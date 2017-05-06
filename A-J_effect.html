@@ -1,0 +1,120 @@
+
+​<html>
+
+<head>
+<title>
+애버치-존슨 효과
+</title>
+
+</head>
+
+
+<body>
+<!-- 주석-->
+\indent 기업의 생산함수가 다음과 같다고 하자.
+\begin{displaymath}
+q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표현하기 위해 \text 명령을 쓴다.
+\end{displaymath}
+
+여기서 \(q\)는 오목함수이고, 2 차 미분이 가능한 신고전학파 생산함수이다.
+
+즉,
+\begin{equation*}
+\frac{\partial F}{\partial L}>0,
+\quad\frac{\partial^2 F}{\partial L^2}<0,\qquad
+\frac{\partial F}{\partial K}>0,
+\quad\frac{\partial^2 F}{\partial K^2}<0 
+\end{equation*}
+
+\subsection{\textsf{비규제하 기업의 이윤극대화}} % \textsf는 한글에 쓰면 고딕체 폰트를 의미한다.
+
+\indent 역수요함수를 \( p=p(q)=p(F(L,K)) \)라 하자.
+
+
+이때 총수입은 \(TR=pq\), 총비용은 \(TC=wL+rK\)이다.
+
+\(w \)은 노동의 단위비용, \(r\)은 자본의 단위비용을 의미한다.\\
+
+기업의 이윤 \(\pi \)는 
+\begin{align*}
+\pi&=TR-TC \\
+&=pq-wL-rK \\
+&=p(F(L,K))F(L,K)-wL-rK
+\end{align*}
+
+이윤극대화를 위해 \(\pi \) 를L과 K에 대해  미분하면 \\
+\begin{eqnarray}\label{eq:b}
+&\frac {\partial \pi}{\partial L}= \frac{\partial p}{ \partial q}\frac{\partial F}{\partial L} q+p\frac{\partial F}{\partial L}-w=0 \nonumber \\
+&\Rightarrow \frac{\partial F}{\partial L}\left(
+\frac{ \partial p}{ \partial q}q+p \right) = w 
+\end{eqnarray}
+% \begin{split} 명령이 있어야 식 전체에 대해 하나의 수식번호가 붙는다. 이것이 없다면 각 줄 마다 수식이 붙고 식의 크기도 작아진다.
+
+\begin{eqnarray}\label{eq:c}
+&\frac {\partial F}{\partial K}= \frac{\partial p}{ \partial q}\frac{\partial F}{\partial K} q+p\frac{\partial F}{\partial K}-r=0 \nonumber \\
+&\Rightarrow \frac{\partial F}{\partial K}\left(
+\frac{ \partial p}{ \partial q}q+p \right) = r 
+\end{eqnarray}
+% equation명령에서는 줄바꿈기호 \\ 가 안먹힌다. 그러나 eqnarray 명령에서는 \\ 가 먹힌다.
+(\ref{eq:c})을 (\ref{eq:b})로 나누면\\
+\begin{eqnarray*}
+\frac{F_{K}}{F_{L}}=\frac{r}{w}, \quad \textrm{where}\; F_{K} =\frac {\partial F}{\partial K}, F_{L}=\frac {\partial F}{\partial L}
+\end{eqnarray*}
+
+즉 기업은 각 생산요소의 한계생산물 비율이 각 생산요소의 가격비율과 같게되는 정도까지 생산하는 것이 최적이다.\\
+
+\subsection{\textsf{보수율 규제하 기업의 이윤극대화}} 
+
+규제자는 피규제기업이 일정의 자본수익률 $s(s>r)$ 이상을 얻는 것을 금한다. 즉 독점력이 있는 피규제 기업은 다음이 성립하도록 가격 $p$를 설정해야 한다.
+
+\begin{eqnarray*}
+&pq \leq wL+sK \\
+&\Rightarrow pq-wL \leq sK
+\end{eqnarray*}
+
+따라서 규제기업의 문제는
+\begin{eqnarray*}
+max &\pi = pq - wL+rK \\
+subject \; to &pq-wL \leq sK
+\end{eqnarray*}
+$p$가 증가할수록 이윤이 증가하므로 최적값에서 제약식은 등호로 설립한다.(즉 binding constraint이므로 구지 KKT조건을 적용할 필요가 없다.) \\
+
+\noindent 따라서 다음과 같이 라그란지안을 취하면 
+\begin{eqnarray*}
+\mathscr{L} &= pq-wL-rK+\lambda(wL+sK-pq)\\
+    &= (1-\lambda)pq-(1-\lambda)wL+(\lambda s-r)K
+\end{eqnarray*}
+
+\begin{eqnarray}\label{eq:d}
+\frac{\partial \mathscr{L}}{\partial L}&=(1-\lambda)\left(\frac{
+\partial p}{\partial q}\frac{ \partial q}{ \partial L}q+p \frac{ \partial q}{ \partial L}\right)-(1-\lambda)w=0 \nonumber\\
+&\Rightarrow \frac{\partial q}{\partial L}\left(
+\frac{ \partial p}{ \partial q}q+p \right) = w, (\lambda \neq1) 
+\end{eqnarray}
+
+\begin{eqnarray}\label{eq:e}
+\frac{\partial \mathscr{L}}{\partial K}&=(1-\lambda)\left(\frac{
+\partial p}{\partial q}\frac{ \partial q}{ \partial K}q+p \frac{ \partial q}{ \partial K}\right)+(\lambda s-r)=0 \nonumber\\
+&\Rightarrow \frac{\partial q}{\partial K}\left(
+\frac{ \partial p}{ \partial q}q+p \right) = 
+\frac{r-\lambda s}{1-\lambda}
+\end{eqnarray}
+(\ref{eq:e})을 (\ref{eq:d})로 나누면\\
+\begin{eqnarray*}
+\frac{F_{K}^{'}}{F_{L}^{'}}=
+\frac{\frac{r-\lambda s}{1-\lambda}}{w}< \frac{r}{w} = \frac{F_K^*}{F_L^*} \quad
+\left(\because \frac{r-\lambda s}{1-\lambda}<\frac{r-\lambda r}{1-\lambda} = r \right)
+\end{eqnarray*}
+
+\noindent (\ref{eq:b})=(\ref{eq:d})이므로 $F_{L}^{'}={F_{L}^{*}}$, 또한 앞의 신고전학파 생산함수 가정에서 $\frac{ \partial^2 F}{ \partial K^2}<0$ \\
+$\therefore \quad F_{K}^{'}<{F_{K}^{*}}$ \\\\
+즉 $K^{'}>K^{*}$이므로 보수율 규제하 기업은 비규제시보다 자본투자를 늘린다.
+이는 보수율 규제의 기저가 되는 자본이 늘면 규제보수율($s$)하에 있는 기업은 더 많은 이윤을 얻는 것이 허용되기 때문이다.\\
+
+그러나 이론과 달리 현실의 자료를 이용한 이후의 실증적 연구에서 A-J 효과는 실증적으로는 뒷받침되지는 않았다\footnote{연구에 따라 효과가 있기도 하고 없기도 함}. \\
+\indent 그럼에도 불구하고 A-J 효과가 가지는 규제정책상의 의미는 상당하다. 규저의 기저가 되는 부분에서 왜곡된 행동을 하는 경우가 발생하기 때문이다. 예를 들어자본을 기저로 대기업의 입찰을 규제하는 경우 편법적인 방법으로 자회사를 만들어서 이를 회피하려 한다든지, 규제당국이 경제활성화를 위해 은행에게 대출을 늘리라고 하니까 기업대출이 아니라 가계대출을 대폭 늘려 가계부채의 증대를 야기시킨 것 등을 들 수 있다.
+    
+
+</body>
+
+</html>
