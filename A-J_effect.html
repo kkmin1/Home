@@ -12,10 +12,10 @@
 
 <body>
 <!-- 주석-->
-\indent 기업의 생산함수가 다음과 같다고 하자.
-\begin{displaymath}
+기업의 생산함수가 다음과 같다고 하자.
+\begin{equation*}
 q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표현하기 위해 \text 명령을 쓴다.
-\end{displaymath}
+\end{equation*}
 
 여기서 \(q\)는 오목함수이고, 2 차 미분이 가능한 신고전학파 생산함수이다.
 
@@ -27,14 +27,14 @@ q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표�
 \quad\frac{\partial^2 F}{\partial K^2}<0 
 \end{equation*}
 
-\subsection{\textsf{비규제하 기업의 이윤극대화}} % \textsf는 한글에 쓰면 고딕체 폰트를 의미한다.
+2. 비규제하 기업의 이윤극대화
 
-\indent 역수요함수를 \( p=p(q)=p(F(L,K)) \)라 하자.
+역수요함수를 \( p=p(q)=p(F(L,K)) \)라 하자.
 
 
 이때 총수입은 \(TR=pq\), 총비용은 \(TC=wL+rK\)이다.
 
-\(w \)은 노동의 단위비용, \(r\)은 자본의 단위비용을 의미한다.\\
+\(w \)은 노동의 단위비용, \(r\)은 자본의 단위비용을 의미한다.
 
 기업의 이윤 \(\pi \)는 
 \begin{align*}
@@ -43,13 +43,12 @@ q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표�
 &=p(F(L,K))F(L,K)-wL-rK
 \end{align*}
 
-이윤극대화를 위해 \(\pi \) 를L과 K에 대해  미분하면 \\
+이윤극대화를 위해 \(\pi \) 를L과 K에 대해  미분하면 
 \begin{eqnarray}\label{eq:b}
 &\frac {\partial \pi}{\partial L}= \frac{\partial p}{ \partial q}\frac{\partial F}{\partial L} q+p\frac{\partial F}{\partial L}-w=0 \nonumber \\
 &\Rightarrow \frac{\partial F}{\partial L}\left(
 \frac{ \partial p}{ \partial q}q+p \right) = w 
 \end{eqnarray}
-% \begin{split} 명령이 있어야 식 전체에 대해 하나의 수식번호가 붙는다. 이것이 없다면 각 줄 마다 수식이 붙고 식의 크기도 작아진다.
 
 \begin{eqnarray}\label{eq:c}
 &\frac {\partial F}{\partial K}= \frac{\partial p}{ \partial q}\frac{\partial F}{\partial K} q+p\frac{\partial F}{\partial K}-r=0 \nonumber \\
@@ -62,9 +61,9 @@ q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표�
 \frac{F_{K}}{F_{L}}=\frac{r}{w}, \quad \textrm{where}\; F_{K} =\frac {\partial F}{\partial K}, F_{L}=\frac {\partial F}{\partial L}
 \end{eqnarray*}
 
-즉 기업은 각 생산요소의 한계생산물 비율이 각 생산요소의 가격비율과 같게되는 정도까지 생산하는 것이 최적이다.\\
+즉 기업은 각 생산요소의 한계생산물 비율이 각 생산요소의 가격비율과 같게되는 정도까지 생산하는 것이 최적이다.
 
-\subsection{\textsf{보수율 규제하 기업의 이윤극대화}} 
+3.보수율 규제하 기업의 이윤극대화 
 
 규제자는 피규제기업이 일정의 자본수익률 $s(s>r)$ 이상을 얻는 것을 금한다. 즉 독점력이 있는 피규제 기업은 다음이 성립하도록 가격 $p$를 설정해야 한다.
 
