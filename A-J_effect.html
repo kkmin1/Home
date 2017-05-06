@@ -47,16 +47,16 @@ q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표�
 \begin{eqnarray}\label{eq:b}
 &\frac {\partial \pi}{\partial L}= \frac{\partial p}{ \partial q}\frac{\partial F}{\partial L} q+p\frac{\partial F}{\partial L}-w=0 \nonumber \\
 &\Rightarrow \frac{\partial F}{\partial L}\left(
-\frac{ \partial p}{ \partial q}q+p \right) = w .......(1)
+\frac{ \partial p}{ \partial q}q+p \right) = w \qquad .......(1)
 \end{eqnarray}
 
 \begin{eqnarray}\label{eq:c}
 &\frac {\partial F}{\partial K}= \frac{\partial p}{ \partial q}\frac{\partial F}{\partial K} q+p\frac{\partial F}{\partial K}-r=0 \nonumber \\
 &\Rightarrow \frac{\partial F}{\partial K}\left(
-\frac{ \partial p}{ \partial q}q+p \right) = r .......(2)
+\frac{ \partial p}{ \partial q}q+p \right) = r \qquad .......(2)
 \end{eqnarray}
 
-(2) (1)로 나누면\\
+(2)를 (1)로 나누면
 \begin{eqnarray*}
 \frac{F_{K}}{F_{L}}=\frac{r}{w}, \quad \textrm{where}\; F_{K} =\frac {\partial F}{\partial K}, F_{L}=\frac {\partial F}{\partial L}
 \end{eqnarray*}
@@ -89,7 +89,7 @@ $p$가 증가할수록 이윤이 증가하므로 최적값에서 제약식은 �
 \frac{\partial \mathscr{L}}{\partial L}&=(1-\lambda)\left(\frac{
 \partial p}{\partial q}\frac{ \partial q}{ \partial L}q+p \frac{ \partial q}{ \partial L}\right)-(1-\lambda)w=0 \nonumber\\
 &\Rightarrow \frac{\partial q}{\partial L}\left(
-\frac{ \partial p}{ \partial q}q+p \right) = w, (\lambda \neq1) 
+\frac{ \partial p}{ \partial q}q+p \right) = w, (\lambda \neq1) \qquad ...............(3)
 \end{eqnarray}
 
 \begin{eqnarray}\label{eq:e}
@@ -97,16 +97,17 @@ $p$가 증가할수록 이윤이 증가하므로 최적값에서 제약식은 �
 \partial p}{\partial q}\frac{ \partial q}{ \partial K}q+p \frac{ \partial q}{ \partial K}\right)+(\lambda s-r)=0 \nonumber\\
 &\Rightarrow \frac{\partial q}{\partial K}\left(
 \frac{ \partial p}{ \partial q}q+p \right) = 
-\frac{r-\lambda s}{1-\lambda}
+\frac{r-\lambda s}{1-\lambda} \qqad ................(4)
 \end{eqnarray}
-(\ref{eq:e})을 (\ref{eq:d})로 나누면
+    
+(4)를 (3)으로 나누면
 \begin{eqnarray*}
 \frac{F_{K}^{'}}{F_{L}^{'}}=
 \frac{\frac{r-\lambda s}{1-\lambda}}{w}< \frac{r}{w} = \frac{F_K^*}{F_L^*} \quad
 \left(\because \frac{r-\lambda s}{1-\lambda}<\frac{r-\lambda r}{1-\lambda} = r \right)
 \end{eqnarray*}
 
-(\ref{eq:b})=(\ref{eq:d})이므로 $F_{L}^{'}={F_{L}^{*}}$, 또한 앞의 신고전학파 생산함수 가정에서 $\frac{ \partial^2 F}{ \partial K^2}<0$ \\
+(1)=(3)이므로 $F_{L}^{'}={F_{L}^{*}}$, 또한 앞의 신고전학파 생산함수 가정에서 $\frac{ \partial^2 F}{ \partial K^2}<0$ \\
 $\therefore \quad F_{K}^{'}<{F_{K}^{*}}$ \\\\
 즉 $K^{'}>K^{*}$이므로 보수율 규제하 기업은 비규제시보다 자본투자를 늘린다.
 이는 보수율 규제의 기저가 되는 자본이 늘면 규제보수율($s$)하에 있는 기업은 더 많은 이윤을 얻는 것이 허용되기 때문이다.
