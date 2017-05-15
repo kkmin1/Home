@@ -2,79 +2,132 @@
 
 <head>
 <title>
-차선의 이론
+애버치-존슨 효과
 </title>
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
-<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: '$','$'], ['\\(','\\)'} }); </script> 
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script> 
 </head>
 
+
 <body>
-1. 최선의 정책(First Best Rule:FBR)<br><br>
+ 
+<!-- 주석-->
+이하의 내용은 경제/경영수학에 대한 기초지식이 있음을 전제로한다.<br><br>
+ 
+기업의 생산함수가 다음과 같다고 하자.
+\begin{equation*}
+q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표현하기 위해 \text 명령을 쓴다.
+\end{equation*}
 
-다음의 문제를 고려하자.
-\begin{eqnarray*}
-	max &F(x_1, \cdots, x_n) \\
-	subject \; to &\Phi(x_1, \cdots, x_n)=0
-\end{eqnarray*}
+여기서 \(q\)는 오목함수이고, 2 차 미분이 가능한 신고전학파 생산함수이다.
 
-여기서 $F(x_1, \cdots, x_n)$은 소비자 $n$ 명으로 구성된 사회후생함수(social welfare function)를 의미한다. $x_i$는 소비자 $i$의 소비벡터, 제약식$\Phi(x_1, \cdots, x_n)$는 기술$\cdot$생산함수(transformation function)로서 제약식은 기술, 자원의 제약을 의미한다.\\
+즉,
+\begin{equation*}
+\frac{\partial F}{\partial L}>0,
+\quad\frac{\partial^2 F}{\partial L^2}<0,\qquad
+\frac{\partial F}{\partial K}>0,
+\quad\frac{\partial^2 F}{\partial K^2}<0 
+\end{equation*}
 
-이 문제를 풀기 위해 라그란지안을 도입하면
+2. 비규제하 기업의 이윤극대화<br><br>
 
-\begin{eqnarray*}
+역수요함수를 \( p=p(q)=p(F(L,K)) \)라 하자.
+
+
+이때 총수입은 \(TR=pq\), 총비용은 \(TC=wL+rK\)이다.
+
+\(w \)은 노동의 단위비용, \(r\)은 자본의 단위비용을 의미한다.
+
+기업의 이윤 \(\pi \)는 
+\begin{align*}
+\pi&=TR-TC \\
+&=pq-wL-rK \\
+&=p(F(L,K))F(L,K)-wL-rK
+\end{align*}
+
+이윤극대화를 위해 \(\pi \) 를 $L$과 $K$에 대해  미분하면
+
+\begin{eqnarray}
 \begin{split}
-\mathscr{L} &= F-\lambda\Phi\\
-\pdv{\mathscr{L}}{x_i} &= \pdv{F}{x_i}-\lambda\pdv{\Phi}{x_i} = 0\\
-&\Rightarrow F_i = \lambda\Phi_i,\quad \textrm{where}\; F_{i} =\frac {\partial F}{\partial x_i},\, \Phi_{i}=\frac {\partial \Phi}{\partial x_i}\\
-\textrm{for} \quad i&=1,\cdots,n
+\frac {\partial \pi}{\partial L}&= \frac{\partial p}{ \partial q}\frac{\partial F}{\partial L} q+p\frac{\partial F}{\partial L}-w=0 \nonumber \\
+&\Rightarrow \frac{\partial F}{\partial L}\left(
+\frac{ \partial p}{ \partial q}q+p \right) = w \qquad .............(1)
 \end{split}
+\end{eqnarray}
+
+\begin{eqnarray}
+\begin{split}
+\frac {\partial F}{\partial K}&= \frac{\partial p}{ \partial q}\frac{\partial F}{\partial K} q+p\frac{\partial F}{\partial K}-r=0 \nonumber \\
+&\Rightarrow \frac{\partial F}{\partial K}\left(
+\frac{ \partial p}{ \partial q}q+p \right) = r \qquad .............(2)
+\end{split}
+\end{eqnarray}
+
+(2)를 (1)로 나누면
+\begin{eqnarray*}
+\frac{F_{K}^*}{F_{L}^*}=\frac{r}{w}, \quad \textrm{where}\; F_{K} =\frac {\partial F}{\partial K}, F_{L}=\frac {\partial F}{\partial L}
 \end{eqnarray*}
-% \begin{split}이 있어야 수식 간격이 맞는다.
-% \pdv는 physics 패키지에서 불러오는 편미분 명령(\partial 대체)
 
-일반성을 잃지 않고 n번째 상품을 화폐재(numeraire good)라 하자.
+ 여기서 $F_{K}^{*}$, $F_{L}^{*}$ 는 각각 자본과 노동의 최적값을 의미한다. 즉 기업은 각 생산요소의 한계생산물 비율이 각 생산요소의 가격비율과 같게되는 정도까지 생산하는 것이 최적이다.<br><br>
 
-\[ \frac{F_i}{F_n} = \frac{\Phi_i}{\Phi_n}, i = 1, \cdots, n-1 \]
+3.보수율 규제하 기업의 이윤극대화<br><br>
 
-즉, i 소비자의 한계효용의 금전적 가치와 i 소비자의 한계생산물의 금전적 가치가 같아야 한다. 이는 파레토 효율성을 의미한다. 위 식은 다시
+규제자는 피규제기업이 일정의 자본수익률 $s(s>r)$ 이상을 얻는 것을 금한다. 즉 독점력이 있는 피규제 기업은 다음이 성립하도록 가격 $p$를 설정해야 한다.
 
+\begin{eqnarray*}
+&pq \leq wL+sK \\
+&\Rightarrow pq-wL \leq sK
+\end{eqnarray*}
 
-\[ \frac{F_i}{F_j} = \frac{\Phi_i}{\Phi_j}, i,j = 1, \cdots, n \]
+따라서 규제기업의 문제는
+\begin{eqnarray*}
+max \; &\pi = pq - wL+rK \\
+subject \; &to \quad pq-wL \leq sK
+\end{eqnarray*}
+$p$가 증가할수록 이윤이 증가하므로 최적값에서 제약식은 등호로 설립한다.(즉 binding constraint이므로 굳이 KKT조건을 적용할 필요가 없다.)
+ 
+따라서 다음과 같이 라그란지안을 취하면 
+\begin{eqnarray*}
+\mathscr{L} &= pq-wL-rK+\lambda(wL+sK-pq)\\
+    &= (1-\lambda)pq-(1-\lambda)wL+(\lambda s-r)K
+\end{eqnarray*}
 
-즉, 소비재의 한계대체율은 생산물의 한계대체율과 같아야 한다는 의미.<br><br>
+\begin{eqnarray}
+\begin{split}
+\frac{\partial \mathscr{L}}{\partial L}&=(1-\lambda)\left(\frac{
+\partial p}{\partial q}\frac{ \partial q}{ \partial L}q+p \frac{ \partial q}{ \partial L}\right)-(1-\lambda)w=0 \nonumber\\
+&\Rightarrow \frac{\partial q}{\partial L}\left(
+\frac{ \partial p}{ \partial q}q+p \right) = w, (\lambda \neq1) \qquad ...............(3)
+\end{split}
+\end{eqnarray}
 
+\begin{eqnarray}
+\begin{split}
+\frac{\partial \mathscr{L}}{\partial K}&=(1-\lambda)\left(\frac{
+\partial p}{\partial q}\frac{ \partial q}{ \partial K}q+p \frac{ \partial q}{ \partial K}\right)+(\lambda s-r)=0 \nonumber\\
+&\Rightarrow \frac{\partial q}{\partial K}\left(
+\frac{ \partial p}{ \partial q}q+p \right) = 
+\frac{r-\lambda s}{1-\lambda} \qquad ................(4)
+\end{split}
+\end{eqnarray}
+    
+(4)를 (3)으로 나누면
+\begin{eqnarray*}
+\frac{F_{K}^{'}}{F_{L}^{'}}=
+\frac{\frac{r-\lambda s}{1-\lambda}}{w}< \frac{r}{w} = \frac{F_K^*}{F_L^*} \quad
+\left(\because \frac{r-\lambda s}{1-\lambda}<\frac{r-\lambda r}{1-\lambda} = r \right)
+\end{eqnarray*}
 
-2. 차선의 정책(Second Best Rule:SBR)<br><br>
+여기서 $F_{K}^{'}$, $F_{L}^{'}$ 은 각각 규제하 자본과 노동의 최적 한계생산물 의미한다.<br><br>
+  
+(1)=(3)이므로 $F_{L}^{'}={F_{L}^{*}}$,  따라서 $F_{K}^{'} < F_K^{*}$.<br>
 
-앞의 문제에 다음의 제약조건이 추가되었다고 하자.
-
-\[ \frac{F_1}{F_n} = k\frac{\Phi_1}{\Phi_n}, \quad \neq 1  \]
-
-즉, 이 제약조건의 의미는 최선의 정책에서 도출된 결과에서 첫번째 파레토 최적조건을 만족하지 못함을 의미한다. 즉 이 제약식은 경제시스템의 한 부분에서 왜곡이 발생했음을 의미하며, 외부성 등을 영향을 의미하는 것으로도 해석할 수 있다.<br>
-
-이 문제를 풀기 위해 라그란지안을 도입하면
-
-
-\[		\mathscr{L} = F-\lambda\Phi - \mu \left(\frac{F_1}{F_n} - k\frac{\Phi_1}{\Phi_n} \right) \]  \\
-		
-1차 조건은 
-\[		\pdv{\mathscr{L}}{x_i}= F_i-\lambda\Phi_i -\mu \left[  
-\frac{F_{n}F_{1i}-F_{1}F_{ni}}{F_n^2}-k\frac{\Phi_{n}\Phi_{1i}-\Phi_{1i}\Phi_{ni}}{\Phi_n^2}\right]=0, \quad \textrm{for} \quad i=1,\cdots,n-1 \]
-	
-	\begin{displaymath}
-	\textrm{Let} \quad Q_i = \frac{F_{n}F_{1i}-F_{1}F_{ni}}{F_n^2}, \quad
-	R_i = \frac{\Phi_{n}\Phi_{1i}-\Phi_{1i}\Phi_{ni}}{\Phi_n^2}
-	\end{displaymath}
-	
-then
-\[ \frac{F_i}{F_n} = \frac{\Phi_i+\frac{\mu}{\lambda}(Q_i-kR_i)}{\Phi_n+\frac{\mu}{\lambda}(Q_n-kR_n)}, \quad i = 1, \cdots, n-1 \]
-
-$ \mu \neq 0 $ 이므로
-\[ \frac{F_i}{F_n} \neq \frac{\Phi_i}{\Phi_n}, \quad i = 1, \cdots, n-1 \]
-
-또한, \[ \frac{F_i}{F_n} \lessgtr \frac{\Phi_i}{\Phi_n}, \quad i = 1, \cdots, n-1 \] \\
-즉 대소를 판별할 수 없다. 따라서 FRB의 파레토 최적조건들은 SBR하에서 더 이상 파레토 최적조건이 아니다. FBR의 일부 파레토 최적조건을 만족하지 못할 경우 FRB의 다른 파레토 최적 조건도 다 바뀐다는 것을 의미. 
-일부 파레토 최적조건이 바뀌었을 때 대소를 판별할 수 없으므로 후생증감을 알 수 없다.
+<img src="ajcurve.jpg" width=400 height=400 hspace= 300><br> <!--그림크기는 원래 600x600을 400x400으로축소. 좌측에서 400pt 떨어져서 배치-->
+<br>
+ 
+또한 앞의 신고전학파 생산함수 가정에서 $\frac{ \partial^2 F}{ \partial K^2}<0$ 이므로 그림 1에서 보듯이 
+ $K^{'}>K^{*}$, 따라서 보수율 규제하 기업은 비규제시보다 자본투자를 늘린다.<br>
+이는 보수율 규제의 기저가 되는 자본이 늘면 규제보수율($s$)하에 있는 기업은 더 많은 이윤을 얻는 것이 허용되기 때문이다.<br>
 
 </body>
 
