@@ -18,7 +18,7 @@
 다음의 문제를 고려하자.
 \begin{eqnarray*}
 	max &F(x_1, \cdots, x_n) \\
-	subject \; to &\Phi(x_1, \cdots, x_n)=0
+	subject \; to \; &\Phi(x_1, \cdots, x_n)=0
 \end{eqnarray*}
 
 여기서 $F(x_1, \cdots, x_n)$은 소비자 $n$ 명으로 구성된 사회후생함수(social welfare function)를 의미한다. $x_i$는 소비자 $i$의 소비벡터, 제약식$\Phi(x_1, \cdots, x_n)$는 기술$\cdot$생산함수(transformation function)로서 제약식은 기술, 자원의 제약을 의미한다.\\
@@ -28,7 +28,7 @@
 \begin{eqnarray*}
 \begin{split}
 \mathscr{L} &= F-\lambda\Phi\\
-\pdv{\mathscr{L}}{x_i} &= \pdv{F}{x_i}-\lambda\pdv{\Phi}{x_i} = 0\\
+\frac\partial{\mathscr{L}}{\partial x_i} &= \frac{\partial F}{\partial x_i}-\lambda\frac{\partial \Phi}{\partial x_i} = 0\\
 &\Rightarrow F_i = \lambda\Phi_i,\quad \textrm{where}\; F_{i} =\frac {\partial F}{\partial x_i},\, \Phi_{i}=\frac {\partial \Phi}{\partial x_i}\\
 \textrm{for} \quad i&=1,\cdots,n
 \end{split}
@@ -60,7 +60,7 @@
 \[		\mathscr{L} = F-\lambda\Phi - \mu \left(\frac{F_1}{F_n} - k\frac{\Phi_1}{\Phi_n} \right) \]  \\
 		
 1차 조건은 
-\[		\pdv{\mathscr{L}}{x_i}= F_i-\lambda\Phi_i -\mu \left[  
+\[		\frac{\partial \mathscr{L}}{\partial  x_i}= F_i-\lambda\Phi_i -\mu \left[  
 \frac{F_{n}F_{1i}-F_{1}F_{ni}}{F_n^2}-k\frac{\Phi_{n}\Phi_{1i}-\Phi_{1i}\Phi_{ni}}{\Phi_n^2}\right]=0, \quad \textrm{for} \quad i=1,\cdots,n-1 \]
 	
 	\[
