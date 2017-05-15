@@ -1,0 +1,81 @@
+<html>
+
+<head>
+<title>
+차선의 이론
+</title>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: '$','$'], ['\\(','\\)'} }); </script> 
+</head>
+
+<body>
+1. 최선의 정책(First Best Rule:FBR)
+
+다음의 문제를 고려하자.
+\begin{eqnarray*}
+	max &F(x_1, \cdots, x_n) \\
+	subject \; to &\Phi(x_1, \cdots, x_n)=0
+\end{eqnarray*}
+
+여기서 $F(x_1, \cdots, x_n)$은 소비자 $n$ 명으로 구성된 사회후생함수(social welfare function)를 의미한다. $x_i$는 소비자 $i$의 소비벡터, 제약식$\Phi(x_1, \cdots, x_n)$는 기술$\cdot$생산함수(transformation function)로서 제약식은 기술, 자원의 제약을 의미한다.\\
+
+이 문제를 풀기 위해 라그란지안을 도입하면
+
+\begin{eqnarray*}
+\begin{split}
+\mathscr{L} &= F-\lambda\Phi\\
+\pdv{\mathscr{L}}{x_i} &= \pdv{F}{x_i}-\lambda\pdv{\Phi}{x_i} = 0\\
+&\Rightarrow F_i = \lambda\Phi_i,\quad \textrm{where}\; F_{i} =\frac {\partial F}{\partial x_i},\, \Phi_{i}=\frac {\partial \Phi}{\partial x_i}\\
+\textrm{for} \quad i&=1,\cdots,n
+\end{split}
+\end{eqnarray*}
+% \begin{split}이 있어야 수식 간격이 맞는다.
+% \pdv는 physics 패키지에서 불러오는 편미분 명령(\partial 대체)
+
+일반성을 잃지 않고 n번째 상품을 화폐재(numeraire good)라 하자.
+
+\[ \frac{F_i}{F_n} = \frac{\Phi_i}{\Phi_n}, i = 1, \cdots, n-1 \]
+
+즉, i 소비자의 한계효용의 금전적 가치와 i 소비자의 한계생산물의 금전적 가치가 같아야 한다. 이는 파레토 효율성을 의미한다. 위 식은 다시
+
+
+\[ \frac{F_i}{F_j} = \frac{\Phi_i}{\Phi_j}, i,j = 1, \cdots, n \]
+
+즉, 소비재의 한계대체율은 생산물의 한계대체율과 같아야 한다는 의미.
+
+
+2. 차선의 정책(Second Best Rule:SBR)
+
+앞의 문제에 다음의 제약조건이 추가되었다고 하자.
+
+\[ \frac{F_1}{F_n} = k\frac{\Phi_1}{\Phi_n}, \quad \neq 1  \]
+
+즉, 이 제약조건의 의미는 최선의 정책에서 도출된 결과에서 첫번째 파레토 최적조건을 만족하지 못함을 의미한다. 즉 이 제약식은 경제시스템의 한 부분에서 왜곡이 발생했음을 의미하며, 외부성 등을 영향을 의미하는 것으로도 해석할 수 있다.
+
+이 문제를 풀기 위해 라그란지안을 도입하면
+
+
+\[		\mathscr{L} = F-\lambda\Phi - \mu \left(\frac{F_1}{F_n} - k\frac{\Phi_1}{\Phi_n} \right) \]  \\
+		
+1차 조건은 
+\[		\pdv{\mathscr{L}}{x_i}= F_i-\lambda\Phi_i -\mu \left[  
+\frac{F_{n}F_{1i}-F_{1}F_{ni}}{F_n^2}-k\frac{\Phi_{n}\Phi_{1i}-\Phi_{1i}\Phi_{ni}}{\Phi_n^2}\right]=0, \quad \textrm{for} \quad i=1,\cdots,n-1 \]
+	
+	\begin{displaymath}
+	\textrm{Let} \quad Q_i = \frac{F_{n}F_{1i}-F_{1}F_{ni}}{F_n^2}, \quad
+	R_i = \frac{\Phi_{n}\Phi_{1i}-\Phi_{1i}\Phi_{ni}}{\Phi_n^2}
+	\end{displaymath}
+	
+then
+\[ \frac{F_i}{F_n} = \frac{\Phi_i+\frac{\mu}{\lambda}(Q_i-kR_i)}{\Phi_n+\frac{\mu}{\lambda}(Q_n-kR_n)}, \quad i = 1, \cdots, n-1 \]
+
+$ \mu \neq 0 $ 이므로
+\[ \frac{F_i}{F_n} \neq \frac{\Phi_i}{\Phi_n}, \quad i = 1, \cdots, n-1 \]
+
+또한, \[ \frac{F_i}{F_n} \lessgtr \frac{\Phi_i}{\Phi_n}, \quad i = 1, \cdots, n-1 \] \\
+즉 대소를 판별할 수 없다. 따라서 FRB의 파레토 최적조건들은 SBR하에서 더 이상 파레토 최적조건이 아니다. FBR의 일부 파레토 최적조건을 만족하지 못할 경우 FRB의 다른 파레토 최적 조건도 다 바뀐다는 것을 의미. 
+일부 파레토 최적조건이 바뀌었을 때 대소를 판별할 수 없으므로 후생증감을 알 수 없다.
+
+</body>
+
+</html>
