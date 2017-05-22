@@ -1,3 +1,16 @@
+​<html>
+
+<head>
+<title>
+聖 페테르스부르크 역설
+</title>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script> 
+</head>
+
+
+<body>
+
 1. 머릿글 
 聖 페테르스부르크의 역설(Paradox of St. Petersberg)은 1738년 세인트 피터스버그 왕립학회 논문에 다니엘 베르누이(Daniel Bernoulli)가 
 이 문제를 제기했다.<sup><a href="#fn1" id="ref1">1</a></sup>
