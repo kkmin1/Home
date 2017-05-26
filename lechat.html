@@ -5,6 +5,90 @@
 </head> 
 <body>
 1. 서론<br>
-화학적 평형이론에서 나온 용어로 균형 상태에서 변화를 주면 변화를 거스르는 방향으로 평형을 유지하려는 힘이 작용한다. 경제학에서 르샤틀리에 법칙이란 단기(노동)의 가격탄력성이 장기(자본)의 가격탄력성보다 작은 현상을 의미한다.샤뮤엘슨은 단기적으로 변화에 저항하려는 성질이 화학의 균형이론과 비슷하다고 보아 이렇게 명명한것이다.\footnote{\href{https://en.wikipedia.org/wiki/Le Chatelier\%27s_principleciple}{wiki}참조}\section{비용최소화}	다음의 문제를 고려하자.\begin{eqnarray*}	min &C(\mathbf{w}, y) = \mathbf{w} \bullet \mathbf{x}\\	subject \; to &f(\mathbf{x}) \geq y, \quad \mathbf{x} \geq \mathbf{0}\end{eqnarray*}	여기서 $C(\mathbf{w}, y)$는 임금 $\mathbf{w}$의 2차 미분 가능한 신고전학파 비용함수. $\mathbf{w}$는 n개의 원소로 구성된 요소가격벡터, $\mathbf{x}$는 n개의 원소로 구성된 요소수량벡터. $f(\mathbf{x})$는 생산함수로 제약식은 생산수량이 적어도 $y$보다는 커야 함을 의미한다.\footnote{$\mathbf{w}$는 행벡터라고 하자. 열벡터라고 하면 식에 전치표현을 써야 하는데 표기의 편리상 생략한 것으로 생각해도 된다.} \\최소비용을 구하기 위해 라그란지안을 취하면\[ \mathscr{L} = \mathbf{w} \bullet \mathbf{x} + \lambda(y-f(\mathbf{x})) \]포락선 정리에 의해 최적값에서 $\mathscr{L}^* = C^*$ 이므로  	\[ \pdv{\mathscr{L}^*}{y} = \pdv{C^*}{y} = \lambda(\mathbf{w},y) > 0 \]이는 우변 상수 $y$의 증가에 따른 한계비용을 의미한다. $\lambda$가 0보다 큰 것은 KKT조건에 의한 것이다.	\[ \pdv{\mathscr{L}^*}{w_i} = \pdv{C^*}{w_i} = x_i(\mathbf{w},y) > 0, \quad i=1, \cdots,n \]이는 유명한 쉐퍼드보조정리(Shephard lemma)이다. $x_i$가 0보다 큰 것은 KKT조건에 의한 것이다.$C(\mathbf{w}, y)$가 2차 미분가능하고 헤시안(Hessian)행렬은 대칭행렬이므로 \[ \pdv{x_j}{w_i} = \pdv{C^*}{w_i}{w_j} = \pdv{x_i}{w_j}, \quad i=1, \cdots,n \]\[ \pdv{x_i}{y} = \pdv{C^*}{w_i}{y} = \pdv{\lambda}{w_i}, \quad i=1, \cdots,n \]이는 유명한 샤뮤엘슨의 역관계(Samuelson's reciprocity relation)이다.\section{이윤극대화}다음의 문제를 고려하자.\begin{eqnarray*}	max &\pi(p,\mathbf{w}) = py(p,\mathbf{w}) - \mathbf{w} \bullet \mathbf{x}(p,\mathbf{w}) \\	subject \; to &g(\mathbf{x},y) \geq 0, \quad \mathbf{x} \geq \mathbf{0} \quad y \geq 0\end{eqnarray*}최소비용을 구하기 위해 라그란지안을 취하면\[ \mathscr{L} = py - \mathbf{w} \bullet \mathbf{x} + \lambda g(\mathbf{x}, y) \]포락선 정리에 의해\[ \pdv{\mathscr{L}^*}{p} = \pdv{\pi^*}{p} = y > 0  \]\[ \pdv{\mathscr{L}^*}{w_i} = \pdv{\pi^*}{w_i} = -x_i < 0, \quad i=1, \cdots,n  \]이는 유명한 호텔링의 보조정리(Hotelling's lemma)이다. 부등호의 방향은 KKT조건에 의한 것이다.$C$가 미분가능하고 볼록함수이므로 $\pi$는 미분가능하고 오목함수이다. 다라서 헤시안행렬은 음반정치행렬(negative semidefinite matrix).\[ \pdv{x_i}{w_j} = \pdv{\pi^*}{w_i}{w_j} = \pdv{x_j}{w_i}, \quad i=1, \cdots,n \]\[ -\pdv{x_i}{p} = \pdv{\pi^*}{w_i}{p} = \pdv{y}{w_i}, \quad i=1, \cdots,n \]\section{르샤틀리에 법칙의 유도}\subsection{자본이 고정인 경우}단기적으로 자본은 불변이므로 자본이 고정인 경우는 단기를 의미한다.\begin{eqnarray*}	min &C(\mathbf{w}, y) = \mathbf{w} \bullet \mathbf{x} + rk\\	subject \; to &f(\mathbf{x},k) \geq y, \quad \mathbf{x} \geq \mathbf{0}\end{eqnarray*}여기서 $k$는 자본, $r$은 자본의 가격을 의미한다. 자본이 고정이므로 자본은 최적값에 영향을 미치지 못하고 목적식에서 제외해도 무방하다. 이 경우 목적식은 2절의 경우와 같으므로 결론도  2절의 경우와 같다.\[ \pdv{x_j^*}{w_i} = \pdv{x_i^*}{w_j}, \quad i=1, \cdots,n \]\[ \pdv{x_i^*}{y} = \pdv{\lambda}{w_i}, \quad i=1, \cdots,n \]\[ \pdv{x_i^*}{w_i} = \pdv[2]{C}{w_i} \leq 0, \quad i=1, \cdots,n \]$C(\mathbf{w})$는 $w_i$에 대해 오목함수이므로 2차미분이 0보다 작다.\footnote{$w', w^*$일 때의 최소값을 각각 \( x'=x(w'), \quad x^*=x(w^*)\)라 하자. $w'$과 $w^*$ 사이의 점을 $w^{\circ}$라 하면\\ $w^{\circ} = \theta w'+(1-\theta)w*, \quad (0 \leq \theta \leq 1)$, \quad $x'w' \leq x'w^{\circ},\quad x^*w^* \leq x^*w^{\circ}$이므로\\ $\theta w'x'+(1-\theta)w^*x^* \leq \theta  w'x^{\circ}+(1-\theta)w^*x^{\circ}=w^{\circ}x^{\circ}$, 즉 \(\theta C(w')+(1-\theta)C(w^*) \leq C(w^{\circ}) \). 따라서 $C(w)$는 $w$에 대해 오목함수.}	\subsection{자본이 변동인 경우}장기적으로 자본은 변동하므로 자본이 변동인 경우는 장기를 의미한다.\begin{eqnarray*}\text{Minimize} &C(\mathbf{w}, y) = \mathbf{w} \bullet \mathbf{x} + rk\\\text{Subject to} &f(\mathbf{x},k) \geq y, \quad \mathbf{x} \geq \mathbf{0}, \quad k \geq 0\end{eqnarray*}최소비용을 구하기 위해 라그란지안을 취하면\[ \mathscr{L} = \mathbf{w} \bullet \mathbf{x} + rk + \lambda(y-f(\mathbf{x},k)) \]최적값을 $C', \; x'_i, \; k', \; \lambda'$라 하면 포락선정리에 따라\[ \pdv{C'}{w_i} = x'_i, \Rightarrow \pdv{x'_i}{r} = \pdv{C'}{w_i}{r} \]\begin{eqnarray*}\begin{split} \pdv{C'}{r} = k' &\Rightarrow \pdv{k'_i}{w_i} = \pdv{C'}{w_i}{r}\\ &\Rightarrow \pdv{k'_i}{y} = \pdv{C'}{y}{r} \end{split}\end{eqnarray*}\[ \pdv{C'}{y} = \lambda' \Rightarrow \pdv{\lambda'}{r} = \pdv{C'}{y}{r} \]이상으로 부터 \[ \pdv{x'_i}{r} = \pdv{k'_i}{w_i}, \quad \pdv{k'_i}{y} = \pdv{\lambda'}{r} \]$C$는 $w, r$에 대해 오목함수이므로 \[ \pdv{x'_i}{w_i} = \pdv[2]{C}{w_i} \leq 0 \]\[ \pdv{k'}{r} = \pdv[2]{C}{r} \leq 0 \]등호로 성립하는 제약식(binding constraint)을 단기 최적화 문제에 추가하더라도 최적값에 변화가 없다. 즉 장기에서 자본 $k$의 최적값이 단기 요소수요함수에 대입되더라도 장기와 단기의 요소수요함수는 같다.\begin{eqnarray} x'_i(\mathbf{w}, r, y) &= x_i ^*[w, r, y ; k'(\mathbf{w}, r, y)]\label{eq:a} \\ \lambda'(\mathbf{w}, r, y) &= \lambda^*[w, r, y ; k'(\mathbf{w}, r, y)] \label{eq:b} \end{eqnarray}\subsubsection{요소수요탄력성}(\ref{eq:a})를 $w_i$에 대해 미분하면\begin{eqnarray}\pdv{x'_i}{w_i} = \pdv{x_i^*}{w_i}+\pdv{x_i^*}{k}\pdv{k'}{w_i}\label{eq:c}\end{eqnarray}(\ref{eq:a})를 $r$에 대해 미분하면\begin{eqnarray}\pdv{x'_i}{r} &=& \pdv{x_i^*}{r}+\pdv{x_i^*}{k}\pdv{k'}{r}\nonumber \\[10pt]&=& \pdv{x_i^*}{k}\pdv{k'}{r}, \quad (\because \pdv{x_i^*}{r}=0)\label{eq:d}\end{eqnarray}단기적으로 자본은 고정되어 있으므로 자본가격변동이 직접 다른 요소공급에 영향을 미치지 않는다.앞에서 포락선 정리에 따라 $\pdv{x'_i}{r} = \pdv{k'_i}{w_i}$ \; 이므로이를 (\ref{eq:c})에 대입\begin{eqnarray}\pdv{x'_i}{w_i} = \pdv{x_i^*}{w_i}+\pdv{x_i^*}{k}\pdv{x'_i}{r}\label{eq:e}\end{eqnarray}(\ref{eq:e})를 (\ref{eq:d})에 대입\begin{eqnarray*}\underbrace{\pdv{x'_i}{w_i}}_\text{장기요소수요탄력성} = \underbrace {\pdv{x_i^*}{w_i}}_\text{단기요소수요탄력성}+\underbrace{\left(\pdv{x_i^*}{k}\right)^2 \pdv{k'}{r}}_\text{조정효과}\label{eq:f}\end{eqnarray*}\(	\pdv{k'}{r} \leq 0 \quad \text{이므로} \quad \pdv{x'_i}{w_i} \leq \pdv{x_i^*}{w_i} \leq 0, \quad \text{따라서} \quad \left|\pdv{x'_i}{w_i}\right| \geq \left|\pdv{x_i^*}{w_i}\right|\)\\즉 장기요소수요탄력성이 단기요소수요탄력성보다 크다.\\\subsubsection{상품수요탄력성}(\ref{eq:b})를 $y$에 대해 미분하면 \(\pdv{\lambda'}{y} = \pdv{\lambda^*}{y}+\pdv{\lambda^*}{k}\pdv{k'}{y}\)\\(\ref{eq:b})를 $r$에 대해 미분하면 \(\pdv{\lambda'}{r} = \pdv{\lambda^*}{k}\pdv{k'}{r}\)\\앞에서 포락선 정리에 따라 $\pdv{k'}{y} = \pdv{\lambda'}{r}$ \; 이므로 \;\(\pdv{\lambda'}{y} = \pdv{\lambda^*}{y}+\left(\pdv{\lambda^*}{k}\right)^2 \pdv{k'}{r}\)\\\(\pdv{k'}{r} \leq 0 \text{이므로} \quad 0 \leq \pdv{\lambda'}{y} \leq \pdv{\lambda^*}{y}\)\\[1pt]$\lambda$는 우변상수 $y$의 증가에 따른 비용의 증가분이므로 한계비용(MC)을 의미한다.\\즉, \; \(\pdv{MC^*}{y}\geq\pdv{MC'}{y}>0 \)\\따라서 장기한계비용은 단기한계비용보다 덜 탄력적이다.\\완전경쟁시장이라면 $MC = p$ 이므로 \(\pdv{p^*}{y}\geq\pdv{p'}{y}\)\( \Rightarrow \pdv{y^*}{p}\leq\pdv{y'}{p}\)\\즉 장기의 생산물 공급탄력성은 단기의 생산물공급탄력성보다 더 크다.\section{결론}요소수요와 상품공급의 탄력성은 장기가 단기보다 크다. 장기, 단기 최적값에는 차이가 없도록 binding하는 제약식을 추가했을 때 모수변화의 보상효과의 절대값은 제약식이 추가될 때 더 작다. 제약식이 추가되면 변동을 거스르는 힘이 작용하므로 보상변화는 더 작아진다.즉 시스템에 외부 충격을 받을 때 이를 완화시키는 방향으로 작용한다는 점에서 화학적 르샤틀리에 평형효과와 같은 의미인 것이다.\end{document}
+화학적 평형이론에서 나온 용어로 균형 상태에서 변화를 주면 변화를 거스르는 방향으로 평형을 유지하려는 힘이 작용한다. 경제학에서 르샤틀리에 법칙이란 단기(노동)의 가격탄력성이 장기(자본)의 가격탄력성보다 작은 현상을 의미한다.샤뮤엘슨은 단기적으로 변화에 저항하려는 성질이 화학의 균형이론과 비슷하다고 보아 이렇게 명명한것이다.\footnote{\href{https://en.wikipedia.org/wiki/Le Chatelier\%27s_principleciple}{wiki}참조}
+2.비용최소화<br>
+다음의 문제를 고려하자.
+\begin{eqnarray*}	min &C(\mathbf{w}, y) = \mathbf{w} \bullet \mathbf{x}\\	
+  subject \; to &f(\mathbf{x}) \geq y, \quad \mathbf{x} \geq \mathbf{0}
+\end{eqnarray*}	
+  여기서 $C(\mathbf{w}, y)$는 임금 $\mathbf{w}$의 2차 미분 가능한 신고전학파 비용함수.<br>
+  $\mathbf{w}$는 n개의 원소로 구성된 요소가격벡터, $\mathbf{x}$는 n개의 원소로 구성된 요소수량벡터.<br>
+  $f(\mathbf{x})$는 생산함수로 제약식은 생산수량이 적어도 $y$보다는 커야 함을 의미한다.\footnote{$\mathbf{w}$는 행벡터라고 하자. 열벡터라고 하면 식에 전치표현을 써야 하는데 표기의 편리상 생략한 것으로 생각해도 된다.}<br>
+  최소비용을 구하기 위해 라그란지안을 취하면\[ \mathscr{L} = \mathbf{w} \bullet \mathbf{x} + \lambda(y-f(\mathbf{x})) \]포락선 정리에 의해 최적값에서 $\mathscr{L}^* = C^*$ 이므로  
+  \[ \pdv{\mathscr{L}^*}{y} = \pdv{C^*}{y} = \lambda(\mathbf{w},y) > 0 \]
+  이는 우변 상수 $y$의 증가에 따른 한계비용을 의미한다. $\lambda$가 0보다 큰 것은 KKT조건에 의한 것이다.	
+  \[ \pdv{\mathscr{L}^*}{w_i} = \pdv{C^*}{w_i} = x_i(\mathbf{w},y) > 0, \quad i=1, \cdots,n \]
+  이는 유명한 쉐퍼드보조정리(Shephard lemma)이다. $x_i$가 0보다 큰 것은 KKT조건에 의한 것이다.<br>
+  $C(\mathbf{w}, y)$가 2차 미분가능하고 헤시안(Hessian)행렬은 대칭행렬이므로 
+  \[ \pdv{x_j}{w_i} = \pdv{C^*}{w_i}{w_j} = \pdv{x_i}{w_j}, \quad i=1, \cdots,n \]\[ \pdv{x_i}{y} = \pdv{C^*}{w_i}{y} = \pdv{\lambda}{w_i}, \quad i=1, \cdots,n \]
+  이는 유명한 샤뮤엘슨의 역관계(Samuelson's reciprocity relation)이다.<br>
+  
+  3. 이윤극대화<br>
+  다음의 문제를 고려하자.
+  \begin{eqnarray*}	max &\pi(p,\mathbf{w}) = py(p,\mathbf{w}) - \mathbf{w} \bullet \mathbf{x}(p,\mathbf{w}) \\	
+  subject \; to &g(\mathbf{x},y) \geq 0, \quad \mathbf{x} \geq \mathbf{0} \quad y \geq 0
+  \end{eqnarray*}
+  최소비용을 구하기 위해 라그란지안을 취하면
+  \[ \mathscr{L} = py - \mathbf{w} \bullet \mathbf{x} + \lambda g(\mathbf{x}, y) \]
+  포락선 정리에 의해
+  \[ \pdv{\mathscr{L}^*}{p} = \pdv{\pi^*}{p} = y > 0  \]
+  \[ \pdv{\mathscr{L}^*}{w_i} = \pdv{\pi^*}{w_i} = -x_i < 0, \quad i=1, \cdots,n  \]
+  이는 유명한 호텔링의 보조정리(Hotelling's lemma)이다. 부등호의 방향은 KKT조건에 의한 것이다.<br>
+  $C$가 미분가능하고 볼록함수이므로 $\pi$는 미분가능하고 오목함수이다. 다라서 헤시안행렬은 음반정치행렬(negative semidefinite matrix).
+  \[ \pdv{x_i}{w_j} = \pdv{\pi^*}{w_i}{w_j} = \pdv{x_j}{w_i}, \quad i=1, \cdots,n \]\[ -\pdv{x_i}{p} = \pdv{\pi^*}{w_i}{p} = \pdv{y}{w_i}, \quad i=1, \cdots,n \]
+  4. 르샤틀리에 법칙의 유도
+    4.1 자본이 고정인 경우<br>
+    단기적으로 자본은 불변이므로 자본이 고정인 경우는 단기를 의미한다.
+    \begin{eqnarray*}	min &C(\mathbf{w}, y) = \mathbf{w} \bullet \mathbf{x} + rk\\	subject \; to &f(\mathbf{x},k) \geq y, \quad \mathbf{x} \geq \mathbf{0}
+    \end{eqnarray*}
+    여기서 $k$는 자본, $r$은 자본의 가격을 의미한다. 자본이 고정이므로 자본은 최적값에 영향을 미치지 못하고 목적식에서 제외해도 무방하다. 이 경우 목적식은 2절의 경우와 같으므로 결론도  2절의 경우와 같다.
+    \[ \pdv{x_j^*}{w_i} = \pdv{x_i^*}{w_j}, \quad i=1, \cdots,n \]\[ \pdv{x_i^*}{y} = \pdv{\lambda}{w_i}, \quad i=1, \cdots,n \]\[ \pdv{x_i^*}{w_i} = \pdv[2]{C}{w_i} \leq 0, \quad i=1, \cdots,n \]
+    $C(\mathbf{w})$는 $w_i$에 대해 오목함수이므로 2차미분이 0보다 작다.\footnote{$w', w^*$일 때의 최소값을 각각 \( x'=x(w'), \quad x^*=x(w^*)\)라 하자. $w'$과 $w^*$ 사이의 점을 $w^{\circ}$라 하면\\ $w^{\circ} = \theta w'+(1-\theta)w*, \quad (0 \leq \theta \leq 1)$, \quad $x'w' \leq x'w^{\circ},\quad x^*w^* \leq x^*w^{\circ}$이므로\\ $\theta w'x'+(1-\theta)w^*x^* \leq \theta  w'x^{\circ}+(1-\theta)w^*x^{\circ}=w^{\circ}x^{\circ}$, 즉 \(\theta C(w')+(1-\theta)C(w^*) \leq C(w^{\circ}) \). 따라서 $C(w)$는 $w$에 대해 오목함수.}	
+    4.2 자본이 변동인 경우<br>
+    장기적으로 자본은 변동하므로 자본이 변동인 경우는 장기를 의미한다.
+    \begin{eqnarray*}
+    \text{Minimize} &C(\mathbf{w}, y) = \mathbf{w} \bullet \mathbf{x} + rk\\
+    \text{Subject to} &f(\mathbf{x},k) \geq y, \quad \mathbf{x} \geq \mathbf{0}, \quad k \geq 0\end{eqnarray*}
+    최소비용을 구하기 위해 라그란지안을 취하면
+    \[ \mathscr{L} = \mathbf{w} \bullet \mathbf{x} + rk + \lambda(y-f(\mathbf{x},k)) \]
+    최적값을 $C', \; x'_i, \; k', \; \lambda'$라 하면 포락선정리에 따라\[ \pdv{C'}{w_i} = x'_i, \Rightarrow \pdv{x'_i}{r} = \pdv{C'}{w_i}{r} \]
+    \begin{eqnarray*}
+    \begin{split} 
+    \pdv{C'}{r} = k' &\Rightarrow \pdv{k'_i}{w_i} = \pdv{C'}{w_i}{r}\\ &\Rightarrow \pdv{k'_i}{y} = \pdv{C'}{y}{r}
+    \end{split}
+    \end{eqnarray*}
+    \[ \pdv{C'}{y} = \lambda' \Rightarrow \pdv{\lambda'}{r} = \pdv{C'}{y}{r} \]
+    이상으로 부터 \[ \pdv{x'_i}{r} = \pdv{k'_i}{w_i}, \quad \pdv{k'_i}{y} = \pdv{\lambda'}{r} \]
+    $C$는 $w, r$에 대해 오목함수이므로 
+    \[ \pdv{x'_i}{w_i} = \pdv[2]{C}{w_i} \leq 0 \]
+     \[ \pdv{k'}{r} = \pdv[2]{C}{r} \leq 0 \]
+    등호로 성립하는 제약식(binding constraint)을 단기 최적화 문제에 추가하더라도 최적값에 변화가 없다. 즉 장기에서 자본 $k$의 최적값이 단기 요소수요함수에 대입되더라도 장기와 단기의 요소수요함수는 같다.
+    \begin{eqnarray} 
+    x'_i(\mathbf{w}, r, y) &= x_i ^*[w, r, y ; k'(\mathbf{w}, r, y)]\label{eq:a} \\ 
+    \lambda'(\mathbf{w}, r, y) &= \lambda^*[w, r, y ; k'(\mathbf{w}, r, y)] \label{eq:b} 
+    \end{eqnarray}
+    4.3 요소수요탄력성<br>
+    (\ref{eq:a})를 $w_i$에 대해 미분하면
+    \begin{eqnarray}
+    \pdv{x'_i}{w_i} = \pdv{x_i^*}{w_i}+\pdv{x_i^*}{k}\pdv{k'}{w_i}\label{eq:c}
+    \end{eqnarray}
+    (\ref{eq:a})를 $r$에 대해 미분하면
+    \begin{eqnarray}\pdv{x'_i}{r} &=& \pdv{x_i^*}{r}+\pdv{x_i^*}{k}\pdv{k'}{r}\nonumber \\[10pt]&=& \pdv{x_i^*}{k}\pdv{k'}{r}, \quad (\because \pdv{x_i^*}{r}=0)\label{eq:d}
+    \end{eqnarray}
+    단기적으로 자본은 고정되어 있으므로 자본가격변동이 직접 다른 요소공급에 영향을 미치지 않는다.앞에서 포락선 정리에 따라 $\pdv{x'_i}{r} = \pdv{k'_i}{w_i}$ \; 이므로 이를 (\ref{eq:c})에 대입
+      \begin{eqnarray}
+     \pdv{x'_i}{w_i} = \pdv{x_i^*}{w_i}+\pdv{x_i^*}{k}\pdv{x'_i}{r}\label{eq:e}
+                                                            \end{eqnarray}(\ref{eq:e})를 (\ref{eq:d})에 대입
+                                                            \begin{eqnarray*}\underbrace{\pdv{x'_i}{w_i}}_\text{장기요소수요탄력성} = \underbrace {\pdv{x_i^*}{w_i}}_\text{단기요소수요탄력성}+\underbrace{\left(\pdv{x_i^*}{k}\right)^2 \pdv{k'}{r}}_\text{조정효과}\label{eq:f}
+                                                            \end{eqnarray*}
+                                                            \(	\pdv{k'}{r} \leq 0 \quad \text{이므로} \quad \pdv{x'_i}{w_i} \leq \pdv{x_i^*}{w_i} \leq 0, \quad \text{따라서} \quad \left|\pdv{x'_i}{w_i}\right| \geq \left|\pdv{x_i^*}{w_i}\right|\)\\즉 장기요소수요탄력성이 단기요소수요탄력성보다 크다.\\
+    4.4 상품수요탄력성<br>
+    (\ref{eq:b})를 $y$에 대해 미분하면 \(\pdv{\lambda'}{y} = \pdv{\lambda^*}{y}+\pdv{\lambda^*}{k}\pdv{k'}{y}\)\\(\ref{eq:b})를 $r$에 대해 미분하면 \(\pdv{\lambda'}{r} = \pdv{\lambda^*}{k}\pdv{k'}{r}\)<br>
+    앞에서 포락선 정리에 따라 $\pdv{k'}{y} = \pdv{\lambda'}{r}$ \; 이므로 \;\(\pdv{\lambda'}{y} = \pdv{\lambda^*}{y}+\left(\pdv{\lambda^*}{k}\right)^2 \pdv{k'}{r}\)\\\(\pdv{k'}{r} \leq 0 \text{이므로} \quad 0 \leq \pdv{\lambda'}{y} \leq \pdv{\lambda^*}{y}\)[1pt]<br>
+    $\lambda$는 우변상수 $y$의 증가에 따른 비용의 증가분이므로 한계비용(MC)을 의미한다.\\즉, \; \(\pdv{MC^*}{y}\geq\pdv{MC'}{y}>0 \)<br>
+  따라서 장기한계비용은 단기한계비용보다 덜 탄력적이다.\\완전경쟁시장이라면 $MC = p$ 이므로 \(\pdv{p^*}{y}\geq\pdv{p'}{y}\)\( \Rightarrow \pdv{y^*}{p}\leq\pdv{y'}{p}\)<br>
+  즉 장기의 생산물 공급탄력성은 단기의 생산물공급탄력성보다 더 크다.<br>
+  5.결론<br>
+  요소수요와 상품공급의 탄력성은 장기가 단기보다 크다. 장기, 단기 최적값에는 차이가 없도록 binding하는 제약식을 추가했을 때 모수변화의 보상효과의 절대값은 제약식이 추가될 때 더 작다. 제약식이 추가되면 변동을 거스르는 힘이 작용하므로 보상변화는 더 작아진다.즉 시스템에 외부 충격을 받을 때 이를 완화시키는 방향으로 작용한다는 점에서 화학적 르샤틀리에 평형효과와 같은 의미인 것이다.
 </body>
 </html>
