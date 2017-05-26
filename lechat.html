@@ -18,13 +18,15 @@
   여기서 $C(\mathbf{w}, y)$는 임금 $\mathbf{w}$의 2차 미분 가능한 신고전학파 비용함수.<br>
   $\mathbf{w}$는 n개의 원소로 구성된 요소가격벡터, $\mathbf{x}$는 n개의 원소로 구성된 요소수량벡터.<br>
   $f(\mathbf{x})$는 생산함수로 제약식은 생산수량이 적어도 $y$보다는 커야 함을 의미한다.\footnote{$\mathbf{w}$는 행벡터라고 하자. 열벡터라고 하면 식에 전치표현을 써야 하는데 표기의 편리상 생략한 것으로 생각해도 된다.}<br>
-  최소비용을 구하기 위해 라그란지안을 취하면\[ \mathscr{L} = \mathbf{w} \bullet \mathbf{x} + \lambda(y-f(\mathbf{x})) \]포락선 정리에 의해 최적값에서 $\mathscr{L}^* = C^*$ 이므로  
-  \[ \pdv{\mathscr{L}^*}{y} = \pdv{C^*}{y} = \lambda(\mathbf{w},y) > 0 \]
+  최소비용을 구하기 위해 라그란지안을 취하면\[ \mathscr{L} = \mathbf{w} \bullet \mathbf{x} + \lambda(y-f(\mathbf{x})) \]
+  포락선 정리에 의해 최적값에서 $\mathscr{L}^* = C^*$ 이므로  
+  \[ \frac{\mathscr{L}^*}{y} = \frac{C^*}{y} = \lambda(\mathbf{w},y) > 0 \]
   이는 우변 상수 $y$의 증가에 따른 한계비용을 의미한다. $\lambda$가 0보다 큰 것은 KKT조건에 의한 것이다.	
-  \[ \pdv{\mathscr{L}^*}{w_i} = \pdv{C^*}{w_i} = x_i(\mathbf{w},y) > 0, \quad i=1, \cdots,n \]
+  \[ \frac{\mathscr{L}^*}{w_i} = \pdv{C^*}{w_i} = x_i(\mathbf{w},y) > 0, \quad i=1, \cdots,n \]
   이는 유명한 쉐퍼드보조정리(Shephard lemma)이다. $x_i$가 0보다 큰 것은 KKT조건에 의한 것이다.<br>
   $C(\mathbf{w}, y)$가 2차 미분가능하고 헤시안(Hessian)행렬은 대칭행렬이므로 
-  \[ \pdv{x_j}{w_i} = \pdv{C^*}{w_i}{w_j} = \pdv{x_i}{w_j}, \quad i=1, \cdots,n \]\[ \pdv{x_i}{y} = \pdv{C^*}{w_i}{y} = \pdv{\lambda}{w_i}, \quad i=1, \cdots,n \]
+  \[ \frac{x_j}{w_i} = \frac{C^*}{w_i}{w_j} = \frac{x_i}{w_j}, \quad i=1, \cdots,n \]
+  \[ \frac{x_i}{y} = \frac{C^*}{w_i}{y} = \frac{\lambda}{w_i}, \quad i=1, \cdots,n \]
   이는 유명한 샤뮤엘슨의 역관계(Samuelson's reciprocity relation)이다.<br><br>
   
   3. 이윤극대화<br><br>
