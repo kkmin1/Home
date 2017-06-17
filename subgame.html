@@ -13,8 +13,8 @@
 	background-size: 100% 100%;
          }
     .slash div, .backslash div { text-align: right; }
-      table {width: 60%; /* 100%로 하면 전체를 차지 */      
-             height: 60%;
+      table {width: 70%; /* 100%로 하면 전체를 차지 */      
+             height: 30%;
              margin-left: auto; /*표를 가운데 정렬할 때는 좌우 margin 속성값을 auto로 정합니다.*/
              margin-right: auto;
              /* float: right; 표를 오른쪽 정렬할 때는 float 속성값을 right로 정합니다.*/
@@ -38,15 +38,15 @@
  갑이 핵무기를 개발한다면 을은 이에 강력 대응과 이를 용인하는 두 가지 선택안이 있다. 을이 강력 대응한다면 쌍방간의 전쟁으로 갑은 -5, 을은 -3 의 효용을 얻는다. 
 만약 을이 갑의 위협에 굴복하여 이를 용인한다면 갑은 5,  을은 0 의 효용을 얻는다. 이 상황을 그래프로 그리면 다음과 같다. <br> <br>
 
-<img src = "game-tree1.jpg" width=600 height=600 hspace= 300> 
+<img src = "game-tree1.jpg" width=600 height=600 hspace= 100><br> <br><!-- hspace는 왼쪽 여백 설정-->
 
       이 게임에서 최선의 선택은 무엇인가?  이 게임에서 갑의 전략은 핵무기 개발, 또는 포기 두 가지다. 
 을의 전략은 갑의 선택에 영향을 받으므로 i) 갑의 포기시 무대응, 갑의 개발시 강공, ii) 갑의 포기시 무대응, 갑의 개발시 용인의 두 가지다. <br> <br>
 
-<table> 
-<caption> <핵무기 개발-포기> </caption><br><br>
+<table style = "font-size: 30pt"> 
+<caption> < 핵무기 개발 - 포기 모형 > </caption><br>
  <tr>  <!--table row  약자로 행을 만드는역할 (기본값은보통글씨체에, 왼쪽정렬) -->
-<th class="backslash" style='letter-spacing:15px'><div>을</div>갑</th>
+<th class="backslash" style='letter-spacing:50px'><div>을</div>갑</th>
 <th>포기-무대응  개발-강공</th> <!-- th : header cell , table head  약자로 표의 제목을쓰는역할 ? (기본값은굵은글씨체에, 중앙정렬)-->
  <th>포기-무대응  개발-용인</th> 
  </tr>  
@@ -75,7 +75,7 @@
 갑이 핵무기를 개발하더라도 핵위협에 굴복하지 않을 것이라고 판단할 수 있다. 이 경우 을의 보수는 갑이 예상한 값과 다를 것이다. <br> <br>
 예를 들어 다음의 그림을 보자. <br> <br>
 
-<img src = "game-tree2.jpg" width=600 height=600 hspace= 300> <br> <br>
+<img src = "game-tree2.jpg" width=600 height=600 hspace= 100> <br><br>
 
 보수값을 용인시 (5, -5), 강공시 (-5, -3)로 바꿨다. 이 경우 을은 강공 전략을 구사하는 것이 최선이고 갑은 3과 -5를 비교하여 포기가 최선이다. 즉 갑 포기, 을 개발시 강공이 부분게임완전균형이 되는 것이다.
 이상과 같이 게임의 보수를 어떻게 평가하는가에 따라 게임의 결과가 달라질 수 있다. 이 점이 게임이론을 현실에 적용했을 때 가장 신경써야 되는 부분이다. <br> <br>
