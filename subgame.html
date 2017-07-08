@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <title>HTML</title>
-    <style>
+    <style type="text/css">
     .slash {
 	background: url('http://cdn.zetawiki.com/png/slash.png');
 	background-size: 100% 100%;
@@ -26,7 +26,9 @@
       table{border: 1px solid #bcbcbc;}
       th, td{border: 1px solid #bcbcbc; width: 200px; height: 50px}
      /*.jb-th-1 {width: 100px; height: 100px;} 헤더셀1의 가로크기, 세로높이 설정 */
-     </style>  
+   
+      body { line-height:1.3em }
+   </style>  
 
 </head> 
 <body>
@@ -36,16 +38,15 @@
 갑은 핵무기를 개발할지, 아니면 이 돈으로 다른 사업에 쓸지를 고려하고 있다.
 갑이 핵무기 개발을 포기하고 다른 곳에 투자한다면 그 댓가로 을에게 일정부분 보상을 받아 갑은 3의 효용을, 을은 전쟁을 회피하여 5의 효용을  얻는다.
  갑이 핵무기를 개발한다면 을은 이에 강력 대응과 이를 용인하는 두 가지 선택안이 있다. 을이 강력 대응한다면 쌍방간의 전쟁으로 갑은 -5, 을은 -3 의 효용을 얻는다. 
-만약 을이 갑의 위협에 굴복하여 이를 용인한다면 갑은 5,  을은 0 의 효용을 얻는다. 이 상황을 그래프로 그리면 다음과 같다. <br> <br>
+만약 을이 갑의 위협에 굴복하여 이를 용인한다면 갑은 5,  을은 0 의 효용을 얻는다. 이 상황을 그래프로 그리면 <그림 1>과 같다. <br> <br>
 
 <img src = "game-tree1.jpg" width=600 height=600 hspace= 100><br> <br><!-- hspace는 왼쪽 여백 설정-->
 
       이 게임에서 최선의 선택은 무엇인가?  이 게임에서 갑의 전략은 핵무기 개발, 또는 포기 두 가지다. 
 을의 전략은 갑의 선택에 영향을 받으므로 i) 갑의 포기시 무대응, 갑의 개발시 강공, ii) 갑의 포기시 무대응, 갑의 개발시 용인의 두 가지다. <sup><a href="#fn1" id="ref1">1</a></sup><br> <br>
 
-<table style = "font-size: 30pt"> 
-<caption> < 핵무기 개발 - 포기 모형 > </caption><br>
- <tr>  <!--table row  약자로 행을 만드는역할 (기본값은보통글씨체에, 왼쪽정렬) -->
+<table style = "font-size: 20pt"> 
+<tr>  <!--table row  약자로 행을 만드는역할 (기본값은보통글씨체에, 왼쪽정렬) -->
 <th class="backslash" style='letter-spacing:50px'><div>을</div>갑</th>
 <th>포기-무대응<br>  개발-강공</th> <!-- th : header cell , table head  약자로 표의 제목을쓰는역할 ? (기본값은굵은글씨체에, 중앙정렬)-->
  <th>포기-무대응<br>  개발-용인</th> 
@@ -60,6 +61,7 @@
 <td>(-5, -3)</td>  
 <td bgcolor="gray">(5, 0)</td>  <!-- 셀의 백경색을 회색으로 함 -->
 </tr> 
+<caption> 표 1 : 핵무기 개발 - 포기 모형 </caption><br>
 </table> <br> <br>
 
 이 게임의 내쉬 균형은 두 개다. i) 갑의 포기, 을의 갑의 개발시 강공, ii) 갑의 개발, 을의 갑의 개발시 용인. 표에서 회색으로 칠해진 칸이다. 각각의 칸에서 상대가 다른 전략으로 이탈할 유인이 없음을 알 수 있다. 
@@ -75,8 +77,7 @@
 갑이 핵무기를 개발하더라도 핵위협에 굴복하지 않을 것이라고 판단할 수 있다. 이 경우 을의 보수는 갑이 예상한 값과 다를 것이다. <br> <br>
 예를 들어 다음의 그림을 보자. <br> <br>
 
-<img src = "game-tree2.jpg" width=600 height=600 hspace= 100> <br><br>
-
+<img src = "game-tree2.jpg" width=600 height=600 hspace= 100> <br>
 보수값을 용인시 (5, -5), 강공시 (-5, -3)로 바꿨다. 이 경우 을은 강공 전략을 구사하는 것이 최선이고 갑은 3과 -5를 비교하여 포기가 최선이다. 즉 갑 포기, 을 개발시 강공이 부분게임완전균형이 되는 것이다.
 이상과 같이 게임의 보수를 어떻게 평가하는가에 따라 게임의 결과가 달라질 수 있다. 이 점이 게임이론을 현실에 적용했을 때 가장 신경써야 되는 부분이다. <br> <br>
 
