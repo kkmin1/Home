@@ -1,0 +1,83 @@
+\documentclass{book}
+\usepackage{tikz}
+ \usetikzlibrary{math} 
+ \usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+
+\title{demand supply cobweb diagram}
+\author{민관기}
+\date{\today}
+
+\tikzmath
+{
+   function de(\x) % demand function
+   {return \a+\b*\x;};
+     function su(\x) % supply function
+   {return \c+\d*\x;};
+   function si(\x) % inverse supply function
+   {return (\x-\c)/\d;};
+   function cobweb(\a,\b,\c,\d,\x0,\n) % x0 is initial value, \n is number of iteration
+     {
+         {
+    \draw[->](0,0)--(0,6) node[above]{P(price)};
+    \draw[->](0,0)--(10,0) node[right]{{Q(quantity}};
+    \clip (-1,-1) rectangle (11,8);
+    \draw[color=blue,domain=0:8] plot (\x,{de(\x)});    
+    \draw[color=blue,domain=0:8] plot (\x,{su(\x)}); 
+   \node at (7,6) {supply function};
+  \node at (7,1) {demand function};
+    \node at (-0.2,-0.2) {0};
+    };
+    \xb=\x0;
+    \xa=\xb;
+    \ya=de(\xa);
+     {
+      \draw [->,color=magenta] (\xa, 0)--(\xa, \ya);
+      \node at (\xa,-0.2) {$\x0$};
+      };
+         for \i in {1,...,\n}{
+             \xa = \xb;
+             \ya = de(\xa);
+             \xb = si(\ya);
+              \yb = de(\xb);
+             {
+                  \draw [->,color=magenta] (\xa, \ya)--(\xb, \ya);
+                  \draw[->,color=magenta] (\xb,\ya)--(\xb,\yb);
+              };
+             };
+};
+  function fluc(\a,\b,\c,\d,\x0,\n) 
+  {
+      {
+    \draw[->](0,0)--(0,6) node[above]{P(price)};
+    \draw[->](0,0)--(10,0) node[right]{t(time)};
+    \node at (-0.2,-0.2) {0};
+    };
+    \xb=\x0;
+         for \i in {1,...,\n}{
+             \xa = \xb;
+             \ya = de(\xa);
+             \xb = si(\ya);
+              \yb = de(\xb);
+             {\draw [color=magenta] (\i, \ya)--(\i+1, \yb);};
+             };
+      };
+}
+
+\begin{document}
+
+\begin{figure}[htbp]
+\centering
+    \begin{tikzpicture}
+   \tikzmath{cobweb(5,-0.7,1,1,1,8);}
+    \end{tikzpicture}
+    \caption{demand supply cobweb diagram}
+    
+     \begin{tikzpicture}
+   \tikzmath{fluc(5,-0.7,1,1,1,8);}
+    \end{tikzpicture}
+    \caption{time variation}
+    \end{figure} 
+    
+  
+\end{document} 
