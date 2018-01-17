@@ -1,0 +1,129 @@
+﻿<!-- Created by Jafca, Remaked by kkmin -->
+
+	
+<!DOCTYPE html>
+
+<html>
+
+	
+<head>
+
+<meta charset="utf8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    $("p#c1").click(function(){
+        $("#center").load("hello.html pre#c1");
+    });
+    $("p#c2").click(function(){
+        $("#center").load("hello.html pre#c2");
+    });
+    $("p#j1").click(function(){
+        $("#center").load("hello.html pre#j1");
+    });
+    $("p#py1").click(function(){
+        $("#center").load("hello.html pre#py1");
+    });
+});
+</script>
+
+<link rel="stylesheet" type="text/css" href="code.css">
+</head>
+
+
+<body>
+<div style=margin:10px>
+<h1>프로그래밍 언어별 "Hello World" 출력 문법</h1>
+</div>
+
+<div id="left">
+<ul>
+<li id=0>
+<div class="dropdown">
+<button onclick="cFunction()" class="dropbtn">C</button>
+  <div id="cDropdown" class="dropdown-content">
+    <p id="c1">output</p>
+    <p id="c2">input</p>
+    <p id="c3">function</p>
+  </div>
+</div>
+</li>
+
+<li id=1>C#</li>
+
+<li id=2>
+<div class="dropdown">
+<button onclick="jFunction()" class="dropbtn">Java</button>
+  <div id="jDropdown" class="dropdown-content">
+    <p id="j1">output</p>
+    <p id="j2">input</p>
+    <p id="j3">function</p>
+  </div>
+</div>
+</li>
+
+<li id=3>
+<div class="dropdown">
+<button onclick="pyFunction()" class="dropbtn">Python</button>
+  <div id="pyDropdown" class="dropdown-content">
+    <p id="py1">output</p>
+    <p id="py2">input</p>
+    <p id="py3">function</p>
+  </div>
+</div>
+</li>
+
+<li id=4>Ruby</li>
+<li id=5>PHP</li>
+<li id=6>HTML</li>
+<li id=7>CSS</li>
+<li id=8>JavaScript</li>
+</ul>
+</div>
+
+
+<div id="center">
+<!--<iframe height="300px" width="50%" src="code0.html" name="code0"></iframe>-->
+</div>
+
+<footer>
+      Created by &copy; kkmin 2018
+</footer>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function cFunction() {
+    document.getElementById("cDropdown").classList.toggle("show");
+}
+
+function pyFunction() {
+    document.getElementById("pyDropdown").classList.toggle("show");
+}
+
+function jFunction() {
+    document.getElementById("jDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+      
+</body>
+
+</html>
+
