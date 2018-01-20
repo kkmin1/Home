@@ -20,12 +20,49 @@ $(document).ready(function(){
     $("p#c2").click(function(){
         $("#center").load("code.txt pre#c2");
     });
+    $("p#cp1").click(function(){
+        $("#center").load("code.txt pre#cp1");
+    });
     $("p#j1").click(function(){
         $("#center").load("code.txt pre#j1");
     });
     $("p#py1").click(function(){
         $("#center").load("code.txt pre#py1");
     });
+    $("p#pl1").click(function(){
+        $("#center").load("code.txt pre#pl1");
+    });
+    $("p#r1").click(function(){
+        $("#center").load("code.txt pre#r1");
+    });
+    $("p#h1").click(function(){
+        $("#center").load("code.txt pre#h1");
+    });
+    $("p#ph1").click(function(){
+        $("#center").load("code.txt pre#ph1");
+    });
+    $("p#js1").click(function(){
+        $("#center").load("code.txt pre#js1");
+    });
+    $("p#k1").click(function(){
+        $("#center").load("code.txt pre#k1");
+    });
+    $("p#s1").click(function(){
+        $("#center").load("code.txt pre#s1");
+    });
+
+    $("p#l1").click(function(){
+       $("#center").load("code.txt pre#l1");
+    });
+
+    $("p#jl1").click(function(){
+       $("#center").load("code.txt pre#jl1");
+    });
+
+    $("p#g1").click(function(){
+       $("#center").load("code.txt pre#g1");
+    });
+
 });
 </script>
 
@@ -35,13 +72,14 @@ $(document).ready(function(){
 
 <body>
 
-   <div id="header">
-   <h1>프로그래밍 언어별 문법</h1>
-   </div>
+<header>
+<h1>프로그래밍 언어별 문법</h1>
+</header>
 
 <div id="content">
 
 <div id="left">
+<h3> 프로그램 언어</h3>
 
 <div class="dropdown">
 <button onclick="cFunction()" class="dropbtn">C</button>
@@ -57,8 +95,8 @@ $(document).ready(function(){
 	<button onclick="cpFunction()" class="dropbtn">C++</button>
 	  <div id="cpDropdown" class="dropdown-content">
 	    <p id="cp1">output</p>
-	    <p id="cp">input</p>
-	    <p id="cp">function</p>
+	    <p id="cp2">input</p>
+	    <p id="cp3">function</p>
 	  </div>
 	</div>
 
@@ -67,8 +105,8 @@ $(document).ready(function(){
 	<button onclick="csFunction()" class="dropbtn">C#</button>
 	  <div id="csDropdown" class="dropdown-content">
 	    <p id="cs1">output</p>
-	    <p id="cs">input</p>
-	    <p id="cs">function</p>
+	    <p id="cs2">input</p>
+	    <p id="cs3">function</p>
 	  </div>
 	</div>
 
@@ -94,93 +132,140 @@ $(document).ready(function(){
 
 
 	<div class="dropdown">
-	<button onclick="cpFunction()" class="dropbtn">Perl</button>
-	  <div id="cpDropdown" class="dropdown-content">
-	    <p id="cp1">output</p>
-	    <p id="cp">input</p>
-	    <p id="cp">function</p>
+	<button onclick="plFunction()" class="dropbtn">Perl</button>
+	  <div id="plDropdown" class="dropdown-content">
+	    <p id="pl1">output</p>
+	    <p id="pl2">input</p>
+	    <p id="pl3">function</p>
 	  </div>
 	</div>
 
 
 	<div class="dropdown">
-	<button onclick="cpFunction()" class="dropbtn">Ruby</button>
-	  <div id="cpDropdown" class="dropdown-content">
-	    <p id="cp1">output</p>
-	    <p id="cp">input</p>
-	    <p id="cp">function</p>
+	<button onclick="rFunction()" class="dropbtn">Ruby</button>
+	  <div id="rDropdown" class="dropdown-content">
+	    <p id="r1">output</p>
+	    <p id="r2">input</p>
+	    <p id="r3">function</p>
 	  </div>
 	</div>
 
+  <div class="dropdown">
+  <button onclick="lFunction()" class="dropbtn">Lua</button>
+    <div id="lDropdown" class="dropdown-content">
+      <p id="l1">output</p>
+      <p id="l2">input</p>
+      <p id="l3">function</p>
+    </div>
+  </div>
+
 
 	<div class="dropdown">
-	<button onclick="cpFunction()" class="dropbtn">HTML</button>
-		<div id="cpDropdown" class="dropdown-content">
-			<p id="cp1">output</p>
-			<p id="cp">input</p>
-			<p id="cp">function</p>
+	<button onclick="hFunction()" class="dropbtn">HTML</button>
+		<div id="hDropdown" class="dropdown-content">
+			<p id="h1">output</p>
+			<p id="h2">input</p>
+			<p id="h3">function</p>
 		</div>
 	</div>
 
 
 	<div class="dropdown">
-	<button onclick="cpFunction()" class="dropbtn">PHP</button>
-		<div id="cpDropdown" class="dropdown-content">
-			<p id="cp1">output</p>
-			<p id="cp">input</p>
-			<p id="cp">function</p>
+	<button onclick="phFunction()" class="dropbtn">PHP</button>
+		<div id="phDropdown" class="dropdown-content">
+			<p id="ph1">output</p>
+			<p id="ph2">input</p>
+			<p id="ph3">function</p>
 		</div>
 	</div>
 
 
 	<div class="dropdown">
-	<button onclick="cpFunction()" class="dropbtn">JavaScript</button>
-		<div id="cpDropdown" class="dropdown-content">
-			<p id="cp1">output</p>
-			<p id="cp">input</p>
-			<p id="cp">function</p>
+	<button onclick="jsFunction()" class="dropbtn">JavaScript</button>
+		<div id="jsDropdown" class="dropdown-content">
+			<p id="js1">output</p>
+			<p id="js2">input</p>
+			<p id="js3">function</p>
 		</div>
 	</div>
 
 	<div class="dropdown">
-	<button onclick="cpFunction()" class="dropbtn">Kotlin</button>
-		<div id="cpDropdown" class="dropdown-content">
-			<p id="cp1">output</p>
-			<p id="cp">input</p>
-			<p id="cp">function</p>
+	<button onclick="kFunction()" class="dropbtn">Kotlin</button>
+		<div id="kDropdown" class="dropdown-content">
+			<p id="k1">output</p>
+			<p id="k2">input</p>
+			<p id="k3">function</p>
 		</div>
 	</div>
 
 	<div class="dropdown">
-	<button onclick="cpFunction()" class="dropbtn">Scala</button>
-		<div id="cpDropdown" class="dropdown-content">
-			<p id="cp1">output</p>
-			<p id="cp">input</p>
-			<p id="cp">function</p>
+	<button onclick="sFunction()" class="dropbtn">Scala</button>
+		<div id="sDropdown" class="dropdown-content">
+			<p id="s1">output</p>
+			<p id="s2">input</p>
+			<p id="s3">function</p>
 		</div>
 	</div>
 
 	<div class="dropdown">
-	<button onclick="cpFunction()" class="dropbtn">Go</button>
-		<div id="cpDropdown" class="dropdown-content">
-			<p id="cp1">output</p>
-			<p id="cp">input</p>
-			<p id="cp">function</p>
+	<button onclick="gFunction()" class="dropbtn">Go</button>
+		<div id="gDropdown" class="dropdown-content">
+			<p id="g1">output</p>
+			<p id="g2">input</p>
+			<p id="g3">function</p>
 		</div>
 	</div>
 
-</div>
+  <div class="dropdown">
+  <button onclick="jlFunction()" class="dropbtn">Julia</button>
+    <div id="jlDropdown" class="dropdown-content">
+      <p id="jl1">output</p>
+      <p id="jl2">input</p>
+      <p id="jl3">function</p>
+    </div>
+  </div>
+
+</div><!--div left 닫기 -->
 
 
 <div id="center">
 <!--<iframe height="300px" width="50%" src="code0.html" name="code0"></iframe>-->
 </div>
 
+<div id="right">
+<h3> links </h3>
 </div>
+
+</div>
+
+<!--댓글 코드 -->
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://min-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
 
 <footer>
       Created by &copy; kkmin 2018
 </footer>
+
+
 
 
 <script>
@@ -190,12 +275,56 @@ function cFunction() {
     document.getElementById("cDropdown").classList.toggle("show");
 }
 
+function cpFunction() {
+    document.getElementById("cpDropdown").classList.toggle("show");
+}
+
 function pyFunction() {
     document.getElementById("pyDropdown").classList.toggle("show");
 }
 
 function jFunction() {
     document.getElementById("jDropdown").classList.toggle("show");
+}
+
+function plFunction() {
+    document.getElementById("plDropdown").classList.toggle("show");
+}
+
+function rFunction() {
+    document.getElementById("rDropdown").classList.toggle("show");
+}
+
+function hFunction() {
+    document.getElementById("hDropdown").classList.toggle("show");
+}
+
+function phFunction() {
+    document.getElementById("phDropdown").classList.toggle("show");
+}
+
+function jsFunction() {
+    document.getElementById("jsDropdown").classList.toggle("show");
+}
+
+function kFunction() {
+    document.getElementById("kDropdown").classList.toggle("show");
+}
+
+function sFunction() {
+    document.getElementById("sDropdown").classList.toggle("show");
+}
+
+function gFunction() {
+    document.getElementById("gDropdown").classList.toggle("show");
+}
+
+function lFunction() {
+    document.getElementById("lDropdown").classList.toggle("show");
+}
+
+function jlFunction() {
+    document.getElementById("jlDropdown").classList.toggle("show");
 }
 
 // Close the dropdown if the user clicks outside of it

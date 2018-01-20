@@ -6,7 +6,7 @@
 <pre id="py1">
 # 주석
 
-print("Hello, World!") # 자동 줄바꿈 
+print("Hello, World!") # 자동 줄바꿈
 print("안녕하세요!")
 print("민", end="") # 자동 줄바꿈 안 함
 print("관기")
@@ -14,9 +14,9 @@ print("관기")
 
 <pre id="j1">
 # 주석
-// 주석 
+// 주석
 // 컴파일 >> javac hello.java
-// run >> java hello
+// 실행 >> java hello
 
 public class hello {
     public static void main(String[] args) {
@@ -49,9 +49,130 @@ int main()
     printf("출생년도를 입력하세요: ");
     scanf("%d", &a);    // 입력을 받아서 변수에 저장
     printf("이름을 입력하세요: ");
-    scanf("%s", &b);    
-    printf("당신은 %d년 생이고 이름은 %s입니다.", a, &b);    
+    scanf("%s", &b);
+    printf("당신은 %d년 생이고 이름은 %s입니다.", a, &b);
 
     return 0;
+}
+</pre>
+
+<pre id="cp1">
+// 주석
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    cout << "Hello, World!\n";  // \n은 c식 줄바꿈
+    cout << "안녕하세요!"<< endl; // << endl은 c++에서 줄바꿈
+    return 0;
+}
+</pre>
+
+<pre id="k1">
+// comment
+/* multiline 주석
+컴파일    >> kotlinc hello.kt -include-runtime -d hello.jar
+실행      >> kotlin hello
+*/
+
+fun main(args: Array<String>) {
+   println("Hello, World!")
+   println("안녕하세요")
+}
+</pre>
+
+<pre id="s1">
+// comment
+/* multiline 주석
+실행     >> scala hello.scala
+*/
+
+object hello // 자바와 같이 파일명과 객체명이 같아야 함.
+{
+  def main(args: Array[String]) {
+    println("Hello, world!")
+    println("안녕하세요!")
+  }
+}
+</pre>
+
+<pre id="h1">
+&lt;!-- 주석 -->
+&lt;meta charset="utf8">
+&lt;body>
+Hello, world! &lt;br> &lt;!-- 줄바꿈은 &lt;br> -->
+안녕하세요! &lt;br>
+&lt;/body>
+</pre>
+
+<pre id="ph1">
+&lt;?php
+// comment. 파일 확장자는 php
+
+echo "Hello, World!"."&lt;br>";
+echo "안녕하세요!"."&lt;br>";
+?>
+</pre>
+
+
+<pre id="js1">
+&lt;meta charset=utf8> &lt;!-- html 파일에서 한글출력을 위해 필요.-->
+
+&lt;script>
+// 주석. 파일 확장자는 html
+
+document.write("Hello, world!&lt;br>"); // 줄바꿈은 &lt;br>
+document.write("안녕하세요!"+"&lt;br>");
+alert("Hello, world! \n 안녕하세요!"); // alert box로 출력. 여기에서 줄바꿈은 \n
+&lt;/script>
+</pre>
+
+<pre id="r1">
+
+</pre>
+
+<pre id="pl1">
+# 주석
+print "Hello world!\n";
+print "안녕하세요 \n";
+</pre>
+
+<pre id="l1">
+-- single line comment
+--[[
+multi-line comment
+multi-line comment
+--]]
+
+print("Hello World")
+print("안녕하세요!")
+</pre>
+
+<pre id="jl1">
+# single line comment
+
+#=
+multi-line comment
+multi-line comment
+=#
+
+print("Hello World")
+print("안녕하세요!")
+</pre>
+
+<pre id="g1">
+// 코멘트
+// 컴파일 >> go build -o go-hello.out hello.go
+// 실행  >> ./go-hello.out
+
+package main
+
+import "fmt"
+
+func main() {  // 중괄호를 쓰는 명령어의 경우 중괄호를 이렇게 명령어 뒤에 붙여야 함. 줄빠꿔 스면 에러남.
+    fmt.Printf("hello, world\n")
+    fmt.Printf("안녕하세요\n")
 }
 </pre>
