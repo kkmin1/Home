@@ -23,6 +23,15 @@ $(document).ready(function(){
     $("p#cp1").click(function(){
         $("#center").load("code.txt pre#cp1");
     });
+    $("p#cp2").click(function(){
+        $("#center").load("code.txt pre#cp2");
+    });
+    $("p#cs1").click(function(){
+        $("#center").load("code.txt pre#cs1");
+    });
+    $("p#cs2").click(function(){
+        $("#center").load("code.txt pre#cs2");
+    });
     $("p#j1").click(function(){
         $("#center").load("code.txt pre#j1");
     });
@@ -61,6 +70,18 @@ $(document).ready(function(){
 
     $("p#g1").click(function(){
        $("#center").load("code.txt pre#g1");
+    });
+    $("p#rs1").click(function(){
+       $("#center").load("code.txt pre#rs1");
+    });
+    $("p#ex1").click(function(){
+       $("#center").load("code.txt pre#ex1");
+    });
+    $("p#cl1").click(function(){
+       $("#center").load("code.txt pre#cl1");
+    });
+    $("p#ns1").click(function(){
+       $("#center").load("code.txt pre#ns1");
     });
 
 });
@@ -225,6 +246,42 @@ $(document).ready(function(){
     </div>
   </div>
 
+  <div class="dropdown">
+  <button onclick="clFunction()" class="dropbtn">Clojure</button>
+    <div id="clDropdown" class="dropdown-content">
+      <p id="cl1">output</p>
+      <p id="cl2">input</p>
+      <p id="cl3">function</p>
+    </div>
+  </div>
+
+  <div class="dropdown">
+  <button onclick="exFunction()" class="dropbtn">Elixir</button>
+    <div id="exDropdown" class="dropdown-content">
+      <p id="ex1">output</p>
+      <p id="ex2">input</p>
+      <p id="ex3">function</p>
+    </div>
+  </div>
+
+  <div class="dropdown">
+  <button onclick="rsFunction()" class="dropbtn">Rust</button>
+    <div id="rsDropdown" class="dropdown-content">
+      <p id="rs1">output</p>
+      <p id="rs2">input</p>
+      <p id="rs3">function</p>
+    </div>
+  </div>
+
+  <div class="dropdown">
+  <button onclick="nsFunction()" class="dropbtn">node js</button>
+    <div id="nsDropdown" class="dropdown-content">
+      <p id="ns1">output</p>
+      <p id="ns2">input</p>
+      <p id="ns3">function</p>
+    </div>
+  </div>
+
 </div><!--div left 닫기 -->
 
 
@@ -279,6 +336,10 @@ function cpFunction() {
     document.getElementById("cpDropdown").classList.toggle("show");
 }
 
+function csFunction() {
+    document.getElementById("csDropdown").classList.toggle("show");
+}
+
 function pyFunction() {
     document.getElementById("pyDropdown").classList.toggle("show");
 }
@@ -325,6 +386,26 @@ function lFunction() {
 
 function jlFunction() {
     document.getElementById("jlDropdown").classList.toggle("show");
+}
+
+function exFunction() {
+    document.getElementById("exDropdown").classList.toggle("show");
+}
+
+function exFunction() {
+    document.getElementById("exDropdown").classList.toggle("show");
+}
+
+function rsFunction() {
+    document.getElementById("rsDropdown").classList.toggle("show");
+}
+
+function clFunction() {
+    document.getElementById("clDropdown").classList.toggle("show");
+}
+
+function nsFunction() {
+    document.getElementById("nsDropdown").classList.toggle("show");
 }
 
 // Close the dropdown if the user clicks outside of it

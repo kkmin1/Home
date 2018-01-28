@@ -3,31 +3,18 @@
 <link rel="stylesheet" type="text/css" href="code.css">
 </head>
 
-<pre id="py1">
-# 주석
 
-print("Hello, World!") # 자동 줄바꿈
-print("안녕하세요!")
-print("민", end="") # 자동 줄바꿈 안 함
-print("관기")
-</pre>
-
-<pre id="j1">
-# 주석
-// 주석
-// 컴파일 >> javac hello.java
-// 실행 >> java hello
-
-public class hello {
-    public static void main(String[] args) {
-        System.out.println("Hello, world!");
-        System.out.println("안녕하세요!");
-    }
-}
-</pre>
 
 <pre id="c1">
 // 주석
+// 확장자 *.c
+// 컴파일 >> gcc hello.c  ==> 기본으로 리눅스는  a.out 또는 윈도우는 a.exe 파일이 자동으로 생성
+// 리눅스 실행  >> ./a.out
+// 윈도우 실행  >> a.exe
+// 실행 파일명을 지정하고 싶은 경우
+// 컴파일 >> gcc -o hello.out hello.c
+// 리눅스 실행  >> ./hello.out
+// 윈도우 실행  >> hello.exe
 
 #include &lt;stdio.h>
 
@@ -35,6 +22,9 @@ int main()
 {
    printf("Hello, World!\n");
    printf("안녕하세요!\n");
+   printf("안녕하세요!\n");  // \n 은 개행
+   printf("내 이름은");  // 개행 없음
+   printf("홍길동입니다.\n");
    return 0;
 }
 </pre>
@@ -58,6 +48,14 @@ int main()
 
 <pre id="cp1">
 // 주석
+// 확장자 *.cpp
+// 컴파일 >> g++ hello.cpp  ==> 기본으로 리눅스는  a.out 또는 윈도우는 a.exe 파일이 자동으로 생성
+// 리눅스 실행  >> ./a.out
+// 윈도우 실행  >> a.exe
+// 실행 파일명을 지정하고 싶은 경우
+// 컴파일 >> gcc -o hello.out hello.cpp
+// 리눅스 실행  >> ./hello.out
+// 윈도우 실행  >> hello.exe
 
 #include <iostream>
 using namespace std;
@@ -68,6 +66,117 @@ int main()
     cout << "안녕하세요!"<< endl; // << endl은 c++에서 줄바꿈
     return 0;
 }
+</pre>
+
+<pre id="cp2">
+#include <iostream>
+#include <string>     // Need this header to use string class
+#include <limits>
+using namespace std;  // Also needed for <string>
+
+int main() {
+int age;
+string message;
+char message2[100];
+char z;
+
+  cout << "나이(정수 입력) : ";
+  cin >> age;
+
+  cout << "당신의 나이는" << age <<"살입니다."<< endl;
+
+
+   cout << "이름 : ";
+   cin >> message;
+   cout << "당신의 이름은 " << message <<"입니다."<< endl;
+
+cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 입력 버퍼를 지움
+
+   z = cin.get(); //영어 한 문자만 입력 받음. z에 입력한 문자 저장
+   cout <<"z = " << z << endl;
+
+cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+   cout << "여백있게 문장을 입력하세요 "<< endl;;
+   cin.getline(message2, 100); // getline은 공백도 문자로서 받아들임
+   cout << message2 << endl;
+
+   cout << "Enter a message (with spaces): ";
+   getline(cin, message);  // Read input from cin into message
+   cout << message << endl;
+
+   return 0;
+}
+</pre>
+
+<pre id="cs1">
+// 한 줄 주석
+/*
+여러 줄 주석.
+c#은 윈도우(또는 .net환경)에서만 실행 가능.
+컴파일은 visual studio 이용.
+컴파일 >> csc hello.cs
+실행 >> hello.exe
+*/
+
+using System;
+
+namespace HelloWorld {
+class HelloWorld {
+
+static void Main() {
+Console.WriteLine("Hello World");
+Console.ReadKey();
+}
+}
+</pre>
+
+<pre id="j1">
+# 주석
+// 주석
+// 컴파일 >> javac hello.java
+// 실행 >> java hello
+
+public class hello {
+    public static void main(String[] args) {
+    System.out.println("Hello, world!"); // 줄 바꿈
+    System.out.println("안녕하세요!");
+    System.out.print("내 이름은"); // 줄 바꿈 안함.
+    System.out.println("민관기입니다.");
+    }
+}
+</pre>
+
+<pre id="j2">
+import java.util.Scanner;
+
+public class input {
+
+    public static void main(String []args) {
+
+          String name;
+          int age;
+          Scanner read = new Scanner(System.in);  // Scanner class에서 name 이라는 객체 생성
+
+          System.out.print("이름 : ");
+          name = read.nextLine(); // 줄 입력은 nextLine()
+          System.out.print("나이 : ");
+          age = read.nextInt(); // 입력값은 항상 문자이므로 이를 정수화함
+
+          System.out.println("당신의 이름은 "+name+"이고, 당신의 나이는 " +age+ "살입니다.");
+          read.close();
+
+    }
+}
+</pre>
+
+<pre id="py1">
+# 주석
+
+print("Hello, World!") # 자동 줄바꿈
+print("안녕하세요!")
+print("민", end="") # 자동 줄바꿈 안 함
+print("관기")
 </pre>
 
 <pre id="k1">
@@ -130,7 +239,23 @@ alert("Hello, world! \n 안녕하세요!"); // alert box로 출력. 여기에서
 </pre>
 
 <pre id="r1">
+# comment
 
+p 'hello!';
+puts '안녕하세요'; # 자동 개행
+puts "처음 뵙겠습니다.";
+print "내 이름은 민관기입니다.\n"; # 자동 개행 안됨. \n 포함시 싱글 따옴표 안됨
+print '반갑습니다.';
+puts '';
+
+print &lt;&lt;aaa 
+   이 행은 연습입니다.  공백도 그대로 출력됩니다.
+       두 줄 이상 출력시 이렇게 하면 됩니다.
+aaa
+# &lt;&lt;aaa 와 aaa 사이의 문장은 코드 입력 그대로 출력.
+# 단 &lt;&lt;와 aaa 사이에 여백이 있으면 안됨. min은 임의의 식별자. 아무거나 쓰면됨
+
+printf "여기에 %d개의 %s가 있읍니다.", 3, '사과'
 </pre>
 
 <pre id="pl1">
@@ -155,24 +280,91 @@ print("안녕하세요!")
 
 #=
 multi-line comment
-multi-line comment
+
+1. 실행
+>> julia hello.jl
+
+2. 또는 실행후 julia 화면에서 include("hello.jl")
+>> julia
+julia> include("hello.jl")
 =#
 
-print("Hello World")
-print("안녕하세요!")
+println("Hello World")  # 개행
+print("안녕하세요!")  # 개행 없음
 </pre>
 
 <pre id="g1">
 // 코멘트
-// 컴파일 >> go build -o go-hello.out hello.go
-// 실행  >> ./go-hello.out
+// 컴파일 >> go build -o hello.out hello.go
+// 실행  >> ./hello.out
 
 package main
 
 import "fmt"
 
-func main() {  // 중괄호를 쓰는 명령어의 경우 중괄호를 이렇게 명령어 뒤에 붙여야 함. 줄빠꿔 스면 에러남.
+func main() {  // 중괄호를 쓰는 명령어의 경우 중괄호를 이렇게 명령어 뒤에 붙여야 함. 줄 빠꿔 쓰면 에러남.
     fmt.Printf("hello, world\n")
     fmt.Printf("안녕하세요\n")
 }
+</pre>
+
+<pre id="ex1">
+# 코멘트
+# 실행 >> elixirc hello.ex # 컴파일 및 실행
+# 실행 >> elixir hello.exs # 스크립트 파일
+
+IO.puts "Hello, Elixir"
+IO.puts("안녕하세요")
+</pre>
+
+<pre id="cl1">
+; 한줄 주석. clojure 에서  ;는 명령끝을 의미하는 것이 아닌 주석의 시작을 의미
+(comment
+여러줄 주석
+)
+
+
+(ns example.hello (:gen-class)) ; example 폴더에 있는 hello.clj 파일을 의미
+(defn -main [] (println "Hello World"))
+
+(ns examples.hello (:gen-class))
+(defn hellow [] (println "안녕하세요")) ;hellow 는 함수명.
+(hellow) ; hellow 함수를 호출
+</pre>
+
+<pre id="rs1">
+// single line comment
+
+/* multiline comment
+컴파일  >> rustc hello.rs
+실행 (리눅스)     >> ./hello
+실행 (윈도우)     >> .\hello.exe
+*/
+
+fn main() {
+    println!("Hello, Rust!");
+     println!("안녕하세요!");
+    }
+</pre>
+
+<pre id="ns1">
+// node js 설치
+// console에서 실행
+// >> node hello.js
+// >> Server running at http://127.0.0.1:1337/
+// 웹브라우저에서 localhost:1337 입력
+// 웹브라우저에 "안녕하세요! nodejs 강의에 오신 것을 환영합니다." 출력
+
+const http = require('http');
+
+const hostname = '127.0.0.1';
+const port = 1337;
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain; charset=UTF-8' });
+  res.end('안녕하세요! nodejs 강의에 오신 것을 환영합니다.\n');
+});
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
 </pre>
