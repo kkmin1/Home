@@ -1,4 +1,4 @@
 # coding = utf8
-a=input("성 : ")
-b=input("이름:")
-print("안녕하세요", a+b+"님") // , 는 한칸 띄기. 붙여쓸려면 + 사용
+name=input("이름 : ")  #input는 입력메서드
+age=input("나이:")
+print("당신의 이름은", name+"이고 나이는",age+"살입니다.") # , 는 한칸 띄기. 붙여쓸려면 + 사용
