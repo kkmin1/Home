@@ -1,4 +1,4 @@
-﻿<head>
+<head>
 <meta charset="utf8">
 <link rel="stylesheet" type="text/css" href="code.css">
 </head>
@@ -6,27 +6,37 @@
 
 
 <pre id="c1">
-// 주석
-// 확장자 *.c
-// 컴파일 >> gcc hello.c  ==> 기본으로 리눅스는  a.out 또는 윈도우는 a.exe 파일이 자동으로 생성
-// 리눅스 실행  >> ./a.out
-// 윈도우 실행  >> a.exe
-// 실행 파일명을 지정하고 싶은 경우
-// 컴파일 >> gcc -o hello.out hello.c
-// 리눅스 실행  >> ./hello.out
-// 윈도우 실행  >> hello.exe
+// 한 줄 주석
+/* 여러줄 주석
+확장자 *.c
+1. 컴파일
+컴파일 >> gcc hello.c  ==> 기본으로 리눅스는  a.out 또는 윈도우는 a.exe 파일이 자동으로 생성
+리눅스 실행  >> ./a.out
+윈도우 실행  >> a.exe
 
-#include &lt;stdio.h>
+2. 실행 파일명을 지정하고 싶은 경우
+컴파일 >> gcc -o hello.out hello.c
+리눅스 실행  >> ./hello.out
+윈도우 실행  >> hello.exe
+*/
+
+#include <stdio.h>
 
 int main()
 {
-   printf("Hello, World!\n");
-   printf("안녕하세요!\n");
-   printf("안녕하세요!\n");  // \n 은 개행
-   printf("내 이름은");  // 개행 없음
-   printf("홍길동입니다.\n");
-   return 0;
+char name[] = "홍길동", a='C'; // 문자 변수 선언 chr, 둘 이상의 변수를 한줄에서 선언 가능.
+int age=22;            // 정수 변수 선언 int
+float score=3.1;       // 실수 변수 선언 float
+
+printf("Hello, C!\n"); // \n 은 개행
+printf("안녕하세요!\n");  
+printf("내 이름은 %s이고 나이는 %d살입니다.\n", name, age); 
+printf("당신의 c 언어 학점은 %.1f로 %c 등급입니다.\n", score, a);
+// 문장변수는 %s, 한 문자변수는 %c, 정수변수는 %d, 실수변수는 %f
+
+return 0;
 }
+
 </pre>
 
 <pre id="c2">
