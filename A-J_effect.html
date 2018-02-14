@@ -2,19 +2,20 @@
 ​<html>
 
 <head>
+  <meta charset="utf-8">
 <title>
 애버치-존슨 효과
 </title>
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
-<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script> 
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
 </head>
 
 
 <body>
- 
+
 <!-- 주석-->
 이하의 내용은 경제/경영수학에 대한 기초지식이 있음을 전제로한다.<br><br>
- 
+
 기업의 생산함수가 다음과 같다고 하자.
 \begin{equation*}
 q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표현하기 위해 \text 명령을 쓴다.
@@ -27,7 +28,7 @@ q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표�
 \frac{\partial F}{\partial L}>0,
 \quad\frac{\partial^2 F}{\partial L^2}<0,\qquad
 \frac{\partial F}{\partial K}>0,
-\quad\frac{\partial^2 F}{\partial K^2}<0 
+\quad\frac{\partial^2 F}{\partial K^2}<0
 \end{equation*}
 
 2. 비규제하 기업의 이윤극대화<br><br>
@@ -39,7 +40,7 @@ q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표�
 
 \(w \)은 노동의 단위비용, \(r\)은 자본의 단위비용을 의미한다.
 
-기업의 이윤 \(\pi \)는 
+기업의 이윤 \(\pi \)는
 \begin{align*}
 \pi&=TR-TC \\
 &=pq-wL-rK \\
@@ -86,8 +87,8 @@ max \; &\pi = pq - wL+rK \\
 subject \; &to \quad pq-wL \leq sK
 \end{eqnarray*}
 $p$가 증가할수록 이윤이 증가하므로 최적값에서 제약식은 등호로 설립한다.(즉 binding constraint이므로 굳이 KKT조건을 적용할 필요가 없다.)
- 
-따라서 다음과 같이 라그란지안을 취하면 
+
+따라서 다음과 같이 라그란지안을 취하면
 \begin{eqnarray*}
 \mathscr{L} &= pq-wL-rK+\lambda(wL+sK-pq)\\
     &= (1-\lambda)pq-(1-\lambda)wL+(\lambda s-r)K
@@ -107,11 +108,11 @@ $p$가 증가할수록 이윤이 증가하므로 최적값에서 제약식은 �
 \frac{\partial \mathscr{L}}{\partial K}&=(1-\lambda)\left(\frac{
 \partial p}{\partial q}\frac{ \partial q}{ \partial K}q+p \frac{ \partial q}{ \partial K}\right)+(\lambda s-r)=0 \nonumber\\
 &\Rightarrow \frac{\partial q}{\partial K}\left(
-\frac{ \partial p}{ \partial q}q+p \right) = 
+\frac{ \partial p}{ \partial q}q+p \right) =
 \frac{r-\lambda s}{1-\lambda} \qquad ................(4)
 \end{split}
 \end{eqnarray}
-    
+
 (4)를 (3)으로 나누면
 \begin{eqnarray*}
 \frac{F_{K}^{'}}{F_{L}^{'}}=
@@ -120,13 +121,13 @@ $p$가 증가할수록 이윤이 증가하므로 최적값에서 제약식은 �
 \end{eqnarray*}
 
 여기서 $F_{K}^{'}$, $F_{L}^{'}$ 은 각각 규제하 자본과 노동의 최적 한계생산물 의미한다.<br><br>
-  
+
 (1)=(3)이므로 $F_{L}^{'}={F_{L}^{*}}$,  따라서 $F_{K}^{'} < F_K^{*}$.<br>
 
 <img src="ajcurve.jpg" width=400 height=400 hspace= 300><br> <!--그림크기는 원래 600x600을 400x400으로축소. 좌측에서 400pt 떨어져서 배치-->
 <br>
- 
-또한 앞의 신고전학파 생산함수 가정에서 $\frac{ \partial^2 F}{ \partial K^2}<0$ 이므로 그림 1에서 보듯이 
+
+또한 앞의 신고전학파 생산함수 가정에서 $\frac{ \partial^2 F}{ \partial K^2}<0$ 이므로 그림 1에서 보듯이
  $K^{'}>K^{*}$, 따라서 보수율 규제하 기업은 비규제시보다 자본투자를 늘린다.<br>
 이는 보수율 규제의 기저가 되는 자본이 늘면 규제보수율($s$)하에 있는 기업은 더 많은 이윤을 얻는 것이 허용되기 때문이다.<br>
 
