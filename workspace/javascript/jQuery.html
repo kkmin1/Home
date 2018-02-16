@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>jQuery Hello World</title>
+<meta charset="utf8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--외부의 jQuery 파일을 불러 온다. 받는 장소는 google외에 ms 등도 있다.  자세한 것은 <a herf="http://http://jquery.com" >jquery 홈페이지 </a> 참조.
+다운로드 받아서 사용할 수도 있다.
+-->
+
+
+</head>
+
+<body>
+
+<script>
+
+$(document).ready(function(){
+  /* <body>태그가 로드된 후 자바스크립트를 실행하라는 명령. 내용 로드전 자바스크립트가 실행된다면 오류 날 수 있다.
+  $(function(){ 로 줄여써도 된다.
+  */
+ $("#abc").html("This is Hello World by JQuery"); // 태그 중 id="abc"인 태그에 ""내용 출력.
+});
+
+</script>
+<a href = "https://jQuery.com"> jQuery 홈페이지 </a> 참조
+
+<div id="abc">
+</div>
+
+</body>
+</html>

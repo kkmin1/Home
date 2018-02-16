@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "utf8">
+<style> 
+h1{
+	text-align:center;
+	}
+	
+#canvas{
+	border-style:solid;
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    }
+    
+#circle
+{
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    border-radius:50%; /*원을 그림*/
+    position: relative;
+    animation-name: example;
+    animation-duration: 3s;
+    animation-iteration-count:3; /*애니 3번 반복, 무한대는 infinite*/
+}
+
+@keyframes example {
+    0%   {left:100px; top:0px;}
+    20%  {left:300px; top:400px;}
+    40%  {left:0px; top:100px;}
+    60%  {left:300px; top:0px;}
+    80% {left:400px; top:200px;}
+    100% {left:100px; top:0px;}
+}
+</style>
+</head>
+<body>
+
+<h1><b><그림></b> 움직이는 상자</h1>
+<div id=canvas>
+<div id=circle>
+</div>
+</div>
+
+</body>
+</html>

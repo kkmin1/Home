@@ -1,0 +1,43 @@
+<head>
+<meta charset="utf-8">
+
+</head>
+
+<body>
+<h2>associated array in JavaScript</h2>
+<p id="data1"></p>
+<p id="data2"></p>
+<p id="data3"></p>
+<p id="data4"></p>
+<script>
+
+var data = ["data1", "data2", "data3", "data4"]
+var text1 = '{"firstName":"민","lastName":"관기","age":"55"}'; // json 형식
+var text2 = {"firstName":"민","lastName":"관기","age":"55"};  // javascript 형식 객체. 프로퍼티에서 쌍따옴표는 생략해도 됨
+var obj = JSON.parse(text1); // json 형식을 자바스크립트 객체로 만든다.
+
+document.getElementById(data[0]).innerHTML = "성:"+obj.firstName +"<br>"+ "이름:"+obj.lastName + "<br>"+"나이:"+obj.age+"<br>"; 
+document.getElementById(data[1]).innerHTML = "성:"+obj["firstName"] + "<br>"+"이름:"+obj["lastName"] + "<br>"+"나이:"+obj["age"]+"<br>"; // 같은 결과
+
+
+document.getElementById(data[3]).innerHTML = "성:"+text2.firstName + "이름:"+text2.lastName + "나이:"+text2.age+"<br>"; 
+
+
+for(i in text1) 
+    {document.write(text1[i]+" ")} ;
+document.write("<br>");
+document.write("원소갯수:"+i); // text1은 하나의 큰 문자열. 각자가 원소가 됨. 문자열의 갯수는 43개.
+document.write("<br>");
+// 결과 => { " f i r s t N a m e " : " 민 " , " l a s t N a m e " : " 관 기 " , " a g e " : " 5 5 " }
+
+for(i in obj) // obj는 객체이기 때문에 obj.length는 쓸 수 없다.
+    {
+    document.getElementById(data[2]).innerHTML = i+":"+obj[i] + "<br>"; // i는 객체의 프로퍼티를 의미. document.getElement는 앞에 것을 덮어쓰므로 결과는 age:55 만 출력
+   document.write(i+":"+obj[i]+"<br>") // 모든 원소 출력
+     }
+
+
+
+</script>
+</body>
+ 

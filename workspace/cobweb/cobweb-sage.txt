@@ -1,0 +1,27 @@
+start=0.1
+a=5
+b=-0.7
+c=1
+d=1
+iterations=10
+D(x) = a+b*x
+S(x) = c+d*x
+S_inv(x) = (x-c)/d
+d=plot(D, 0,10)
+s=plot(S, 0,10)
+iter= [[start,0], [start, D(start)]]
+cur = start
+cur=D(cur)
+for i in range(iterations):
+    cur2= S_inv(cur)
+    iter.append([cur2,cur])
+    cur=D(cur2)
+    iter.append([cur2,cur])
+# cobweb = line(iter_list, color = 'red')
+cobweb=sum([arrow(iter[i],iter[i+1], width=1, arrowsize=2, rgbcolor=(1,0,0)) for i in range(iterations)])
+demand = text( "d",(5, 2), fontsize=20 )
+supply = text( "s",(5, 7), fontsize=20 )
+grp = d+s+cobweb+demand+supply
+grp.axes_labels(["Q", "P"])
+grp.show()
+grp.save('cobweb.pdf')

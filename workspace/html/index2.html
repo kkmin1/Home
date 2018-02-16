@@ -1,0 +1,55 @@
+
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
+MathJax.Hub.Config({
+extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+jax: ["input/TeX", "output/HTML-CSS"],
+tex2jax: 
+{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+"HTML-CSS": { availableFonts: ["TeX"] }
+});
+</script>
+</head> 
+
+<body>
+1. 수식예<br />
+<br />
+$\textrm{\$}$와 수식사이에 공백이 없어야 한다.<br />
+<br />
+$y=ax^2$<br />
+<br />
+$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$<br />
+<br />
+$\mathbf{x} = [ x_{1}, x_{2}, \cdots, x_{D} ] \in \mathbb{R}^{D}$ 는 $D$ 차원 벡터이다.<br />
+<br />
+2. 벡터표시 수식<br />
+<br />
+$\mathbf{y} = a \mathbf{x}$<br />
+<br />
+3. 수식의 가운데 정렬<br />
+<br />
+양끝에 $\textrm{\$\$}$를 추가한다.<br />
+<br />
+$$\mathbf{y} = a \mathbf{x}$$
+
+기업의 이윤 \(\pi \)는 
+\begin{align*}
+\pi&=TR-TC \\
+&=pq-wL-rK \\
+&=p(F(L,K))F(L,K)-wL-rK
+\end{align*}
+
+이윤극대화를 위해 \(\pi \) 를L과 K에 대해  미분하면 \\
+\begin{eqnarray}\label{eq:b}
+\begin{split}
+&\frac {\partial \pi}{\partial L}= \frac{\partial p}{ \partial q}\frac{\partial F}{\partial L} q+p\frac{\partial F}{\partial L}-w=0 \\\\
+&\Longrightarrow \frac{\partial F}{\partial L}\left(
+\frac{ \partial p}{ \partial q}q+p \right) = w \\
+\end{split}
+\end{eqnarray}
+
+</body>
+
+</html>
