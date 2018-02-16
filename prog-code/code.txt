@@ -1,0 +1,484 @@
+﻿<head>
+<meta charset="utf8">
+<link rel="stylesheet" type="text/css" href="code.css">
+</head>
+
+
+
+<pre id="c1">
+// 주석
+// 확장자 *.c
+// 컴파일 >> gcc hello.c  ==> 기본으로 리눅스는  a.out 또는 윈도우는 a.exe 파일이 자동으로 생성
+// 리눅스 실행  >> ./a.out
+// 윈도우 실행  >> a.exe
+// 실행 파일명을 지정하고 싶은 경우
+// 컴파일 >> gcc -o hello.out hello.c
+// 리눅스 실행  >> ./hello.out
+// 윈도우 실행  >> hello.exe
+
+#include &lt;stdio.h>
+
+int main()
+{
+   printf("Hello, World!\n");
+   printf("안녕하세요!\n");
+   printf("안녕하세요!\n");  // \n 은 개행
+   printf("내 이름은");  // 개행 없음
+   printf("홍길동입니다.\n");
+   return 0;
+}
+</pre>
+
+<pre id="c2">
+#include &lt;stdio.h>
+
+int main()
+{
+    int a;
+    char b[100];
+    printf("출생년도를 입력하세요: ");
+    scanf("%d", &a);    // 입력을 받아서 변수에 저장
+    printf("이름을 입력하세요: ");
+    scanf("%s", &b);
+    printf("당신은 %d년 생이고 이름은 %s입니다.", a, &b);
+
+    return 0;
+}
+</pre>
+
+<pre id="cp1">
+// 주석
+// 확장자 *.cpp
+// 컴파일 >> g++ hello.cpp  ==> 기본으로 리눅스는  a.out 또는 윈도우는 a.exe 파일이 자동으로 생성
+// 리눅스 실행  >> ./a.out
+// 윈도우 실행  >> a.exe
+// 실행 파일명을 지정하고 싶은 경우
+// 컴파일 >> gcc -o hello.out hello.cpp
+// 리눅스 실행  >> ./hello.out
+// 윈도우 실행  >> hello.exe
+
+#include &lt;iostream>
+using namespace std;
+
+int main()
+{
+    cout << "Hello, World!\n";  // \n은 c식 줄바꿈
+    cout << "안녕하세요!"<< endl; // << endl은 c++에서 줄바꿈
+    return 0;
+}
+</pre>
+
+<pre id="cp2">
+#include &lt;iostream>
+#include &lt;string>     // Need this header to use string class
+#include &lt;limits>
+using namespace std;  // Also needed for &lt;string>
+
+int main() {
+int age;
+string message;
+char message2[100];
+char z;
+
+  cout << "나이(정수 입력) : ";
+  cin >> age;
+
+  cout << "당신의 나이는" << age <<"살입니다."<< endl;
+
+
+   cout << "이름 : ";
+   cin >> message;
+   cout << "당신의 이름은 " << message <<"입니다."<< endl;
+
+cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 입력 버퍼를 지움
+
+   z = cin.get(); //영어 한 문자만 입력 받음. z에 입력한 문자 저장
+   cout <<"z = " << z << endl;
+
+cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+   cout << "여백있게 문장을 입력하세요 "<< endl;;
+   cin.getline(message2, 100); // getline은 공백도 문자로서 받아들임
+   cout << message2 << endl;
+
+   cout << "Enter a message (with spaces): ";
+   getline(cin, message);  // Read input from cin into message
+   cout << message << endl;
+
+   return 0;
+}
+</pre>
+
+<pre id="cs1">
+// 한 줄 주석
+/*
+여러 줄 주석.
+1. 윈도우(또는 .net환경)
+컴파일은 visual studio 이용.
+컴파일 >> csc hello.cs
+실행 >> hello.exe
+
+2. 우분투
+monodevelop 설치
+컴파일 >> mcs -out:hello.o hello.cs
+실행 >> mono hello.o
+*/
+
+using System;
+
+namespace HelloWorld {
+class HelloWorld {
+
+static void Main() {
+Console.WriteLine("Hello World");
+Console.WriteLine("안녕하세요!");
+// Console.ReadKey(); // 다음 키 입력을 기다림
+}
+}
+}
+</pre>
+
+<pre id="j1">
+// 주석
+// 컴파일 >> javac hello.java
+// 실행 >> java hello
+// java에서는 파일명과 public class명이 같아야 함.
+
+public class hello {
+    public static void main(String[] args) {
+    System.out.println("Hello, world!"); // 자동 줄 바꿈. 빤드시 쌍따옴표("")로 묶어야 함.
+    System.out.println("안녕하세요!");
+    System.out.print("내 이름은"); // 줄 바꿈 안함.
+    System.out.printf("홍길동입니다.\n"); // \n은 줄 바꿈
+
+    int ht = 178; // 정수형
+    double wt = 77.7;  // 실수형
+    String name = "홍길동"; // 문자열(string) 변수선언. 앞의 다른 변수형 선언과 달리 String의 S가 대문자임에 주의
+    System.out.println("당신의 키는 " +ht+"cm이고, 몸무게는 "+wt+"kg이며, 이름은 "+name+"입니다.");
+    }
+}
+</pre>
+
+<pre id="j2">
+import java.util.Scanner; // 입력을 받기위해 필요한 자바패키지.
+
+public class input { //public class 명이 input이므로 파일명도 input.java
+
+    public static void main(String []args) {
+
+          String name;
+          int age;
+          Scanner read = new Scanner(System.in);  // Scanner class에서 name 이라는 객체 생성
+
+          System.out.print("이름 : ");
+          name = read.nextLine(); // 줄 입력은 nextLine() 함수를 쓴다.
+          System.out.print("나이 : ");
+          age = read.nextInt(); // 입력값은 항상 문자이므로 nextInt()를 써서 이를 정수화함
+
+          System.out.println("당신의 이름은 "+name+"이고, 당신의 나이는 " +age+ "살입니다.");
+          read.close();
+
+    }
+}
+</pre>
+
+<pre id="py1">
+# 한 줄 주석
+'''(또는 """)
+여러 줄 주석
+'''(""")
+
+print("Hello, World!") # 자동 줄바꿈됨
+# 출력 : Hello, World!
+
+print('안녕하세요!') # 문자열 출력시 '', "" 둘 다 사용 가능
+# 출력 : 안녕하세요!
+
+print("홍", end="") # 자동 줄바꿈 안함
+print("길동")
+# 출력 : 홍길동
+
+print("Hi, '홍길동'") # 문장에 따옴표 넣을 때는 ' 기호가 있는 경우에는 “ ”로 “ 기호가 있는 경우에는 ‘ ’를 사용
+# 출력 : Hi, '홍길동'
+
+print('안녕', '하세요') # 콤마(,)로 문자열을 나열할 경우 공백이 자동 추가
+# 출력 : 안녕 하세요
+print('안녕' + '하세요') # 더하기(+)는 공백없음
+# 출력 : 안녕하세요
+
+ # 긴 문자열은 \ 기호로 사용하여 여러 줄에 작성할 수 있다.
+print('I like Python. \
+But I do not like Ruby.')
+# 출력 : I like Python. But I do not like Ruby.
+
+'''
+개행(줄바꿈), 공백, 특수기호(이스케이프 문자)를 포함하여 입력한 그대로 화면에 출력하기 위해서는 ‘’‘ ’‘’ 또는 “”“ ”“” 기호를 사용
+'''
+
+print("""I like Python.
+But I don't like C.""")
+# 출력 : I like Python.
+But I don't like C.
+
+# \n 개행, \t 탭키, \\ \, \‘, \“ 등 이스케이프 문자(Escape character)는 \를 사용하여 출력한다.
+print(my daughter\'s birthday)
+# 출력 : my daughter's birthday
+
+print('긴 문자열은 \\ 기호를 사용하여 여러 줄에 작성할 수 있다.')
+# 출력 : 긴 문자열은 \ 기호를 사용하여 여러 줄에 작성할 수 있다.
+
+# 변수 형은 자동 결정
+ht = 178 # 정수형
+wt = 77.7  # 실수형
+name = '홍길동' # 문자열(string)
+
+'''
+c 언어와 같이 % 기호를 활용하여 변수값을 출력할 수 있다. (%d 정수, %f 실수, %s 문자열)
+%5.2f처럼 출력하는 모양을 지정할 수 있다. (총 자릿수 5, 소수점 2자리까지)
+format 함수를 사용하면 좀 더 다양한 방식으로 출력을 할 수 있다.
+'''
+print('당신의 키는 %dcm이고, 몸무게는 %.2fkg이며, 이름은 %s입니다.' % (ht,wt,name))  # .2f는 wt는 소숫점 2자리까지만 출력
+# 출력 : 당신의 키는 178cm이고, 몸무게는 77.70kg이며, 이름은 홍길동입니다.
+
+print('당신의 키는 {0}cm이고, 몸무게는 {1:.2f}kg이며, 이름은 {2}입니다.'.format(ht,wt,name)) # .2f는 wt는 소숫점 2자리까지만 출력
+# 출력 : 당신의 키는 178cm이고, 몸무게는 77.70kg이며, 이름은 홍길동입니다.
+
+</pre>
+
+<pre id="k1">
+// comment
+/* multiline 주석
+컴파일    >> kotlinc hello.kt -include-runtime -d hello.jar
+실행      >> kotlin hello
+*/
+
+fun main(args: Array<String>) {
+   println("Hello, World!")
+   println("안녕하세요")
+}
+</pre>
+
+<pre id="s1">
+// comment
+/* multiline 주석
+실행     >> scala hello.scala
+*/
+
+object hello // 자바와 같이 파일명과 객체명이 같아야 함.
+{
+  def main(args: Array[String]) {
+    println("Hello, world!")
+    println("안녕하세요!")
+  }
+}
+</pre>
+
+<pre id="h1">
+&lt;!-- 주석 -->
+&lt;!-- 확장자는 html이고 파일을 더블 클릭하거나 웹브라우저의 주소창에 입력하여 실행. -->
+&lt;head>
+&lt;meta charset="utf8"> &lt;!-- 한글 표기를 위해 필요 -->
+&lt;/head>
+
+&lt;body>
+Hello, world! &lt;br> &lt;!-- 줄바꿈은 &lt;br> -->
+안녕하세요! &lt;br>
+&lt;/body>
+</pre>
+
+<pre id="ph1">
+&lt;?php
+// comment. 파일 확장자는 php
+
+echo "Hello, World!"."&lt;br>";
+echo "안녕하세요!"."&lt;br>";
+?>
+</pre>
+
+
+<pre id="js1">
+&lt;!--
+html 파일내 임의의 자리에 올 수 있으나 &lt;body> 맨 밑줄을 권장함.
+javascript 파일을 html 파일과 분리하여 따로 만드는 경우는 &lt;script> 태그없이 만든 후 확장자 .js 파일로 저장.
+html 파일과 같은 폴더에 넣고 위와 같이 &lt;head>태그 사이, 또는 &lt;body> 맨 밑줄에 &lt;script src="code.js">&lt;/script>
+다른 폴더에 넣었을 때는 경로를 표시해야 함. 예) project 폴더의 code.js파일인 경우 &lt;script src="./project/code.js">&lt;/script>
+-->
+
+&lt;head>
+&lt;meta charset=utf8> &lt;!-- html 파일에서 한글출력을 위해 필요.-->
+&lt;script src="code.js">&lt;/script>
+&lt;/head>
+
+&lt;script>
+// javascript문 내에서의 주석. 위 html문의 주석 명령과 다름에 주의.
+/*
+여러줄 주석
+*/
+
+document.write("Hello, javascript!&lt;br>"); // 웹 페이지에 출력. 줄바꿈은 &lt;br>
+document.write("안녕하세요!"+"&lt;br>");
+alert("Hello, world! \n 안녕하세요!"); // alert box로 출력. 여기에서 줄바꿈은 \n
+
+var ht = 178; // 모든 변수는 변수형에 무관하게 var로 선언
+var wt = 77.7;
+var name = "홍길동";
+
+document.write("당신의 키는 " +ht+"cm이고, 몸무게는 "+wt+"kg이며, 이름은 "+name+"입니다.&lt;br>");
+document.write("당신의 키는 ",ht,"cm이고, 몸무게는 ",wt,"kg이며, 이름은 ",name,"입니다.&lt;br>");
+console.log("당신의 키는 " +ht+"cm이고, 몸무게는 "+wt+"kg이며, 이름은 "+name+"입니다.");
+// console.log는  콘솔창에만 나타남. 웹브라우저에서 F12키로 콘솔창 실행
+&lt;/script>
+</pre>
+
+<pre id="jq1">
+&lt;!--
+html 파일내 임의의 자리에 올 수 있으나 &lt;body> 맨 밑줄을 권장함.
+javascript 파일을 html 파일과 분리하여 따로 만드는 경우는 &lt;script> 태그없이 만든 후 확장자 .js 파일로 저장.
+html 파일과 같은 폴더에 넣고 위와 같이 &lt;head>태그 사이, 또는 &lt;body> 맨 밑줄에 &lt;script src="code.js">&lt;/script>
+다른 폴더에 넣었을 때는 경로를 표시해야 함. 예) project 폴더의 code.js파일인 경우 &lt;script src="./project/code.js">&lt;/script>
+-->
+
+&lt;html>
+&lt;head>
+&lt;title>jQuery Hello World&lt;/title>
+
+&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">&lt;/script>
+&lt;!--외부의 jQuery 파일을 불러 온다. 받는 장소는 google외에 ms 등도 있다.  자세한 것은 <a href = "https://jQuery.com"> jQuery 홈페이지 </a> 참조.
+다운로드 받아서 사용할 수도 있다.
+-->
+&lt;/head>
+
+&lt;body>
+
+&lt;script>
+
+$(document).ready(function(){
+/* <body>태그가 로드된 후 자바스크립트를 실행하라는 명령. 내용 로드 전 자바스크립트가 실행된다면 오류 날 수 있기 때문이다.
+'$(document).ready(function(){' 는 '$(function(){' 로 줄여 써도 된다.
+*/
+    $("#abc").html("Hello World");  // 태그 중 id="abc"인 태그에 html("")내용 출력.
+});
+
+&lt;/script>
+
+&lt;div id="abc">
+&lt;/div>
+
+&lt;/body>
+&lt;/html>
+</pre>
+
+<pre id="r1">
+
+</pre>
+
+<pre id="pl1">
+# 주석
+print "Hello world!\n";
+print "안녕하세요 \n";
+</pre>
+
+<pre id="l1">
+-- 주석
+--[[
+여러 줄 주석
+--]]
+
+print("Hello World") --자동 줄바꿈
+print("안녕하세요!")
+</pre>
+
+<pre id="jl1">
+# single line comment
+
+#=
+multi-line comment
+
+1. 실행
+>> julia hello.jl
+
+2. 또는 실행후 julia 화면에서 include("hello.jl")
+>> julia
+julia> include("hello.jl")
+=#
+
+println("Hello World")  # 개행
+print("안녕하세요!")  # 개행 없음
+</pre>
+
+<pre id="g1">
+// 코멘트
+// 컴파일 >> go build -o hello.out hello.go
+// 실행  >> ./hello.out
+
+package main
+
+import "fmt"
+
+func main() {  // 중괄호를 쓰는 명령어의 경우 중괄호를 이렇게 명령어 뒤에 붙여야 함. 줄 빠꿔 쓰면 에러남.
+    fmt.Printf("hello, world\n")
+    fmt.Printf("안녕하세요\n")
+}
+</pre>
+
+<pre id="ex1">
+# 코멘트
+# 실행 >> elixirc hello.ex # 컴파일 및 실행
+# 실행 >> elixir hello.exs # 스크립트 파일
+
+IO.puts "Hello, Elixir"
+IO.puts("안녕하세요")
+</pre>
+
+<pre id="cl1">
+; 한줄 주석. clojure 에서  ;는 명령끝을 의미하는 것이 아닌 주석의 시작을 의미
+(comment
+여러줄 주석
+컴파일 및 실행 >> clojure hello.clj
+)
+
+
+(println "Hello clojure!")
+;출력:Hello clojure!
+
+(ns examples.hello (:gen-class))
+(defn hello [] (println "안녕하세요")) ; hello 는 함수명.
+(hello) ; hello 함수를 호출
+;출력: 안녕하세요
+</pre>
+
+<pre id="rs1">
+// single line comment
+
+/* multiline comment
+컴파일  >> rustc hello.rs
+실행 (리눅스)     >> ./hello
+실행 (윈도우)     >> .\hello.exe
+*/
+
+fn main() {
+    println!("Hello, Rust!");
+     println!("안녕하세요!");
+    }
+</pre>
+
+<pre id="ns1">
+// node.js 설치
+// console에서 실행
+// >> node hello.js
+// >> Server running at http://127.0.0.1:1337/
+// 웹브라우저에서 localhost:1337 입력
+// 웹브라우저에 "안녕하세요! node.js 강의에 오신 것을 환영합니다." 출력
+
+const http = require('http'); // 상수변수 http 설정
+const hostname = '127.0.0.1'; // 상수변수 hostname 설정
+const port = 1337; // 상수변수 port 설정
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain; charset=UTF-8' }); // charset=UTF-8은 한글 출력이 깨짐 방지
+  res.end('안녕하세요! node.js 강의에 오신 것을 환영합니다.\n');
+});
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`); // 괄호안은 작은 떠옴표('')가 아니라 ~표시 밑에 있는 (``)임에 주의.
+});
+</pre>
