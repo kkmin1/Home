@@ -113,6 +113,7 @@ cin.ignore(numeric_limits<streamsize>::max(), '\n');
 // 한 줄 주석
 /*
 여러 줄 주석.
+
 1. 윈도우(또는 .net환경)
 컴파일은 visual studio 이용.
 컴파일 >> csc hello.cs
@@ -245,6 +246,38 @@ print('당신의 키는 {0}cm이고, 몸무게는 {1:.2f}kg이며, 이름은 {2}
 
 </pre>
 
+<pre id="pl1">
+# 주석
+print "Hello world!\n";
+print "안녕하세요 \n";
+</pre>
+
+<pre id="r1">
+p 'hello!';
+puts '안녕하세요'; # 자동 개행
+puts "처음 뵙겠습니다.";
+print "내 이름은 민관기입니다.\n"; # 자동 개행 안됨. \n 포함시 싱글 따옴표 안됨
+print '반갑습니다.';
+puts '';
+print &lt;&lt;min 
+       이 행은 연습입니다.  공백도 그대로 출력됩니다.
+       두 줄 이상 출력시 이렇게 하면 됩니다.
+min
+# &lt;&lt;와 min 사이에 여백이 있으면 안됨. min은 임의의 식별자. 아무거나 쓰면됨
+
+printf "여기에 %d개의 %s가 있읍니다.", 3, '사과'
+</pre>
+
+<pre id="l1">
+-- 주석
+--[[
+여러 줄 주석
+--]]
+
+print("Hello World") --자동 줄바꿈
+print("안녕하세요!")
+</pre>
+
 <pre id="k1">
 // comment
 /* multiline 주석
@@ -368,25 +401,6 @@ $(document).ready(function(){
 &lt;/html>
 </pre>
 
-<pre id="r1">
-
-</pre>
-
-<pre id="pl1">
-# 주석
-print "Hello world!\n";
-print "안녕하세요 \n";
-</pre>
-
-<pre id="l1">
--- 주석
---[[
-여러 줄 주석
---]]
-
-print("Hello World") --자동 줄바꿈
-print("안녕하세요!")
-</pre>
 
 <pre id="jl1">
 # single line comment
