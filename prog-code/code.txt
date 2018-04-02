@@ -246,6 +246,38 @@ print('당신의 키는 {0}cm이고, 몸무게는 {1:.2f}kg이며, 이름은 {2}
 
 </pre>
 
+<pre id="py2">
+
+name = input("이름 : ")
+print("안녕하세요", name +"님") # , 는 한칸 띄기. 붙여쓸려면 + 사용
+
+age = input("나이 : ") #정수를 입력
+print("당신의 나이는" + age + " 살입니다.")
+
+
+# 실수 2개를 두 줄에 입력
+print ("<나누기>")
+print ("실수 두 개를 입력하시오")
+a = float(input("a: ")) #input값은 문자열로 인식되므로 실수로 형변환함
+b = float(input("b: "))
+print ('{0:.2f} ÷ {1:.2f} = {2:.2f}' .format(a, b, a / b))
+
+# 정수 2개를 한줄에 입력. 공백으로 구분
+print ("<더하기>")
+print ("정수 두 개를 입력하시오")
+m, n = map(int, input('정수 2 개를 한 칸 띄어 입력하시오\n').split()) 
+#map은 리스트를 모두 형변환할 때 씀. 정수로 형변환
+
+print('{0} + {1} = {2}'.format(m, n, m+n))
+
+print ("<빼기>")
+print ("임의의 수 두 개를 입력하시오")
+c, d = map(eval, input('수 2개를 한 칸 띄어 입력하시오\n').split()) 
+# eval은 입력형에 따라 자동 형변환
+
+print('{0:.1f} - {1:.1f} = {2:.1f}'.format(c, d, c- d))
+</pre>
+
 <pre id="pl1">
 # 주석
 print "Hello world!\n";

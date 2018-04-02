@@ -35,6 +35,10 @@ $(function(){
         $("#center").load("code.txt pre#py1");
     });
     
+    $("p#py2").click(function(){
+        $("#center").load("code.txt pre#py2");
+    });
+    
     $("p#pl1").click(function(){
         $("#center").load("code.txt pre#pl1");
     });
