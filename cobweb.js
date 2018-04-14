@@ -25,12 +25,12 @@ function Graph(canvas){
     // Blank out the canvas to a pristine state.
     this.resetCanvas=function(){
         // make border
-     
+
         ctx.fillStyle="white";
         ctx.fillRect(0,0,w,h);
         ctx.fillStyle="black";
     }
-    
+
     // convert a mathematical x coordinate to a canvas x coordinate
     // 그래프의 x 값을 캔버스값으로 편경. 화면 입력값이 그래프값임을 상기.
     function mathToCanvasX(x){
@@ -57,6 +57,7 @@ function Graph(canvas){
         ctx.beginPath();
         ctx.moveTo(cx1,cy1);
         ctx.lineTo(cx2,cy2);
+    // ctx.strokeStyle="green";
         ctx.stroke();
         ctx.closePath();
 
@@ -68,20 +69,21 @@ function Graph(canvas){
  // 화살표 축을 그린다.
      this.plotLine2=function(x1,y1,x2,y2){
      var deg=30;
-     var scale=0.98; // 내분 비율 
-  
-     var sx1=x1+(x2-x1)*scale; // 내분점 
+     var scale=0.98; // 내분 비율
+
+     var sx1=x1+(x2-x1)*scale; // 내분점
      var sy1=y1+(y2-y1)*scale; // 내분점
         // plot the line segment
         ctx.beginPath();
         ctx.moveTo(x1,y1);
         ctx.lineTo(x2,y2);
+        ctx.strokeStyle="black"; // 축 색깔 지정.
         ctx.stroke();
         ctx.closePath();
 
-    // 화살표 윗부분 그림 
+    // 화살표 윗부분 그림
        ctx.save(); // saves the coordinate system
-       ctx.translate(x2,y2); 
+       ctx.translate(x2,y2);
        ctx.rotate(deg * Math.PI / 180); // (x2,y2)을 중심으로 시계방향으로 deg도 회전
        ctx.beginPath();
        ctx.moveTo(0,0);
@@ -96,7 +98,7 @@ function Graph(canvas){
        ctx.stroke();
        ctx.restore(); // restore canvas. 원래 캔버스로 돌아온다.
     }
-    
+
     // Plot red cobweb line segment
     this.plotLine3=function(x1,y1,x2,y2){
         // convert coordinates
@@ -108,29 +110,72 @@ function Graph(canvas){
         ctx.beginPath();
         ctx.moveTo(cx1,cy1);
         ctx.lineTo(cx2,cy2);
-        ctx.strokeStyle="red";
+        ctx.strokeStyle="green"; // cobweb 곡선 색깔
         ctx.stroke();
         ctx.closePath();
-        ctx.strokeStyle="black"; 
+        ctx.strokeStyle="black";
 
         // change color for next draw action
         // this.nextColor();
     }
-    
-// 축 그리는 함수 
-    this.axes=function(){
+
+    this.plotLine4=function(x1,y1,x2,y2){
+        // convert coordinates
+        var cx1=mathToCanvasX(x1);
+        var cy1=mathToCanvasY(y1);
+        var cx2=mathToCanvasX(x2);
+        var cy2=mathToCanvasY(y2);
+
+        // plot the line segment
+        ctx.beginPath();
+        ctx.moveTo(cx1,cy1);
+        ctx.lineTo(cx2,cy2);
+        ctx.strokeStyle="red"; // 수요곡선 색깔
+        ctx.stroke();
+        ctx.closePath();
+        // change color for next draw action
+        // this.nextColor();
+        }
+
+        this.plotLine5=function(x1,y1,x2,y2){
+            // convert coordinates
+            var cx1=mathToCanvasX(x1);
+            var cy1=mathToCanvasY(y1);
+            var cx2=mathToCanvasX(x2);
+            var cy2=mathToCanvasY(y2);
+
+            // plot the line segment
+            ctx.beginPath();
+            ctx.moveTo(cx1,cy1);
+            ctx.lineTo(cx2,cy2);
+            ctx.strokeStyle="blue"; // 공급곡선 색깔
+            ctx.stroke();
+            ctx.closePath();
+            // change color for next draw action
+            // this.nextColor();
+            }
+
+// 축 그리는 함수
+      this.axes=function(){
     	var x1=glob.x1;
-        var cx1=mathToCanvasX(x1); // 그래프의 x 값을 캔버스값으로 편경
-    	ctx.font = "30px Arial";
+      var cx1=mathToCanvasX(x1); // 그래프의 x 값을 캔버스값으로 편경
+    	ctx.font = "20px Arial";
     	ctx.fillText("0",margin-30,h1+30);
-    	ctx.fillText("수량", w1+10, h1+10);
+    	ctx.fillText("수량", w1+30, h1+40);
     	ctx.fillText("가격", margin-20, margin-10);
-        ctx.fillText(x1, cx1-10, h1+30); // x축에 초기값을 표시
-        this.plotLine2(0,h1,w1,h1); // x 축 그림 
-        this.plotLine2(margin,h,margin,margin); // y 축 그림 
+      ctx.font = "12px Arial";
+      ctx.fillStyle = 'red';
+      ctx.fillText("수요곡선 : 빨간색",500,220);
+      ctx.fillStyle = 'blue';
+      ctx.fillText("공급곡선 : 파란색",500,250);
+      ctx.font = "20px Arial";
+      ctx.fillText(x1, cx1-10, h1+30); // x축에 초기값을 표시
+      this.plotLine2(0,h1,w1+60,h1); // x 축 그림
+      this.plotLine2(margin,h,margin,margin); // y 축 그림
     }
 
     // 임의의 함수식에 대해 그래프를 그리는 함수
+    // 수요 곡선
     this.plotFunction=function(f){
         // get initial point and distance between points
         x1=xmin;
@@ -141,7 +186,24 @@ function Graph(canvas){
         // x의 조그만 증가에 대한 y의 조그만 증가를 이용하여 두 점을 조금씩 연결하여 감으로써 그래프를 그림
        for(var x2=xmin+delta; x2<xmax+delta/2; x2+=delta){
             y2=f(x2);
-            this.plotLine(x1,y1,x2,y2);
+            this.plotLine4(x1,y1,x2,y2);
+            x1=x2;
+            y1=y2;
+        }
+    }
+
+// 공급곡선
+    this.plotFunction2=function(f){
+        // get initial point and distance between points
+        x1=xmin;
+        y1=f(x1);
+        delta=(xmax-xmin)/(w-2*borderSize);
+        // Go thru all point values, with 'delta/2' to avoid rounding error preventing the last point from being drawn.
+        // Note: Altho "<" vs "<=" is irrelevant with probability 1, only "<" avoids an infinite loop when xmin==xmax, like when their both zero from nothing being entered.
+        // x의 조그만 증가에 대한 y의 조그만 증가를 이용하여 두 점을 조금씩 연결하여 감으로써 그래프를 그림
+       for(var x2=xmin+delta; x2<xmax+delta/2; x2+=delta){
+            y2=f(x2);
+            this.plotLine5(x1,y1,x2,y2);
             x1=x2;
             y1=y2;
         }
@@ -182,7 +244,7 @@ function cobweb(){
     var x1=glob.x1;
     var y1=func(x1);
     graph.plotLine3(x1,0,x1,y1);
-    
+
     for (var i=0;i<iters;i++){
         var x2=func3(y1);
         var y2=func(x2);
@@ -212,7 +274,7 @@ function clearCont(){
 // 수요, 공급 곡선을 그리는 함수
 function plotFn(){
     glob.graph.plotFunction(glob.execFunc);  // 수요곡선을 그린다.
-    glob.graph.plotFunction(glob.execFunc2);  // 공급곡선을 그린다.
+    glob.graph.plotFunction2(glob.execFunc2);  // 공급곡선을 그린다.
     glob.graph.axes(); // 축을 그린다.
 }
 
@@ -227,7 +289,7 @@ function generate() {
     glob.execFunc3=parseFunction(glob.func3);
     var canvas=get('canvas');
     var graph=new Graph(canvas);
-   graph.resetCanvas();
+    graph.resetCanvas();
     glob.graph=graph;
     plotFn(); // 수요, 공급곡선을 그려라.
     // plot cobweb
@@ -249,7 +311,7 @@ function generate2() {
    graph.resetCanvas();
     glob.graph=graph;
     plotFn(); // 수요, 공급곡선을 그려라.
-    
+
     // plot cobweb
     cobweb(); // cobweb 도형을 그려라.
 

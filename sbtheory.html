@@ -1,23 +1,25 @@
 <html>
 
 <head>
-<style type="text/css">
-body { line-height:2em }
-</style>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" type="text/css" href="eco-math.css">
+
 <title>
 차선의 이론
 </title>
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
-<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script> 
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
 </head>
 
 
 <body>
- 
-<!-- 주석-->
+
+<h1> 차선의 이론 </h1><br>
+
+<h2>1. 최선의 정책(First Best Rule:FBR)</h2><br>
 이하의 내용은 경제/경영수학에 대한 기초지식이 있음을 전제로한다.<br><br><br>
- 
-<b>1. 최선의 정책(First Best Rule:FBR)</b><br><br>
+
+
 다음의 문제를 고려하자.
 \begin{eqnarray*}
 	max &F(x_1, \cdots, x_n) \\
@@ -32,7 +34,7 @@ body { line-height:2em }
 \[ \mathscr{L} = F-\lambda\Phi \]
 
 1차 조건은
-	
+
 \[ \frac{\partial \mathscr{L}}{\partial x_i} = \frac{\partial F}{\partial x_i}-\lambda\frac{\partial \Phi}{\partial x_i} = 0 \\[2em]
 \Rightarrow F_i = \lambda\Phi_i, \; \textrm{for} \quad i = 1,\cdots,n \\[2em]
 \textrm{where}\; F_{i} =\frac {\partial F}{\partial x_i},\, \Phi_{i}=\frac {\partial \Phi}{\partial x_i} \]
@@ -48,7 +50,7 @@ body { line-height:2em }
 즉, 소비재의 한계대체율은 생산물의 한계대체율과 같아야 한다.<br><br><br>
 
 
-<b>2. 차선의 정책(Second Best Rule:SBR)</b><br><br>
+<h2>2. 차선의 정책(Second Best Rule:SBR)</h2><br>
 
 앞의 문제에 다음의 제약조건이 추가되었다고 하자.
 
@@ -60,23 +62,23 @@ body { line-height:2em }
 
 
 \[		\mathscr{L} = F-\lambda\Phi - \mu \left(\frac{F_1}{F_n} - k\frac{\Phi_1}{\Phi_n} \right) \]
-		
-1차 조건은 
-\[		\frac{\partial \mathscr{L}}{\partial  x_i}= F_i-\lambda\Phi_i -\mu \left[  
+
+1차 조건은
+\[		\frac{\partial \mathscr{L}}{\partial  x_i}= F_i-\lambda\Phi_i -\mu \left[
 \frac{F_{n}F_{1i}-F_{1}F_{ni}}{F_n^2}-k\frac{\Phi_{n}\Phi_{1i}-\Phi_{1i}\Phi_{ni}}{\Phi_n^2}\right]=0, \quad \textrm{for} \quad i=1,\cdots,n-1 \]
-	
+
 	\[
 	\textrm{Let} \quad Q_i = \frac{F_{n}F_{1i}-F_{1}F_{ni}}{F_n^2}, \quad
 	R_i = \frac{\Phi_{n}\Phi_{1i}-\Phi_{1i}\Phi_{ni}}{\Phi_n^2}
 	\]
-	
+
 then
 \[ \frac{F_i}{F_n} = \frac{\Phi_i+\frac{\mu}{\lambda}(Q_i-kR_i)}{\Phi_n+\frac{\mu}{\lambda}(Q_n-kR_n)}, \quad i = 1, \cdots, n-1 \]
 
 $ \mu \neq 0 $ 이므로
 \[ \frac{F_i}{F_n} \neq \frac{\Phi_i}{\Phi_n}, \quad i = 1, \cdots, n-1 \]
 
-또한, \[ \frac{F_i}{F_n} \lessgtr \frac{\Phi_i}{\Phi_n}, \quad i = 1, \cdots, n-1 \] 
+또한, \[ \frac{F_i}{F_n} \lessgtr \frac{\Phi_i}{\Phi_n}, \quad i = 1, \cdots, n-1 \]
 즉 대소를 판별할 수 없다. 따라서 FBR의 파레토 최적조건들은 SBR하에서 더 이상 파레토 최적조건이 아니다. 즉 FBR의 일부가 파레토 최적조건을 만족하지 못할 경우 FRB의 다른 파레토 최적 조건도 다 바뀐다는 것을 의미. 일부 파레토 최적조건이 바뀌었을 때 대소를 판별할 수 없으므로 후생증감을 알 수 없다.
 </body>
 
