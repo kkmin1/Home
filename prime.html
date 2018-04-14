@@ -1,0 +1,144 @@
+
+<html lang="ko">
+
+<head>
+
+   <meta charset="utf-8"/>
+
+   <title>소수 출력하기</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<style>
+body { text-align: center; /* 가운데 정렬 */ }
+
+#popup1 {
+    display:none;
+    position:absolute;
+    background:#99d6ff;
+    width:100px;
+    height:50px;
+    opacity: 0.7;
+}
+
+#popup2 {
+    display:none;
+    position:absolute;
+    background:#99d6ff;
+    width:100px;
+    height:50px;
+    opacity: 0.7;
+}
+
+</style>
+
+
+<body>
+
+
+ <h1> 범위주고 소수 출력하기 </h1>
+ 정수의 상한, 하한을 입력하세요<br><br>
+  하한 : <input type="text" id="input1"> &nbsp;
+  상한 : <input type="text" id="input2"> &nbsp;
+  <button id = "mouse1" onclick="prime()">계산1 <div id = "popup1"> 모든 경우의 수를 계산해서 계산</div> </button>
+  <button id = "mouse2" onclick="prime2()">계산2 <div id = "popup2"> 상한이 제곱보다 작은 경우만 계산</div> </button>
+  <br><br>
+
+
+<h2>소수</h2>
+<textarea rows="50" cols="150" id="output"></textarea><br><br>
+<!--<button onclick="output()">출력</button><br><br>-->
+
+<script>
+$("#mouse1").mouseover(function() {
+    $(this).children("#popup1").show();
+}).mouseout(function() {
+    $(this).children("#popup1").hide();
+});
+
+$("#mouse2").mouseover(function() {
+    $(this).children("#popup2").show();
+}).mouseout(function() {
+    $(this).children("#popup2").hide();
+});
+
+
+// 소수 구하는 함수
+function prime(){
+var primeList = [];
+var count = 0;
+var startTime = new Date().getTime();
+var m, n;
+var primeList2;
+
+m = parseInt(document.getElementById("input1").value);
+n = parseInt(document.getElementById("input2").value);
+
+for (var i = 2; i <= n; i ++){
+  var j = 2;
+  //var count = 0;
+  while (j <= i - 1){
+   if (i % j == 0) {break;}
+   else {j++;}
+  }
+
+  if (j == i && i>=m) {
+     primeList2 = primeList.push(i);
+     count++;
+  }
+
+}
+var endTime = new Date().getTime();
+// alert("계산시간 : " + (endTime - startTime));
+calTime = (endTime - startTime)/1000;
+document.getElementById("output").innerHTML = "<소수>\n" + primeList + "\n\n<소수갯수>\n" + count + "개" + "\n\n<계산시간>\n" + calTime + "초"; //textarea 내에 쓰는 것이기때문에 개행시 <br>이 아니라 \n을 씀
+}
+
+
+function prime2(){
+var primeList = [];
+var count = 0;
+var startTime = new Date().getTime();
+var m, n;
+var primeList2;
+
+m = parseInt(document.getElementById("input1").value);
+n = parseInt(document.getElementById("input2").value);
+
+for (var i = 2; i <= n; i ++){
+  var j = 2;
+  var isPrime = true;
+
+  while (j * j <= i){
+   if (i % j == 0) {isPrime = false; break;}
+   else {j++;}
+  }
+
+  if (isPrime && i>=m) {
+     primeList2 = primeList.push(i);
+     count++;
+  }
+
+}
+var endTime = new Date().getTime();
+// alert("계산시간 : " + (endTime - startTime));
+calTime = (endTime - startTime)/1000;
+document.getElementById("output").innerHTML = "<소수>\n" + primeList + "\n\n<소수갯수>\n" + count + "개" + "\n\n<계산시간>\n" + calTime + "초"; //textarea 내에 쓰는 것이기때문에 개행시 <br>이 아니라 \n을 씀
+}
+
+function output(){
+  // document.write(primeList);
+  // document.getElementById("output").value = primeList;
+  document.getElementById("output").innerHTML = "<소수>\n" + primeList + "\n\n<소수갯수>\n" + count + "개"; //textarea 내에 쓰는 것이기때문에 개행시 <br>이 아니라 \n을 씀
+
+  // 반복 입력시 값이 누적되는 것을 방지하기 위해 값 초기화
+  primeList = [];
+  count = 0;
+}
+
+</script>
+
+</body>
+
+</html>
