@@ -7,7 +7,6 @@
 <meta charset="utf8">
 <title> 별찍기 </title>
 
-<script src=https://code.jquery.com/jquery-3.1.1.js></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!--<link rel="stylesheet" type="text/css" href="code.css">-->
 
@@ -48,6 +47,16 @@ code{
 pre{
     border : 1px solid;
 }
+
+#popup1 {
+    display:none;
+    position:absolute;
+    background:#99d6ff;
+    width:200px;
+    height:50px;
+    opacity: 0.7;
+}
+
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
@@ -148,16 +157,36 @@ pre{
                     }
             </code>
         </pre>
-<br>
+
+
+<p>
+        이 논리를 적용하면 포물선 형태의 종모양의 별표를 찍을 수 있다. $y > (0.3x - 15)^2$ 이면 포물선 윗부분을 의미하므로 x축으로 대칭하면 종모양이 그려진다.
+</p>
+<pre>
+        <code>
+                for ( var i = 0 ; i < n ; i ++){
+                    for (var j = 0 ; j < n ; j++){
+                        if (i >  (0.3*j - 15)*(0.3*j - 15))
+                            star += '*';
+                        else
+                            star += ' ';
+                    }
+                            star += '\n';
+                }
+        </code>
+    </pre>
+    <br>
+
 <h2> 2. 별찍기 연습 </h2><br>
 <div id = "ex">
 3 이상의 정수를 입력하세요<br><br>
   정수 : <input type="text" id="input" value="10"> <br><br><br>
   
-  <button id = "mouse1" onclick="starPrint()">왼쪽 붙은 역삼각형모양별 찍기  </button> <br><br>
-  <button id = "mouse2" onclick="starPrint2()">오른쪽 붙은 역삼각형모양별 찍기  </button> <br><br>
-  <button id = "mouse3" onclick="starPrint3()">왼쪽 붙은 삼각형모양별 찍기  </button> <br><br>
-  <button id = "mouse4" onclick="starPrint4()">오른쪽 붙은 삼각형모양별 찍기  </button> <br><br>
+  <button id = "mouse1" onclick="starPrint()">왼쪽 붙은 역삼각형모양 별찍기  </button> <br><br>
+  <button id = "mouse2" onclick="starPrint2()">오른쪽 붙은 역삼각형모양 별찍기  </button> <br><br>
+  <button id = "mouse3" onclick="starPrint3()">왼쪽 붙은 삼각형모양 별찍기  </button> <br><br>
+  <button id = "mouse4" onclick="starPrint4()">오른쪽 붙은 삼각형모양 별찍기  </button> <br><br>
+  <button id = "mouse5" onclick="starPrint5()">종모양 별찍기 <div id = "popup1"> 100 이상의 정수를 입력해야 종모양이 나옴</div> </button> <br><br>
   <br><br>
 
 
@@ -168,7 +197,13 @@ pre{
 
 <script>
         
-        
+$("#mouse5").mouseover(function() {
+    $(this).children("#popup1").show();
+}).mouseout(function() {
+    $(this).children("#popup1").hide();
+});
+
+
 function starPrint() {
     var n ;
     var star = '';
@@ -184,7 +219,7 @@ function starPrint() {
             }
                     star += '\n';
         }
-        document.getElementById("output").innerHTML = "<왼쪽 붙은 역삼각형모양별 찍기>\n\n" + star;
+        document.getElementById("output").innerHTML = "<왼쪽 붙은 역삼각형모양 별찍기>\n\n" + star;
 } 
         
     function starPrint2() {
@@ -203,7 +238,7 @@ function starPrint() {
             }
                     star += '\n';
         }
-    document.getElementById("output").innerHTML = "<오른쪽 붙은 역삼각형모양별 찍기>\n\n" + star;
+    document.getElementById("output").innerHTML = "<오른쪽 붙은 역삼각형모양 별찍기>\n\n" + star;
 } 
 
 function starPrint3() {
@@ -221,7 +256,7 @@ function starPrint3() {
             }
                     star += '\n';
         }
-        document.getElementById("output").innerHTML = "<왼쪽 붙은 삼각형모양별 찍기>\n\n" + star;
+        document.getElementById("output").innerHTML = "<왼쪽 붙은 삼각형모양 별찍기>\n\n" + star;
 } 
 
 function starPrint4() {
@@ -239,7 +274,27 @@ function starPrint4() {
             }
                     star += '\n';
         }
-        document.getElementById("output").innerHTML = "<오른쪽 붙은 삼각형모양별 찍기>\n\n" + star;
+        document.getElementById("output").innerHTML = "<오른쪽 붙은 삼각형모양 별찍기>\n\n" + star;
+} 
+
+function starPrint5() {
+    var n ;
+    var star = '';
+    var k = 0.3;
+    var m = 15;
+
+    n = parseInt(document.getElementById("input").value);
+
+        for ( var i = 0 ; i < n ; i ++){
+            for (var j = 0 ; j < n ; j++){
+                if (i > (k*j - m)*(k*j-m))
+                    star += '*';
+                else
+                    star += '  ';
+            }
+                    star += '\n';
+        }
+        document.getElementById("output").innerHTML = "<종모양 별찍기>\n\n" + star;
 } 
 
 </script>
