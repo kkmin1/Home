@@ -4,6 +4,7 @@
 }
 header{
   border-bottom:1px solid gray;
+  border: 5px   solid  silver;
   padding-left: 20px;
   text-align: center;
 }
