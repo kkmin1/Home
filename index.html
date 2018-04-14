@@ -1,99 +1,67 @@
-<!doctype html>
-<html lang="ko">
+<!-- Created by kkmin -->
+
+<html>
 <head>
-<meta charset="utf-8">
-<title>kkmin's blog</title>
-<style>
-      #jb-container {
-        font-size:12px;
-        width: 1400px;
-        margin: 0px auto;
-        padding: 20px;
-        border: 1px solid #bcbcbc;
-      }
-      #jb-header {
-        padding: 20px;
-        margin-bottom: 20px;
-        border: 1px solid #bcbcbc;
-        text-align:center;
-      }
-      #jb-sidebar-left {
-        width: 200px;
-        height: 500px;
-        padding: 20px;
-        margin-right: 20px;
-        margin-bottom: 20px;
-        float: left;
-        border: 1px solid #bcbcbc;
-        text-align:center;
-      }
-      #jb-content {
-        width: 850px;
-        height: 500px;
-        padding: 20px;
-        margin-bottom: 20px;
-        float: left;
-        border: 1px solid #bcbcbc;
-        text-align:center;
-      }
-      #jb-sidebar-right {
-        width: 160px;
-        height: 500px;
-        padding: 20px;
-        margin-bottom: 20px;
-        float: right;
-        border: 1px solid #bcbcbc;
-        text-align:center;
-      }
-      #jb-footer {
-        clear: both;
-        padding: 20px;
-        border: 1px solid #bcbcbc;
-        text-align:center;
-      }
-    </style>
 
-    </head>
+	<meta charset="utf8">
+	<title> kkmin's blog </title>
 
-     <body>
-     <div id="jb-container">
-      <div id="jb-header">
-      <h1>kkmin's blog</h1>
-       </div>
-      <div id="jb-sidebar-left">
-        <h2>홈페이지</h2>
-  <div style="text-align:left">
-        <ol>
-  <li><a href="http://blog.naver.com/kkmin1">네이버 블로그<br></a> <br><br></li>
-  <li><a href="http://minkwki.blogspot.kr/">blogger<br></a> <br><br></li>
-  <li><a href="https://simpleiscomplexblog.wordpress.com/">wordpress 블로그<br></a> <br><br></li>
+  <link rel="stylesheet" type="text/css" href="blog.css">
+	<script src=https://code.jquery.com/jquery-3.1.1.js></script>
+
+
+
+	<style>
+
+	</style>
+
+</head>
+
+
+<body>
+  <div class = "container">
+		<header>
+				<h1> 민관기의 blog </h1>
+		</header>
+
+		<section class = "content">
+			<nav>
+				<h2 id = "link"> homepage </h2>
+				<div style="text-align:left">
+				<ol>
+  				<li><a href="http://blog.naver.com/kkmin1">네이버 블로그<br></a> <br><br></li>
+  				<li><a href="http://minkwki.blogspot.kr/">blogger<br></a> <br><br></li>
+  				<li><a href="https://simpleiscomplexblog.wordpress.com/">wordpress 블로그<br></a> <br><br></li>
       </ol>
-              </div>
-       </div>
+			</div>
+			</nav>
 
-      <div id="jb-content">
-      <h2>소개</h2>
-<div style="text-align:left">
+			<main>
 
-            </div>
-      </div>
+				<iframe height="1000px" width="800px" name="iframe_a"> <h2 id = "link"> 소개 </h2> </iframe>
+			</main>
 
-  <div id="jb-sidebar-right">
-        <h2>관심분야</h2>
+			<aside>
+				<h2 id = "link"> 관심분야 </h2>
         <div style="text-align:left">
         <ol>
-        <li><a href="game.html">게임이론</a> <br><br></li>
-        <li><a href="eco-math.html">인문수학</a> <br><br></li>
-        <li><a href="econophysics.html">경제물리</a> <br><br></li>
+        <li><a href="game.html" target="iframe_a">게임이론</a> <br><br></li>
+        <li><a href="eco-math.html" target="iframe_a">인문수학</a> <br><br></li>
+        <li><a href="econophysics.html" target="iframe_a">경제물리</a> <br><br></li>
         <li><a href="code.html">프로그래밍</a> <br><br></li>
         </ol>
-           </div>
-         </div>
+        </div>
+			</aside>
 
-         <div id="jb-footer">
-          <p>Copyright : all right reserved</p>
-          <p>Created by &copy; kkmin 2018</p>
-       </div>
-       </div>
-       </body>
+		</section>
+
+		<footer>
+			<p> Copyright : all right reserved </p>
+			<p> Created by &copy; kkmin 2018 </p>
+		</footer>
+
+	</div>
+
+</body>
+
 </html>
