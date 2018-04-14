@@ -1,0 +1,255 @@
+<!-- Created by kkmin -->
+
+<html>
+
+<head>
+
+<meta charset="utf8">
+<title> 별찍기 </title>
+
+<script src=https://code.jquery.com/jquery-3.1.1.js></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="code.css">-->
+
+<style> 
+h1, h2, #ex {
+	text-align:center;
+	}
+	
+#idname{
+	border-style:solid;
+    width: 500px;
+    height: 500px;
+    background-color ; white;
+    }
+footer{
+    border-top: 1px solid gray;
+    padding: 20px;
+    text-align: center;
+}
+input{
+    text-align:center;
+}
+table{
+        border-collapse: collapse;
+        table-layout: fixed;
+        width : 300px;
+        border : 1px solid black;
+        margin:auto; /*테이블 가운데 중앙정렬*/
+        font-size:16px
+      }
+      tr, td, th{
+        text-align: center;
+        height:50px;
+      }
+code{
+    text-align:left;
+    }
+pre{
+    border : 1px solid;
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: 
+    {inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+    "HTML-CSS": { availableFonts: ["TeX"] }
+    });
+</script>
+</head>
+
+
+<body>
+
+<h1> 다양한 별찍기 </h1>
+
+<h2> 1. 별찍기의 기본원리 </h2>
+<p>
+별찍기는 컴퓨터 모니터의 좌표와 좌표계에서 함수의 부등식 영역을 이해하면 쉽게 그릴 수 있다. (이는 모든 프로그램 언어에 공히 적용된다.)
+컴퓨터 모니터의 좌표는 행렬의 인덱스와 같다.  
+</p>
+
+<br>
+<table border="1">
+  <caption> 모니터의 좌표계 </caption>
+  <tr >
+    <td > 0, 0 </td>
+    <td > 0, 1 </td>
+    <td > 0, 2 </td>
+    <td > 0, 3 </td>
+    <td > 0, 4 </td>
+  </tr>
+  <tr >
+    <td > 1, 0 </td>
+    <td > 1, 1 </td>
+    <td > 1, 2 </td>
+    <td > 1, 3 </td>
+    <td > 1, 4 </td>
+  </tr>
+  <tr >
+    <td > 2, 0 </td>
+    <td > 2, 1 </td>
+    <td > 2, 2 </td>
+    <td > 2, 3 </td>
+    <td > 2, 4 </td>
+  </tr>
+  <tr >
+    <td > 3, 0 </td>
+    <td > 3, 1 </td>
+    <td > 3, 2 </td>
+    <td > 3, 3 </td>
+    <td > 3, 4 </td>
+ </tr>
+    <tr >
+    <td > 4, 0 </td>
+    <td > 4, 1 </td>
+    <td > 4, 2 </td>
+    <td > 4, 3 </td>
+    <td > 4, 4 </td>                                        
+</tr>
+</table>
+<br>
+
+<p> 이는 우리가 수학시간에 배우는 데카르트 좌표계와 x축 방향은 같고 y축 방향은 반대임을 알 수 있다. 따라서 우리가 찍으려는 별모양의 x축 대칭인 함수형태를 구상하면 된다.</p>
+
+<img src="star.png" width=600 height=400 hspace= 100>
+
+<p> 그림에서 4/4분면이 모니터의 좌표계이다. 그래서 왼쪽 그림에서 회색영역인 왼쪽붙은 직각삼각형을 출력하려면 x축에 대칭인 1/4//분면의 함수부등식 y > x를 고려하면 된다. 흔히 코드에서 행이 i, 열을 j로 표시하므로, 
+        일단 모든 i, j에 대해 0부터 n까지 돌린다. 그리고 i > j인 경우 별을 찍으면 된다.  프로그램 언어마다 조금씩 차이는 있지만 자바스크립트는 다음과 같다.</p>
+<pre>
+        <code>
+            for ( var i = 0 ; i < n ; i ++){
+                for (var j = 0 ; j < n ; j++){
+                    if (i > j)
+                        star += '*';
+                    else
+                        star += ' ';
+                }
+                        star += '\n';
+            }
+    </code>
+</pre>
+    <p> 오른쪽 그림에서 회색영역인 왼쪽붙은 역직각삼각형을 출력하려면 x축에 대칭인 1/4//분면의 함수부등식 y < n - x를 고려하면 된다. 즉  
+            i < n - j인 조건식을 써주면 된다. 프로그램 언어마다 조금씩 차이는 있지만 자바스크립트는 다음과 같다.</p>
+            <pre>
+            <code>
+                    for ( var i = 0 ; i < n ; i ++){
+                        for (var j = 0 ; j < n ; j++){
+                            if (i < n - j)
+                                star += '*';
+                            else
+                                star += ' ';
+                        }
+                                star += '\n';
+                    }
+            </code>
+        </pre>
+<br>
+<h2> 2. 별찍기 연습 </h2><br>
+<div id = "ex">
+3 이상의 정수를 입력하세요<br><br>
+  정수 : <input type="text" id="input" value="10"> <br><br><br>
+  
+  <button id = "mouse1" onclick="starPrint()">왼쪽 붙은 역삼각형모양별 찍기  </button> <br><br>
+  <button id = "mouse2" onclick="starPrint2()">오른쪽 붙은 역삼각형모양별 찍기  </button> <br><br>
+  <button id = "mouse3" onclick="starPrint3()">왼쪽 붙은 삼각형모양별 찍기  </button> <br><br>
+  <button id = "mouse4" onclick="starPrint4()">오른쪽 붙은 삼각형모양별 찍기  </button> <br><br>
+  <br><br>
+
+
+<h2> 출력 </h2>
+<textarea rows="50" cols="150" id="output"></textarea><br><br>
+<!--<button onclick="output()">출력</button><br><br>-->
+</div>
+
+<script>
+        
+        
+function starPrint() {
+    var n ;
+    var star = '';
+                
+    n = parseInt(document.getElementById("input").value);
+
+        for ( var i = 0 ; i < n ; i ++){
+            for (var j = 0 ; j < n ; j++){
+                if (i < n-j)
+                    star += '*';
+                else
+                    star += ' ';
+            }
+                    star += '\n';
+        }
+        document.getElementById("output").innerHTML = "<왼쪽 붙은 역삼각형모양별 찍기>\n\n" + star;
+} 
+        
+    function starPrint2() {
+    var n ;
+    var star = " ";
+                
+    n = parseInt(document.getElementById("input").value);
+                                
+        for ( var i = 0 ; i < n ; i ++){
+                
+            for (var j = 0 ; j < n ; j++){
+                if (i >= n-j)
+                    star += '*';
+                else
+                    star += '  '; // 두칸 띄기. 공백의 크기를 잘 조절해야 직삼각형 모양이 나옴
+            }
+                    star += '\n';
+        }
+    document.getElementById("output").innerHTML = "<오른쪽 붙은 역삼각형모양별 찍기>\n\n" + star;
+} 
+
+function starPrint3() {
+    var n ;
+    var star = '';
+                
+    n = parseInt(document.getElementById("input").value);
+
+        for ( var i = 0 ; i < n ; i ++){
+            for (var j = 0 ; j < n ; j++){
+                if (i > j)
+                    star += '*';
+                else
+                    star += ' ';
+            }
+                    star += '\n';
+        }
+        document.getElementById("output").innerHTML = "<왼쪽 붙은 삼각형모양별 찍기>\n\n" + star;
+} 
+
+function starPrint4() {
+    var n ;
+    var star = '';
+                
+    n = parseInt(document.getElementById("input").value);
+
+        for ( var i = 0 ; i < n ; i ++){
+            for (var j = 0 ; j < n ; j++){
+                if (i < j)
+                    star += '*';
+                else
+                    star += '  ';
+            }
+                    star += '\n';
+        }
+        document.getElementById("output").innerHTML = "<오른쪽 붙은 삼각형모양별 찍기>\n\n" + star;
+} 
+
+</script>
+        
+<footer>
+      Created by &copy; kkmin 2018
+</footer>
+        
+     
+</body>
+
+</html>
+
