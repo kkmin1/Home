@@ -1,265 +1,264 @@
-﻿<!-- Created by Jafca, Remaked by kkmin -->
-
-
-<!DOCTYPE html>
+<!-- Created by kkmin -->
 
 <html>
-
-
 <head>
 
-<meta charset="utf8">
+	<meta charset="utf8">
+	<title> 프로그램밍 코드 요약집 </title>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="code.js"></script>
-<link rel="stylesheet" type="text/css" href="code.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="code.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="code.css">
+
+	<style>
+
+	</style>
+
 </head>
 
 
 <body>
+  <div class = "container">
+		<header>
+				<h1> 프로그래밍 언어별 문법 </h1>
+		</header>
 
-<header>
-<h1>프로그래밍 언어별 문법</h1>
-</header>
-
-<div>
-웹에서 코드를 테스트 할 수있다.
-아래 코드를 <a href = "http://ideone.com"  target="_blank"> 여기 </a>에 복사해서 실행
-</div>
-
-<div id="content">
-
-<div id="left">
-<h3> 프로그램 언어</h3>
-
-<div class="dropdown">
-<button onclick="cFunction()" class="dropbtn">C</button>
-  <div id="cDropdown" class="dropdown-content">
-    <p id="c1">output</p>
-    <p id="c2">input</p>
-    <p id="c3">function</p>
-  </div>
-</div>
-
-
-	<div class="dropdown">
-	<button onclick="cpFunction()" class="dropbtn">C++</button>
-	  <div id="cpDropdown" class="dropdown-content">
-	    <p id="cp1">output</p>
-	    <p id="cp2">input</p>
-	    <p id="cp3">function</p>
-	  </div>
-	</div>
-
-
-	<div class="dropdown">
-	<button onclick="csFunction()" class="dropbtn">C#</button>
-	  <div id="csDropdown" class="dropdown-content">
-	    <p id="cs1">output</p>
-	    <p id="cs2">input</p>
-	    <p id="cs3">function</p>
-	  </div>
-	</div>
-
-
-<div class="dropdown">
-<button onclick="jFunction()" class="dropbtn">Java</button>
-  <div id="jDropdown" class="dropdown-content">
-    <p id="j1">output</p>
-    <p id="j2">input</p>
-    <p id="j3">function</p>
-  </div>
-</div>
-
-
-<div class="dropdown">
-<button onclick="pyFunction()" class="dropbtn">Python</button>
-  <div id="pyDropdown" class="dropdown-content">
-    <p id="py1">output</p>
-    <p id="py2">input</p>
-    <p id="py3">function</p>
-  </div>
-</div>
-
-
-	<div class="dropdown">
-	<button onclick="plFunction()" class="dropbtn">Perl</button>
-	  <div id="plDropdown" class="dropdown-content">
-	    <p id="pl1">output</p>
-	    <p id="pl2">input</p>
-	    <p id="pl3">function</p>
-	  </div>
-	</div>
-
-
-	<div class="dropdown">
-	<button onclick="rFunction()" class="dropbtn">Ruby</button>
-	  <div id="rDropdown" class="dropdown-content">
-	    <p id="r1">output</p>
-	    <p id="r2">input</p>
-	    <p id="r3">function</p>
-	  </div>
-	</div>
-
-  <div class="dropdown">
-  <button onclick="lFunction()" class="dropbtn">Lua</button>
-    <div id="lDropdown" class="dropdown-content">
-      <p id="l1">output</p>
-      <p id="l2">input</p>
-      <p id="l3">function</p>
-    </div>
-  </div>
-
-
-	<div class="dropdown">
-	<button onclick="hFunction()" class="dropbtn">HTML</button>
-		<div id="hDropdown" class="dropdown-content">
-			<p id="h1">output</p>
-			<p id="h2">input</p>
-			<p id="h3">function</p>
+		<div id = "sub">
+		간단한 코드는 웹에서 코드를 테스트 할 수 있다. 예로 아래 코드를 <a href = "http://ideone.com" target="_blank"> ideone </a>에 복사해서 실행하면 된다.
+		그러나 특정 헤더파일이나 그래픽 라이브러리가 포함된 코드는 실행안 될 수도 있다.
 		</div>
+
+		<section class = "content">
+			<nav>
+				<h3> 프로그램 언어</h3>
+
+				<div class="dropdown">
+				<button onclick="cFunction()" class="dropbtn">C</button>
+				  <div id="cDropdown" class="dropdown-content">
+				    <p id="c1">output</p>
+				    <p id="c2">input</p>
+				    <p id="c3">function</p>
+				  </div>
+				</div>
+
+
+					<div class="dropdown">
+					<button onclick="cpFunction()" class="dropbtn">C++</button>
+					  <div id="cpDropdown" class="dropdown-content">
+					    <p id="cp1">output</p>
+					    <p id="cp2">input</p>
+					    <p id="cp3">function</p>
+					  </div>
+					</div>
+
+
+					<div class="dropdown">
+					<button onclick="csFunction()" class="dropbtn">C#</button>
+					  <div id="csDropdown" class="dropdown-content">
+					    <p id="cs1">output</p>
+					    <p id="cs2">input</p>
+					    <p id="cs3">function</p>
+					  </div>
+					</div>
+
+
+				<div class="dropdown">
+				<button onclick="jFunction()" class="dropbtn">Java</button>
+				  <div id="jDropdown" class="dropdown-content">
+				    <p id="j1">output</p>
+				    <p id="j2">input</p>
+				    <p id="j3">function</p>
+				  </div>
+				</div>
+
+
+				<div class="dropdown">
+				<button onclick="pyFunction()" class="dropbtn">Python</button>
+				  <div id="pyDropdown" class="dropdown-content">
+				    <p id="py1">output</p>
+				    <p id="py2">input</p>
+				    <p id="py3">function</p>
+				  </div>
+				</div>
+
+
+					<div class="dropdown">
+					<button onclick="plFunction()" class="dropbtn">Perl</button>
+					  <div id="plDropdown" class="dropdown-content">
+					    <p id="pl1">output</p>
+					    <p id="pl2">input</p>
+					    <p id="pl3">function</p>
+					  </div>
+					</div>
+
+
+					<div class="dropdown">
+					<button onclick="rFunction()" class="dropbtn">Ruby</button>
+					  <div id="rDropdown" class="dropdown-content">
+					    <p id="r1">output</p>
+					    <p id="r2">input</p>
+					    <p id="r3">function</p>
+					  </div>
+					</div>
+
+				  <div class="dropdown">
+				  <button onclick="lFunction()" class="dropbtn">Lua</button>
+				    <div id="lDropdown" class="dropdown-content">
+				      <p id="l1">output</p>
+				      <p id="l2">input</p>
+				      <p id="l3">function</p>
+				    </div>
+				  </div>
+
+
+					<div class="dropdown">
+					<button onclick="hFunction()" class="dropbtn">HTML</button>
+						<div id="hDropdown" class="dropdown-content">
+							<p id="h1">output</p>
+							<p id="h2">input</p>
+							<p id="h3">function</p>
+						</div>
+					</div>
+
+
+					<div class="dropdown">
+					<button onclick="phFunction()" class="dropbtn">PHP</button>
+						<div id="phDropdown" class="dropdown-content">
+							<p id="ph1">output</p>
+							<p id="ph2">input</p>
+							<p id="ph3">function</p>
+						</div>
+					</div>
+
+
+					<div class="dropdown">
+					<button onclick="jsFunction()" class="dropbtn">JavaScript</button>
+						<div id="jsDropdown" class="dropdown-content">
+							<p id="js1">output</p>
+							<p id="js2">input</p>
+							<p id="js3">function</p>
+						</div>
+					</div>
+
+				  <div class="dropdown">
+				  <button onclick="jqFunction()" class="dropbtn">jQuery</button>
+				    <div id="jqDropdown" class="dropdown-content">
+				      <p id="jq1">output</p>
+				      <p id="jq2">input</p>
+				      <p id="jq3">function</p>
+				    </div>
+				  </div>
+
+					<div class="dropdown">
+					<button onclick="kFunction()" class="dropbtn">Kotlin</button>
+						<div id="kDropdown" class="dropdown-content">
+							<p id="k1">output</p>
+							<p id="k2">input</p>
+							<p id="k3">function</p>
+						</div>
+					</div>
+
+					<div class="dropdown">
+					<button onclick="sFunction()" class="dropbtn">Scala</button>
+						<div id="sDropdown" class="dropdown-content">
+							<p id="s1">output</p>
+							<p id="s2">input</p>
+							<p id="s3">function</p>
+						</div>
+					</div>
+
+					<div class="dropdown">
+					<button onclick="gFunction()" class="dropbtn">Go</button>
+						<div id="gDropdown" class="dropdown-content">
+							<p id="g1">output</p>
+							<p id="g2">input</p>
+							<p id="g3">function</p>
+						</div>
+					</div>
+
+				  <div class="dropdown">
+				  <button onclick="jlFunction()" class="dropbtn">Julia</button>
+				    <div id="jlDropdown" class="dropdown-content">
+				      <p id="jl1">output</p>
+				      <p id="jl2">input</p>
+				      <p id="jl3">function</p>
+				    </div>
+				  </div>
+
+				  <div class="dropdown">
+				  <button onclick="clFunction()" class="dropbtn">Clojure</button>
+				    <div id="clDropdown" class="dropdown-content">
+				      <p id="cl1">output</p>
+				      <p id="cl2">input</p>
+				      <p id="cl3">function</p>
+				    </div>
+				  </div>
+
+				  <div class="dropdown">
+				  <button onclick="exFunction()" class="dropbtn">Elixir</button>
+				    <div id="exDropdown" class="dropdown-content">
+				      <p id="ex1">output</p>
+				      <p id="ex2">input</p>
+				      <p id="ex3">function</p>
+				    </div>
+				  </div>
+
+				  <div class="dropdown">
+				  <button onclick="rsFunction()" class="dropbtn">Rust</button>
+				    <div id="rsDropdown" class="dropdown-content">
+				      <p id="rs1">output</p>
+				      <p id="rs2">input</p>
+				      <p id="rs3">function</p>
+				    </div>
+				  </div>
+
+				  <div class="dropdown">
+				  <button onclick="nsFunction()" class="dropbtn">node.js</button>
+				    <div id="nsDropdown" class="dropdown-content">
+				      <p id="ns1">output</p>
+				      <p id="ns2">input</p>
+				      <p id="ns3">function</p>
+				    </div>
+				  </div>
+			</nav>
+
+			<main id="center">
+
+			</main>
+
+			<aside id="right">
+				<h2> link </h2>
+			</aside>
+		</section>
+
+		<!--댓글 코드 -->
+		<div id="disqus_thread"></div>
+		<script>
+
+		/**
+		*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+		*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+		/*
+		var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		};
+		*/
+		(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = 'https://min-1.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+		})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+		<footer>
+		      Created by &copy; kkmin 2018
+		</footer>
+
 	</div>
-
-
-	<div class="dropdown">
-	<button onclick="phFunction()" class="dropbtn">PHP</button>
-		<div id="phDropdown" class="dropdown-content">
-			<p id="ph1">output</p>
-			<p id="ph2">input</p>
-			<p id="ph3">function</p>
-		</div>
-	</div>
-
-
-	<div class="dropdown">
-	<button onclick="jsFunction()" class="dropbtn">JavaScript</button>
-		<div id="jsDropdown" class="dropdown-content">
-			<p id="js1">output</p>
-			<p id="js2">input</p>
-			<p id="js3">function</p>
-		</div>
-	</div>
-
-  <div class="dropdown">
-  <button onclick="jqFunction()" class="dropbtn">jQuery</button>
-    <div id="jqDropdown" class="dropdown-content">
-      <p id="jq1">output</p>
-      <p id="jq2">input</p>
-      <p id="jq3">function</p>
-    </div>
-  </div>
-
-	<div class="dropdown">
-	<button onclick="kFunction()" class="dropbtn">Kotlin</button>
-		<div id="kDropdown" class="dropdown-content">
-			<p id="k1">output</p>
-			<p id="k2">input</p>
-			<p id="k3">function</p>
-		</div>
-	</div>
-
-	<div class="dropdown">
-	<button onclick="sFunction()" class="dropbtn">Scala</button>
-		<div id="sDropdown" class="dropdown-content">
-			<p id="s1">output</p>
-			<p id="s2">input</p>
-			<p id="s3">function</p>
-		</div>
-	</div>
-
-	<div class="dropdown">
-	<button onclick="gFunction()" class="dropbtn">Go</button>
-		<div id="gDropdown" class="dropdown-content">
-			<p id="g1">output</p>
-			<p id="g2">input</p>
-			<p id="g3">function</p>
-		</div>
-	</div>
-
-  <div class="dropdown">
-  <button onclick="jlFunction()" class="dropbtn">Julia</button>
-    <div id="jlDropdown" class="dropdown-content">
-      <p id="jl1">output</p>
-      <p id="jl2">input</p>
-      <p id="jl3">function</p>
-    </div>
-  </div>
-
-  <div class="dropdown">
-  <button onclick="clFunction()" class="dropbtn">Clojure</button>
-    <div id="clDropdown" class="dropdown-content">
-      <p id="cl1">output</p>
-      <p id="cl2">input</p>
-      <p id="cl3">function</p>
-    </div>
-  </div>
-
-  <div class="dropdown">
-  <button onclick="exFunction()" class="dropbtn">Elixir</button>
-    <div id="exDropdown" class="dropdown-content">
-      <p id="ex1">output</p>
-      <p id="ex2">input</p>
-      <p id="ex3">function</p>
-    </div>
-  </div>
-
-  <div class="dropdown">
-  <button onclick="rsFunction()" class="dropbtn">Rust</button>
-    <div id="rsDropdown" class="dropdown-content">
-      <p id="rs1">output</p>
-      <p id="rs2">input</p>
-      <p id="rs3">function</p>
-    </div>
-  </div>
-
-  <div class="dropdown">
-  <button onclick="nsFunction()" class="dropbtn">node.js</button>
-    <div id="nsDropdown" class="dropdown-content">
-      <p id="ns1">output</p>
-      <p id="ns2">input</p>
-      <p id="ns3">function</p>
-    </div>
-  </div>
-
-</div><!--div left 닫기 -->
-
-
-<div id="center">
-<!--<iframe height="300px" width="50%" src="code0.html" name="code0"></iframe>-->
-</div>
-
-<div id="right">
-<h3> 카테고리 </h3>
-</div>
-
-</div>
-
-<!--댓글 코드 -->
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://min-1.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-<footer>
-      Created by &copy; kkmin 2018
-</footer>
 
 <script src="dropdown.js"></script>
 

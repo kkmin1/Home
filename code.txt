@@ -20,11 +20,22 @@
 
 int main()
 {
-   printf("Hello, World!\n");
-   printf("안녕하세요!\n");
-   printf("안녕하세요!\n");  // \n 은 개행
-   printf("내 이름은");  // 개행 없음
-   printf("홍길동입니다.\n");
+   int sum = 1560, n = 23, age = 24; // 정수형 변수 선언
+   float average; // 실수형 변수 선언
+   char name[] = "홍길동", hello[] = "hello C!"; // 문자열형 변수는 배열로 선언
+   
+   printf("안녕하세요!\n");  // \n 은 줄바꿈 표시
+   printf("내 이름은 ");  // 개행 없음
+   printf("%s이고 나이는 %d살입니다.\n", name, age);
+   
+   // 형식제어문자
+   // %d:  정수, %f: 실수, %c: 단일문자, %s: 문장 또는 문자들
+   average = (float)sum/n; //(float)는 정수형을 실수형으로 형 변환
+   printf("반평균은 %.2f점입니다.\n", average); //.2f는 소수점 이하 두째 자리까지 출력
+  
+   puts("hello world!"); // 자동 개행
+   puts(hello); // 공백 포함 문장을 변수로 출력
+   
    return 0;
 }
 </pre>
@@ -34,14 +45,14 @@ int main()
 
 int main()
 {
-    int a;
-    char b[100];
-    printf("출생년도를 입력하세요: ");
-    scanf("%d", &a);    // 입력을 받아서 변수에 저장
-    printf("이름을 입력하세요: ");
-    scanf("%s", &b);
-    printf("당신은 %d년 생이고 이름은 %s입니다.", a, &b);
-
+    int age, year;
+    char name[100];
+    
+    printf("출생년도와 나이, 이름을 입력하세요: ");
+    scanf("%d %d %s", &year, &age, name);    // 입력을 받아서 변수에 저장
+    puts("");
+    printf("당신은 %d년 생이고, 이름은 %s이며, 나이는 %d살입니다.", year, name, age);
+  
     return 0;
 }
 </pre>
