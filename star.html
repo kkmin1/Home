@@ -11,10 +11,21 @@
 <!--<link rel="stylesheet" type="text/css" href="code.css">-->
 
 <style> 
+body{
+    padding : 20px;
+}
 h1, h2, #ex {
 	text-align:center;
 	}
-	
+h1{
+    color : #3399ff;
+}
+#ex{
+    display:flex;
+}	
+#div1, #div2{
+    border : 2px solid gray;
+}
 #idname{
 	border-style:solid;
     width: 500px;
@@ -46,6 +57,12 @@ code{
     }
 pre{
     border : 1px solid;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 300px;
 }
 
 #popup1 {
@@ -55,6 +72,18 @@ pre{
     width:200px;
     height:50px;
     opacity: 0.7;
+}
+
+#center{padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 1000px;
+    
+}
+#canvas1, #canvas2{
+    border : 1px solid;
 }
 
 </style>
@@ -125,9 +154,15 @@ pre{
 
 <p> 이는 우리가 수학시간에 배우는 데카르트 좌표계와 x축 방향은 같고 y축 방향은 반대임을 알 수 있다. 따라서 우리가 찍으려는 별모양의 x축 대칭인 함수형태를 구상하면 된다.</p>
 
-<img src="star.png" width=600 height=400 hspace= 100>
+<!--<img src="star.png" width=600 height=400 hspace= 100>-->
 
-<p> 그림에서 4/4분면이 모니터의 좌표계이다. 그래서 왼쪽 그림에서 회색영역인 왼쪽붙은 직각삼각형을 출력하려면 x축에 대칭인 1/4//분면의 함수부등식 y > x를 고려하면 된다. 흔히 코드에서 행이 i, 열을 j로 표시하므로, 
+<div id = "center">
+        <canvas id="canvas1" height="400" width="400"></canvas> &nbsp;&nbsp;&nbsp;
+        <canvas id="canvas2" height="400" width="400"></canvas>
+</div>
+
+<p> 그림에서 4/4 분면이 모니터의 좌표계이다. 그래서 <그림 1>에서 회색영역인 왼쪽붙은 직각삼각형을 출력하려면 x축에 대칭인 1/4 분면의 함수부등식 y > x를 고려하면 된다. 
+    흔히 코드에서 행을 i, 열을 j로 표시하므로 i가 y에 j가 x에 대응한다.  
         일단 모든 i, j에 대해 0부터 n까지 돌린다. 그리고 i > j인 경우 별을 찍으면 된다.  프로그램 언어마다 조금씩 차이는 있지만 자바스크립트는 다음과 같다.</p>
 <pre>
         <code>
@@ -142,7 +177,7 @@ pre{
             }
     </code>
 </pre>
-    <p> 오른쪽 그림에서 회색영역인 왼쪽붙은 역직각삼각형을 출력하려면 x축에 대칭인 1/4//분면의 함수부등식 y < n - x를 고려하면 된다. 즉  
+    <p> <그림 2>에서 회색영역인 왼쪽붙은 역직각삼각형을 출력하려면 x축에 대칭인 1/4//분면의 함수부등식 y < n - x를 고려하면 된다. 즉  
             i < n - j인 조건식을 써주면 된다. 프로그램 언어마다 조금씩 차이는 있지만 자바스크립트는 다음과 같다.</p>
             <pre>
             <code>
@@ -179,6 +214,7 @@ pre{
 
 <h2> 2. 별찍기 연습 </h2><br>
 <div id = "ex">
+    <div id = "div1">
 3 이상의 정수를 입력하세요<br><br>
   정수 : <input type="text" id="input" value="10"> <br><br><br>
   
@@ -188,13 +224,14 @@ pre{
   <button id = "mouse4" onclick="starPrint4()">오른쪽 붙은 삼각형모양 별찍기  </button> <br><br>
   <button id = "mouse5" onclick="starPrint5()">종모양 별찍기 <div id = "popup1"> 100 이상의 정수를 입력해야 종모양이 나옴</div> </button> <br><br>
   <br><br>
+</div>
 
-
+    <div id = "div2">
 <h2> 출력 </h2>
 <textarea rows="50" cols="150" id="output"></textarea><br><br>
 <!--<button onclick="output()">출력</button><br><br>-->
+    </div>
 </div>
-
 <script>
         
 $("#mouse5").mouseover(function() {
@@ -280,8 +317,8 @@ function starPrint4() {
 function starPrint5() {
     var n ;
     var star = '';
-    var k = 0.3;
-    var m = 15;
+    var k = 0.3; // 종의 가파름 정도
+    var m = 15; // 중심이 왼쪽에서 떨어지는 정도
 
     n = parseInt(document.getElementById("input").value);
 
@@ -303,7 +340,90 @@ function starPrint5() {
       Created by &copy; kkmin 2018
 </footer>
         
-     
+<script>
+        window.onload=function()
+        {
+        // canvas1 생성
+        var canvas1 = document.getElementById("canvas1");
+        var context1 = canvas1.getContext("2d");
+        
+        // x, y 축그림
+        context1.fillStyle="black"; 
+        context1.font = "16px Arial";
+        context1.fillText("0",40,220);
+        context1.fillText("y축",20,40);
+        context1.fillText("x축",360,210);
+        context1.fillText("y > x",170,100);
+        context1.fillText("<그림 1>",200,370);
+        canvas_arrow(context1, 40, 200, 350, 200)
+        canvas_arrow(context1, 50, 350, 50, 40)
+        context1.stroke();
+        
+        // 함수 부등호 영역 그림
+        context1.beginPath();
+        context1.moveTo(50,50);
+        context1.lineTo(50,200);
+        context1.lineTo(200,50);
+        context1.closePath();
+        context1.fillStyle="hotpink";
+        context1.fill();
+        context1.stroke();
+        context1.beginPath();
+        context1.moveTo(50,200);
+        context1.lineTo(50,350);
+        context1.lineTo(200,350);
+        context1.closePath();
+        context1.fillStyle="hotpink";
+        context1.fill();
+        context1.stroke();
+        
+        // canvas2 생성
+        var canvas2 = document.getElementById("canvas2");
+        var context2 = canvas2.getContext("2d");
+        
+          
+        // x, y 축그림
+        context2.fillStyle="black"; 
+        context2.font = "16px Arial";
+        context2.fillText("0",40,220);
+        context2.fillText("y축",20,40);
+        context2.fillText("x축",360,210);
+        context2.fillText("y < n - x",120,100);
+        context2.fillText("<그림 2>",200,370);
+        canvas_arrow(context2, 40, 200, 350, 200)
+        canvas_arrow(context2, 50, 350, 50, 40)
+        context2.stroke();
+        
+        // 함수 부등호 영역 그림
+        context2.beginPath();
+        context2.moveTo(50,50);
+        context2.lineTo(50,200);
+        context2.lineTo(200,200);
+        context2.closePath();
+        context2.fillStyle="hotpink";
+        context2.fill();
+        context2.stroke();
+        context2.beginPath();
+        context2.moveTo(50,200);
+        context2.lineTo(200,200);
+        context2.lineTo(50,350);
+        context2.closePath();
+        context2.fillStyle="hotpink";
+        context2.fill();
+        context2.stroke();
+
+        // 화살표선을 그리는 함수
+        function canvas_arrow(context, fromx, fromy, tox, toy){
+            var headlen = 10;   // length of head in pixels
+            var angle = Math.atan2(toy-fromy,tox-fromx);
+            context.moveTo(fromx, fromy);
+            context.lineTo(tox, toy);
+            context.lineTo(tox-headlen*Math.cos(angle-Math.PI/6),toy-headlen*Math.sin(angle-Math.PI/6));
+            context.moveTo(tox, toy);
+            context.lineTo(tox-headlen*Math.cos(angle+Math.PI/6),toy-headlen*Math.sin(angle+Math.PI/6));
+        }
+        };
+        </script>     
 </body>
 
 </html>
