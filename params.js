@@ -6,7 +6,7 @@ var defaultParams={
     xmax:5,ymax:5,
     x1:0.5,
     iters:100,
-    func:'3-0.2*Math.pow(x,2)',
+    func:'3-0.2*x**2',
     func2:'3+Math.atan(1.3*x-3)',
     func3:'(Math.tan(x-3)+3)/1.3'
 }

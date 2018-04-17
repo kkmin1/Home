@@ -1,46 +1,89 @@
-<!DOCTYPE html>
+<!-- Created by kkmin -->
+
 <html>
-  <head>
-    <meta charset="utf-8"/>
-    <title> economic cobweb diagram </title>
-    <style>
-        input[id=func] {
-                 height:40px;
-                 width: 300px;
-                 font-size:12px;
-         }
+<head>
 
-            input[id=func2] {
-                 height:40px;
-                 width: 300px;
-                 font-size:12px;
-         }
+	<meta charset="utf8">
+	<title> Economic Cobweb Diagram </title>
 
-          input[id=func3] {
-                 height:40px;
-                 width: 300px;
-                 font-size:12px;
-         }
+	<script src=https://code.jquery.com/jquery-3.1.1.js></script>
 
-        input {
-                 height:30px;
-                 width: 50px;
-                 font-size:12px;
+	<link rel="stylesheet" type="text/css" href="code.css">
+
+	<style>
+		.container{
+			display:flex;
+			flex-direction: column;}
+		header{
+			border-bottom:1px solid gray;
+			padding-left: 20px;
+			
+		}
+		footer{
+			border-top: 1px solid gray;
+			padding: 20px;
+			text-align: center;
+		}
+		.content{
+			display:flex;
+		}
+		.content nav{
+			border-right: 1px solid gray;
+		}
+		.content aside{
+			border-left: 1px solid gray;
+		}
+		nav, aside{
+			flex-basis: 150px;
+			flex-shrink: 0;
+		}
+		main{
+			padding:10px;
+		}
+		aside{
+			text-align: center;
+		}
+
+        #func, #func2, #func3{
+                 height:20px;
+                 width: 200px;
+                 font-size:16px;
                  text-align:center;
                  padding:10px;
          }
-
+         #xmin, #xmax, #ymin, #ymax, #x1, #iters{
+                height:20px;
+                 width: 50px;
+                 font-size:16px;
+                 text-align:center;
+                 padding:10px;
+         }
+        
+         #dem, #sup, #rsup{
+                height:20px;
+                width: 100px;
+                font-size:16px;
+                text-align:center;
+                padding:10px;
+        }
+        #xy{
+                height:20px;
+                width: 70px;
+                font-size:16px;
+                text-align:center;
+                padding:10px;
+        }
         body{
                   margin: 50px;
-                  font-size:12px;
+                  font-size:16px;
                   text-align:center;
                    }
         button{
             height:50px;
             width:100px;
-            font-size:12px;
+            font-size:16px;
         	        }
-        #content{
+        #content, p{
           text-align:left;
         }
         table{
@@ -51,83 +94,147 @@
         tr, th, td{
           border: 1px solid;
         }
+        
         #func, #func2, #func3, #xmin, #xmax, #ymin, #ymax, #x1, #iters{
           border: 0;
         }
-  </style>
+        #disqus_thread{
+            border : 1px solid;
+            padding : 10px;
+        }
+	</style>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
-  MathJax.Hub.Config({
-  extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
-  jax: ["input/TeX", "output/HTML-CSS"],
-  tex2jax:
-  {inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-  displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
-  "HTML-CSS": { availableFonts: ["TeX"] }
-  });
-  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax:
+    {inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+    "HTML-CSS": { availableFonts: ["TeX"] }
+    });
+    </script>
 
-  </head>
+</head>
+
 
 <body>
-  <h1> < 경제적 거미집 모형의 도해 > </h1>
+  <div class = "container">
+		<header>
+				<h1> < 경제적 거미집 모형의 도해 > </h1>
 <p id = "content"> 일반균형이론에 따를 때 경제시스템의 모든 가격은 조정과정(tatonnement process)을 거쳐 균형가격을 도출한다고 주장한다.
   그러나 경제시스템의 연립방정식을 풀어 해(균형가격)가 존재하는 경우와 해로 수렴하는 지의 여부는 별개의 문제이다. 거미집 모형에 따를 때 가격이 균형에 수렴하지 않는 경우도 있다.
   이런 경우를 해가 발산한다고 하고 경제 현상에서 흔히 말하는 거품(bubble)을 의미한다.
-  거미집 모형(cobweb model)이란 수요함수, 공급함수가 있을 때 균형 가격을 향해 가는 과정을 묘사한다.</p>
-</p>  수요함수, 공급함수는 p = p(x)의 형태로 x는 수량, p는 가격을 의미.</p>
+  거미집 모형(cobweb model)이란 수요함수, 공급함수가 있을 때 균형 가격을 향해 가는 과정을 묘사한다. 수요함수, 공급함수는 p = p(x)의 형태로 x는 수량, p는 가격을 의미.</p>
 <p>수식은 자바스크립트 문법으로 입력.</p>
   <p> 예) $\sin{x}$ => Math.sin(x), $x^2$ => Math.pow(x,2) 등. 자세한 사항은
-  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math"  target="_blank">여기</a> 참조</p>
-<p>공급함수 역함수는 공급함수의 역함수를 자바스크립트 문법으로 기입한다. </p>
-<p style="color: red"><strong><중요></strong> 공급함수를 변화시켰을 때는 그 역함수도 함께 바꿔줘야 한다.</p><br><br>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math"  target="_blank">여기</a> 참조. 공급함수 역함수는 공급함수의 역함수를 자바스크립트 문법으로 기입한다. </p>
+<p style="color: red"><strong><중요></strong> 공급함수를 변화시켰을 때는 그 역함수도 함께 바꿔줘야 한다.</p>
+		</header>
 
-<table>
-  <tr >
-    <th > 수요함수 </th>
-    <td colspan="3" > <input type="text" id="func" autofocus="true"/> </td>
-  </tr>
-  <tr >
-    <th > 공급함수 </th>
-    <td colspan="3" > <input type="text" id="func2" autofocus="true" /> </td>
-  </tr>
-  <tr >
-    <th > 공급함수 역함수 </th>
-    <td colspan="3" > <input type="text" id="func3" autofocus="true" /> </td>
-  </tr>
-  <tr >
-    <th > XMin </th>
-    <td >  <input type="text" id="xmin" size="5"/> </td>
-    <th > XMax </th>
-    <td > <input type="text" id="xmax" size="5" /> </td>
-  </tr>
-  <tr >
-    <th > YMin </th>
-    <td > <input type="text" id="ymin" size="5" /> </td>
-    <th > YMax </th>
-    <td > <input type="text" id="ymax" size="5" /> </td>
-  </tr>
-  <tr >
-    <th > 초기값 </th>
-    <td > <input type="text" id="x1" size="5" /> </td>
-    <th > Iterations </th>
-    <td > <input type="text" id="iters" size="5" /> </td>
-  </tr>
-</table>
+		<section class = "content">
+			<nav>
+                    <table>
+                            <tr >
+                              <th id = "dem"> 수요함수 </th>
+                              <td colspan="3" > <input type="text" id="func" autofocus="true"/> </td>
+                            </tr>
+                            <tr >
+                              <th id = "sup"> 공급함수 </th>
+                              <td colspan="3" > <input type="text" id="func2" autofocus="true" /> </td>
+                            </tr>
+                            <tr >
+                              <th id = "rsup"> 역공급함수 </th>
+                              <td colspan="3" > <input type="text" id="func3" autofocus="true" /> </td>
+                            </tr>
+                            <tr >
+                              <th id = "xy"> XMin </th>
+                              <td >  <input type="text" id="xmin" /> </td>
+                              <th id = "xy"> XMax </th>
+                              <td > <input type="text" id="xmax" /> </td>
+                            </tr>
+                            <tr >
+                              <th id = "xy"> YMin </th>
+                              <td > <input type="text" id="ymin" /> </td>
+                              <th id = "xy"> YMax </th>
+                              <td > <input type="text" id="ymax" /> </td>
+                            </tr>
+                            <tr >
+                              <th id = "xy"> 초기값 </th>
+                              <td > <input type="text" id="x1" /> </td>
+                              <th > 반복횟수 </th>
+                              <td id = "xy"> <input type="text" id="iters" /> </td>
+                            </tr>
+                          </table>
+                          <br><br>
+                          <!-- button to activate script that generates canvas content -->
+        <button class="button" id="generate" onclick="generate2()">그리기</button> &nbsp;&nbsp;&nbsp;
+        <!-- <p><button class="button" id="cont" onclick="cont()">more iterations!</button></p> -->
+        <button class="button" id="clearCont" onclick="generate()">지우기</button><br>
+			</nav>
 
-    <!-- button to activate script that generates canvas content -->
-    <p><button class="button" id="generate" onclick="generate2()">그리기</button> &nbsp;&nbsp;&nbsp;
-	<!-- <p><button class="button" id="cont" onclick="cont()">more iterations!</button></p> -->
-    <button class="button" id="clearCont" onclick="generate()">지우기</button></p><br>
+			<main>
+                    <h1> economic cobweb diagram </h1>
 
-<h1> economic cobweb diagram </h1>
+                    <!-- <canvas> that it's actually drawn onto; generate at high resolution and use CSS to scale it? -->
+                    <canvas id="canvas" width="600" height="600"> </canvas>
+                
+                     
 
-    <!-- <canvas> that it's actually drawn onto; generate at high resolution and use CSS to scale it? -->
-    <canvas id="canvas" width="600" height="600"> </canvas>
+                    <!-- load scripts -->
+                    <script src="cobweb.js"></script>
+                    <script src="params.js"></script>
+                
+			</main>
 
-    <!-- load scripts -->
-    <script src="./cobweb.js"></script>
-    <script src="./params.js"></script>
+			<aside>
+       <h2> 다양한 유형 </h2>
+        <ul>
+          <li><a href="#{%22xmin%22:0,%22xmax%22:5,%22ymin%22:0,%22ymax%22:5,%22x1%22:0.9,%22iters%22:100,%22func%22:%223-1.2*x%22,%22func2%22:%22x+1%22,%22func3%22:%22x-1%22}"> 발산 </a></li>
+          <li><a href="#{%22xmin%22:0,%22xmax%22:2,%22ymin%22:0,%22ymax%22:2,%22x1%22:0.1,%22iters%22:100,%22func%22:%223.5*x*(1-x)%22,%22func2%22:%22x%22,%22func3%22:%22x%22}"> 진동 </a></li>
+          <li><a href="#{%22xmin%22:0,%22xmax%22:10,%22ymin%22:0,%22ymax%22:10,%22x1%22:0.2,%22iters%22:100,%22func%22:%220.8*x+1%22,%22func2%22:%22x%22,%22func3%22:%22x%22}"> 수렴 </a></li>
+          
+          </ul>
+			</aside>
+		</section>
 
-  </body>
+        <!--댓글 코드 -->
+		<div id="disqus_thread"></div>
+		<script>
+
+		/**
+		*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+		*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+		/*
+		var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		};
+		*/
+		(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = 'https://min-1.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+		})();
+		</script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+		<footer>
+		      Created by &copy; kkmin 2018
+		</footer>
+
+	</div>
+
+
+<!--<img src = "image.php" width = "100" height = "100">-->
+
+
+
+
+
+
+
+</body>
+
 </html>
