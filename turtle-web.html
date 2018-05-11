@@ -1,0 +1,114 @@
+<html> 
+<head> 
+<meta charset="utf8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script> 
+<script src="http://www.skulpt.org/static/skulpt.min.js" type="text/javascript"></script> 
+<script src="http://www.skulpt.org/static/skulpt-stdlib.js" type="text/javascript"></script> 
+
+</head> 
+
+<body> 
+
+<script type="text/javascript"> 
+// output functions are configurable.  This one just appends some text
+// to a pre element.
+function outf(text) { 
+    var mypre = document.getElementById("output"); 
+    mypre.innerHTML = mypre.innerHTML + text; 
+} 
+function builtinRead(x) {
+    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+            throw "File not found: '" + x + "'";
+    return Sk.builtinFiles["files"][x];
+}
+// Here's everything you need to run a python program in skulpt
+// grab the code from your textarea
+// get a reference to your pre element for output
+// configure the output function
+// call Sk.importMainWithBody()
+function runit() { 
+   var prog = document.getElementById("yourcode").value; 
+   var mypre = document.getElementById("output"); 
+   mypre.innerHTML = ''; 
+   Sk.pre = "output";
+   Sk.configure({output:outf, read:builtinRead}); 
+   (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'mycanvas';
+   var myPromise = Sk.misceval.asyncToPromise(function() {
+       return Sk.importMainWithBody("<stdin>", false, prog, true);
+   });
+   myPromise.then(function(mod) {
+       console.log('success');
+   },
+       function(err) {
+       console.log(err.toString());
+   });
+} 
+</script> 
+
+<h3>python 2.7</h3> 
+<form> 
+<textarea id="yourcode" cols="80" rows="50">
+from turtle import Turtle, Screen
+
+t = Turtle()
+t.forward(100)
+
+
+WIDTH, HEIGHT = 10, 10  # coordinate system size
+tick = 0.1 # 그래프 그리기 위한 x 증분
+
+# python의 기본 range함수는 실수 증분을 허용하지 않으므로 실수 증분을 가능하게 하는 myrange 함수를 만듬
+def myrange(start, end, step):
+    r = start
+    while(r < end):
+        yield r
+        r += step
+
+# 수식 그리는 함수
+def plotter(turtle, x_range):
+    turtle.penup()
+
+    for x in x_range:
+        y = (x-1)*(x-2)*(x-3) # 그리고 싶은 함수식을 적음 
+        ivy.goto(x, y)
+        turtle.pendown()
+
+# 축 그리는 함수
+def axis(turtle, distance):
+    position = turtle.position()
+    turtle.pendown()
+    turtle.forward(distance)
+    turtle.setposition(position)
+    turtle.backward(distance)
+
+# screen = Screen()
+# screen.setworldcoordinates(-WIDTH/2, -HEIGHT/2, WIDTH//2, HEIGHT/2)
+
+ivy = Turtle(visible=False)
+ivy.speed('fastest')
+ivy.penup()
+axis(ivy, WIDTH)
+
+ivy.penup()
+ivy.home()
+ivy.setpos((-0.3,-0.4))
+ivy.write("0")
+ivy.home()
+ivy.setheading(90) #90도로 각도 전환
+axis(ivy, HEIGHT)
+
+plotter(ivy, myrange(-WIDTH//2, WIDTH//2, tick))
+
+
+
+
+</textarea><br /> 
+<button type="button" onclick="runit()">Run</button> 
+</form> 
+<pre id="output" ></pre> 
+<!-- If you want turtle graphics include a canvas -->
+<div id="mycanvas"></div> 
+
+</body> 
+
+</html> 

@@ -1,0 +1,26 @@
+#include "stdafx.h"
+#include <time.h>
+#include <Windows.h>
+#include <iostream>
+using namespace std;
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	
+
+	int a,dice;
+	srand(time(NULL));
+
+
+	while(1){
+		dice=(rand()%6)+1;
+		cout<<dice;
+		Sleep(1000);
+		system("cls");
+	}
+
+
+	return 0;
+}
+

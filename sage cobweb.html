@@ -18,19 +18,13 @@
 $(function () {
     // Make *any* div with class 'compute' a Sage cell
     sagecell.makeSagecell({inputLocation: 'div.compute',
-    						template:       sagecell.templates.minimal, 
+    						template:       sagecell.templates.minimal,
             //               evalButtonText: 'Launch the Interactive Applet Now',
                             autoeval:true});
 });
     </script>
   </head>
   <body style="width: 1000px; height:1000px;">
-
-<! you may start modifying below this point!>
-<! you may start modifying below this point!>
-<! you may start modifying below this point!>
-<! you may start modifying below this point!>
-<! you may start modifying below this point!>
 
   <h1>cobweb diagram</h1>
 
@@ -52,7 +46,7 @@ $(function () {
 <p>yada yada yada</p>
 
 <div class="compute">
-	
+
 <script type="text/x-sage">
 
 
@@ -61,49 +55,46 @@ def inv(f, x):
     y = SR.var('y')
     g = (f - y).roots(x, multiplicities=False)
     for expr in g:
-        return expr.subs(y=x) 
+        return expr.subs(y=x)
 
 
-R=RealField(8) # 출력 digit값을 기본 53에서 8로 줄임으로써 소숫점 두자리로 출력양식 제한 
+R=RealField(8) # 출력 digit값을 기본 53에서 8로 줄임으로써 소숫점 두자리로 출력양식 제한
 @interact
 def grapher(start=slider(0,5, default=0.5, label='초기값', display_value=False),  D=input_box(3-R(0.2)*x^2, label="수요함수", width=40), S=input_box(3+arctan(R(1.3)*x-3), label="공급함수", width=40), min=0, max=5, iterations=100):
-    
-    d=plot(D, min, max, ymin=min, ymax=max) # 수요함수 그림 
+
+    d=plot(D, min, max, ymin=min, ymax=max) # 수요함수 그림
     s=plot(S, min, max, ymin=min, ymax=max) # 공급함수 그림
-    D(x)=D
-    S(x)=S
-    iter= [[start,0], [start, D(start)]]
-    cur=D(start)
+    iter= [[start,0], [start, D(x=start)]]
+    cur=D(x=start)
     Sinv(x)=inv(S, x)
     for i in range(iterations):
           cur2= Sinv(cur)
           iter.append([cur2,cur])
-          cur=D(cur2)
+          cur=D(x=cur2)
           iter.append([cur2,cur])
     cobweb=sum([arrow(iter[i],iter[i+1], width=1, arrowsize=2, rgbcolor=(1,0,0)) for i in range(iterations)])
-    de_name = text("demand",(max*8/10, D(max*8/10)+0.5), fontsize=20, color='black' )
-    su_name = text("supply",(max*8/10, S(max*8/10)-0.5), fontsize=20, color='black' )
+    de_name = text("demand",(max*8/10, D(x=max*8/10)+0.5), fontsize=20, color='black' )
+    su_name = text("supply",(max*8/10, S(x=max*8/10)-0.5), fontsize=20, color='black' )
     zero = text("0",(-0.1, -0.1), fontsize=10, color='black' )  # '0'표시
     init = text(R(start),(start, -max*1/20), fontsize=10, color='black' ) # 초기값 표시
     grp1 = d+s+cobweb+de_name+su_name+zero+init
     grp1.axes_labels(["Q(quantity)", "P(price)"])
     xa=start
-    ya=D(xa)
+    ya=D(x=xa)
     xb=Sinv(ya)
-    yb=D(xb)
+    yb=D(x=xb)
     fluc = line([(1,ya),(2,yb)], color = 'red')
     for i in range(iterations):
           xa=xb
-          ya=D(xa)
+          ya=D(x=xa)
           xb=Sinv(ya)
-          yb=D(xb)
+          yb=D(x=xb)
           fluc += line([(i,ya),(i+1,yb)], color = 'red')
-    zero = text("0",(-2, -0.05), fontsize=10, color='black' )  # '0'표시
     grp2 = fluc+zero
-    grp2.axes_labels(["t(iteration)", "P(price)"])
+    grp2.axes_labels(["t(time)", "P(price)"])
     g = graphics_array([grp1, grp2],2,1)
     g.show(figsize=[10,20]) # 전체의 그림 크기가 10x20
-    
+
 </script>
 </div>
 

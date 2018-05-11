@@ -43,18 +43,10 @@ input{
 #output{
     width : 800px;
 }
-table{
-        border-collapse: collapse;
-        table-layout: fixed;
-        width : 300px;
-        border : 1px solid black;
-        margin:auto; /*테이블 가운데 중앙정렬*/
-        font-size:16px;
-      }
-tr, td, th{
-text-align: center;
-height:50px;
-}
+table{border : 1px solid; border-collapse:collapse;margin:auto; }
+td, th{border : 1px solid; width : 30px; text-align:center;}
+#table2{border : 0; border-collapse:collapse;margin:auto; }
+#td2, #th2{border : 0; width : 20px; text-align:center;}
 code{
     text-align:left;
     }
@@ -196,20 +188,28 @@ pre{
             </code>
         </pre>
 
-<p> 오른 쪽 붙은 직각삼각형을 출력하는 것도 같은 논리다. 단 화면 크기상 공백을 찍는 부분이 정사각형이 아니므로 공백의 크기를   
-    조정해 준다. </p>
+<p> 오른 쪽 붙은 직각삼각형을 출력하는 것도 같은 논리다. 단 데스크탑이나 휴대폰과 같이 화면 비율이 틀리면 공백 찍는 부분이 정사각형이 아니므로    
+    정확히 직각삼각형이 나오지 않는다. 이를 회피하기 위해 정사각형의 테두리 없는 표를 만들고 셀안에 별을 찍는다. </p>
             <pre>
             <code>
-                for ( var i = 0 ; i < n ; i ++){
-                
-                    for (var j = 0 ; j <= n ; j++){
-                        if (i >= n-j)
-                            star += '*';
-                        else
-                            star += '  '; // 두칸 띄기. 공백의 크기를 잘 조절해야 직삼각형 모양이 나옴. 화면크기에 따라 다르다. 휴대폰인 경우 한칸 띠기
-                    }
-                            star += '\n';
-                }
+                function starPrint2() {
+                    var n ;
+                                    
+                    n = parseInt(document.getElementById("input").value);
+                    var table = "&lt;table id = table2>";    
+                        for ( var i = 0 ; i < n ; i ++){
+                            table += "&lt;tr>";
+                            for (var j = 0 ; j <= n ; j++){
+                                if (i >= n-j)
+                                    table += "&lt;td id = td2>*&lt;/td>"; 
+                                else
+                                    table += "&lt;td id = td2>&lt;/td>"; 
+                            }
+                            table += "&lt;/tr>";
+                        }
+                        table += "&lt;/table>"; 
+                    document.getElementById("output").innerHTML = "<오른쪽 붙은 역삼각형모양 별찍기>&lt;br>&lt;br>" + table;
+                } 
             </code>
         </pre>
 
@@ -266,31 +266,33 @@ function starPrint() {
     var star = '';
                 
     n = parseInt(document.getElementById("input").value);
-
+    var table = "<table id = table2>";   
         for ( var i = 0 ; i < n ; i ++){
+            table += "<tr>";
             for (var j = 0 ; j < n ; j++){
                 if (i < n-j)
-                    star += '*';
+                table += "<td id = td2>*</td>"; 
                 else
-                    star += ' ';
+                table += "<td id = td2></td>"; 
             }
-                    star += '<br>';
+            table += "</tr>";
         }
-        document.getElementById("output").innerHTML = "<왼쪽 붙은 역삼각형모양 별찍기><br><br>" + star;
+        table += "</table>"; 
+        document.getElementById("output").innerHTML = "<왼쪽 붙은 역삼각형모양 별찍기><br><br>" + table;
 } 
         
     function starPrint2() {
     var n ;
                     
     n = parseInt(document.getElementById("input").value);
-    var table = "<table>";    
+    var table = "<table id = table2>";    
         for ( var i = 0 ; i < n ; i ++){
             table += "<tr>";
             for (var j = 0 ; j <= n ; j++){
                 if (i >= n-j)
-                    table += "<td >*</td>"; 
+                    table += "<td id = td2>*</td>"; 
                 else
-                    table += "<td ></td>"; 
+                    table += "<td id = td2></td>"; 
             }
             table += "</tr>";
         }
@@ -303,17 +305,19 @@ function starPrint3() {
     var star = '';
                 
     n = parseInt(document.getElementById("input").value);
-
+    var table = "<table id = table2>";
         for ( var i = 0 ; i < n ; i ++){
+            table += "<tr>";
             for (var j = 0 ; j < n ; j++){
-                if (i > j)
-                    star += '*';
+                if (i >= j)
+                    table += "<td id = td2>*</td>"; 
                 else
-                    star += ' ';
+                    table += "<td id = td2></td>";
             }
-                    star += '\n';
+            table += "</tr>";
         }
-        document.getElementById("output").innerHTML = "<왼쪽 붙은 삼각형모양 별찍기>\n\n" + star;
+        table += "</table>"; 
+        document.getElementById("output").innerHTML = "<왼쪽 붙은 삼각형모양 별찍기><br><br>" + table;
 } 
 
 function starPrint4() {
@@ -321,17 +325,19 @@ function starPrint4() {
     var star = '';
                 
     n = parseInt(document.getElementById("input").value);
-
+    var table = "<table id = table2>";
         for ( var i = 0 ; i < n ; i ++){
+            table += "<tr>";
             for (var j = 0 ; j <= n ; j++){
                 if (i < j)
-                    star += '*';
+                    table += "<td id = td2>*</td>"; 
                 else
-                    star += '  ';
+                    table += "<td id = td2></td>";
             }
-                    star += '\n';
+            table += "</tr>";
         }
-        document.getElementById("output").innerHTML = "<오른쪽 붙은 삼각형모양 별찍기>\n\n" + star;
+        table += "</table>"; 
+        document.getElementById("output").innerHTML = "<오른쪽 붙은 삼각형모양 별찍기><br><br>" + table;
 } 
 
 function starPrint5() {

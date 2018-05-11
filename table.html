@@ -1,0 +1,99 @@
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title> table </title>
+    <style>
+      body { line-height:2.3em }
+      p{  text-indent: 3em;  }
+      h1{text-align: center;}
+      table{
+        border-collapse: collapse;
+        table-layout: fixed;
+        border : 1px solid black;
+        width : 400px;
+        margin:auto; /*테이블 가운데 중앙정렬*/
+        font-size:22px
+      }
+      tr, td, th{
+        text-align: center;
+        height:50px;
+      }
+      /* 표에 대각선을 긋는 코드, 여기서는 th 태그의 id = diag 셀에 대각선을 긋는다. */
+      table:nth-of-type(1) th#diag { /* 첫번째 표에 대각선을 긋는다. */
+        background-image: linear-gradient(
+          to top right,
+          white 49%,black,white 51%
+        );
+      }
+      table:nth-of-type(2) th#diag { /* 두번째 표에 대각선을 긋는다. */
+        background-image: linear-gradient(
+          to top right,
+          white 49%,black,white 51%
+        );
+      }
+      caption {
+          text-align: center;
+          margin-bottom: 5px;
+          text-transform: lowercase;
+          font-size: 100%;
+          padding: 10px;
+          /*letter-spacing: 10px;*/
+          font-weight: bold;
+          color:#ff9999;
+      }
+     </style>
+
+ </head>
+
+<body>
+
+
+
+<h2> 죄인들의 딜렘마(prisonner's dilemma)</h2>
+<br>
+<table border="1">
+  <caption>표 1. 죄인들의 딜렘마</caption>
+  <tr >
+    <th id = "diag"> <pre>갑      을</pre> </th>
+    <th > C </th>
+    <th > D </th>
+  </tr>
+  <tr >
+    <th > C </th>
+    <td > -1,-1 </td>
+    <td > -9, 0 </td>
+  </tr>
+  <tr >
+    <th > D </th>
+    <td >  0, -9 </td>
+    <td > -5, -5 </td>
+  </tr>
+
+</table>
+<br>
+
+
+<h2>사슴사냥게임(stag-hunt game)</h2>
+
+<br>
+<table border="1">
+  <caption>표 2. 사슴사냥게임</caption>
+  <tr >
+    <th id = "diag"> <pre>갑      을</pre> </th>
+    <th > 사슴 </th>
+    <th > 토끼 </th>
+  </tr>
+  <tr >
+    <th > 사슴 </th>
+    <td > 3, 3 </td>
+    <td > 0, 1 </td>
+  </tr>
+  <tr >
+    <th > 토끼 </th>
+    <td >  1, 0 </td>
+    <td > 1, 1 </td>
+  </tr>
+
+</table>
+<br>
+

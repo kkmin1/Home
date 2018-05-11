@@ -47,7 +47,7 @@ body { text-align: center; /* 가운데 정렬 */ }
 
 
 <h2>소수</h2>
-<textarea rows="50" cols="150" id="output"></textarea><br><br>
+<textarea rows="10" cols="100" id="output"></textarea><br><br>
 <!--<button onclick="output()">출력</button><br><br>-->
 
 <script>
@@ -91,14 +91,15 @@ for (var i = 2; i <= n; i ++){
 }
 var endTime = new Date().getTime();
 // alert("계산시간 : " + (endTime - startTime));
-calTime = (endTime - startTime)/1000;
-document.getElementById("output").innerHTML = "<소수>\n" + primeList + "\n\n<소수갯수>\n" + count + "개" + "\n\n<계산시간>\n" + calTime + "초"; //textarea 내에 쓰는 것이기때문에 개행시 <br>이 아니라 \n을 씀
+calTime = endTime - startTime;
+document.getElementById("output").innerHTML = "<소수>\n" + primeList + "\n\n<소수갯수>\n" + count + "개" + "\n\n<계산시간>\n" + calTime; //textarea 내에 쓰는 것이기때문에 개행시 <br>이 아니라 \n을 씀
+
+
+
 }
 
 
 function prime2(){
-var primeList = [];
-var count = 0;
 var startTime = new Date().getTime();
 var m, n;
 var primeList2;
@@ -123,8 +124,9 @@ for (var i = 2; i <= n; i ++){
 }
 var endTime = new Date().getTime();
 // alert("계산시간 : " + (endTime - startTime));
-calTime = (endTime - startTime)/1000;
-document.getElementById("output").innerHTML = "<소수>\n" + primeList + "\n\n<소수갯수>\n" + count + "개" + "\n\n<계산시간>\n" + calTime + "초"; //textarea 내에 쓰는 것이기때문에 개행시 <br>이 아니라 \n을 씀
+calTime = endTime - startTime;
+document.getElementById("output").innerHTML = "<소수>\n" + primeList + "\n\n<소수갯수>\n" + count + "개" + "\n\n<계산시간>\n" + calTime; //textarea 내에 쓰는 것이기때문에 개행시 <br>이 아니라 \n을 씀
+
 }
 
 function output(){
