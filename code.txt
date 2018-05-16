@@ -86,27 +86,21 @@ int main()
 using namespace std;  // Also needed for &lt;string>
 
 int main() {
-int age;
-string message;
+int age, kor, eng, math, sum;
+string name, message;
 char message2[100];
-char z;
-
+ float ave;
+ 
   cout << "나이(정수 입력) : ";
   cin >> age;
 
   cout << "당신의 나이는" << age <<"살입니다."<< endl;
 
-
    cout << "이름 : ";
-   cin >> message;
-   cout << "당신의 이름은 " << message <<"입니다."<< endl;
+   cin >> name;
+   cout << "당신의 이름은 " << name <<"입니다."<< endl;
 
-cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 입력 버퍼를 지움
-
-   z = cin.get(); //영어 한 문자만 입력 받음. z에 입력한 문자 저장
-   cout <<"z = " << z << endl;
-
-cin.ignore(numeric_limits<streamsize>::max(), '\n');
+cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 입력버퍼를 지움 
 
    cout << "여백있게 문장을 입력하세요 "<< endl;;
    cin.getline(message2, 100); // getline은 공백도 문자로서 받아들임
@@ -116,7 +110,21 @@ cin.ignore(numeric_limits<streamsize>::max(), '\n');
    getline(cin, message);  // Read input from cin into message
    cout << message << endl;
 
+  cout  << "과목 점수를 정수로 입력해 주세요" << endl;
+  cout  << "국어  : ";
+  cin >> kor;
+  cout  << "영어  : ";
+  cin >> eng;
+  cout  << "수학  : ";
+  cin >> math;
+ 
+  sum = kor + eng + math; // 자동 형변환
+  ave = (float)sum/3;
+  cout  << "총점은 " << sum << "이고 평균은 " ;
+  cout.precision(4); // 소수포함 총자릿수 4자리로 함
+  cout << ave << "점입니다." << endl;
    return 0;
+}
 }
 </pre>
 
@@ -147,6 +155,34 @@ Console.WriteLine("안녕하세요!");
 // Console.ReadKey(); // 다음 키 입력을 기다림
 }
 }
+}
+</pre>
+
+<pre id="cs2">
+using System; 
+
+namespace 성적처리 { 
+class Program { 
+
+static void Main(string[] args) { 
+	String name; 
+	int kor, eng, math, total; 
+	float avg; 
+	
+	Console.Write("이름 :"); 
+	name = Console.ReadLine(); 
+	Console.Write("국어 :"); 
+	kor = int.Parse(Console.ReadLine()); // string을 숫자로 변환
+	Console.Write("영어 :"); 
+	eng = int.Parse(Console.ReadLine()); 
+	Console.Write("수학 :"); 
+	math = int.Parse(Console.ReadLine()); 
+	total = kor + eng + math; 
+	// 실수는 기본적으로 Double로 받아들여서 Float하고 연산시 경고가 나옵니다.
+	avg = (float)total / 3; 
+	Console.WriteLine("{0} 님의 총점은 {1} 이고 평균은 {2:f2} 입니다.", name, total, avg); // f2는 소수점 2째자리까지 출력
+	} 
+} 
 }
 </pre>
 
