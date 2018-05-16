@@ -4,7 +4,6 @@
 }
 header{
   border-bottom:1px solid gray;
-  border: 5px   solid  silver;
   padding-left: 20px;
   text-align: center;
 }
@@ -15,7 +14,6 @@ footer{
 }
 .content{
   display:flex;
-  flex-direction: row;
 }
 .content nav{
   border-right: 1px solid gray;
