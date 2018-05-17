@@ -20,23 +20,23 @@
 
 int main()
 {
-   int sum = 1560, n = 23, age = 24; // 정수형 변수 선언
-   float average; // 실수형 변수 선언
-   char name[] = "홍길동", hello[] = "hello C!"; // 문자열형 변수는 배열로 선언
-   
-   printf("안녕하세요!\n");  // \n 은 줄바꿈 표시
-   printf("내 이름은 ");  // 개행 없음
-   printf("%s이고 나이는 %d살입니다.\n", name, age);
-   
-   // 형식제어문자
-   // %d:  정수, %f: 실수, %c: 단일문자, %s: 문장 또는 문자들
-   average = (float)sum/n; //(float)는 정수형을 실수형으로 형 변환
-   printf("반평균은 %.2f점입니다.\n", average); //.2f는 소수점 이하 두째 자리까지 출력
-  
-   puts("hello world!"); // 자동 개행
-   puts(hello); // 공백 포함 문장을 변수로 출력
-   
-   return 0;
+    int sum = 1560, n = 23, age = 24; // 정수형 변수 선언
+    float average; // 실수형 변수 선언
+    char name[] = "홍길동", hello[] = "hello C!"; // 문자열형 변수는 배열로 선언
+    
+    printf("안녕하세요!\n");  // \n 은 줄바꿈 표시
+    printf("내 이름은 ");  // 개행 없음
+    printf("%s이고 나이는 %d살입니다.\n", name, age);
+    
+    // 형식제어문자
+    // %d:  정수, %f: 실수, %c: 단일문자, %s: 문장 또는 문자들
+    average = (float)sum/n; //(float)는 정수형을 실수형으로 형 변환
+    printf("반평균은 %.2f점입니다.\n", average); //.2f는 소수점 이하 두째 자리까지 출력
+    
+    puts("hello world!"); // 자동 개행
+    puts(hello); // 공백 포함 문장을 변수로 출력
+    
+    return 0;
 }
 </pre>
 
@@ -73,8 +73,16 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello, World!\n";  // \n은 c식 줄바꿈
-    cout << "안녕하세요!"<< endl; // << endl은 c++에서 줄바꿈
+    int age = 20;
+    string name = "홍길동";
+    char message[100] = "\"안녕하세요, 반갑습니다.!\""; // \"는 "표시
+    float ave = 84.5;
+
+    cout << "Hello, World!\n";  // \n은 c식 줄 바꿈
+    cout << "안녕하세요!"<< endl; // << endl은 c++에서 줄 바꿈
+
+    cout << "당신의 이름은 " << name << "이고 나이는 " << age << "살이며 평균 점수는 " << ave << "입니다." << endl;
+	cout << message << endl;
     return 0;
 }
 </pre>
@@ -86,45 +94,45 @@ int main()
 using namespace std;  // Also needed for &lt;string>
 
 int main() {
-int age, kor, eng, math, sum;
-string name, message;
-char message2[100];
- float ave;
+    int age, kor, eng, math, sum;
+    string name, message;
+    char message2[100];
+    float ave;
  
-  cout << "나이(정수 입력) : ";
-  cin >> age;
+    cout << "나이(정수 입력) : ";
+    cin >> age;
 
-  cout << "당신의 나이는" << age <<"살입니다."<< endl;
+    cout << "당신의 나이는" << age <<"살입니다."<< endl;
 
-   cout << "이름 : ";
-   cin >> name;
-   cout << "당신의 이름은 " << name <<"입니다."<< endl;
+    cout << "이름 : ";
+    cin >> name;
+    cout << "당신의 이름은 " << name <<"입니다."<< endl;
 
-cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 입력버퍼를 지움 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 입력버퍼를 지움 
 
-   cout << "여백있게 문장을 입력하세요 "<< endl;;
-   cin.getline(message2, 100); // getline은 공백도 문자로서 받아들임
-   cout << message2 << endl;
+    cout << "여백있게 문장을 입력하세요 "<< endl;;
+    cin.getline(message2, 100); // getline은 공백도 문자로서 받아들임
+    cout << message2 << endl;
 
-   cout << "Enter a message (with spaces): ";
-   getline(cin, message);  // Read input from cin into message
-   cout << message << endl;
+    cout << "Enter a message (with spaces): ";
+    getline(cin, message);  // Read input from cin into message
+    cout << message << endl;
 
-  cout  << "과목 점수를 정수로 입력해 주세요" << endl;
-  cout  << "국어  : ";
-  cin >> kor;
-  cout  << "영어  : ";
-  cin >> eng;
-  cout  << "수학  : ";
-  cin >> math;
- 
-  sum = kor + eng + math; // 자동 형변환
-  ave = (float)sum/3;
-  cout  << "총점은 " << sum << "이고 평균은 " ;
-  cout.precision(4); // 소수포함 총자릿수 4자리로 함
-  cout << ave << "점입니다." << endl;
-   return 0;
-}
+    cout  << "과목 점수를 정수로 입력해 주세요" << endl;
+    cout  << "국어  : ";
+    cin >> kor;
+    cout  << "영어  : ";
+    cin >> eng;
+    cout  << "수학  : ";
+    cin >> math;
+    
+    sum = kor + eng + math; // 자동 형변환
+    ave = (float)sum/3;
+    cout  << "총점은 " << sum << "이고 평균은 " ;
+    cout.precision(4); // 소수포함 총자릿수 4자리로 함
+    cout << ave << "점입니다." << endl;
+    return 0;
+    }
 }
 </pre>
 
@@ -147,14 +155,14 @@ monodevelop 설치
 using System;
 
 namespace HelloWorld {
-class HelloWorld {
+    class HelloWorld {
 
-static void Main() {
-Console.WriteLine("Hello World");
-Console.WriteLine("안녕하세요!");
-// Console.ReadKey(); // 다음 키 입력을 기다림
-}
-}
+        static void Main() {
+        Console.WriteLine("Hello World");
+        Console.WriteLine("안녕하세요!");
+        // Console.ReadKey(); // 다음 키 입력을 기다림
+        }
+    }
 }
 </pre>
 
@@ -162,27 +170,27 @@ Console.WriteLine("안녕하세요!");
 using System; 
 
 namespace 성적처리 { 
-class Program { 
+    class Program { 
 
-static void Main(string[] args) { 
-	String name; 
-	int kor, eng, math, total; 
-	float avg; 
-	
-	Console.Write("이름 :"); 
-	name = Console.ReadLine(); 
-	Console.Write("국어 :"); 
-	kor = int.Parse(Console.ReadLine()); // string을 숫자로 변환
-	Console.Write("영어 :"); 
-	eng = int.Parse(Console.ReadLine()); 
-	Console.Write("수학 :"); 
-	math = int.Parse(Console.ReadLine()); 
-	total = kor + eng + math; 
-	// 실수는 기본적으로 Double로 받아들여서 Float하고 연산시 경고가 나옵니다.
-	avg = (float)total / 3; 
-	Console.WriteLine("{0} 님의 총점은 {1} 이고 평균은 {2:f2} 입니다.", name, total, avg); // f2는 소수점 2째자리까지 출력
-	} 
-} 
+        static void Main(string[] args) { 
+        String name; 
+        int kor, eng, math, total; 
+        float avg; 
+        
+        Console.Write("이름 :"); 
+        name = Console.ReadLine(); 
+        Console.Write("국어 :"); 
+        kor = int.Parse(Console.ReadLine()); // string을 숫자로 변환
+        Console.Write("영어 :"); 
+        eng = int.Parse(Console.ReadLine()); 
+        Console.Write("수학 :"); 
+        math = int.Parse(Console.ReadLine()); 
+        total = kor + eng + math; 
+        // 실수는 기본적으로 Double로 받아들여서 Float하고 연산시 경고가 나옵니다.
+        avg = (float)total / 3; 
+        Console.WriteLine("{0} 님의 총점은 {1} 이고 평균은 {2:f2} 입니다.", name, total, avg); // f2는 소수점 2째자리까지 출력
+        } 
+    } 
 }
 </pre>
 
@@ -194,23 +202,23 @@ static void Main(string[] args) {
 
 public class hello {
     public static void main(String[] args) {
-    System.out.println("Hello, world!"); // 자동 줄 바꿈. 빤드시 쌍따옴표("")로 묶어야 함.
-    System.out.println("안녕하세요!");
-    System.out.print("내 이름은"); // 줄 바꿈 안함.
-    System.out.printf("홍길동입니다.\n"); // \n은 줄 바꿈
+        System.out.println("Hello, world!"); // 자동 줄 바꿈. 빤드시 쌍따옴표("")로 묶어야 함.
+        System.out.println("안녕하세요!");
+        System.out.print("내 이름은"); // 줄 바꿈 안함.
+        System.out.printf("홍길동입니다.\n"); // \n은 줄 바꿈
 
-    int ht = 178; // 정수형
-    double wt = 77.7;  // 실수형
-    String name = "홍길동"; // 문자열(string) 변수선언. 앞의 다른 변수형 선언과 달리 String의 S가 대문자임에 주의
-    System.out.println("당신의 키는 " +ht+"cm이고, 몸무게는 "+wt+"kg이며, 이름은 "+name+"입니다.");
-    }
+        int ht = 178; // 정수형
+        double wt = 77.7;  // 실수형
+        String name = "홍길동"; // 문자열(string) 변수선언. 앞의 다른 변수형 선언과 달리 String의 S가 대문자임에 주의
+        System.out.println("당신의 키는 " + ht +" cm이고, 몸무게는 " + wt + "kg이며, 이름은 " + name + "입니다.");
+        }
 }
 </pre>
 
 <pre id="j2">
 import java.util.Scanner; // 입력을 받기위해 필요한 자바패키지.
 
-public class input { //public class 명이 input이므로 파일명도 input.java
+public class input { 
 
     public static void main(String []args) {
 
@@ -237,27 +245,25 @@ public class input { //public class 명이 input이므로 파일명도 input.jav
 '''(""")
 
 print("Hello, World!") # 자동 줄바꿈됨
-# 출력 : Hello, World!
 
 print('안녕하세요!') # 문자열 출력시 '', "" 둘 다 사용 가능
-# 출력 : 안녕하세요!
 
 print("홍", end="") # 자동 줄바꿈 안함
 print("길동")
-# 출력 : 홍길동
 
 print("Hi, '홍길동'") # 문장에 따옴표 넣을 때는 ' 기호가 있는 경우에는 “ ”로 “ 기호가 있는 경우에는 ‘ ’를 사용
-# 출력 : Hi, '홍길동'
+    # 출력 : Hi, '홍길동'
 
 print('안녕', '하세요') # 콤마(,)로 문자열을 나열할 경우 공백이 자동 추가
-# 출력 : 안녕 하세요
+    # 출력 : 안녕 하세요
+
 print('안녕' + '하세요') # 더하기(+)는 공백없음
-# 출력 : 안녕하세요
+    # 출력 : 안녕하세요
 
  # 긴 문자열은 \ 기호로 사용하여 여러 줄에 작성할 수 있다.
 print('I like Python. \
 But I do not like Ruby.')
-# 출력 : I like Python. But I do not like Ruby.
+    # 출력 : I like Python. But I do not like Ruby.
 
 '''
 개행(줄바꿈), 공백, 특수기호(이스케이프 문자)를 포함하여 입력한 그대로 화면에 출력하기 위해서는 ‘’‘ ’‘’ 또는 “”“ ”“” 기호를 사용
@@ -270,10 +276,10 @@ But I don't like C.
 
 # \n 개행, \t 탭키, \\ \, \‘, \“ 등 이스케이프 문자(Escape character)는 \를 사용하여 출력한다.
 print(my daughter\'s birthday)
-# 출력 : my daughter's birthday
+    # 출력 : my daughter's birthday
 
 print('긴 문자열은 \\ 기호를 사용하여 여러 줄에 작성할 수 있다.')
-# 출력 : 긴 문자열은 \ 기호를 사용하여 여러 줄에 작성할 수 있다.
+    # 출력 : 긴 문자열은 \ 기호를 사용하여 여러 줄에 작성할 수 있다.
 
 # 변수 형은 자동 결정
 ht = 178 # 정수형
@@ -286,10 +292,10 @@ c 언어와 같이 % 기호를 활용하여 변수값을 출력할 수 있다. (
 format 함수를 사용하면 좀 더 다양한 방식으로 출력을 할 수 있다.
 '''
 print('당신의 키는 %dcm이고, 몸무게는 %.2fkg이며, 이름은 %s입니다.' % (ht,wt,name))  # .2f는 wt는 소숫점 2자리까지만 출력
-# 출력 : 당신의 키는 178cm이고, 몸무게는 77.70kg이며, 이름은 홍길동입니다.
+    # 출력 : 당신의 키는 178cm이고, 몸무게는 77.70kg이며, 이름은 홍길동입니다.
 
 print('당신의 키는 {0}cm이고, 몸무게는 {1:.2f}kg이며, 이름은 {2}입니다.'.format(ht,wt,name)) # .2f는 wt는 소숫점 2자리까지만 출력
-# 출력 : 당신의 키는 178cm이고, 몸무게는 77.70kg이며, 이름은 홍길동입니다.
+    # 출력 : 당신의 키는 178cm이고, 몸무게는 77.70kg이며, 이름은 홍길동입니다.
 
 </pre>
 
@@ -301,11 +307,10 @@ print("안녕하세요", name +"님") # , 는 한칸 띄기. 붙여쓸려면 + �
 age = input("나이 : ") #정수를 입력
 print("당신의 나이는" + age + " 살입니다.")
 
-
 # 실수 2개를 두 줄에 입력
 print ("<나누기>")
 print ("실수 두 개를 입력하시오")
-a = float(input("a: ")) #input값은 문자열로 인식되므로 실수로 형변환함
+a = float(input("a: ")) #input값은 문자열로 인식되므로 실수로 형 변환함
 b = float(input("b: "))
 print ('{0:.2f} ÷ {1:.2f} = {2:.2f}' .format(a, b, a / b))
 
@@ -313,7 +318,7 @@ print ('{0:.2f} ÷ {1:.2f} = {2:.2f}' .format(a, b, a / b))
 print ("<더하기>")
 print ("정수 두 개를 입력하시오")
 m, n = map(int, input('정수 2 개를 한 칸 띄어 입력하시오\n').split()) 
-#map은 리스트를 모두 형변환할 때 씀. 정수로 형변환
+# map은 리스트를 모두 형변환할 때 씀. 정수로 형 변환
 
 print('{0} + {1} = {2}'.format(m, n, m+n))
 
@@ -327,24 +332,52 @@ print('{0:.1f} - {1:.1f} = {2:.1f}'.format(c, d, c- d))
 
 <pre id="pl1">
 # 주석
-print "Hello world!\n";
+print "Hello world!\n"; # \n은 개행
 print "안녕하세요 \n";
+
+# 변수 선언은 my, $는 스칼라 변수, @는 배열 변수
+my $num = 4040.5;
+print $num; # "4040.5\n"
+
+my $string = "world";
+print $string; # "world\n"
+
+# 문자열 결합은 . 연산자로 한다(PHP와 같다)
+print "Hello ".$string; # "Hello world\n"
+
 </pre>
 
-<pre id="r1">
-p 'hello!';
+<pre id="r1"><xmp>
 puts '안녕하세요'; # 자동 개행
-puts "처음 뵙겠습니다.";
-print "내 이름은 민관기입니다.\n"; # 자동 개행 안됨. \n 포함시 싱글 따옴표 안됨
-print '반갑습니다.';
-puts '';
-print &lt;&lt;min 
-       이 행은 연습입니다.  공백도 그대로 출력됩니다.
-       두 줄 이상 출력시 이렇게 하면 됩니다.
-min
-# &lt;&lt;와 min 사이에 여백이 있으면 안됨. min은 임의의 식별자. 아무거나 쓰면됨
+print "내 이름은 홍길동입니다.\n"; # print는 자동 개행 안됨. \n 포함시 싱글 따옴표 안됨
+p "hello!"; # "hello!", 따옴표도 출력, 자동 개행
 
-printf "여기에 %d개의 %s가 있읍니다.", 3, '사과'
+print <<aaa # <<와 aaa 사이에 여백이 있으면 안됨. aaa은 식별자. 이름은 아무거나 쓰면됨
+   이 행은 연습입니다.  공백도 그대로 출력됩니다.
+       두 줄 이상 출력시 이렇게 하면 됩니다.
+aaa
+
+# c 형 출력
+printf "여기에 %d 개의 %s가 있읍니다.\n", 3, '사과'
+
+# 변수선언은 따로 하지 않는다. 변수의 변수형은 자동 결정.
+age, b, c, name = 34, 3, 2.2, '홍길동'; # 변수 중복 대입 가능. age = 34, b = 3, c = 2.2, name = '홍길동'
+sum = age + b;
+div = age/b; # 3, 정수끼리 나누는 것이므로 div도 정수형, 11.333333333333334 이 아니다.
+div2 = age/c; # 15.45454545454545453, 정수/실수 이므로 div2는 실수형
+puts sum, div, div2;
+printf  "%.2f\n", div2; # 15.45
+puts "안녕, #{name}!"; # 안녕, 홍길동!
+print "내 이름은 ", name, "이고 나이는 ", age, "살 입니다.\n"; # print name + age + "\n"; 는 에러 
+</xmp></pre>
+
+<pre id="r2">
+print '이름 : '
+name = gets.chomp
+print '나이 : '
+age = gets.chomp
+print "당신의 이름은 ", name,"이고 나이는 ", age," 살입니다.\n"
+print "당신의 이름은 #{name}이고 나이는 #{age} 살입니다.\n"
 </pre>
 
 <pre id="l1">
@@ -386,16 +419,53 @@ object hello // 자바와 같이 파일명과 객체명이 같아야 함.
 </pre>
 
 <pre id="h1">
-&lt;!-- 주석 -->
-&lt;!-- 확장자는 html이고 파일을 더블 클릭하거나 웹브라우저의 주소창에 입력하여 실행. -->
-&lt;head>
-&lt;meta charset="utf8"> &lt;!-- 한글 표기를 위해 필요 -->
-&lt;/head>
+<xmp>
+<!-- 주석 -->
+<!-- 확장자는 html이고 파일을 더블 클릭하거나 웹브라우저의 주소창에 입력하여 실행. -->
 
-&lt;body>
-Hello, world! &lt;br> &lt;!-- 줄바꿈은 &lt;br> -->
-안녕하세요! &lt;br>
-&lt;/body>
+<head>
+    <meta charset="utf8"> <!-- 한글 표기를 위해 필요 -->
+
+    <!-- 문서 양식 지정, 내부에 표기 -->
+    <style> 
+    /* 스타일 주석 */
+    /* 태그이름은 그대로 씀, .body1 class = body1, #idname id = idname 
+        border: 1px solid; .body1 테두리를 두께 1px로 그림, 기본 검은색
+        padding:30px; 글자와 테두리 사이 간격
+        margin-left: 20px; 테두리와 화면 사이 간격 
+        background-color: blue; 배경색
+        color: red; 글자색
+        text-align: center; 문장 중앙 정렬
+        width: 700px; 넓이
+        height: 100px; 높이
+        line-height: 24px; 줄간격
+     */
+        .body1{border: 1px solid; padding: 30px; margin-left: 20px;} 
+        #idname{
+            border: 1px solid gray; padding:10px; margin-left: 20px; background-color: thistle; 
+            color:mediumvioletred;
+            width: 400px;
+            height: 100px
+            }
+        #idh2{text-align: center;}
+        p{line-height: 32px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="cssName.css"> <!-- 외부 stylesheet cssName을 불러온다. -->
+</head>
+    
+<body>
+    <div class = body1>
+        <h1> 제목1 </h1> <!-- 글자 크기 큰 것 부터 -->
+        <h2 id = idh2> 제목2 </h2>
+        <h3> 제목3 </h3>
+
+        <div id = idname> <!-- 단락을 구분짓는 태그, 여러개의 div가 있을 경으 id, class로 구분 -->
+        <p>Hello, world! <br> <!-- 줄바꿈은 <br> -->
+        안녕하세요! </div></p>
+        </div>
+    </div>
+</body>
+</xmp>
 </pre>
 
 <pre id="ph1">
@@ -417,9 +487,12 @@ html 파일과 같은 폴더에 넣고 위와 같이 &lt;head>태그 사이, 또
 -->
 
 &lt;head>
-&lt;meta charset=utf8> &lt;!-- html 파일에서 한글출력을 위해 필요.-->
-&lt;script src="code.js">&lt;/script>
+    &lt;meta charset=utf8> &lt;!-- html 파일에서 한글출력을 위해 필요.-->
 &lt;/head>
+
+&lt;body>
+    &lt;div id = test> &lt;/div>
+&lt;/body>
 
 &lt;script>
 // javascript문 내에서의 주석. 위 html문의 주석 명령과 다름에 주의.
@@ -428,6 +501,8 @@ html 파일과 같은 폴더에 넣고 위와 같이 &lt;head>태그 사이, 또
 */
 
 document.write("Hello, javascript!&lt;br>"); // 웹 페이지에 출력. 줄바꿈은 &lt;br>
+// document.write()는 기존의 웹페이지 내용을 다 지우고 그 위에 덮어 쓰는 것이므로 코딩 연습의 경우 외에는 쓰면 안됨.
+
 document.write("안녕하세요!"+"&lt;br>");
 alert("Hello, world! \n 안녕하세요!"); // alert box로 출력. 여기에서 줄바꿈은 \n
 
@@ -439,7 +514,10 @@ document.write("당신의 키는 " +ht+"cm이고, 몸무게는 "+wt+"kg이며, �
 document.write("당신의 키는 ",ht,"cm이고, 몸무게는 ",wt,"kg이며, 이름은 ",name,"입니다.&lt;br>");
 console.log("당신의 키는 " +ht+"cm이고, 몸무게는 "+wt+"kg이며, 이름은 "+name+"입니다.");
 // console.log는  콘솔창에만 나타남. 웹브라우저에서 F12키로 콘솔창 실행
+
+document.getElementById("test").innerHTML = "반갑습니다."; // id = test 를 갖는 태그안에 출력 
 &lt;/script>
+
 </pre>
 
 <pre id="jq1">

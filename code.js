@@ -43,10 +43,18 @@ $(function(){
         $("#center").load("code.txt pre#pl1");
     });
     
+    $("p#pl2").click(function(){
+        $("#center").load("code.txt pre#pl2");
+    });
+
     $("p#r1").click(function(){
         $("#center").load("code.txt pre#r1");
     });
     
+    $("p#r2").click(function(){
+        $("#center").load("code.txt pre#r2");
+    });
+
     $("p#h1").click(function(){
         $("#center").load("code.txt pre#h1");
     });
