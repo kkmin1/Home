@@ -6,62 +6,151 @@
 	<meta charset="utf8">
 	<title> kkmin's blog </title>
 
-  <link rel="stylesheet" type="text/css" href="blog.css">
-	<script src=https://code.jquery.com/jquery-3.1.1.js></script>
-
-
-
+		<link rel="stylesheet" type="text/css" href="blog.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
 	<style>
-
 	</style>
 
 </head>
 
-
 <body>
   <div class = "container">
-		<header>
-				<h1> 민관기의 blog </h1>
-		</header>
+	<header>
+			<h1> 민관기의 blog </h1>
+	</header>
 
 		<section class = "content">
 			<nav>
-				<h2 id = "link"> homepage </h2>
-				<div style="text-align:left">
-				<ol>
-  				<li><a href="http://blog.naver.com/kkmin1">네이버 블로그<br></a> <br><br></li>
-  				<li><a href="http://minkwki.blogspot.kr/">blogger<br></a> <br><br></li>
-  				<li><a href="https://simpleiscomplexblog.wordpress.com/">wordpress 블로그<br></a> <br><br></li>
-      </ol>
+			<h2 id = "link"> homepage </h2>
+			<div id = nav style="text-align:left">
+			<ul>
+			<li><a href="http://blog.naver.com/kkmin1">네이버 블로그<br></a> <br><br></li>
+			<li><a href="http://minkwki.blogspot.kr/">blogger<br></a> <br><br></li>
+			<li><a href="https://simpleiscomplexblog.wordpress.com/">wordpress 블로그<br></a> <br><br></li>
+			</ul>
 			</div>
 			</nav>
 
 			<main>
 
-				<iframe height="1000px" width="800px" name="iframe_a"> <h2 id = "link"> 소개 </h2> </iframe>
+				<iframe name="iframe_a"> <h2 id = "link"> 소개 </h2> </iframe>
 			</main>
 
 			<aside>
 				<h2 id = "link"> 관심분야 </h2>
-        <div style="text-align:left">
-        <ol>
-        <li><a href="game.html" target="iframe_a">게임이론</a> <br><br></li>
-        <li><a href="eco-math.html" target="iframe_a">인문수학</a> <br><br></li>
-        <li><a href="econophysics.html" target="iframe_a">경제물리</a> <br><br></li>
-        <li><a href="code.html">프로그래밍</a> <br><br></li>
-        </ol>
-        </div>
-			</aside>
+        		
+					<div class="dropdown">
+						<button onclick="gFunction()" class="dropbtn"> 게임이론 </button>
+						  	<div id="gDropdown" class="dropdown-content">
+								<p id="g1"><a href="nash.html" target="iframe_a">내쉬균형</a></p>
+								<p id="g2"><a href="normal vs tree.html" target="iframe_a">동시게임 대 순차게임</a></p>
+								<p id="g3"><a href="subgame.html" target="iframe_a">부분게임완전균형</a></p>
+								<p id="g4"><a href="forward-ind.html" target="iframe_a">순방향 추론법</a></p>
+								<p id="g5"><a href="bayesian.html" target="iframe_a">베이지안게임</a></p>
+								<p id="g6"><a href="pe.html" target="iframe_a">완전베이지안게임</a></p>
+								<p id="g6"><a href="signaling.html" target="iframe_a">신호게임</a></p>
+						  	</div>
+					</div>
+				
+					<div class="dropdown">
+						<button onclick="hmFunction()" class="dropbtn"> 인문수학 </button>
+							<div id="hmDropdown" class="dropdown-content">
+								<p id="hm1"><a href="lechat.html" target="iframe_a">르 샤틀리에 법칙</a></p>
+								<p id="hm2"><a href="A-J_effect.html" target="iframe_a">애버치-존슨 효과</a></p>
+								<p id="hm3"><a href="sbtheory.html" target="iframe_a">차선의 이론</a></p>
+								<p id="hm4"><a href="stpet.html" target="iframe_a">성 페테르스부르크 역설</a></p>
+						</div>
+					</div>
+				
+					<div class="dropdown">
+						<button onclick="epFunction()" class="dropbtn"> 경제물리 </button>
+							<div id="epDropdown" class="dropdown-content">
+								<p id="ep1"><a href="cobweb.html" target="iframe_a">cobweb 모형</a></p>
+								<p id="ep2"><a href="ne.html" target="iframe_a">내쉬균형 도출</a></p>
+								<p id="ep3"><a href="wealth.html" target="iframe_a">분의 분포</a></p>
+							</div>
+					</div>
+
+					<div class="dropdown">
+						<button onclick="pFunction()" class="dropbtn"> 프로그래밍 </button>
+							<div id="pDropdown" class="dropdown-content">
+								<p id="p1"><a href="code.html" target="iframe_a">프로그래밍언어 요약집</a></p>
+								<p id="p2"><a href="star.html" target="iframe_a">별찍기 알고리듬</a></p>
+									
+							</div>	
+					</div>			
+        </aside>
 
 		</section>
 
-		<footer>
-			<p> Copyright : all right reserved </p>
-			<p> Created by &copy; kkmin 2018 </p>
-		</footer>
-
+		
 	</div>
 
-</body>
+<script>
+		/* When the user clicks on the button,
+		toggle between hiding and showing the dropdown content */
+		
+		function gFunction() {
+			document.getElementById("gDropdown").classList.toggle("show");
+		}
+		
+		function hmFunction() {
+			document.getElementById("hmDropdown").classList.toggle("show");
+		}
+		
+		function epFunction() {
+			document.getElementById("epDropdown").classList.toggle("show");
+		}
+		
+		function pFunction() {
+			document.getElementById("pDropdown").classList.toggle("show");
+		}
+		
+		
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function(event) {
+		  if (!event.target.matches('.dropbtn')) {
+		
+			var dropdowns = document.getElementsByClassName("dropdown-content");
+			var i;
+			for (i = 0; i < dropdowns.length; i++) {
+			  var openDropdown = dropdowns[i];
+			  if (openDropdown.classList.contains('show')) {
+				openDropdown.classList.remove('show');
+			  }
+			}
+		  }
+		}
 
+</script>
+
+<!--댓글 코드 -->
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://min-1.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+	<footer>
+		<p> Copyright : all right reserved </p>
+		<p> Created by &copy; kkmin 2018 </p>
+	</footer>
+</div>
+</body>
 </html>

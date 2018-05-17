@@ -3,12 +3,10 @@
   flex-direction: column;}
 header{
   border:1px solid gray;
-  padding-left: 20px;
   text-align: center;
 }
 footer{
   border: 1px solid gray;
-  padding: 20px;
   text-align: center;
 }
 .content{
@@ -22,14 +20,19 @@ footer{
   border: 1px solid gray;
   text-align: center;
 }
+#nav{padding: 5px;}
 nav, aside{
   flex-basis: 200px;
   flex-shrink: 0;
 }
+
 main{
   padding:10px;
-  width:1200px;
   text-align: center;
+}
+iframe{
+  width:1200px; 
+  height:1000px;
 }
 aside{
   text-align: center;
@@ -37,3 +40,50 @@ aside{
 #link{
   color: red;
 }
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 8px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  cursor: pointer;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 8px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
