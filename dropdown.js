@@ -82,6 +82,10 @@ function clFunction() {
     document.getElementById("clDropdown").classList.toggle("show");
 }
 
+function hsFunction() {
+    document.getElementById("hsDropdown").classList.toggle("show");
+}
+
 function nsFunction() {
     document.getElementById("nsDropdown").classList.toggle("show");
 }

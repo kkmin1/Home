@@ -633,6 +633,93 @@ fn main() {
     }
 </pre>
 
+<pre id="hs1">
+-- single line comment
+
+{- A multiline comment
+     실행  >> runhaskell hello.hs
+  -}
+
+s=8
+a="hello"
+b="haskell"
+
+main = do
+putStrLn "Hello World"
+print "Hello World"
+print (s*4) --괄호가 있어야 함
+putStrLn (a++" "++b)   -- 두 문자열의 합은 ++
+print a
+print(a++show(s)) --show() 함수는 숫자를 문자열로 바꿈
+putStrLn(a++show(s))
+
+</pre>
+
+<pre id="hs2">
+main = do
+  putStrLn "Please enter your name: "
+  name <- getLine
+  putStrLn ("Hello, " ++ name ++ ", how are you?")
+
+</pre>
+
+
+<pre id="hs3">
+-- 한줄 별출력 함수
+starRow 0 = return ()
+starRow n =
+  do
+    putStr "*"
+    starRow (n-1)
+
+
+-- 한줄 공백 출력 함수
+spaceRow 0 = return ()
+spaceRow n =
+  do
+    putStr " "
+    spaceRow (n-1)
+
+
+-- 왼쪽 붙은 삼각형
+star1 0 = return ()
+star1 n =
+  do
+    star1 (n-1)
+    starRow (n)
+    putStrLn ""
+
+
+-- 오른쪽 붙은 삼각형
+star2 (0, sp) = return ()
+star2 (st, sp) =
+  do 
+    star2 (st-1, sp+1)
+    putStrLn ""
+    spaceRow (sp)
+    starRow (st)
+
+
+-- 피라미드형
+star3 (0, sp) = return ()
+star3 (st, sp) =
+  do 
+    star3 (st-1, sp+1)
+    putStrLn ""
+    spaceRow (sp)
+    starRow (2*st-1)
+
+n = 7
+
+main = 
+  do
+    star1 n
+    star2 (n,0)
+    star3 (n,0)
+    putStrLn "" 
+
+</pre>
+
 <pre id="ns1">
 // node.js 설치
 // console에서 실행

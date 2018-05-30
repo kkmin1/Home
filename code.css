@@ -1,4 +1,4 @@
-#center{line-height : 36px;}
+#center{line-height : 36px; font : 150%;}
 .container{
   display:flex;
   flex-direction: column;
