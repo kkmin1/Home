@@ -4,447 +4,960 @@
 
 <head>
 
-<meta charset="utf8">
-<title> 별찍기 </title>
+    <meta charset="utf8">
+    <title> 별찍기 </title>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!--<link rel="stylesheet" type="text/css" href="code.css">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="code.css">-->
 
-<style> 
-body{
-    padding : 20px;
-}
-h1, h2, #ex {
-	text-align:center;
-	}
-h1{
-    color : #3399ff;
-}
-#ex{
-    display:flex;
-}	
-#div1, #div2{
-    border : 2px solid gray;
-}
-#idname{
-	border-style:solid;
-    width: 500px;
-    height: 500px;
-    background-color : white;
-    }
-footer{
-    border-top: 1px solid gray;
-    padding: 20px;
-    text-align: center;
-}
-input{
-    text-align:center;
-}
-#output{
-    width : 800px;
-}
-table{
-        border-collapse: collapse;
-        table-layout: fixed;
-        width : 300px;
-        border : 1px solid black;
-        margin:auto; /*테이블 가운데 중앙정렬*/
-        font-size:16px;
-      }
-tr, td, th{
-text-align: center;
-height:50px;
-}
-code{
-    text-align:left;
-    }
-pre{
-    border : 1px solid;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 500px;
-}
+    <style>
+        body {
+            padding: 20px;
+            line-height: 150%;
+        }
 
-#popup1 {
-    display:none;
-    position:absolute;
-    background:#99d6ff;
-    width:200px;
-    height:50px;
-    opacity: 0.7;
-}
+        h1,h2,#ex {
+            text-align: center;
+        }
 
-#center{padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 1000px;
-    
-}
-#canvas1, #canvas2{
-    border : 1px solid;
-}
+        h1 {
+            color: #3399ff;
+        }
 
-</style>
+        #ex {
+            display: flex;
+            margin-left:20px;
+        }
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
-    MathJax.Hub.Config({
-    extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: 
-    {inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
-    "HTML-CSS": { availableFonts: ["TeX"] }
-    });
-</script>
+        #div1, #div2 {
+            border: 2px solid gray;
+        }
+        #div1{width:20%;}
+
+        footer {
+            border-top: 1px solid gray;
+            padding: 20px;
+            text-align: center;
+        }
+
+        input {
+            text-align: center;
+        }
+
+        #output {
+            width: 800px;
+        }
+
+        table {
+            border: 1px solid;
+            border-collapse: collapse;
+            margin: auto;
+            width: 300px;
+            font-size: 16px;
+        }
+
+        td,th {
+            border: 1px solid;
+            width: 30px;
+            height: 50px;
+            text-align: center;
+        }
+
+        #table2 {
+            border: 0;
+            border-collapse: collapse;
+            margin: auto;
+        }
+
+        /* 별찍기 정렬을 위한 가상표 */
+
+        #td2,#th2 {
+            border: 0;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+        }
+
+        code {
+            text-align: left;
+        }
+
+        pre {
+            border: 1px solid;
+            padding-left: 20px;
+            padding-right: 20px;
+            margin: 0 auto;
+            width:60%;
+            background: #ffe6e6;
+            
+        }
+
+        #popup1 {
+            display: none;
+            position: absolute;
+            background: #99d6ff;
+            width: 200px;
+            height: 50px;
+            opacity: 0.7;
+        }
+
+        
+        #canvas1, #canvas2 {
+            margin-left: 100px;           
+            border: 1px solid;           
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax:
+                {
+                    inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                    displayMath: [['$$', '$$'], ["\\[", "\\]"]],
+                },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
 </head>
 
 
 <body>
 
-<h1> 다양한 별찍기 </h1>
+    <h1> 다양한 별찍기 </h1>
 
-<h2> 1. 별찍기의 기본원리 </h2>
-<p>
-별찍기는 컴퓨터 모니터의 좌표와 좌표계에서 함수의 부등식 영역을 이해하면 쉽게 그릴 수 있다. (이는 모든 프로그램 언어에 공히 적용된다.)
-컴퓨터 모니터의 좌표는 행렬의 인덱스와 같다.  
-</p>
+    <h2> 1. 별찍기의 기본원리 </h2>
+    <p>
+        별찍기는 컴퓨터 모니터의 좌표와 좌표계에서 함수의 부등식 영역을 이해하면 쉽게 그릴 수 있다. (이는 모든 프로그램 언어에 공히 적용된다.) 컴퓨터 모니터의 좌표는 행렬의 인덱스와 같다.
+    </p>
 
-<br>
-<table id = table1 border="1">
-  <caption> 모니터의 좌표계 </caption>
-  <tr >
-    <td > 0, 0 </td>
-    <td > 0, 1 </td>
-    <td > 0, 2 </td>
-    <td > 0, 3 </td>
-    <td > 0, 4 </td>
-  </tr>
-  <tr >
-    <td > 1, 0 </td>
-    <td > 1, 1 </td>
-    <td > 1, 2 </td>
-    <td > 1, 3 </td>
-    <td > 1, 4 </td>
-  </tr>
-  <tr >
-    <td > 2, 0 </td>
-    <td > 2, 1 </td>
-    <td > 2, 2 </td>
-    <td > 2, 3 </td>
-    <td > 2, 4 </td>
-  </tr>
-  <tr >
-    <td > 3, 0 </td>
-    <td > 3, 1 </td>
-    <td > 3, 2 </td>
-    <td > 3, 3 </td>
-    <td > 3, 4 </td>
- </tr>
-    <tr >
-    <td > 4, 0 </td>
-    <td > 4, 1 </td>
-    <td > 4, 2 </td>
-    <td > 4, 3 </td>
-    <td > 4, 4 </td>                                        
-</tr>
-</table>
-<br>
+    <br>
+    <table id=t able1 border="1">
+        <caption>
+            < 모니터의 좌표계>
+        </caption>
+        <tr>
+            <td> 0, 0 </td>
+            <td> 0, 1 </td>
+            <td> 0, 2 </td>
+            <td> 0, 3 </td>
+            <td> 0, 4 </td>
+        </tr>
+        <tr>
+            <td> 1, 0 </td>
+            <td> 1, 1 </td>
+            <td> 1, 2 </td>
+            <td> 1, 3 </td>
+            <td> 1, 4 </td>
+        </tr>
+        <tr>
+            <td> 2, 0 </td>
+            <td> 2, 1 </td>
+            <td> 2, 2 </td>
+            <td> 2, 3 </td>
+            <td> 2, 4 </td>
+        </tr>
+        <tr>
+            <td> 3, 0 </td>
+            <td> 3, 1 </td>
+            <td> 3, 2 </td>
+            <td> 3, 3 </td>
+            <td> 3, 4 </td>
+        </tr>
+        <tr>
+            <td> 4, 0 </td>
+            <td> 4, 1 </td>
+            <td> 4, 2 </td>
+            <td> 4, 3 </td>
+            <td> 4, 4 </td>
+        </tr>
+    </table>
+    <br>
 
-<p> 이는 우리가 수학시간에 배우는 데카르트 좌표계와 x축 방향은 같고 y축 방향은 반대임을 알 수 있다. 따라서 우리가 찍으려는 별모양의 x축 대칭인 함수형태를 구상하면 된다.</p>
+    <p> 이는 우리가 수학시간에 배우는 데카르트 좌표계와 x축 방향은 같고 y축 방향은 반대임을 알 수 있다. 따라서 우리가 찍으려는 별모양의 x축 대칭인 함수형태를 구상하면 된다.</p>
 
-<!--<img src="star.png" width=600 height=400 hspace= 100>-->
+    <!--<img src="star.png" width=600 height=400 hspace= 100>-->
 
-<div id = "center">
+    <div id = mycanvas>
         <canvas id="canvas1" height="400" width="400"></canvas> &nbsp;&nbsp;&nbsp;
         <canvas id="canvas2" height="400" width="400"></canvas>
-</div>
+    </div>
 
-<p> 그림에서 4/4 분면이 모니터의 좌표계이다. 그래서 <그림 1>에서 회색영역인 왼쪽붙은 직각삼각형을 출력하려면 x축에 대칭인 1/4 분면의 함수부등식 y > x를 고려하면 된다. 
-    흔히 코드에서 행을 i, 열을 j로 표시하므로 i가 y에 j가 x에 대응한다.  
-        일단 모든 i, j에 대해 0부터 n까지 돌린다. 그리고 i > j인 경우 별을 찍으면 된다.  프로그램 언어마다 조금씩 차이는 있지만 자바스크립트는 다음과 같다.</p>
+    <p> 그림에서 4/4 분면이 모니터의 좌표계이다. 그래서
+        <그림 1>에서 회색영역인 왼쪽붙은 직각삼각형을 출력하려면 x축에 대칭인 1/4 분면의 함수부등식 y > x (
+            <그림 1>에서 분홍색 영역)를 고려하면 된다. 코드에서 행을 y, 열을 x로 표시한다. 일단 모든 y, x에 대해 0부터 n 까지 루프를 돌린다. 그리고 y > x 인 경우 별을 찍으면 된다. 프로그램 언어마다
+                조금씩 차이는 있지만 자바스크립트의 경우는 다음과 같다.</p>
+    <pre>
+        <code> 
+for ( var y = 0 ; y < n ; y ++){
+    for (var x = 0 ; x < n ; x++){
+        if (y > x)
+            star += '*';
+        else
+            star += ' ';
+    }
+            star += '\n';
+}
+    </code>
+</pre>
+    <p>
+        <그림 2>에서 회색영역인 왼쪽붙은 역직각삼각형을 출력하려면 x축에 대칭인 1/4 분면의 함수부등식 y
+            < n - x 을 써주면 된다. </p>
+    <p>
+        그러나 수식이 복잡해질 경우 x축에 대칭인 부등식을 찾기가 번거로울 수 있다. 그냥 4/4 분면의 회색 영역 부등식을 써도 된다. 단 y는 감소하는 식으로 코드를 짠다.
+    0부터 (n-1)까지 이므로 for ( var y = n-1 ; y >= 0 ; y--)
+    </p>
+
 <pre>
-        <code>
-            for ( var i = 0 ; i < n ; i ++){
-                for (var j = 0 ; j < n ; j++){
-                    if (i > j)
+    <code>
+for ( var y = n-1 ; y >= 0 ; y--){
+    for (var x = 0 ; x < n ; x++){
+        yf (y > x - n)
+            star += '*';
+        else
+            star += ' ';
+    }
+            star += '\n';
+}
+            </code>
+        </pre>
+
+<p> 오른 쪽 붙은 직각삼각형을 출력하는 것도 같은 논리다. 단 자비스크립트의 경우 데스크탑이나 휴대폰 등 화면 비율이 틀리면 공백 찍는 부분이 정사각형이 아니므로 정확히 직각삼각형이 나오지 않는다. 이를 회피하기
+    위해 정사각형의 테두리 없는 표를 만들고 셀안에 별을 찍는다. </p>
+
+<pre>
+            <code>              
+function starPrint2() {
+    var n ;                   
+    n = parseInt(document.getElementById("input").value);
+    var table = "&lt;table id = table2>";    
+        for ( var y = 0 ; y < n ; y ++){
+            table += "&lt;tr>";
+            for (var x = 0 ; x <= n ; x++){
+                if (y >= n-x)
+                    table += "&lt;td id = td2>*&lt;/td>"; 
+                else
+                    table += "&lt;td id = td2>&lt;/td>"; 
+            }
+            table += "&lt;/tr>";
+        }
+        table += "&lt;/table>"; 
+    document.getElementById("output").innerHTML = "<오른쪽 붙은 역삼각형모양 별찍기>&lt;br>&lt;br>" + table;
+}
+            </code>
+        </pre>
+
+<p>    포물선 형태의 종모양의 별표도 찍을 수 있다. $y > (0.3x - 15)^2$ 이면 포물선 윗부분을 의미하므로 x축으로 대칭하면 종모양이 그려진다.
+    </p>
+                            <pre>
+                    <code>
+            for ( var y = 0 ; y < n ; y ++){
+                for (var x = 0 ; x < n ; x++){
+                    if (y >  (0.3*x - 15)*(0.3*x - 15))
                         star += '*';
                     else
                         star += ' ';
                 }
                         star += '\n';
             }
-    </code>
-</pre>
-<p> <그림 2>에서 회색영역인 왼쪽붙은 역직각삼각형을 출력하려면 x축에 대칭인 1/4//분면의 함수부등식 y < n - x를 고려하면 된다. 즉  
-    i < n - j인 조건식을 써주면 된다. </p>
-            <pre>
-            <code>
-                    for ( var i = 0 ; i < n ; i ++){
-                        for (var j = 0 ; j < n ; j++){
-                            if (i < n - j)
-                                star += '*';
-                            else
-                                star += ' ';
-                        }
-                                star += '\n';
-                    }
-            </code>
-        </pre>
+                    </code>
+                </pre>
+                            <br>
+            
 
-<p> 오른 쪽 붙은 직각삼각형을 출력하는 것도 같은 논리다. 단 화면 크기상 공백을 찍는 부분이 정사각형이 아니므로 공백의 크기를   
-    조정해 준다. </p>
-            <pre>
-            <code>
-                for ( var i = 0 ; i < n ; i ++){
-                
-                    for (var j = 0 ; j <= n ; j++){
-                        if (i >= n-j)
-                            star += '*';
-                        else
-                            star += '  '; // 두칸 띄기. 공백의 크기를 잘 조절해야 직삼각형 모양이 나옴. 화면크기에 따라 다르다. 휴대폰인 경우 한칸 띠기
-                    }
-                            star += '\n';
-                }
-            </code>
-        </pre>
+<p>
+    이 논리를 적용하면 피라미드형, 역피라미드형, 다이아몬드형, 모래시계형 모양을 찍을 수 있다. 심지어 피라미드 2개를 나라히 찍을 수도 있다. x, y를 구간으로 나눠 구간별로 
+    부등식을 적용하면 된다. 자세한 내용은 브라우저에서 웹페이지 소스 보기를 참조하기 바란다.</p>
 
-
-        <p>
-        이 논리를 적용하면 포물선 형태의 종모양의 별표를 찍을 수 있다. $y > (0.3x - 15)^2$ 이면 포물선 윗부분을 의미하므로 x축으로 대칭하면 종모양이 그려진다.
-</p>
-<pre>
-        <code>
-                for ( var i = 0 ; i < n ; i ++){
-                    for (var j = 0 ; j < n ; j++){
-                        if (i >  (0.3*j - 15)*(0.3*j - 15))
-                            star += '*';
-                        else
-                            star += ' ';
-                    }
-                            star += '\n';
-                }
-        </code>
-    </pre>
-    <br>
-
-<h2> 2. 별찍기 연습 </h2><br>
-<div id = "ex">
-    <div id = "div1">
-3 이상의 정수를 입력하세요<br><br>
-  정수 : <input type="text" id="input" value="10"> <br><br><br>
-  
-  <button id = "mouse1" onclick="starPrint()">왼쪽 붙은 역삼각형모양 별찍기  </button> <br><br>
-  <button id = "mouse2" onclick="starPrint2()">오른쪽 붙은 역삼각형모양 별찍기  </button> <br><br>
-  <button id = "mouse3" onclick="starPrint3()">왼쪽 붙은 삼각형모양 별찍기  </button> <br><br>
-  <button id = "mouse4" onclick="starPrint4()">오른쪽 붙은 삼각형모양 별찍기  </button> <br><br>
-  <button id = "mouse5" onclick="starPrint5()">종모양 별찍기 <div id = "popup1"> 30 이상의 정수를 입력해야 종모양이 나옴</div> </button> <br><br>
-  <br><br>
-</div>
-
-    <div id = "div2">
-<h2> 출력 </h2>
-<div id="output"></div><br><br>
-<!--<button onclick="output()">출력</button><br><br>-->
-    </div>
-</div>
-<script>
-        
-$("#mouse5").mouseover(function() {
-    $(this).children("#popup1").show();
-}).mouseout(function() {
-    $(this).children("#popup1").hide();
-});
-
-
-function starPrint() {
-    var n ;
-    var star = '';
-                
-    n = parseInt(document.getElementById("input").value);
-
-        for ( var i = 0 ; i < n ; i ++){
-            for (var j = 0 ; j < n ; j++){
-                if (i < n-j)
-                    star += '*';
-                else
-                    star += ' ';
-            }
-                    star += '<br>';
-        }
-        document.getElementById("output").innerHTML = "<왼쪽 붙은 역삼각형모양 별찍기><br><br>" + star;
-} 
-        
-    function starPrint2() {
-    var n ;
-                    
-    n = parseInt(document.getElementById("input").value);
-    var table = "<table>";    
-        for ( var i = 0 ; i < n ; i ++){
+    <pre><code><xmp>
+    // 피라미드 2개 나란히 찍기
+       function starPrint8() {
+        var n;
+        n = parseInt(document.getElementById("input").value);
+        var table = "<table id = table2>";
+        for (var y = n; y > 0; y--) {
             table += "<tr>";
-            for (var j = 0 ; j <= n ; j++){
-                if (i >= n-j)
-                    table += "<td >*</td>"; 
+            for (var x = -2 * n; x < 2 * n; x++) {
+                if (is2Pyramid(n, x, y))
+                    table += "<td id = td2>*</td>";
                 else
-                    table += "<td ></td>"; 
+                    table += "<td id = td2></td>";
             }
             table += "</tr>";
         }
-        table += "</table>"; 
-    document.getElementById("output").innerHTML = "<오른쪽 붙은 역삼각형모양 별찍기><br><br>" + table;
-} 
+        table += "</table>";
+        document.getElementById("output").innerHTML = "<피라미드 2개 나란히 찍기><br><br>" + table;
 
-function starPrint3() {
-    var n ;
-    var star = '';
-                
-    n = parseInt(document.getElementById("input").value);
-
-        for ( var i = 0 ; i < n ; i ++){
-            for (var j = 0 ; j < n ; j++){
-                if (i > j)
-                    star += '*';
+        // 피라미드 2개의 영역을 판정하는 함수
+        function is2Pyramid(n, x, y) {
+            if (x <= -n) {
+                if (y <= x + 2 * n)
+                    return true;
                 else
-                    star += ' ';
+                    return false;
             }
-                    star += '\n';
-        }
-        document.getElementById("output").innerHTML = "<왼쪽 붙은 삼각형모양 별찍기>\n\n" + star;
-} 
-
-function starPrint4() {
-    var n ;
-    var star = '';
-                
-    n = parseInt(document.getElementById("input").value);
-
-        for ( var i = 0 ; i < n ; i ++){
-            for (var j = 0 ; j <= n ; j++){
-                if (i < j)
-                    star += '*';
+            else if (x >= -n && x <= 0) {
+                if (y <= -x)
+                    return true;
                 else
-                    star += '  ';
+                    return false;
             }
-                    star += '\n';
-        }
-        document.getElementById("output").innerHTML = "<오른쪽 붙은 삼각형모양 별찍기>\n\n" + star;
-} 
-
-function starPrint5() {
-    var n ;
-    var star = '';
-    var k = 0.3; // 종의 가파름 정도
-    var m = 10; // 중심이 왼쪽에서 떨어지는 정도
-
-    n = parseInt(document.getElementById("input").value);
-
-        for ( var i = 0 ; i < n ; i ++){
-            for (var j = 0 ; j < 2*n ; j++){
-                if (i > (k*j - m)*(k*j-m))
-                    star += '*';
+            else if (x >= 0 && x <= n) {
+                if (y <= x)
+                    return true;
                 else
-                    star += '  ';
+                    return false;
             }
-                    star += '\n';
+            else {
+                if (y <= 2 * n - x)
+                    return true;
+                else
+                    return false;
+            }
         }
-        document.getElementById("output").innerHTML = "<종모양 별찍기>\n\n" + star;
-} 
+    }
+</xmp></code></pre>
+
+<p>
+피라미드를 아래 위로 여러 개를 연달아 찍으려면 어떻게 해야 할까? 피라미드의 갯수가 늘어날수록 위와 같이
+일일이 구간을 정하여 고려하기가 매우 복잡해진다. 이 경우는 수학시간에 배운 평행이동의 개념을 적용할 수 있다.
+y축으로 a만큼 평행이동하려면 y에 y-a를 대입하고 x축으로 b만큼 평행이동하려면 x에 x-b를 대입하면 된다.
+</p>
+
+<pre>
+    <code><xmp>
+        function starPrint10() {
+            var n;
+            var arr = [[],[]];
+            n = parseInt(document.getElementById("input").value);
+            
+            // 2n 개 행을 갖는 배열 생성
+            for(var y = 4*n-1; y >= 0; y-- ) {
+                arr.push([]);
+            }
+            
+            // 4n 개 열을 갖는 배열 생성
+            for (var y = 4*n-1; y >= 0; y--){
+                for (var x =  0; x < 8*n; x++){
+                    arr[y].push(" ");
+                }
+            }
+            
+            // 파리미드형 배열을 생성하는 함수
+            function pyramid(n, a, b){ // y는 a 만큼 이동, x는 b 만큼 이동
+                for(var y = n + a - 1; y >= 0 + a; y--){
+                    for(var x = b; x < 2*n + b; x++){
+                        if (x <= n + b && y < x - b + a)
+                            arr[y][x] = '*';
+                        else if (x > n + b && y < -(x - b) + 2*n + a)
+                            arr[y][x] = '*';
+                        else
+                            arr[y][x] = ' ';
+                    }
+                }
+            }
+            
+            pyramid(n, 0, 0);
+            pyramid(n, 0, 2*n);
+            pyramid(n, n, 0);
+            pyramid(n, n, 2*n);
+            pyramid(n, n, 4*n);
+
+            // 배열을 스트링으로 만들어서 찍기           
+            var table = "<table id = table2>";
+            
+            for (var y = 2*n-1; y >= 0; y--) {
+                table += "<tr>";
+                for (var x = 0; x < 8*n; x++) {
+                    table += "<td id = td2>" + arr[y][x] + "</td>";
+                }
+                table += "</tr>";
+            }
+            table += "</table>";
+            
+            document.getElementById("output").innerHTML = "<n개 피라미드형 별찍기><br><br>" + table;
+            }
+        </xmp></code>
+</pre>
+
+<br><br><br>
+
+    <h2> 2. 별찍기 연습 </h2>
+    <br>
+    <div id="ex">
+        <div id="div1">
+            3 이상의 정수를 입력하세요
+            <br>
+            <br> 줄수 :
+            <input type="text" id="input" value="10">
+            <br>
+            <br>
+            <br>
+
+            <button id="mouse1" onclick="starPrint()">왼쪽 붙은 삼각형 </button>
+            <br>
+            <br>
+            <button id="mouse2" onclick="starPrint2()">오른쪽 붙은 삼각형 </button>
+            <br>
+            <br>
+            <button id="mouse3" onclick="starPrint3()">왼쪽 붙은 역삼각형 </button>
+            <br>
+            <br>
+            <button id="mouse4" onclick="starPrint4()">오른쪽 붙은 역삼각형 </button>
+            <br>
+            <br>
+            <button id="mouse5" onclick="starPrint5()">피라미드형 </button>
+            <br>
+            <br>
+            <button id="mouse6" onclick="starPrint6()">모래시계형 </button>
+            <br>
+            <br>
+            <button id="mouse7" onclick="starPrint7()">다이아몬드형 </button>
+            <br>
+            <br>
+            <button id="mouse8" onclick="starPrint8()">피라미드 2개 나란히 찍기 </button>
+            <br>
+            <br>
+            <button id="mouse9" onclick="starPrint9()">종모양
+                <div id="popup1"> 30 이상의 정수를 입력해야 종모양이 나옴</div>
+            </button>
+            <br>
+            <br>
+            <button id="mouse10" onclick="starPrint10()">피라미드 n 개 찍기</button>
+            <br>
+            <br>
+            <br> 수직 간격(정수) :
+            <input type="text" id="input2" value="5">
+            <br>
+            <br> 수평 간격(정수) :
+            <input type="text" id="input3" value="7">
+            <br>
+            <button id="mouse11" onclick="starPrint11()">피라미드 n 개 찍기 </button>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+
+                    <div id="div2">
+                        <h2> 출력 </h2>
+                        <div id="output"></div>
+                        <br>
+                        <br>
+                        <!--<button onclick="output()">출력</button><br><br>-->
+                    </div>
+                </div>
+                <script>
+
+                    $("#mouse9").mouseover(function () {
+                        $(this).children("#popup1").show();
+                    }).mouseout(function () {
+                        $(this).children("#popup1").hide();
+                    });
+
+
+                    function starPrint() {
+
+                        var n;
+
+                        n = parseInt(document.getElementById("input").value);
+                        var table = "<table id = table2>";
+                        for (var y = 0; y < n; y++) {
+                            table += "<tr>";
+                            for (var x = 0; x < n; x++) {
+                                if (y >= x)
+                                    table += "<td id = td2>*</td>";
+                                else
+                                    table += "<td id = td2></td>";
+                            }
+                            table += "</tr>";
+                        }
+                        table += "</table>";
+                        document.getElementById("output").innerHTML = "<왼쪽 붙은 삼각형모양 별찍기><br><br>" + table;
+
+
+                    }
+
+
+                    function starPrint2() {
+                        var n;
+
+                        n = parseInt(document.getElementById("input").value);
+                        var table = "<table id = table2>";
+                        for (var y = 0; y < n; y++) {
+                            table += "<tr>";
+                            for (var x = 0; x <= n; x++) {
+                                if (y >= n - x)
+                                    table += "<td id = td2>*</td>";
+                                else
+                                    table += "<td id = td2></td>";
+                            }
+                            table += "</tr>";
+                        }
+                        table += "</table>";
+                        document.getElementById("output").innerHTML = "<오른쪽 붙은 삼각형모양 별찍기><br><br>" + table;
+                    }
+
+
+                    function starPrint3() {
+                        var n;
+
+                        n = parseInt(document.getElementById("input").value);
+                        var table = "<table id = table2>";
+                        for (var y = 0; y > -n; y--) {
+                            table += "<tr>";
+                            for (var x = 0; x < n; x++) {
+                                if (y > x - n)
+                                    table += "<td id = td2>*</td>";
+                                else
+                                    table += "<td id = td2></td>";
+                            }
+                            table += "</tr>";
+                        }
+                        table += "</table>";
+                        document.getElementById("output").innerHTML = "<왼쪽 붙은 역삼각형모양 별찍기><br><br>" + table;
+                    }
+
+
+                    function starPrint4() {
+                        var n;
+
+                        n = parseInt(document.getElementById("input").value);
+                        var table = "<table id = table2>";
+                        for (var y = 0; y < n; y++) {
+                            table += "<tr>";
+                            for (var x = 0; x <= n; x++) {
+                                if (y < x)
+                                    table += "<td id = td2>*</td>";
+                                else
+                                    table += "<td id = td2></td>";
+                            }
+                            table += "</tr>";
+                        }
+                        table += "</table>";
+                        document.getElementById("output").innerHTML = "<오른쪽 붙은 역삼각형모양 별찍기><br><br>" + table;
+                    }
+
+                    function starPrint5() {
+                        var n;
+
+                        n = parseInt(document.getElementById("input").value);
+                        var table = "<table id = table2>";
+                        for (var y = n; y > 0; y--) {
+                            table += "<tr>";
+                            for (var x = 0; x < 2 * n; x++) {
+                                if (isPyramid(n, x, y))
+                                    table += "<td id = td2>*</td>";
+                                else
+                                    table += "<td id = td2></td>";
+                            }
+                            table += "</tr>";
+                        }
+                        table += "</table>";
+                        document.getElementById("output").innerHTML = "<피라미드형 별찍기><br><br>" + table;
+
+                        // 피라미드의 영역을 판정하는 함수
+                        function isPyramid(n, x, y) {
+
+                            if (x <= n)
+                                if (y <= x)
+                                    return true;
+                                else
+                                    return false;
+                            else
+                                if (y <= 2 * n - x)
+                                    return true;
+                                else
+                                    return false;
+                        }
+                    }
+
+                    function starPrint6() {
+                        var n;
+
+                        n = parseInt(document.getElementById("input").value);
+                        var table = "<table id = table2>";
+                        for (var y = n; y > -n; y--) {
+                            table += "<tr>";
+                            for (var x = 0; x < 2 * n; x++) {
+                                if (isHourglass(n, x, y))
+                                    table += "<td id = td2>*</td>";
+                                else
+                                    table += "<td id = td2></td>";
+                            }
+                            table += "</tr>";
+                        }
+                        table += "</table>";
+                        document.getElementById("output").innerHTML = "<모래시계형 별찍기><br><br>" + table;
+
+                        // 모래시계의 영역을 판정하는 함수
+                        function isHourglass(n, x, y) {
+                            if (y > 0) {
+                                if (y > n - x && y > x - n)
+                                    return true;
+                                else
+                                    return false;
+                            }
+                            else {
+                                if (y <= n - x && y <= x - n)
+                                    return true;
+                                else
+                                    return false;
+                            }
+                        }
+                    }
+
+                    function starPrint7() {
+                        var n;
+
+                        n = parseInt(document.getElementById("input").value);
+                        var table = "<table id = table2>";
+                        for (var y = n; y >= -n; y--) {
+                            table += "<tr>";
+                            for (var x = -n; x <= n; x++) {
+                                if (isDiamond(n, x, y))
+                                    table += "<td id = td2>*</td>";
+                                else
+                                    table += "<td id = td2></td>";
+                            }
+                            table += "</tr>";
+                        }
+                        table += "</table>";
+                        document.getElementById("output").innerHTML = "<다이아몬드형 별찍기><br><br>" + table;
+
+                        // 다이아몬드의 영역을 판정하는 함수
+                        function isDiamond(n, x, y) {
+                            if (y >= 0) {
+                                if (y <= n - x && y <= x + n)
+                                    return true;
+                                else
+                                    return false;
+                            }
+                            else {
+                                if (y >= -n - x && y >= x - n)
+                                    return true;
+                                else
+                                    return false;
+                            }
+                        }
+                    }
+
+                    function starPrint8() {
+                        var n;
+
+                        n = parseInt(document.getElementById("input").value);
+                        var table = "<table id = table2>";
+                        for (var y = n; y > 0; y--) {
+                            table += "<tr>";
+                            for (var x = -2 * n; x < 2 * n; x++) {
+                                if (is2Pyramid(n, x, y))
+                                    table += "<td id = td2>*</td>";
+                                else
+                                    table += "<td id = td2></td>";
+                            }
+                            table += "</tr>";
+                        }
+                        table += "</table>";
+                        document.getElementById("output").innerHTML = "<피라미드 2개 나란히 찍기><br><br>" + table;
+
+                        // 피라미드 2개의 영역을 판정하는 함수
+                        function is2Pyramid(n, x, y) {
+                            if (x <= -n) {
+                                if (y <= x + 2 * n)
+                                    return true;
+                                else
+                                    return false;
+                            }
+                            else if (x >= -n && x <= 0) {
+                                if (y <= -x)
+                                    return true;
+                                else
+                                    return false;
+                            }
+                            else if (x >= 0 && x <= n) {
+                                if (y <= x)
+                                    return true;
+                                else
+                                    return false;
+                            }
+                            else {
+                                if (y <= 2 * n - x)
+                                    return true;
+                                else
+                                    return false;
+                            }
+                        }
+                    }
+
+                    function starPrint9() {
+                        var n;
+                        var star = '';
+                        var k = 0.3; // 종의 가파름 정도
+                        var m = 10; // 중심이 왼쪽에서 떨어지는 정도
+
+                        n = parseInt(document.getElementById("input").value);
+                        var table = "<table id = table2>";
+                        for (var y = 0; y < 2 * n; y++) {
+                            table += "<tr>";
+                            for (var x = 0; x < 2 * n; x++) {
+                                if (y > (k * x - m) * (k * x - m))
+                                    table += "<td id = td2>*</td>";
+                                else
+                                    table += "<td id = td2></td>";
+                            }
+                            table += "</tr>";
+                        }
+                        table += "</table>";
+                        document.getElementById("output").innerHTML = "<종모양 별찍기><br><br>" + table;
+                    }
+
+function starPrint11() {
+
+var n;
+
+n = parseInt(document.getElementById("input").value);
+a = parseInt(document.getElementById("input2").value);
+b = parseInt(document.getElementById("input3").value);
+
+var table = "<table id = table2>";
+
+for (var y = n - 1 ; y >= 0 ; y--) {
+    table += "<tr>";
+        starSpace();
+        starRow();
+        starRow();
+        
+    table += "</tr>";
+}
+
+for (var y = a; y >= 0; y--) {
+    table += "<tr>";
+        starSpace();
+    table += "</tr>";
+}
+
+for (var y = n - 1; y >= 0; y--) {
+    table += "<tr>";
+        starRow();
+        starSpace();
+        starRow();
+    table += "</tr>";
+}
+
+table += "</table>";
+
+function starRow(){
+    for (var x = 0 ; x <= 2*n ; x++) {
+        if (isPyramid(n, x, y))
+            table += "<td id = td2>*</td>";
+        else
+            table += "<td id = td2></td>";
+    }
+}
+
+// 피라미드의 영역을 판정하는 함수
+function isPyramid(n, x, y) {
+    if (x <= n)
+        if (y < x)
+            return true;
+        else
+            return false;
+    else
+        if (y < 2 * n - x)
+            return true;
+        else
+            return false;
+    }
+
+function starSpace(){
+    for (var x = 0 ; x < b ; x++) {
+        table += "<td id = td2></td>";
+    }
+}
+document.getElementById("output").innerHTML = "<n 개 피라미드 별찍기><br><br>" + table;
+}
+
+function starPrint10() {
+
+var n;
+var arr = [[],[]];
+n = parseInt(document.getElementById("input").value);
+
+// 2n 개 행을 갖는 배열 생성
+for(var y = 4*n-1; y >= 0; y-- ) {
+    arr.push([]);
+}
+
+// 4n 개 열을 갖는 배열 생성
+for (var y = 4*n-1; y >= 0; y--){
+    for (var x =  0; x < 8*n; x++){
+        arr[y].push(" ");
+    }
+}
+
+// 파리미드형 배열을 생성하는 함수
+function pyramid(n, a, b){
+    for(var y = n + a - 1; y >= 0 + a; y--){
+        for(var x = b; x < 2*n + b; x++){
+            if (x <= n + b && y < x - b + a)
+                arr[y][x] = '*';
+            else if (x > n + b && y < -(x - b) + 2*n + a)
+                arr[y][x] = '*';
+            else
+                arr[y][x] = ' ';
+        }
+    }
+}
+
+pyramid(n, 0, 0);
+pyramid(n, 0, 2*n);
+pyramid(n, n, 0);
+pyramid(n, n, 2*n);
+pyramid(n, n, 4*n);
+// 배열을 스트링으로 만들어서 찍기
+
+var table = "<table id = table2>";
+
+for (var y = 2*n-1; y >= 0; y--) {
+    table += "<tr>";
+    for (var x = 0; x < 8*n; x++) {
+        table += "<td id = td2>" + arr[y][x] + "</td>";
+    }
+    table += "</tr>";
+}
+
+table += "</table>";
+
+document.getElementById("output").innerHTML = "<n 개 피라미드 별찍기><br><br>" + table;
+}
+/*
+var star = "";
+for (var y = 2*n-1; y >= 0; y--){
+    for (var x = 0; x < 4*n; x++){     
+        star += arr[y][x];
+    }
+    star += "\n";    
+}
+console.log(star);
+}
+*/
 
 </script>
-        
-<footer>
-      Created by &copy; kkmin 2018
-</footer>
-        
-<script>
-        window.onload=function()
-        {
-        // canvas1 생성
-        var canvas1 = document.getElementById("canvas1");
-        var context1 = canvas1.getContext("2d");
-        
-        // x, y 축그림
-        context1.fillStyle="black"; 
-        context1.font = "16px Arial";
-        context1.fillText("0",40,220);
-        context1.fillText("y축",20,40);
-        context1.fillText("x축",360,210);
-        context1.fillText("y > x",170,100);
-        context1.fillText("<그림 1>",200,370);
-        canvas_arrow(context1, 40, 200, 350, 200)
-        canvas_arrow(context1, 50, 350, 50, 40)
-        context1.stroke();
-        
-        // 함수 부등호 영역 그림
-        context1.beginPath();
-        context1.moveTo(50,50);
-        context1.lineTo(50,200);
-        context1.lineTo(200,50);
-        context1.closePath();
-        context1.fillStyle="hotpink";
-        context1.fill();
-        context1.stroke();
-        context1.beginPath();
-        context1.moveTo(50,200);
-        context1.lineTo(50,350);
-        context1.lineTo(200,350);
-        context1.closePath();
-        context1.fillStyle="hotpink";
-        context1.fill();
-        context1.stroke();
-        
-        // canvas2 생성
-        var canvas2 = document.getElementById("canvas2");
-        var context2 = canvas2.getContext("2d");
-        
-          
-        // x, y 축그림
-        context2.fillStyle="black"; 
-        context2.font = "16px Arial";
-        context2.fillText("0",40,220);
-        context2.fillText("y축",20,40);
-        context2.fillText("x축",360,210);
-        context2.fillText("y < n - x",120,100);
-        context2.fillText("<그림 2>",200,370);
-        canvas_arrow(context2, 40, 200, 350, 200)
-        canvas_arrow(context2, 50, 350, 50, 40)
-        context2.stroke();
-        
-        // 함수 부등호 영역 그림
-        context2.beginPath();
-        context2.moveTo(50,50);
-        context2.lineTo(50,200);
-        context2.lineTo(200,200);
-        context2.closePath();
-        context2.fillStyle="hotpink";
-        context2.fill();
-        context2.stroke();
-        context2.beginPath();
-        context2.moveTo(50,200);
-        context2.lineTo(200,200);
-        context2.lineTo(50,350);
-        context2.closePath();
-        context2.fillStyle="hotpink";
-        context2.fill();
-        context2.stroke();
 
-        // 화살표선을 그리는 함수
-        function canvas_arrow(context, fromx, fromy, tox, toy){
-            var headlen = 10;   // length of head in pixels
-            var angle = Math.atan2(toy-fromy,tox-fromx);
-            context.moveTo(fromx, fromy);
-            context.lineTo(tox, toy);
-            context.lineTo(tox-headlen*Math.cos(angle-Math.PI/6),toy-headlen*Math.sin(angle-Math.PI/6));
-            context.moveTo(tox, toy);
-            context.lineTo(tox-headlen*Math.cos(angle+Math.PI/6),toy-headlen*Math.sin(angle+Math.PI/6));
-        }
-        };
-        </script>     
+
+                <!--댓글 코드 -->
+                <div id="disqus_thread"></div>
+                <script>
+
+                    /**
+                    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                    /*
+                    var disqus_config = function () {
+                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    };
+                    */
+                    (function () { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://min-1.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the
+                    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                </noscript>
+
+
+                <footer>
+                    Created by &copy; kkmin 2018
+                </footer>
+
+                <script>
+                    window.onload = function () {
+                        // canvas1 생성
+                        var canvas1 = document.getElementById("canvas1");
+                        var context1 = canvas1.getContext("2d");
+
+                        // x, y 축그림
+                        context1.fillStyle = "black";
+                        context1.font = "16px Arial";
+                        context1.fillText("0", 40, 220);
+                        context1.fillText("y축", 20, 40);
+                        context1.fillText("x축", 360, 210);
+                        context1.fillText("y > x", 170, 100);
+                        context1.fillText("<그림 1>", 200, 370);
+                        canvas_arrow(context1, 40, 200, 350, 200)
+                        canvas_arrow(context1, 50, 350, 50, 40)
+                        context1.stroke();
+
+                        // 함수 부등호 영역 그림
+                        context1.beginPath();
+                        context1.moveTo(50, 50);
+                        context1.lineTo(50, 200);
+                        context1.lineTo(200, 50);
+                        context1.closePath();
+                        context1.fillStyle = "hotpink";
+                        context1.fill();
+                        context1.stroke();
+                        context1.beginPath();
+                        context1.moveTo(50, 200);
+                        context1.lineTo(50, 350);
+                        context1.lineTo(200, 350);
+                        context1.closePath();
+                        context1.fillStyle = "gray";
+                        context1.fill();
+                        context1.stroke();
+
+                        // canvas2 생성
+                        var canvas2 = document.getElementById("canvas2");
+                        var context2 = canvas2.getContext("2d");
+
+
+                        // x, y 축그림
+                        context2.fillStyle = "black";
+                        context2.font = "16px Arial";
+                        context2.fillText("0", 40, 220);
+                        context2.fillText("y축", 20, 40);
+                        context2.fillText("x축", 360, 210);
+                        context2.fillText("y < n - x", 120, 100);
+                        context2.fillText("<그림 2>", 200, 370);
+                        canvas_arrow(context2, 40, 200, 350, 200)
+                        canvas_arrow(context2, 50, 350, 50, 40)
+                        context2.stroke();
+
+                        // 함수 부등호 영역 그림
+                        context2.beginPath();
+                        context2.moveTo(50, 50);
+                        context2.lineTo(50, 200);
+                        context2.lineTo(200, 200);
+                        context2.closePath();
+                        context2.fillStyle = "hotpink";
+                        context2.fill();
+                        context2.stroke();
+                        context2.beginPath();
+                        context2.moveTo(50, 200);
+                        context2.lineTo(200, 200);
+                        context2.lineTo(50, 350);
+                        context2.closePath();
+                        context2.fillStyle = "gray";
+                        context2.fill();
+                        context2.stroke();
+
+                        // 화살표선을 그리는 함수
+                        function canvas_arrow(context, fromx, fromy, tox, toy) {
+                            var headlen = 10;   // length of head in pixels
+                            var angle = Math.atan2(toy - fromy, tox - fromx);
+                            context.moveTo(fromx, fromy);
+                            context.lineTo(tox, toy);
+                            context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+                            context.moveTo(tox, toy);
+                            context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+                        }
+                    };
+                </script>
 </body>
 
 </html>
-
