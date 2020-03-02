@@ -6,6 +6,10 @@ $(function(){
     $("p#c2").click(function(){
         $("#center").load("code.txt pre#c2");
     });
+	
+	$("p#c3").click(function(){
+        $("#center").load("code.txt pre#c3");
+    });
     
     $("p#cp1").click(function(){
         $("#center").load("code.txt pre#cp1");
@@ -103,19 +107,6 @@ $(function(){
        $("#center").load("code.txt pre#cl1");
     });
     
-    $("p#hs1").click(function(){
-        $("#center").load("code.txt pre#hs1");
-     });
-
-     $("p#hs2").click(function(){
-        $("#center").load("code.txt pre#hs2");
-     });
-
-     $("p#hs3").click(function(){
-        $("#center").load("code.txt pre#hs3");
-     });
-
-
     $("p#ns1").click(function(){
        $("#center").load("code.txt pre#ns1");
     });
