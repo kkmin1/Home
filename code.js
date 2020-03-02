@@ -19,6 +19,10 @@ $(function(){
         $("#center").load("code.txt pre#cp2");
     });
     
+$("p#cp3").click(function(){
+        $("#center").load("code.txt pre#cp3");
+    });
+	
     $("p#cs1").click(function(){
         $("#center").load("code.txt pre#cs1");
     });
