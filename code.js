@@ -7,8 +7,8 @@ $(function(){
         $("#center").load("code.txt pre#c2");
     });
 	
-	$("p#c3").click(function(){
-        $("#center").load("code.txt pre#c3");
+    $("p#c3").click(function(){
+    $("#center").load("code.txt pre#c3");
     });
     
     $("p#cp1").click(function(){
@@ -19,8 +19,8 @@ $(function(){
         $("#center").load("code.txt pre#cp2");
     });
     
-$("p#cp3").click(function(){
-        $("#center").load("code.txt pre#cp3");
+    $("p#cp3").click(function(){
+    $("#center").load("code.txt pre#cp3");
     });
 	
     $("p#cs1").click(function(){
