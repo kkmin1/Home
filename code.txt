@@ -57,6 +57,29 @@ int main()
 }
 </pre>
 
+<pre id="c3">
+#include &lt;stdio.h>
+
+// 왼쪽붙은 역직각 삼각형
+int main()
+{
+int n = 10;
+
+	for (int i=0; i<=n; i++){
+        for (int j=0; j<=n; j++){
+            if (i<=n-j)
+                printf("*");
+            else
+                printf(" ");
+
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+</pre>
+
 <pre id="cp1">
 // 주석
 // 확장자 *.cpp
@@ -240,14 +263,10 @@ public class input {
 
 <pre id="py1">
 # 한 줄 주석
-'''
+'''(또는 """)
 여러 줄 주석
-주석기호는 문장의 맨 첫줄, 맨 마지막 줄에 있어야 한다.
-'''
-"""
-여러 줄 주석
-주석기호는 문장의 맨 첫줄, 맨 마지막 줄에 있어야 한다.
-"""
+'''(""")
+
 print("Hello, World!") # 자동 줄바꿈됨
 
 print('안녕하세요!') # 문자열 출력시 '', "" 둘 다 사용 가능
@@ -275,13 +294,11 @@ But I do not like Ruby.')
 
 print("""I like Python.
 But I don't like C.""")
-'''
-출력 : I like Python.
+# 출력 : I like Python.
 But I don't like C.
-'''
 
 # \n 개행, \t 탭키, \\ \, \‘, \“ 등 이스케이프 문자(Escape character)는 \를 사용하여 출력한다.
-print("my daughter\'s birthday")
+print(my daughter\'s birthday)
     # 출력 : my daughter's birthday
 
 print('긴 문자열은 \\ 기호를 사용하여 여러 줄에 작성할 수 있다.')
@@ -302,7 +319,6 @@ print('당신의 키는 %dcm이고, 몸무게는 %.2fkg이며, 이름은 %s입�
 
 print('당신의 키는 {0}cm이고, 몸무게는 {1:.2f}kg이며, 이름은 {2}입니다.'.format(ht,wt,name)) # .2f는 wt는 소숫점 2자리까지만 출력
     # 출력 : 당신의 키는 178cm이고, 몸무게는 77.70kg이며, 이름은 홍길동입니다.
-
 
 </pre>
 
@@ -638,93 +654,6 @@ fn main() {
     println!("Hello, Rust!");
      println!("안녕하세요!");
     }
-</pre>
-
-<pre id="hs1">
--- single line comment
-
-{- A multiline comment
-     실행  >> runhaskell hello.hs
-  -}
-
-s=8
-a="hello"
-b="haskell"
-
-main = do
-putStrLn "Hello World"
-print "Hello World"
-print (s*4) --괄호가 있어야 함
-putStrLn (a++" "++b)   -- 두 문자열의 합은 ++
-print a
-print(a++show(s)) --show() 함수는 숫자를 문자열로 바꿈
-putStrLn(a++show(s))
-
-</pre>
-
-<pre id="hs2">
-main = do
-  putStrLn "Please enter your name: "
-  name <- getLine
-  putStrLn ("Hello, " ++ name ++ ", how are you?")
-
-</pre>
-
-
-<pre id="hs3">
--- 한줄 별출력 함수
-starRow 0 = return ()
-starRow n =
-  do
-    putStr "*"
-    starRow (n-1)
-
-
--- 한줄 공백 출력 함수
-spaceRow 0 = return ()
-spaceRow n =
-  do
-    putStr " "
-    spaceRow (n-1)
-
-
--- 왼쪽 붙은 삼각형
-star1 0 = return ()
-star1 n =
-  do
-    star1 (n-1)
-    starRow (n)
-    putStrLn ""
-
-
--- 오른쪽 붙은 삼각형
-star2 (0, sp) = return ()
-star2 (st, sp) =
-  do 
-    star2 (st-1, sp+1)
-    putStrLn ""
-    spaceRow (sp)
-    starRow (st)
-
-
--- 피라미드형
-star3 (0, sp) = return ()
-star3 (st, sp) =
-  do 
-    star3 (st-1, sp+1)
-    putStrLn ""
-    spaceRow (sp)
-    starRow (2*st-1)
-
-n = 7
-
-main = 
-  do
-    star1 n
-    star2 (n,0)
-    star3 (n,0)
-    putStrLn "" 
-
 </pre>
 
 <pre id="ns1">
