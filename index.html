@@ -10,9 +10,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	
 	<style>
-		body {font-size: 150%;}
-		#nav {width:300px; text-align:left}
-		#dropbtn {font-size : 36px; width: 100%; height: 100px;}
+		body {font-size: 100%;}
+	/*	#nav {width:300px; text-align:left}
+		#dropbtn {font-size : 28px; width: 100%; height: 100px;}
+		#gDropdown {font-size : 28px; width: 100%; height: 100px;} */
 	</style>
 
 </head>
@@ -24,16 +25,7 @@
 	</header>
 
 		<section class = "content">
-			<nav>
-			<h2 id = "link"> homepage </h2>
-			<div id = nav>
-			<ul>
-			<li><a href="http://blog.naver.com/kkmin1">네이버 블로그<br></a> <br><br></li>
-			<li><a href="http://minkwki.blogspot.kr/">blogger<br></a> <br><br></li>
-			<li><a href="https://simpleiscomplexblog.wordpress.com/">wordpress 블로그<br></a> <br><br></li>
-			</ul>
-			</div>
-			</nav>
+			
 
 			<main>
 
@@ -46,40 +38,63 @@
 					<div class="dropdown">
 						<button onclick="gFunction()" class="dropbtn" style="font-size : 28px; height: 80px;"> 게임이론 </button>
 						  	<div id="gDropdown" class="dropdown-content">
-								<p id="g1"><a href="nash.html" target="iframe_a">내쉬균형</a></p>
-								<p id="g2"><a href="normal vs tree.html" target="iframe_a">동시게임 대 순차게임</a></p>
-								<p id="g3"><a href="subgame.html" target="iframe_a">부분게임완전균형</a></p>
-								<p id="g4"><a href="forward-ind.html" target="iframe_a">순방향 추론법</a></p>
-								<p id="g5"><a href="bayesian.html" target="iframe_a">베이지안게임</a></p>
-								<p id="g6"><a href="pe.html" target="iframe_a">완전베이지안게임</a></p>
-								<p id="g6"><a href="signaling.html" target="iframe_a">신호게임</a></p>
+								<p><a href="nash.html" target="iframe_a">내쉬균형 I</a></p>
+								<p><a href="nash2.html" target="iframe_a">내쉬균형 II</a></p>
+								<p><a href="mixed-str.html" target="iframe_a">혼합전략</a></p>
+								<p ><a href="normal vs tree.html" target="iframe_a">동시게임 대 순차게임</a></p>
+								<p><a href="subgame.html" target="iframe_a">부분게임완전균형</a></p>
+								<p><a href="repeated-game.html" target="iframe_a">반복게임</a></p>
+								<p><a href="forward-ind.html" target="iframe_a">순방향 추론법</a></p>
+								<p><a href="bayesian.html" target="iframe_a">베이지안게임</a></p>
+								<p><a href="pe.html" target="iframe_a">완전베이지안게임</a></p>
+								<p><a href="signaling.html" target="iframe_a">신호게임</a></p>
+								<p><a href="intuitive-eq.html" target="iframe_a">직관균형</a></p>
+								<p><a href="cheap-talk.html" target="iframe_a">선언게임</a></p>
+								<p><a href="evolu-game.html" target="iframe_a">진화게임</a></p>
 						  	</div>
 					</div>
 				
 					<div class="dropdown">
+						<button onclick="mFunction()" class="dropbtn" style="font-size : 28px; height: 80px;"> 경제수학II </button>
+							<div id="mDropdown" class="dropdown-content">
+								<p><a href="system-of-diff equation.html" target="iframe_a">미분방정식과 응용</a></p>
+								<p><a href="phase diagram.html" target="iframe_a">위상도 분석</a></p>
+								<p><a href="diffnc.html" target="iframe_a">차분방정식과 응용</a></p>
+								<p><a href="dynamic-opt-theory.html" target="iframe_a">동적최적화이론과 응용</a></p>
+								
+						</div>
+					</div>
+
+					<div class="dropdown">
 						<button onclick="hmFunction()" class="dropbtn" style="font-size : 28px; height: 80px;"> 인문수학 </button>
 							<div id="hmDropdown" class="dropdown-content">
-								<p id="hm1"><a href="lechat.html" target="iframe_a">르 샤틀리에 법칙</a></p>
-								<p id="hm2"><a href="A-J_effect.html" target="iframe_a">애버치-존슨 효과</a></p>
-								<p id="hm3"><a href="sbtheory.html" target="iframe_a">차선의 이론</a></p>
-								<p id="hm4"><a href="stpet.html" target="iframe_a">성 페테르스부르크 역설</a></p>
+								<p><a href="lechat.html" target="iframe_a">르 샤틀리에 법칙</a></p>
+								<p><a href="A-J_effect.html" target="iframe_a">애버치-존슨 효과</a></p>
+								<p><a href="sbtheory.html" target="iframe_a">차선의 이론</a></p>
+								<p><a href="stpet.html" target="iframe_a">성 페테르스부르크 역설</a></p>
+								<p><a href="predator-prey model.html" target="iframe_a">predator-prey 모형</a></p>
+								<p><a href="Goodwin model.html" target="iframe_a">Goodwin의 계급투쟁 모형</a></p>
+								<p><a href="overshooting model.html" target="iframe_a">Donbush 오버슈팅모형</a></p>
+								<p><a href="love equation.html" target="iframe_a">사랑방정식</a></p>
+								<p><a href="kelly.html" target="iframe_a">켈리기준</a></p>
+								<p><a href="cobweb model.html" target="iframe_a">경제적 cobweb 모형</a></p>
 						</div>
 					</div>
 				
 					<div class="dropdown">
 						<button onclick="epFunction()" class="dropbtn" style="font-size : 28px; height: 80px;"> 경제물리 </button>
 							<div id="epDropdown" class="dropdown-content">
-								<p id="ep1"><a href="cobweb.html" target="iframe_a">cobweb 모형</a></p>
-								<p id="ep2"><a href="ne.html" target="iframe_a">내쉬균형 도출</a></p>
-								<p id="ep3"><a href="wealth.html" target="iframe_a">분의 분포</a></p>
+								<p><a href="cobweb.html" target="iframe_a">cobweb 모형</a></p>
+								<p><a href="ne.html" target="iframe_a">내쉬균형 도출</a></p>
+								<p><a href="wealth.html" target="iframe_a">분의 분포</a></p>
 							</div>
 					</div>
 
 					<div class="dropdown">
 						<button onclick="pFunction()" class="dropbtn" style="font-size : 28px; height: 80px;"> 프로그래밍 </button>
 							<div id="pDropdown" class="dropdown-content">
-								<p id="p1"><a href="code.html" target="iframe_a">프로그래밍언어 요약집</a></p>
-								<p id="p2"><a href="star.html" target="iframe_a">별찍기 알고리듬</a></p>
+								<p><a href="code.html" target="iframe_a">프로그래밍언어 요약집</a></p>
+								<p><a href="star.html" target="iframe_a">별찍기 알고리듬</a></p>
 									
 							</div>	
 					</div>			
@@ -98,6 +113,10 @@
 			document.getElementById("gDropdown").classList.toggle("show");
 		}
 		
+		function mFunction() {
+			document.getElementById("mDropdown").classList.toggle("show");
+		}
+
 		function hmFunction() {
 			document.getElementById("hmDropdown").classList.toggle("show");
 		}
@@ -152,7 +171,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 	<footer>
 		<p> Copyright : all right reserved </p>
-		<p> Created by &copy; kkmin 2018 </p>
+		<p> Created by &copy; kkmin 2020 </p>
 	</footer>
 </div>
 </body>

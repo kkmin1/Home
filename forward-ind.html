@@ -1,11 +1,26 @@
 <html lang="ko"> 
 <head>
     <meta charset="utf-8">
-    <title>선택안의 추가 - 순방향추론법</title>
+    <title>순방향추론법</title>
     <style>
     body { line-height:2.3em }
       p{  text-indent: 2em;  } 
+      h1{ color: blue; }
+      h2{ color: red; }
+      h3{ color: green; }
+      h4{ color: rgb(85, 7, 81); }
+      .inline{ display: inline; }
+    #border2{border:1px solid red;} 
+      #sgv-text{
+        fill:black;
+        font-size:50px;
+        font-family:Times;}
+      #sgv-text2{
+        fill:black;
+        font-size:30px;
+        font-family:Times; }
      </style>  
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
 MathJax.Hub.Config({
 extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
@@ -21,94 +36,201 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 	
 <h2>1. 선택안이 있는 죄인들의 딜렘마게임</h2> 
 
-죄인들의 딜렘마 게임의 확장판을 고려하자. 범죄자 갑은 죄를 짓고 해외로 도
-피를 고려 중이다. 검찰은 그가 자수하기를 요구하지만 귀국하면 국내에 이미 검
-거되 있는 공범 을과 함께 심문을 받는다. 즉 죄를 자복하는 것과 부인하는 것
-간에 죄인들의 딜렘마 상황에 놓이는 것이다. 갑은 향수병이 강해 해외체류시 -6
-의 효용을 얻는다고 하자. 갑의 최선의 선택은 무엇인가?.<br><br>
+<p>죄인들의 딜렘마 게임의 확장판을 고려하자. 범죄자 갑은 죄를 짓고 해외로 도피를 고려 중이다. 검찰은 그가 자수하기를 요구하지만 국내에 있으면 이미 검거되 있는 공범 을과 함께 심문을 받는다. 즉 죄를 자복(C)하는 것과 부인(D)하는 것 간에 죄인들의 딜렘마 상황에 놓이는 것이다. </p>
+<p> 갑은 향수병이 강해 해외체류시 -6의 효용을 얻는다고 하자. 갑의 최선의 선택은 무엇인가?</p>
 
-<img src="opt-prisdil.jpg" width=400 height=300 hspace= 300><br> 
 
-<그림1>에서 보듯이 죄인들의 딜렘마 게임이 하나의 부분게임임을 알 수 있
-다.<sup><a href="#fn1" id="ref1">1</a></sup>
+<svg id = "border" width="1600" height="900">
+  <circle cx="600" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  
+  <polyline points="600,240 400,400" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="600,240 800,400" fill="none" stroke="black" 
+    stroke-width="2" />
+  
+  <text id = "sgv-text" x="580" y="220" > 갑 </text>
+  <text id = "sgv-text2" x="420" y="330" > 해외 </text>
+  <text id = "sgv-text2" x="720" y="330" > 자수 </text>
+  
+  <polyline points="700,420 1300,420" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,520 1300,520" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,620 1300,620" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,720 1300,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,420 700,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="900,420 900,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1100,420 1100,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1300,420 1300,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,420 900,520" fill="none" stroke="black" 
+    stroke-width="2" />
 
-부분게임 완전균형을 구하기 위해 역방향추론법을 적용한다. 갑은 자수시
-죄인들의 딜렘마 상황이 전개될 것으로 예상할 것이다. 이때 갑, 을이 모두 죄를
-부인하는 것이 부분게임에서 내쉬균형이므로 (-5,-5)를 얻을 것으로 기대된다.
-한편 갑은 해외체류시 -6의 효용을 얻으므로 부분게임값의 -5와 비교하여 갑은
-자수하는 것이 더 낫다. 따라서 갑은 자수하고 자백, 을도 자백하는 전략을 선택
-하는 것이 부분게임 완전균형이다. 만약 갑이 해외체류하는 것을 그다지 꺼리지
-않아 갑의 효용이 -5보다 크다면 그는 자수하지 않고 해외로 밀항할 것이다.<br><br>
+  <text id = "sgv-text" x="720" y="500" > 갑 </text>
+  <text id = "sgv-text" x="820" y="470" > 을 </text>
+  <text id = "sgv-text" x="975" y="485" > C </text>
+  <text id = "sgv-text" x="1175" y="485" > D </text>
+  <text id = "sgv-text" x="780" y="590" > C </text>
+  <text id = "sgv-text" x="780" y="690" > D </text>
+  <text id = "sgv-text" x="340" y="450" > (-6, 0) </text>
+  <text id = "sgv-text" x="945" y="590" > -1, -1 </text>
+  <text id = "sgv-text" x="1145" y="590" > -9, 0 </text>
+  <text id = "sgv-text" x="965" y="690" > 0, -9 </text>
+  <text id = "sgv-text" x="1145" y="690" > -5, -5 </text>
 
-<h2>2. 성대결게임</h2>
-다음은 성대결 게임(battle of sex)이라 하는 유명한 게임이다. 휴일을 맞이하여
-남편과 아내는 외출하여 야구장 또는 뮤지컬을 관람하려 한다. 그런데 남편은 야구장을 좀 더 선호하고 아내는 뮤지컬을 좀 더 선호한다. 게임의 효용은 이하 <표 1>과 
- 같다.<br><br>
+  <text x="500" y="850" style="font-size:30px"> (그림 1) 대안이 있는 죄인들의 딜렘마 게임 </text>
 
-<img src="box.jpg" width=400 height=300 hspace= 300><br> <br>
+</svg>
 
-이 정태적 게임에서 내쉬균형은 두 개 이다. 남편과 아내가 함께 야구장을 가거나, 둘이 함께 뮤지컬을 관람하는 것이다. 두개의 균형 중 어느 것이 선택될지
-는 알 수 없다. 이와 같은 상황에서 남편이 자기가 좋아하는 야구장이 선택되도
-록 하는 방법이 있을까?<br><br>
+<p> (그림 1)에서 보듯이 죄인들의 딜렘마 게임이 하나의 부분게임임을 알 수 있다.<sup><a href="#fn1" id="ref1">1</a></sup></p>
+<p> 부분게임 완전균형을 구하기 위해 역방향 추론법(backward induction)을 이용한다.</p> 
+
+<p> 갑은 자수시 죄인들의 딜렘마 상황이 전개될 것으로 예상할 것이다. 이때 갑, 을이 모두 죄를 부인하는 것이 부분게임에서 내쉬균형이므로 (-5,-5)를 얻을 것으로 기대된다. 한편 갑은 해외 체류시 -6의 효용을 얻으므로 부분게임값의 -5와 비교하여 갑은 자수하는 것이 더 낫다. 따라서 갑은 자수하고 자백, 을도 자백하는 전략을 선택하는 것이 부분게임 완전균형이다. 만약 갑이 해외로 도피하는 것을 그다지 꺼리지 않아 갑의 효용이 -5보다 크다면 그는 자수하지 않고 해외로 밀항할 것이다.</p>
+<br>
+
+<h2>2. 부부갈등 게임</h2>
+<p>다음은 부부갈등 게임(battle of sex)이라 하는 유명한 게임이다. 휴일을 맞이하여 남편과 아내는 외출하여 야구장 또는 뮤지컬을 관람하려 한다. 그런데 남편은 야구장을 좀 더 선호하고 아내는 뮤지컬을 좀 더 선호한다.</p> 
+<p>게임의 효용은 <표 1>과 같다.</p>
+
+<svg id = "border" width="900" height="400" viewBox="0 0 900 400">
+    
+  <polyline points="200,20 800,20" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,120 800,120" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,220 800,220" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,320 800,320" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,20 200,320" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="400,20 400,320" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="600,20 600,320" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="800,20 800,320" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,20 400,120" fill="none" stroke="black" 
+    stroke-width="2" />
+
+  <text id = "sgv-text2" x="220" y="100" > 남편 </text>
+  <text id = "sgv-text2" x="320" y="70" > 아내 </text>
+  <text id = "sgv-text2" x="455" y="85" > 야구장 </text>
+  <text id = "sgv-text2" x="655" y="85" > 뮤지컬 </text>
+  <text id = "sgv-text2" x="260" y="190" > 야구장 </text>
+  <text id = "sgv-text2" x="260" y="290" > 뮤지컬 </text>
+  <text id = "sgv-text" x="465" y="190" > 5, 3 </text>
+  <text id = "sgv-text" x="665" y="190" > 0, 0 </text>
+  <text id = "sgv-text" x="465" y="290" > 0, 0 </text>
+  <text id = "sgv-text" x="665" y="290" > 3, 5 </text>
+
+  <text x="300" y="370" style="font-size:30px"> <표 1> 부부갈등 게임 </text>
+
+</svg>
+
+<p>이 정태적 게임에서 내쉬균형은 두 개 이다. 남편과 아내가 함께 야구장을 가거나, 둘이 함께 뮤지컬을 관람하는 것이다. 두개의 균형 중 어느 것이 선택될지는 알 수 없다.</p> 
+<p>이와 같은 상황에서 남편이 자기가 좋아하는 야구장이 선택되도록 하는 방법이 있을까?</p>
+<br>	
+
+<h2>3. 선택안이 있는 부부갈등 게임</h2>
+<p>그런데 남편은 외출 자체를 좋아하지 않을 수도 있으므로 이제 조건을 추가하여 남편이 집에 머물러 있는 옵션을 추가한다. </p>
+<p> 아내는 휴일에 집에 있는 것을 별로 좋아하지 않으므로 집에 있는 경우 남편과 아내의 효용은 (4, 1)이라 하자.</p>
 	
-	
-<h2>3. 선택안이 있는 성대결 게임</h2>
-그런데 남편은 외출을 좋아하지 않을 수도 있으므로 이제 조건을 추가하여 남편
-이 집에 머물러 있는 옵션을 추가한다. 아내는 휴일에 집에 있는 것을 별로 좋아
-하지 않으므로 집에 있는 경우 남편과 아내의 효용은 (4, 1)이라 하자.<br><br>
-	
-<img src="opt-box.jpg" width=400 height=300 hspace= 300><br> <br>
-	
-역방향 추론법을 적용하여 균형을 구해보자. 남편은 외출 선택시 부분게임에
-서 내쉬균형인 (야구장, 야구장) 또는 (뮤지컬, 뮤지컬)로 결론날 것으로 예상한
-다. 이제 전체 게임을 고려하자. 전자의 부분게임 균형이 실현된다면 남편은 집
-4, 외출 5의 효용을 비교해서 외출을 선택하고 야구장을 선택한다. 후자의 부분
-게임 균형이 실현된다면 남편은 집 4, 뮤지컬 3을 비교해서 집을 있는 선택을 하
-게 된다. 이 경우 부분게임 완전균형은 다음 두 가지다.<br> <br> 
-i) 남편 외출 선택, 남편, 부인 모두 야구장 선택, 효용값 (5, 3)<br> 
-ii) 남편 집 선택, 부인 무대응, 효용값 (4, 1)<br> <br> 
-다른 방법으로 첫 단계부터 추론해 보자.<br> <br> 
-남편은 두 가지 선택지가 있다. 방콕 혹은 외출.<br> 
-i) 남편이 방콕을 선택하는 경우 : 남편의 효용은 4.<br> 
-ii) 남편이 외출을 선택하는 경우 :<br> 
-부분게임을 잘 보면 남편이 뮤지컬을 선택할 일은 전혀 없다. 남편이 뮤지컬 선
-택시, 아내가 야구장을 선택하면 남편은 0의 효용을, 아내가 뮤지컬을 선택하면
-남편은 3의 효용을 얻는다. 어느 경우도 남편이 집에 있을 경우 효용 4 보다 작기
-때문이다. 즉 남편은 외출 선택시에는 야구장을 선택하여 5의 효용을 기대한다.
-이제 다음 단계에서 아내의 합리적 추론은 무엇일까?
-남편이 외출을 선택한다면 아내는 외출시 남편이 무조건 야구장을 선택할 것임을 예상할 수 있고 그렇다면 집에 있을 경우 아내의 효용 1과 외출하여 야구장
-선택시 아내의 효용 3을 비교하여 아내도 야구장을 선택한다. 이 경우 남편 야구장, 아내 야구장이 최종 선택되고 효용 (5, 3)을 얻는다. <br> 
-이와 같이 앞에서 부터 상황을 추론하는 방법을 순방향추론법 (forward induction)이라 한다. <sup><a href="#fn2" id="ref2">1</a></sup><br> <br> 
+<svg id = "border" width="1600" height="900">
+  <circle cx="600" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  
+  <polyline points="600,240 400,400" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="600,240 800,400" fill="none" stroke="black" 
+    stroke-width="2" />
+  
+  <text id = "sgv-text2" x="570" y="210" > 남편 </text>
+  <text id = "sgv-text2" x="420" y="330" > 방콕 </text>
+  <text id = "sgv-text2" x="720" y="330" > 외출 </text>
+  
+  <polyline points="700,420 1300,420" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,520 1300,520" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,620 1300,620" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,720 1300,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,420 700,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="900,420 900,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1100,420 1100,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1300,420 1300,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,420 900,520" fill="none" stroke="black" 
+    stroke-width="2" />
 
-결과적으로 두 가지 추론방법에서 같은 결과가 나오는 것은 (5, 3) 균형 뿐이
-다. 이 균형이 (4, 1) 균형보다 안정적인 균형이라 할 수 있을 것이다.<br> <br> 
+  <text id = "sgv-text2" x="720" y="500" > 남편 </text>
+  <text id = "sgv-text2" x="820" y="470" > 아내 </text>
+  <text id = "sgv-text2" x="955" y="485" > 야구장 </text>
+  <text id = "sgv-text2" x="1155" y="485" > 뮤지컬 </text>
+  <text id = "sgv-text2" x="760" y="580" > 야구장 </text>
+  <text id = "sgv-text2" x="760" y="680" > 뮤지컬 </text>
+  <text id = "sgv-text" x="340" y="450" > (4, 1) </text>
+  <text id = "sgv-text" x="965" y="590" > 5, 3 </text>
+  <text id = "sgv-text" x="1165" y="590" > 0, 0 </text>
+  <text id = "sgv-text" x="965" y="690" > 0, 0 </text>
+  <text id = "sgv-text" x="1165" y="690" > 3, 5 </text>
 
-이와 비슷한 예는 현실에서 많이 볼 수 있다. 여당과 야당은 두 안건 A, B
-심의를 놓고 격돌하고 있다. 단 여당은 A안을, 야당은 B안을 더 선호한다. 양당이 협치를 해서 (A, A) 또는 (B, B)로 같은 법안을 선택하는 것이 부분게임에서
-내쉬균형이다. 즉 두 개의 내쉬균형이 존재한다. 야당은 자기의 주장이 관철되도
-록 하기 위해 국회를 보이콧하는 옵션을 검토하고 있다. 여당이 국회 파행보다
-야당의 요구를 들어주는 것이 낫다고 판단한다면 야당이 주장하는대로 (B, B)를
-선택할 것이다. 그러나 양당이 자신의 주장을 굽히지 않는다면 국회는 파행되고
-양당은 끊임없는 평행선을 걷게될 것이다.<br> <br> 
+  <text x="500" y="850" style="font-size:30px"> (그림 3) 대안이 있는 부부갈등 게임 </text>
 
-애인 사이인 남녀가 중국집에서 짜장면 혹은 짬뽕을 먹으려고 하는데 남자는
-짜장면을 선호하고 여자는 짬뽕을 선호한다. 둘은 하나를 사서 사이좋게 나눠먹
- 으려 하고 있다. 이 상황에서 남자가 자기가 먹고 싶은 것을 시키려면 어떻게 해
-야할까? 남자가 중국집 입구에서 은근 슬적 사실 나는 보신탕을 더 좋이하는데
-라고 말한다. 여자는 보신탕을 극히 싫어하므로 차라리 짜장면을 선택할 것이다.<br> <br> 
+</svg>
 
-사슴사냥게임을 생각해 보자. 이는 갑과 을이 협동하여 사슴을 사냥하든가, 아니면 각자 토끼를 사냥하는 것이 내쉬균형이다.
-이  때 갑이 토끼를 사냥할 바에야 나는 바에서 술이나 먹겠다고 한다면 술을 좋아하지 않는 을이 봤을 때 갑의 요구대로 사슴사냥에 주력하려는 유인이 있다.
-매번 약속시간보다 늦게 오는 친구에게 그럴 바에는 약속을 취소하겠다고 한다면 그 친구는 약속시간을 지키려고 할 것이다.<br> <br> 
+<p>역방향 추론법을 적용하여 균형을 구해보자.</p> 
+<p>남편이 외출을 선택한 후의 부분게임에서 남편은 내쉬균형인 (야구장, 야구장) 또는 (뮤지컬, 뮤지컬)로 결론날 것으로 예상한다. </p>
+<p> 이제 전체 게임을 고려하자.</p> 
+<p>(야구장, 야구장)이 선택된다면 남편은 집 4, 외출 5의 효용을 비교해서 외출을 선택하고 야구장을 선택한다.</p> 
+<p>(뮤지컬, 뮤지컬)이 선택된다면 남편은 집 4, 뮤지컬 3을 비교해서 집을 있는 선택을 하게 된다.</p> 
+<p>이 경우 부분게임 완전균형은 다음 두 가지다.</p>  
 
-이와같이 게임적 상황에 새로운 선택지를 추가함으로써 나에게 유리한 결과
-가 실현되도록 할 수 있다. 갑은 을과 협상시 협상외 다른 대안이 있다는 것을
-암시함으로써 자신에게 유리한 방향으로 협상의 결론을 유도할 수 있다. 갑에게 다른 대안이 있다는 사실이 을의 결정에 제약을 줄 것이다.<br> 
+<p> i) 남편 외출 선택, 남편, 부인 모두 야구장 선택, 효용값 (5, 3) </p>
+<p> ii) 남편 집 선택, 부인 무대응, 효용값 (4, 1) </p>
 
+<p>다른 추론 방법으로 첫 단계부터 추론해 보자.</p>
+<p>남편은 두 가지 선택지가 있다. 방콕 혹은 외출.</p> 
 
-<hr></hr> 
+<p>i) 남편이 방콕을 선택하는 경우 : </p>
+<p>남편의 효용은 4</p> 
+
+<p>ii) 남편이 외출을 선택하는 경우 :</p>
+<p> 부분게임을 잘 보면 남편이 뮤지컬을 선택할 일은 전혀 없다.</p> 
+<p>남편이 뮤지컬 선택시, 아내가 야구장을 선택하면 남편은 0의 효용을, 아내가 뮤지컬을 선택하면 남편은 3의 효용을 얻는다. 어느 경우도 남편이 집에 있을 경우 효용 4 보다 작기 때문이다. 즉 남편은 외출 선택시에는 야구장을 선택하여 5의 효용을 기대한다.</p> 
+<p>이제 다음 단계에서 아내의 합리적 추론은 무엇일까?</p>
+<p>남편이 외출을 선택한다면 아내는 외출시 남편이 무조건 야구장을 선택할 것임을 예상할 수 있고 그렇다면 집에 있을 경우 아내의 효용 1과 외출하여 야구장 선택시 아내의 효용 3을 비교하여 아내도 야구장을 선택한다. 이 경우 남편 야구장, 아내 야구장이 최종 선택되고 효용 (5, 3)을 얻는다. </p> 
+<p>이와 같이 앞에서 부터 상황을 추론하는 방법을 순방향추론법 (forward induction)이라 한다.<sup><a href="#fn2" id="ref2">2</a></sup> <sup><a href="#fn3" id="ref3">3</a></sup> </p>
+
+<p>결과적으로 두 가지 추론방법에서 같은 결과가 나오는 것은 (5, 3) 균형 뿐이다. 이 균형이 (4, 1) 균형보다 안정적인 균형이라 할 수 있을 것이다.<sup><a href="#fn4" id="ref4">4</a></sup> </p>
+
+<p>이와 비슷한 예는 현실에서 많이 볼 수 있다. 여당과 야당은 두 안건 A, B 심의를 놓고 격돌하고 있다. 단 여당은 A안을, 야당은 B안을 더 선호한다. 양당이 협치를 해서 (A, A) 또는 (B, B)로 같은 법안을 선택하는 것이 부분게임에서 내쉬균형이다. 즉 두 개의 내쉬균형이 존재한다. 야당은 자기의 주장이 관철되도록 하기 위해 국회를 보이콧하는 옵션을 검토하고 있다. 여당이 국회 파행보다 야당의 요구를 들어주는 것이 낫다고 판단한다면 야당이 주장하는대로 (B, B)를 선택할 것이다. 그러나 양당이 자신의 주장을 굽히지 않는다면 국회는 파행되고
+양당은 끊임없는 평행선을 걷게될 것이다.</p> 
+
+<p>애인 사이인 남녀가 중국집에서 짜장면 혹은 짬뽕을 먹으려고 하는데 남자는 짜장면을 선호하고 여자는 짬뽕을 선호한다. 둘은 하나를 사서 사이좋게 나눠먹으려 하고 있다. 이 상황에서 남자가 자기가 먹고 싶은 것을 시키려면 어떻게 해야할까? 남자가 중국집 입구에서 은근 슬적 사실 나는 보신탕을 더 좋이하는데라고 말한다. 여자는 보신탕을 극히 싫어하므로 차라리 짜장면을 선택할 것이다.</p>
+
+<p>사슴사냥게임을 생각해 보자. 이는 갑과 을이 협동하여 사슴을 사냥하든가, 아니면 각자 토끼를 사냥하는 것이 내쉬균형이다.
+이 때 갑이 토끼를 사냥할 바에야 나는 바에서 술이나 먹겠다고 한다면 술을 좋아하지 않는 을이 봤을 때 갑의 요구대로 사슴사냥에 주력하려는 유인이 있다.</p> 
+
+<p>매번 약속시간보다 늦게 오는 친구에게 그럴 바에는 약속을 취소하겠다고 한다면 그 친구는 약속시간을 지키려고 할 것이다.</p>
+
+<p>이와 같이 게임적 상황에 새로운 선택지를 추가함으로써 나에게 유리한 결과가 실현되도록 할 수 있다. 갑은 을과 협상시 협상외 다른 대안이 있다는 것을 암시함으로써 자신에게 유리한 방향으로 협상의 결론을 유도할 수 있다. 갑에게 다른 대안이 있다는 사실이 을의 선택에 제약을 줄 것이다.</p> 
+<p> 이와 같은 협상 기술은 국가간 협상이나 비지니스적인 거래 협상시 협상의 결과가 자기에게 유리하게 도출되도록 유도할 수 있다.</p>
+
+<hr> 
 <sup id="fn1"> 1. 정확히는 모든 그림을 트리형으로 그려야 하겠지만 이해의 편의상 트리와 표를 혼합해서 그리는 경우가 많다.</sup> <br>
 <sup id="fn2"> 2. 순방향추론법에 대해서는 다음 문헌 참조<br> 
-P. T. Y. MAN,<a href = "http://econ.shufe.edu.cn/upload/htmleditor/Image/44347_1003080941041.pdf"> FORWARD INDUCTION EQUILIBRIUM </a>, 2009 <br>  S.GOVINDAN AND R. WILSON, <a href = "http://www.dklevine.com/archive/refs4321307000000000618.pdf"> ON FORWARD INDUCTION </a>, 2006 </sup> 
+P. T. Y. MAN,<a href = "http://econ.shufe.edu.cn/upload/htmleditor/Image/44347_1003080941041.pdf"> FORWARD INDUCTION EQUILIBRIUM </a>, 2009 <br>  S.GOVINDAN AND R. WILSON, <a href = "http://www.dklevine.com/archive/refs4321307000000000618.pdf"> ON FORWARD INDUCTION </a>, 2006. </sup> <br>
+<sup id="fn3"> 3. 이 게임의 부분게임은 트리형으로 표현할 경우 정보집합이 포함되어 있는 동시게임이다. 즉 불전 정보하의 동적게임이므로 이런 게임의 균형을 완전베이지안 균형이라 한다. 자세한 설명은 <a href="https://kkmin1.github.io/kkmin/pe.html" target="_blank" class="con_link">완전베이지안 게임</a> 참조.<br>
+<sup id="fn4"> 4. 안정균형에 대해서는 다음 문헌 참조 <a href = "https://en.wikipedia.org/wiki/Mertens-stable_equilibrium"> en.wikipedia.org/wiki/Mertens-stable_equilibrium</a> </sup>
  </body> 
 </html>

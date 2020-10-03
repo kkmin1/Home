@@ -1,0 +1,577 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+
+<HEAD>
+<META NAME="Generator" CONTENT="Hancom HWP 8.5.8.1677">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<TITLE>거미집이론</TITLE>
+<style>
+    body { line-height:2.3em }
+    p{  text-indent: 2em;  }
+    h1{ color: blue; }
+    h2{ color: red; }
+    h3{ color: green; }
+    h4{ color: rgb(85, 7, 81); }
+    .inline{ display: inline; }
+
+    div.digitDiv {
+      font-size:10vw;
+      font-family: monospace;
+      display:inline-block;
+      width:1em;
+      margin-left:1em;
+    /* border:1px solid red; */
+    }
+    #boder{border:1px solid red;}
+    #dark-arrow {
+                stroke: #03051af8;
+                fill: #03051af8;
+            }
+    #blue-arrow {
+                stroke:#0e1abd;
+                fill: #0e1abd;
+                }
+
+    #red-arrow {
+                stroke: #bb0b37;
+                fill:  #bb0b37;
+                }
+    #green-arrow {
+                stroke: #4eda0d;
+                fill:  #4eda0d;
+                }
+    #sgv-text{
+        fill:black;
+        font-size:30px;
+    }
+     </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+	MathJax.Hub.Config({
+	extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+	jax: ["input/TeX", "output/HTML-CSS"],
+	tex2jax:
+	{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+	displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+	"HTML-CSS": { availableFonts: ["TeX"] }
+	});
+	</script>
+
+</HEAD>
+
+<BODY>
+
+<h2 class = "inline">거미집이론(cobweb 모형)</h2>	<sup><a href="#fn1" >1</a></sup>
+	
+<P CLASS=HStyle0>수요에 비해 공급의 반응이 지체되어 일어나는 현상으로 가격의 변동에 수요는 즉각적으로 반응하나 공급은 반응에 일정한 시간이 필요하기 때문에 균형가격은 시간차를 고려한 후 결정된다. </P>
+
+<P CLASS=HStyle0>생산기간이 짧은 공산품 같은 경우는 비교적 수요에 대한 공급이 즉각적으로 이루어지지만 생산기간이 긴 농산물은 수요에 비해 공급이 늦어지므로 가격 변화에 따라 즉각적인 공급이 어렵고 농산물은 초과공급 혹은 초과수요가 발생하게 된다. 이처럼 가격에 대응하여 공급될 때까지의 시차 때문에 초과 공급과 초과수요가 반복되면서 가격 폭락과 폭등이 주기적으로 나타나게 된다. </P>
+
+<P CLASS=HStyle0>농산물 가격과 생산량이 시차를 두고 움직여 나가는 과정을 수요, 공급곡선으로 표시하면 마치 거미집 같은 모양으로 그려지기 때문에 거미집 이론이라 불리운다. </P>
+
+<P CLASS=HStyle0>건축시장과 농산물시장은 공급에 시차가 존재한다는 점에서 유사하며, 생산된 상품은 보관이 용이하지 않으므로 일정 기간 이내에 판매되어야 한다는 점에서 유사하다. 부동산의 경우도 전기의 가격이 다음 기의 주택 공급량을 결정하는데 중요한 역할을 하기 때문에 부동산 시장의 경우에도 적용될 수 있다.<sup><a href="#fn2" >2</a></sup> </P>
+<br>
+
+<h3>가정</h3>
+
+<P CLASS=HStyle0 STYLE='margin-left:15.0pt;text-indent:-15.0pt;'>- 수요는 현재가격 및 외부의 임의의 충격에 의해 결정.</P>
+
+<P CLASS=HStyle0 STYLE='margin-left:15.0pt;text-indent:-15.0pt;'>- 공급은 제품가격 기대치 및 외부의 임의의 충격에 의해 결정. </P>
+
+<P CLASS=HStyle0 STYLE='margin-left:15.0pt;text-indent:-15.0pt;'>- 생산된 상품은 보관이 용이하지 않으므로 일정 기간 이내에 판매되어야 한다. (재고는 없고 매기 시장청산이 일어남)<sup><a href="#fn3" >3</a></sup></P>
+<br>
+
+<h3>모형</h3>
+
+<p> $ D_t = a - b P_t $ </p>
+<p> $ S_t = c + d P_t^e, \quad a, b, c, d > 0 $ </p>
+
+<p> $ D_t $ : 제품의 t기의 수요 </p>
+<p> $ S_t $ : 제품의 t기의 공급 </p>
+<p> $ P_t $ : 제품의 t기의 가격 </p>
+<p> $ P_t^e $ : 제품의 t기의 기대가격 </p>
+<br>
+
+<h3> 1) 고정기대모형(static expectation model)</h3>
+
+<p> $ P_t^e = P_{t-1} $  </p>
+
+<P CLASS=HStyle0>즉 공급자는 단순히 전기의 가격만을 고려하여 공급량을 결정</P>
+
+<P CLASS=HStyle0>每期 시장청산이 일어나므로, 每期 수요 = 공급</P>
+
+<p> $ a - b P_t = c + d P_t^e $ 에서 $ P_t^e = P_{t-1} $ 를 대입하면 </p>
+<p> $ a - b P_t = c + d P_{t-1} $ 이므로  </p>
+<p> $ P_t = \dfrac{a-c}{b} - \dfrac{d}{b}P_{t-1} $  </p>
+
+
+<P CLASS=HStyle0>이는 일차 비동차 차분방정식이므로 균형가격은</P>
+<p> $ P^* = \dfrac{a-c}{b} - \dfrac{d}{b}P^* $  </p>
+<p> $ \Longrightarrow P^* = \dfrac{a-c}{b+d}  $  </p>
+
+<p> 따라서 해는 $ P_t = \dfrac{a-c}{b+d} +({- \dfrac{d}{b}}^t)(p_0 - \dfrac{a-c}{b+d}) $  </p>
+
+<P> $ - \dfrac{d}{b} $이므로 $ P_t $는 진동함을 알 수 있다.</P>
+
+i)	$ d > b $
+	
+	<P CLASS=HStyle0>가격에 대한 공급의 탄력성이 수요의 탄력성보다 큰 경우에는 가격과 공급량은 더욱 그 폭을 넓히면서 경로는 발산한다.</P>
+	
+ii)
+	$ d = b $
+	
+	<P CLASS=HStyle0>가격에 대한 공급의 탄력성과 수요의 탄력성이 같은 경우에는 계속 같은 경로를 순환한다. </P>
+	
+iii)
+	$ d < b $
+	
+	<P CLASS=HStyle0>가격에 대한 수요의 탄력성이 공급의 탄력성보다 클 경우 수렴한다. 균형에 충격이 가해지면 새로운 균형으로 수렴한다.</P>
+	
+
+
+<h3>i) 발산인 경우<sup><a href="#fn4" >4</a></sup></h3>
+
+<div class="digitDiv">
+  <svg width="1000px" height="850px" viewBox="-200 50 1200 900" 
+      xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <defs>
+          <marker id="dark-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+          </marker>
+          <marker id="blue-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+          </marker>
+          <marker id="red-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+          </marker>
+          <marker id="green-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+          markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 0 L 10 5 L 0 10 z" />
+        </marker>
+       </defs>
+  
+    <polyline points="100,700 800,700" fill="none" stroke="black" 
+        stroke-width="3" marker-end="url(#dark-arrow)" />
+    <polyline points="200,800 200,100" fill="none" stroke="black" 
+        stroke-width="3" marker-end="url(#blue-arrow)" />
+  <polyline points="300,600 600,200" fill="none" stroke="blue" 
+        stroke-width="2" />
+    <polyline points="300,300 700,600" fill="none" stroke="blue" 
+        stroke-width="2" />
+           
+      <polyline points="465,380 417,380" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="410,382 410,443" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="410,452 490,452" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />  
+      <polyline points="500,452 500,340" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="500,335 355,335" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="350,335 350,525" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="350,530 600,530" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="605,530 605,230" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="445,410 445,700" fill="none" stroke="red" 
+        stroke-width="2" stroke-dasharray="5,5" />
+      <polyline points="445,410 200,410" fill="none" stroke="red" 
+        stroke-width="2" stroke-dasharray="5,5" />
+      <polyline points="465,380 465,700" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+      <polyline points="465,380 200,380" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+      <polyline points="410,382 410,700" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+        <polyline points="500,700 500,340" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+        <polyline points="350,335 350,700" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+        <polyline points="605,700 605,230" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+        <polyline points="410,452 200,452" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+        <polyline points="350,335 200,335" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+        <polyline points="350,530 200,530" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+
+        <foreignObject x="180" y="50" width="100" height="100">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+          $ Q $
+          </div>
+        </foreignObject>
+        <foreignObject x="830" y="690" width="100" height="100">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+          $ P $
+          </div>
+        </foreignObject>
+        <foreignObject x="180" y="710" width="100" height="100">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+          $ 0 $
+          </div>
+        </foreignObject>
+        <foreignObject x="700" y="600" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ D $
+            </div>
+          </foreignObject>
+        <foreignObject x="610" y="180" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ S $
+            </div>
+          </foreignObject>
+        <foreignObject x="425" y="710" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ P^* $
+            </div>
+          </foreignObject>
+        <foreignObject x="160" y="400" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ Q^* $
+            </div>
+          </foreignObject>
+        <foreignObject x="455" y="730" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ P_0 $
+            </div>
+          </foreignObject>
+          <foreignObject x="490" y="710" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ P_2 $
+            </div>
+          </foreignObject>
+          <foreignObject x="395" y="710" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ P_1 $
+            </div>
+          </foreignObject>
+          <foreignObject x="330" y="710" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ P_3 $
+            </div>
+          </foreignObject>
+          <foreignObject x="595" y="710" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ P_4 $
+            </div>
+          </foreignObject>
+          <foreignObject x="160" y="360" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ Q_1 $
+            </div>
+          </foreignObject>
+          <foreignObject x="160" y="320" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ Q_3 $
+            </div>
+          </foreignObject>
+          <foreignObject x="160" y="440" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ Q_2 $
+            </div>
+          </foreignObject>
+          <foreignObject x="160" y="510" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ Q_4 $
+            </div>
+          </foreignObject>
+
+
+        <foreignObject x="300" y="820" width="500" height="150">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            (그림 1) cobweb 모형(발산)
+            </div>
+          </foreignObject>
+  </svg>
+  </div>
+  
+<p>현재 균형은 $ P^* $, $ Q^* $에서 형성되어 있다.</p>
+<P CLASS=HStyle0>어떤 이유로 0기에 제품의 가격이 균형가격인 $ P^* $에서 이탈하여 $ P_0 $에서 가격이 형성됐을 경우 공급자는 1기에 $ Q_1 $을 공급한다. 시장에는 $ Q_1 $ 만큼의 상품이 존재하고 시장균형을 위해서는 공급 = 수요에서 $ Q_1 $의 수요량에 대해 $ P_1 $으로 가격이 결정된다. 1 기에 $ P_1 $의 가격을 본 공급자는 2기에 $ Q_2 $를 공급하게 되고 이는 수요공급의 법칙에 따라 $ P_2 $로 가격이 결정된다. 2 기에 $ P_2 $를 본 공급자는 3기에 $ Q_3 $공급하게 되고 이는 수요공급의 법칙에 따라 $ P_3 $로 가격이 결정된다. 3기에 $ P_3 $의 가격을 본 공급자는 4기에 $ Q_4 $를 공급하게 되고 이는 수요공급의 법칙에 따라 $ P_4 $로 가격이 결정된다. (그림 1)에서 보는 바와 같이 균형가격에서의 조그마한 이탈은 다시 균형가격으로 회귀하지 않고 거미집 모양으로 확산되게 된다. </P>
+<br>
+
+<h3 CLASS=HStyle0>b) 수렴인 경우</h3>
+
+<p>현재 균형은 $ P^* $, $ Q^* $에서 형성되어 있다.</p>
+<P CLASS=HStyle0>어떤 이유로 0기에 제품의 가격이 균형가격인 $ P^* $에서 이탈하여 $ P_0 $에서 가격이 형성됐을 경우 공급자는 1기에 $ Q_1 $을 공급한다. 시장에는 $ Q_1 $ 만큼의 상품이 존재하고 시장균형을 위해서는 공급 = 수요에서 $ Q_1 $의 수요량에 대해 $ P_1 $으로 가격이 결정된다. 1 기에 $ P_1 $의 가격을 본 공급자는 2기에 $ Q_2 $를 공급하게 되고 이는 수요공급의 법칙에 따라 $ P_2 $로 가격이 결정된다. 2 기에 $ P_2 $를 본 공급자는 3기에 $ Q_3 $공급하게 되고 이는 수요공급의 법칙에 따라 $ P_3 $로 가격이 결정된다. 3기에 $ P_3 $의 가격을 본 공급자는 4기에 $ Q_4 $를 공급하게 되고 이는 수요공급의 법칙에 따라 $ P_4 $로 가격이 결정된다. 이와 같은 과정이 반복되어 (그림 2)에서 보는 바와 같이 균형가격에서의 이탈은 거미집 모양으로 다시 균형가격으로 수렴하게 된다. </P>
+
+<div class="digitDiv">
+  <svg width="1000px" height="850px" viewBox="-200 50 1200 900" 
+      xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <defs>
+          <marker id="dark-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+          </marker>
+          <marker id="blue-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+          </marker>
+          <marker id="red-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+          </marker>
+          <marker id="green-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+          markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 0 L 10 5 L 0 10 z" />
+        </marker>
+       </defs>
+  
+    <polyline points="100,700 800,700" fill="none" stroke="black" 
+        stroke-width="3" marker-end="url(#dark-arrow)" />
+    <polyline points="200,800 200,100" fill="none" stroke="black" 
+        stroke-width="3" marker-end="url(#blue-arrow)" />
+  <polyline points="300,600 700,350" fill="none" stroke="blue" 
+        stroke-width="2" />
+    <polyline points="300,300 600,600" fill="none" stroke="blue" 
+        stroke-width="2" />
+           
+      <polyline points="605,410 420,410" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="410,410 410,520" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="410,530 520,530" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />  
+      <polyline points="530,530 530,465" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="530,455 465,455" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="455,455 455,495" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="455,505 495,505" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      <polyline points="505,505 505,485" fill="none" stroke="green" 
+        stroke-width="2" marker-end="url(#green-arrow)" />
+      
+      <polyline points="485,483 485,700" fill="none" stroke="red" 
+        stroke-width="2" stroke-dasharray="5,5" />
+      <polyline points="485,483 200,483" fill="none" stroke="red" 
+        stroke-width="2" stroke-dasharray="5,5" />
+      <polyline points="602,700 602,410" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+      <polyline points="410,410 200,410" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+      <polyline points="410,530 200,530" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+        <polyline points="410,530 410,700" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+        <polyline points="530,530 530,700" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+        <polyline points="455,455 200,455" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+        <polyline points="455,505 200,505" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+        <polyline points="505,500 505,700" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+        <polyline points="455,500 455,700" fill="none" stroke="black" 
+        stroke-width="2" stroke-dasharray="5,5" />
+
+        <foreignObject x="180" y="50" width="100" height="100">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+          $ Q $
+          </div>
+        </foreignObject>
+        <foreignObject x="830" y="690" width="100" height="100">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+          $ P $
+          </div>
+        </foreignObject>
+        <foreignObject x="180" y="710" width="100" height="100">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+          $ 0 $
+          </div>
+        </foreignObject>
+        <foreignObject x="600" y="600" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ D $
+            </div>
+          </foreignObject>
+        <foreignObject x="700" y="330" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ S $
+            </div>
+          </foreignObject>
+        <foreignObject x="470" y="710" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ P^* $
+            </div>
+          </foreignObject>
+        <foreignObject x="160" y="470" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ Q^* $
+            </div>
+          </foreignObject>
+        <foreignObject x="440" y="710" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ P_3 $
+            </div>
+          </foreignObject>
+          <foreignObject x="520" y="710" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ P_2 $
+            </div>
+          </foreignObject>
+          <foreignObject x="395" y="710" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ P_1 $
+            </div>
+          </foreignObject>
+          <foreignObject x="490" y="730" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ P_4 $
+            </div>
+          </foreignObject>
+          <foreignObject x="595" y="710" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ P_0 $
+            </div>
+          </foreignObject>
+          <foreignObject x="160" y="400" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ Q_1 $
+            </div>
+          </foreignObject>
+          <foreignObject x="130" y="490" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ Q_4 $
+            </div>
+          </foreignObject>
+          <foreignObject x="160" y="440" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ Q_3 $
+            </div>
+          </foreignObject>
+          <foreignObject x="160" y="510" width="100" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ Q_2 $
+            </div>
+          </foreignObject>
+
+
+        <foreignObject x="300" y="820" width="500" height="150">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            (그림 2) cobweb 모형(수렴)
+            </div>
+          </foreignObject>
+  </svg>
+  </div>
+
+  <h3>2) 적응적기대모형(adaptive expectation model)</h3>
+
+
+<P CLASS=HStyle0>적응적 기대하에 가격 예측은 전기의 예측오차를 반영하여 다음과 같이 이루어 진다.<sup><a href="#fn5" >5</a></sup></P>
+
+
+<p> $ p_t^e - p_{t-1}^e = \lambda(p_{t-1} - p_{t-1}^e) $, $ 0 < \lambda < 1 $ </p>
+<p> $ \Rightarrow p_t^e = \lambda p_{t-1} + (1 - \lambda)p_{t-1}^e $ ..............①</p>
+
+
+<P CLASS=HStyle0>즉 공급자는 전기의 가격과 예측가격의 가중평균을 고려하여 공급량을 결정</P>
+
+<P CLASS=HStyle0>시장청산 가정에서</P>
+
+<p> $ a - b P_t = c + d P_t^e $ 에서 </p>
+
+<p> $ P_t = \dfrac{a-c}{b} - \dfrac{d}{b}P_t^e $  </p>
+
+<P CLASS=HStyle0>①을 대입하면</P>
+
+<p> $ P_t = \dfrac{a-c}{b} - \dfrac{d}{b}(\lambda p_{t-1} + (1 - \lambda)p_{t-1}^e) $ ...............② </p>
+
+<P CLASS=HStyle0>한편, (t-1)기는 $ P_{t-1} = \dfrac{a-c}{b} - \dfrac{d}{b}P_{t-1}^e $</P>
+
+<P CLASS=HStyle0>양변에 (λ-1)를 곱하고 ②에 더하면</P>
+
+<p> $ P_t = \lambda \dfrac{a-c}{b} + (1 - \lambda - \lambda \dfrac{d}{b})p_{t-1} $ </p>
+
+<P CLASS=HStyle0>이 차분방정식의 해는</P>
+
+<p> $ P_t = \dfrac{a-c}{b+d} + (1 - \lambda - \lambda \dfrac{d}{b})^t (p_0 - \dfrac{a-c}{b+d}) $ </p>
+
+<p> $ -1 < 1 - \lambda - \lambda \dfrac{d}{b} < 1 $ 이면 $ \lim\limits_{t \to \infty} P_t = \dfrac{a-c}{b+d} $ 이므로 해는 안정적</p>
+<!-- \limits 는 \lim 밑으로 subscript가 가도록 하는 역할, 이 것이 없이 그냥 \lim 만 쓰면 subscript가 옆으로 간다. $ 대신 \[, \] 를 쓰면 subscript가 \lim 밑으로 가지만 중앙정렬이 된다.-->
+
+
+<P CLASS=HStyle0>i) $ 1 - \lambda - \lambda \dfrac{d}{b} < 1 $ 의 성립여부</P>
+
+<p> $ 1 - \lambda - \lambda \dfrac{d}{b} < 1 \quad \Rightarrow \quad \lambda + \lambda \dfrac{d}{b} > 0 $ </p>
+<p> $ \lambda, b, d > 0 $ 이므로 항상 성립 </p>
+
+<P CLASS=HStyle0>ii) $ <-1 < 1 - \lambda - \lambda \dfrac{d}{b} $ 의 성립여부</P>
+
+  <p> $ <-1 < 1 - \lambda - \lambda \dfrac{d}{b} \quad \Rightarrow \quad \lambda + \lambda \dfrac{d}{b} < 2 $ </p>
+
+<p> $ \Rightarrow \quad \dfrac{d}{b} < \dfrac{2}{\lambda} -1 $ </p>
+<p> $ 0 < \lambda < 1 $ 이므로 $ \dfrac{2}{\lambda} - 1 > 1 $</p>
+
+<p> $ \dfrac{d}{b} < 1 $이면 $ \dfrac{d}{b} < 1 < \dfrac{2}{\lambda} - 1  $ </p>
+
+<P CLASS=HStyle0>즉 $ d < b $이면 수요곡선의 절대값의 기울기가 공급곡선의 절대값의 기울기보다 크다면 해는 균형가격에 수렴. 고정기대모형과 같은 결과이다.</P>
+
+<p> $ \dfrac{d}{b} < 1 $이면 $ \dfrac{d}{b} \lessgtr \dfrac{2}{\lambda} - 1  $ </p>
+
+<P CLASS=HStyle0>부호를 판정할 수 없다. 즉 수렴할 수도 발산할 수도 있다. 즉 $ d > b $ 이더라도 수렴할 수가 있다. 고정기대모형과 다른 결과이다.</P>
+<br>
+
+<h3>거미집이론의 사례</h3>
+
+<p>대표적인 예로 메모리 반도체의 가격을 들 수 있다. </p>
+<p> 메모리 반도체의 가격은 전형적인 거미집 모형을 따르고 있다. 전기의 공급이 늘어나면 가격이 내려가고 이로 인해 수요가 늘면 공급이 부족하므로 가격이 올라가고 이는 수요 감소로 이어진다.</p>
+<P CLASS=HStyle0>또 다른 예로 농작물을 들 수 있다. 배추 농사가 풍년이 되어 공급 과잉이 되면 그 해의 배추농가는 싼값에 배추를 매매한다.  이제 다음 해에는 배추 공급량이 크게 줄게 되어 가격이 급등하게 되고 이러한 현상은 계속해서 순환하게 한다. 이러한 악순환이 계속되게 된다면 소비자, 공급자 모두 피해를 보게 된다. 이러한 문제를 극복하기 위해 농가단위 소득안정지원 제도가 있다. 일명 농가단위 소득안정직불제<sup><a href="#fn6" >6</a></sup>로 가격의 급등, 급락에 따른 농부들의 피해를 줄여주기 위한 정부의 노력이라고 할 수 있다.<sup><a href="#fn7" >7</a></sup></P>
+<br>
+
+<h3 class = "inline">cobweb 이론의 의미</h3><sup><a href="#fn8" >8</a></sup>
+
+<P CLASS=HStyle0>아래에 예시하는 것처럼 여러 가지 현실성이 결여된 측면이 있다 하더라도 상품의 시장 가격의 변동에 대한 이론적 배경을 제시한다. </P>
+<P CLASS=HStyle0> 또한 국민 경제라는 거시적인 측면에서 보더라도 물가와 총생산량의 측면에서 보았을 때 경기변동의 원인에 대한 설명이 될 수 있다. </P>
+<P CLASS=HStyle0>가격의 변동은 균형가격으로 자연적으로 회귀하는 경우만 존재하는 것이 아니라 경우에 따라서는 균형가격에서 점점 멀어질 수도 있다는 점을 시사</P>
+<br>
+
+<h3>cobweb 이론의 한계</h3>
+
+<P CLASS=HStyle0>(1) 제품의 가격은 시장에 존재하는 제품의 공급량에만 영향을 받는다. </P>
+<P CLASS=HStyle0>(2) 생산 수량의 결정은 전기의 가격이라는 변수에 의해서만 결정된다. </P>
+<P CLASS=HStyle0>(3) 기간 중에는 생산량을 변화시킬 수 없다.</P>
+<br>
+
+
+<h2>공급함수가 비선형인 경우 거미집 모형</h2>
+<p> 공급함수, 수요함수가 비선형인 경우는 수렴, 발산, 진동 외에 혼돈현상(chaos)이 발생할 수 있는데 <A href="cobweb.html" TARGET="_self">여기</A> 를 참조하기 바란다. </p>
+
+<hr style="width:300px;text-align:left;margin-left:0"/>
+
+<sup id="fn1"> 
+	<P CLASS=HStyle11>1. &nbsp;N. kaldor 가 1938년 논문에서 최초로 명명, 그래프의 설명은 <A href="cobweb.html" TARGET="_self">cobweb 모형</A> 참조</P>
+ </sup>
+  <sup id="fn2"> 
+	<P CLASS=HStyle11>2. &nbsp;주택 가격이 거미집 모형으로 설명된다는 주장은 재고의 여지가 있다. 실제 주택 가격은 일관적으로 상승하거나 일관적으로 하락하거나 하는 경우가 대부분으로 주택가격이 균형가격(원가)을 중심으로 요동치는 경우는 현실적으로 찾아보기 어렵다.</P>
+ </sup>
+ <sup id="fn3"> 
+	<P CLASS=HStyle11>3. &nbsp;옥수수, 돼지고기와 같은 非貯藏性財(non-storablee goods)에 적합</P>
+ </sup>
+ <sup id="fn4"> 
+	<P CLASS=HStyle11>4. &nbsp;일반적인 수요, 공급곡선 그림과 P, Q 축이 반대로 되어있음에 유의. P가 x축이 되고 Q가 y축이 되면 기울기의 개념이 반대로 된다. 이 경우 수렴하기 위해서는 공급곡선의 기울기 절대값이 수요곡선의 기울기 절대값보다 커야 한다.</P>
+ </sup>
+ <sup id="fn5"> 
+	<P CLASS=HStyle11>5. &nbsp;‘적응적 기대’ 참조</P>
+ </sup>
+ <sup id="fn6"> 
+	<P CLASS=HStyle11>6. &nbsp;농가소득안정 직불제란 농가 단위로 기준소득을 정한 뒤 실제소득이 기준보다 낮을 때 부족분의 일부를 보전해 주는 직접지불제를 말한다. 농림수산식품부는 2013년 시행을 목표로 쌀·콩·고추·사과·포도·감귤·한우·돼지·산란계, 감자·쌀보리·배추·마늘·오이·대파·배·육우·번식우·인삼 등을 대상품목으로 선정했다. <A HREF="http://www.nongmin.com/article/ar_detail.htm?ar_id=193180&subMenu=articletotal" TARGET="_self">http://www.nongmin.com/article/ar_detail.htm?ar_id=193180&amp;subMenu=articletotal</A> </P>
+ </sup>
+ <sup id="fn7"> 
+	<P CLASS=HStyle11>7. &nbsp;<A HREF="http://blog.naver.com/bluesky__1?Redirect=Log&logNo=140148311770" TARGET="_self">http://blog.naver.com/bluesky__1?Redirect=Log&amp;logNo=140148311770</A> </P>
+ </sup>
+ <sup id="fn8"> 
+	<P CLASS=HStyle11>8. &nbsp;<A HREF="http://en.wikipedia.org/wiki/Cobweb_model" TARGET="_self">http://en.wikipedia.org/wiki/Cobweb_model</A> 참조</P>
+ </sup>
+ 
+
+
+</BODY>
+
+</HTML>

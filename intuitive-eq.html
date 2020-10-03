@@ -1,7 +1,7 @@
 <html lang="ko"> 
 <head>
     <meta charset="utf-8">
-    <title>신호게임</title>
+    <title>직관균형</title>
     <head>
       <style>
         body { line-height:2.3em }
@@ -37,97 +37,123 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
  </head> 
 <body> 
 	
-<h2>1. 신호게임 모형 </h2> 
+<h2>1. Out of equilibrium beliefs and Refinements of PBE </h2> 
 
-<svg id = "border" width="1600" height="1000">
-  <circle cx="400" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
-  <circle cx="800" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
-  <circle cx="1200" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
-  <circle cx="400" cy="700" r="40" stroke="green" stroke-width="4" fill="yellow" />
-  <circle cx="800" cy="700" r="40" stroke="green" stroke-width="4" fill="yellow" />
-  <circle cx="1200" cy="700" r="40" stroke="green" stroke-width="4" fill="yellow" />
-  <circle cx="800" cy="450" r="40" stroke="green" stroke-width="4" fill="yellow" />
+<p> • Requirement 1 and 2 of the PBE say that no
+    player’s strategy can be strictly dominated
+    beginning at any information set.    
+     $  $ </p>
+<p> • The problem is to prevent player j to believe
+    that player i would play a dominated strategy,
+    i.e. to impose restrictions on the beliefs off
+    the equilibrium path. $  $ </p>
+<p>  • Consider for example the following game: $ $ </p>
 
-  <polyline points="200,150 360,200" fill="none" stroke="black" 
-    stroke-width="2" />
-  <polyline points="200,250 360,200" fill="none" stroke="black" 
-    stroke-width="2" />
-  <polyline points="200,650 360,700" fill="none" stroke="black" 
-    stroke-width="2" />
-  <polyline points="200,750 360,700" fill="none" stroke="black" 
-    stroke-width="2" />
-  <polyline points="1240,200 1400,150" fill="none" stroke="black" 
-    stroke-width="2" />
-  <polyline points="1240,200 1400,250" fill="none" stroke="black" 
-    stroke-width="2" />
-  <polyline points="1240,700 1400,650" fill="none" stroke="black" 
-    stroke-width="2" />
-  <polyline points="1240,700 1400,750" fill="none" stroke="black" 
-    stroke-width="2" />
-  <polyline points="440,200 760,200" fill="none" stroke="black" 
-    stroke-width="2" />  
-  <polyline points="840,200 1160,200" fill="none" stroke="black" 
-    stroke-width="2" />   
-  <polyline points="440,700 760,700" fill="none" stroke="black" 
-    stroke-width="2" />  
-  <polyline points="840,700 1160,700" fill="none" stroke="black" 
-    stroke-width="2" /> 
-  <polyline points="800,240 800,410" fill="none" stroke="black" 
-    stroke-width="2" /> 
-  <polyline points="800,490 800,660" fill="none" stroke="black" 
-    stroke-width="2" />
-  <polyline points="400,240 400,660" fill="none" stroke="black" 
-    stroke-width="2" stroke-dasharray="4"/>
-  <polyline points="1200,240 1200,660" fill="none" stroke="black" 
-    stroke-width="2" stroke-dasharray="4"/>
+<div style="text-align : center;">
+    <img src="intuitive.png"><br>
+    (그림 1)  
+</div>
 
-  <text id = "sgv-text" x="385" y="215" > R </text>
-  <text id = "sgv-text" x="785" y="215" > S </text>
-  <text id = "sgv-text" x="1185" y="215" > R </text>
-  <text id = "sgv-text" x="385" y="715" > R </text>
-  <text id = "sgv-text" x="785" y="715" > S </text>
-  <text id = "sgv-text" x="1185" y="715" > R </text>
-  <text id = "sgv-text" x="785" y="465" > N </text>
-  <text id = "sgv-text" x="600" y="190" > A </text>
-  <text id = "sgv-text" x="1000" y="190" > B </text>
-  <text id = "sgv-text" x="600" y="690" > A </text>
-  <text id = "sgv-text" x="1000" y="690" > B </text>
-  <text id = "sgv-text" x="810" y="350" > H(p)</text>
-  <text id = "sgv-text" x="810" y="600" > L(1-p)</text>
+<p> Strategy L’ and R’ can both be the better strategy for player 2 according to
+    the values of p. $  $ </p>
+<p>  Expected payoff from L’: 1p+(1‐p)0 $ $ </p>
+<p>  Expected payoff from R’: 0p+(1‐p)1 $ $ </p>
+<p>p < 1-p 에서 </p>
+<p>  R’ is better than L’ if p<1/2. 
+<p>  If player 2 plays R’,  player 1 의 payoff는 L : 0, M:0, R:2이므로 plays R. $ $ </p>
+<p>  Thus, there are two pure‐strategy PBE in this game: $ $ </p>
+<p>  1. L, L’, p=1 where belief are computed according to Bayes rule $ $ </p>
+<p>  2. R,R’, p≤1/2 in this case beliefs are arbitrary because R is off
+    equilibrium. $ $ </p>
+<p>  In the second equilibrium player 2 believes that player 1
+    plays M with probability (1‐p)>1/2. $ $ </p>
+<p>  However, M for player 1 is strictly dominated by L. $ $ </p>
+<p>  The payoff from M is always smaller than the payoff from
+    L no matter what player 2 does, strategy L is better for player 1. $ $ </p>
+<p>  We now introduce the requirement that player 2
+    should not believe that player 1 might have played
+    a strategy that is strictly dominated beginning at
+    any information set. $ $ </p>
+<p>  To do this we need to define what is a strictly
+    dominated strategy beginning at a given
+    information set. $ $ </p>
+
+    <p> 앞의 PBNE의 핵무기 개발-포기 모형2에서  $  $ </p>
+    <p><표 2>에서 보듯이 을이 용인을 선택하면 갑은 개발끝이 최선이고, 을이 강공을 선택하면 갑은 포기가 최선이다. 을의 믿음에 따라 최적 대응이 바뀌므로 두 내쉬균형 모두 완전베이지안균형이 된다.이 경우 완전베이지안균형은 다음과 같이 표기한다. </p>
+    <p> i) p > 3/4 인 경우  {갑 포기, 갑 포기->을 무대응, 갑 임의 선택->을 강공}</p>
+    <p> ii) p < 3/4 인 경우  {갑 개발,  갑 포기->을 무대응, 갑 임의 선택->을 용인}</p>
+    비균형경로를 분석해 보자. </p>
+    <p> i)의 균형은 비균형경로가 갑 임의 선택, 을 강공이다. 이는 확률 p 에 따라 을 강공의 가능성이 있으므로 불합리하지 않다.</p> 
+    <p> ii)의 균형은 비균형경로가 갑 포기, 을 무대응이므로 불합리한 것이 없다.</p> 
+    <p> 따라서 두 내쉬균형 모두  완전베이지안균형이 된다.</p>
+    
+    <p> 을이 무슨 선택을 하든 갑은 미개발이 개발보다 열등한 효용을 가져온다. 이를 미개발은 개발보다 강지배(strictly dominated)됐다고 한다.$  $ </p>
+    <p>  We now introduce the requirement that 을 should not believe that 갑 might have played a strategy that is strictly dominated beginning at any information set. $ $ </p>
+    <p>  To do this we need to define what is a strictly dominated strategy beginning at a given   information set. $ $ </p>
+
+
+ 
+  <iframe style="width:100%;height:100%;" 
+				src="intuitive-eq.pdf">
+    </iframe>
+    도람뿌, 로켓맨 핵 사찰
+    로켓맨의 신호는 핵사찰 수용/불가
+      
+  <div style="text-align : center;">
+      <img src="intuitive3.png"><br>
+      (그림 1)  
+  </div>
   
-  <text id = "sgv-text" x="250" y="160" > u </text>
-  <text id = "sgv-text" x="250" y="270" > d </text>
-  <text id = "sgv-text" x="250" y="660" > u </text>
-  <text id = "sgv-text" x="250" y="770" > d </text>
-  <text id = "sgv-text" x="1320" y="160" > u </text>
-  <text id = "sgv-text" x="1320" y="270" > d </text>
-  <text id = "sgv-text" x="1320" y="660" > u </text>
-  <text id = "sgv-text" x="1320" y="770" > d </text>
-  <text x="700" y="950" style="font-size:30px"> (그림 1) 신호게임 </text>
+  <div style="text-align : center;">
+    <img src="intuitive4-1.png"><br>
+    (그림 1)  
+</div>
 
-  <foreignObject x="425" y="245" width="100" height="100">
-    <div xmlns="http://www.w3.org/1999/xhtml" id = "sgv-text">
-    $ \alpha $
-    </div>
-  </foreignObject>
-  <foreignObject x="425" y="625" width="150" height="100">
-    <div xmlns="http://www.w3.org/1999/xhtml" id = "sgv-text">
-    $ 1-\alpha $
-    </div>
-  </foreignObject>
-  <foreignObject x="1140" y="245" width="100" height="100">
-    <div xmlns="http://www.w3.org/1999/xhtml" id = "sgv-text">
-    $ \beta $
-    </div>
-  </foreignObject>
-  <foreignObject x="1070" y="625" width="150" height="100">
-    <div xmlns="http://www.w3.org/1999/xhtml" id = "sgv-text">
-    $ 1-\beta $
-    </div>
-  </foreignObject>
-</svg>
+<div style="text-align : center;">
+  <img src="intuitive8.png"><br>
+  (그림 1)  
+</div>
 
-<div>
+<div style="text-align : center;">
+  <img src="intuitive4-2.png"><br>
+  (그림 1)  
+</div>
+
+<div style="text-align : center;">
+  <img src="intuitive5.png"><br>
+  (그림 1)  
+</div>
+
+<div style="text-align : center;">
+  <img src="intuitive6.png"><br>
+  (그림 1)  
+</div>
+<div style="text-align : center;">
+  <img src="intuitive7.png"><br>
+  (그림 1)  
+</div>
+<p>Political Game Theory, Nolan McCarty and Adam Meirowitz </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+
+
 신호게임은 (그림 1)과 같은 구조를 갖는 게임이다. 
 이 게임은 발신자(sender:S)와  수신자(receiver:R)로 구성된 순차적 게임이다. 
 수신자가 정보집합으로 연결되어 있기 때문에 부분게임은 존재하지 않는다. 

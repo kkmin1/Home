@@ -1,12 +1,24 @@
-<html lang="ko">
+<html lang="ko"> 
 <head>
     <meta charset="utf-8">
-    <title> table </title>
-    <style>
-      body { line-height:2.3em }
-      p{  text-indent: 3em;  }
-      h1{text-align: center;}
-      table{
+    <title>신호게임</title>
+    <head>
+      <style>
+        body { line-height:2.3em }
+        div{width:100%}
+        p{  text-indent: 2.3em;  }
+        h1{ color: blue; }
+        h2{ color: red; }
+        h3{ color: green; }
+        h4{ color: rgb(85, 7, 81); }
+        .inline{ display: inline; }
+   /*     #border{border:1px solid red;} */
+        #sgv-text{
+            fill:black;
+            font-size:50px;
+            font-family:Times;
+        }
+        table{
         border-collapse: collapse;
         table-layout: fixed;
         border : 1px solid black;
@@ -18,6 +30,7 @@
         text-align: center;
         height:50px;
       }
+
       /* 표에 대각선을 긋는 코드, 여기서는 th 태그의 id = diag 셀에 대각선을 긋는다. */
       table:nth-of-type(1) th#diag { /* 첫번째 표에 대각선을 긋는다. */
         background-image: linear-gradient(
@@ -41,59 +54,38 @@
           font-weight: bold;
           color:#ff9999;
       }
-     </style>
-
- </head>
-
-<body>
-
-
-
-<h2> 죄인들의 딜렘마(prisonner's dilemma)</h2>
-<br>
-<table border="1">
-  <caption>표 1. 죄인들의 딜렘마</caption>
-  <tr >
-    <th id = "diag"> <pre>갑      을</pre> </th>
-    <th > C </th>
-    <th > D </th>
-  </tr>
-  <tr >
-    <th > C </th>
-    <td > -1,-1 </td>
-    <td > -9, 0 </td>
-  </tr>
-  <tr >
-    <th > D </th>
-    <td >  0, -9 </td>
-    <td > -5, -5 </td>
-  </tr>
-
-</table>
-<br>
-
-
-<h2>사슴사냥게임(stag-hunt game)</h2>
-
-<br>
-<table border="1">
-  <caption>표 2. 사슴사냥게임</caption>
-  <tr >
-    <th id = "diag"> <pre>갑      을</pre> </th>
-    <th > 사슴 </th>
-    <th > 토끼 </th>
-  </tr>
-  <tr >
-    <th > 사슴 </th>
-    <td > 3, 3 </td>
-    <td > 0, 1 </td>
-  </tr>
-  <tr >
-    <th > 토끼 </th>
-    <td >  1, 0 </td>
-    <td > 1, 1 </td>
-  </tr>
-
-</table>
-<br>
-
+         </style>
+        </head>   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+MathJax.Hub.Config({
+extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+jax: ["input/TeX", "output/HTML-CSS"],
+tex2jax: 
+{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+"HTML-CSS": { availableFonts: ["TeX"] }
+});
+</script>
+ </head> 
+<body> 
+    <table border="1">
+        <caption>표 2. 사슴사냥게임</caption>
+        <tr >
+          <th id = "diag"> <pre>갑         을</pre> </th>
+          <th > 사슴 </th>
+          <th > 토끼 </th>
+        </tr>
+        <tr >
+          <th > 사슴 </th>
+          <td > 3, 3 </td>
+          <td > 0, 1 </td>
+        </tr>
+        <tr >
+          <th > 토끼 </th>
+          <td >  1, 0 </td>
+          <td > 1, 1 </td>
+        </tr>
+      
+      </table>
+    </body> 
+    </html>

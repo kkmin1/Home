@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sage 연습</title>
+<style>
+  p{  text-indent: 2em;  }
+    h1{ color: blue; }
+    h2{ color: red; }
+    h3{ color: green; }
+    h4{ color: rgb(85, 7, 81); }
+    .inline{ display: inline; }
+</style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+      MathJax.Hub.Config({
+      extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax:
+      {inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+      "HTML-CSS": { availableFonts: ["TeX"] }
+      });
+      </script>
+
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>
+    $(function () {
+    // Make the div with id 'mycell' a Sage cell
+    sagecell.makeSagecell({inputLocation:  '#mycell',
+                          // 셀 내용 감춤
+                           template:       sagecell.templates.minimal,
+                           
+                           evalButtonText: 'Activate'});
+    // Make *any* div with class 'compute' a Sage cell
+    sagecell.makeSagecell({inputLocation: 'div.compute',
+                           evalButtonText: 'Evaluate'});
+                          
+    // 셀 내용 감추고 자동 실행
+    sagecell.makeSagecell({inputLocation: 'div.compute2',
+                          template:       sagecell.templates.minimal,
+                          autoeval:true});
+    });
+    </script>
+  </head>
+  <body>
+
+<h1>Embedded Sage Cells</h1>
+
+<h2>Factorial</h2>
+
+  Click the “Activate” button below to calculate factorials.
+    
+<div id="mycell">
+  <script type="text/x-sage">
+    
+@interact    # 1-10까지 스크롤 가능한 상태바
+def _(a=(1, 10)):    # 함수는 왼쪽 끝에 맞춰야 함
+      print (factorial(a))    # print() 괄호가 있어야 함
+ </script>
+</div>
+
+<h2>Your own computations</h2>
+
+Type your own Sage computation below and click “Evaluate”.
+
+<div class="compute">
+    <script type="text/x-sage">
+plot(sin(x), (x, 0, 2*pi))
+
+    </script>
+</div>
+
+<div class="compute">
+  <script type="text/x-sage">
+
+log(10)
+
+  </script>
+</div>
+
+<div class="compute">
+  <script type="text/x-sage">
+
+ln(e)
+  </script>
+</div>
+
+<div class="compute">
+  <script type="text/x-sage">
+@interact
+def f(n=(0,10)):
+      print(2^n)
+  </script>
+</div>
+
+<div class="compute">
+<script type="text/x-sage">
+### Simulates Lotka-Volterra population dynamics, producing a vector field
+### Arrows indicate the direction of population evolution
+### The blue contour is one potential stable loop
+var('t R F R0 F0 a b c d')
+## CONSTANTS
+a = 0.04         # rabbit birthrate
+b = 0.0005       # probability of predation per encounter
+c = 0.1*0.0005   # rabbit -> fox conversion efficiency
+d = 0.2          # death rate of foxes
+## INITIAL CONDITIONS
+R0 = 5000     #initial number of rabbits
+F0 = 200      #initial number of foxes
+
+## DIFFERENTIAL EQUATIONS
+de_R = (diff(R,t) == a*R - b*R*F)
+de_F = (diff(F,t) == c*R*F - d*F)
+
+## CALCULATION PARAMETERS
+end_points = 500
+stepsize = 1.0
+steps = end_points/stepsize
+ics = [0,R0,F0]
+des = [de_R.rhs(), de_F.rhs()]
+
+## NUMERICAL SOLUTION OF DIFFERENTIAL EQUATIONS
+sol = desolve_system_rk4(des,[R,F],ics,ivar=t,
+   end_points=end_points,step=stepsize)
+
+## Clean up to graph
+sol_t=[]; sol_R=[]; sol_F=[]
+for i in range(steps):
+    sol_t.append(sol[i][0])
+    sol_R.append(sol[i][1])
+    sol_F.append(sol[i][2])
+
+a = plot([],figsize=[6,4])
+a += line(zip(sol_R,sol_F))
+a += plot_vector_field((des[0], des[1]), (R,0,7000), (F,0,225),
+  xmin=1500,color='orange')
+a.axes_labels(['Rabbits','Foxes']); show(a)
+</script>
+</div>
+<br>
+
+<h2>vector field drawing </h2>
+<p> $ \dfrac{dy}{dx} = x^2y^2  $ </p>
+<p> It is easy to check that the general solution to this differential equation is given by the function </p>
+<p> $ y = \dfrac{-3}{x^3 + C} $, where C 는 상수 </p>
+<p> C에 6, -3, 0.3 대입시 그래프를 그림 </p>
+
+
+<div class="compute">
+  <script type="text/x-sage">
+x,y=var('x y')   # 2 개 변수 동시 정의
+v=plot_slope_field(x^2*y^2,(x,-5,5),(y,-10,10),headaxislength=3, headlength=3) 
+# 함수는 왼쪽 끝에 맞춰야 함
+# plot_slope_field는 x, y 변수를 그림, plot_vector_field는 y는 x의 함수로 그림
+
+a=6
+b=-3
+c=0.3
+d1=plot(-3/(x^3+a),(x,0,4))   # 미분방정식의 해
+d2=plot(-3/(x^3+b),(x,0,1.4))
+d3=plot(-3/(x^3+c),(x,0,4))
+show(v+d1+d2+d3)
+   
+  </script>
+  </div>
+
+
+  <h2> predator-prey model(Lotka-Volterra equation) </h2>
+  <p> $ \dfrac{dx}{dt} = (a-by)x  $ </p>
+  <p> $ \dfrac{dy}{dt} = (cx-d)y  $ </p>
+
+  <p> $ \dfrac{dy}{dx} = \dfrac{(cx-d)y}{(a-by)x}  $ </p>
+
+<div class="compute2">
+<script type="text/x-sage">
+
+x,y,k=var('x y k')
+a=4
+b=2
+c=3
+d=3
+ysol=3*x-3*ln(x)+2*y-4*ln(y)-k
+show(ysol)    # 공식을 출력
+
+p1 = plot_vector_field([(a-b*y)*x, (c*x-d)*y], (x,0,10),(y,0,10),headaxislength=3, headlength=3) 
+for i in range(5,10):
+    p1 = p1 + implicit_plot(ysol(k=i),(x,0,10), (y,0,10))
+p1
+
+    </script>
+    </div>
+  </body>
+</html>

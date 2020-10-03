@@ -1,5 +1,5 @@
-body {font-size : 150%;}
-#center{line-height : 36px; font : 150%;}
+body {font-size : 100%;}
+#center{line-height : 36px; font-size : 100%;}
 .container{
   display:flex;
   flex-direction: column;
@@ -16,30 +16,24 @@ footer{
 }
 .content{
   display:flex;
+  
 }
 .content nav{
-  border-right: 1px solid gray;
   color: red;
   text-align: center;
-  border: 3px   solid  silver;
+  border: 1px   solid  silver;
+  
 }
-.content aside{
-  border-left: 1px solid gray;
-  color: red;
-  text-align: center;
-  border: 3px   solid  silver;
-}
-nav, aside{
-  flex-basis: 150px;
+
+nav {
+  flex-basis: 200px;
   flex-shrink: 0;
 }
 main{
   padding:10px;
-  width:1600px;
+  width:2000px; 
 }
-aside{
-  text-align: center;
-}
+
 #sub{
   height:50px;
   padding:10px;
@@ -92,3 +86,5 @@ aside{
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
+
+.dropdown:hover .dropdown-content { display: block; }

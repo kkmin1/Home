@@ -22,7 +22,7 @@ footer{
 }
 #nav{padding: 5px;}
 nav, aside{
-  flex-basis: 200px;
+  flex-basis: 300px;
   flex-shrink: 0;
 }
 
@@ -31,8 +31,8 @@ main{
   text-align: center;
 }
 iframe{
-  width:1200px; 
-  height:1000px;
+  width:1600px; 
+  height:1200px; 
 }
 aside{
   text-align: center;
@@ -49,7 +49,7 @@ aside{
   font-size: 16px;
   border: none;
   cursor: pointer;
-  width: 200px;
+  width: 300px;
 }
 
 /* Dropdown button on hover & focus */
@@ -87,3 +87,5 @@ aside{
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
+
+.dropdown:hover .dropdown-content { display: block; }

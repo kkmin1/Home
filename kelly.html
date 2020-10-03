@@ -1,0 +1,232 @@
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>켈리기준(Kelly Criterion)</title>
+
+<style>
+    body { line-height:2.3em }
+    p{  text-indent: 2em;  }
+    h1{ color: blue; }
+    h2{ color: red; }
+    h3{ color: green; }
+    ul{list-style:none; }
+    .inline{ display: inline; }
+     </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+MathJax.Hub.Config({
+extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+jax: ["input/TeX", "output/HTML-CSS"],
+tex2jax:
+{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+"HTML-CSS": { availableFonts: ["TeX"] }
+});
+
+</script>
+
+ </head>
+
+<body>
+    
+
+<h1> 켈리기준(Kelly Criterion) </h1>
+
+<p> 갬블에서 최고의 기대수익을 얻기 위해 매번 얼마를 베팅해야 하는가?</p>
+
+<p>$w_0 $ : 초기 재산</p>
+
+<p>$w_n $ : n번 베팅 후 재산</p>
+ 
+<p>$ \max \{ w_n \} $ 하는 것이 목표</p>
+ 
+<p> $ y_k $ : k 번째 베팅시 베팅액(random variable) </p>
+ 
+<p> let </p>
+<p>
+\begin{equation*}
+t_k = \left \{ 
+\begin{array}{ll}
+1 & \textrm{$ if \quad win $}\\
+-1 & \textrm{$ if \quad loss $}\\
+\end{array} 
+\right.
+\end{equation*}
+</p>
+      
+    <p> $p$ : 베팅시 이길 확률(매번 일정) </p>
+    <p> $q$ : 실패확률 ($= 1 - p$) </p>
+ 
+    <p> $ w_k = w_{k-1} + t_k y_k, \qquad k = 1, 2, 3, ... $ </p>
+ 
+    <p> $ w_n = w_0 + \sum\limits_{k=1}^n {(t_k y_k)} $ </p> 
+    <!-- \limits 는 \sum 밑으로 subscript가 가도록 하는 역할, 이 것이 없이 그냥 \sum 만 쓰면 subscript가 옆으로 간다. $ 대신 \[, \] 를 쓰면 subscript가 \sum 밑으로 가지만 중앙정렬이 된다.-->
+ 
+    <p> $ E[w_n] = w_0 + \sum\limits_{k=1}^{n} {E[t_k y_k]} $ </p>
+    <p> $  =  w_0 + \sum\limits_{k=1}^{n} {(p-q)E[y_k]}$ </p>
+
+    <p> $ \because $ 확률변수 $ t_k, y_k $ 는 서로 독립이므로 </p>
+    
+    <p> $ E[t_k] = 1 \times p + (-1) \times q  = p - q $ </p>
+
+<p> 단 $ p - q > 0 $ 이라 가정, </p>
+
+<p>즉 $ 2p - 1 > 0 \Longrightarrow p > \dfrac{1}{2} $ </p>
+<!-- \frac 대신 \dfrac를 쓰는 것은 분수의 폰트 크기가 비분수의 폰트와 같아지는 역할, 이 것이 없이 그냥 \frac를 쓰면 분수의 폰트 크기가 비분수의 폰트보다 작아진다.-->
+
+<br>
+
+<h2> 1.  최종 재산의 최대화</h2>
+<p>$\max {E[w_n]}$ : 최종재산 </p>
+<p>$\max {E[w_n]} \Longrightarrow \max {E[w_k]}$ 이므로 </p>
+
+<p>기대수익을 최대화하기 위해서는 매기 전액을 베팅 </p>
+
+<p>$y_0 = w_0$, 이긴다면 $y_1 = 2w_0$, 등 등 </p>
+
+<p>그러나 n번 베팅시 모두 이길 확률은 $ p^n $ </p>
+
+<p>따라서 한번이라도 실패 확률은 $ 1 - p^n $ </p>
+<p> $ \lim\limits_{n \to \infty}(1 - p^n) = 1 $ </p>
+
+<p>즉 따라서 매번 전액을 베팅하는 투자전략은 
+게임을 계속할 수록 100% 파산으로 귀결된다. 
+이를 <font color="red">gambler's ruin</font>이라 한다. </p>
+
+<br>
+
+<h2> 2.  평균 부의 증가율(평균투자수익률) 최대화(Kelly 기준) </h2> 
+
+<h3> (가정) </h3>
+<p> i) 돈은 무한정 작게 쪼갤 수 있다.</p>
+<p> ii) 매번 베팅시 확률, 보수는 불변</p>
+<br>
+
+<p>$ y_i = b x w_{i-1}, \qquad 0 \leq x \leq 1 $ </p>
+
+<p>$ y_i $ : 이길 때 받는 금액 </p>
+
+<p>$ x $ : 매번 일정 비율로 베팅 </p>
+<p>$b$ : 배당률, 이길 때는 판돈의 b배를 받는다.</p>
+
+<br>
+	
+<h3> (풀이) </h3>
+<p>n번 시행 중 k 번 성공, n-k 번 실패한다면 </p>
+
+<p> 투자의 결과 총재산은</p>
+
+<p> $ w_n = w_0(1 + b x)^k (1 - x)^{n-k} $ </p>
+
+<p>부의 증가율의 평균은 기하평균으로 계산하는 것이 일반적이다.<sup><a href="#fn1" id="ref1">1</a></sup> </p>
+
+<p>n 개의 양의 수가 있을 때 이들 수의 곱의 n 제곱근의 값. </p>
+
+<p> $ \mu_G $ 를 기하평균이라 하면 </p>
+<p> \[ \mu_G = \sqrt[n]{w_0w_1w_2 \cdots w_n} = \prod_{i=1}^{n}y_i^{\dfrac{1}{n}} \] </p>
+<!-- <p>와 수식 사이에 한 칸을 뛰어야 폰트크기가 조정-->
+
+<p>양변 log를 취하면 </p>
+
+<p> \[ \log \mu_G = \dfrac{1}{n} \sum_{i=1}^{n} \log{w_i} \] </p>
+
+<p> 즉 기하평균의 log는 log의 산술평균이다. 기하평균은 증가율의 평균을 계산하는데 적합하다. </p>
+
+<p> 로그함수는 단조증가함수이므로 평균 부의 증가율은 로그를 취해도 최적값은 같다.</p>
+ 
+<p> $ \ln (\dfrac{w_n}{w_0})^{\dfrac {1}{n}} $</p>
+<p> $ = \dfrac {k}{n} \ln(1 + b x) + \dfrac{n-k}{n} \ln(1 - x) $</p>
+
+<p>$ n \to \infty $ 이면 대수의 법칙에 따라 $ \dfrac {k}{n} \to p $ </p>
+
+<p>$ f(x) = p \ln(1+b x) + q \ln(1 - x) $ 라 하면</p>
+
+<p>$ f(x) $를 극대화 하는 1차 조건은</p>
+
+<p> $ f'(x) = b \dfrac{p}{1 + b x} - \dfrac {q}{1- x} = 0 $ </p>
+
+<p>so, $ x^* = p - \dfrac {q}{b} $ <sup><a href="#fn2" id="ref2">2</a></sup></p>
+
+<p>이차조건은</p>
+
+<p>$ f''(x) = - \dfrac {b^2p}{(1+b x)^2} - \dfrac {q}{(1 - x)^2} < 0 $ </p></0>
+
+<p>따라서 최대화의 2차조건 만족</p>
+
+<br>
+
+<h2> 켈리기준의 의미 </h2>
+
+<p>예를 들어, 승리 확률이 60%인 도박에서($ p=0.6, q=0.4 $), 도박사가 승리시 1대1보상을 받는 경우($ b=1 $), 
+보유자금의 장기 성장률을 극대화하기 위해, 각 베팅 기회에서 도박사는 총 보유자금의 20%씩을 걸어야 한다.</p>
+
+<p>도박사가 우위를 갖지 못한다면, </p>
+
+<p> $ y_i = 0 $ 이라면, $ b = \dfrac {q}{p} $ </p>
+
+<p>즉 켈리공식은 한 푼도 걸지 말 것을 추천한다.
+
+<p>$ y_i < 0 $ 이라면, $ b < \dfrac {q}{p} $</p>
+
+<p>이는 도박사가 반대편에 베팅해야 한다는 것을 의미한다.</p>
+
+<p>1 원을 걸 경우 나올 수 있는 두 가지 결과가 $p$의 확률로 $b$원을 획득하거나 베팅한 1 원을 날리는 것이므로, 첫 공식의 분자는 1원을 걸 때 기대 순수익을 의미한다. </p>
+
+<p>따라서</p>
+
+<table>
+              <tbody>
+                <tr>
+                  <td rowspan="2"> $ x^*= $ </td>
+                  <td align="center" style="font-size:1.2em; border-bottom:solid">기대 순수익</td>              
+                </tr>
+                <tr>            
+                  <td style = "font-size:1.0em; ">승리시 순수익</td>
+               </tr>
+              </tbody>
+</table>	
+<br>
+<p>이길 확률 $p$는 정보량에 의존하므로 투자에 대한 최선의 베팅금액은 정보량에 비례한다. </p>
+<p>실무적으로는 켈리기준이 투자의 상한선으로 많이 쓰인다.</p>
+<p>① 켈리 기준은 중심극한정리를 이용하므로 투자 횟수 $n$이 충분히 커야 함을 전제로 한다.(적어도 100회 이상을 시행하는 것을 권고)</p>
+<p>② 켈리 기준은 위험(risk), 즉 분산(variance)을 고려하지 않는다.</p>
+<p> ①, ②를 감안해서 현실에서는 켈리 기준보다 적게 투자하는 것이 일반적이다.<sup><a href="#fn3" id="ref3">3</a></sup></p> </p>
+<br>
+
+<h2> 3. 성공시 $b$ 배를 얻고 실패시 $a$ 배를 잃는 경우(차입 투자) </h2>
+
+<p> 실패시 $a$ 배를 잃는다는 의미는 원금의 $a$ 배를 차입해서 투자를 한 경우를 생각할 수 있다. </p>
+<p> 이때, 켈리공식은  </p>
+
+<p> $ x^{*} = \dfrac{p}{a} - \dfrac{q}{b} $ </p>
+
+
+<p> 최소한 매우 작은 금액이라도 투자하는 것이 유리하기 위해서 $ pb > qa $ </p>
+
+<p>이는 단순히, 투자가 합리적이기 위해서는 기대이익이 기대손실을 초과해야 한다는 사실에 지나지 않는다.</p>
+
+<p>이러한 일반적 결과는, 차입투자(leveraging; 투자를 위한 차입조달)를 할 경우, 
+
+ $ a > 1 $이 되어 최적 투자금액 비율을 감소시킨다. </p>
+
+<p> 성공확률 $ p $가 아무리 크더라도, $ a $가 충분히 크면 최적 투자금액 비율은 $0$이다. 
+
+따라서 지나친 신용거래는 투자 전략상 좋지 않다.</p>
+
+<hr>
+<span style = " font-size:0.7em;  color: green; line-height: 1.5em;">
+<sup id="fn1"> 
+1. 기하평균은 양수인 경우에만 적용된다. 따라서 인구증가율이나 투자수익률의 평균 측정에 주로 사용된다.
+</sup>
+<br>
+<sup id="fn2"> 
+2. $ \frac{bp}{1+b x} = \frac{q}{1-x} \Longrightarrow (bp+qb) x = bp - q \Longrightarrow x = \frac{bp - q}{bp+qb} = \frac{bp - q}{b} = p - \frac{q}{b} $
+    </sup>
+  
+    <br>
+<sup id="fn3"> 
+3. 켈리 자신은 켈리공식에서 계산된 최적 투자금액의 반을 투자할 것을 제안
+    </sup>
+</span>
+</body>
+</html>

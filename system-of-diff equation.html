@@ -1,0 +1,275 @@
+<html lang="ko"> 
+<head>
+    <meta charset="utf-8">
+    <title>연립미분방정식</title>
+    <style>
+    body { line-height:2.3em }
+      p{  text-indent: 2em;  } 
+      h1{ color: blue; }
+      h2{ color: red; }
+      h3{ color: green; }
+      h4{ color: rgb(85, 7, 81); }
+      .inline{ display: inline; }
+    #border2{border:1px solid red;} 
+      #sgv-text{
+        fill:black;
+        font-size:50px;
+        font-family:Times;}
+      #sgv-text2{
+        fill:black;
+        font-size:30px;
+        font-family:Times; }
+     </style>  
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+MathJax.Hub.Config({
+extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+jax: ["input/TeX", "output/HTML-CSS"],
+tex2jax: 
+{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+"HTML-CSS": { availableFonts: ["TeX"] }
+});
+</script>
+ </head> 
+<body> 
+	
+<h2>연립미분방정식(systems of differential equations) 일반형</h2> 
+<p>일차 연립미분방정식의 일반형은 다음과 같다.</p>
+<p> $ y_i(t), a_{ij}(t), b_i(t) $ 는 t의 함수, $ i=1, \cdots, n $ </p>
+
+<p> $ y'_{\tiny 1} + a_{\tiny{11}} y_{\tiny 1} + a_{\tiny{12}} y_{\tiny 2} + \cdots + a_{\tiny 1n} y_{\tiny n} = b_{\tiny 1} $ </p>
+<p> $ y'_{\tiny 1} + a_{\tiny{21}} y_{\tiny 1} + a_{\tiny{22}} y_{\tiny 2} + \cdots + a_{\tiny 2n} y_{\tiny n} = b_{\tiny 2} $ </p>
+<p> $ \qquad \qquad \qquad \vdots $ </p>
+<p> $ y'_{\tiny 1} + a_{\tiny{n1}} y_{\tiny 1} + a_{\tiny{n2}} y_{\tiny 2} + \cdots + a_{\tiny nn} y_{\tiny n} = b_{\tiny n} $ </p>
+<br>
+
+<h2>고차미분방정식의 연립미분방정식으로 변환 </h2>
+
+<p>n차 미분방정식은 변수변환으로 1차 연립미분방정식 문제로 변형될 수 있다.</p>
+<p>예) $ y'''' + 3y'' - \sin(t)y' + 6y = t^2,  y(0) = 1, y'(0) = 2, y'(0) =3, y'(0) = 4 $ </p>
+<p>(풀이)</p>
+<p> $ x_1 = y, x_2 = y', x_3 = y'', x_4 = y''' $ 이라 하면</p>
+<p> $ x_1' = y' = x_2 $</p>
+<p> $ x_2' = y'' = x_3 $ </p>
+<p> $ x_3' = y''' = x_4 $ </p>
+<p> $ x_4' = y'''' = t^2 - 3y'' + \sin(t)y' - 6y $ </p>
+<p> $ = t^2 - 3x_3 + \sin(t)x_2 - 6x_1 $ </p>
+<p> 따라서 위 식을 1차 연립미분방정식 형태로 고치면 </p>
+<p> $ x_1' = x_2 $ </p>
+<p> $ x_2' = x_3 $ </p>
+<p> $ x_3' = x_4 $ </p>
+<p> $ x_4' = - 6x_1 + \sin(t)x_2 - 3x_3 + t^2 $ </p>
+<p> 초기조건 $ x_1(0) = 1, x_2(0) = 2, x_3(0) = 4, x_4(0) = 4 $ </p>
+<div style="text-align : right;">   (풀이끝)</div>
+
+<h2>계수가 상수인 경우</h2>
+
+<p> $ a_{\tiny{11}} y_{\tiny 1} + a_{\tiny{12}} y_{\tiny 2} + \cdots + a_{\tiny 1n} y_{\tiny n} = y'_{\tiny 1} $ </p>
+<p> $ a_{\tiny{21}} y_{\tiny 1} + a_{\tiny{22}} y_{\tiny 2} + \cdots + a_{\tiny 2n} y_{\tiny n} = y'_{\tiny 2} $ </p>
+<p> $ \qquad \qquad \qquad \vdots $ </p>
+<p> $ a_{\tiny{n1}} y_{\tiny 1} + a_{\tiny{n2}} y_{\tiny 2} + \cdots + a_{\tiny nn} y_{\tiny n} = y'_{\tiny n} $ </p>
+
+<br>
+<h3>계수가 상수인 경우</h3>
+
+<p> $ \mathbf{y}' = \mathbf{Ay} $ </p>
+<p>
+    \begin{equation*}
+    where \quad \mathbf{A} =
+    \left( \begin{array}{ccc}
+    a_{11} & a_{12} & \ldots & a_{1n} \\
+    a_{21} & a_{22} & \ldots & a_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{n1} & a_{n2} & \ldots & a_{nn}
+    \end{array} \right), \quad \mathbf{y}' =
+    \left( \begin{array}{ccc}
+    y'_1 \\
+    y'_2 \\
+    \vdots \\
+    y'_n 
+    \end{array} \right), \quad \mathbf{y} =
+    \left( \begin{array}{ccc}
+    y_1 \\
+    y_2 \\
+    \vdots \\
+    y_n 
+    \end{array} \right)
+    \end{equation*}
+</p>
+<p>예) 앞의 문제를 행렬로 표현하면</p>
+<p> $ \mathbf{x}' = \mathbf{Ax + t} $ </p>
+<p>
+    \begin{equation*}
+    where \quad \mathbf{A} =
+    \left( \begin{array}{ccc}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    -6 & \sin(t) & -3 & 0
+    \end{array} \right), \quad \mathbf{x}' =
+    \left( \begin{array}{ccc}
+    x'_1 \\
+    x'_2 \\
+    x'_3 \\
+    x'_4 
+    \end{array} \right), \quad \mathbf{x} =
+    \left( \begin{array}{ccc}
+    x_1 \\
+    x_2 \\
+    x_3 \\
+    x_4 
+    \end{array} \right), \quad \mathbf{t} =
+    \left( \begin{array}{ccc}
+    0 \\
+    0 \\
+    0 \\
+    t_2 
+    \end{array} \right)
+    \end{equation*}
+</P>
+<div style="text-align : right;">   (풀이끝)</div>
+
+<h3>대각행렬화(diagonalization)</h3>
+
+<h4>(1) 고유치가 서로 다를 경우</h4>
+
+<p> $\mathbf{A}$를 대각행렬($\mathbf{D}$)로 만들 수 있다면 미분방정식의 해는 쉽게 도출된다.  </p>
+<p> $
+     \mathbf{D} =
+    \left( \begin{array}{ccc}
+    \lambda_1 & 0 & \ldots & 0 \\
+    0 & \lambda_2 & \ldots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \ldots & \lambda_n
+    \end{array} \right), \quad \lambda_i 는 \, \mathbf{A} 행렬의 \, 고유치(eigen \, value)
+    $
+</p>
+
+<p> $ \mathbf{z}' = \mathbf{Dz} $ 라 하면 </p>
+<p>
+    \begin{equation*}
+    \left( \begin{array}{ccc}
+    z'_1 \\
+    z'_2 \\
+    \vdots \\
+    z'_n 
+    \end{array} \right) =
+    \left( \begin{array}{ccc}
+    \lambda_1 & 0 & \ldots & 0 \\
+    0 & \lambda_2 & \ldots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \ldots & \lambda_n
+    \end{array} \right)
+    \left( \begin{array}{ccc}
+    z_1 \\
+    z_2 \\
+    \vdots \\
+    z_n 
+    \end{array} \right) =
+    \left( \begin{array}{ccc}
+    \lambda_1 z_1 \\
+    \lambda_2 z_2 \\
+    \vdots \\
+    \lambda_n z_n 
+    \end{array} \right)
+    \end{equation*}
+</p>
+<p>풀어쓰면</p>
+<p> $ z'_1 = \lambda_1 z_1 $</p>
+<p> $ z'_2 = \lambda_2 z_2 $ </p>
+<p> $ \qquad \ldots $ </p>
+<p> $ z'_n = \lambda_n z_n $ </p>
+
+<p> 이들 미분방정식의 해는 쉽게 도출된다. </p>
+<p> $ z_1 = C_1 e^{\lambda_1 t} $</p>
+<p> $ z_2 = C_2 e^{\lambda_2 t} $ </p>
+<p> $ \qquad \ldots $ </p>
+<p> $ z_n = C_n e^{\lambda_n t} $ </p>
+<p> where $ C_i $ 는 상수 </p>
+
+<p>이제 $\mathbf{A}$를 대각행렬($\mathbf{D}$)로 만든다.</p>
+<p> $\mathbf{A}$ 의 대각행렬화는 대각행렬화정리에 의해</p>
+<p> $ \mathbf{A} = \mathbf{PDP^{-1}} $ </p>
+
+<p> where $
+    \mathbf{D} =
+   \left( \begin{array}{ccc}
+   \lambda_1 & 0 & \ldots & 0 \\
+   0 & \lambda_2 & \ldots & 0 \\
+   \vdots & \vdots & \ddots & \vdots \\
+   0 & 0 & \ldots & \lambda_n
+   \end{array} \right), \quad \lambda_i 는 \, \mathbf{A} 행렬의 \, 고유치(\text{eigen value})
+   $
+</p>
+
+<p> $ \mathbf{P} = (\mathbf{p}_1, ..., \mathbf{p}_n) , \mathbf{p}_i $ 는 고유벡터($\text{eigen vector}$) </p>
+<p> 즉 $\mathbf{P}$ 는 고유 벡터들로 이루어진 행렬</p>
+<p>이제 고유벡터행렬과 그의 역행렬을 각각 $\mathbf{A}$에 후방곱, 전방곱하면 다음이 구해진다. </p>
+<p> $ \mathbf{D} = \mathbf{P^{-1}AP} $ </p>
+
+<h4> (정리)</h4>
+<p> $ \mathbf{z}는 \quad \mathbf{z}' = \mathbf{Dz} $의 해라 할 때 $\mathbf{y} = \mathbf{Pz}$ 는 원래의 선형 연립미분방정식 $\mathbf{y}' = \mathbf{Ay}$ 의 해가 된다. </p>
+
+<h4> (증명)</h4>
+<p> $\mathbf{y}' = \frac{dy}{dt}\mathbf{y} = \frac{dy}{dt}\mathbf{Pz} = \mathbf{P}\frac{dy}{dt}z = \mathbf{Pz}' = \mathbf{PDz} $</p>
+<p> $= \mathbf{P(P^{-1}AP)z}$ </p>
+<p> $= \mathbf{APz} = \mathbf{Ay}$ </p>
+<div style="text-align : right;">   (증명 끝)</div>
+<br>
+<p>따라서 $ \mathbf{y} = \mathbf{Pz} = (\mathbf{p}_1, ..., \mathbf{p}_n)
+  \left( \begin{array}{ccc}
+  c_1 e^{\lambda_1 t} \\
+  c_2 e^{\lambda_2 t} \\
+ \vdots \\
+ c_n e^{\lambda_n t}
+ \end{array} \right) = \sum\limits_{t=1}^n c_i e^{\lambda_i t} p_i $ </p> 
+ <!-- \limits 는 inline meth 형식($ 표시)에서 sum의 아랫첨자가 밑으로 오게 만듬-->
+
+<p>복잡하게 설명했지만 다음과 같이 설명할 수 있다.</p>
+<p> 단일변수인 경우 </p>
+<p> $ y(t)' = ay(t)$의 해는 $y(t) = ce^{at}$, , where c는 상수 /p>
+
+<p> 다일변수인 경우 </p>
+<p> $ \mathbf{y}'(t) = \mathbf{Ay}(t)$ 의 해는 단일변수인 경우로부터 다음과 같이 짐작할 수 있다.</p>
+<p> $ \mathbf{y}(t) = \mathbf{p}_i e^{\lambda_i t}$ ............① , where 는 $\mathbf{A}$의 한 고유치, $\mathbf{p}_i$는 $\mathbf{A}$의 한 고유벡터</p>
+<p>①를 $ \mathbf{y}'(t) = \mathbf{Ay}(t)$에 대입하면</p>
+<p> $\lambda_i \mathbf{p}_i e^{\lambda_i t} = \mathbf{Ap}_i e^{\lambda_i t} $ </p>
+<p> $\Longrightarrow \lambda_i \mathbf{p}_i = \mathbf{Ap}_i $ </p>
+<p> $\Longrightarrow (A - \lambda_i I)\mathbf{p}_i = 0 $ ............② </p>
+<p> 이 등식이 성립해야 해가 된다. 그런데 ②는 특성방정식을 나타내는 식이고 따라서 $\mathbf{p}_i$는 $\mathbf{A}$의 고유치와 고유벡터이다.  </p>
+<p> 다시 말하면 A의 고유치와 고유벡터로 이루어진 $ \mathbf{y}(t) = \mathbf{p}_i e^{\lambda_i t}$ 가 $ \mathbf{y}'(t) = \mathbf{Ay}(t)$ 의 해임을 알 수 있다. </p>
+
+<p>일반해는 서로 독립인 근들의 선형결합으로 표시된다.</p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+ </body> 
+</html>
