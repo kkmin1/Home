@@ -1,0 +1,64 @@
+/* This creates the counter  */
+body {
+  counter-reset: section cb_counter_var;
+}
+
+/* This increments the counter value and defines 
+the displayed content  */
+
+h2::before { 
+    counter-increment: section;
+    content:  counter(section) ". " ;
+}
+
+sup::after {
+  counter-increment: cb_counter_var;
+  content: counter(cb_counter_var);
+
+}
+
+/* This initially hides the footnote (i.e. span)  */
+input[type=checkbox] ~ span {
+    display:none; 
+}
+
+/* This styles the footnote text which appears 
+when the label is clicked  */
+ input[type=checkbox]:checked ~ span {
+    display:inline; 
+    font-size: 100%;
+    font-family: "Times New Roman", "Malgun Gothic", serif;
+    color: mix(#000, $text-color, 30%); 
+    color: white; 
+    background-color:black;
+    cursor:default;
+}
+
+/* This permanently hides the checkbox  */
+input[type=checkbox]{
+    display:none;  
+}
+
+/* This styles the footnote label to appear 
+like a hyperlink  */
+input[type=checkbox] ~ label {
+    display:inline;
+    cursor:pointer;
+  /*  color:$link-color; */
+    color:blue;
+    text-decoration:underline;
+}
+
+/* This styles the footnote label when the mouse 
+hover over it */
+input[type=checkbox] ~ label:hover {
+    text-decoration:underline;
+    cursor:pointer;
+    color:red;
+}
+
+/* This styles the footnote label after it is clicked */
+input[type=checkbox]:checked ~ label {
+    color:red;
+    text-decoration:none;
+}
