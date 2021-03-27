@@ -783,13 +783,28 @@ multi-line comment
 1. 실행
 >> julia hello.jl
 
-2. 또는 실행후 julia 화면에서 include("hello.jl")
+2. 또는 julia 실행 후 julia 화면에서 include("hello.jl")
 >> julia
 julia> include("hello.jl")
 =#
 
 println("Hello World")  # 개행
 print("안녕하세요!")  # 개행 없음
+
+println("") 
+print("hi \n")  # 개행
+
+성="홍"
+이름="길동"
+
+println("나의 이름은 ",성,이름, "입니다.")
+# println('홍'+'길동')
+# python과 달리 + 는 에러
+
+ht = 178 # 정수형
+wt = 77.7  # 실수형
+
+println("키는 ", ht,"cm,", " 몸무게는 ", wt, "kg")
 </pre>
 
 <pre id="g1">
