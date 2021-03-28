@@ -860,7 +860,6 @@ var4 = var1 / var2
 
 println("$(var1) + $(var2) = $(var3)")
 println("$(var1) / $(var2) = $(var4)")
-<pre id="jl2">
 
 </pre>
 
