@@ -805,6 +805,61 @@ ht = 178 # 정수형
 wt = 77.7  # 실수형
 
 println("키는 ", ht,"cm,", " 몸무게는 ", wt, "kg")
+
+name = "철수"
+age = 33
+println("내 이름은 $(name)이고 나이는 $(age)살입니다.")
+
+a = 3
+b = 4.1
+c = 7
+println(a, " + " , b, " = " , (a+b))   # 타입 자동추론
+println("$(a) / $(b) = $(a/c)")
+
+
+# 배열
+성 = ["김", "이", "박", "조"]
+println(성[1])   # 김,주의 :  index는 1부터 시작, 
+
+#=
+
+c 언어와 같이 % 기호를 활용하여 변수값을 출력할 수 있다. (%d 정수, %f 실수, %s 문자열)
+
+%5.2f처럼 출력하는 모양을 지정할 수 있다. (총 자릿수 5, 소수점 2자리까지)
+
+format 함수를 사용하면 좀 더 다양한 방식으로 출력을 할 수 있다.
+
+=#
+
+using Printf     # P는 대문자 주의!
+@printf("%d / %d = %.2f \n", a, c, (a/c))  # c언어형 출력. 소숫점 이하 두자리까지
+
+@printf("당신의 키는 %dcm이고, 몸무게는 %.2fkg이며, 이름은 %s입니다.\n", ht,wt,name)  # .2f는 wt는 소숫점 2자리까지만 출력
+
+    # 출력 : 당신의 키는 178cm이고, 몸무게는 77.70kg이며, 이름은 홍길동입니다.
+
+</pre>
+print("이름 : ")
+name = readline()
+print("나이 : ")
+age = readline()
+println("당신의 이름은 $(name)이고 나이는 $(age)살입니다.")
+
+print("정수 입력 : ")
+var1 = readline()
+print("실수입력 : ")
+var2 = readline()
+
+# 입력값은 string이므로 계산을 하기 위해서는 숫자화해야 함
+var1 = parse(Int, var1)
+var2 = parse(Float32, var2)
+var3 = var1 + var2
+var4 = var1 / var2
+
+println("$(var1) + $(var2) = $(var3)")
+println("$(var1) / $(var2) = $(var4)")
+<pre id="jl2">
+
 </pre>
 
 <pre id="g1">
