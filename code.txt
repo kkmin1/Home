@@ -839,6 +839,8 @@ using Printf     # P는 대문자 주의!
     # 출력 : 당신의 키는 178cm이고, 몸무게는 77.70kg이며, 이름은 홍길동입니다.
 
 </pre>
+
+<pre id="jl2">
 print("이름 : ")
 name = readline()
 print("나이 : ")
