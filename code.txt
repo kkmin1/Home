@@ -939,3 +939,117 @@ server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`); // 괄호안은 작은 떠옴표('')가 아니라 ~표시 밑에 있는 (``)임에 주의.
 });
 </pre>
+
+<pre id="ns2">
+
+</pre>
+
+<pre id="ns3">
+
+</pre>
+
+<pre id="mt1">
+% single line comment
+%{
+multiline comment
+run *.m file in matlab app.
+%}
+
+disp("hello world") 
+disp("?�녕?�세??") % No support Hangul 
+name = 'Alice';   % semicolon is needed for no display
+% if no semicolon, Alice is displayed in output panel.
+
+age = 12;
+X = [name,' will be ',num2str(age),' years old this year.'];
+disp(X)
+
+% 'c' type print 
+name = 'Alice';   
+age = 12;
+X = sprintf('%s will be %d years old this year.',name,age);
+disp(X)
+
+% no disp
+name = 'Alice';   
+age = 12;
+fprintf('%s will be %d years old this year.\n',name,age);
+<pre id="mt1">
+
+</pre>
+
+<pre id="mt2">
+x = input('name: ', 's');   % string input
+y = input('age: ');    % number input
+X = [x,' will be ',num2str(y),' years old this year.'];
+disp(X)
+
+disp('input numbers(real or integer)') % no type check, any type is possible.
+a = input('a: ');
+b = input('b: ');
+c = a+b;
+d = a/b;
+out1 = ['a + b = ', num2str(c)];
+out2 = ['a / b = ', num2str(d)];
+disp(out1)
+disp(out2)
+
+</pre>
+
+<pre id="mt3">
+% print star image
+
+n=input('Enter line number = ');
+
+for y=1:n
+for x=1:n
+  if x < y
+  fprintf('*');
+  end
+end
+fprintf('\n');
+end
+
+disp('')
+
+for y=1:n
+for x=1:n
+  if n-x < y
+    fprintf('*');
+  else
+    fprintf(' ');
+  end
+end
+fprintf('\n');
+end
+
+disp('')
+
+x = [];
+for i = 1 : n
+    x = strcat(x,'*');
+    disp(x)
+end
+
+disp('')
+
+x = [];
+for i = 1 : n
+    x = strcat(x,'*');
+    s = [blanks(n-i) x];
+    disp(s)
+end
+
+disp('')
+
+x = [];
+for i = 1 : n
+    x = strcat(x,'*');
+    s = [blanks(n-i) x];
+    if i == 1
+      disp([s]); % no symmetry print in first line
+    end
+    disp([s fliplr(s)])
+end
+</pre>
+

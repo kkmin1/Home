@@ -239,5 +239,17 @@ $(function(){
      $("p#ns3").click(function(){
         $("#center").load("code.txt pre#ns3");
      });
+
+     $("p#mt1").click(function(){
+        $("#center").load("code.txt pre#mt1");
+     });
+ 
+     $("p#mt2").click(function(){
+         $("#center").load("code.txt pre#mt2");
+      });
+     
+      $("p#mt3").click(function(){
+         $("#center").load("code.txt pre#mt3");
+      });
     
 });
