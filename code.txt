@@ -410,47 +410,151 @@ namespace 성적처리 {
 </pre>
 
 <pre id="j1">
-// 주석
-// 컴파일 >> javac hello.java
-// 실행 >> java hello
-// java에서는 파일명과 public class명이 같아야 함.
-
-public class hello {
+// single line comment
+/* multi line comment
+컴파일 >> javac out.java
+실행 >> java out
+java에서는 파일명과 public class명이 같아야 함.
+*/
+public class out {
     public static void main(String[] args) {
         System.out.println("Hello, world!"); // 자동 줄 바꿈. 빤드시 쌍따옴표("")로 묶어야 함.
         System.out.println("안녕하세요!");
-        System.out.print("내 이름은"); // 줄 바꿈 안함.
+        System.out.print("내 이름은 "); // 줄 바꿈 안함.
         System.out.printf("홍길동입니다.\n"); // \n은 줄 바꿈
 
         int ht = 178; // 정수형
         double wt = 77.7;  // 실수형
         String name = "홍길동"; // 문자열(string) 변수선언. 앞의 다른 변수형 선언과 달리 String의 S가 대문자임에 주의
         System.out.println("당신의 키는 " + ht +" cm이고, 몸무게는 " + wt + "kg이며, 이름은 " + name + "입니다.");
+
+        int a = 2;
+        int b = 3;
+        
+        System.out.println(a+b);
+        System.out.printf("a + b = %d \n", a+b);
+        System.out.format("a + b = %d \n", a+b);
+        System.out.println(a/b); // 정수형 나누기 정수형은 정수형이므로 결과는 0, 실수가 아니다.
+        // 실수가 나오기 위해서는 정수를 실수로 바꿔줌
+        System.out.println(a*1.0/b);
+        System.out.printf("a/b = %.2f \n", (double)a/b);
         }
 }
 </pre>
 
 <pre id="j2">
-import java.util.Scanner; // 입력을 받기위해 필요한 자바패키지.
+import java.util.Scanner;
 
-public class input { 
+public class input {
 
+public static void main(String []args) {
+
+    import java.util.Scanner;
+
+    public class input {
+    
     public static void main(String []args) {
+    
+    String name;
+    int age;
+    Scanner read = new Scanner(System.in);  // Scanner class에서 name 이라는 객체 생성
+    
+    System.out.print("이름 : ");
+    name = read.nextLine(); // 줄 입력은 nextLine()
+    System.out.print("나이 : ");
+    age = read.nextInt(); // 입력값은 항상 문자이므로 이를 정수화함
+    
+    System.out.println("당신의 이름은 "+name+"이고, 당신의 나이는 " +age+ "살입니다.");
+    read.close();
 
-          String name;
-          int age;
-          Scanner read = new Scanner(System.in);  // Scanner class에서 name 이라는 객체 생성
+    /////////////////////////////////////////////////////////////
 
-          System.out.print("이름 : ");
-          name = read.nextLine(); // 줄 입력은 nextLine() 함수를 쓴다.
-          System.out.print("나이 : ");
-          age = read.nextInt(); // 입력값은 항상 문자이므로 nextInt()를 써서 이를 정수화함
+    int num;
+    double real;
+    String str;
+        Scanner s1 = new Scanner(System.in);
 
-          System.out.println("당신의 이름은 "+name+"이고, 당신의 나이는 " +age+ "살입니다.");
-          read.close();
+        System.out.print("정수:");  // 실수를 입력하면 에러남.
+        num = s1.nextInt();    // 정수 입력
+        System.out.println("당신이 입력한 숫자는 " + num + " 입니다."); // java와 javac의 버전이 다르면 에러남.
+        System.out.printf("입력한 숫자는 %d 입니다.\n",num);   // %d 는 정수 
+        
+        Scanner s2 = new Scanner(System.in);
+        System.out.print("실수:");
+        real = s2.nextDouble();   // 실수 입력
+        System.out.println("당신이 입력한 숫자는 " + real + " 입니다."); 
+        System.out.format("입력한 숫자는 %.2f 입니다.\n",real);
+        
+        Scanner s3 = new Scanner(System.in);
+        System.out.print("문자열:");
+        str = s3.nextLine(); // 공백있는 문자열 입력. 공백없는 한 단어의 경우는 s1.next(); 로 쓴다.
+        System.out.println("당신이 입력한 문자는 " + str + " 입니다."); 
+        System.out.printf("입력한 문자는 %s 입니다.\n",str);  // %s 는 문자열 , %c는 단일 문자 
+        
+        ////////////////////////////////////////////////////////////
 
-    }
+        int num1, num2, num3 ;
+        double num4 ;
+    
+        Scanner sc = new Scanner(System.in);
+    
+        System.out.println("두 정수를 입력하시오");
+        System.out.print("num1 : ");
+            num1 = sc.nextInt();
+            System.out.print("num2 : ");
+            num2 = sc.nextInt();
+            
+        num3 = num1+num2;
+        num4 = (double)num1/num2;
+        String sum = String.valueOf(num3);
+        System.out.println("num1 + num2 = " +sum);
+        System.out.printf("num1 + num2 = %d \n", num3);
+        System.out.printf("num1 / num2 = %.2f \n", num4);
+   }
 }
+
+</pre>
+
+<pre id="j3">
+import java.util.Scanner;
+
+public class star2 {
+ 
+    public static void main(String[] args) {
+ 
+     System.out.print("정수 입력 : ");
+     Scanner input = new Scanner(System.in);
+     int n = input.nextInt(); 
+     String star = "*";
+     String spc = " ";
+
+// 좌측 붙은 삼각형
+      for (int y = 0; y < n; y++) {
+           for (int x = 0; x < n; x++) {
+              if (x<y) 
+                 System.out.printf("%s",star);
+              else 
+                 System.out.printf("%s", spc);
+              }
+          System.out.println();
+        }
+      System.out.println();
+
+
+// 우측 붙은 삼각형
+    for (int y = 0; y < n; y++) {
+           for (int x = 0; x < n; x++) {
+              if (x >= n-y) 
+                 System.out.printf("%s",star);
+              else 
+                 System.out.printf("%s", spc);
+              }
+          System.out.println();
+        }
+      System.out.println();
+     }
+ }
+
 </pre>
 
 <pre id="py1">
@@ -606,15 +710,111 @@ print("안녕하세요!")
 </pre>
 
 <pre id="k1">
-// comment
-/* multiline 주석
-컴파일    >> kotlinc hello.kt -include-runtime -d hello.jar
-실행      >> kotlin hello
+// single line comment
+
+/*
+compile >> kotlinc hello.kt -include-runtime -d hello.jar
+run     >> java -jar hello.jar
 */
 
 fun main(args: Array<String>) {
-   println("Hello, World!")
+	print("Hello, ") // no 개행
+	println("World!") // 개행
    println("안녕하세요")
+   
+// 변수선언은 val 혹은 var
+// val : 변경 불가능한 값, 상수
+// var : 변경 가능한 값, 변수
+// 변수든 상수든 무조건 초기화해야 함
+
+  var name = "홍길동" 
+   println("내 이름은 $name 입니다.")
+   
+   // 변수명 한글도 가능
+
+   val 성 = "홍" 
+   val 이름 = "길동"
+   println("당신의 이름은 ${성+이름}입니다.")
+   
+   var a : Int = 5 // 변수형은 변수명 뒤에 표시. 자동 추론에 의해 생략 가능
+   var b : Double = 3.1
+   var c : Float = 3.13f // float type은 값 뒤에 f를 붙여야 함
+   println("$a + $b = ${a + b}")// ${ }로 지정한 부분은 그대로 출력되지 않고, 표현식(expression)으로 인식되어 해당 수식을 계산한 후 출력합니다.
+   println("$a / $b = ${a / b}")
+   println("%d / %.1f = %.2f".format(a, b, (a/b)))
+
+ val d = 3 // 변수형은 자동 결정
+ val e = 1.5 
+   println("d + e = ${d + e}") 
+
+   val r = 5
+   val pi = 3.141592
+    println("반지름이 $r 일 때 원주의 길이는 %.2f입니다.".format(2 * pi * r))
+}
+</pre>
+
+<pre id="k2">
+import java.util.Scanner
+
+fun main(args: Array<String>){
+  print("이름: ")
+  var name  = readLine()!!  
+    // !!는 입력값이 null 여부 체크
+  print("나이: ")
+  var age  = readLine()!! 
+  println("내 이름은 ${name}이고 나이는 ${age} 살입니다.")
+  
+print("정수 입력:") 
+var i:Int=readLine()!!.toInt() 
+print("실수 입력:") 
+var d:Double=readLine()!!.toDouble() 
+print(i+d)
+
+  // 두 숫자를 다른 줄에 입력
+  println("두 정수를 다른 줄에 입력")
+  var var1 = readLine()!!.toInt() // 문자열의 정수화
+  var var2 = readLine()!!.toInt()
+  println("$var1 + $var2 = ${var1 + var2}")
+  
+  // 두 숫자를 한 줄에 입력
+  println("두 실수를 같은 줄에 입력")
+  var (a, b) = readLine()!!.split(' ') 
+  println("$a / $b = ${(a.toFloat() / b.toFloat())}")
+}
+
+</pre>
+
+<pre id="k3">
+fun main(args: Array<String>){
+var n = 7
+println("왼쪽붙은 삼각형")
+star1(n)
+println()
+println("오른쪽 붙은 삼각형")
+star2(n)
+}
+
+// 왼쪽붙은 삼각형
+fun star1(n : Int){
+
+for (y in 0 until n) { // n을 안 포함, 0..n 은 n을 포함
+for (x in 0 until n){
+if (y>=x) print("*") // print는 줄바꿈 안함
+}
+println()
+}
+}
+
+// 오른쪽 붙은 삼각형
+fun star2(n : Int){
+
+for (y in 0 until n) { 
+for (x in 0 until n){
+if (y>=n-x) print("*")
+else print(" ")
+}
+println()
+}
 }
 </pre>
 
@@ -684,14 +884,79 @@ object hello // 자바와 같이 파일명과 객체명이 같아야 함.
 </pre>
 
 <pre id="ph1">
-&lt;?php
-// comment. 파일 확장자는 php
+<html>
+ <head>
+  <title>PHP 테스트</title>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ </head>
+ <body>
+ 
+ <?php 
+// This is a single-line comment
 
-echo "Hello, World!"."&lt;br>";
-echo "안녕하세요!"."&lt;br>";
+# This is also a single-line comment
+
+/*
+multiple-lines comment 
+웹서버 구축 후 php 파일을 지정 폴더에 넣고
+웹브라우저에서 서버 ip 주소로 접속하여 실행한다.
+예) 테스트용으로 http://localhost/test.php 
+*/
+
+$name = "홍길동"; 
+echo '<p>Hello World</p>'; 
+echo $name."님 안녕하세요<br>"; // string 연결은 .로 한다.
+echo "내 이름은 $name 입니다.<br>"; // 이렇게 표현해도 된다. $name과 님 사이를 띄어야 함. 붙이면 '$name님'이 변수명이 됨.
+?> 
+
+<?php
+$x = 5.3;
+$y = 4;
+$z = $x + $y;
+$a = $x/$y;
+echo "x = $x <br>";
+echo "y = $y <br>";
+echo "x + y =".$z."<br>";
+echo "x / y = $a <br>";
 ?>
 </pre>
 
+<pre id="ph2">
+
+</pre>
+
+<pre id="ph3">
+<?php
+$n = 10; 
+echo "왼쪽 붙은 삼각형<br>";
+star1($n);
+echo "<br>";
+echo "오른 쪽붙은 삼각형<br>";
+star2($n);
+
+// 왼쪽붙은 삼각형
+function star1($n){
+for ($y=0; $y < $n ; $y++) {
+  for($x = 0; $x < $n; $x++ ) {
+    if ($x < $y) echo "*";
+    else echo "&nbsp";
+  }
+  echo "<br>";
+}
+}
+
+// 오른쪽 붙은 삼각형
+function star2($n){
+for ($y = $n-1; $y >= 0 ; $y--) {
+  for($x = 0; $x < $n; $x++ ) {
+    if ($x > $y) echo "*";
+    else echo "&nbsp";
+  }
+  echo "<br>";
+}
+}
+?>
+</pre>
 
 <pre id="js1">
 &lt;!--
