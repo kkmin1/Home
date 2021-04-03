@@ -974,7 +974,6 @@ disp(X)
 name = 'Alice';   
 age = 12;
 fprintf('%s will be %d years old this year.\n',name,age);
-<pre id="mt1">
 
 </pre>
 
