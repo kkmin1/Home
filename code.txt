@@ -1377,20 +1377,43 @@ IO.puts("안녕하세요")
 </pre>
 
 <pre id="cl1">
-; 한줄 주석. clojure 에서  ;는 명령끝을 의미하는 것이 아닌 주석의 시작을 의미
+
+; 한줄 주석
 (comment
 여러줄 주석
-컴파일 및 실행 >> clojure hello.clj
 )
 
 
-(println "Hello clojure!")
-;출력:Hello clojure!
-
 (ns examples.hello (:gen-class))
-(defn hello [] (println "안녕하세요")) ; hello 는 함수명.
+(defn hello [] (println "안녕하세요")) ;hello 는 함수명.
 (hello) ; hello 함수를 호출
-;출력: 안녕하세요
+
+(defn yourName [name age]
+   (println (format "당신의 이름은 %s이고 나이는 %d살입니다." name age)))
+
+(yourName "홍길동" 25)
+
+(defn Example []
+   (def x 1)
+   (def y 3)
+  
+   (println (+ x y)) ; 더하기
+   (println (/ x y)) ; 나누기, 1/3
+   (println (float(/ x y))) ; 0.3333
+   
+   (def z (float(/ x y)))
+   (println (format "%d / %d = %.2f" x y z)) ; 
+ )
+(Example)
+
+</pre>
+
+<pre id="cl2">
+
+</pre>
+
+<pre id="cl3">
+
 </pre>
 
 <pre id="rs1">
