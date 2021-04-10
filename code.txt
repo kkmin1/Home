@@ -897,19 +897,61 @@ println()
 </pre>
 
 <pre id="s1">
-// comment
-/* multiline 주석
-실행     >> scala hello.scala
+// single line comment
+
+/*
+multiline comment
 */
 
-object hello // 자바와 같이 파일명과 객체명이 같아야 함.
+object output // 자바와 같이 파일명과 객체명이 같아야 함. 
 {
   def main(args: Array[String]) {
-    println("Hello, world!")
-    println("안녕하세요!")
+    print("Hello, world!")  // no 개행
+    println("안녕하세요!") // 개행
+    
+  // Float 실수형, Int 정수형, String 문자열
+    var (name, age)= ("홍길동", 30) // 값이 있으면 타입은 자동 판정
+    var (kor, eng, math)=(35, 53, 73)
+    var ave : Float = ((kor+eng+ math):Float)/3 
+// 정수를 실수로 형변환. 안하면 나머지 없는 정수 반환
+    
+   println("당신의 이름은 " + name + "이고 나이는 " + age + "살입니다.") // java 형식
+    println(s"당신의 이름은 ${name}이고 나이는 ${age}살입니다.") // 문자열 앞에 s를 쓰면 $를 쓰고 변수이름을 바로 쓸 수 있음
+    println(s"$kor + $eng + $math = ${kor+eng+ math}이고 평균은 ${ave}입니다.")
+    
+    // c의 printf 형식
+     //java.lang.*은 자동으로 import
+     printf("%d + %d + %d = %d이고 평균은 %.2f입니다.\n",kor, eng, math, kor+eng+ math, ave)
+    println(f"$kor + $eng + $math = ${kor+eng+ math}%d이고 평균은 ${ave}%.2f입니다.") 
   }
 }
+
 </pre>
+
+<pre id="s2">
+import scala.io.StdIn._
+object input 
+{
+  def main(args: Array[String]) {
+
+val name = readLine("이름: ")
+val age = readLine("나이: ")
+println(s"당신의 이름은 ${name}이고 나이는 ${age}살입니다.")
+ print("정수: ")
+ val a = readInt()
+ print("정수: ")
+ val b = readInt()
+ val c : Float = (a:Float) / b
+ println(f"${a} / ${b} = ${c}%.2f")
+  }
+}
+
+</pre>
+
+<pre id="s3">
+
+</pre>
+
 
 <pre id="h1">
 <xmp>
@@ -1054,6 +1096,15 @@ object hello // 자바와 같이 파일명과 객체명이 같아야 함.
 </body>
 
 </xmp>
+</pre>
+
+<pre id="h2">
+
+</pre>
+
+<pre id="h3">
+자바스크립트를 이용해서 별찍기를 할 수 있다.
+별찍기 알고리듬 참조
 </pre>
 
 <pre id="ph1">
