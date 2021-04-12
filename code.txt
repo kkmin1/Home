@@ -1108,6 +1108,7 @@ println(s"당신의 이름은 ${name}이고 나이는 ${age}살입니다.")
 </pre>
 
 <pre id="ph1">
+<xmp>
 <html>
  <head>
   <title>PHP 테스트</title>
@@ -1143,13 +1144,18 @@ echo "y = $y <br>";
 echo "x + y =".$z."<br>";
 echo "x / y = $a <br>";
 ?>
+
+</xmp>
 </pre>
 
 <pre id="ph2">
+<xmp>
 
+</xmp>
 </pre>
 
 <pre id="ph3">
+<xmp>
 <?php
 $n = 10; 
 echo "왼쪽 붙은 삼각형<br>";
@@ -1180,6 +1186,7 @@ for ($y = $n-1; $y >= 0 ; $y--) {
 }
 }
 ?>
+</xmp>
 </pre>
 
 <pre id="js1">
