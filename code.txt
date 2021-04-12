@@ -955,6 +955,8 @@ println(s"당신의 이름은 ${name}이고 나이는 ${age}살입니다.")
 
 <pre id="h1">
 <xmp>
+
+<html>
 <!-- html 주석문 -->
 <!-- out.html을 웹브라우저의 주소창에 입력-->
 
@@ -1094,12 +1096,79 @@ println(s"당신의 이름은 ${name}이고 나이는 ${age}살입니다.")
 </table>
         </div>
 </body>
+</html>
 
 </xmp>
 </pre>
 
 <pre id="h2">
+<xmp>
 
+<html>
+	<head>
+    <meta charset="utf8"> 
+    	</head>
+    
+<body>
+
+<h2>login field</h2>
+
+<!--
+입력 방식으로 form tag를 쓴다.
+action 속성은 입력자료를 서버에서 처리하는 파일. 서버용 언어에 따라 php, python, node.js, JSP등 사용
+method는 post, get 2 종류
+post 방식: 보안상 바람직, get 방식:url에 입력내용 노출, 보안상 비바람직
+
+입력 자료를 화면에 출력하기 위해서는 javascript가 필요.
+-->
+<form action="/myscript" method="post">   
+
+<!--박스형 입력-->
+User name:<br>
+<input type="text" name="userid" value="yourID">  <!-- value=" "는 기본 입력값-->
+<br><br>
+User password:<br>
+<input type="password" name="psw" value="yourPW"><br>
+<p>The characters in a password field are masked (shown as asterisks or circles).</p><br>
+
+숫자 입력:<br>
+<input type="number" name="points" step="any"> <br>
+<!-- 정수 입력은  type="number", 소숫점 포함 실수를 입력하려면 step="any" 추가-->
+<br>
+<input type="submit" value="Submit"><br>
+<br><br>
+	
+성별:<br>
+<!--라디오 단추형 입력-->
+  <input type="radio" name="gender" value="male" checked> Male<br>  <!-- checked는 기본값-->
+  <input type="radio" name="gender" value="female"> Female<br>
+  <input type="radio" name="gender" value="other"> Other
+<br><br>
+
+출신지:<br>
+<!--drop down 형 입력-->
+<select name="do">
+  <option value="경기">경기도</option>
+  <option value="충청">충청도</option>
+  <option value="강원">강원도</option>
+  <option value="전라">전라도</option>
+</select>
+<br><br>
+
+<!--문장형 입력-->
+기타:<br>
+<textarea name="message" rows="10" cols="30">
+기본 입력문.
+</textarea>
+<br><br>
+	
+<button>submit</button>
+
+</form>
+
+</body>
+</html>
+</xmp>
 </pre>
 
 <pre id="h3">
@@ -1131,18 +1200,20 @@ multiple-lines comment
 $name = "홍길동"; 
 echo '<p>Hello World</p>'; 
 echo $name."님 안녕하세요<br>"; // string 연결은 .로 한다.
-echo "내 이름은 $name 입니다.<br>"; // 이렇게 표현해도 된다. $name과 님 사이를 띄어야 함. 붙이면 '$name님'이 변수명이 됨.
+echo "내 이름은 $name 입니다.<br>"; // 이렇게 표현해도 된다. $name 과 입니다. 사이를 띄어야 함. 
+echo "내 이름은 ${name}입니다.<br>"; 
 ?> 
 
 <?php
 $x = 5.3;
-$y = 4;
+$y = 3;
 $z = $x + $y;
 $a = $x/$y;
-echo "x = $x <br>";
+echo "x = $x <br>"; // 자동 타입 추정
 echo "y = $y <br>";
-echo "x + y =".$z."<br>";
-echo "x / y = $a <br>";
+echo "$x + $y = ".$z."<br>";
+echo "$x / $y = $a <br>";
+printf( "%.1f / %d = %.2f \n", $x, $y, $a);
 ?>
 
 </xmp>
@@ -1150,7 +1221,64 @@ echo "x / y = $a <br>";
 
 <pre id="ph2">
 <xmp>
+<head>
+   <meta charset="UTF-8">
+   <title>PHP Form Validation</title>
+</head>
 
+<!-- post 방식은 정보 노출 안됨 -->
+<form action = "input_output.php" method="post">
+Name: <input type="text" name="name"><br>
+E-mail: <input type="text" name="email"><br>
+post 방식: <input type="submit">
+</form>
+
+<!-- get 방식은 url에 정보 노출  -->
+<form action = "input_output.php" method="get">
+Name: <input type="text" name="name"><br>
+E-mail: <input type="text" name="email"><br>
+get 방식: <input type="submit">
+</form>
+
+<form action = "input_output.php" method="get">
+<!-- step = "any" 는 실수 입력 가능, 이게 없으면 정수만 입력 가능-->
+
+정수: <input type="number" name="var1"><br>
+정수: <input type="number" name="var2"><br>
+실수: <input type="number" step="any" name="var3"><br>
+<input type="submit" value="계산">
+</form>
+ 
+ <?php
+// local host에서 돌리면 안됨. 외부 php서버에서 돌려야 함
+
+if (isset( $_POST["name"]) || isset($_POST["email"])) { // isset() 함수는 변수의 존재 여부 확인
+echo "당신의 이름은 ".$_POST["name"]."입니다.<br>";
+echo "Your email address : ".$_POST["email"]; 
+exit();
+}
+   
+if (isset( $_GET["name"]) || isset($_GET["email"] )) {
+echo "당신의 이름은 ".$_GET["name"]."입니다.<br>";
+echo "Your email address : ".$_GET["email"]; 
+exit();
+}
+   
+if (isset( $_GET["var1"]) || isset($_GET["var2"]) || isset($_GET["var3"] )) {
+echo "<h2> 출력</h2>";
+echo "<textarea rows=\"4\" cols=\"50\">";  // "출력위해 이스케이프 \" 사용
+$var1 = $_GET["var1"];
+$var2 = $_GET["var2"];
+$var3 = $_GET["var3"];
+$frac = $var1/$var2;   // 변수의 타입 추론 
+echo "${var1} + ${var3} = ",$var1+$var3,"\n";  // textarea 내에서는 개행 명령이 \n
+echo "${var1} / ${var2} = ${frac}\n";
+
+printf("%d / %d = %.2f\n", $var1, $var2, $var1/$var2); // 소숫점 이하 두째자리까지
+echo "</textarea>";
+exit();
+}
+?>
 </xmp>
 </pre>
 
@@ -1267,6 +1395,72 @@ console.log(`당신의 이름은 ${이름}이고 나이는 ${나이}살입니다
 </script>
 
 </html>
+</xmp>
+</pre>
+
+<pre id="js2">
+<xmp>
+<head>
+   <meta charset="UTF-8">
+   <title> javascript 입력 </title>
+   
+    <script>
+    	// 문장에 직접 입력
+        function showMessage(){
+            var message = document.getElementById("message").value;
+            display_message.innerHTML= message;
+        }
+    </script>
+    
+    <script> 
+function input(){ 
+  var result = document.getElementById('text'); 
+  result.value =  prompt('문자열을 입력하세요: '); 
+} 
+document.getElementById('btn').onclick = input; 
+</script> 
+
+<script> 
+function calc(){ 
+  var num1 = document.getElementById('num1'); 
+  var num2 = document.getElementById('num2'); 
+  var oper= document.getElementById('oper'); 
+  var result = document.getElementById('result'); 
+  result.value = eval(num1.value + oper.value + num2.value); 
+} 
+document.getElementById('equals').onclick = calc; 
+</script> 
+</head>
+
+<body>
+<form>
+Enter message: <input type="text" id = "message">
+<input type="button" onclick="showMessage()" value="submit" />
+</form>
+<p> Your message is: <span id = "display_message"></span> </p>
+
+<input type="button" id="btn" value="입력"> <br><br>
+<input type="text" id="text"> <br><br><br>
+
+<input type="number" id="num1"> 
+<select id="oper"> 
+<option value="+">+</option> 
+<option value="-">-</option> 
+<option value="*">*</option> 
+<option value="/">/</option> 
+</select> 
+<input type="number" id="num2"> 
+<input type="button" id="equals" value="="> 
+<input type="number" id="result"> 
+
+</body>
+
+</xmp>
+</pre>
+
+<pre id="js3">
+<xmp>
+별찍기 알고리듬 참조
 </xmp>
 </pre>
 
