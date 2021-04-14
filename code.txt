@@ -949,6 +949,35 @@ println(s"당신의 이름은 ${name}이고 나이는 ${age}살입니다.")
 </pre>
 
 <pre id="s3">
+object star 
+
+  def main(args: Array[String]) {
+    var n=7;
+    star1(n);
+    star2(n);
+  }
+  
+def star1(n:Int)={
+     for (y <- 0 until n){   // 0에서 (n-1)까지
+       for (x <- 0 to n){  //  0부터 n까지
+	       if (y >= x) print("*");
+	       else print(" ");
+        }
+        println();
+      }
+   }
+   
+def star2(n:Int)={
+     for (y <- n-1 to 0 by -1){  // (n-1)에서 0까지 -1씩 감소
+       for (x <- 0 to n){
+	       if (y < x) print("*");
+	       else print(" ");
+        }
+        println();
+      }
+   }   
+   
+}
 
 </pre>
 
