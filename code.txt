@@ -1593,18 +1593,69 @@ println("$(var1) / $(var2) = $(var4)")
 </pre>
 
 <pre id="g1">
-// 코멘트
-// 컴파일 >> go build -o hello.out hello.go
-// 실행  >> ./hello.out
 
+// single line comment
+/* multiline comment
+// 컴파일 >> go build -o hello.out hello.go
+// run >> ./hello.out
+*/
+  
 package main
 
 import "fmt"
 
-func main() {  // 중괄호를 쓰는 명령어의 경우 중괄호를 이렇게 명령어 뒤에 붙여야 함. 줄 빠꿔 쓰면 에러남.
-    fmt.Printf("hello, world\n")
+func main() {
+    fmt.Println("hello, world")
     fmt.Printf("안녕하세요\n")
+    const (
+    age = "25" // 문자열
+    name = "홍길동"
+    )
+    fmt.Println("내 이름은",name, "이고 나이는",age, "살 입니다.")
+    fmt.Println("내 이름은 " + name + "이고 나이는 " + age + "살 입니다.")
+  
+    num1 := 7 // 자동 변수형 결정
+    var num2 float32 = 3.2 // 실수형 변수
+    num3 := float32(num1) + num2 // 연산을 위해서는 변수형이 같아야 함
+    num4 := float32(num1) / num2 
+    fmt.Printf("%d + %.1f = %.2f \n", num1, num2, num3)
+    fmt.Printf("%d / %.1f = %.2f \n", num1, num2, num4)
 }
+ 
+</pre>
+
+<pre id="g2">
+package main
+import ("fmt")
+ 
+func main() { 
+
+var age, name  string
+var a, b, c int 
+var d float32
+fmt.Print("나이 :") 
+fmt.Scan(&age) 
+
+fmt.Print("이름 :") 
+fmt.Scan(&name)
+fmt.Println("당신의 이름은 " + name + "이고 나이는 " + age + "살입니다.")
+
+fmt.Print("정수 :") 
+fmt.Scan(&a) 
+fmt.Print("정수 :") 
+fmt.Scan(&b) 
+
+c = a + b 
+d = float32(a) / float32(b)
+fmt.Printf("%d + %d = %d \n", a, b, c)
+fmt.Printf("%d / %d = %.2f \n", a, b, d)
+} 
+
+
+</pre>
+
+<pre id="g3">
+
 </pre>
 
 <pre id="ex1">
