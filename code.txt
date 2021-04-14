@@ -376,6 +376,7 @@ for(auto y: l1) {
 monodevelop 설치
 컴파일 >> mcs -out:hello.o hello.cs
 실행 >> mono hello.o
+
 */
 
 using System;
@@ -384,12 +385,29 @@ namespace HelloWorld {
     class HelloWorld {
 
         static void Main() {
-        Console.WriteLine("Hello World");
+        Console.Write("Hello, "); // no 개행
+        Console.WriteLine("World");  // 개행
         Console.WriteLine("안녕하세요!");
-        // Console.ReadKey(); // 다음 키 입력을 기다림
+        
+        int age = 32;
+        String name1 = "홍길동";
+        var name2 = "김병장";   // 자동 변수형 추론
+        Console.WriteLine("당신의 이름은 {0}이고 나이는 {1}살입니다.", name1, age);
+        Console.WriteLine("Hello " + name2 + "!");
+        
+    
+    // 변수형을 var로 설정 가능, 자동추론, 단 한 줄로 복수 선언은 불가
+        var a = 3; 
+        var b = 4.1; 
+        var c = 7;
+        
+        Console.WriteLine("{0} + {1} = {2}", a, b, a+b); // a+b는 실수형.
+        Console.WriteLine("{0} / {1} = {2:F2}", a, c, a/b); // a/c는 실수형. 자동형변환
+        // F2는 소숫점 이하 두자리까지
         }
     }
 }
+
 </pre>
 
 <pre id="cs2">
