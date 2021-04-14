@@ -1655,7 +1655,84 @@ fmt.Printf("%d / %d = %.2f \n", a, b, d)
 </pre>
 
 <pre id="g3">
+package main
 
+import (
+    "fmt"
+    "strings"
+    "strconv"  // strconv용
+)
+
+func main() {
+	n := 6
+	star1(n)
+	star2(n)
+	star3(n)
+	star4(n)
+	star5(n)
+	star6(n)
+	}
+
+func star1(n int){
+for y:= 0; y <= n; y++ {
+	for x:=0; x<=n; x++{
+		if y>x {
+fmt.Printf("*")
+} else{
+
+fmt.Printf(" ")
+}
+}
+fmt.Printf("\n")
+}
+}
+
+func star2(n int){
+list := make([]int, n+1) // 0에서 n까지 정수 숫자 배열을 만듬
+for y := range list {
+	for x:= range list{
+if y>x {
+fmt.Printf("*")
+} else{
+
+fmt.Printf(" ")
+}
+}
+fmt.Printf("\n")
+}
+}
+
+func star3(n int){
+for y := range [7] int{} { // 7개의 정수 리스트, 변수 n을 쓸 수 없음
+	for x:= range [7] int{} {
+if y>x {
+fmt.Printf("*")
+} else{
+fmt.Printf(" ")
+}
+}
+fmt.Printf("\n")
+}
+}
+
+func star4(n int){
+for i := 1; i <= n; i++ {
+fmt.Printf("%s\n", strings.Repeat("*", i)) //  *는 i회 반복
+}
+}
+
+func star5(n int){
+for i := 1; i <= n; i++ {
+fmt.Printf("%6s\n", strings.Repeat("*", i)) // 6개의 string 자릿수, *는 i회 반복
+}
+}
+
+func star6(n int){
+fmtString := "%" + strconv.Itoa(n) + "s\n"  // n개의 string 자릿수, Itoa => interger to string
+for i := 1; i <= n; i++ {
+fmt.Printf(fmtString, strings.Repeat("*", i))
+}
+}
 </pre>
 
 <pre id="ex1">
