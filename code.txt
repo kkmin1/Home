@@ -438,6 +438,48 @@ namespace 성적처리 {
 }
 </pre>
 
+<pre id="cs3">
+
+using System;
+
+class Program
+{
+static void Main(string[] args)
+{
+    int num = 8;
+       
+        star1(num);
+        Console.WriteLine();
+        star2(num);
+}    
+
+        static void star1(int n){
+         int row, col;
+         for (row = 1; row <= n; ++row)
+           { for (col = 1; col <=  row; ++col) 
+           Console.Write("*");
+             Console.WriteLine();
+           }
+      }
+
+     static void star2(int n){
+        int y, x;
+         for (y = 1; y <= n; ++y) 
+           { for (x = 1; x <= n; ++x)
+              if (y > n-x)
+                  Console.Write("*"); 
+              else
+                  Console.Write(" "); 
+      
+               Console.WriteLine(); 
+             
+           }
+      }
+
+}
+
+</pre>
+
 <pre id="j1">
 // single line comment
 /* multi line comment
