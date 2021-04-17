@@ -1897,6 +1897,8 @@ println!("{0} / {1:.2} = {2:.2}", x, y, x as f32/y); // {0}{1}{2}는 각자 첫�
 }
 
 </pre>
+
+<pre id="rs2">
 use std::io;
     
 fn main() {
@@ -1925,9 +1927,9 @@ fn main() {
     println!("{0} / {1} =  {2:.2}", x, y, (x as f32 / y as f32));
     }
 
-<pre id="rs2">
-
 </pre>
+
+<pre id="rs3">
 fn main(){
 let n = 7i32;
 star1(n);
@@ -1954,8 +1956,6 @@ for x in 0..n {
 println!("");
 }
 }
-
-<pre id="rs3">
 
 </pre>
 
