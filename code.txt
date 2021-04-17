@@ -802,6 +802,100 @@ printf("%d / %.2f = %.2f \n", $a, $b, $div);
 
 <pre id="pl3">
 
+my $num = 7;
+
+# 왼쪽붙은 직각삼각형
+sub star1{
+my $n=shift @_;  # perl에서는 함수의 인자를 이렇게 선언, @_는 기본 변수
+for (my $y = $n; $y >0; $y-- ) {
+for (my $x = 0; $x < $n; $x++ ) {
+if ($y <= $n - $x)
+{ print "*";}
+else
+{print " ";}
+}
+print "\n";
+}
+}
+
+# 왼쪽붙은 직각삼각형
+sub star2{
+my $n=shift @_;  
+for my $y (reverse 0 .. $n) { # 역순으로 시작
+for my $x (0 .. $n ) {
+if ($y < $n - $x)
+{ print "*";}
+else
+{print " ";}
+}
+print "\n";
+}
+}
+
+
+# 오른쪽붙은 직각삼각형
+sub star3{
+my $n=shift @_;  
+for my $y (reverse 1 .. $n) {
+print " " for 0..$y;
+print "*" for $y..$n;
+print "\n";
+}
+}
+
+# 오른쪽붙은 직각삼각형
+sub star4{
+my $n=shift @_;  
+print " " x $_, "*" x ($n-$_), "\n" for 0..$n;
+}
+
+
+# 왼쪽붙은 역직각삼각형
+sub star5{
+my $n=shift @_;
+print map { "*" x $_, "\n" } reverse 1 .. $n;  # $_ 는 기본 변수, x 연산자는 스트링 반복
+}
+
+# 왼쪽붙은 직각삼각형
+sub star6{
+  my $n=shift @_;
+  print "*" x $_."\n" for 1..$n;   
+}
+
+# 피라미드형
+sub star7{
+my $n=shift @_;  
+for my $y (reverse 0 .. $n) { 
+for my $x (-$n .. 0 ) {
+if ($y <= $n + $x)
+{ print "*";}
+else
+{print " ";}
+}
+for my $x (1 .. $n) {
+if ($y <= $n - $x)
+{ print "*";}
+else
+{print " ";}
+}
+
+print "\n";
+}
+}
+
+star1($num);
+print "\n";
+star2($num);
+print "\n";
+star3($num);
+print "\n";
+star4($num);
+print "\n";
+star5($num);
+print "\n";
+star6($num);
+print "\n";
+star7($num);
 </pre>
 
 <pre id="r1"><xmp>
