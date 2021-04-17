@@ -1883,14 +1883,77 @@ IO.puts("안녕하세요")
 */
 
 fn main() {
-    println!("Hello, Rust!");
-     println!("안녕하세요!");
-    }
+    print!("Hello, Rust!");  // no 개행, !는 매크로를 의미
+    println!("안녕하세요!"); // 개행
+
+let str1 = "홍길동"; // 문자열
+let x : i32 = 25; //immutable, (default), i32는 32비트 정수형
+let y = 68.50f32; // f32는 실수형, type 선언시 값뒤에 적어도 됨, 단 붙여 써야함.
+println!("내 이름은 {}이고 나이는 {}살이고 몸무게는 {:.2}kg입니다.", str1, x, y);
+
+println!("{0} / {1:.2} = {2:.2}", x, y, x as f32/y); // {0}{1}{2}는 각자 첫번째, 두번째, 세번째 인자
+// x as f32는 정수형 x를 실수형으로 형변환
+
+}
+
 </pre>
+use std::io;
+    
+fn main() {
+    println!("이름");
+    let mut name = String::new();
+    io::stdin().read_line(&mut name).expect("Failed to read line"); // expect()는 예외 처리
+    if let Some('\n')=name.chars().next_back() {
+        name.pop();} // 개행문자 제거
+    println!("나이");
+    let mut age = String::new();
+    io::stdin().read_line(&mut age).expect("Failed to read line");
+    if let Some('\n')=age.chars().next_back() {
+        age.pop();}
+    println!("당신의 이름은 {}이고 나이는 {}살 입니다.", name, age);
+ 
+ // 숫자 입력시 줄바꿈  
+    println!("정수 : "); 
+    let mut x = String::new();
+    io::stdin().read_line(&mut x).expect("failed to read input.");
+    let x: i32 = x.trim().parse().expect("invalid input");  // trim은 개행문자 제거, parse는 문자의 숫자화
+    println!("정수 : "); 
+    let mut y = String::new();
+    io::stdin().read_line(&mut y).expect("failed to read input.");
+    let y: i32 = y.trim().parse().expect("invalid input");  
+    println!("{} + {} =  {}", x, y, x + y);
+    println!("{0} / {1} =  {2:.2}", x, y, (x as f32 / y as f32));
+    }
 
 <pre id="rs2">
 
 </pre>
+fn main(){
+let n = 7i32;
+star1(n);
+println!("");
+star2(n);
+}
+
+fn star1(n : i32){
+for y in 0..n {
+for x in 0..n {
+	if x <= y {print! ("*");}
+	else {print! (" ");}
+}
+println!("");
+}
+}
+
+fn star2(n : i32){
+for y in (0..n).rev() {  // rev()는 역순으로 배열
+for x in 0..n {
+	if x >= y {print! ("*");}
+	else {print! (" ");}
+}
+println!("");
+}
+}
 
 <pre id="rs3">
 
@@ -1947,12 +2010,17 @@ main = do
 </pre>
 
 <pre id="hs2">
-main = do
-  putStrLn "이름 : "
+main = do
+
+  putStrLn "이름 : "
+
   name <- getLine
-  putStrLn "나이 : "
-  age <- getLine
-  putStrLn ("내 이름은 " ++ name ++ "이고 나이는 " ++ age ++ "살입니다.")
+  putStrLn "나이 : "
+
+  age <- getLine
+
+  putStrLn ("내 이름은 " ++ name ++ "이고 나이는 " ++ age ++ "살입니다.")
+
   
   putStrLn "enter value for x: "
   input1 <- getLine
