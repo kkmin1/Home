@@ -1967,29 +1967,82 @@ main = do
 </pre>
 
 <pre id="hs3">
-n = 6 
+-- 한줄 별출력 함수
+starRow 0 = return ()
+starRow n =
+  do
+    putStr "*"
+    starRow (n-1)
+
+
+-- 한줄 공백 출력 함수
+spaceRow 0 = return ()
+spaceRow n =
+  do
+    putStr " "
+    spaceRow (n-1)
+
 
 -- 왼쪽 붙은 삼각형
-star1 =  concat[starLow1(y) ++ "\n"| y <- [1..n]]
+star1 0 = return ()
+star1 n =
+  do
+    star1 (n-1)
+    starRow (n)
+    putStrLn ""
+
+
+-- 오른쪽 붙은 삼각형
+star2 (0, sp) = return ()
+star2 (st, sp) =
+  do 
+    star2 (st-1, sp+1)
+    putStrLn ""
+    spaceRow (sp)
+    starRow (st)
+
+
+-- 피라미드형
+star3 (0, sp) = return ()
+star3 (st, sp) =
+  do 
+    star3 (st-1, sp+1)
+    putStrLn ""
+    spaceRow (sp)
+    starRow (2*st-1)
+
+
+-- 왼쪽 붙은 삼각형
+star4 =  concat[starLow1(y) ++ "\n"| y <- [1..n]]
 starLow1(y) =  concat["*" ++ ""| x <- [1..n], y > x]
 
 -- 왼쪽 붙은 역삼각형
-star2 =  concat[concat ["*" ++ ""| x <- [1..n], y < x] ++ "\n"| y <- [1..n]]
+star5 =  concat[concat ["*" ++ ""| x <- [1..n], y < x] ++ "\n"| y <- [1..n]]
 
 -- 오른쪽 붙은 역삼각형
-star3 =  concat[concat [" " ++ ""| x <- [1..n], y > x] ++ concat ["*" ++ ""| x <- [1..n], y < x]++"\n"| y <- [1..n]]
+star6 =  concat[concat [" " ++ ""| x <- [1..n], y > x] ++ concat ["*" ++ ""| x <- [1..n], y < x]++"\n"| y <- [1..n]]
 
 -- 오른쪽 붙은 삼각형
-star4 =  concat[concat [" " ++ ""| x <- [1..n], y < x] ++ concat ["*" ++ ""| x <- [1..n], y > x]++"\n"| y <- [1..n]]
+star7 =  concat[concat [" " ++ ""| x <- [1..n], y < x] ++ concat ["*" ++ ""| x <- [1..n], y > x]++"\n"| y <- [1..n]]
 
-main = do 
-putStr star1
-putStrLn ""
-putStr star2
-putStrLn ""
-putStr star3
-putStrLn ""
-putStr star4
+n = 7
+
+main = 
+  do
+    star1 n
+    putStrLn ""
+    star2 (n,0)
+    putStrLn ""
+    star3 (n,0)
+    putStrLn "" 
+    putStr star4
+    putStrLn ""
+    putStr star5
+    putStrLn ""
+    putStr star6
+    putStrLn ""
+    putStr star7
+
 
 </pre>
 
