@@ -203,6 +203,19 @@ $(function(){
         $("#center").load("code.txt pre#rs3");
      });
 
+   $("p#hs1").click(function(){
+       $("#center").load("code.txt pre#hs1");
+    });
+    
+    $("p#hs2").click(function(){
+        $("#center").load("code.txt pre#hs2");
+     });
+    
+     $("p#hs3").click(function(){
+        $("#center").load("code.txt pre#hs3");
+     });
+
+
     $("p#ex1").click(function(){
        $("#center").load("code.txt pre#ex1");
     });
