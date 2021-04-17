@@ -1888,6 +1888,111 @@ fn main() {
     }
 </pre>
 
+<pre id="rs2">
+
+</pre>
+
+<pre id="rs3">
+
+</pre>
+
+<pre id="hs1">
+-- 한줄 주석
+{--
+여러줄 주석
+ haskell은 함수지향형 언어로서. 변수명, 객체 등 모든 것을 함수로 봄
+실행: > runhaskell hello.hs
+--}
+
+import Text.Printf  -- printf 함수에 사용 
+
+num = 8  -- 정수형, 자동추론
+num1 = 8  -- 타입을 명시하지 않으면 아래 더하기 계산이 있으므로 타입을 일치하기 위해 실수형으로 추론
+num2 = 4.5 -- 실수형
+c1 = 'a' -- char 형
+a = "hello" -- [char],  문자 list 형
+b = "haskell"
+
+{-- 
+main 함수는 c의 main 함수,   java의 main 클래스에 대응하는 haskell의 기본 입출력 함수
+main = { }, 명령이 여러개일 때는 do 사용하여 ;로 구분, 
+중괄호는 생략 가능하며 줄바꿈으로 ; 대체. 대신 줄은 맞춰야 함
+--}
+
+main = do
+        putStr "Hello"     -- no 개행
+        putStrLn "World"      -- 개행, HelloWorld. 따옴표가 안찍힘.
+        print "Hello World"   -- "Hello World". 따옴표가 찍힘.
+
+        print (num*4)    -- 32, 괄호가 있어야 함, 개행
+        print(num /= 8) -- False, /=은 다르다 기호. 다른 언어와 다름
+        print (num1*4)    -- 32.0
+        print $ num1*4     -- 32.0, $를 쓰면 괄호안해도 됨
+        putStrLn (a++" "++b)      -- hello haskell, 두 문자열의 합은 ++
+        print (num1 + num2)    -- 12.5
+        putStrLn(show(num1 + num2))   -- 12.5, putStrLn는 문자를 출력, show 함수는 숫자를 문자화
+        print $ show(num1)++" + "++show(num2)++" = " ++show(num1+num2) -- 출력시 타입을 일치시켜야 함. 따라서 숫자를 문자화
+        putStrLn $ show $ num1 + num2    -- 12.5
+        (putStrLn.show)(num1) -- .은 두 함수를 연결하는 역할
+
+
+        let var1 = 11 -- main 함수내 변수 설정은 let을 써야함
+        let var2 = 3 
+        printf "%d \n" (var1::Int)
+        printf "%d + %d = %d \n" var1 var2 (var1+var2)
+        let a = fromIntegral var1 :: Float  -- 정수를 실수로 변환
+        let b = fromIntegral var2 :: Float
+        printf "%f / %f = %.2f \n" a b (a / b)
+
+</pre>
+
+<pre id="hs2">
+main = do
+  putStrLn "이름 : "
+  name <- getLine
+  putStrLn "나이 : "
+  age <- getLine
+  putStrLn ("내 이름은 " ++ name ++ "이고 나이는 " ++ age ++ "살입니다.")
+  
+  putStrLn "enter value for x: "
+  input1 <- getLine
+  putStrLn "enter value for y: " 
+  input2 <- getLine 
+  let x = (read input1 :: Int)
+  let y = (read input2 :: Int)
+  print (show(x)++ " + " ++show(y)++ " = " ++show(x + y))
+  let x1 = fromIntegral x :: Float 
+  let y1 = fromIntegral y :: Float 
+  print(show(x1)++ " / " ++show(y1)++ " = " ++show(x1 / y1))
+</pre>
+
+<pre id="hs3">
+n = 6 
+
+-- 왼쪽 붙은 삼각형
+star1 =  concat[starLow1(y) ++ "\n"| y <- [1..n]]
+starLow1(y) =  concat["*" ++ ""| x <- [1..n], y > x]
+
+-- 왼쪽 붙은 역삼각형
+star2 =  concat[concat ["*" ++ ""| x <- [1..n], y < x] ++ "\n"| y <- [1..n]]
+
+-- 오른쪽 붙은 역삼각형
+star3 =  concat[concat [" " ++ ""| x <- [1..n], y > x] ++ concat ["*" ++ ""| x <- [1..n], y < x]++"\n"| y <- [1..n]]
+
+-- 오른쪽 붙은 삼각형
+star4 =  concat[concat [" " ++ ""| x <- [1..n], y < x] ++ concat ["*" ++ ""| x <- [1..n], y > x]++"\n"| y <- [1..n]]
+
+main = do 
+putStr star1
+putStrLn ""
+putStr star2
+putStrLn ""
+putStr star3
+putStrLn ""
+putStr star4
+
+</pre>
+
 <pre id="ns1">
 // node.js 설치
 // console에서 실행
@@ -1925,7 +2030,7 @@ run *.m file in matlab app.
 %}
 
 disp("hello world") 
-disp("?�녕?�세??") % No support Hangul 
+disp("안녕") % No support Hangul 
 name = 'Alice';   % semicolon is needed for no display
 % if no semicolon, Alice is displayed in output panel.
 
