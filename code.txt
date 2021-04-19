@@ -2339,20 +2339,21 @@ fprintf('%d / %d = %.2f \n',a(1),a(2), a(1)/a(2));
 </pre>
 
 <pre id="mt2">
-x = input('name: ', 's');   % string input
-y = input('age: ');    % number input
-X = [x,' will be ',num2str(y),' years old this year.'];
+name = input('이름: ', 's');   % string input
+age = input('나이: ');    % number input
+X = ['내 이름은 ' name,'이고 나이는 ',num2str(age),' 입니다.'];
 disp(X)
 
-disp('input numbers(real or integer)') % no type check, any type is possible.
-a = input('a: ');
-b = input('b: ');
+disp('숫자 입력(real or integer)') % no type check, any type is possible.
+a = input('숫자: ');
+b = input('숫자: ');
 c = a+b;
 d = a/b;
-out1 = ['a + b = ', num2str(c)];
-out2 = ['a / b = ', num2str(d)];
+out1 = [num2str(a), ' + ', num2str(b), ' = ', num2str(c)];
+out2 = [num2str(a), ' / ', num2str(b), ' = ', num2str(d)];
 disp(out1)
 disp(out2)
+
 
 </pre>
 
