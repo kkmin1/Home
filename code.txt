@@ -2315,6 +2315,7 @@ multiline comment
 실행
 >> *.m 
 %}
+% octave는 한글 안됨
 
 disp("hello world") % 개행
 disp("안녕")
@@ -2360,8 +2361,18 @@ disp(out2)
 <pre id="mt3">
 % print star image
 
-n=input('Enter line number = ');
+star1(7);
+disp(" ");
+star2(7);
+disp(" ");
+star3(7);
+disp(" ");
+star4(7);
+disp(" ");
+star5(7);
 
+% 왼쪽 붙은 직각삼각형
+function star1(n)
 for y=1:n
 for x=1:n
   if x < y
@@ -2370,9 +2381,10 @@ for x=1:n
 end
 fprintf('\n');
 end
+end
 
-disp('')
-
+% 오른쪽 붙은 직각삼각형
+function star2(n)
 for y=1:n
 for x=1:n
   if n-x < y
@@ -2383,25 +2395,29 @@ for x=1:n
 end
 fprintf('\n');
 end
+end
 
-disp('')
-
+% 왼쪽 붙은 직각삼각형
+function star3(n)
 x = [];
 for i = 1 : n
     x = strcat(x,'*');
     disp(x)
 end
+end
 
-disp('')
-
+% 오른쪽 붙은 직각삼각형
+function star4(n)
 x = [];
 for i = 1 : n
     x = strcat(x,'*');
     s = [blanks(n-i) x];
     disp(s)
 end
+end
 
-disp('')
+% 정삼각형
+function star5(n)
 
 x = [];
 for i = 1 : n
@@ -2411,6 +2427,7 @@ for i = 1 : n
       disp([s]); % no symmetry print in first line
     end
     disp([s fliplr(s)])
+end
 end
 </pre>
 
