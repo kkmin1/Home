@@ -898,37 +898,108 @@ print "\n";
 star7($num);
 </pre>
 
-<pre id="r1"><xmp>
+<pre id="r1">
+<xmp>
+# single line comment
+
+=begin
+multi line comment
+실행
+> ruby out.rb
+=end
+
 puts '안녕하세요'; # 자동 개행
-print "내 이름은 홍길동입니다.\n"; # print는 자동 개행 안됨. \n 포함시 싱글 따옴표 안됨
+print "내 이름은 홍길동입니다.\n"; #  자동 개행 안됨. \n 포함시 싱글 따옴표 안됨
 p "hello!"; # "hello!", 따옴표도 출력, 자동 개행
 
-print <<aaa # <<와 aaa 사이에 여백이 있으면 안됨. aaa은 식별자. 이름은 아무거나 쓰면됨
+print <<aaa    
    이 행은 연습입니다.  공백도 그대로 출력됩니다.
        두 줄 이상 출력시 이렇게 하면 됩니다.
 aaa
+#  <<와 aaa 사이에 여백이 있으면 안됨. aaa은 식별자. 이름은 아무거나 쓰면됨
 
 # c 형 출력
 printf "여기에 %d 개의 %s가 있읍니다.\n", 3, '사과'
 
-# 변수선언은 따로 하지 않는다. 변수의 변수형은 자동 결정.
-age, b, c, name = 34, 3, 2.2, '홍길동'; # 변수 중복 대입 가능. age = 34, b = 3, c = 2.2, name = '홍길동'
-sum = age + b;
-div = age/b; # 3, 정수끼리 나누는 것이므로 div도 정수형, 11.333333333333334 이 아니다.
-div2 = age/c; # 15.45454545454545453, 정수/실수 이므로 div2는 실수형
-puts sum, div, div2;
-printf  "%.2f\n", div2; # 15.45
-puts "안녕, #{name}!"; # 안녕, 홍길동!
-print "내 이름은 ", name, "이고 나이는 ", age, "살 입니다.\n"; # print name + age + "\n"; 는 에러 
-</xmp></pre>
+# 변수선언은 따로 하지 않는다. 변수형 자동 결정
+name, age, b, c,  = '홍길동', 25, 3, 2.2, ; 
+
+puts "내 이름은 #{name}이고 나이는 #{age}살입니다."; 
+print "내 이름은 ", name, "이고 나이는 ", age, "살 입니다.\n"; 
+
+sum = a + b;
+c = age/a; 
+# 정수끼리 나누는 것이므로 c도 정수, c = 8
+
+d = age/b; 
+# 정수/실수 이므로 d는 실수, d = 11.3636
+
+puts "#{a} + #{b} = #{sum}";
+puts "#{age} / #{a} = #{c}";
+puts "#{age} / #{b} = #{d}";
+printf  "%d / %.2f = %.2f\n", age, b, d; 
+
+</xmp>
+</pre>
 
 <pre id="r2">
-print '이름 : '
+
+# gets는 입력값 받는 메서드
+# chomp는 입력값에서 앤터값을 제거하는 메서드
+
+puts '이름 :'
 name = gets.chomp
-print '나이 : '
+puts '나이 :'
 age = gets.chomp
-print "당신의 이름은 ", name,"이고 나이는 ", age," 살입니다.\n"
+print "당신의 이름은 ", name, "이고 나이는 ", age, " 살입니다.\n"
+
 print "당신의 이름은 #{name}이고 나이는 #{age} 살입니다.\n"
+
+puts '정수 :'
+a = gets.chomp.to_i   # to_i는 입력받은 문자열을 정수로 변환
+puts '정수 :'
+b = gets.chomp.to_i
+
+c = (a / b).to_f  # to_f는 입력받은 문자열을 실수로 변환
+
+
+printf "%d / %d =  %.2f ", a, b, c
+</pre>
+
+<pre id="r3">
+# 왼쪽 붙은 직각삼각형
+# 아래 방식 모두 같은 결과
+
+def leftRightTringle(n)
+for i in 1..n
+   puts("*" * i) # 개행
+end
+end
+
+def leftRightTringle2(n)
+n.times do
+  |i| puts ("*" * (i+1)) # 5는 [0,1,2,3,4]를 의미
+end
+end
+
+def leftRightTringle3(n)
+n.times { |i| puts "*" * (i+1) }
+end
+
+def leftRightTringle4(n)
+puts ((1..n).map{ |i| "*" * i }.join("\n"))
+end
+
+def leftRightTringle5(n)
+(1..n).each{ |i| puts "*" * i}
+end
+
+n = 5
+leftRightTringle(n)
+leftRightTringle2(n)
+leftRightTringle3(n)
+leftRightTringle4(n)
+leftRightTringle5(n)
 </pre>
 
 <pre id="l1">
@@ -2241,28 +2312,29 @@ server.listen(port, hostname, () => {
 % single line comment
 %{
 multiline comment
-run *.m file in matlab app.
+실행
+>> *.m 
 %}
 
-disp("hello world") 
-disp("안녕") % No support Hangul 
-name = 'Alice';   % semicolon is needed for no display
-% if no semicolon, Alice is displayed in output panel.
+disp("hello world") % 개행
+disp("안녕")
+name = '홍길동';   % semicolon is needed for no display
+age = 25;
 
-age = 12;
-X = [name,' will be ',num2str(age),' years old this year.'];
-disp(X)
+X = ['내 이름은 ' ,name,'이고 나이는 ',num2str(age),' 살입니다.']; 
+disp(X)  % num2str()는 숫자의 문자화
 
-% 'c' type print 
-name = 'Alice';   
-age = 12;
-X = sprintf('%s will be %d years old this year.',name,age);
-disp(X)
+fprintf('내 이름은 %s이고 나이는 %d 살입니다. \n',name,age);
 
-% no disp
-name = 'Alice';   
-age = 12;
-fprintf('%s will be %d years old this year.\n',name,age);
+a = [3 7 1.2];
+Z = [num2str(a(1)), ' + ', num2str(a(3)), ' = ', num2str((a(1)+a(3)))];
+disp(Z)
+% matlab에서 첫번째 원소는 a(1)
+
+Y = [num2str(a(1)), ' / ', num2str(a(2)), ' = ', num2str((a(1)/a(2)))];
+disp(Y)
+
+fprintf('%d / %d = %.2f \n',a(1),a(2), a(1)/a(2));
 
 </pre>
 
