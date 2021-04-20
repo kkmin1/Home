@@ -5,12 +5,13 @@
 header{
   border:1px solid gray;
   text-align: center;
-  display:flex;
   background : black;
   color : white;
+  /*
   padding : 20px;
   font-weight : 600;
   font-size : 20px;
+  */
 }
 footer{
   border: 1px solid gray;
