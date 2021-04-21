@@ -1990,12 +1990,46 @@ fmt.Printf(fmtString, strings.Repeat("*", i))
 </pre>
 
 <pre id="ex1">
-# 코멘트
+
+# single line comment, no multiline comment
 # 실행 >> elixirc hello.ex # 컴파일 및 실행
 # 실행 >> elixir hello.exs # 스크립트 파일
 
-IO.puts "Hello, Elixir"
+IO.puts "Hello, Elixir" # 개행
 IO.puts("안녕하세요")
+name = "홍길동"
+age = 25
+IO.puts("내 이름은 #{name}이고 나이는 #{age}살입니다.")
+IO.puts("내 이름은 " <> name <> "이고 나이는 " <> to_string(age) <> "살입니다.")
+a = 2
+b = 3
+c = a/b # 자동 변수형 결정
+c = Float.round(c,2) # 소숫점 2 자리까지
+IO.puts("#{a} + #{b} = #{a+b}")
+IO.puts("#{a} / #{b} = #{c}")
+</pre>
+
+<pre id="ex2">
+name=IO.gets("이름 : ")
+name=String.trim(name) # 개행문자 제거
+age=IO.gets("나이 : ")
+age=String.trim(age) 
+IO.puts("당신의 이름은 #{name}이고 나이는 #{age}살입니다.")
+
+a=IO.gets("정수 입력 : ")
+a=String.trim(a) 
+a=String.to_integer(a)
+b=IO.gets("정수 입력 : ")
+b=String.trim(b) 
+b=String.to_integer(b)
+IO.puts("#{a} / #{b} = #{a/b}")
+c = a/b # 자동 변수형 결정
+c = Float.round(c,2) # 소숫점 2 자리까지
+IO.puts("#{a} + #{b} = #{a+b}")
+IO.puts("#{a} / #{b} = #{c}")
+</pre>
+
+<pre id="ex3">
 </pre>
 
 <pre id="cl1">
