@@ -1714,7 +1714,8 @@ Enter message: <input type="text" id = "message">
 
 <pre id="js3">
 <xmp>
-별찍기 알고리듬 참조
+ <a href = "https://kkmin1.github.io/kkmin/star.html" target="_blank"> 별찍기 알고리듬 </a>
+ 참조
 </xmp>
 </pre>
 
