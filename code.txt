@@ -4,7 +4,7 @@
 </head>
 
 
-
+<div id= cod>
 <pre id="c1">
 // 주석
 // 확장자 *.c
@@ -2519,3 +2519,4 @@ end
 end
 </pre>
 
+</div>
