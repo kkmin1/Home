@@ -22,7 +22,10 @@ footer{
   color: red;
   text-align: center;
   border: 1px   solid  silver;
-  
+}
+
+.cod{
+font-size : 36px
 }
 
 nav {
