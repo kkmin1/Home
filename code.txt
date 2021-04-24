@@ -2065,10 +2065,64 @@ IO.puts("#{a} / #{b} = #{c}")
 </pre>
 
 <pre id="cl2">
+(println "이름 : ")
+(def Name (read-line)) ; (read-line)은 입력 함수
 
+(println "나이 : ")
+(def age (read-line)) ;
+(println (format "당신의 이름은 %s이고 나이는 %s살입니다." Name age))
+; 입력값은 문자열
+
+; 줄 단위 입력. 각 정수를 다른 줄에 입력
+(println "두 정수를 줄 바꿔서 입력하시오")
+(def num1 (read-line))
+(def num2 (read-line))
+(def m (Integer/parseInt num1)) ; 문자열의 정수화, java 문법
+(def n (Integer/parseInt num2))
+(def var1 (read-string num1)) ; 문자열의 정수화, clojure 문법
+(def var2 (read-string num2))
+(def var3 (+ m n))
+(def var4 (double(/ var1 var2)))  ; 정수의 실수화
+(println (format "%d + %d = %d" m, n, var3))
+(println (format "%d / %d = %.2f" var1, var2, var4))
 </pre>
 
 <pre id="cl3">
+; 왼쪽붙은 삼각형
+(defn star1 [n]
+    ; y 0에서 (n-1)까지
+(loop [y 0]
+  (when (< y n)
+      ; x 0에서 (n-1)까지
+     (loop [x 0]    
+        (when (< x n)
+           (if (> y x)
+               (print "*")
+               (print " ")
+            )
+        (recur (inc x))   ; x 1씩 증가
+        )
+     )
+     (println)           ; 줄바꿈
+    (recur (inc y))
+   )
+)
+)
+
+
+; 왼쪽붙은 삼각형
+(defn star2 [n]
+(doseq [y (range 0 n)] ; 0에서 (n-1)까지
+(doseq [x (range 0 n)]
+           (if (> y x) (print "*")(print " "))
+        )
+             (println) 
+     )
+)
+
+(def n 7)
+(star1 n)
+(star2 n)
 
 </pre>
 
