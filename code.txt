@@ -6,8 +6,8 @@
 
 <div id= "cod">
 
-<xmp>
 <pre id="c1">
+<xmp>
 // 주석
 // 확장자 *.c
 // 컴파일 >> gcc hello.c  ==> 기본으로 리눅스는  a.out 또는 윈도우는 a.exe 파일이 자동으로 생성
@@ -40,9 +40,11 @@ int main()
     
     return 0;
 }
+</xmp>
 </pre>
 
 <pre id="c2">
+<xmp>
 #include <stdio.h>
 
 int main()
@@ -68,9 +70,11 @@ int main()
    
     return 0;
 }
+</xmp>
 </pre>
 
 <pre id="c3">
+<xmp>
 #include <stdio.h>
 
 void star1(char, char, int); // 삼각형 1
