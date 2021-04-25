@@ -1292,39 +1292,42 @@ def star2(n:Int)={
 
 <pre id="h1">
 <xmp>
-
-<html>
 <!-- html 주석문 -->
-<!-- out.html을 웹브라우저의 주소창에 입력-->
+<!-- 실행은 *.html을 웹브라우저의 주소창에 입력-->
 
 <head>
     <meta charset="utf8"> <!-- 한글 표기 -->
-    <title>  html output  </title>
-    
+    <title>  html 출력 예  </title>  
+<!-- title tag는 웹 브라우저 표시되지 않지만 브라우저 태그창에 표시 -->
+     <!-- style tag는 문장의 내용을 제외한 틀, 색, 구성 등을 정함-->
     <style> 
-    /* 스타일 문의 주석 */
+    /* 스타일 문 내에서 주석은 이렇게 표시한다. */
     
      /* class = cls1인 태그 */
         .cls1{  
-                  border: 1px solid; 
-                  padding: 30px; 
-                  margin-left: 20px;
+                  border: 1px solid;     /* 굵기 1픽셀의 외각선 */
+                  padding: 30px;     /* 문장과 30픽셀 여유 */
+                  margin-left: 20px;      /* 왼쪽 여백 20픽셀 */
                 } 
-                
+      
+       .cls2{  
+                  padding: 30px;  
+                  margin-left: 20px;   
+                } 
+          
             /* id = id2 인 태그 */
         #id2{  
             border: 1px solid gray; 
             padding:10px; 
             margin-left: 20px; 
-            background-color: thistle; 
-            color:mediumvioletred;
-            width: 400px;
-            height: 200px
+            background-color: yellow;     /* 배경색 */
+            color:red;     /* 글자색 */
+            width: 400px;     /* 박스 폭 */
+            height: 200px     /* 높이 */
             }
             
-            /* id = id1 인 태그 */
         #id1{  
-                text-align: center;
+                text-align: center;   /* 문장 중앙 정렬 */
                 color:green;
                  }
                  
@@ -1381,7 +1384,8 @@ def star2(n:Int)={
 </head>
     
 <body>
-    <div class = cls1> <!-- div tag는 단락을 구분짓는 태그, 여러개의 div가 있을 경으 id, class로 구분 -->
+	<!-- div tag는 단락을 구분짓는 태그, 여러개의 div가 있을 경으 id, class로 구분 -->
+    <div class = cls1> 
     	
     	<!-- h tag는 글자 크기 큰 것 부터 -->
         <h1 id=id1> 1. 제목1 </h1> 
@@ -1396,23 +1400,23 @@ def star2(n:Int)={
         	반갑습니다.</p>
         </div>
       
-    <div>
+    <div class = cls2>
            <!-- 이미지 삽입 -->
            	<h2 > 3. 이미지 삽입 </h2>
-    <p>    <img src="test.png" width = "200" height = "200" alt="My Image"></p>
+    <p>    <img src="https://raw.githubusercontent.com/kkmin1/kkmin/master/image-test.jpg" width = "400" height = "400" alt="My Image"></p>
         </div>
         
-     <div>
+     <div class = cls2>
        <!-- 하이퍼 텍스트 링크 삽입 -->
         <h2 > 4. 하이퍼 텍스트  </h2>	
      <p>   <a href = "http://www.naver.com"> 네이버 <a> <!-- 외부 주소 링크 --></p>
     </div>
     
-        <div>
-        	<!-- 테이블 만들기 -->
-        	<h2> 5. 죄인들의 딜렘마(prisonner's dilemma)</h2>
+  <div class = cls2>
+     <!-- 테이블 만들기 -->
+    <h2> 5. 테이블 예</h2>
 <br>
-<table border="1">
+   <table border="1">
   <caption>표 1. 죄인들의 딜렘마</caption>
   <tr >
     <th id = "diag"> <pre>갑      을</pre> </th>
@@ -1430,10 +1434,9 @@ def star2(n:Int)={
     <td > -5, -5 </td>
   </tr>
 
-</table>
-        </div>
+     </table>
+ </div>
 </body>
-</html>
 
 </xmp>
 </pre>
@@ -1443,33 +1446,24 @@ def star2(n:Int)={
 
 <html>
 	<head>
-    <meta charset="utf8"> 
-    	</head>
+        <meta charset="utf8"> 
+    </head>
     
 <body>
 
-<h2>login field</h2>
+<h2>입력방식 예</h2>
 
-<!--
-입력 방식으로 form tag를 쓴다.
-action 속성은 입력자료를 서버에서 처리하는 파일. 서버용 언어에 따라 php, python, node.js, JSP등 사용
-method는 post, get 2 종류
-post 방식: 보안상 바람직, get 방식:url에 입력내용 노출, 보안상 비바람직
-
-입력 자료를 화면에 출력하기 위해서는 javascript가 필요.
--->
 <form action="/myscript" method="post">   
-
 <!--박스형 입력-->
-User name:<br>
-<input type="text" name="userid" value="yourID">  <!-- value=" "는 기본 입력값-->
+아이디 :<br>
+<input type="text" name="userid" value="your ID">  <!-- value=" "는 기본 입력값-->
 <br><br>
-User password:<br>
-<input type="password" name="psw" value="yourPW"><br>
-<p>The characters in a password field are masked (shown as asterisks or circles).</p><br>
-
-숫자 입력:<br>
-<input type="number" name="points" step="any"> <br>
+패스워드 :<br>
+<input type="password" name="psw" value="your passward"><br>
+<br>
+<!-- 패스워드는 입력값이 안보임-->
+출생연도 :<br>
+<input type="number" name="num" step="any"> <br>
 <!-- 정수 입력은  type="number", 소숫점 포함 실수를 입력하려면 step="any" 추가-->
 <br>
 <input type="submit" value="Submit"><br>
@@ -1477,9 +1471,10 @@ User password:<br>
 	
 성별:<br>
 <!--라디오 단추형 입력-->
-  <input type="radio" name="gender" value="male" checked> Male<br>  <!-- checked는 기본값-->
+  <input type="radio" name="gender" value="male" checked> Male<br>  
+<!-- checked는 기본값-->
   <input type="radio" name="gender" value="female"> Female<br>
-  <input type="radio" name="gender" value="other"> Other
+
 <br><br>
 
 출신지:<br>
@@ -1505,12 +1500,13 @@ User password:<br>
 
 </body>
 </html>
+
 </xmp>
 </pre>
 
 <pre id="h3">
-자바스크립트를 이용해서 별찍기를 할 수 있다.
-별찍기 알고리듬 참조
+javascript 를 이용해서 별찍기를 할 수 있다.
+ <a href = "https://kkmin1.github.io/kkmin/star.html" target="_blank"> 별찍기 알고리듬 </a> 참조
 </pre>
 
 <pre id="ph1">
