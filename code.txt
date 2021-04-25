@@ -4,7 +4,7 @@
 </head>
 
 
-<div id= "cod">
+<div>
 
 <pre id="c1">
 <xmp>
@@ -1020,13 +1020,79 @@ leftRightTringle5(n)
 </pre>
 
 <pre id="l1">
--- 주석
+-- single line comment
 --[[
 여러 줄 주석
+실행
+> lua out.lua
 --]]
 
-print("Hello World") --자동 줄바꿈
-print("안녕하세요!")
+io.write("Hello ") -- no 개행
+io.write("World")
+print("")
+print("안녕하세요!") -- 개행
+
+name = "홍길동"
+age = 27
+wt = 67.8
+
+print("내 이름은 ", name, "이고 나이는 ", age, "살이며 몸무게는 ", wt, "kg 입니다.")
+print("내 이름은 ".. name.. "이고 나이는 ".. age.. "살이며 몸무게는 ".. wt.. "kg 입니다.")
+--  ,연결은 한칸 여백이 생긴다. ..연결은 한칸 여백이 안생긴다.
+print(string.format("내 이름은 %s이고 나이는 %d살이며 몸무게는 %.1fkg 입니다.", name, age, wt))
+
+a = 7
+b = 3
+c = a/b -- 자동 형변환
+print(c)
+print(string.format("%d / %d = %.2f", a,b,c)) 
+</pre>
+
+<pre id="l2">
+io.write('이름 : ')
+local name = io.read()
+io.write('나이 : ')
+local age = io.read()
+print('내 이름은 '.. name.. "이고 나이는 " .. age .. "살입니다.")
+
+io.write('정수 = ')
+local a = io.read()
+io.write('정수 = ')
+local b = io.read()
+
+c = a/b 
+print(c)
+print(string.format("%d / %d = %.2f", a,b,c)) 
+</pre>
+
+<pre id="l3">
+function Tringle1(n)
+
+ for y = 1, n do
+  for x = 1,n do
+    if x <= y then
+    io.write("*")
+    end
+  end
+  io.write("\n") 
+ end
+end
+
+function Tringle2(n)
+
+ for y = 1, n do
+  for x = 1, y do
+    io.write("*")
+  end
+  print("")
+ end
+end
+
+print("")
+n = 7
+Tringle1(n)
+print("")
+Tringle2(n)
 </pre>
 
 <pre id="k1">
