@@ -795,25 +795,109 @@ printf("%d / %.2f = %.2f \n",$num[0],$num[2],$div);
 </pre>
 
 <pre id="pl2">
+</html>
+<head>
+   <meta charset="UTF-8">
+   <title> PHP 입력 </title>
+     <style> 
+    #post{  
+            border: 1px solid gray; 
+            padding:10px; 
+            margin-left: 20px; 
+            background-color: yellow;    
+            color:red;     
+            width: 400px;    
+            height: 150px    
+            }
+            #get{  
+            border: 1px solid gray; 
+            padding:10px; 
+            margin-left: 20px; 
+            background-color: grey;    
+            color:darkred;     
+            width: 400px;    
+            height: 150px    
+            }
+            #get2{  
+            border: 1px solid gray; 
+            padding:10px; 
+            margin-left: 20px; 
+            width: 400px;    
+            height: 150px    
+            }
+           </style> 
+</head>
 
-$name = <STDIN>;
-$age = <>; # <>안의 stdin은 생략 가능
-chomp $name; # chomp는 입력시 return키 제거 함수
-chomp $age;
+<body>
+<!-- post 방식은 정보 노출 안됨 -->
+<form action = "input.php" method="post">
+Name: <input  type="text" name="name"><br>
+E-mail: <input  type="text" name="email"><br>
+post 방식: <input type="submit">
+</form>
 
-print "당신의 이름은 $name이고 나이는 $age살입니다.\n";
+<!-- get 방식은 url에 정보 노출  -->
+<form action = "input.php" method="get">
+Name: <input  type="text" name="name"><br>
+E-mail: <input  type="text" name="email"><br>
+get 방식: <input type="submit">
+</form>
 
-print("정수: ");
-$a = <>;
-chomp $a;
-print("실수: ");
-$b = <>;
-chomp $b;
-print("\n");
-$sum = $a+$b;
-$div = $a/$b;
-print("$a + $b = $sum \n");
-printf("%d / %.2f = %.2f \n", $a, $b, $div);
+<form action = "input.php" method="get">
+<!-- step = "any" 는 실수 입력 가능, 이게 없으면 정수만 입력 가능-->
+
+정수: <input  type="number" name="var1"><br>
+정수: <input  type="number" name="var2"><br>
+실수: <input  type="number" step="any" name="var3"><br>
+<input type="submit" value="계산">
+</form>
+
+
+<div id ='post'>
+<h2> post 방식 출력</h2>
+ <?php
+if (isset( $_POST["name"]) || isset($_POST["email"])) { // isset() 함수는 변수의 존재 여부 확인
+
+echo "<p> 당신의 이름은 ".$_POST["name"]."입니다.</p>";
+echo "<p> 당신의 메일 주소는 ".$_POST["email"]. "입니다.</p>";
+
+exit();
+}
+?>
+</div>
+
+<div id = 'get'>
+<h2> get 방식 출력</h2>
+ <?php
+ if (isset( $_GET["name"]) || isset($_GET["email"] )) {
+echo "<p> 당신의 이름은 ".$_GET["name"]."입니다.</p>";
+echo "<p> 당신의 메일 주소는 ".$_GET["email"]."입니다.</p>";;
+exit();
+}
+?>
+</div>
+
+<div id = 'get2'>
+<h2> 계산</h2>
+ <?php
+ if (isset( $_GET["var1"]) || isset($_GET["var2"]) || isset($_GET["var3"] )) {
+
+echo "<textarea rows=\"4\" cols=\"50\">";  // 따옴표 출력위해 이스케이프 \" 사용
+$var1 = $_GET["var1"];
+$var2 = $_GET["var2"];
+$var3 = $_GET["var3"];
+$frac = $var1/$var2;   // 변수의 타입 추론 
+echo "${var1} + ${var3} = ",$var1+$var3,"\n";  // textarea 내에서는 개행 명령이 \n
+echo "${var1} / ${var2} = ${frac}\n";
+
+printf("%d / %d = %.2f\n", $var1, $var2, $var1/$var2); // 소숫점 이하 두째자리까지
+echo "</textarea>";
+exit();
+}
+?>
+</div>
+</body>
+</html>
 
 </pre>
 
