@@ -1822,54 +1822,65 @@ console.log(`당신의 이름은 ${이름}이고 나이는 ${나이}살입니다
    <title> javascript 입력 </title>
    
     <script>
-    	// 문장에 직접 입력
+    	var now = new Date();	// 현재 날짜 및 시간
+var year = now.getFullYear();	// 연도
+
+    	function input(){
+            var name = document.getElementById("text").value;
+            var birth = document.getElementById("birth").value;
+            var age = year - birth;
+      //      out1.innerHTML= name;
+            document.getElementById("out1").innerHTML = "당신의 이름은 "+name+"이고 나이는 "+age+"살입니다.";
+        }
+        
         function showMessage(){
             var message = document.getElementById("message").value;
             display_message.innerHTML= message;
         }
+        
+        function calc(){
+            var num1 = document.getElementById("num1").value;
+          var num2 = document.getElementById("num2").value;
+          var num3 = +num1 + +num2;
+          var num4 = +num1 / +num2;
+          var num4 = num4.toFixed(2);
+          // 입력값은 string이므로 변수 앞에 +를 붙여 숫자화
+          document.getElementById("out2").innerHTML = num1 + ' + ' + num2 + ' = ' + num3;
+            document.getElementById("out3").innerHTML = num1 + ' / ' + num2 + ' = ' + num4;
+        }
+        
     </script>
-    
-    <script> 
-function input(){ 
-  var result = document.getElementById('text'); 
-  result.value =  prompt('문자열을 입력하세요: '); 
-} 
-document.getElementById('btn').onclick = input; 
-</script> 
 
-<script> 
-function calc(){ 
-  var num1 = document.getElementById('num1'); 
-  var num2 = document.getElementById('num2'); 
-  var oper= document.getElementById('oper'); 
-  var result = document.getElementById('result'); 
-  result.value = eval(num1.value + oper.value + num2.value); 
-} 
-document.getElementById('equals').onclick = calc; 
-</script> 
 </head>
 
 <body>
+
 <form>
-Enter message: <input type="text" id = "message">
+<div>이   름     : <input type="text" id="text"> </div>
+<div>출생년도 : <input type="number" id="birth"> </div>
+
+<input type="button" id="btn" onclick="input()" value="제출"> <br><br>
+
+<p> 출력 : <span id = "out1"></span> </p>
+<br><br>
+	
+<div>기타의견 : <input type="text" id = "message"></div>
 <input type="button" onclick="showMessage()" value="submit" />
+
+
+<p> 출력 : <span id = "display_message"></span> </p>
+<br><br>
+	
+<div> 숫자 입력 : <input type="number" id="num1" step="any"> </div>
+<!-- 정수 입력은  type="number", 소숫점 포함 실수를 입력하려면 step="any" 추가-->
+<div> 숫자 입력 : <input type="number" id="num2" step="any"> </div>
+<input type="button" onclick="calc()" value="submit" />
+
+	<h3>출력</h3>
+<p id = "out2">  </p>
+ <p id = "out3"> </p>
+	
 </form>
-<p> Your message is: <span id = "display_message"></span> </p>
-
-<input type="button" id="btn" value="입력"> <br><br>
-<input type="text" id="text"> <br><br><br>
-
-<input type="number" id="num1"> 
-<select id="oper"> 
-<option value="+">+</option> 
-<option value="-">-</option> 
-<option value="*">*</option> 
-<option value="/">/</option> 
-</select> 
-<input type="number" id="num2"> 
-<input type="button" id="equals" value="="> 
-<input type="number" id="result"> 
-
 </body>
 
 </xmp>
