@@ -3,10 +3,12 @@
   flex-direction: column;
 }
 header{
+  margin: auto;
   border:1px solid gray;
   text-align: center;
   background : black;
   color : white;
+  width : 200%
 }
 footer{
   border: 1px solid gray;
