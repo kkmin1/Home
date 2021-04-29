@@ -2542,6 +2542,7 @@ main =
 </pre>
 
 <pre id="ns1">
+<xmp>
 /*
 node.js 설치
 >> node MyServer.js
@@ -2594,6 +2595,7 @@ app.use(express.static('public'));
 
 // 모든 파일을 루트에 놓으면 app.use(express.static(''));
 
+</xmp>
 </pre>
 
 <pre id="ns2">
