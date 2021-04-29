@@ -795,6 +795,24 @@ printf("%d / %.2f = %.2f \n",$num[0],$num[2],$div);
 </pre>
 
 <pre id="pl2">
+$name = <STDIN>;
+$age = <>; # <>안의 stdin은 생략 가능
+chomp $name; # chomp는 입력시 return키 제거 함수
+chomp $age;
+
+print "당신의 이름은 $name이고 나이는 $age살입니다.\n";
+
+print("정수: ");
+$a = <>;
+chomp $a;
+print("실수: ");
+$b = <>;
+chomp $b;
+print("\n");
+$sum = $a+$b;
+$div = $a/$b;
+print("$a + $b = $sum \n");
+printf("%d / %.2f = %.2f \n", $a, $b, $div);
 
 
 </pre>
