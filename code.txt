@@ -2542,24 +2542,58 @@ main =
 </pre>
 
 <pre id="ns1">
-// node.js 설치
-// console에서 실행
-// >> node hello.js
-// >> Server running at http://127.0.0.1:1337/
-// 웹브라우저에서 localhost:1337 입력
-// 웹브라우저에 "안녕하세요! node.js 강의에 오신 것을 환영합니다." 출력
+/*
+node.js 설치
+>> node MyServer.js
+>> Server running at http://127.0.0.1:1337/
+웹브라우저에서 localhost:1337 입력
+웹브라우저에 "Hello 안녕!" 출력
+*/
+	
+// 서버 실행을 위해 express 프레임워크 사용
+// 서버가 실행되는 디렉토리가 루트 디렉토리
 
-const http = require('http'); // 상수변수 http 설정
-const hostname = '127.0.0.1'; // 상수변수 hostname 설정
-const port = 1337; // 상수변수 port 설정
+/* 루트 디렉토리에 test.html 작성
+	<html>
+  <head>
+    <title>Main</title>
+    <link rel="stylesheet" type="text/css" href="/test.css">
+  </head>
+  <body>
+    Express 연습
+  </body>
+</html>
+*/
+	
+/* 루트/public 디렉토리에 test.css 작성
+	body{
+	background-color: black;
+	color: white;
+}
+*/
+	
+const express = require('express'); // express 불러옴
+const app = express();
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain; charset=UTF-8' }); // charset=UTF-8은 한글 출력이 깨짐 방지
-  res.end('안녕하세요! node.js 강의에 오신 것을 환영합니다.\n');
-});
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`); // 괄호안은 작은 떠옴표('')가 아니라 ~표시 밑에 있는 (``)임에 주의.
-});
+// localhost:port 접속시  Hello 안녕! 띄움. 한글 인식
+app.get('/', (req, res) => res.send('Hello 안녕!'))
+
+// localhost:port/home 접속시 test.html 파일 띄움
+app.get('/home',function(req,res){ res.render('test.html')});
+app.set('views', __dirname + '/');
+
+// html 처리를 위해 EJS template engine 사용
+app.set('view engine', 'html');
+app.engine('html', require('ejs').renderFile);
+app.listen(8080, function() {
+    console.log('server running on 8080')
+})
+
+// 루트/public/ 내의 css, image 파일 사용
+app.use(express.static('public'));
+
+// 모든 파일을 루트에 놓으면 app.use(express.static(''));
+
 </pre>
 
 <pre id="ns2">
