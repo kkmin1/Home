@@ -1855,11 +1855,6 @@ var year = now.getFullYear();	// 연도
 
 <pre id="jq1">
 <xmp>
-<!--
-javascript 파일을 따로 만드는 경우는 <script> 태그없이 만든 후 확장자 .js 파일로 저장.
-<script src="code.js"></script>
-다른 폴더에 넣었을 때는 경로를 표시해야 함. 예) project 폴더의 code.js파일인 경우 <script src="./project/code.js"></script>
--->
 
 <html>
 <head>
@@ -1873,7 +1868,7 @@ javascript 파일을 따로 만드는 경우는 <script> 태그없이 만든 후
 	
 <style> 
 #div1{padding:20px;}
-#panel, #flip {
+#flip {
     padding: 5px;
     text-align: center;
     background-color: #e5eecc;
@@ -1882,7 +1877,13 @@ javascript 파일을 따로 만드는 경우는 <script> 태그없이 만든 후
 }
 
 #panel {
-	height: 100px;
+    padding: 5px;
+    text-align: center;
+    background-color: #0d0522;
+    color:aqua;
+    border: solid 1px #c3c3c3;
+    width: 100px;
+	height: 150px;
     display: none; /*처음 시작시 보이지 않음*/
 }
 
@@ -1979,10 +1980,12 @@ $(function(){
 <p class="color"> 내 위에 마우스 대거나 나를 클릭하면 색이 변함 </p>
 <hr>
 	
-<button class="toggle"> 토글 버튼</button>
 <p id="toggle"> 토글 메세지</p>
+<button class="toggle"> 토글 버튼</button>
 <br>
+<hr>
 <div id="flip"> 판넬 slide </div>
+<br>
 <div id="panel"> 안녕 jquery! </div><br>
 </div>
 
