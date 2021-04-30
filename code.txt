@@ -1854,41 +1854,143 @@ var year = now.getFullYear();	// 연도
 </pre>
 
 <pre id="jq1">
-&lt;!--
-html 파일내 임의의 자리에 올 수 있으나 &lt;body> 맨 밑줄을 권장함.
-javascript 파일을 html 파일과 분리하여 따로 만드는 경우는 &lt;script> 태그없이 만든 후 확장자 .js 파일로 저장.
-html 파일과 같은 폴더에 넣고 위와 같이 &lt;head>태그 사이, 또는 &lt;body> 맨 밑줄에 &lt;script src="code.js">&lt;/script>
-다른 폴더에 넣었을 때는 경로를 표시해야 함. 예) project 폴더의 code.js파일인 경우 &lt;script src="./project/code.js">&lt;/script>
+<xmp>
+<!--
+javascript 파일을 따로 만드는 경우는 <script> 태그없이 만든 후 확장자 .js 파일로 저장.
+<script src="code.js"></script>
+다른 폴더에 넣었을 때는 경로를 표시해야 함. 예) project 폴더의 code.js파일인 경우 <script src="./project/code.js"></script>
 -->
 
-&lt;html>
-&lt;head>
-&lt;title>jQuery Hello World&lt;/title>
+<html>
+<head>
+	 <meta charset="UTF-8">
+   
+<title> jQuery 연습 </title>
 
-&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">&lt;/script>
-&lt;!--외부의 jQuery 파일을 불러 온다. 받는 장소는 google외에 ms 등도 있다.  자세한 것은 <a href = "https://jQuery.com"> jQuery 홈페이지 </a> 참조.
-다운로드 받아서 사용할 수도 있다.
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--외부의 jQuery 파일을 불러 온다. 다운로드 받아서 사용할 수도 있다. 자세한 것은 <a href = "https://jQuery.com"> jQuery 홈페이지 </a> 참조.
 -->
-&lt;/head>
+	
+<style> 
+#div1{padding:20px;}
+#panel, #flip {
+    padding: 5px;
+    text-align: center;
+    background-color: #e5eecc;
+    border: solid 1px #c3c3c3;
+    width: 100px;
+}
 
-&lt;body>
+#panel {
+	height: 100px;
+    display: none; /*처음 시작시 보이지 않음*/
+}
 
-&lt;script>
+</style>
+
+</head>
+
+<script>
 
 $(document).ready(function(){
-/* <body>태그가 로드된 후 자바스크립트를 실행하라는 명령. 내용 로드 전 자바스크립트가 실행된다면 오류 날 수 있기 때문이다.
-'$(document).ready(function(){' 는 '$(function(){' 로 줄여 써도 된다.
-*/
-    $("#abc").html("Hello World");  // 태그 중 id="abc"인 태그에 html("")내용 출력.
+
+//   $(function() {});로 줄여 써도 된다.
+
+    $("#test1").html("Hello World<br>");  
+    //  id="test1" 태그에 html(" ")내용 출력.
+    $(".test1").html("안녕하세요<br>");
+    //  class="test1" 태그에 html(" ")내용 출력
+    
+    var 이름 = "홍길동";  
+    var 나이 = 25;
+    $("#test2").html("당신의 이름은 " + 이름 + "이고 나이는 " + 나이 +" 살입니다.");
+    $(".test2").html(`당신의 이름은 ${이름}이고 나이는 ${나이}살입니다.`);   // 백틱 ` ` 사용
 });
 
-&lt;/script>
+$(function(){
+var num = [3, 4.1, 7];
 
-&lt;div id="abc">
-&lt;/div>
+$("#test3").html( num[0] + " + " + num[1] + " = " +(num[0]+num[1]) + "<br>");  // 자동 타입 추론
+$("#test4").html( num[0] + " / "+ num[2] + " = "+(num[0]/num[2]) + "<br>");  
+$("#test5").html( `${num[0]} / ${num[2]} = ${(num[0]/num[2]).toFixed(2)} <br>`);  // 소숫점 이하 2자리까지
 
-&lt;/body>
-&lt;/html>
+});
+</script>
+
+<script>
+$(function(){
+	 $("#flip").click(function(){
+          $("div#panel").slideToggle();
+      });
+	
+    $("button.b1").click(function(){$("#h2").hide();});
+    $("button.b2").click(function(){$("#p1").hide();});
+    $("button.b3").click(function(){$("#p2").hide();});
+    $("button.s1").click(function(){$("#h2").show();});
+    $("button.s2").click(function(){$("#p1").show();});
+    $("button.s3").click(function(){$("#p2").show();});
+    $(".toggle").click(function(){$("#toggle").toggle();}); // 클릭할 때마다 사라지고 나타나기를 반복함
+    $("#self").click(function(){$(this).hide();});  // 자기 자신이 사라짐
+   
+    $(".color").on({
+       mouseenter: function(){
+           $(this).css("background-color", "lightgray");
+       },
+       mouseleave: function(){
+           $(this).css("background-color", "lightblue");
+       },
+       click: function(){
+           $(this).css("background-color", "yellow");
+        }
+    }); 
+});
+</script>
+
+
+<body>
+<div id="div1">
+ 
+<p id="test1"> </p>
+<p class="test1"> </p>
+<p id ="test2"> </p>
+<p class="test2"> </p>
+<p id ="test3"> </p>
+<p id ="test4"> </p>
+<p id ="test5"> </p>
+<hr>
+	
+<h2 id="h2"> jquery 연습 </h2>
+<button class="b1"> 제목 사라지기</button><br><br>
+<button class="s1"> 제목 나타나기 </button><br><br>
+<hr>
+
+<p id="p1"> 인생은 짧고, </p>
+<p id="p2"> 예술은 길다.</p>
+
+<button class="b2">Click me to hide first paragraphs</button><br><br>
+<button class="s2">Click me to show first paragraphs</button><br><br>
+<button class="b3">Click me to hide second paragraphs</button><br><br>
+<button class="s3">Click me to show second paragraphs</button><br><br>
+
+<hr>
+<p id="self"> 나를 클릭하면 내가 사라짐 </p>
+<hr>
+	
+<p class="color"> 내 위에 마우스 대거나 나를 클릭하면 색이 변함 </p>
+<hr>
+	
+<button class="toggle"> 토글 버튼</button>
+<p id="toggle"> 토글 메세지</p>
+<br>
+<div id="flip"> 판넬 slide </div>
+<div id="panel"> 안녕 jquery! </div><br>
+</div>
+
+</body>
+</html>
+
+
+</xmp>
 </pre>
 
 
