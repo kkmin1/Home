@@ -265,4 +265,15 @@ $(function(){
          $("#center").load("code.txt pre#mt3");
       });
     
+      $("p#str1").click(function(){
+        $("#center").load("code.txt pre#str1");
+     });
+ 
+     $("p#mstr2").click(function(){
+         $("#center").load("code.txt pre#str2");
+      });
+     
+     $("p#mstr3").click(function(){
+         $("#center").load("code.txt pre#str3");
+      });
 });
