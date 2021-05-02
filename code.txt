@@ -1,4 +1,4 @@
-﻿<head>
+<head>
 <meta charset="utf8">
 <link rel="stylesheet" type="text/css" href="code.css">
 </head>
@@ -2793,6 +2793,47 @@ for i = 1 : n
     disp([s fliplr(s)])
 end
 end
+</pre>
+
+<pre id="str1">
+# single line comment
+# (Rstudio) multiline comment: Highlight text, press the keys (ctrl + shift + c)
+#
+# 터미널에서 스크립트 실행
+# >> source('out.R', encoding='utf-8')
+# 현재 폴더 getwd()
+# 작업 폴더 이동 : setwd('c:/myfolder')
+#
+# (Rstudio) console 창 지우기 : ctrl + l
+# (Rstudio) 스크립트 실행 : ctrl + Alt + r
+# (Rstudio) 스크립트 부분 실행 : Highlight text, press the keys (ctrl + Alt + r)
+
+print("Hello World!") # 개행
+cat("안녕하세요")  # no 개행
+
+name = "홍길동"
+age = 24
+
+cat("내 이름은", name, "이고 나이는", age,"살입니다.\n")
+x<-sprintf("내 이름은 %s이고 나이는 %d살입니다.", name, age)
+print(x)
+# sprintf는 직접 출력되지 않는다.
+
+num <- c(3, 7, 1.2)
+x<-sprintf("%d + %d = %d ", num[1], num[2], num[1]+num[2]) # 첫 원소가 [1]임에 주의
+print(x)
+x<-sprintf("%d - %.1f = %.1f ", num[1], num[3], num[1]-num[3])
+print(x)
+x<-sprintf("%d / %d = %.2f ", num[1], num[2], num[1]/num[2])
+print(x)
+
+</pre>
+
+<pre id="str2">
+
+</pre>
+<pre id="str3">
+
 </pre>
 
 </div>
