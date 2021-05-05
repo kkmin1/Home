@@ -935,26 +935,23 @@ print <<aaa
 aaa
 #  <<와 aaa 사이에 여백이 있으면 안됨. aaa은 식별자. 이름은 아무거나 쓰면됨
 
-# c 형 출력
-printf "여기에 %d 개의 %s가 있읍니다.\n", 3, '사과'
-
-# 변수선언은 따로 하지 않는다. 변수형 자동 결정
-name, age, b, c,  = '홍길동', 25, 3, 2.2, ; 
+# 변수형 자동 결정 , 연속 선언도 가능
+name, age = '홍길동', 25;
 
 puts "내 이름은 #{name}이고 나이는 #{age}살입니다."; 
 print "내 이름은 ", name, "이고 나이는 ", age, "살 입니다.\n"; 
+printf "내 이름은 %s이고 나이는 %d살입니다. \n", name, age
 
-sum = a + b;
-c = age/a; 
-# 정수끼리 나누는 것이므로 c도 정수, c = 8
+num= [3, 7, 2.2] ; 
+sum = num[0] + num [2];
+div = num[0].to_f / num[1];
+# 정수끼리 나누는 것이므로 div도 정수가 된다. 
+# 이를 피하려면 두 수 중 하나를 실수로 만들면 된다.
 
-d = age/b; 
-# 정수/실수 이므로 d는 실수, d = 11.3636
 
-puts "#{a} + #{b} = #{sum}";
-puts "#{age} / #{a} = #{c}";
-puts "#{age} / #{b} = #{d}";
-printf  "%d / %.2f = %.2f\n", age, b, d; 
+puts "#{num[0]} + #{num[2]} = #{sum}";
+puts "#{num[0]} / #{num[1]} = #{div}";
+printf  "%d / %d = %.2f \n", num[0], num[1], div;
 
 </xmp>
 </pre>
