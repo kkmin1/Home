@@ -8,7 +8,7 @@ header{
   text-align: center;
   background : black;
   color : white;
-  width : 200%
+  width : 100%
 }
 footer{
   border: 1px solid gray;
@@ -16,8 +16,7 @@ footer{
 }
 .content{
   display:flex;
-}
-.content{
+  width:100%;
   border: 1px solid gray;
   text-align: center;
 }
@@ -26,7 +25,6 @@ footer{
   text-align: center;
   flex-basis: 300px;
   flex-shrink: 0;
-  text-align: center;
 }
 
 main{
