@@ -17,31 +17,28 @@ footer{
 .content{
   display:flex;
 }
-.content nav{
+.content{
   border: 1px solid gray;
   text-align: center;
 }
 .content aside{
   border: 1px solid gray;
   text-align: center;
-}
-#nav{padding: 5px;}
-nav, aside{
   flex-basis: 300px;
   flex-shrink: 0;
+  text-align: center;
 }
 
 main{
   padding:10px;
+  width:100%;
   text-align: center;
 }
 iframe{
-  width:1600px; 
+  width:100%; 
   height:1200px; 
 }
-aside{
-  text-align: center;
-}
+
 #link{
   color: red;
 }
