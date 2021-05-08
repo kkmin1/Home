@@ -2794,6 +2794,7 @@ end
 
 <pre id="str1">
 # single line comment
+# no multi line comment
 # (Rstudio) multiline comment: Highlight text, press the keys (ctrl + shift + c)
 #
 # 터미널에서 스크립트 실행
@@ -2806,7 +2807,7 @@ end
 # (Rstudio) 스크립트 부분 실행 : Highlight text, press the keys (ctrl + Alt + r)
 
 print("Hello World!") # 개행
-cat("안녕하세요")  # no 개행
+cat("안녕하세요 \n")  # no 개행. \n 개행문자
 
 name = "홍길동"
 age = 24
@@ -2816,6 +2817,10 @@ x<-sprintf("내 이름은 %s이고 나이는 %d살입니다.", name, age)
 print(x)
 # sprintf는 직접 출력되지 않는다.
 
+print(paste0("내 이름은 ", name, "이고 나이는 ", age,"살입니다."))
+# paste는 콤마로 나열된 원소를 이어붙임
+# paste()는 여백, paste0()는 여백없이 출력
+
 num <- c(3, 7, 1.2)
 x<-sprintf("%d + %d = %d ", num[1], num[2], num[1]+num[2]) # 첫 원소가 [1]임에 주의
 print(x)
@@ -2824,13 +2829,109 @@ print(x)
 x<-sprintf("%d / %d = %.2f ", num[1], num[2], num[1]/num[2])
 print(x)
 
+x <- c(2, 4, 5, 3, 6, 1, 6, 4, 5, 3)
+y <- c(6, 7, 4, 9, 8, 9, 7, 9, 8, 9)
+cat("x =", x, "\n")
+cat("x의 평균 =", mean(x), "\n")
+cat("x의 분산 =", var(x), "\n")
+cat("x의 표준편차 =", sd(x), "\n")
+
+## table 생성 ##
+name <- c("김철수", "박영희", "홍길동", "최만리")
+eng.result <- c(76, 82, 84, 67)
+eng.grade <- c("B", "A", "A", "C")
+
+# 문자벡터는 factor형이 아님
+class1 <- data.frame(name, eng.result, eng.grade, string=FALSE)
+print(class1)
+
+# 열 추가 방법1
+class1$sex = c('m', 'f', 'm', 'm')
+print(class1)
+
+# 열 추가 방법2
+class1 = transform(class1, age=c(17,17,16,17))
+print(class1)
+
+# 열 추가 방법3
+id = c(2354, 6853, 3210, 6087)
+class1 = cbind(class1, id)
+print(class1)
+
+## 도표 그리기 ##
+# Rstudio figure margin 에러 방지 코드
+par(mar=c(4,5,2,4))
+
+# 두 개의 그림을 2행 1열로 표시
+# par(mfrow = c(m,n)) 은 m행 n열
+par(mfrow = c(2,1))
+
+x1 = 1:100 # (1, 2, 3, ..., 100) 열백터
+y1 = x1^2
+plot(x1,y1, type='p', col="blue", main="y=x^2", xlab='', ylab='y')
+title(xlab="사람", line=2) # x축 제목을 도형에 바짝 붙임, default는 line=0
+
+x2 = seq(-10, 10, 0.1) # -10 부터 10 까지 0.1씩 증가하는 수
+y2 = sin(x2)
+plot(x2, y2, type='l', col='red', main='y=sin(x)', xlab='', ylab='y')
+title(xlab="x", line=2)
+
 </pre>
 
 <pre id="str2">
+my.name <- readline(prompt="이름 : ")
+my.age <- readline(prompt="나이 : ")
+
+# 입력받은 것은 문자열이므로 정수로 변환
+my.age <- as.integer(my.age)
+print(paste0("내 이름은 ", my.name, "이고 나이는 ", my.age, "살입니다."))
+
+num1 = readline(prompt="정수 : ")
+num1 = as.integer(num1)
+num2 = readline(prompt="정수 : ")
+num2 = as.integer(num2)
+x = sprintf("%d / %d = %.2f ", num1, num2, num1/num2)
+print(x)
 
 </pre>
-<pre id="str3">
 
+<pre id="str3">
+star1 = function(n){
+    for (y in 0:n) {
+        for (x in 0:n) {
+            if (y <= x)  cat("*")
+            else cat(" ")
+        }
+        cat("\n")
+    }
+}
+
+star2 = function(n){
+    for (y in 0:n) {
+        for (x in 0:n) {
+            if (y >= x)  cat("*")
+            else cat(" ")
+        }
+        cat("\n")
+    }
+}
+
+star3 = function(n){
+    for (y in n:0) {
+        for (x in 0:n) {
+            if (y >= x)  cat("*")
+            else cat(" ")
+        }
+        cat("\n")
+    }
+}
+
+n = 5
+star1(n)
+cat("\n")
+star2(n)
+cat("\n")
+star3(n)
 </pre>
 
 <pre id="sh1">
