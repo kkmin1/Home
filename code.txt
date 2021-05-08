@@ -2833,4 +2833,98 @@ print(x)
 
 </pre>
 
+<pre id="sh1">
+# single line comment
+: '   
+multi line comment
+실행
+> bash filename
+파일명에 확장자 sh는 안써도 된다.
+'
+printf "hello world \n"  # no 개행 '\n'은 개행 문자
+echo "안녕하세요" # 개행
+
+# 변수형은 구분 않함
+# 모든 변수는 문자열
+name="홍길동"
+age=24
+echo "내 이름은 ${name}이고 나이는 ${age}살입니다."
+printf "내 이름은 %s이고 나이는 %d살입니다.\n" $name $age
+
+# shell에서는 정수만 됨
+num=(3 7 1)
+echo $((${num[0]}+${num[1]}))
+</pre>
+
+<pre id="sh2">
+read -p "이름 : " name  
+read -p "나이 : " age
+echo "내 이름은 ${name}이고, 나이는 ${age}살입니다."  
+printf "내 이름은 %s이고, 나이는 %s살입니다.\n" $name $age
+
+read -p "정수 : " num1
+read -p "정수 : " num2
+sum=$((num1+num2))
+printf "%d + %d = %d\n" $num1 $num2 $sum
+
+# ================================
+: ' 파일 뒤에 입력 변수를 쓸 수도 있다.
+변수명은 순서 대로 $1, $2... 로 쓴다. 
+
+>>sh input.sh "홍길동" 23
+
+echo "내 이름은 $1이고, 나이는 $2살입니다." 
+'
+</pre>
+
+<pre id="sh3">
+n=5
+
+star1(){
+for ((i=1; i<=n; i++)) ; do 
+    for ((j=1; j<=n; j++)) ; do
+     if [ $j -ge $((n+1-$i)) ] ; then                                                                  
+        echo -n "*"
+     else
+        echo -n " "
+      fi                                                                  
+    done                                                                              
+  echo                                                                                
+done
+}
+
+star2(){
+for ((i=1;i<=n;i++));         
+do 
+  for((k=1;k<=(n-i);k++));  
+  do 
+    printf "%s" " ";
+  done;
+  for ((j=1;j<=i;j++));        
+  do 
+    printf "%s" "*";
+  done;
+  printf "\n";         
+done
+}
+
+star3(){
+for((i=1; i<=n; i++))
+do
+  for((j=1; j<=i; j++))
+  do
+    echo -n "*"
+  done
+  echo
+done
+}
+
+star1
+echo ""
+star2
+echo ""
+star3
+
+</pre>
+
 </div>

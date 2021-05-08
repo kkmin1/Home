@@ -98,6 +98,10 @@ function strFunction() {
     document.getElementById("strDropdown").classList.toggle("show");
 }
 
+function shFunction() {
+    document.getElementById("shDropdown").classList.toggle("show");
+}
+
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {

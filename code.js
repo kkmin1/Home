@@ -276,4 +276,17 @@ $(function(){
      $("p#mstr3").click(function(){
          $("#center").load("code.txt pre#str3");
       });
+
+      $("p#sh1").click(function(){
+        $("#center").load("code.txt pre#sh1");
+     });
+ 
+     $("p#msh2").click(function(){
+         $("#center").load("code.txt pre#sh2");
+      });
+     
+     $("p#msh3").click(function(){
+         $("#center").load("code.txt pre#sh3");
+      });
+
 });
