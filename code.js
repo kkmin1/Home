@@ -281,11 +281,11 @@ $(function(){
         $("#center").load("code.txt pre#sh1");
      });
  
-     $("p#msh2").click(function(){
+     $("p#sh2").click(function(){
          $("#center").load("code.txt pre#sh2");
       });
      
-     $("p#msh3").click(function(){
+     $("p#sh3").click(function(){
          $("#center").load("code.txt pre#sh3");
       });
 
