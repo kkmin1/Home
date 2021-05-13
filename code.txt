@@ -2608,23 +2608,28 @@ main =
 <xmp>
 /*
 node.js 설치
+현재 웹 페이지 전체 문장 복사후  Myserver.js 만듦
+
 >> node MyServer.js
->> Server running at http://127.0.0.1:1337/
-웹브라우저에서 localhost:1337 입력
-웹브라우저에 "Hello 안녕!" 출력
+>> Server running on 8080
+웹브라우저에서 localhost:8080 입력
+웹브라우저에 "Hello 안녕! Express" 출력
 */
 	
 // 서버 실행을 위해 express 프레임워크 사용
 // 서버가 실행되는 디렉토리가 루트 디렉토리
 
 /* 루트 디렉토리에 test.html 작성
-	<html>
+
+<html>
   <head>
     <title>Main</title>
     <link rel="stylesheet" type="text/css" href="/test.css">
   </head>
   <body>
-    Express 연습
+      <p> node.js  연습 </p>
+   
+	<img src="go.jpg" width = "200" height = "200" alt="My Image" >
   </body>
 </html>
 */
@@ -2640,7 +2645,7 @@ const express = require('express'); // express 불러옴
 const app = express();
 
 // localhost:port 접속시  Hello 안녕! 띄움. 한글 인식
-app.get('/', (req, res) => res.send('Hello 안녕!'))
+app.get('/', (req, res) => res.send('Hello 안녕!Express'))
 
 // localhost:port/home 접속시 test.html 파일 띄움
 app.get('/home',function(req,res){ res.render('test.html')});
@@ -2656,7 +2661,7 @@ app.listen(8080, function() {
 // 루트/public/ 내의 css, image 파일 사용
 app.use(express.static('public'));
 
-// 모든 파일을 루트에 놓으면 app.use(express.static(''));
+// 모든 파일을 루트에 놓으려면 app.use(express.static(''));
 
 </xmp>
 </pre>
