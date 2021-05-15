@@ -1988,10 +1988,11 @@ $(function(){
 
 </body>
 </html>
+</xmp>
+</pre>
 
 <pre id="jq2">
 <xmp>
-
 
 <!DOCTYPE html>
 <html>
@@ -2087,10 +2088,6 @@ $(function (){
 
 </body>
 </html>
-
-
-</xmp>
-</pre>
 
 </xmp>
 </pre>
