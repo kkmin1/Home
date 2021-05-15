@@ -1989,10 +1989,111 @@ $(function(){
 </body>
 </html>
 
+<pre id="jq2">
+<xmp>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> jquery 입력 연습 </title>
+
+<style>
+
+input button textarea{
+  position: relative;
+  display: block;
+  width: 30%;
+  margin: 5px auto;
+  font-size: 20px;
+  padding: 10px;
+  box-shadow: 4px 0px 12px black inset;
+}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+</head>
+
+<body>
+<h1> 클릭시 출력 </h1>
+입력 : <input type="text" id="textIn" >
+<button id = prn >제출</button><br><br>
+출력: <textarea id="textOut"></textarea><br><br>
+	
+<h1>  입력시 출력 </h1>
+입력 : <input type="text" id="textIn2" ><br><br>
+출력 : <textarea id="textOut2"></textarea><br><br>
+	
+	<h1>  신상정보 입력 </h1>
+	    <form id="signup">
+        <label for="name" class="label">이 름 :</label>
+        <input type="text" name="name" id="name" title="Required" class="required"><br><br>
+
+        <label for="theage" class="label">나 이 :</label>
+        <input type="text" name="theage" id="theage" title="Required" class="required digits"><br><br>
+
+        <label for="theemail" class="label">이메일 :</label>
+        <input type="text" name="theemail" id="theemail" title="Please enter a valid email address" class="required email"><br><br>
+
+        <input type='submit' value='Submit' name="submit" id='submitme'>
+    </form>
+
+    <p> 이름: <span id = name2></span></p>
+    <p> 나이: <span id = age2></span></p>
+    <p> Email: <span id = email2></span></p>
+    <p></p>
+	<br>
+
+
+<script >
+$(function (){
+	
+	// 클릭시 출력
+	$( "#prn" ).click(function() {
+    var value = $("#textIn").val();
+    $( "#textOut" ).text( value );
+  })
+	
+	// 입력시 출력
+	$( "#textIn2" ).keyup(function() {
+    var value = $( this ).val();
+    $( "#textOut2" ).text( value );
+  })
+  .keyup();
+	
+	// 신상 입력
+    $("#signup").validate();
+
+    $("#signup").submit(function(e) {
+        e.preventDefault();
+
+
+    var myname = $("#name").val();
+    var myage = $("#theage").val();
+    var myemail = $("#theemail").val();
+        
+        $("#name2").html(myname);
+        $("#age2").html(myage);
+        $("#email2").html(myemail);
+    }); 
+	
+
+})
+
+
+</script>
+
+</body>
+</html>
+
 
 </xmp>
 </pre>
 
+</xmp>
+</pre>
 
 <pre id="jl1">
 # single line comment
