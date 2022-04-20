@@ -3131,4 +3131,608 @@ star3
 
 </pre>
 
+<pre id="lx1">
+
+% 한줄 주석
+\documentclass[12pt]{article} % [12pt]는 글자 크기
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage{kotex} % 한글
+\usepackage{graphicx} % 그림
+\usepackage{verbatim} % 문장 있는 그대로 표현
+\usepackage{comment} % multiline comment
+\usepackage{enumitem} % \begin{enumerate} 옵션 설정
+\usepackage{sectsty} % chapter, section 색 설정 
+\sectionfont{\color{red}}  % section 컬러 red
+\usepackage[table]{xcolor} % 글자, 테이블 cell 색 설정
+\usepackage[onehalfspacing]{setspace}  % 문장 줄간격 설정
+\usepackage{hyperref} % 하이퍼링크 설정, 목차 링크 설정
+\hypersetup{ colorlinks=true, linkcolor=red, filecolor=magenta, urlcolor=blue, }
+\usepackage{array} % 표의 열 넓이를 고정
+\usepackage{diagbox} % 표에 대각선을 넣음
+\usepackage{multirow} % 표의 행 합침
+\usepackage{makecell} % 표의 특정 행의 높이를 조절
+\usepackage{tikz} % 그림 패키지
+\usetikzlibrary{positioning} % 노드 그릴 때 위치지정
+
+\usepackage{titlesec}
+\titlelabel{\thetitle.\;}
+\title{LaTeX 연습} % 제목 설정
+\author{홍길동} % 저자 설정
+\begin{document}
+
+\maketitle % 앞에 설정한 제목, 저자, 추가로 현재 시간 표기
+
+\begin{comment}
+multiline comment
+\documentclass[12pt]{book}은 많은 분량의 내용을 만들 때 사용. 
+
+내용이 많으므로 여러 개의 파일로 나누어 main 파일에서 합친다.
+컴파일 검증을 위해 \includeonly 명령을 사용해서 특정 부분만 실행하도록 하여 컴파일 시간 효율을 높임.
+
+\documentclass{book}
+
+\includeonly{chapter1}
+
+\begin{document}
+
+\include{chapter1}
+\include{chapter2}
+
+\end{document}
+
+각 챕터는 내용만으로 구성
+예를 들어 chapter1.tex
+\chapter{chapter heading}
+\section{Section heading}
+\begin{example}
+...
+\end{example}
+...
+
+\end{comment}
+\tableofcontents % 본문의 \section{}, \subsection{}으로 목차를 자동으로 만들어 줌
+\newpage % 페이지 갱신
+
+\listoffigures % 그림 목차 생성
+\listoftables % 표 목차 생성
+
+\newpage
+
+\setlength{\parindent}{0pt}
+% 들여쓰기 간격 설정, 0은 이 명령 이후로 들여쓰기 안한다는 의미
+\section{문장}
+\subsection{문장 모양}
+\subsubsection{글자 크기}
+% 줄바꾸기 : \\ 또는 \newline, 빈줄에는 사용 안됨
+% 쪽 나누기 : \newpage, \clearpage
+
+% 그림 또는 표가 있는 경우에 개체랑 새로 시작하는 챕터가 같은 페이지에 나옴.\\
+% 이런 경우에 \newpage 대신에 \clearpage를 사용하면 그림 또는 표 아래도 깔끔하게 되고 다음 장에 새로운 챕터가 시작됨.\\
+
+% 글자 크기는 \Huge -> \huge -> \Large -> \large 순
+% \textless : < 
+% \textgreater : >
+\vspace{1cm} % 1cm 줄간격 띄기
+{\huge \textless 데빌맨 : 이타성과 정의감의 역설 \textgreater}
+\\\\
+"일본은 전쟁의 패전국 이란 걸 잊고 있으며..
+전쟁 당시에 젊은이들의 목숨을 애국심이라며 이용해 먹고 병기이자 도구로 그들을 이용했다. 인간 어뢰, 가미카제가 바로 그것이다. 그건 인간이 해서는 안될 짓이며 그들을 도구로써 이용했다는 증거이다.\\\\
+{\large 일본은 미래에 다가올 수록 역사 왜곡으로 인해 젊은 세대 들은 이러한 역사를 기억하지 못하게 될 것이다.}\\\\ 
+{\Large 그리고 일본 윗 대가리들은 그런 젊은 세대 들을 이용해서 다시 전쟁이 가능한 국가로 만들어 평화를 망가뜨릴 것이다.}\\\\
+그 모습 그 자체가 악마 그자체 인게 아닌가?!"\\
+
+\subsubsection{수평 띄어쓰기}
+
+아\,아\;아\quad아\qquad아\\
+% \, : 한칸 띄어쓰기
+% \; : 두칸 띄어쓰기
+% \quad : 네칸 띄어쓰기
+% \qquad : 여덟칸 띄어쓰기
+
+\subsubsection{수직 띄어쓰기}
+% \vspace{1cm} % 1cm 줄간격 띄기
+인간의 삶에서 갈등은 공기와도 같이 늘 상존하는 것이다.\\
+인간의 삶에서 갈등은 공기와도 같이 늘 상존하는 것이다.\\
+\smallskip
+인간의 삶에서 갈등은 공기와도 같이 늘 상존하는 것이다.\\
+\medskip
+인간의 삶에서 갈등은 공기와도 같이 늘 상존하는 것이다.\\
+\bigskip
+인간의 삶에서 갈등은 공기와도 같이 늘 상존하는 것이다.\\
+\vspace{10mm}
+인간의 삶에서 갈등은 공기와도 같이 늘 상존하는 것이다.\\
+
+\subsection{글자 표현}
+
+% \underline{...} : 밑줄
+% \textbf{...} : 굵게
+% \textit{...} : 기울임
+
+"\underline{역사의 반복}이란게 똑같은 모습으로 오는 게 아니죠. 그 밑에 담긴 \textbf{의도와 본질}이 \textit{유사}한겁니다."\\ 
+
+% \fbox : 문장의 box화
+% \begin{minipage}{...}...\end{minipage}는 문장 넓이 설정
+
+\fbox{
+	\begin{minipage}{30em}
+		"한·미 동맹은 몇 장의 종이 위에 서명으로 맺어진 약속이 아니다. 양국 국민 한 사람 한 사람의 삶과 강하게 연결돼 있다."
+	\end{minipage}
+}\\
+
+\textcolor{red}{"사람이 가장 잔혹해지는 것은 아이러니하게도 자신이 절대적 정의라고 굳게 믿을 때이다."}\\
+
+"\emph{잘 모르고 무식한 사람이 신념을 가지면 무섭습니다."}\\
+
+— 찰스 다윈\\
+\textbf{\textit{"무지는 지식보다 더 확신을 가지게 한다."}}\\
+
+— 니체\\ 
+\emph{\textcolor{blue}{"강한 신념이야말로 거짓보다 더 위험한 진리의 적이다."}}\\
+
+
+
+\subsection{문장 정렬}
+
+다음은 수주 변영로 선생의 시 '논개'이다.\\
+
+거룩한 분노는\\ 
+종교보다도 깊고\newline 
+불붙는 정열은\\
+사랑보다도 강하다.\newline
+
+\begin{center} % 중앙 정렬
+아! 강낭콩 꽃보다도 더 푸른\\
+그 물결 위에\\
+양귀비 꽃보다도 더 붉은\\
+그 마음 흘러라.\\
+아리땁던 그 아미(蛾眉)\\
+높게 흔들리우며\\
+그 석류 속 같은 입술\\
+죽음을 입맞추었네.\\
+\end{center}
+
+\begin{flushright} % 우측 정렬
+아, 강낭콩 꽃보다도 더 푸른\\
+그 물결 위에\\
+양귀비 꽃보다도 더 붉은\\
+그 마음 흘러라.\\
+흐르는 강물은\\
+길이길이 푸르리니\\
+그대의 꽃다운 혼(魂)\\
+어이 아니 붉으랴.\\
+\end{flushright}
+
+\begin{flushleft} % 좌측 정렬
+아, 강낭콩 꽃보다도 더 푸른\\
+그 물결 위에\\
+양귀비 꽃보다도 더 붉은\\
+그 마음 흘러라.\\
+\end{flushleft}
+\newpage
+
+
+\subsection{문장을 있는 그대로 표현 방법}
+
+\subsubsection{특정 문자만}
+% \verb|...|
+
+The \verb|\ldots|은 \ldots를 표기하는 명령어이다.
+
+\subsubsection{문장 일부}
+% \begin{verbatim} ...\end{verbatim}
+
+\begin{verbatim} 
+   인생은 짧고
+          예술은 길다.
+\end{verbatim}
+
+\begin{verbatim} 
+	The \verb|\ldots|은 \ldots를 표기하는 명령어이다.
+\end{verbatim}
+
+	
+\subsection{목록 나열}
+% 단순 나열 : \begin{itemize} ... \end{itemize}
+% 번호붙은 나열 : \begin{enumerate} ... \end{enumerate}
+\vspace{0.5mm}
+\subsubsection{단순 나열}
+\begin{itemize}
+\item 목록1
+\item 목록2
+\item 목록3
+\item[-] 목록1
+\item[-] 목록2
+\item[-] 목록3
+
+\end{itemize}
+\vspace{0.5mm}
+
+\subsubsection{번호붙은 나열}
+\begin{enumerate} 
+\item 목록1
+\item 목록2
+\item 목록3
+\end{enumerate}
+
+% 다른 문자 목록 사용
+\begin{enumerate}[label=\Alph*.] % \usepackage{enumitem} 사용
+\item 목록1
+\item 목록2
+\item 목록3
+\end{enumerate}
+
+\newpage
+
+\section{링크}
+
+\subsection{하이퍼 링크}
+
+% \href{http://https://ko.overleaf.com/}{overleaf}
+
+\LaTeX  온라인 편집
+\begin{itemize} 
+	\item \href{http://https://ko.overleaf.com/}{overleaf} 
+	\item \href{http://http://www.sharelatex.com/}{sharelatex} 
+\end{itemize}
+
+\subsection{문장내 링크}
+% \label{...} 명령이 쓰인 곳을 찾아서 장, 절, 그림, 표, 정리 등을 번호로 \ref{...}를 바꾸어 넣는다.
+% \pageref는 해당하는 \label 명령이 쓰인 쪽의 쪽수를 표시한다.
+
+링크의 예는 페이지 \pageref{sec:this}의 그림 링크 \ref{sec:this}를 참조하시오
+
+\subsection{각주}
+% \footnote{각주 내용}
+
+"IT 산업은 흔히 가트너 성장곡선 {\footnote{\href{https://en.wikipedia.org/wiki/Hype_cycle}{하이프 사이클} 참조}을 따른다고 알려져 있는데 이는 거시적으로 보면 충격파의 파동을 나타내는 것에 다름이 아니다."
+	
+% 장, 절 제목내에 각주가 있을 경우 에러가 발생하므로 앞에 \protect\footnote{...}를 붙여줌
+
+\newpage
+
+\section{그림 입력}
+
+\subsection{그림 위치}
+The [htbp] controls where the table or figure is placed. Tables
+and figures do not need to go where you put them in the text.
+LATEX moves them around to prevent large areas of white space
+from appearing in your paper. \\
+
+
+\begin{tabular}{|c|l|}
+	\hline
+	b(Bottom) & Place the table at the bottom of the current page. \\
+	\hline
+	h(Here) & Place the table at the spot where the table
+	environment appears in the text \\
+	\hline
+	p(Page) & Place the table at the top of the next page. \\
+	\hline
+	t(Top) & Place the table at the top of the current \\
+	\hline
+\end{tabular}
+
+The first letter inside brackets has highest priority. In the
+example on the previous page, if LATEX couldn’t put the table
+or figure “here,” it tried to put it at the top of the current
+page, then on the bottom of the current page, then at the top
+of the next page. \\
+
+\subsection{그림 입력 및 링크}
+% \includegraphics[width=100mm]{*.*}
+
+\label{sec:this}
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=100mm]{image-test.jpg}
+	\end{center}
+	\caption{홍길동의 기보} % 그림 제목
+	\label{fig:gibo} % 문장내 인용을 위한 레벨화
+\end{figure}
+
+[그림 \ref{fig:gibo}]는 홍길동의 기성전 대국 기보이다.\\
+\newpage
+
+
+\section{표 그리기}
+
+\subsection{표 입력 및 링크}
+
+$<$ 표 \ref{tab:aa} $>$은 용의자들의 딜렘마라고 하는 유명한 게임의 예이다.\\
+
+\begin{table}[!htbp]
+	\caption{죄인들의 딜렘마}
+	\begin{center}
+		%	\renewcommand{\arraystretch}{2} % 모든 행의 높이를 두배로 늘림.
+		\begin{tabular}{|c|c|c|} % 수직선 그림. 가운데 정렬
+			\hline  % 수평선 그림
+			\diagbox[width=4em]	{갑} {을} & C & D \\
+			\hline
+			C & \Gape[6pt]{-1,\; -1} & -9,\; 0 \\ 
+			\hline % 행의 높이를 6pt 로 늘림
+			D & \Gape[6pt]{0,\; -9} & \cellcolor{blue!10} -5,\; -5 \\ 
+			\hline
+		\end{tabular}
+	\end{center}
+	
+\end{table}
+
+
+
+% c : 중앙정렬, r : 우측정렬, l : 좌측정렬
+% ccc는 열이 3개
+% |c|c|c|는 열의 테두리
+% \hline 수평선
+% \diagbox[width=4em] 대각선을 넣음. 폭은 4em
+
+
+\subsection{열합치기}
+
+$<$ 표  \ref{tab:bb}  $>$은 열 합치기의 예이다.\\
+
+% \multicolumn{합칠 열의 수}{정렬과 선그리기}{내용}
+
+\begin{table}[!htbp]
+\caption{열합치기}
+\begin{center}
+\begin{tabular}{|c|c|}
+	\hline
+	\multicolumn{2}{|c|}{Ene} \\
+	\hline
+	Mene & Muh! \\
+	\hline
+\end{tabular}
+\end{center}
+\label{tab:bb}
+\end{table}
+
+\subsection{행합치기}
+
+$<$ 표  \ref{tab:cc}  $>$은 행 합치기의 예이다.\\
+
+% \multirow{합칠 행의 수}{정렬과 선그리기}{내용}
+\begin{table}[htbp]
+
+\centering
+\begin{tabular}{|c|c|c|} \hline \multicolumn{2}{|c|}{\multirow{2}{*}{combined cells}} & top right\\ \cline{3-3} \multicolumn{2}{|c|}{} &middle right\\ \hline bottom left &bottom center &bottom right\\ \hline 
+\end{tabular}
+\caption{행합치기}
+\label{tab:cc}
+\end{table}
+
+% 행을 합칠때는 선을 긋지 않는것만으로도 그 효과를 볼수 있다.
+% \cline{선긋기를 시작할 칸 - 끝낼칸}
+행을 합칠때는 선을 긋지 않는것만으로도 그 효과를 볼수 있다.
+
+\begin{table}[htbp]
+\caption{행 합치기2}
+\begin{center}
+	\begin{tabular}{|c|c|r|}\hline
+		& a & b \\ \cline{2-3}
+		c & d & e \\ \cline{2-3}
+		& f & g \\ \hline
+	\end{tabular}
+\end{center}
+\label{tab:dd}
+\end{table}
+
+\clearpage
+
+\section{수식 표현}
+
+\subsection{inline 표현}
+
+% $...$ 또는 \(...\) 사용
+
+원의 방정식은 $x^2+y^2=1$ 입니다.\\
+
+"금성은 태양에서 두 번째로 가까운 행성이자 태양계에서 가장 뜨거운 행성으로, 표면온도는 납을 녹일만큼 뜨거운 \(500^{\circ}\mathrm{C}\) 안팎에 달한다."\\
+
+\subsection{block 표현}
+
+% $$...$$ 또는 \[...\],  \begin{displaymath} ... \end{displaymath} 사용
+
+\begin{itemize} 
+
+\item \textbf{근의 공식}
+
+ $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$ 
+\\
+
+\item \textbf{오일러 공식}
+
+\[ e^{i \pi} + 1 = 0 \]
+
+\item \textbf{행렬 표현}
+
+\begin{displaymath} 
+\mathbf{X_{mn}} = % \mathbf{} 수식 굵게
+\left( 
+\begin{array}{cccc} %{cccc}중앙 정렬, 컬럼 갯수 만큼, l은 왼쪽 정렬
+x_{11} & x_{12} & \ldots & x_{1n}\\ 
+x_{21} & x_{22} & \ldots & x_{2n}\\ 
+\vdots & \vdots & \ddots & \vdots\\
+x_{m1} & x_{m2} & \ldots & x_{mn}\\ 
+\end{array} 
+\right) 
+\end{displaymath}
+
+\item \textbf{수식번호 추가}
+% 수식 번호 추가 \begin{equation} ... \end{equation}
+
+\begin{equation} 
+s_i(x,N)=\frac{N_ix_i}{x} \frac{L_i}{T} \label{eq:f1}
+\end{equation}
+
+\begin{equation} \label{eq:f2}
+\epsilon > 0
+\end{equation} \\
+
+(식 \ref{eq:f1}), (식 \ref{eq:f2})으로부터 다음을 알 수 있다.\\
+
+\item \textbf{최대화 문제}
+\begin{eqnarray*}
+	max &F(x_1, \cdots, x_n) \\
+	subject \; to &\Phi(x_1, \cdots, x_n)=0
+\end{eqnarray*}
+
+\item \textbf{수식 정렬}
+\begin{displaymath}
+	y = \left\{ \begin{array}{ll}
+		a & \textrm{if $d>c$}\\
+		b+x & \textrm{in the morning}\\
+		l & \textrm{all day long}
+	\end{array} \right.
+\end{displaymath}
+
+\end{itemize}
+
+
+\subsection{inline 방식 vs block 방식의 수식 모양 차이}
+
+inline 방식과 block 방식 사이에는 조판 스타일에 차이가 있다는 점을 유의하자.\\
+
+inline 방식 : 
+$\lim_{n \to \infty}\sum_{k=1}^n \frac{1}{k^2}= \frac{\pi^2}{6}$\\
+
+block 방식 :
+$$\lim_{n \to \infty}\sum_{k=1}^n \frac{1}{k^2}= \frac{\pi^2}{6}
+$$
+
+inline 방식 : \(\int_{a}^{b} x^2 dx\) \\
+block 방식 : \[\int_{a}^{b} x^2 dx\]
+
+
+\subsection{inline 방식의 block 방식 표현}
+
+inline 방식의 수식 모양이 안좋아서 행간에 block 방식으로 수식을 표현하기 원한다면 \verb|$\displaystyle{수식}$|을 사용한다.\\
+
+% inline mode의 수식 모양을 block mode로 만들려면 \displaystyle 명령을 사용
+
+$\displaystyle{\lim_{n \to \infty}
+\sum_{k=1}^n \frac{1}{k^2}
+= \frac{\pi^2}{6}}$ \\
+
+\(\displaystyle{\int_{a}^{b} x^2 dx}\)\\
+
+\clearpage
+
+
+\section{그림 그리기}
+
+\subsection{기초}
+
+\begin{tikzpicture}
+	\draw (0,0) -- (0,2) -- (2,0)-- (0,0);
+	\draw[line width=2mm] (3,0) -- (3,4);
+	\filldraw [gray] (5,0) circle (10pt); 
+	% 점(0,0)에 10pt 크기의 속이 회색으로 칠해진 원을 그림
+	
+\end{tikzpicture}
+
+\vspace{5mm}
+
+\begin{tikzpicture}
+	\draw[red, thick, ->] (-1,2) -- (2,-2); 
+	% 붉은색 선 굵게 그림
+	\draw[blue, very thick, ->] (-1,-1) -- (2,2);
+	% 푸른색 선 더 굵게 그림
+	
+	\filldraw[black] (0,0) circle
+	(2pt) node[anchor=west]{a};
+	% 검은색 원 그림. 글자는 왼쪽에 a라고 씀
+	
+\end{tikzpicture}
+
+\vspace{5mm}
+
+\begin{tikzpicture}
+	\filldraw[color=red!60,
+	fill=red!5, very thick](-1,0)
+	circle (1.5);
+	% 원의 외각선 색은 빨간색의 60%, 내부는 5%의 빨간색으로 채움.원중심(-1,0), 반경 1.5cm
+	\fill[blue!50] (2.5,0) ellipse
+	(1.5 and 0.5);
+	% 와곽선과 내부를 구분할 필요가 없을 때는 \fill을 사용. 타원의 중심점, 기준점 2개 제시
+	\draw[ultra thick, ->] (6.5,0) arc
+	(0:220:1);
+\end{tikzpicture}
+
+\vspace{5mm}
+
+\subsection{곡선그리기}
+
+\begin{figure}[!h]
+\centering
+	
+\begin{tikzpicture} % 그림 시작
+
+% xy 좌표계를 고려한다.
+
+\draw (-2,0) -- (2,0); % 점(-2,0)에서 점(2,0)을 잇는 선을 그림
+
+\draw (-2,-2) .. controls (0,0) .. (2,-2); % 점(-2,-2)에서 점(2,-2)을 잇는 선을 그리는데 점(0,0) 방향으로 부드럽게 그림
+
+\draw (-2,2) .. controls (-1,0) and (1,0) .. (2,2); 
+% 점(-2,2)에서 점(2,2)을 잇는 선을 그리는데 점(-1,0), 점(1,0) 방향으로 부드럽게 그림
+
+\end{tikzpicture} % 그림 끝
+\caption{tikz 예}
+\label{fig3.2}
+\end{figure}
+
+[그림 \ref{fig3.2}]는 tikz 그림의 예이다.\\
+
+\vspace{5cm}
+
+\subsection{함수 그리기}
+
+\begin{figure}[!h]
+\begin{tikzpicture}[domain=0:2]
+	\draw[->] (-3, 0) -- (4.2, 0) node[right] {$x$};
+	\draw[->] (0, -3) -- (0, 4.2) node[above] {$y$};
+	\draw[scale=0.5, domain=-3:3, smooth, variable=\x, blue] plot ({\x}, {\x*\x-2*\x+3});
+	% y = x^2+2x+3
+	\draw[scale=0.5, domain=-3:3, smooth, variable=\y, red]  plot ({\y*\y}, {\y});
+	% x = y^2
+\end{tikzpicture}
+\caption{함수 그리기 예}
+\label{fig3.3}
+\end{figure}
+
+[그림 \ref{fig3.3}]는 함수그리기의 예이다. 파란선의 식은 $ y = x^2-2x+3 $, 빨간선의 식은 $ x = y^2 $ \\
+
+\vspace{5cm}
+
+\subsection{노드 그리기}
+
+\begin{tikzpicture}[
+	roundnode/.style={circle,
+		draw=green!60, fill=green!5, very
+		thick, minimum size=7mm},
+	squarednode/.style={rectangle,
+		draw=red!60, fill=red!5, very
+		thick, minimum size=5mm},
+	]
+	
+	% 노드들
+	\node[squarednode](id1){갑};
+	\node[roundnode](uc) [above=of id1] {을};
+	\node[squarednode](rs) [right=of id1] {병};
+	\node[roundnode](lc) [below=of id1] {정};
+	
+	% 선들
+	\draw[->] (uc.south) -- (id1.north);
+	\draw[->] (id1.east) -- (rs.west);
+	\draw[->] (rs.south) .. controls +(down:7mm) and
+	+(right:7mm) .. (lc.east);
+\end{tikzpicture}
+
+
+\end{document}
+
+</pre>
+
+
+
 </div>
