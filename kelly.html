@@ -4,9 +4,8 @@
     <title>켈리기준(Kelly Criterion)</title>
 
 <style>
-    body { line-height:2.3em }
-    p{  text-indent: 2em;  }
-    h1{ color: blue; }
+	body{width:1600px;}
+    h1{ color: blue; text-align: center;}
     h2{ color: red; }
     h3{ color: green; }
     ul{list-style:none; }
@@ -18,7 +17,7 @@ MathJax.Hub.Config({
 extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
 jax: ["input/TeX", "output/HTML-CSS"],
 tex2jax:
-{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+{inlineMath: [ ['$','$'], ["\\(","\\)"] ], processEscapes: true,
 displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 "HTML-CSS": { availableFonts: ["TeX"] }
 });
@@ -31,32 +30,37 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
     
 
 <h1> 켈리기준(Kelly Criterion) </h1>
+<br>
+<h2>  개요 </h2>
+켈리공식은 여러번 반복되는 베팅에서 매번 최적 베팅액수를 결정하는 공식이다. 켈리공식은 몇가지 가정하에  몇몇 도박과 투자에서 장기적으로 다른 어떤 전략보다 우월한 성과를 낸다고 알려져 있다. 이름은 공식을 개발한 벨 연구소 연구원이었던 J. L. Kelly에서 명명되었다. 
+<br>
+	
+<h2>  도박(갬블)에서 기대수익 </h2>
 
 <p> 갬블에서 최고의 기대수익을 얻기 위해 매번 얼마를 베팅해야 하는가?</p>
 
 <p>$w_0 $ : 초기 재산</p>
 
-<p>$w_n $ : n번 베팅 후 재산</p>
- 
-<p>$ \max \{ w_n \} $ 하는 것이 목표</p>
- 
+<p>$w_k $ : k 번 베팅 후 재산</p>
+<p> $p$ : 베팅시 이길 확률(일정) </p>
+<p> $q$ : 실패확률 ($= 1 - p$) </p>
 <p> $ y_k $ : k 번째 베팅시 베팅액(random variable) </p>
- 
+ <br>
+<p> 투자자는 n 번 베팅 후 $ \max \{ w_n \} $ 하는 것이 목표다.</p>
+<p>  투자자의 n 번 베팅 후 재산의 기대값은 다음과 같이 구할 수 있다.</p>
+ 	
 <p> let </p>
 <p>
-\begin{equation*}
-t_k = \left \{ 
+
+$t_k = \left \{ 
 \begin{array}{ll}
 1 & \textrm{$ if \quad win $}\\
 -1 & \textrm{$ if \quad loss $}\\
 \end{array} 
-\right.
-\end{equation*}
+\right.$
+
 </p>
-      
-    <p> $p$ : 베팅시 이길 확률(매번 일정) </p>
-    <p> $q$ : 실패확률 ($= 1 - p$) </p>
- 
+
     <p> $ w_k = w_{k-1} + t_k y_k, \qquad k = 1, 2, 3, ... $ </p>
  
     <p> $ w_n = w_0 + \sum\limits_{k=1}^n {(t_k y_k)} $ </p> 
@@ -65,18 +69,28 @@ t_k = \left \{
     <p> $ E[w_n] = w_0 + \sum\limits_{k=1}^{n} {E[t_k y_k]} $ </p>
     <p> $  =  w_0 + \sum\limits_{k=1}^{n} {(p-q)E[y_k]}$ </p>
 
-    <p> $ \because $ 확률변수 $ t_k, y_k $ 는 서로 독립이므로 </p>
-    
-    <p> $ E[t_k] = 1 \times p + (-1) \times q  = p - q $ </p>
+ <p>  $ \because $ 확률변수 $ t_k, y_k $ 는 서로 독립이므로  $ E[t_k] = 1 \times p + (-1) \times q  = p - q $  </p>
 
-<p> 단 $ p - q > 0 $ 이라 가정, </p>
-
-<p>즉 $ 2p - 1 > 0 \Longrightarrow p > \dfrac{1}{2} $ </p>
+<p> (단 $ p - q > 0 $ 이라 가정, 즉 $ 2p - 1 > 0 \Rightarrow p > \dfrac{1}{2} $ )</p>
 <!-- \frac 대신 \dfrac를 쓰는 것은 분수의 폰트 크기가 비분수의 폰트와 같아지는 역할, 이 것이 없이 그냥 \frac를 쓰면 분수의 폰트 크기가 비분수의 폰트보다 작아진다.-->
 
 <br>
 
-<h2> 1.  최종 재산의 최대화</h2>
+<h2>  기대값 이론의 함정 </h2>  
+<p> one-shot 게임임을 망각 </p> 
+<p> Let’s play a game. Imagine you have $100 and you’d like to maximize your money. You flip a weighted coin that comes up heads 60% of the time, and tails 40% of the time x∼Bernoulli(p=0.6). </p> 
+
+<p> You can play as many times as you would like. How much would you bet?</p> 
+
+<p> The most intuitive answer may not be the optimal one. 
+Well let’s look at the two extremes. 
+If you choose to bet \$0, i.e. not play the game at all, you will leave with \$100 with probability 1. 
+If you bet the entire \$100, you have a 60% of doubling up, and 40% of leaving with nothing. That gives you an expected value (EV) of 0.6(200) + 0.4(0) = 120. Since $120/$100 = 1.2, in the long run you would expect to make 1.2x your bet. </p> 
+<p> So you might naturally think that the optimal strategy is to always bet all your money. But what if it lands on tails the first time? Then you can no longer continue to play the game since you will have no more money. In poker language, you won’t be able to realize your equity because even though in the limit of infinite wealth, you will make money, you can’t withstand the variance of any individual flip. 
+In fact, in the limit of infinite games, you will go broke with probability 1. So it seems like the optimal betting strategy is somewhere in between the two, and should probably vary according to the size of your budget.</p> 
+<br>
+	
+<h2>  최종 재산의 최대화 </h2>
 <p>$\max {E[w_n]}$ : 최종재산 </p>
 <p>$\max {E[w_n]} \Longrightarrow \max {E[w_k]}$ 이므로 </p>
 
@@ -95,7 +109,7 @@ t_k = \left \{
 
 <br>
 
-<h2> 2.  평균 부의 증가율(평균투자수익률) 최대화(Kelly 기준) </h2> 
+<h2> 평균 부의 증가율(평균투자수익률) 최대화(Kelly 기준) </h2> 
 
 <h3> (가정) </h3>
 <p> i) 돈은 무한정 작게 쪼갤 수 있다.</p>
@@ -145,7 +159,7 @@ t_k = \left \{
 
 <p> $ f'(x) = b \dfrac{p}{1 + b x} - \dfrac {q}{1- x} = 0 $ </p>
 
-<p>so, $ x^* = p - \dfrac {q}{b} $ <sup><a href="#fn2" id="ref2">2</a></sup></p>
+<p> 따라서, $ x^* = p - \dfrac {q}{b} $ <sup><a href="#fn2" id="ref2">2</a></sup></p>
 
 <p>이차조건은</p>
 
@@ -157,8 +171,9 @@ t_k = \left \{
 
 <h2> 켈리기준의 의미 </h2>
 
-<p>예를 들어, 승리 확률이 60%인 도박에서($ p=0.6, q=0.4 $), 도박사가 승리시 1대1보상을 받는 경우($ b=1 $), 
-보유자금의 장기 성장률을 극대화하기 위해, 각 베팅 기회에서 도박사는 총 보유자금의 20%씩을 걸어야 한다.</p>
+<p>예를 들어, 승리 확률이 60%인 도박에서($ p=0.6, q=0.4 $), 도박사가 승리시 베팅 금액 만큼의 보상을 받는 경우($ b=1 $), </p>
+<p> $ x^* = 0.6 - \dfrac {0.4}{1} = 0.2 $ </p>
+<p> 즉, 보유자금의 장기 성장률을 극대화하기 위해, 각 베팅 기회에서 도박사는 총 보유자금의 20%씩을 걸어야 한다.</p>
 
 <p>도박사가 우위를 갖지 못한다면, </p>
 
@@ -174,7 +189,7 @@ t_k = \left \{
 
 <p>따라서</p>
 
-<table>
+<table style = " font-size:2.5em; ">
               <tbody>
                 <tr>
                   <td rowspan="2"> $ x^*= $ </td>
@@ -193,10 +208,10 @@ t_k = \left \{
 <p> ①, ②를 감안해서 현실에서는 켈리 기준보다 적게 투자하는 것이 일반적이다.<sup><a href="#fn3" id="ref3">3</a></sup></p> </p>
 <br>
 
-<h2> 3. 성공시 $b$ 배를 얻고 실패시 $a$ 배를 잃는 경우(차입 투자) </h2>
+<h2> 성공시 $b$ 배를 얻고 실패시 $a$ 배를 잃는 경우(차입 투자) </h2>
 
 <p> 실패시 $a$ 배를 잃는다는 의미는 원금의 $a$ 배를 차입해서 투자를 한 경우를 생각할 수 있다. </p>
-<p> 이때, 켈리공식은  </p>
+<p> 이때, 켈리공식은 다음과 같다. </p>
 
 <p> $ x^{*} = \dfrac{p}{a} - \dfrac{q}{b} $ </p>
 
