@@ -1,11 +1,14 @@
-<html lang="ko">
+<html>
 <head>
     <meta charset="utf-8">
     <title>위상도(Phase Diagram)</title>
 
     <style>
-    body { line-height:2.3em }
-    p{  text-indent: 2em;  }
+    body {
+  	width: 1200px;
+      height: auto;
+  } 
+  /*  p{  text-indent: 2em;  } */
     h1{ color: blue; }
     h2{ color: red; }
     h3{ color: green; }
@@ -20,7 +23,7 @@
       margin-left:1em;
     /* border:1px solid red; */
     }
-    #boder{border:1px solid red;}
+/*    #boder{border:1px solid red;} */
     #dark-arrow {
                 stroke: #03051af8;
                 fill: #03051af8;
@@ -57,142 +60,87 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
  </head>
 
 <body>
-    <h1 class="inline">위상도(Phase Diagram) </h1>
+<h1 class="inline">위상도(Phase Diagram) 분석</h1>
+<br><br>
 
-<h3> 단일방정식인 경우 위상도 </h3>
+<h2> 1. 단일방정식인 경우 </h2>
+<br>
 
+<h3> 위상도</h3>
 
+<p> 다음과 같은 미분방정식을 생각해 보자.</p> 
 
-<p>ㅇ 위상도</p>
-<p>- 수평축을 $y(t)$, 수직축을 $ \frac{dy(t)}{dt} $로 놓고 $ y $와 $ \frac{dy}{dt} $의 관계를 표현한 것 </p>
-<p>- 수평축을 $y(t)$, 수직축을 $ y $ 의 함수인 $f(y(t)) $로 표현한 것  </p>
+<p> $ \frac{dy(t)}{dt}=F(y) $ </p> 
 
-<p>ㅇ 위상선(phase line)</p>
-<p>- $ y $와 $ \frac{dy}{dt} $, 또는 $ y $와 $f(y(t)) $의 관계를 나타내는 선</p>
+<p> 위상도 분석은 미분방정식의 해를 구하기 어려울 때 기하학적으로 해의 의미를 해석하는데 유
+  용하게 사용된다. 특히 경제학에서 그림의 형태를 보고 해의 수렴 또는 발산을 판정하는 데
+  사용된다. </p>
 
-<p> 위상도는 미분방정식의 해를 구하기 어려울 때 기하학적으로 해의 의미를 해석하는데 유용하게 사용된다. </p>
+<p> 위상도는 수평축을 $y(t)$, 수직축을 $ \dfrac{dy(t)}{dt} $로 놓고 $ y $와 $ \dfrac{dy}{dt} $의 관계를 표현한 것이다. </p>
+<br>
 
-<p>값이 수평축 위에 있을 때,  즉 $ \frac{dy}{dt} > 0 $ 일 때 $ y $는 시간이 흐름에 따라 증가함을 의미. $ y $ 는 왼쪽에서 오른쪽으로 흐른다. </p>
-<p>값이 수평축 아래에 있을 때,  즉  $ \frac{dy}{dt} < 0 $ 일 때 $ y $는 시간이 흐름에 따라 감소함을 의미. $ y $는 오른쪽에서 왼쪽으로 흐른다.</p>
+<h3> 위상선(phase line)</h3>
+<p>위상선은 $ y $와 $ \frac{dy}{dt} $의 관계를 나타내는 선이다.</p>
 
+<p>값이 수평축 위에 있을 때,  즉 $ \dfrac{dy}{dt} > 0 $ 일 때 $ y $는 시간이 흐름에 따라 증가함을 의미. 그래프에서는 $ y $ 선상에 왼쪽에서 오
+  른쪽으로 화살표를 표시한다.    </p>
+<p>값이 수평축 아래에 있을 때,  즉  $ \dfrac{dy}{dt} < 0 $ 일 때 $ y $는 시간이 흐름에 따라 감소함을 의미. 그래프에서는 $ y $ 선상에 오른쪽에서
+  왼쪽으로 화살표를 표시한다.   </p>
+  <p>$ \frac{dy}{dt}= 0 $ 인 점을 임계점(critical point) 또는 균형점(equilibrium point)이라 한다.  </p>
+  <p> 특히 경제학에서는 이 점을 정상상태 균형(steady-state equilibrium)이라 한다. <sup><a href="#fn1" id="ref1">1</a></sup> </p>
+<p> $ \dfrac{dy}{dt}= 0 $ 인 점에서 화살표가 모이면 해의 수렴을 의미하므로 안정상태 균형(stable equilibrium)이라 한다.</p>
+  <p>$ \dfrac{dy}{dt}= 0 $ 인 점에서 화살표가 모이지 않는다면 해의 발산을 의미하므로 해는 불안정 상태에 있음을 알 수 있다. </p>
+  <p>즉, 교차점에서 위상선의 기울기가 음(-)일 때 교차점은 안정적이고, 교차점에서 위상선의 기울기가 양(+)일 때 교차점은 불안정함을 알 수 있다.   </p>
+<br>
+	
+<h3> Stability theorem </h3>
+<p>Let $ \dfrac{dy}{dt}=f(y) $ be an autonomous differential equation. </p>
+<p>Suppose $y(t)=y^∗$ is an equilibrium, i.e., $f(y^∗) = 0 $. </p>
+<p>Then</p>
+<p> if $f(y^∗) < 0 $, the equilibrium $y(t)=y^∗$ is locally stable,</p>
+<p> if $f(y^∗) > 0 $, the equilibrium $y(t)=y^∗$ is unstable.</p>
 
-<div class="digitDiv">
-  <svg id = "boder" width="1300px" height="1000px" viewBox="-100 0 1200 900" 
-  xmlns="http://www.w3.org/2000/svg" version="1.1">
-  <defs>
-   <!-- <marker id="dark-arrow" viewBox="0 0 10 10" refX="1" refY="5"
-        markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" />
-    </marker>
-  -->
+<br>
+<h3> 예1) </h3>
 
-    <marker id="dark-arrow" markerWidth="10" markerHeight="7" 
-    refX="0" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" />
-    </marker>
-
-    <marker id="blue-arrow" viewBox="0 0 10 10" refX="1" refY="5"
-        markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" />
-    </marker>
-    <marker id="red-arrow" viewBox="0 0 10 10" refX="1" refY="5"
-        markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" />
-    </marker>
-    <marker id="green-arrow" viewBox="0 0 10 10" refX="1" refY="5"
-    markerWidth="6" markerHeight="6" orient="auto">
-  <path d="M 0 0 L 10 5 L 0 10 z" />
-  </marker>
-  </defs>
-
-<polyline points="10,500 700,500" fill="none" stroke="black" 
-    stroke-width="2" marker-end="url(#dark-arrow)" />
-<polyline points="100,600 100,100" fill="none" stroke="black" 
-    stroke-width="2" marker-end="url(#dark-arrow)" />
-
-<text id = "sgv-text" x="60" y="540" > 0 </text>
-<path 
-    d="M 110 580 C 180 410, 280 410, 380 480 S 550 680, 680 480" 
-    stroke="#eb6e4c" fill="none" stroke-width="6" stroke-linecap="round" />
-
-<foreignObject x="150" y="520" width="100" height="100">
-  <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
-  $ y_1 $
-  </div>
-</foreignObject>
-<foreignObject x="380" y="520" width="100" height="100">
-  <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
-  $ y_2 $
-  </div>
-</foreignObject>
-<foreignObject x="80" y="10" width="100" height="100">
-  <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
-  $ \dfrac{dy}{dt} $
-  </div>
-</foreignObject>
-<foreignObject x="730" y="480" width="100" height="100">
-  <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
-  $ y(t) $
-  </div>
-</foreignObject>
-<foreignObject x="100" y="700" width="500" height="100">
-  <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
-    (그림 1) 위상도
-  </div>
-</foreignObject>
-
-<polyline points="115,575 112,580" fill="none" stroke="none" 
-    stroke-width="2" marker-end="url(#dark-arrow)" />
-<polyline points="135,530 130,540" fill="none" stroke="none" 
-    stroke-width="2" marker-end="url(#dark-arrow)" />
-<polyline points="190,460 193,458" fill="none" stroke="none" 
-    stroke-width="2" marker-end="url(#dark-arrow)" />
-<polyline points="250,435 253,435" fill="none" stroke="none" 
-    stroke-width="2" marker-end="url(#dark-arrow)" /> 
-<polyline points="350,460 355,465" fill="none" stroke="none" 
-    stroke-width="2" marker-end="url(#dark-arrow)" />
-<polyline points="443,535 440,530" fill="none" stroke="none" 
-    stroke-width="2" marker-end="url(#dark-arrow)" />
-<polyline points="543,585 540,585" fill="none" stroke="none" 
-    stroke-width="2" marker-end="url(#dark-arrow)" />
-<polyline points="603,565 600,568" fill="none" stroke="none" 
-    stroke-width="2" marker-end="url(#dark-arrow)" />
-
-<circle cx="155" cy="500" r="5" fill="red" />
-<circle cx="405" cy="500" r="5" fill="red" />
-
-</svg>
+<div style="text-align : center;">
+  <img src="phase-diagram1.png"><br>
+  (그림 1) 해의 수렴, 발산
 </div>
 
 <p>이를 (그림 1)에서 보듯이 화살표로 표시. 즉, 화살표의 방향은 위상선의 기울기와는 무관하다.</p>
 
-<p>$ \frac{dy}{dt}= 0 $ 인 점을 임계점(critical point) 또는 균형점(equilibrium point)이라 한다.  </p>
 
-<p> 특히 경제학에서는 이 점을 정상상태 균형(steady-state equilibrium)이라 한다.<sup><a href="#fn1" id="ref1">1</a></sup> </p>
  
  <p> (그림 1)에는 $ y_1, y_2 $  2 개의 균형점이 존재한다. </p>
 
-<p>$y_2$는 시간이 흘러도 변하지 않고 안정적이므로 안정상태 균형(stable equilibrium)임을 알 수 있다.  </p>
+<p>$ y_2 $는 시간이 흘러도 변하지 않고 안정적이므로 안정상태 균형(stable equilibrium)임을 알 수 있다.  </p>
  
- 
-<p>미분방정식이 안정상태에 있다면 $\frac{dy}{dt} = 0 $인 $y^*$에서</p>
- 
-<p>$y^*$ 의 근방에서  $ y < y^*$ 일 때  $\frac{dy}{dt} > 0 $, 그리고  $ y > y^*$ 일 때 $\frac{dy}{dt} < 0 $ .</p>
+<p>(그림 1)에서 보듯이 교차점에서 위상선의 기울기가 음일 때 교차점은 안정적임을 알 수 있다. $ y_1 $는 시간이 흐름에 따라 
+  안정적이지 않고 미세한 왼쪽의 움직임은 왼쪽, 미세한 오른쪽의 움직임은 오른쪽으로 이동한다. 교차점에서 위상선의 기울기가 양일 때 교차점은 안정적이지 않다. </p>
+<br>
 
-<p>(그림 1)에서 보듯이 교차점에서 위상선의 기울기가 음일 때 교차점은 안정적임을 알 수 있다. </p>
+<h3> 예2) </h3>
 
-<p>$ y_1 $는 시간이 흐름에 따라 안정적이지 않고 미세한 왼쪽의 움직임은 왼쪽, 미세한 오른쪽의 움직임은 오른쪽으로 이동한다. 교차점에서 위상선의 기울기가 양일 때 교차점은 안정적이지 않다. </p>
+<div style="text-align : center;">
+  <img src="phase-diagram2.png"><br>
+  (그림 2) 해가 안장점인 경우
+</div>
 
-<h3>연립미분방정식인 경우 위상도(상태변수가 2 이상)</h3>
+<p> $ y(t) < y^∗ $ 일 때 $ \dfrac{dy}{dt} > 0 $, $ y(t) > y^∗ $ 일 때 $ \dfrac{dy}{dt} > 0 $   
+따라서 $ y^∗ $는 불안정함을 알 수 있다. 이와 같이 접하는 경우의 해를 안장점(saddle point)라고 한다. 안장점도 불안정한 균형이다. </p>
+<br><br>
 
+<h2>2. 연립미분방정식인 경우 (상태변수가 2 이상)</h2>
+
+<p> 다음의 연립미분방정식을 고려한다. </p>
 <p> $ \mathbf y'(t) = \mathbf A(t) \mathbf y(t) + \mathbf v(t)$ </p>
 
-<p> 주로 $ \mathbf A $가 2×2 행렬인 경우에 대해서 분석 가능하다. 그 이상인 경우는 그림으로 분석하기 곤란. </p>
+<p> 위상도 분석은 $ \mathbf A $가 2×2 행렬인 경우에 대해서만 가능하다. 그 이상인 경우는 그림으로
+  분석하기 곤란하기 때문이다. </p>
 
-<p> $ \mathbf y'(t) = 0 $인 곡선을 등고선(等高線, zero-growth isoclines)이라 한다. </p>
-
-<p> 등고선은 함수의 기울기가 항상 같은 점을 모은 선을 의미한다. 즉 $ \mathbf {y'(t)} = C, C $는 임의 상수  </p>
-<p> $ C = 0 $ 인 경우는 nullcline이라 한다.</p>
+<p> $ \mathbf y'(t) = 0 $인 곡선을 등고선(等高線, zero-growth isoclines)이라 한다. 
+  등고선은 함수의 기울기가 항상 같은 점을 모은 선을 의미한다. </p>
  
 <h4>(예1) </h4>
 <p> $x$, $y$는 시간 t의 함수, $x(t), y(t)$ </p>
@@ -203,14 +151,14 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 <h4>(풀이)</h4>
 <p>정상상태(steady state)에서 상태변수들은 시간에 따라 변하지 않으므로</p>
 
-<p> $ \frac{dy}{dt} = 0, \frac{dx}{dt} = 0 $ 인 선들을 그리면 (그림 2)와 같다.</p>
-<p> $ \frac{dx}{dt} = -2x = 0 \Longrightarrow x = 0 ........... ① $ </p>
-<p> $ \frac{dy}{dt} = 2x - 4y +32 = 0 \Longrightarrow y = \frac{1}{2}x + 8 ........... ② $ </p>
+<p> $ \frac{dy}{dt} = 0, \frac{dx}{dt} = 0 $ 인 선들을 그리면 (그림 2a), (그림 2b)와 같다.</p>
+<p> $ \frac{dx}{dt} = -2x = 0 \Longrightarrow x = 0 $........... ①  </p>
+<p> $ \frac{dy}{dt} = 2x - 4y +32 = 0 \Longrightarrow y = \frac{1}{2}x + 8 $........... ②  </p>
 
 <p>균형점은 $ \dfrac{dx}{dt} = \dfrac{dy}{dt} = 0 $ 에서 결정되므로 </p>
 <p> 이 두 연립방정식의 해는 ①, ②를 동시에 만족시켜야 한다.</p>
 <p>따라서 균형점은 $(0, 8)$ 이 된다.</p>
-
+<p>이제 이 해의 수렴, 발산 여부를 판정해 보자.</p>
 <p> 이 연립미분방정식의 $\textrm{A}$ 행렬은 </p>
 <p>
   $
