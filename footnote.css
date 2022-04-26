@@ -14,7 +14,6 @@ h2::before {
 sup::after {
   counter-increment: cb_counter_var;
   content: counter(cb_counter_var);
-
 }
 
 /* This initially hides the footnote (i.e. span)  */
@@ -24,13 +23,11 @@ input[type=checkbox] ~ span {
 
 /* This styles the footnote text which appears 
 when the label is clicked  */
- input[type=checkbox]:checked ~ span {
+input[type=checkbox]:checked ~ span {
     display:inline; 
-    font-size: 100%;
-    font-family: "Times New Roman", "Malgun Gothic", serif;
-    color: mix(#000, $text-color, 30%); 
-    color: white; 
-    background-color:black;
+    font-size: 85%;
+    font-family:$monospace;
+    color: blue;
     cursor:default;
 }
 
@@ -44,8 +41,7 @@ like a hyperlink  */
 input[type=checkbox] ~ label {
     display:inline;
     cursor:pointer;
-  /*  color:$link-color; */
-    color:blue;
+    color:$link-color;
     text-decoration:underline;
 }
 
