@@ -1,0 +1,6 @@
+h1{ color: blue; }
+h2{ color: red; }
+h3{ color: green; }
+h4{ color: rgb(85, 7, 81); }
+.inline{ display: inline; }
+#ex{font-size: 20px; font-family:Gothic; font-weight:bold; color:#000099;}
