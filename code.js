@@ -292,13 +292,11 @@ $(function(){
       $("p#lx1").click(function(){
         $("#center").load("code.txt pre#lx1");
      });
+
+     $("p#md1").click(function(){
+        $("#center").load("code.txt pre#md1");
+     });
  
-     $("p#lx2").click(function(){
-         $("#center").load("code.txt pre#lx2");
-      });
      
-     $("p#lx3").click(function(){
-         $("#center").load("code.txt pre#lx3");
-      });
 
 });

@@ -3733,6 +3733,389 @@ $\displaystyle{\lim_{n \to \infty}
 
 </pre>
 
+<pre id="md1">
 
+<!--주석문 -->
+<!--markdown은 표준화가 안되서 특히 일부 latex 수식의 경우 구현이 안되는 경우도 있다. 본 문장은 vscode를 기준으로
+한 것이다. -->
+
+<style>
+r { color: Red }
+o { color: Orange }
+g { color: Green }
+b { color: Blue }
+</style>
+
+markdown 연습
+================
+
+# <a id="con"> 목차 <a>
+
+- [1. 제목](#1-제목)
+- [2. 문장](#2-문장)
+- [3. 링크](#3-링크) 
+- [4. 표](#4-표)
+- [5. 수식](#5-수식)
+- [6. 문장내 링크](#6-문장내-링크)
+
+
+<br><br>
+
+## <r> 1. 제목
+<br>
+
+대제목은 '#'를 붙이거나 '===='로 밑줄친다.
+
+```
+# 대제목(H1 태그)
+```
+
+# 대제목(H1 태그)
+
+```
+대제목(H1 태그)
+====
+```
+
+대제목(H1 태그)
+====
+
+중제목은 '##'를 붙이거나 '----'로 밑줄친다.
+
+```
+## 중제목(H2 태그)
+```
+
+## 중제목(H2 태그)
+
+```
+중제목(H2 태그)
+----
+```
+
+중제목(H2 태그)
+----
+
+<br>
+
+소제목은 '###', 이후로 # 갯수가 늘수록 크기가 작아짐
+
+```
+### 소제목(H3 태그)
+```
+
+### 소제목(H3 태그)
+
+<br>
+
+## <r> 2. 문장
+<br>
+
+### <o> ■ 문장 형식
+
+```
+<p>HTML 문법을 사용할 수 있다.</P>
+
+이텔릭체는 *별표* 또는 _언더바_ 사용
+
+찐한체는 **쌍별표** 혹은 __쌍언더바__ 사용
+
+이텔릭체와 찐한체 **_동시_** 사용
+
+취소선은 ~~물결표시(tilde)~~ 사용
+
+<u>밑줄</u>은 `<u></u>`를 사용
+```
+
+<p>HTML 문법을 사용할 수 있다.</P>
+
+이텔릭체는 *별표* 또는 _언더바_ 사용
+
+찐한체는 **쌍별표** 혹은 __쌍언더바__ 사용
+
+이텔릭체와 찐한체 **_동시_** 사용
+
+취소선은 ~~물결표시(tilde)~~ 사용
+
+<u>밑줄</u>은 `<u></u>`를 사용
+<br><br>
+
+### <o> ■ 인라인(inline) 코드 강조
+<br>
+
+```
+백틱(ˋ)으로 문자열을 두름
+`background` 혹은 `background-image` 속성으로 요소에 배경 이미지를 삽입할 수 있습니다.
+```
+
+백틱(ˋ)으로 문자열을 두름
+`background` 혹은 `background-image` 속성으로 요소에 배경 이미지를 삽입할 수 있습니다.
+
+### <o> ■ 블록(block) 코드 강조
+<br>
+3개의 백틱(ˋˋˋ)으로 문장을 두름
+
+```
+마크다운(Markdown)은 존 그루버(John Gruber)와 아론 스워츠
+(Aaron Swartz)가 만들었다. 온갖 태그로 범벅된 HTML 문서 
+등과 달리, 읽기도 쓰기도 쉬운 문서 양식을 지향한다. 
+```
+
+```
+html
+<a href="https://www.google.co.kr/" target="_blank">GOOGLE</a>
+```
+
+```c
+#include <stdio.h>
+int main()
+{
+    printf("Hello, world!\n");
+    return 0;
+}
+```
+
+### <o> ■ 목록 표현
+
+목록에는 번호를 순서대로 매기지 않아도 자동 정렬된다.
+```
+1. 순서가 필요한 목록
+3. 순서가 필요한 목록 
+     - 순서가 필요하지 않은 목록(서브) 
+     - 순서가 필요하지 않은 목록(서브) 
+2. 순서가 필요한 목록 
+    1. 순서가 필요한 목록(서브) 
+    1. 순서가 필요한 목록(서브)
+1. 순서가 필요한 목록
+- 순서가 필요하지 않은 목록에 사용 가능한 기호
+
+    - 대쉬(hyphen) 
+    * 별표(asterisks) 
+    + 더하기(plus sign)
+```
+
+1. 순서가 필요한 목록
+1. 순서가 필요한 목록 
+     - 순서가 필요하지 않은 목록(서브) 
+     - 순서가 필요하지 않은 목록(서브) 
+1. 순서가 필요한 목록 
+    1. 순서가 필요한 목록(서브) 
+    1. 순서가 필요한 목록(서브)
+1. 순서가 필요한 목록
+- 순서가 필요하지 않은 목록에 사용 가능한 기호
+
+    - 대쉬(hyphen) 
+    * 별표(asterisks) 
+    + 더하기(plus sign)
+<br>
+
+### <o> ■ 수평선
+
+-, *, _ 각 기호를 3개 이상 입력
+
+```
+---
+(Hyphens)
+
+***
+(Asterisks)
+
+___
+(Underscores)
+```
+
+---
+(Hyphens)
+
+***
+(Asterisks)
+
+___
+(Underscores)
+
+
+<br><br>
+
+## <r> 3. 링크 
+<br>
+
+### <o> ■ 웹페이지 링크
+<br>
+
+링크는 대괄호로 묶음
+
+```
+[GOOGLE](https://google.com)
+```
+
+[GOOGLE](https://google.com)
+
+```
+[GitHub][1]
+
+[1]: https://github.com
+```
+
+[GitHub][1]
+
+[1]: https://github.com
+
+```
+[참조 링크]: https://naver.com
+``` 
+
+문서 안에서 [참조 링크]를 그대로 사용할 수도 있다.
+
+[참조 링크]: https://naver.com
+
+문서 내 URL이나 꺾쇠(<...>)안의 URL은 자동으로 링크를 적용
+```
+구글 홈페이지: https://google.com 
+
+네이버 홈페이지: <https://naver.com> 
+```
+구글 홈페이지: https://google.com 
+
+네이버 홈페이지: <https://naver.com> 
+<br><br>
+
+### <o> ■ 이미지 링크
+<br>
+
+대괄호 앞에 ! 붙임
+
+```
+![그림1](./image-test.jpg)
+![그림2](http://www.gstatic.com/webp/gallery/5.jpg)
+![그림3][logo]
+
+ [logo]: http://www.gstatic.com/webp/gallery/2.jpg
+ ![그림4](./images/vue.png)](https://kr.vuejs.org/)
+```
+```
+[그림3][logo]와 [logo]: http://www.gstatic.com/webp/gallery/2.jpg 사이에 한 줄 띄어야 됨. md 명령은 명령줄간 한 줄 띄어써야 실행되는 경우가 많음
+```
+![그림1](./image-test.jpg)
+![그림2](http://www.gstatic.com/webp/gallery/5.jpg)
+![그림3][logo]
+
+ [logo]: http://www.gstatic.com/webp/gallery/2.jpg
+ ![그림4](./images/vue.png)](https://kr.vuejs.org/)
+<br><br>
+
+### <o> 목차 및 문장내 링크
+<br>
+본문 처음의 목차는 다음 코드로 작성된 것이다.
+공백은 -으로 연결, 
+.(구둣점)은 제외,
+영어의 경우 첫 글자는 소문자로 시작
+
+```
+# <a id="con"> 목차 <a>
+
+- [1. 제목](#1-제목)
+- [2. 문장](#2-문장)
+- [3. 링크](#3-링크) 
+- [4. 표](#4-표)
+- [5. 수식](#5-수식)
+- [6. 문장내 링크](#6-문장내-링크)
+```
+
+html 같이 id tag를 사용해 연결할 수도 있다.
+
+```
+<a id="con"> 목차 <a>
+...
+[TOP](#con)
+```
+
+[TOP](#con)
+
+### <o> 각주
+
+마크다운 (Markdown)은 마크업 언어의 일종으로, 존 그루버(John Gruber)[^f1]와 아론 스워츠(Aaron Swartz)[^f2]가 만들었다. 확장자는 .md
+
+[^f1]: 유명한 애플 관련 블로거
+[^f2]: 레딧의 공동설립자이자 RSS를 고안하고 정보자유를 중점적으로 주장한 인터넷 활동가이자 프로그래머. 재판기록 같은 각종 공공정보를 무료로 대중에게 공개해야한다는 신념으로 활동하던 중 유료 저널 검색엔진 및 저장소인 JSTOR의 논문들을 다운받아 공개하려한 건으로 FBI 수사로 기소되어 재판과정 중에 자살로 생을 마감했다.
+
+## <r> 4. 표
+<br>
+헤더 셀을 구분할 때 3개 이상의 -(hyphen/dash) 기호가 필요합니다.
+헤더 셀을 구분하면서 :(Colons) 기호로 셀(열/칸) 안에 내용을 정렬할 수 있습니다.
+가장 좌측과 가장 우측에 있는 |(vertical bar) 기호는 생략 가능합니다.
+
+```
+#### <b> 용의자의 딜레마
+| 갑\을 | 협조 | 배신 |
+|---|---|---|
+| **협조** | -1,-1 | -9,0 |
+| **배신** | 0,-9 | -5,-5 |
+```
+#### <b> <표> 용의자의 딜레마 </b>
+| 갑\을 | 협조 | 배신 |
+|---|---|---|
+| **협조** | -1,-1 | -9,0 |
+| **배신** | 0,-9 | -5,-5 |
+
+
+
+<br><br>
+
+## <r> 5. 수식
+<br>
+수식은 latex 명령어를 쓴다.
+
+### <o> ■ block 수식
+
+- block 수식은 `$$...$$`, 혹은 `\[...\]` 를 사용한다.
+- viewer에 따라 수식표현이 안 되는 것도 있다.
+- viewer에 따라 `\[...\]` 이 안 되는 것도 있다.
+- viewer에 따라  `\`(백슬래쉬)를 인식하기 위해 \를 앞에 추가해야 하는 경우도 있다.
+
+```
+$$x=\frac{-b+\sqrt{b^2-4ac}}{2a}$$
+
+\[ \frac{1+s}{s(s+2)} \]
+
+$$\begin{pmatrix}1&2 \\ 3&4 \\ \end{pmatrix}$$
+
+$$\vert x\vert=
+\begin{cases}
+-x,\;if\;x<0 \\\\
++x,\;if\;x\geq0
+\end{cases}$$
+```
+
+$$x=\frac{-b+\sqrt{b^2-4ac}}{2a}$$
+\[ \frac{1+s}{s(s+2)} \]
+$$\begin{pmatrix}1&2 \\ 3&4 \\ \end{pmatrix}$$
+
+$$\vert x\vert=
+\begin{cases}
+-x,\;if\;x<0 \\\\
++x,\;if\;x\geq0
+\end{cases}$$
+<br>
+
+### <o> ■ inline 수식
+
+- inline 수식은 `$...$`, 혹은 `\(...\)` 를 사용한다. 
+- viewer에 따라 `\(...\)`이 안되는 것도 있다.
+
+```
+This expression $\sqrt{3x-1}+(1+x)^2$ is an example of an inline equation.
+This expression \( \sqrt{3x-1}+(1+x)^2 \) is an example of an inline equation.
+```
+
+This expression $\sqrt{3x-1}+(1+x)^2$ is an example of an inline equation.
+
+This expression \(  \sqrt{3x-1}+(1+x)^2  \) is an example of an inline equation.
+<br><br>
+
+
+
+
+
+</pre>
 
 </div>
