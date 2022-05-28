@@ -3734,7 +3734,7 @@ $\displaystyle{\lim_{n \to \infty}
 </pre>
 
 <pre id="md1">
-
+<xmp>
 <!--주석문 -->
 <!--markdown은 표준화가 안되서 특히 일부 latex 수식의 경우 구현이 안되는 경우도 있다. 본 문장은 vscode를 기준으로
 한 것이다. -->
@@ -4115,7 +4115,7 @@ This expression \(  \sqrt{3x-1}+(1+x)^2  \) is an example of an inline equation.
 
 
 
-
+</xmp>
 </pre>
 
 </div>
