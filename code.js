@@ -289,7 +289,7 @@ $(function(){
          $("#center").load("code.txt pre#sh3");
       });
 
-      $("p#lx1").click(function(){
+     $("p#lx1").click(function(){
         $("#center").load("code.txt pre#lx1");
      });
 

@@ -1,0 +1,162 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+<title>LaTeX equations for web</title>
+<script src="https://raw.githubusercontent.com/kkmin1/Home/master/latex.js"></script>
+</head>
+
+<body>
+<h1>Upmath: Math Online Editor</h1>
+
+<h2>LaTeX</h2>
+<p>Upmath converts LaTeX equations in double-dollars <code>$$...$$</code>. All equations are rendered as inline equations. $$ax^2+bx+c=0$$ like this.</p>
+<p>If you need block ones, just type the formula on separate line plus line break.</p>
+<p>$$p={1\over q}$$</p>
+<p>Place big equations on separate lines:</p>
+<p>$$x_{1,2} = {-b\pm\sqrt{b^2 - 4ac} \over 2a}$$</p>
+<p>In this case the LaTeX syntax will be highlighted in the source code. You can even add equation numbers (unfortunately there is no automatic numbering and refs support):</p>
+<p>$$|\vec{A}|=\sqrt{A_x^2 + A_y^2 + A_z^2}$$(1)</p>
+<p>It is possible to write Cyrillic symbols in <code>\text</code> command: $$Q_\text{плавления}&gt;0$$</p>
+<p>One can use matrices:</p>
+<p>$$T^{\mu\nu}=\begin{pmatrix}
+\varepsilon&amp;0&amp;0&amp;0\\\\
+0&amp;\varepsilon/3&amp;0&amp;0\\\\
+0&amp;0&amp;\varepsilon/3&amp;0\\\\
+0&amp;0&amp;0&amp;\varepsilon/3
+\end{pmatrix}$$</p>
+<p>integrals:</p>
+<p>$$P_\omega={n_\omega\over 2}\hbar\omega\,{1+R\over 1-v^2}\int\limits_{-1}^{1}dx\,(x-v)|x-v|$$</p>
+<p>table: (한글 안됨)</p>
+<p>$$ 
+			\begin{tabular}{|c|c|c|c|}
+			\noalign{\smallskip}\noalign{\smallskip}\hline
+			& column1 & column2 & column3 \\
+			\hline
+			row1 & - & - & - \\
+			\hline
+			row2 & - & - & - \\
+			\hline
+			row3  & - & - & - \\
+			\hline
+		\end{tabular}
+$$</p>
+<p>cool tikz-pictures:</p>
+<p>$$\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}[line width=0.2mm,scale=1.0545]\small
+\tikzset{&gt;=stealth}
+\tikzset{snake it/.style={-&gt;,semithick,
+decoration={snake,amplitude=.3mm,segment length=2.5mm,post length=0.9mm},decorate}}
+\def\h{3}
+\def\d{0.2}
+\def\ww{1.4}
+\def\w{1+\ww}
+\def\p{1.5}
+\def\r{0.7}
+\coordinate[label=below:$A_1$] (A1) at (\ww,\p);
+\coordinate[label=above:$B_1$] (B1) at (\ww,\p+\h);
+\coordinate[label=below:$A_2$] (A2) at (\w,\p);
+\coordinate[label=above:$B_2$] (B2) at (\w,\p+\h);
+\coordinate[label=left:$C$] (C1) at (0,0);
+\coordinate[label=left:$D$] (D) at (0,\h);
+\draw[fill=blue!14](A2)--(B2)-- ++(\d,0)-- ++(0,-\h)--cycle;
+\draw[gray,thin](C1)-- +(\w+\d,0);
+\draw[dashed,gray,fill=blue!5](A1)-- (B1)-- ++(\d,0)-- ++(0,-\h)-- cycle;
+\draw[dashed,line width=0.14mm](A1)--(C1)--(D)--(B1);
+\draw[snake it](C1)--(A2) node[pos=0.6,below] {$c\Delta t$};
+\draw[-&gt;,semithick](\ww,\p+0.44*\h)-- +(\w-\ww,0) node[pos=0.6,above] {$v\Delta t$};
+\draw[snake it](D)--(B2);
+\draw[thin](\r,0) arc (0:atan2(\p,\w):\r) node[midway,right,yshift=0.06cm] {$\theta$};
+\draw[opacity=0](-0.40,-0.14)-- ++(0,5.06);
+\end{tikzpicture}$$</p>
+<p>plots:</p>
+
+<p>$$
+\begin{tikzpicture}[scale=1.0544]\small
+\begin{axis}[axis line style=gray,
+	samples=120,
+	width=9.0cm,height=6.4cm,
+	xmin=-1.5, xmax=1.5,
+	ymin=0, ymax=1.8,
+	restrict y to domain=-0.2:2,
+	ytick={1},
+	xtick={-1,1},
+	axis equal,
+	axis x line=center,
+	axis y line=center,
+	xlabel=$x$,ylabel=$y$]
+\addplot[red,domain=-2:1,semithick]{exp(x)};
+\addplot[black]{x+1};
+\addplot[] coordinates {(1,1.5)} node{$y=x+1$};
+\addplot[red] coordinates {(-1,0.6)} node{$y=e^x$};
+\path (axis cs:0,0) node [anchor=north west,yshift=-0.07cm] {0};
+\end{axis}
+\end{tikzpicture}
+$$</p>
+<br>
+<p>$$
+ \begin{tikzpicture}[scale=0.2]
+    \draw[->] (0,0) -- (0,50) node[left]{$F_{\text{\tiny K}}$};
+    \draw[->] (0,0) -- (50,0) node[below]{$K$};
+    \draw[thick] (2,48) .. controls (15,15) and (44,3) .. (48,2);
+    \node at (10,40) {$\frac{\partial F}{\partial K}$ 곡선};
+    \node at (18,-2) {$K^{*}$};
+    \node at (28,-2) {$K^{\text{\tiny'}}$};
+    \node at (-2,22) {$F_{\text{\tiny K}}^{*}$};
+    \node at (-2,13) {$F_{\text{\tiny K}}^{\text{\tiny'}}$};
+    \node at (-1,-1) {0};
+    \draw[densely dotted] (18,0) -- (18,22.3);
+    \draw[densely dotted] (28,0) -- (28,13.5);
+    \draw[densely dotted] (0,22.3) -- (18,22.3);
+    \draw[densely dotted] (0,13.5) -- (28,13.5);
+\end{tikzpicture}    
+$$</p>
+<br>
+<p>$$  
+\begin{tikzpicture}[scale=2]
+    % draw the axis
+    \draw [thick, ->] (-1,0) -- (5,0); 
+    \draw [thick, ->] (0,-1) -- (0,2); 
+    % draw the curve
+    \draw [blue, thick, domain=0.5:3.5] plot (\x, {-(\x-1)*(\x-3)});
+    % draw the arrows
+    \draw [->, very thick, red] (0.9,-0.21) -- (0.8,-0.44);
+    \draw [->, very thick, red] (1.1,0.19) -- (1.2,0.36);
+    \draw [->, very thick, red] (1.5,0.75) -- (1.6,0.84);
+    \draw [->, very thick, red] (2.4,0.84) -- (2.5,0.75);
+    \draw [->, very thick, red] (2.8,0.36) -- (2.9,0.19);
+    \draw [->, very thick, red] (3.2,-0.44) -- (3.1,-0.21);
+    % draw the labels
+    \node at (-0.2,-0.2) {$0$};
+    \node at (0,2.3){$\dfrac{dy(t)}{dt}$};
+    \node at (5.2,0){$y(t)$};
+    \filldraw [gray] (1,0) circle (2pt); 
+    \filldraw [gray] (3,0) circle (2pt); 
+    \node at (1.2,-0.5){$y_{1}(t)^*$};
+    \node at (2.8,-0.5){$y_{2}(t)^*$};
+\end{tikzpicture}
+$$</p>
+<br>
+<p>$$
+    \begin{tikzpicture}[scale=2]
+		\draw [thick, ->] (-2,0.5) -- (5,0.5); 
+		\draw [thick, ->] (-1,-1) -- (-1,4);
+		\draw [blue, thick] (-1,0.5) -- (4,4); 
+		\draw [dashed] (3.2,0.5) -- (3.2,4); 
+		\draw [orange,thick] (-1,0.5) .. controls (1,3) and  (3,3.5) .. (4,3.6); 
+		\filldraw [gray] (3.2,0.5) circle (2pt); 
+		\draw [red, thick] (-1,0.5) .. controls (1,1.5) and  (3,1.5) .. (4.5,-1); 
+		
+		\node at (-1.5,0) {$0$};
+		\node at (5.5,0.5){$k(t)$};
+		\node at (3.2,0){$k(t)^*$};
+		\node at (1.7,1.3){$sy(k)-\lambda k$};
+		\node at (4.2,4.2){$\lambda k$};
+		\node at (4.5,3.6){$sy(k)$};
+	\end{tikzpicture} 
+$$</p>
+<br>
+<p>I have designed and developed this lightweight editor and the service for converting LaTeX equations into svg-pictures to make publishing math texts on the web easy. I consider client-side rendering, the rival technique implemented in <a href="https://www.mathjax.org/">MathJax</a>, to be too limited and resource-consuming, especially on mobile devices.</p>
+<p>The source code is <a href="https://github.com/parpalak/upmath.me">published on Github</a> under MIT license.</p>
+
+
+</body>

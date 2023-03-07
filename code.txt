@@ -3727,8 +3727,6 @@ $\displaystyle{\lim_{n \to \infty}
 	\draw[->] (rs.south) .. controls +(down:7mm) and
 	+(right:7mm) .. (lc.east);
 \end{tikzpicture}
-
-
 \end{document}
 
 </pre>
