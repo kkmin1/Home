@@ -1,111 +1,62 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
 
 <HEAD>
-<META NAME="Generator" CONTENT="Hancom HWP 8.5.8.1677">
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="eco-math.css">
+  <link rel="stylesheet" type="text/css" href="footnote.css">
+
 <TITLE>거미집이론</TITLE>
-<style>
-    body { line-height:2.3em }
-    p{  text-indent: 2em;  }
-    h1{ color: blue; }
-    h2{ color: red; }
-    h3{ color: green; }
-    h4{ color: rgb(85, 7, 81); }
-    .inline{ display: inline; }
-
-    div.digitDiv {
-      font-size:10vw;
-      font-family: monospace;
-      display:inline-block;
-      width:1em;
-      margin-left:1em;
-    /* border:1px solid red; */
-    }
-    #boder{border:1px solid red;}
-    #dark-arrow {
-                stroke: #03051af8;
-                fill: #03051af8;
-            }
-    #blue-arrow {
-                stroke:#0e1abd;
-                fill: #0e1abd;
-                }
-
-    #red-arrow {
-                stroke: #bb0b37;
-                fill:  #bb0b37;
-                }
-    #green-arrow {
-                stroke: #4eda0d;
-                fill:  #4eda0d;
-                }
-    #sgv-text{
-        fill:black;
-        font-size:30px;
-    }
-     </style>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
-	MathJax.Hub.Config({
-	extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
-	jax: ["input/TeX", "output/HTML-CSS"],
-	tex2jax:
-	{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-	displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
-	"HTML-CSS": { availableFonts: ["TeX"] }
-	});
-	</script>
-
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+<script src="./latex.js"></script>
 </HEAD>
 
 <BODY>
 
-<h2 class = "inline">거미집이론(cobweb 모형)</h2>	<sup><a href="#fn1" >1</a></sup>
+<h1 class = "inline">거미집(cobweb) 이론</h1>	<input type="checkbox" id="cb1" /><label for="cb1"><sup></sup>
+</label><span><br><br>N. kaldor 가 1938년 논문에서 최초로 명명, 그래프의 설명은 <A href="cobweb.html" TARGET="_self">cobweb 모형</A> 참조<br></span>
 	
-<P CLASS=HStyle0>수요에 비해 공급의 반응이 지체되어 일어나는 현상으로 가격의 변동에 수요는 즉각적으로 반응하나 공급은 반응에 일정한 시간이 필요하기 때문에 균형가격은 시간차를 고려한 후 결정된다. </P>
-
-<P CLASS=HStyle0>생산기간이 짧은 공산품 같은 경우는 비교적 수요에 대한 공급이 즉각적으로 이루어지지만 생산기간이 긴 농산물은 수요에 비해 공급이 늦어지므로 가격 변화에 따라 즉각적인 공급이 어렵고 농산물은 초과공급 혹은 초과수요가 발생하게 된다. 이처럼 가격에 대응하여 공급될 때까지의 시차 때문에 초과 공급과 초과수요가 반복되면서 가격 폭락과 폭등이 주기적으로 나타나게 된다. </P>
-
-<P CLASS=HStyle0>농산물 가격과 생산량이 시차를 두고 움직여 나가는 과정을 수요, 공급곡선으로 표시하면 마치 거미집 같은 모양으로 그려지기 때문에 거미집 이론이라 불리운다. </P>
-
-<P CLASS=HStyle0>건축시장과 농산물시장은 공급에 시차가 존재한다는 점에서 유사하며, 생산된 상품은 보관이 용이하지 않으므로 일정 기간 이내에 판매되어야 한다는 점에서 유사하다. 부동산의 경우도 전기의 가격이 다음 기의 주택 공급량을 결정하는데 중요한 역할을 하기 때문에 부동산 시장의 경우에도 적용될 수 있다.<sup><a href="#fn2" >2</a></sup> </P>
+<P>수요에 비해 공급의 반응이 지체되어 일어나는 현상으로 가격의 변동에 수요는 즉각적으로 반응하나 공급은 반응에 일정한 시간이 필요하기 때문에 균형가격은 시간차를 고려한 후 결정된다. </P>
+<P>생산기간이 짧은 공산품 같은 경우는 비교적 수요에 대한 공급이 즉각적으로 이루어지지만 생산기간이 긴 농산물은 수요에 비해 공급이 늦어지므로 가격 변화에 따라 즉각적인 공급이 어렵고 농산물은 초과공급 혹은 초과수요가 발생하게 된다. 이처럼 가격에 대응하여 공급될 때까지의 시차 때문에 초과 공급과 초과수요가 반복되면서 가격 폭락과 폭등이 주기적으로 나타나게 된다. </P>
+<P>농산물 가격과 생산량이 시차를 두고 움직여 나가는 과정을 수요, 공급곡선으로 표시하면 마치 거미집 같은 모양으로 그려지기 때문에 거미집 이론이라 불리운다. </P>
+<P>건축시장과 농산물시장은 공급에 시차가 존재한다는 점에서 유사하며, 생산된 상품은 보관이 용이하지 않으므로 일정 기간 이내에 판매되어야 한다는 점에서 유사하다. 
+  부동산의 경우도 전기의 가격이 다음 기의 주택 공급량을 결정하는데 중요한 역할을 하기 때문에 부동산 시장의 경우에도 적용될 수 있다.<input type="checkbox" id="cb2" /><label for="cb2"><sup></sup>
+  </label><span><br><br>주택 가격이 거미집 모형으로 설명된다는 주장은 재고의 여지가 있다. 실제 주택 가격은 일관적으로 상승하거나 일관적으로 하락하거나 하는 경우가 대부분으로 주택가격이 균형가격(원가)을 중심으로 요동치는 경우는 현실적으로 찾아보기 어렵다.<br><br></span> </P>
 <br>
 
-<h3>가정</h3>
+<h2>가정</h2>
 
-<P CLASS=HStyle0 STYLE='margin-left:15.0pt;text-indent:-15.0pt;'>- 수요는 현재가격 및 외부의 임의의 충격에 의해 결정.</P>
-
-<P CLASS=HStyle0 STYLE='margin-left:15.0pt;text-indent:-15.0pt;'>- 공급은 제품가격 기대치 및 외부의 임의의 충격에 의해 결정. </P>
-
-<P CLASS=HStyle0 STYLE='margin-left:15.0pt;text-indent:-15.0pt;'>- 생산된 상품은 보관이 용이하지 않으므로 일정 기간 이내에 판매되어야 한다. (재고는 없고 매기 시장청산이 일어남)<sup><a href="#fn3" >3</a></sup></P>
+<P> 수요는 현재가격 및 외부의 임의의 충격에 의해 결정된다.</P>
+<P> 공급은 제품가격의 기대치 및 외부의 임의의 충격에 의해 결정된다. </P>
+<P> 생산된 상품은 보관이 용이하지 않으므로 일정 기간 이내에 판매되어야 한다.(재고는 없고 매기 시장 청산이 일어남)<input type="checkbox" id="cb3" /><label for="cb3"><sup></sup>
+</label><span><br><br>옥수수, 돼지고기와 같은 非貯藏性財(non-storablee goods)에 적합<br><br></span> </P>
 <br>
 
-<h3>모형</h3>
+<h2>모형</h2>
 
 <p> $ D_t = a - b P_t $ </p>
 <p> $ S_t = c + d P_t^e, \quad a, b, c, d > 0 $ </p>
-
+<br>
 <p> $ D_t $ : 제품의 t기의 수요 </p>
 <p> $ S_t $ : 제품의 t기의 공급 </p>
 <p> $ P_t $ : 제품의 t기의 가격 </p>
 <p> $ P_t^e $ : 제품의 t기의 기대가격 </p>
+<p> $ a, b, c, d$는 0보다 큰 상수 </p>
 <br>
 
-<h3> 1) 고정기대모형(static expectation model)</h3>
+<h3> 고정기대모형(static expectation model)</h3>
 
-<p> $ P_t^e = P_{t-1} $  </p>
-
-<P CLASS=HStyle0>즉 공급자는 단순히 전기의 가격만을 고려하여 공급량을 결정</P>
-
-<P CLASS=HStyle0>每期 시장청산이 일어나므로, 每期 수요 = 공급</P>
+<P> 공급자는 단순히 전기의 가격만을 고려하여 공급량을 결정한다.</P>
+<p> 즉, $ P_t^e = P_{t-1} $  </p>
+<P> 매기(每期) 시장청산이 일어나므로, 매기의 수요는 공급과 같다.</P>
 
 <p> $ a - b P_t = c + d P_t^e $ 에서 $ P_t^e = P_{t-1} $ 를 대입하면 </p>
 <p> $ a - b P_t = c + d P_{t-1} $ 이므로  </p>
 <p> $ P_t = \dfrac{a-c}{b} - \dfrac{d}{b}P_{t-1} $  </p>
 
+<P>이는 일차 비동차 차분방정식이므로 균형가격은<input type="checkbox" id="cb4" /><label for="cb4"><sup></sup>
+</label><span><br><br>차분방정식<A href="difference-eqq.html" TARGET="_self">cobweb 모형</A> 참조<br><br></span></P>
 
-<P CLASS=HStyle0>이는 일차 비동차 차분방정식이므로 균형가격은</P>
 <p> $ P^* = \dfrac{a-c}{b} - \dfrac{d}{b}P^* $  </p>
 <p> $ \Longrightarrow P^* = \dfrac{a-c}{b+d}  $  </p>
 
@@ -115,21 +66,21 @@
 
 i)	$ d > b $
 	
-	<P CLASS=HStyle0>가격에 대한 공급의 탄력성이 수요의 탄력성보다 큰 경우에는 가격과 공급량은 더욱 그 폭을 넓히면서 경로는 발산한다.</P>
+	<P>가격에 대한 공급의 탄력성이 수요의 탄력성보다 큰 경우에는 가격과 공급량은 더욱 그 폭을 넓히면서 경로는 발산한다.</P>
 	
 ii)
 	$ d = b $
 	
-	<P CLASS=HStyle0>가격에 대한 공급의 탄력성과 수요의 탄력성이 같은 경우에는 계속 같은 경로를 순환한다. </P>
+	<P>가격에 대한 공급의 탄력성과 수요의 탄력성이 같은 경우에는 계속 같은 경로를 순환한다. </P>
 	
 iii)
 	$ d < b $
 	
-	<P CLASS=HStyle0>가격에 대한 수요의 탄력성이 공급의 탄력성보다 클 경우 수렴한다. 균형에 충격이 가해지면 새로운 균형으로 수렴한다.</P>
+	<P>가격에 대한 수요의 탄력성이 공급의 탄력성보다 클 경우 수렴한다. 균형에 충격이 가해지면 새로운 균형으로 수렴한다.</P>
 	
 
 
-<h3>i) 발산인 경우<sup><a href="#fn4" >4</a></sup></h3>
+<h3> 발산인 경우<sup><a href="#fn4" >4</a></sup></h3>
 
 <div class="digitDiv">
   <svg width="1000px" height="850px" viewBox="-200 50 1200 900" 
@@ -295,7 +246,7 @@ iii)
 <P CLASS=HStyle0>어떤 이유로 0기에 제품의 가격이 균형가격인 $ P^* $에서 이탈하여 $ P_0 $에서 가격이 형성됐을 경우 공급자는 1기에 $ Q_1 $을 공급한다. 시장에는 $ Q_1 $ 만큼의 상품이 존재하고 시장균형을 위해서는 공급 = 수요에서 $ Q_1 $의 수요량에 대해 $ P_1 $으로 가격이 결정된다. 1 기에 $ P_1 $의 가격을 본 공급자는 2기에 $ Q_2 $를 공급하게 되고 이는 수요공급의 법칙에 따라 $ P_2 $로 가격이 결정된다. 2 기에 $ P_2 $를 본 공급자는 3기에 $ Q_3 $공급하게 되고 이는 수요공급의 법칙에 따라 $ P_3 $로 가격이 결정된다. 3기에 $ P_3 $의 가격을 본 공급자는 4기에 $ Q_4 $를 공급하게 되고 이는 수요공급의 법칙에 따라 $ P_4 $로 가격이 결정된다. (그림 1)에서 보는 바와 같이 균형가격에서의 조그마한 이탈은 다시 균형가격으로 회귀하지 않고 거미집 모양으로 확산되게 된다. </P>
 <br>
 
-<h3 CLASS=HStyle0>b) 수렴인 경우</h3>
+<h2 CLASS=HStyle0>b) 수렴인 경우</h2>
 
 <p>현재 균형은 $ P^* $, $ Q^* $에서 형성되어 있다.</p>
 <P CLASS=HStyle0>어떤 이유로 0기에 제품의 가격이 균형가격인 $ P^* $에서 이탈하여 $ P_0 $에서 가격이 형성됐을 경우 공급자는 1기에 $ Q_1 $을 공급한다. 시장에는 $ Q_1 $ 만큼의 상품이 존재하고 시장균형을 위해서는 공급 = 수요에서 $ Q_1 $의 수요량에 대해 $ P_1 $으로 가격이 결정된다. 1 기에 $ P_1 $의 가격을 본 공급자는 2기에 $ Q_2 $를 공급하게 되고 이는 수요공급의 법칙에 따라 $ P_2 $로 가격이 결정된다. 2 기에 $ P_2 $를 본 공급자는 3기에 $ Q_3 $공급하게 되고 이는 수요공급의 법칙에 따라 $ P_3 $로 가격이 결정된다. 3기에 $ P_3 $의 가격을 본 공급자는 4기에 $ Q_4 $를 공급하게 되고 이는 수요공급의 법칙에 따라 $ P_4 $로 가격이 결정된다. 이와 같은 과정이 반복되어 (그림 2)에서 보는 바와 같이 균형가격에서의 이탈은 거미집 모양으로 다시 균형가격으로 수렴하게 된다. </P>

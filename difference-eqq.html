@@ -1,0 +1,129 @@
+<html lang="ko"> 
+<head>
+    <meta charset="utf-8">
+      <link rel="stylesheet" type="text/css" href="eco-math.css">
+      <link rel="stylesheet" type="text/css" href="footnote.css">
+    
+    <TITLE>차분방정식</TITLE>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+    <script src="./latex.js"></script>
+
+ </head> 
+
+<body> 
+<h1>差分方程式(difference equation)</h1>
+<br>
+<h2>차분방정식의 정의</h2> 
+<p>기간 $t$를 시간을 나타내는 변수로 하고 기간 $t$의 값 $y_t$를 시간에 따라 변화하는 함수라 하면</p>
+<p> $ \phi_0y_t + \phi_1y_{t-1} + \phi_2y_{t-2} + \cdots + \phi_ny_{t-n} = f(t), \qquad t = 0, 1, 2, \cdots, $ </p>
+<p>를 n차 차분방정식 이라고 함. <input type="checkbox" id="cb1" /><label for="cb1"><sup></sup>
+</label><span><br><br>차분방정식을 階差방정식, 定差방정식이라고도 부른다.<br><br></span></p>
+<p>차분방정식에 $f(t)$를 포함하고 있지 않으면 동차 차분방정식(homogeneous difference equation), 차분방정식에 $f(t)$를 포함하고 있으면 비동차 차분방정식(non-homogeneous difference equation)이라 함. </p>
+<p>$f(t)$가 상수이면 자생적(autonomous), $f(t)$가 t의 함수라면 비자생적(non-autonomous)라고 한다. </p>
+<p>$ \phi_i, \qquad i = 1, 2, 3, \cdots, n$ 가 상수이면 선형 차분방정식이라 한다.  </p>
+<p> 일반적인 함수 형태 $y_{t+1} = f(t)$인 경우를 비선형 차분방정식이라 한다.</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+
+<br>
+
+<h2>중첩원리(superposition principle) </h2>
+<br>
+<div id="min1">[정리]</div>
+<p>선형 동차 차분방정식(linear homogeneous difference equation)의 경우</p>
+<p>$ \phi_0y_t + \phi_1y_{t-1} + \phi_2y_{t-2} + \cdots + \phi_ny_{t-n} = 0, \qquad \phi_i, i = 0, 1, 2, \cdots, n$는 상수</p>
+<p>위 차분방정식의 해들의 선형결합(linear combination)도 해가 된다.</p>
+<br>
+<div id="min1">[증명]</div>
+<br>
+
+<h3>중첩 원리의 확장</h3>
+
+<h2>1차 선형 동차 차분방정식(linear homogeneous difference equation)</h2>
+
+<h2>1차 선형 비동차 차분방정식(linear non-homogeneous difference equation)</h2>
+<h3>비동차 부분이 상수인 경우</h3>
+<h3>비동차 부분이 t의 함수인 경우</h3>
+<h3>비동차 부분이 외생변수이거나 확률변수인 경우</h3>
+<h2>lag 연산자(lag operator)</h2>
+<h3>차분방정식의 해의 도출</h3>
+<br>
+<h2>2차 선형 차분방정식(second-order linear difference equation)</h2>
+
+<h2>연립차분방정식(systems of difference equations)</h2>
+<h3>대각행렬화(diagonalization)</h3>
+<h3>비선형 연립차분방정식</h3>
+<br>
+<h2>위상도(phase diagram) 분석</h2>
+<h3>혼돈이론(chaos theory)</h3>
+<h3>연립차분방정식의 위상도 분석</h3>
+<h3>위상도 분석의 한계</h3>
+<p> 고유값이 음수인 경우 해의 경로는 점진적으로 움직이지 않고 점프하는 현상이 발생한다. 
+    이 경우 실제 고유값을 통한 수렴, 발산의 판정과 위상도를 통한 분석이 다를 수 있다. </p>
+<h3>비선형 함수인 경우 위상도 분석 </h3>
+
+<h2>확률차분방정식(stochastic difference equation)</h2>
+<p> 차분방정식에 기댓값이 포함되어 있을 경우 확률차분방정식이라 한다. 
+    확률차분방정식은 합리적 기대모형에서 많이 발생한다. </p>
+<br>
+
+<h1>차분방정식 응용</h1>
+<h2>맬더스 성장이론(이산형)</h2>
+<h2>케인즈 총수요모형</h2>
+<h2>대부자금의 상환</h2>
+<h2>배당할인모형</h2>
+<h2>Cagan의 초인플레이션(hyper-inflation) 모형</h2>
+<h2>승수-가속도원리(multiplier-acceleration principle)</h2>
+<p> 케인즈의 「일반이론」이 발표된 이후의 경기순환이론은 크게 실물적 경기순환이론과 화폐적 경기순환이론으로 구분될 수 있다.</p>
+<p>  실물적 경기순환이론은 샤무엘슨(P.A.Samuelson)과 힉스(J.Hicks)를 중심으로 발전하여 가장 일반적으로 인정되던 승수(乘數)-가속도(加速度)결합형 순환이론을 그 대표로 한다. 여기서 경기변동의 원인으로서는 기업가의 경제에 대한 전망의 변화라든가 다른 외생적 요인에 의한 투자수준의 변화와 같은 수요충격(Demand Shock)과 원자재가격이나 기술수준의 외생적 변화와 같은 공급충격(Supply Shock)이 모두 인정된다. 
+<p>   승수이론이 투자증대로 유발되는 소득증대를 정식화한 데 반해, 가속도원리는 소득증대가 투자증대를 유발시키는 관계를 설명해 주고 있다. 
+    따라서 승수이론과 가속도원리를 결합시키면 소득변화와 투자변화의 상호작용이 가져오는 종합적인 결과를 도출할 수 있게 된다.(http://terms.naver.com/entry.nhn?docId=779232) </p>
+<p>가속도 원리란 소득이 늘고 이에 따라 소비가 증가하면, 증가된 소비를 충족시키기 위해 신규 설비의 건설을 위한 새로운 투자가 계속 이루어져야 한다. 
+    투자는 승수효과에 의해 다시 소득을 상승시키고 이는 다시 소비증가를 가져오고 이는 신규투자를 유발하고... 등등, 이와 같이 소득증가가 연쇄적으로 투자를 증가시키는 원리를 가속도원리라 한다. 이때 가속도 효과는 소득(GDP) 증가가 투자에 미치는 영향을 GDP의 변동분으로 측정한다. 
+    (가속도 이론은 초기 케인즈 학파가 미국과 유럽을 대상으로 경험적 분석을 한 결과 고정투자를 변동시키는데 이자율이 별 역할을 하지 못했다는 사실에서 시작. 
+    투자행위 분석에서 이자율에 상관없이 자본스톡의 조정에 초점을 맞춘다. 김준영, 거시경제학 강의노트. 21장 투자. 참조)  </p>
+
+<h2>거미집이론(cobweb 모형)</h2>
+<h2>항상소득가설(permanent income hypothesis)</h2>
+<h2>솔로 성장모형(solow growth model) - 이산형</h2>
+<h2>돈 부쉬 오버슈팅모형(Dornbusch’s overshooting model)</h2>
+<h2>실물 경기변동이론(Real Business Cycle : RBC theory)</h2>
+<p> 실물 경기변동이론은 경기변동이 화폐적 충격이 아니라 생산성의 실물의 충격(real shocks)에 의하여 야기된다고 보는 이론이다.
+    실물 경기변동론자들은 외생변수의 변화(random shocks)에 대한 반응이 생산으로 나타나고 이것이 경기의 침체/성장을 가져오는 것으로 본다. 따라서 실물 경기변동론자들은 국내의 생산수준이 어느 시점에서든 개인의 효용 극대화 윈칙을 따르고 있으므로 정부는 경기 침체를 감쇄시키거나 경기 과열을 진정시키기 위해 재정적/통화적 정책을 통한 시장개입을 삼가야 한다고 주장한다.
+    그러므로 실물 경기변동이론에 따르면 경기순환은 시장 청산의 실패를 나타내는 것이 아니라 경제 내에서 가능한 한 가장 효율적인 작용을 반영하고 있는 것이라는 점에서 “실물적” 현상(통화정책으로 인한 경기 변동과 대비되는 의미)
+    인 것이다. 이러한 점에서 실물 경기변동이론은 경기후퇴를 일종의 시장청산의 실패로 이해하는 케인즈 경제학이나 통화주의와 구별된다. (http://en.wikipedia.org/wiki/Real_business_cycle_theory )
+    
+    이 이론은 경기변동을 유발시키는 외부적 충격으로서 예상치 못한 통화량 변화와 같은 화폐적 요인이 아니라 생산성 혹은 기술변화와 같은 실물적 요인의 역할을 강조한다는 점에서 화폐 경기변동이론과 대비하여 실물경기 변동이론으로 불린다. </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+<p> $ $ </p>
+ </body> 
+</html>

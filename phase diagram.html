@@ -1,70 +1,23 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>위상도(Phase Diagram)</title>
+    <meta charset="utf-8"/>
+  <link rel="stylesheet" type="text/css" href="eco-math.css">
+  <link rel="stylesheet" type="text/css" href="footnote.css">
+  
+  <title>위상도(Phase Diagram)</title>
     <link rel="stylesheet" type="text/css" href="footnote.css">
-    <style>
-    body {
-  	width: 1200px;
-      height: auto;
-  } 
-  /*  p{  text-indent: 2em;  } */
-    h1{ color: blue; }
-    h2{ color: red; }
-    h3{ color: green; }
-    h4{ color: rgb(85, 7, 81); }
-    .inline{ display: inline; }
-
-    div.digitDiv {
-      font-size:10vw;
-      font-family: monospace;
-      display:inline-block;
-      width:1em;
-      margin-left:1em;
-    /* border:1px solid red; */
-    }
-/*    #boder{border:1px solid red;} */
-    #dark-arrow {
-                stroke: #03051af8;
-                fill: #03051af8;
-            }
-    #blue-arrow {
-                stroke:#0e1abd;
-                fill: #0e1abd;
-                }
-
-    #red-arrow {
-                stroke: #bb0b37;
-                fill:  #bb0b37;
-                }
-    #green-arrow {
-                stroke: #4eda0d;
-                fill:  #4eda0d;
-                }
-    #sgv-text{
-        fill:black;
-        font-size:30px;
-    }
-     </style>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
-MathJax.Hub.Config({
-extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
-jax: ["input/TeX", "output/HTML-CSS"],
-tex2jax:
-{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
-"HTML-CSS": { availableFonts: ["TeX"] }
-});
-</script>
+    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+    <script src="./latex.js"></script>
  </head>
 
 <body>
 <h1 class="inline">위상도(Phase Diagram) 분석</h1>
-<br><br>
 
 <h2> 단일방정식인 경우 </h2>
-<br>
+
 
 <h3> 위상도</h3>
 
@@ -77,7 +30,7 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
   사용된다. </p>
 
 <p> 위상도는 수평축을 $ y(t) $, 수직축을 $ \dfrac{dy(t)}{dt} $로 놓고 $ y $와 $ \dfrac{dy}{dt} $의 관계를 표현한 것이다. </p>
-<br>
+
 
 <h3> 위상선(phase line)</h3>
 <p>위상선은 $ y $와 $ \dfrac{dy}{dt} $의 관계를 나타내는 선이다.</p>
@@ -94,7 +47,7 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 <p> $ \dfrac{dy}{dt}= 0 $ 인 점에서 화살표가 모이면 해의 수렴을 의미하므로 안정상태 균형(stable equilibrium)이라 한다.</p>
   <p>$ \dfrac{dy}{dt}= 0 $ 인 점에서 화살표가 모이지 않는다면 해의 발산을 의미하므로 해는 불안정 상태에 있음을 알 수 있다. </p>
   <p>즉, 교차점에서 위상선의 기울기가 음(-)일 때 교차점은 안정적이고, 교차점에서 위상선의 기울기가 양(+)일 때 교차점은 불안정함을 알 수 있다.   </p>
-<br>
+
 	
 <h3> Stability theorem </h3>
 <p>Let $ \dfrac{dy}{dt}=f(y) $ be an autonomous differential equation. </p>
@@ -103,36 +56,85 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 <p> if $f(y^∗) < 0 $, the equilibrium $y(t)=y^∗$ is locally stable,</p>
 <p> if $f(y^∗) > 0 $, the equilibrium $y(t)=y^∗$ is unstable.</p>
 
-<br>
+
 <h3> 예1) </h3>
 
 <div style="text-align : center;">
-  <img src="phase-diagram1.png"><br>
-  (그림 1) 해의 수렴, 발산
+  <figure>
+    <p>$$  
+      \begin{tikzpicture}[scale=2]
+          % draw the axis
+          \draw [thick, ->] (-1,0) -- (5,0); 
+          \draw [thick, ->] (0,-1) -- (0,2); 
+          % draw the curve
+          \draw [blue, thick, domain=0.5:3.5] plot (\x, {-(\x-1)*(\x-3)});
+          % draw the arrows
+          \draw [->, very thick, red] (0.9,-0.21) -- (0.8,-0.44);
+          \draw [->, very thick, red] (1.1,0.19) -- (1.2,0.36);
+          \draw [->, very thick, red] (1.5,0.75) -- (1.6,0.84);
+          \draw [->, very thick, red] (2.4,0.84) -- (2.5,0.75);
+          \draw [->, very thick, red] (2.8,0.36) -- (2.9,0.19);
+          \draw [->, very thick, red] (3.2,-0.44) -- (3.1,-0.21);
+          % draw the labels
+          \node at (-0.2,-0.2) {$0$};
+          \node at (0,2.3){$\dfrac{dy(t)}{dt}$};
+          \node at (5.2,0){$y(t)$};
+          \filldraw [gray] (1,0) circle (2pt); 
+          \filldraw [gray] (3,0) circle (2pt); 
+          \node at (1.2,-0.5){$y_{1}(t)^*$};
+          \node at (2.8,-0.5){$y_{2}(t)^*$};
+      \end{tikzpicture}
+      $$</p>
+      <br>
+  <figcaption>  (그림 1) 해의 수렴, 발산  </figcaption>
+</figure>
 </div>
 
 <p>이를 (그림 1)에서 보듯이 화살표로 표시. 즉, 화살표의 방향은 위상선의 기울기와는 무관하다.</p>
 
+<p> (그림 1)에는 $y_{1}(t)^*$, $y_{2}(t)^*$  2 개의 균형점이 존재한다. </p>
 
- 
- <p> (그림 1)에는 $ y_1, y_2 $  2 개의 균형점이 존재한다. </p>
-
-<p>$ y_2 $는 시간이 흘러도 변하지 않고 안정적이므로 안정상태 균형(stable equilibrium)임을 알 수 있다.  </p>
+<p>$y_{2}(t)^*$는 시간이 흘러도 변하지 않고 안정적이므로 안정상태 균형(stable equilibrium)임을 알 수 있다.  </p>
  
 <p>(그림 1)에서 보듯이 교차점에서 위상선의 기울기가 음일 때 교차점은 안정적임을 알 수 있다. $ y_1 $는 시간이 흐름에 따라 
   안정적이지 않고 미세한 왼쪽의 움직임은 왼쪽, 미세한 오른쪽의 움직임은 오른쪽으로 이동한다. 교차점에서 위상선의 기울기가 양일 때 교차점은 안정적이지 않다. </p>
-<br>
+
 
 <h3> 예2) </h3>
 
 <div style="text-align : center;">
-  <img src="phase-diagram2.png"><br>
-  (그림 2) 해가 안장점인 경우
+  
+  <figure>
+    <p>$$  
+      \begin{tikzpicture}[scale=2]
+          % draw the axis
+          \draw [thick, ->] (-1,0) -- (4,0); 
+          \draw [thick, ->] (0,-1) -- (0,2.5); 
+          % draw the curve
+          \draw [blue, thick, domain=0.7:3.3] plot (\x, {(\x-2)*(\x-2)});
+          % draw the arrows
+          \draw [->, very thick, red] (0.9,1.21) -- (1,1);
+          \draw [->, very thick, red] (1.5,0.25) -- (1.6,0.16);
+          \draw [->, very thick, red] (2.5,0.25) -- (2.6,0.36);
+          \draw [->, very thick, red] (3,1) -- (3.1,1.21);
+          
+          % draw the labels
+          \node at (-0.2,-0.2) {$0$};
+          \node at (0,2.8){$\dfrac{dy(t)}{dt}$};
+          \node at (4.2,0){$y(t)$};
+          \filldraw [gray] (2,0) circle (2pt); 
+          \node at (2,-0.3){$y(t)^*$};
+          
+      \end{tikzpicture}
+      $$</p>
+      <br>
+  <figcaption>  (그림 2) 해가 안장점인 경우  </figcaption>
+</figure>
 </div>
 
 <p> $ y(t) < y^∗ $ 일 때 $ \dfrac{dy}{dt} > 0 $, $ y(t) > y^∗ $ 일 때 $ \dfrac{dy}{dt} > 0 $   
 따라서 $ y^∗ $는 불안정함을 알 수 있다. 이와 같이 접하는 경우의 해를 안장점(saddle point)라고 한다. 안장점도 불안정한 균형이다. </p>
-<br><br>
+<br>
 
 <h3> 예3) 솔로우 성장모형 </h3>
 <p> 솔로우 성장모형은 다음과 같다.<input type="checkbox" id="cb1" /><label for="cb1"><sup></sup>
@@ -151,14 +153,6 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
   (그림 3) 솔로우 성장모형
 </div>
 
-<p>
-  
-</p>
-
-<p>
-  
-</p>
-<br>
 
 <h2> 연립미분방정식인 경우 (상태변수가 2 이상)</h2>
 
@@ -169,8 +163,7 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
   분석하기 곤란하기 때문이다. </p>
 
 <p> $ \mathbf y'(t) = 0 $인 곡선을 등고선(等高線, zero-growth isoclines)이라 한다. 
-  등고선은 함수의 기울기가 항상 같은 점을 모은 선을 의미한다. </p>
-  <p>이 경우는 예를 들어 설명하는 것이 편리하다.</p>
+  등고선은 함수의 기울기가 항상 같은 점을 모은 선을 의미한다. 이 경우는 예를 들어 설명하는 것이 편리하다.</p>
 
 <h3> 예1) </h3>
 <p> $x$, $y$는 시간 t의 함수, $x(t), y(t)$ </p>
@@ -312,14 +305,15 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 
 <p> $ \dfrac{dx}{dt} > 0  \Longrightarrow \dfrac{dx}{dt} = -2x > 0 \Longrightarrow x < 0 $</p>
 
-즉 x가 0보다 작은 구간(y 축의 좌측)에서는 x는 시간의 증가에 따라 증가한다. 이는 (그림 4)의 y축 좌측의 화살표 방향으로 표시된다. x가 증가하는 것이므로 화살표의 방향은 x축을 따라 좌에서 우로 흐르는 모양이 된다.
+<p>즉 x가 0보다 작은 구간(y 축의 좌측)에서는 x는 시간의 증가에 따라 증가한다. 이는 (그림 4)의 y축 좌측의 화살표 방향으로 표시된다. 
+  x가 증가하는 것이므로 화살표의 방향은 x축을 따라 좌에서 우로 흐르는 모양이 된다.
 <input type="checkbox" id="cb11" /><label for="cb11"><sup></sup>
 </label>
-<span><br><br>물론 시간의 감소의 경우는 화살표가 반대방향이 되겠지만 시간은 항상 증가하므로 시간의 감소는 고려하지 않는다. <br><br></span> 
+<span><br><br>물론 시간의 감소의 경우는 화살표가 반대방향이 되겠지만 시간은 항상 증가하므로 시간의 감소는 고려하지 않는다. <br><br></span> </p>
 
 <p> $ \dfrac{dx}{dt} < 0  \Longrightarrow x > 0 $</p>
 
-즉 x가 0보다 큰 구간(y 축의 우측)에서는 x는 시간의 증가에 따라 감소한다. 이는 (그림 4)의 y축 우측의 화살표 방향으로 표시된다. x가 감소하는 것이므로 화살표의 방향은 x축을 따라 우에서 좌로 흐르는 모양이 된다.
+<p>즉 x가 0보다 큰 구간(y 축의 우측)에서는 x는 시간의 증가에 따라 감소한다. 이는 (그림 4)의 y축 우측의 화살표 방향으로 표시된다. x가 감소하는 것이므로 화살표의 방향은 x축을 따라 우에서 좌로 흐르는 모양이 된다.</p>
 
 
 <p>(ii) $ \dfrac{dy}{dt} = 2x - 4y +32 $</p>
@@ -526,7 +520,6 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
     stroke-width="2" marker-end="url(#red-arrow)" />
   
 </svg>
-
 </div>
 
 <p> (그림 9)에서 </p>
@@ -569,13 +562,12 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
       (그림 12)  $ \dfrac{dy}{dt} = x - 0.5y $ , $ \dfrac{dx}{dt} = 0.5x + 0.5y - 15 $ 상변화도
       </div>
 
-      <br>
-<h3>위상도 분석의 강점과 제약</h3>
-<UL>
-<LI> 위상도는 시간축이 없으므로 균형에 이르기까지 얼마나 시간이 걸리는지를 알 수 없다.</LI>
-<LI> 위상도는 변수들의 동시 움직임을 나타내므로, 토빈의 q 이론에서 보듯이 자본량(capital stock)이 높을 때 자본의 가격은 낮다. 또는 그 역도 성립.(사소한 것이지만 기본 성장모형에서는 나타나지 않음)</LI>
-<LI> 조정 속도는 균형경로의 모양에 따라 다를 수 있다. 가파른 경로는 빠른 수렴을, 완만한 곡선은 느린 조정속도를 의미한다.</LI>
-</UL>
+<h2>위상도 분석의 강점과 제약</h2>
+<p>
+ 위상도는 시간축이 없으므로 균형에 이르기까지 얼마나 시간이 걸리는지를 알 수 없다.
+ 위상도는 변수들의 동시 움직임을 나타내므로, 토빈의 q 이론에서 보듯이 자본량(capital stock)이 높을 때 자본의 가격은 낮다. 또는 그 역도 성립.(사소한 것이지만 기본 성장모형에서는 나타나지 않음)
+ 조정 속도는 균형경로의 모양에 따라 다를 수 있다. 가파른 경로는 빠른 수렴을, 완만한 곡선은 느린 조정속도를 의미한다.
+</p>
 
 
 

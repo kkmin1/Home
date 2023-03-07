@@ -3,14 +3,26 @@ body {
   counter-reset: section cb_counter_var;
 }
 
-/* This increments the counter value and defines 
-the displayed content  */
+/* 제목 카운트  */
 
-h2::before { 
-    counter-increment: section;
-    content:  counter(section) ". " ;
-}
+h2 {
+    counter-increment: sectioncount 1;
+    counter-reset: subsectioncount;
+  }
+  
+  h2:before {
+    content: counter(sectioncount) ". ";
+  }
+  
+  h3 {
+    counter-increment: subsectioncount 1;
+  }
+  
+  h3:before {
+    content: counter(sectioncount) "." counter(subsectioncount) " ";
+  }
 
+/* 주석 카운트  */  
 sup::after {
   counter-increment: cb_counter_var;
   content: counter(cb_counter_var);
