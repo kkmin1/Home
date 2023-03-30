@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Phase Diagram</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script>
+      // Define the differential equations
+      function dx_dt(x, y) {
+        return 2*x - y;
+      }
+      function dy_dt(x, y) {
+        return x + y;
+      }
+
+      // Define the range of x and y values to plot
+      const xMin = -5;
+      const xMax = 5;
+      const yMin = -5;
+      const yMax = 5;
+
+      // Define the step size for the x and y values
+      const xStep = 0.5;
+      const yStep = 0.5;
+
+      // Define the canvas size
+      const canvasWidth = 400;
+      const canvasHeight = 400;
+
+      // Set up the canvas
+      function setup() {
+        createCanvas(canvasWidth, canvasHeight);
+        background(255);
+      }
+
+      // Draw the phase diagram
+      function draw() {
+        // Loop over all x and y values and draw a small circle at each point
+        for (let x = xMin; x <= xMax; x += xStep) {
+          for (let y = yMin; y <= yMax; y += yStep) {
+            // Calculate the rate of change for this point
+            const dx = dx_dt(x, y);
+            const dy = dy_dt(x, y);
+
+            // Normalize the rate of change
+            const magnitude = Math.sqrt(dx*dx + dy*dy);
+            const dxNorm = dx / magnitude;
+            const dyNorm = dy / magnitude;
+
+            // Draw a small circle at this point, with size proportional to the magnitude of the rate of change
+            const size = magnitude * 0.5;
+            const xPixel = map(x, xMin, xMax, 0, width);
+            const yPixel = map(y, yMin, yMax, height, 0);
+            noStroke();
+            fill(0, 0, 255);
+            ellipse(xPixel, yPixel, size, size);
+            
+
+            // Draw an arrow to indicate the direction of the rate of change
+            const arrowLength = Math.min(size, 20);
+            const arrowHeadSize = Math.min(size / 5, 5);
+            const xArrow = xPixel + dxNorm * arrowLength;
+            const yArrow = yPixel - dyNorm * arrowLength;
+            const xHead1 = xArrow - dxNorm * arrowHeadSize + dyNorm * arrowHeadSize;
+            const yHead1 = yArrow + dyNorm * arrowHeadSize + dxNorm * arrowHeadSize;
+            const xHead2 = xArrow - dxNorm * arrowHeadSize - dyNorm * arrowHeadSize;
+            const yHead2 = yArrow + dyNorm * arrowHeadSize - dxNorm * arrowHeadSize;
+            stroke(0, 0, 255);
+            strokeWeight(1);
+            line(xPixel, yPixel, xArrow, yArrow);
+            triangle(xArrow, yArrow, xHead1, yHead1, xHead2, yHead2);
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <script>new p5();</script>
+  </body>
+</html>

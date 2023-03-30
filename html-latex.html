@@ -12,6 +12,8 @@
 <p>Upmath converts LaTeX equations in double-dollars <code>$$...$$</code>. All equations are rendered as inline equations. $$ax^2+bx+c=0$$ like this.</p>
 <p>If you need block ones, just type the formula on separate line plus line break.</p>
 <p>$$p={1\over q}$$</p>
+<p>&#x29F5;limits 는 &#x29F5;lim 밑으로 subscript가 가도록 하는 역할, 이 것이 없이 그냥 &#x29F5;lim 만 쓰면 subscript가 옆으로 간다. $ 대신 &#x29F5;[, &#x29F5;] 를 쓰면 subscript가 &#x29F5;lim 밑으로 가지만 중앙정렬이 된다.
+	(예) $$ -1 < 1 - \lambda - \lambda \dfrac{d}{b} < 1 $ 이면 $ \lim\limits_{t \to \infty} P_t = \dfrac{a-c}{b+d} $$ </p>
 <p>Place big equations on separate lines:</p>
 <p>$$x_{1,2} = {-b\pm\sqrt{b^2 - 4ac} \over 2a}$$</p>
 <p>In this case the LaTeX syntax will be highlighted in the source code. You can even add equation numbers (unfortunately there is no automatic numbering and refs support):</p>
@@ -155,6 +157,25 @@ $$</p>
 	\end{tikzpicture} 
 $$</p>
 <br>
+<p>$$  
+	\begin{tikzpicture}[scale=2]
+		% draw the axis
+		\draw [thick, ->] (-1,0) -- (5,0); 
+		\draw [thick, ->] (0,-1) -- (0,2); 
+		% draw the curve
+		\draw [blue, thick, domain=0.5:3.5] plot (\x, {(\x-1)*(\x-3)});
+		% draw the labels
+		\node at (-0.2,-0.2) {$0$};
+		\node at (0,2.3){$f(x)$};
+		\node at (5.2,0){$x$};
+		\filldraw [gray] (1,0) circle (2pt); 
+		\filldraw [gray] (3,0) circle (2pt); 
+		\node at (1.2,-0.5){$y_{1}(t)^*$};
+		\node at (2.8,-0.5){$y_{2}(t)^*$};
+	\end{tikzpicture}
+	$$</p>
+	<br>
+
 <p>I have designed and developed this lightweight editor and the service for converting LaTeX equations into svg-pictures to make publishing math texts on the web easy. I consider client-side rendering, the rival technique implemented in <a href="https://www.mathjax.org/">MathJax</a>, to be too limited and resource-consuming, especially on mobile devices.</p>
 <p>The source code is <a href="https://github.com/parpalak/upmath.me">published on Github</a> under MIT license.</p>
 

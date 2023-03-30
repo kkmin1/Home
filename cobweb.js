@@ -1,9 +1,4 @@
-// cobweb.js
-// var canvas = document.getElementById("canvas");
-// var ctx = canvas.getContext("2d");
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// A graph for drawing many things. Graph라는 큰 객체를 만들어 두고 필요할 때 내부의 요소들을 사용
 function Graph(canvas){
     var margin=70;
     var xmin=glob.xmin;
@@ -31,14 +26,13 @@ function Graph(canvas){
         ctx.fillStyle="black";
     }
 
-    // convert a mathematical x coordinate to a canvas x coordinate
-    // 그래프의 x 값을 캔버스값으로 편경. 화면 입력값이 그래프값임을 상기.
+    // 그래프의 x,y 값을 캔버스값으로 편경. 화면 입력값이 그래프값임을 상기.
     function mathToCanvasX(x){
         max=w-edgeSize*2;
         portion=(x-xmin)/(xmax-xmin);
         return portion*max+edgeSize+margin;
     }
-    // convert a mathematical y coordinate to a canvas y coordinate
+    
     function mathToCanvasY(y){
         max=h-edgeSize*2;
         portion=(y-ymin)/(ymax-ymin);
@@ -65,8 +59,8 @@ function Graph(canvas){
         // this.nextColor();
     }
 
- // Plot a line segment, using math function x and y coordinates (from canvas coordinates).
- // 화살표 축을 그린다.
+ 
+    // 축을 그린다.
      this.plotLine2=function(x1,y1,x2,y2){
      var deg=30;
      var scale=0.98; // 내분 비율
@@ -81,7 +75,7 @@ function Graph(canvas){
         ctx.stroke();
         ctx.closePath();
 
-    // 화살표 윗부분 그림
+    // 화살표 모양 윗부분 그림
        ctx.save(); // saves the coordinate system
        ctx.translate(x2,y2);
        ctx.rotate(deg * Math.PI / 180); // (x2,y2)을 중심으로 시계방향으로 deg도 회전
@@ -90,7 +84,7 @@ function Graph(canvas){
        ctx.lineTo(sx1-x2,sy1-y2);
        ctx.stroke();
 
-   // 화살표 아랫부분 그림
+   // 화살표 모양 아랫부분 그림
        ctx.rotate(10*deg * Math.PI / 180); // (x2,y2)을 중심으로 시계방향으로 10*deg도 회전
        ctx.beginPath();
        ctx.moveTo(0,0);
@@ -111,12 +105,14 @@ function Graph(canvas){
         ctx.moveTo(cx1,cy1);
         ctx.lineTo(cx2,cy2);
         ctx.strokeStyle="green"; // cobweb 곡선 색깔
+        ctx.closePath();
+        ctx.stroke();
+
+        ctx.strokeStyle="green"; // cobweb 곡선 색깔
         ctx.stroke();
         ctx.closePath();
         ctx.strokeStyle="black";
-
-        // change color for next draw action
-        // this.nextColor();
+   
     }
 
     this.plotLine4=function(x1,y1,x2,y2){

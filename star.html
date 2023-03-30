@@ -5,21 +5,22 @@
 <head>
 
     <meta charset="utf8">
+    <link rel="stylesheet" type="text/css" href="code.css">
     <title> 별찍기 </title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!--<link rel="stylesheet" type="text/css" href="code.css">-->
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+    <script src="./latex.js"></script>
 
-    <style>
+    <STYLE>
         body {
             padding: 20px;
-            line-height: 150%;
+            line-height: 200%;
         }
-
-        h1,h2,#ex {
+        h1,#ex {
             text-align: center;
         }
-
         h1 {
             color: #3399ff;
         }
@@ -28,7 +29,6 @@
             display: flex;
             margin-left:20px;
         }
-
         #div1, #div2 {
             border: 2px solid gray;
         }
@@ -39,7 +39,6 @@
             padding: 20px;
             text-align: center;
         }
-
         input {
             text-align: center;
         }
@@ -47,7 +46,6 @@
         #output {
             width: 800px;
         }
-
         table {
             border: 1px solid;
             border-collapse: collapse;
@@ -55,43 +53,36 @@
             width: 300px;
             font-size: 16px;
         }
-
         td,th {
             border: 1px solid;
             width: 30px;
             height: 50px;
             text-align: center;
         }
-
         #table2 {
             border: 0;
             border-collapse: collapse;
             margin: auto;
         }
-
         /* 별찍기 정렬을 위한 가상표 */
-
         #td2,#th2 {
             border: 0;
             width: 20px;
             height: 20px;
             text-align: center;
         }
-
         code {
             text-align: left;
         }
-
         pre {
             border: 1px solid;
             padding-left: 20px;
             padding-right: 20px;
             margin: 0 auto;
-            width:60%;
+            width:100%;
             background: #ffe6e6;
-            
+         
         }
-
         #popup1 {
             display: none;
             position: absolute;
@@ -100,33 +91,18 @@
             height: 50px;
             opacity: 0.7;
         }
-
-        
-        #canvas1, #canvas2 {
+                #canvas1, #canvas2 {
             margin-left: 100px;           
             border: 1px solid;           
         }
-    </style>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
-        MathJax.Hub.Config({
-            extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-            tex2jax:
-                {
-                    inlineMath: [['$', '$'], ["\\(", "\\)"]],
-                    displayMath: [['$$', '$$'], ["\\[", "\\]"]],
-                },
-            "HTML-CSS": { availableFonts: ["TeX"] }
-        });
-    </script>
-</head>
+    </STYLE>
+    </head>
 
 
 <body>
 
     <h1> 다양한 별찍기 </h1>
-
+<br>
     <h2> 1. 별찍기의 기본원리 </h2>
     <p>
         별찍기는 컴퓨터 모니터의 좌표와 좌표계에서 함수의 부등식 영역을 이해하면 쉽게 그릴 수 있다. (이는 모든 프로그램 언어에 공히 적용된다.) 컴퓨터 모니터의 좌표는 행렬의 인덱스와 같다.
@@ -183,11 +159,13 @@
         <canvas id="canvas1" height="400" width="400"></canvas> &nbsp;&nbsp;&nbsp;
         <canvas id="canvas2" height="400" width="400"></canvas>
     </div>
+    <br>
 
-    <p> 그림에서 4/4 분면이 모니터의 좌표계이다. 그래서
-        <그림 1>에서 회색영역인 왼쪽붙은 직각삼각형을 출력하려면 x축에 대칭인 1/4 분면의 함수부등식 y > x (
-            <그림 1>에서 분홍색 영역)를 고려하면 된다. 코드에서 행을 y, 열을 x로 표시한다. 일단 모든 y, x에 대해 0부터 n 까지 루프를 돌린다. 그리고 y > x 인 경우 별을 찍으면 된다. 프로그램 언어마다
-                조금씩 차이는 있지만 자바스크립트의 경우는 다음과 같다.</p>
+    <p> 그림에서 4/4 분면이 모니터의 좌표계이다. 그래서 <그림 1>에서 회색영역인 왼쪽붙은 직각삼각형을 출력하려면 x축에 대칭인 1/4 분면의 함수부등식 y > x (<그림 1>에서 분홍색 영역)를 고려하면 된다. </p>
+    <p>코드에서 행을 y, 열을 x로 표시한다. 일단 모든 y, x에 대해 0부터 n 까지 루프를 돌린다. </p>
+    <p>그리고 y > x 인 경우 별을 찍으면 된다. 프로그램 언어마다 조금씩 차이는 있지만 자바스크립트의 경우는 다음과 같다.</p>
+    <br>
+
     <pre>
         <code> 
 for ( var y = 0 ; y < n ; y ++){
@@ -201,6 +179,7 @@ for ( var y = 0 ; y < n ; y ++){
 }
     </code>
 </pre>
+<br>
     <p>
         <그림 2>에서 회색영역인 왼쪽붙은 역직각삼각형을 출력하려면 x축에 대칭인 1/4 분면의 함수부등식 y
             < n - x 을 써주면 된다. </p>
@@ -208,6 +187,7 @@ for ( var y = 0 ; y < n ; y ++){
         그러나 수식이 복잡해질 경우 x축에 대칭인 부등식을 찾기가 번거로울 수 있다. 그냥 4/4 분면의 회색 영역 부등식을 써도 된다. 단 y는 감소하는 식으로 코드를 짠다.
     0부터 (n-1)까지 이므로 for ( var y = n-1 ; y >= 0 ; y--)
     </p>
+    <br>
 
 <pre>
     <code>
@@ -222,9 +202,10 @@ for ( var y = n-1 ; y >= 0 ; y--){
 }
             </code>
         </pre>
+        <br>
 
-<p> 오른 쪽 붙은 직각삼각형을 출력하는 것도 같은 논리다. 단 자비스크립트의 경우 데스크탑이나 휴대폰 등 화면 비율이 틀리면 공백 찍는 부분이 정사각형이 아니므로 정확히 직각삼각형이 나오지 않는다. 이를 회피하기
-    위해 정사각형의 테두리 없는 표를 만들고 셀안에 별을 찍는다. </p>
+     <p> 오른 쪽 붙은 직각삼각형을 출력하는 것도 같은 논리다. 단 자비스크립트의 경우 데스크탑이나 휴대폰 등 화면 비율이 틀리면 공백 찍는 부분이 정사각형이 아니므로 정확히 직각삼각형이 나오지 않는다. 이를 회피하기 위해 정사각형의 테두리 없는 표를 만들고 셀안에 별을 찍는다. </p>
+    <br>
 
 <pre>
             <code>              
@@ -247,11 +228,13 @@ function starPrint2() {
 }
             </code>
         </pre>
+        <br>
 
-<p>    포물선 형태의 종모양의 별표도 찍을 수 있다. $y > (0.3x - 15)^2$ 이면 포물선 윗부분을 의미하므로 x축으로 대칭하면 종모양이 그려진다.
-    </p>
-                            <pre>
-                    <code>
+<p>    포물선 형태의 종모양의 별표도 찍을 수 있다. $y > (0.3x - 15)^2$ 이면 포물선 윗부분을 의미하므로 x축으로 대칭하면 종모양이 그려진다. </p>
+<br>
+
+    <pre>
+        <code>
             for ( var y = 0 ; y < n ; y ++){
                 for (var x = 0 ; x < n ; x++){
                     if (y >  (0.3*x - 15)*(0.3*x - 15))
@@ -261,14 +244,12 @@ function starPrint2() {
                 }
                         star += '\n';
             }
-                    </code>
-                </pre>
-                            <br>
+                </code>
+    </pre>
+    <br>
             
-
-<p>
-    이 논리를 적용하면 피라미드형, 역피라미드형, 다이아몬드형, 모래시계형 모양을 찍을 수 있다. 심지어 피라미드 2개를 나라히 찍을 수도 있다. x, y를 구간으로 나눠 구간별로 
-    부등식을 적용하면 된다. 자세한 내용은 브라우저에서 웹페이지 소스 보기를 참조하기 바란다.</p>
+<p> 이 논리를 적용하면 피라미드형, 역피라미드형, 다이아몬드형, 모래시계형 모양을 찍을 수 있다. 심지어 피라미드 2개를 나라히 찍을 수도 있다. x, y를 구간으로 나눠 구간별로 부등식을 적용하면 된다. 자세한 내용은 브라우저에서 웹페이지 소스 보기를 참조하기 바란다.</p>
+<br>
 
     <pre><code><xmp>
     // 피라미드 2개 나란히 찍기
@@ -318,12 +299,13 @@ function starPrint2() {
         }
     }
 </xmp></code></pre>
-
+<br>
 <p>
 피라미드를 아래 위로 여러 개를 연달아 찍으려면 어떻게 해야 할까? 피라미드의 갯수가 늘어날수록 위와 같이
 일일이 구간을 정하여 고려하기가 매우 복잡해진다. 이 경우는 수학시간에 배운 평행이동의 개념을 적용할 수 있다.
 y축으로 a만큼 평행이동하려면 y에 y-a를 대입하고 x축으로 b만큼 평행이동하려면 x에 x-b를 대입하면 된다.
 </p>
+<br>
 
 <pre>
     <code><xmp>
@@ -380,14 +362,13 @@ y축으로 a만큼 평행이동하려면 y에 y-a를 대입하고 x축으로 b�
             }
         </xmp></code>
 </pre>
-
-<br><br><br>
+<br><br>
 
     <h2> 2. 별찍기 연습 </h2>
     <br>
     <div id="ex">
         <div id="div1">
-            3 이상의 정수를 입력하세요
+           3 이상의 정수를 입력하세요  
             <br>
             <br> 줄수 :
             <input type="text" id="input" value="10">
@@ -845,32 +826,7 @@ console.log(star);
 
 </script>
 
-
-                <!--댓글 코드 -->
-                <div id="disqus_thread"></div>
-                <script>
-
-                    /**
-                    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-                    /*
-                    var disqus_config = function () {
-                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                    };
-                    */
-                    (function () { // DON'T EDIT BELOW THIS LINE
-                        var d = document, s = d.createElement('script');
-                        s.src = 'https://min-1.disqus.com/embed.js';
-                        s.setAttribute('data-timestamp', +new Date());
-                        (d.head || d.body).appendChild(s);
-                    })();
-                </script>
-                <noscript>Please enable JavaScript to view the
-                    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-                </noscript>
-
-
+               
                 <footer>
                     Created by &copy; kkmin 2018
                 </footer>

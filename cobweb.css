@@ -1,0 +1,67 @@
+
+    .container{
+        display:flex;
+        flex-direction: column;}
+   
+    main{
+        padding:10px;
+    }
+   
+    #col1{
+            height:20px;
+            width: 150px;
+            font-size:24px;
+            text-align:center;
+            padding:10px;
+    } 
+
+    #col2{
+        height:20px;
+        width: 350px;
+        font-size:24px;
+        text-align:center;
+        padding:10px;
+    }
+   
+    body{
+              margin: 10px;
+              font-size:16px;
+    }
+    button{
+        height:50px;
+        width:100px;
+        font-size:16px;
+                }
+    
+    table{
+      border: 1px solid;
+      border-collapse: collapse;
+      margin:auto; /*테이블 가운데 중앙정렬*/
+    }
+    tr, th, td{
+      border: 1px solid;
+    }
+    
+    #xmin, #xmax, #ymin, #ymax, #x1, #iters{
+    border: 0;
+    height:20px;
+    width: 100px;
+    font-size:24px;
+    text-align:center;
+    padding:10px;
+          }
+    
+    #func, #func2, #func3{
+    border: 0;
+    height:20px;
+    width: 350px;
+    font-size:24px;
+    text-align:center;
+    padding:10px;
+        }
+    
+    #mytable2{
+        border:0;
+    }
+
+    

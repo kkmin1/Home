@@ -1,138 +1,140 @@
-    body { line-height:2.3em }
+body { line-height:2.3em }
 
-    center{padding: 10px;}
-    #min2{
-      width:200px;
-      text-align: left;
-      align:"center";
-    }
+center{padding: 10px;}
+#min2{
+  width:200px;
+  text-align: left;
+}
 
-    p{ font-size: 24px; text-indent: 2em;  }
-    h1{ color: blue; font-size: 38px;}
-    h2{ color: red; font-size: 32px;}
-    h3{ color: green; font-size: 24px;}
-    #min1{ color: green; font-size: 24px;}
-    
-    figcaption{color: darkgreen; font-size: 24px;}
+p{ font-size: 24px; text-indent: 2em;  }
+h1{ font-weight: bold; font-family: Times; color: blue; font-size: 38px; text-align: center;}
+h2{ font-weight: bold; font-family:'맑은 고딕'; color: red; font-size: 32px;}
+h3{ font-weight: bold; font-family:'맑은 고딕'; color: green; font-size: 28px;}
+h4{ font-weight: bold; font-family:'맑은 고딕'; font-size: 24px;}
+#min1{ color: green; font-size: 28px;}
+.fig{font-family:Times; font-size:30px;}
+figcaption{color: darkgreen; font-size: 28px;}
+#min3{font-size: 28px;}
+#min4{font-family:Arial; font-size: 24px;} /* Arial 영어 폰트를 사용하면 백슬래시 '\' 가 'W' (원화)로 표시되는 것을 막는다.*/
+.inline{ display: inline; }
 
-    .inline{ display: inline; }
-
-    /* 그림 관련 */
-    #sgv-text{
-        fill:black;
-        font-size:40px;
-    }
-    #sgv-text2{
-        fill:black;
-        font-size:30px;
-    }
-    #sgv-text3{
-        fill:black;
-        font-size:20px;
-    }
-    figure {
-        position: relative;
-    }
-    figcaption {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        text-align: center;
-    }
+/* 그림 관련 */
+#sgv-text{
+    fill:black;
+    font-size:40px;
+}
+#sgv-text2{
+    fill:black;
+    font-size:30px;
+}
+#sgv-text3{
+    fill:black;
+    font-size:20px;
+}
+figure {
+    position: relative;
+}
+figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
 
 /* 화살표 그림 */
-    div.digitDiv {
-      font-size:10vw;
-      font-family: monospace;
-      display:inline-block;
-      width:1em;
-      margin-left:1em;
-     }
+div.digitDiv {
+  font-size:10vw;
+  font-family: monospace;
+  display:inline-block;
+  width:1em;
+  margin-left:1em;
+ }
 
-    #dark-arrow {
-                stroke: #03051af8;
-                fill: #03051af8;
+#dark-arrow {
+            stroke: #03051af8;
+            fill: #03051af8;
+        }
+#blue-arrow {
+            stroke:#0e1abd;
+            fill: #0e1abd;
             }
-    #blue-arrow {
-                stroke:#0e1abd;
-                fill: #0e1abd;
-                }
 
-    #red-arrow {
-                stroke: #bb0b37;
-                fill:  #bb0b37;
-                }
-    #green-arrow {
-                stroke: #4eda0d;
-                fill:  #4eda0d;
-                }
-    #sgv-text{
-        fill:black;
-        font-size:30px;
-    }
+#red-arrow {
+            stroke: #bb0b37;
+            fill:  #bb0b37;
+            }
+#green-arrow {
+            stroke: #4eda0d;
+            fill:  #4eda0d;
+            }
+#sgv-text{
+    fill:black;
+    font-size:30px;
+}
 
-    /* 표 그리기 */
-    table{
-        border-collapse: collapse;
-        table-layout: fixed;
-        border : 1px solid black;
-        width : 300px;
-        margin:auto; /*테이블 가운데 중앙정렬*/
-        font-size:22px
-      }
-      table#tbl3{
-        border-collapse: collapse;
-        table-layout: fixed;
-        border : 1px solid black;
-        width : 800px;
-        margin:auto; /*테이블 가운데 중앙정렬*/
-        font-size:22px
-      }
-      tr, td, th, #diag{
-        text-align: center;
-        height:50px;
-      }
-      /* 표에 대각선을 긋는 코드, 여기서는 th 태그의 id = diag 셀에 대각선을 긋는다. */
-      table:nth-of-type(1) th#diag { /* 첫번째 표에 대각선을 긋는다. */
-        background-image: linear-gradient(
-          to top right,
-          white 49%,black,white 51%
-        );
-      }
-      table:nth-of-type(2) th#diag { /* 두번째 표에 대각선을 긋는다. */
-        background-image: linear-gradient(
-          to top right,
-          white 49%,black,white 51%
-        );
-      }
-      caption {
-          text-align: center;
-          margin-bottom: 5px;
-          text-transform: lowercase;
-          font-size: 100%;
-          padding: 10px;
-          /*letter-spacing: 10px;*/
-          font-weight: bold;
-          color:black;
-      }
+/* 표 그리기 */
+table{
+    border-collapse: collapse;
+    table-layout: fixed;
+    border : 1px solid black;
+    width : 300px;
+    margin:auto; /*테이블 가운데 중앙정렬*/
+    font-size:22px
+  }
+  table#tbl3{
+    border-collapse: collapse;
+    table-layout: fixed;
+    border : 1px solid black;
+    width : 800px;
+    margin:auto; /*테이블 가운데 중앙정렬*/
+    font-size:22px
+  }
+  tr, td, th, #diag{
+    text-align: center;
+    height:50px;
+  }
+  /* 표에 대각선을 긋는 코드, 여기서는 th 태그의 id = diag 셀에 대각선을 긋는다. */
+  table:nth-of-type(1) th#diag { /* 첫번째 표에 대각선을 긋는다. */
+    background-image: linear-gradient(
+      to top right,
+      white 49%,black,white 51%
+    );
+  }
+  table:nth-of-type(2) th#diag { /* 두번째 표에 대각선을 긋는다. */
+    background-image: linear-gradient(
+      to top right,
+      white 49%,black,white 51%
+    );
+  }
+  caption {
+      text-align: center;
+      margin-bottom: 5px;
+      text-transform: lowercase;
+      font-size: 100%;
+      padding: 10px;
+      /*letter-spacing: 10px;*/
+      font-weight: bold;
+      color:black;
+  }
 
-      .flex-container {
-        display: flex;
-        justify-content: center;
-       }
-      
-      .flex-container > div {
-        margin-left: 30px;
-        padding: 10px;
-      }
+  .flex-container {
+    display: flex;
+    justify-content: center;
+   }
+  
+  .flex-container > div {
+    margin-left: 30px;
+    padding: 10px;
+  }
 
-      .flex-container2 {
-        display: flex;
-       }
-      
-      .flex-container2 > div {
-        margin-left: 40px;
-        padding: 0px;
-      }
+  .flex-container2 {
+    display: flex;
+   }
+  
+  .flex-container2 > div {
+    margin-left: 40px;
+    padding: 0px;
+  }
+    
  

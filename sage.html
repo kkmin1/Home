@@ -1,40 +1,131 @@
+
 <!DOCTYPE HTML>
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>SageMathCell</title>
+    <link rel="stylesheet" type="text/css" href="code.css">
+    <link rel="stylesheet" type="text/css" href="footnote.css">
+    <title> sage math</title>
+
+    <!-- latex code -->
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+    <script src="./latex.js"></script>
+
+    <!-- sage code -->
     <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
-    <script>$(function () {
-    // Make the div with id 'mycell' a Sage cell
-    sagecell.makeSagecell({inputLocation:  '#mycell',
-                           template:       sagecell.templates.minimal,
-                           evalButtonText: 'Activate'});
-    // Make *any* div with class 'compute' a Sage cell
-    sagecell.makeSagecell({inputLocation: 'div.compute',
-                           evalButtonText: 'Evaluate'});
-    });
+    <script>sagecell.makeSagecell({"inputLocation": ".sage"});</script>
+    
+    <script>
+      // Make the div with id 'mycell' a Sage cell
+      sagecell.makeSagecell({inputLocation:  '#mycell',
+                             template:       sagecell.templates.minimal,
+                             evalButtonText: 'Activate'});
+      // Make *any* div with class 'compute' a Sage cell
+      sagecell.makeSagecell({inputLocation: 'div.compute',
+                             evalButtonText: 'Evaluate'});
     </script>
   </head>
-  <body>
-  <h1>Embedded Sage Cells</h1>
 
-  <h2>Factorial</h2>
-  Click the “Activate” button below to calculate factorials.
-    <div id="mycell"><script type="text/x-sage">
-@interact
-def _(a=(1, 10)):
-    print factorial(a)
- </script>
+
+<body>
+
+
+<h1>Embedded Sage Cells</h1>
+<br>
+
+<hr>
+
+<h2> 파이썬 코딩</h2>
+
+<div class="compute">
+print("Hello, world!")
+print("안녕하세요")
+</div>
+<br>
+<hr>
+
+<h2> 계산</h2>
+<div class="sage">
+  <script type="text/x-sage">1+2</script>
 </div>
 
-<h2>Your own computations</h2>
-Type your own Sage computation below and click “Evaluate”.
+<div class="sage">
+  <script type="text/x-sage">2/3+3.2*2.4</script>
+</div>
+<br>
+<hr>
+
+<h2>Factorial 계산</h2>
+ 
+<div id="mycell"><script type="text/x-sage">
+@interact
+def _(a=(1, 10)):
+    print(factorial(a))
+// 코딩은 좌측끝으로 정렬해서 indent.
+</script>
+</div>
+<br>
+<hr>
+
+<h2>그래프 그리기</h2>
+
     <div class="compute"><script type="text/x-sage">plot(sin(x), (x, 0, 2*pi))</script></div>
+    <br>
+    <hr>
+
+<h2> 제곱승 계산(슬라이드바 표현)</h2>
     <div class="compute"><script type="text/x-sage">
 @interact
 def f(n=(0,10)):
-    print 2^n
-</script></div>
-  </body>
+    print(2^n)
+</script></div>  
+<br>
+<hr>
+
+<h2> 미분</h2>
+<p>$F(x)=(3x^2-5)(2x^4-x) $를 미분하라</p>
+<div class="compute"><script type="text/x-sage">
+var('x')
+F(x) = (3*x^2 - 5)*(2*x^4 - x)
+diff(F(x), x)  		            # diff(f(x), x)  f(x)를 x에 관하여 미분, 도함수를 구한다.
+</script></div>  
+  <br>
+  <hr>
+
+<h2> 미분방정식</h2>
+
+<div class="compute"><script type="text/x-sage">
+x = var('x')
+y = function('y')(x)
+desolve(diff(y,x) + y - 1, y)
+
+</script></div>  
+  <br>
+  <hr>
+
+  <h2> Lotka Volterra Equations</h2>
+  <div class="compute"><script type="text/x-sage">
+from sage.calculus.desolvers import desolve_odeint
+x,y=var('x,y')
+f=[x*(1-y),-y*(1-x)]
+sol=desolve_odeint(f,[0.5,2],srange(0,10,0.1),[x,y])
+p=line(zip(sol[:,0],sol[:,1]))
+p.show()
+  </script></div>  
+    <br>
+   <hr>
+
+<h2> Plotting phase portraits</h2>
+  <div class="compute"><script type="text/x-sage">
+    var('x y'); VF = plot_vector_field([-y,-x],[x,-3,3],[y,-3,3]); plot(VF)
+  </script></div>  
+    <br>
+   <hr>
+
+  <br>
+  <div id="min2">created by kkmin</div>
+  <br>
+
+</body>
 </html>

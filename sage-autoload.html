@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="code.css">
+    <link rel="stylesheet" type="text/css" href="footnote.css">
+    <title>sage auto load</title>
+    <script src="./latex.js"></script>
+    <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
+    <script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
+    <script>
+$(function () {
+    // Make *any* div with class 'compute' a Sage cell
+    sagecell.makeSagecell({inputLocation: 'div.compute',
+    		//				template:       sagecell.templates.minimal, 
+            //               evalButtonText: 'Launch the Interactive Applet Now',
+                            autoeval:true});
+});
+    </script>
+  </head>
+  <body style="width: 1000px;">
+
+ <h1>phase diagram</h1>
+
+<hr>
+<p>sagemath로 미분방정식의 위상도를 그린다.</p>
+<h2> 연립 미분방정식의 위상도 그리기</h2>
+<p> 'plot_slope_field' 명령어를 사용한다.</p>
+
+<p> (예) 다음 연립미분방정식의 위상도 그리기</p>
+<p>$$ \frac{dx}{dt} = -y $$</p>
+<p>$$ \frac{dy}{dt} = -x $$</p>
+  <div class="compute"><script type="text/x-sage">
+var('x y'); VF = plot_vector_field([-y,-x],[x,-3,3],[y,-3,3]); plot(VF)
+  </script></div>  
+<br>
+<hr>
+
+<h2> Plotting phase portraits with solutions</h2>
+<div class="compute"><script type="text/x-sage">
+var('x y')
+VF=plot_vector_field([-y,-x],[x,-2,2],[y,-2,2])
+solutions = []  # we'll store our solutions, to be plotted, here
+T = ode_solver()
+T.function = lambda t,y: [-y[1],-y[0]]
+  
+# generate one solution and put it into solutions[]
+T.ode_solve(y_0=[2,2],t_span=[0,10],num_points=100)
+solutions.append(line([p[1] for p in T.solution]))
+  
+# generate the next solution and put it into solutions[]
+T.ode_solve(y_0=[-1,1],t_span=[0,10],num_points=100)
+solutions.append(line([p[1] for p in T.solution]))
+  
+# plot the vector field with the solutions on top,
+# this time with restricted axes
+show(sum(solutions)+VF,xmin=-2,xmax=2,ymin=-2,ymax=2)
+</script></div>  
+<br>
+<hr>
+
+<h2> Plotting phase diagram with phase line </h2>
+<p>the numerical ODE solver desolve_rk4 can produce a plot</p>
+  <div class="compute"><script type="text/x-sage">
+var('x,y')
+ode_rhs = 4*y/x+x*sqrt(y)
+slope_field = plot_slope_field(ode_rhs, (x,0,4), (y,0,10), headaxislength=3, headlength=3, color='darkred')
+exact_sol = plot(lambda x: 1/4*x^4*(log(x)+2)^2, xmin=0, xmax=4, ymin=0, ymax=10, color='blue')
+integral_curve = desolve_rk4(ode_rhs, y, ivar=x, ics=[1,1], output='plot', xmax=4, ymax=10, color='yellow')
+slope_field + exact_sol + integral_curve
+  </script></div>  
+<br>
+<hr>
+
+<h2> Plotting phase diagram with phase line </h2>
+<p>the numerical ODE solver desolve_rk4 can produce a plot</p>
+  <div class="compute"><script type="text/x-sage">
+var('x,y')
+de = y^3-x
+f1 = desolve_rk4(de,y,ivar=x, ics=[0,0],end_points=[-5,5],step=.01,output='plot',color='red')
+f2 = desolve_rk4(de,y,ivar=x, ics=[2,0],end_points=[-5,5],step=.01,output='plot',color='red')
+f3 = desolve_rk4(de,y,ivar=x, ics=[-2,0],end_points=[-5,5],step=.01,output='plot',color='red')
+a = plot_slope_field(y^3-x,(x,-5,5),(y,-5,5),color='blue')
+show(f1+f2+f3+a,xmin=-5,xmax=5,ymin=-5,ymax=5)
+  </script></div>  
+<br>
+<hr>
+<h2> Lotka Volterra Equations </h2>
+<p> vector field with trajectory</p>
+  <div class="compute"><script type="text/x-sage">
+from sage.calculus.desolvers import desolve_odeint
+x,y=var('x,y')
+f=[x*(1-y),-y*(1-x)]
+sol=desolve_odeint(f,[0.5,2],srange(0,10,0.1),[x,y])
+p=line(zip(sol[:,0],sol[:,1]))
+#p.show()
+VF = plot_vector_field([x*(1-y),-y*(1-x)],[x,0,3],[y,0,3]); 
+show(VF+p)
+  </script></div>  
+
+  <div class="compute"><script type="text/x-sage">
+from sage.calculus.desolvers import desolve_odeint
+x,y=var('x,y')
+f=[-2*x, 2*x-4*y+32]
+sol=desolve_odeint(f,[15,-15],srange(0,10,0.1),[x,y])
+sol2=desolve_odeint(f,[-15,-15],srange(0,10,0.1),[x,y])
+p=line(zip(sol[:,0],sol[:,1]))
+p2=line(zip(sol2[:,0],sol2[:,1]))
+# p.show()
+VF = plot_vector_field([-2*x, 2*x-4*y+32],[x,-15,15],[y,-15,15]); 
+show(VF+p+p2)
+      </script></div>  
+  <br>
+  <hr>
+
+  <h2> Plotting phase diagram with trajectory with python code</h2>
+ 
+<p> def add_arrow_to_line2D : Add arrows to a matplotlib.lines.Line2D at selected locations.</p>
+
+ <div id="min3"> Parameters </div>
+    <ul>
+<li>  axes: </li>  
+<li>  line: Line2D object as returned by plot command</li>  
+<li>  arrow_locs: list of locations where to insert arrows, % of total length</li>  
+<li>  arrowstyle: style of the arrow</li>  
+<li>  arrowsize: size of the arrow</li>  
+<li>  transform: a matplotlib transform instance, default to data coordinates</li>  
+  </ul>
+    
+  <div class="compute"><script type="text/x-sage">
+import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib.lines as mlines
+import matplotlib.patches as mpatches
+from scipy.integrate import odeint
+
+def add_arrow_to_line2D(
+    axes, line, arrow_locs=[0.2, 0.4, 0.6, 0.8],
+    arrowstyle='-|>', arrowsize=1, transform=None):
+    
+    if not isinstance(line, mlines.Line2D):
+        raise ValueError("expected a matplotlib.lines.Line2D object")
+    x, y = line.get_xdata(), line.get_ydata()
+
+    arrow_kw = {
+        "arrowstyle": arrowstyle,
+        "mutation_scale": 10 * arrowsize,
+    }
+
+    color = line.get_color()
+    use_multicolor_lines = isinstance(color, np.ndarray)
+    if use_multicolor_lines:
+        raise NotImplementedError("multicolor lines not supported")
+    else:
+        arrow_kw['color'] = color
+
+    linewidth = line.get_linewidth()
+    if isinstance(linewidth, np.ndarray):
+        raise NotImplementedError("multiwidth lines not supported")
+    else:
+        arrow_kw['linewidth'] = linewidth
+
+    if transform is None:
+        transform = axes.transData
+
+    arrows = []
+    for loc in arrow_locs:
+        s = np.cumsum(np.sqrt(np.diff(x) ** 2 + np.diff(y) ** 2))
+        n = np.searchsorted(s, s[-1] * loc)
+        arrow_tail = (x[n], y[n])
+        arrow_head = (np.mean(x[n:n + 2]), np.mean(y[n:n + 2]))
+        p = mpatches.FancyArrowPatch(
+            arrow_tail, arrow_head, transform=transform,
+            **arrow_kw)
+        axes.add_patch(p)
+        arrows.append(p)
+    return arrows
+
+
+# Define a function for the system of ODEs
+def f(y, t):
+    y1, y2 = y # unpack variables
+    dydt = [-2*y1, 2*y1-4*y2+32] # define derivatives
+    return dydt
+
+# Define a grid of points for plotting
+x = np.linspace(-16, 16, 21)
+y = np.linspace(-16, 16, 21)
+X, Y = np.meshgrid(x, y)
+
+# Evaluate the system on the grid
+t = np.linspace(0, 10, 101)
+u, v = np.zeros(X.shape), np.zeros(Y.shape)
+NI, NJ = X.shape
+for i in range(NI):
+    for j in range(NJ):
+        xdot = f([X[i,j], Y[i,j]],t)
+        u[i,j] = xdot[0]
+        v[i,j] = xdot[1]
+
+# Plot the vector field using quiver
+# plt.quiver(X,Y,u,v,color='r')
+
+fig, ax = plt.subplots(1, 1)
+ax.quiver(X,Y,u,v,color='r')
+
+u1 = np.linspace(-15, 15, 4)
+v1 = np.linspace(-15, 15, 4)
+
+initial_conditions = []
+for i in range(len(u1)):
+    for j in range(len(v1)):
+        initial_conditions.append([u1[i], v1[j]])
+
+lines = []
+for y in initial_conditions:
+    sol = odeint(f,y,t)
+    line, = ax.plot(sol[:,0], sol[:,1], 'b')
+    lines.append(line)
+
+for line in lines:
+    add_arrow_to_line2D(ax, line,
+                        arrow_locs=[0.2, 0.4, 0.6,
+                                    0.8, 1.0],
+                        arrowstyle='->')
+# Show the plot
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.grid(True)
+plt.show()
+      </script></div>  
+<br>
+<hr>
+    <br>
+    <div id="min2">created by kkmin</div>
+    <br>
+
+</body>
+</html>

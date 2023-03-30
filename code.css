@@ -1,3 +1,16 @@
+body{padding: 10px;}
+p, code{ font-size: 24px; }
+h1{ font-weight: bold; font-family: Times; color: blue; font-size: 38px; text-align: center;}
+h2{ font-weight: bold; font-family:'맑은 고딕'; color: red; font-size: 32px;}
+h3{ font-weight: bold; font-family:'맑은 고딕'; color: green; font-size: 28px;}
+h4{ font-weight: bold; font-family:'맑은 고딕'; font-size: 24px;}
+#min1{ color: green; font-size: 28px;}
+#min2{ color: green; font-size: 24px; text-align: center;}
+.fig{font-family:Times; font-size:30px;}
+figcaption{color: darkgreen; font-size: 28px;}
+#min3{font-size: 28px;}
+#min4{font-family:Arial; font-size: 24px;} /* Arial 영어 폰트를 사용하면 백슬래시 '\' 가 'W' (원화)로 표시되는 것을 막는다.*/
+
 
 .container{
   display:flex;
@@ -96,3 +109,10 @@ main{
 .show {display:block;}
 
 .dropdown:hover .dropdown-content { display: block; }
+
+
+a:visited {
+  color: red;
+  background-color: transparent;
+  text-decoration: none;
+}
