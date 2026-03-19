@@ -1,0 +1,87 @@
+\documentclass{oblivoir}
+\usepackage{tikz}
+ \usetikzlibrary{math} 
+\usetikzlibrary{arrows}
+\title{로지스틱 수요 - 공급 cobweb 모형}
+\author{민관기}
+\date{\today}
+
+% cobweb macro
+\newcommand{\dd}{ 
+  \pgfmathsetmacro{\xa}{\xb}
+  \pgfmathsetmacro{\ya}{\yb}
+\pgfmathsetmacro{\xb}{si(\ya)}
+ \pgfmathsetmacro{\yb}{d(\xb)}
+\draw[->,color=magenta] (\xa,\ya)  edge (\xb,\ya) (\xb,\ya) edge (\xb,\yb);
+} 
+
+% time plot macro
+\newcommand{\ee}[1]{ 
+  \pgfmathsetmacro{\xa}{\xb}
+  \pgfmathsetmacro{\ya}{\yb}
+\pgfmathsetmacro{\xb}{si(\ya)}
+ \pgfmathsetmacro{\yb}{d(\xb)}
+ \draw [color=magenta] (#1, \ya)--(#1+1, \yb);
+} 
+
+\begin{document}
+\maketitle
+
+
+\section{수요 곡선  로지스틱 곡선}
+\newcommand{\start}{1.5} %초기값 설정
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1,
+     declare function={d(\t)=  0.7*\t*(6-\t) ; s(\t)=1+0.8*\t ; si(\t)=(\t-1)/0.8;}]  %si()는 s()의 역함수
+    \draw[->](0,0)--(0,10) node[above]{P(가격)};
+    \draw[->](0,0)--(10,0) node[right]{Q(수량)};
+      \clip (-1,-1) rectangle (11,11);
+   \draw[color=blue,domain=0:8] plot (\x,{d(\x)});    
+    \draw[color=blue,domain=0:8] plot (\x,{s(\x)});  
+  \node at (8,7) {공급곡선};
+  \node at (5,1) {수요곡선};
+  \node at (-0.2,-0.2) {0};
+
+\pgfmathsetmacro{\xa}{\start}   
+\pgfmathsetmacro{\ya}{d(\xa)}
+\pgfmathsetmacro{\xb}{si(\ya)}
+ \pgfmathsetmacro{\yb}{d(\xb)}
+  \node at (\xa,-0.2) {$\xa$};
+  \node at (0, \ya) {$\ya$};
+  \node at (0, \yb) {$\yb$};
+\draw[->,color=magenta](\xa,0)--(\xa,\ya);
+\draw[->,color=magenta](\xa,\ya)  edge (\xb,\ya) (\xb,\ya) edge (\xb,\yb);
+ \dd \dd  \dd  \dd  \dd  \dd  \dd  \dd
+
+\end{tikzpicture}
+\caption{수요 - 공급 cobweb 도형 : 발산형}
+\end{figure} 
+
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1,
+     declare function={d(\t)=  0.7*\t*(6-\t) ; s(\t)=1+0.8*\t ; si(\t)=(\t-1)/0.8;}]  
+     
+    \draw[->](0,0)--(0,10) node[above]{P(가격)};
+    \draw[->](0,0)--(10,0) node[right]{t(시간)};
+    \clip (-1,-1) rectangle (11,11);
+
+\node at (-0.2,-0.2) {0};
+
+\pgfmathsetmacro{\xa}{\start} 
+\pgfmathsetmacro{\ya}{d(\xa)}
+\pgfmathsetmacro{\xb}{si(\ya)}
+ \pgfmathsetmacro{\yb}{d(\xb)}
+ \draw [color=magenta] (1, \ya)--(2, \yb);
+   \node at (1, \ya-0.2) {$\ya$};
+   \node at (2, \yb-0.2) {$\yb$};
+ \ee{2}  \ee{3}  \ee{4}  \ee{5}  \ee{6}  \ee{7}
+
+\end{tikzpicture}
+\caption{시간에 따른 가격 변동}
+\end{figure} 
+
+\end{document} 

@@ -1,0 +1,127 @@
+\documentclass{book}
+\usepackage{tikz}
+ \usetikzlibrary{math} 
+ \usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usepackage{expl3}
+\ExplSyntaxOn
+\cs_new_eq:NN \Repeat \prg_replicate:nn
+\ExplSyntaxOff
+
+\title{demand supply cobweb diagram}
+\author{Kwanki Min}
+\date{\today}
+
+% cobweb macro
+\newcommand{\dd}{ 
+  \pgfmathsetmacro{\xa}{\xb}
+  \pgfmathsetmacro{\ya}{\yb}
+\pgfmathsetmacro{\xb}{si(\ya)}
+ \pgfmathsetmacro{\yb}{de(\xb)}
+\draw[->,color=magenta] (\xa,\ya)  edge (\xb,\ya) (\xb,\ya) edge (\xb,\yb);
+} 
+
+% time plot macro
+\newcommand{\ee}[1]{ 
+     \pgfmathsetmacro{\xa}{\xb}
+  \pgfmathsetmacro{\ya}{\yb}
+\pgfmathsetmacro{\xb}{si(\ya)}
+ \pgfmathsetmacro{\yb}{de(\xb)}
+ \draw [color=magenta] (#1, \ya)--(#1+1, \yb);
+} 
+
+
+\tikzmath
+{
+function cobweb(\a,\b,\c,\d,\x0,\n) % x0 is initial value, \n is number of iteration
+  {
+   function de(\x) % demand function
+   {
+   return \a+\b*\x;
+   };
+    function su(\x) % supply function
+   {
+   return \c+\d*\x;
+   };
+   function si(\x) % inverse supply function
+   {
+   return (\x-\c)/\d;
+   };
+   { 
+\draw[->](0,0)--(0,8) node[above]{P(price)};
+ \draw[->](0,0)--(10,0) node[right]{Q(quantity)};
+    \clip (-1,-1) rectangle (11,8);
+   \draw[color=blue,domain=0:8] plot (\x,{de(\x)});    
+    \draw[color=blue,domain=0:8] plot (\x,{su(\x)}); 
+   \node at (7,6) {supply function};
+  \node at (7,1) {demand function};
+  \node at (-0.2,-0.2) {0};
+  \newcommand{\start}{\x0} % initial value setting
+\pgfmathsetmacro{\xa}{\start} 
+\pgfmathsetmacro{\ya}{de(\xa)}
+\pgfmathsetmacro{\xb}{si(\ya)}
+ \pgfmathsetmacro{\yb}{de(\xb)}
+  \node at (\xa,-0.2) {$\start$};
+\draw[->,color=magenta](\xa,0)--(\xa,\ya);
+\draw[->,color=magenta](\xa,\ya)  edge (\xb,\ya) (\xb,\ya) edge (\xb,\yb);
+%\dd \dd  \dd  \dd  \dd  \dd  \dd  \dd
+\Repeat{\n}{\dd}
+};
+};
+function fluc(\a,\b,\c,\d,\x0,\n) 
+  {
+   function de(\x) 
+   {
+   return \a+\b*\x;
+   };
+    function su(\x) 
+   {
+   return \c+\d*\x;
+   };
+   function si(\x)
+   {
+   return (\x-\c)/\d;
+   };
+   {
+    \draw[->](0,0)--(0,6) node[above]{P(price)};
+    \draw[->](0,0)--(10,0) node[right]{t(time)};
+    \clip (-1,-1) rectangle (11,7);
+\node at (-0.2,-0.2) {0};
+\newcommand{\start}{\x0} 
+\pgfmathsetmacro{\xa}{\start} 
+\pgfmathsetmacro{\ya}{de(\xa)}
+\pgfmathsetmacro{\xb}{si(\ya)}
+ \pgfmathsetmacro{\yb}{de(\xb)}
+ \draw [color=magenta] (1, \ya)--(2, \yb);
+ \foreach \i in {2,...,\n}
+{
+\pgfmathparse{\xb}
+ \xdef\xa{\pgfmathresult}
+ \pgfmathparse{\yb}
+ \xdef\ya{\pgfmathresult}
+\pgfmathparse{si(\ya)}
+ \xdef\xb{\pgfmathresult}
+\pgfmathparse{de(\xb)}
+ \xdef\yb{\pgfmathresult}
+ \draw [color=magenta] (\i, \ya)--(\i+1, \yb);
+}
+ };
+ };
+}
+
+
+\begin{document}
+\begin{figure}[htbp]
+\centering
+    \begin{tikzpicture}
+   \tikzmath{cobweb(5,-0.7,1,1,1,8);}
+    \end{tikzpicture}
+    \caption{demand supply cobweb diagram}
+    
+     \begin{tikzpicture}
+   \tikzmath{fluc(5,-0.7,1,1,1,8);}
+    \end{tikzpicture}
+    \caption{time variation}
+    \end{figure} 
+    
+\end{document} 

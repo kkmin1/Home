@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>위상도(Phase Diagram) - JavaScript</title>
+        <link rel="stylesheet" type="text/css" href="pdj.css" />
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script
+            id="MathJax-script"
+            async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+        ></script>
+    </head>
+    <body>
+        <div class="panel">
+            <h1>위상도(Phase Diagram)</h1>
+            <br />
+            <p class="desc">x와 y를 사용하여 미분방정식 수식을 입력하세요.</p>
+            <p class="desc">
+                예: -2*x, x^2,exp(x), sqrt(x), sin(x)-y, exp(x/10)-4
+            </p>
+            <p class="desc">
+                수식을 하나만 입력하면 1차원 위상도로 그려집니다.
+            </p>
+            <br />
+
+            <div class="controls">
+                <div class="input-group">
+                    <label for="exprX">\(\frac{dx}{dt} = \)</label>
+                    <input
+                        id="exprX"
+                        type="text"
+                        value="0.5x + 0.5y - 15"
+                        placeholder="예: -2*x"
+                    />
+                </div>
+                <div class="input-group">
+                    <label for="exprY">\(\frac{dy}{dt} = \)</label>
+                    <input
+                        id="exprY"
+                        type="text"
+                        value="x - 0.5y"
+                        placeholder=""
+                    />
+                </div>
+            </div>
+
+            <div class="range-controls">
+                <div class="input-group">
+                    <label>x축 범위 :</label>
+                    <div class="range-input-wrapper">
+                        <span>min</span>
+                        <input id="xMin" type="number" value="-10" step="any" />
+                        <span class="max-label">max</span>
+                        <input id="xMax" type="number" value="30" step="any" />
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>y축 범위 :</label>
+                    <div class="range-input-wrapper">
+                        <span>min</span>
+                        <input id="yMin" type="number" value="0" step="any" />
+                        <span class="max-label">max</span>
+                        <input id="yMax" type="number" value="40" step="any" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="renderBtn" type="button">그리기</button>
+            </div>
+
+            <hr class="diagram-divider" />
+            <div id="status" class="status"></div>
+            <div id="diagram"></div>
+        </div>
+
+        <script src="./phase_diagram.js?v=20260320-12"></script>
+        <script>
+            const STORAGE_KEY = "phase-diagram-demo-state-v1";
+            const exprX = document.getElementById("exprX");
+            const exprY = document.getElementById("exprY");
+            const xMin = document.getElementById("xMin");
+            const xMax = document.getElementById("xMax");
+            const yMin = document.getElementById("yMin");
+            const yMax = document.getElementById("yMax");
+            const renderBtn = document.getElementById("renderBtn");
+            const status = document.getElementById("status");
+            const inputs = [exprX, exprY, xMin, xMax, yMin, yMax];
+
+            function saveState() {
+                try {
+                    localStorage.setItem(
+                        STORAGE_KEY,
+                        JSON.stringify({
+                            exprX: exprX.value,
+                            exprY: exprY.value,
+                            xMin: xMin.value,
+                            xMax: xMax.value,
+                            yMin: yMin.value,
+                            yMax: yMax.value,
+                        }),
+                    );
+                } catch (error) {
+                    // Ignore storage errors.
+                }
+            }
+
+            function restoreState() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    if (!raw) return;
+                    const saved = JSON.parse(raw);
+                    if (typeof saved.exprX === "string")
+                        exprX.value = saved.exprX;
+                    if (typeof saved.exprY === "string")
+                        exprY.value = saved.exprY;
+                    if (typeof saved.xMin === "string") xMin.value = saved.xMin;
+                    if (typeof saved.xMax === "string") xMax.value = saved.xMax;
+                    if (typeof saved.yMin === "string") yMin.value = saved.yMin;
+                    if (typeof saved.yMax === "string") yMax.value = saved.yMax;
+                } catch (error) {
+                    // Ignore storage errors.
+                }
+            }
+
+            function renderDiagram() {
+                status.textContent = "";
+                try {
+                    saveState();
+                    new PhaseDiagramRenderer({
+                        target: "#diagram",
+                        xRange: [Number(xMin.value), Number(xMax.value)],
+                        yRange: [Number(yMin.value), Number(yMax.value)],
+                        vectorField: {
+                            enabled: true,
+                            xCount: 20,
+                            yCount: 12,
+                            color: "#94a3b8",
+                            opacity: 0.52,
+                            strokeWidth: 0.8,
+                            arrowSize: 3.5,
+                            scale: 13,
+                            minLength: 5,
+                            maxLength: 9,
+                        },
+                        trajectories: {
+                            enabled: false,
+                            color: "#d8a11d",
+                            opacity: 0.92,
+                            strokeWidth: 1.15,
+                            arrowSize: 5,
+                            arrowSpacing: 88,
+                            perRegion: 3,
+                        },
+                        system: {
+                            dx: exprX.value,
+                            dy: exprY.value,
+                        },
+                    }).render();
+                } catch (error) {
+                    status.textContent =
+                        "수식을 해석하지 못했습니다. JS 식 형식과 범위를 확인해 주세요.";
+                }
+            }
+
+            restoreState();
+            renderBtn.addEventListener("click", renderDiagram);
+            inputs.forEach(function (input) {
+                input.addEventListener("input", saveState);
+                input.addEventListener("keydown", function (event) {
+                    if (event.key === "Enter") renderDiagram();
+                });
+            });
+
+            renderDiagram();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="blog.css">
+  <title>사랑방정식 (Love Equation)</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax:
+      {
+        inlineMath: [['$', '$'], ["\\(", "\\)"]],
+        displayMath: [['$$', '$$'], ["\\[", "\\]"]],
+      },
+      "HTML-CSS": { availableFonts: ["TeX"] }
+    });
+  </script>
+</head>
+
+<body class="sub-page-body">
+  <div id="min2">
+    <h1>사랑방정식 (Love Equation)</h1>
+
+    <h2>1. 개요</h2>
+    <p>사랑방정식은 수학자 스티븐 스트로가츠(Steven Strogatz)가 1988년에 발표한 "Love Affairs and Differential Equations" 논문에서 시작되었습니다. 이는 인간의
+      감정 역학을 미분방정식 시스템으로 모델링하여, 시간에 따른 사랑의 온도가 어떻게 변하는지를 분석합니다.</p>
+
+    <h2>2. 로미오와 줄리엣 모형</h2>
+    <p>가장 기본적인 선형 모형은 로미오($R$)와 줄리엣($J$)의 감정 변화를 다음과 같은 연립 미분방정식으로 표현합니다.</p>
+    <p>$$\frac{dR}{dt} = aR + bJ$$</p>
+    <p>$$\frac{dJ}{dt} = cR + dJ$$</p>
+    <p>여기서 $a, b, c, d$는 각 인물의 성격과 상대의 반응에 대한 민감도를 나타내는 파라미터입니다. $a$는 자신의 감정에 대한 반응, $b$는 상대방의 감정에 대한 반응을 의미합니다.</p>
+
+    <h2>3. 연애 스타일의 수학적 분류</h2>
+    <p>파라미터의 부호와 크기에 따라 다양한 연애 스타일이 정의됩니다.</p>
+    <ul>
+      <li><strong>Eager Beaver (열정파):</strong> $a>0, b>0$. 자신의 사랑이 깊어질수록 더 뜨거워지고, 상대가 사랑해줄수록 더 깊게 빠집니다.</li>
+      <li><strong>Narcissistic Nerd (자기도취형):</strong> $a>0, b<0$. 자신의 감정에는 충실하지만, 상대가 다가올수록 밀어내는 스타일입니다.</li>
+      <li><strong>Cautious Lover (신중파):</strong> $a<0, b>0$. 자신의 감정은 절제하려 하지만, 상대방의 따뜻한 반응에는 마음이 열립니다.</li>
+      <li><strong>Hermit (은둔자):</strong> $a<0, b<0$. 자신의 감정도 식히고 상대방이 다가오는 것도 부담스러워합니다.</li>
+    </ul>
+
+    <h2>4. 포식자-피식자 모형과의 유사성</h2>
+    <p>로트카-볼테라(Lotka-Volterra)의 포식자-피식자 모형은 생태계의 인구 변화를 묘사하지만, 이를 사랑에 적용하면 한쪽의 헌신(피식자)이 다른 쪽의 사랑(포식자)을 키우고, 너무 커진 사랑이
+      부담이 되어 다시 헌신이 줄어드는 순환 구조를 설명할 수 있습니다.</p>
+    <p>비선형 모형에서는 연애의 감정이 단순한 수렴을 넘어 '복잡한 주기성'이나 '카오스(Chaos)'적 거동을 보일 수 있음을 시사합니다. 이는 왜 연애가 때로는 예측 불가능하고 요동치는지에 대한 수학적
+      통찰을 제공합니다.</p>
+
+    <br>
+    <a href="hum-math.html">뒤로 가기</a>
+  </div>
+</body>
+
+</html>

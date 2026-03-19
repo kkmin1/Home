@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="blog.css">
+    <title>차분방정식과 응용</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax:
+            {
+                inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                displayMath: [['$$', '$$'], ["\\[", "\\]"]],
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
+</head>
+
+<body class="sub-page-body">
+    <div id="min2">
+        <h1>차분방정식과 응용 (Difference Equations)</h1>
+
+        <h2>1. 개요</h2>
+        <p>차분방정식은 이산적인 시간(Discrete Time) 단계에 따라 변화하는 변수들의 관계를 설명합니다. 연도별, 분기별 데이터 분석에 적합합니다.</p>
+
+        <h2>2. 1계 차분방정식</h2>
+        <p>$ y_{t+1} = ay_t + b $의 형태를 가지며, 점진적인 균형 수렴 여부는 계수 $ a $의 절댓값에 의해 결정됩니다. </p>
+        <p>$ |a| < 1 $ 이면 균형값 $ \bar{y}=\frac{b}{1-a} $로 수렴하며, $ a $가 음수이면 진동하며 수렴합니다.</p>
+
+                <h2>3. 고계 차분방정식</h2>
+                <p>특성방정식(Characteristic Equation)을 통해 해를 구하며, 복소수 근이 나올 경우 순환적인 변동(Oscillation)이 나타날 수 있습니다.</p>
+
+                <h2>4. 경제학적 응용</h2>
+                <p><strong>거미집 모형 (Cobweb Model):</strong> 공급 시차에 따른 가격과 수량의 이산적 변동 분석.</p>
+                <p><strong>사무엘슨 승수-가속도 모형:</strong> 소비와 투자의 시차를 고려한 경기 순환 모델입니다.</p>
+
+                <br>
+                <a href="eco-math2.html">뒤로 가기</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+
+<html ng-app="app" ng-controller="ctrl">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+<body>
+Your Name: <input type="text" ng-model="yourname">
+<br />
+<h2>Hello {{yourname}}</h2>
+<hr>
+	
+<p>Input something in the input box:</p>
+<p>입력 : <input type="text" ng-model="name"></p>
+<textarea ng-bind="name"></textarea>
+<hr>
+	
+<div>
+<p>My first expression: {{ 5 + 5 }}</p>
+<p> 5 + 7 = {{ 5 + 7 }} </p>
+<p> -3 x 5 = {{ (-3) * 5 }} </p>
+<p> 3 ÷ 7 = {{ 3 / 7 }} </p>
+<p> 5 ^ 6 = {{ Math.pow(5, 6) }} </p>
+</div>
+
+<hr>
+First Name: <input type="text" ng-model="firstName"><br>
+Last Name: <input type="text" ng-model="lastName"><br>
+<br>
+Full Name: {{firstName + " " + lastName}}
+
+<hr>
+<p>You can change the value of the input style</p>
+<p>change background color</p>
+<input style="background-color:{{myCol}}" ng-model="myCol" value="{{myCol}}">
+
+
+<script>
+// Math 라이브러리를 사용하가 위해 필요. 추가 ng-controller
+var app = angular.module("app", []);
+
+app.controller("ctrl", function($scope){
+	$scope.Math = window.Math;
+	$scope.firstName = "";
+    $scope.lastName = "";
+})
+</script>
+
+</body>
+</html>
+
+

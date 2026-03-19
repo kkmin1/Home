@@ -1,0 +1,6 @@
+i=i+1
+ya=de(xa)
+set arrow from xa,ya to si(ya),ya lc 1
+xa=si(ya)
+set arrow from xa,ya to xa,de(xa) lc 1
+if (i<N) reread

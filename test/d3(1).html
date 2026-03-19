@@ -1,0 +1,89 @@
+<!-- Created by kkmin -->
+
+<html>
+
+<head>
+
+<meta charset="utf8">
+<title> </title>
+
+<script src=https://code.jquery.com/jquery-3.1.1.js></script>
+
+<link rel="stylesheet" type="text/css" href="code.css">
+
+<style>
+h1{
+	text-align:center;
+	}
+
+#idname{
+	border-style:solid;
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    }
+
+.bar-chart {
+  display: inline-block;
+  margin-right: 1px;
+  background-color: hotpink;
+}
+</style>
+<script src = "http://d3js.org/d3.v3.min.js"> </script>
+</head>
+
+
+<body>
+
+<h1>d3 test </h1>
+
+
+
+
+
+<script>
+	d3.select("h1").text("D3");
+
+	d3.select("body")
+      .append("p")
+      .style("color", "red")
+      .text("my first exercise");
+
+    d3.select("body")
+      .append("div")
+      .style("color", "green")
+      .text("안녕하세요");
+
+   var arr = [10 20 30 40 50 60 70 80 90];
+ var bar =  d3.select("body")
+        .selectAll("div")
+        .data(arr)
+        .enter()
+        .append("div");
+
+    bar.style("height", function(d) {return d + "px";})
+         .style("width", function(d) {return "20px";})
+         .attr("class", "bar-chart");
+
+ var canvas = d3.select("body")
+                   .append("svg")
+                   .attr("width", 500)
+                   .attr("height", 500);
+ var circle = canvas.select("circle")
+                     .attr("cx", 250)
+                     .attr("cy", 250)
+                     .attr("r", 10)
+                     .attr("fill", "red");
+  var rect = canvas.select("rect")
+                    .attr("height", 100)
+                    .attr("width", 50);
+</script>
+
+<footer>
+      Created by &copy; kkmin 2018
+</footer>
+
+
+</body>
+
+</html>

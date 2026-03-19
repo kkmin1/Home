@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Phase Diagram</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script>
+      // Define the differential equations
+      function dx_dt(x, y) {
+        return 2*x - y;
+      }
+      function dy_dt(x, y) {
+        return x + y;
+      }
+
+      // Define the range of x and y values to plot
+      const xMin = -5;
+      const xMax = 5;
+      const yMin = -5;
+      const yMax = 5;
+
+      // Define the step size for the x and y values
+      const xStep = 0.5;
+      const yStep = 0.5;
+
+      // Define the canvas size
+      const canvasWidth = 400;
+      const canvasHeight = 400;
+
+      // Set up the canvas
+      function setup() {
+        createCanvas(canvasWidth, canvasHeight);
+        background(255);
+      }
+
+      // Draw the phase diagram
+      function draw() {
+        // Loop over all x and y values and draw an arrow at each point
+        for (let x = xMin; x <= xMax; x += xStep) {
+          for (let y = yMin; y <= yMax; y += yStep) {
+            // Calculate the rate of change for this point
+            const dx = dx_dt(x, y);
+            const dy = dy_dt(x, y);
+
+            // Normalize the rate of change
+            const magnitude = Math.sqrt(dx*dx + dy*dy);
+            const dxNorm = dx / magnitude;
+            const dyNorm = dy / magnitude;
+
+            // Draw an arrow at this point, with length proportional to the magnitude of the rate of change
+            const arrowLength = magnitude * 10;
+            const xPixel = map(x, xMin, xMax, 0, width);
+            const yPixel = map(y, yMin, yMax, height, 0);
+            stroke(0, 0, 255);
+            strokeWeight(1);
+            line(xPixel, yPixel, xPixel + dxNorm * arrowLength, yPixel - dyNorm * arrowLength);
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <script>new p5();</script>
+  </body>
+</html>

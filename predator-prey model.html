@@ -1,0 +1,493 @@
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Predator - Prey 모형</title>
+
+    <style>
+    body { line-height:2.3em }
+    p{  text-indent: 2em;  }
+    .inline{ display: inline; }
+    h1{ color: blue; }
+    h2{ color: red; }
+    h3{ color: green; }
+    h4{ color: rgb(85, 7, 81); }
+    div.digitDiv {
+      font-size:10vw;
+      font-family: monospace;
+    /*  display:inline-block; /*
+      width:1em;
+      margin-left:1em;
+    /* border:1px solid red; */
+    }
+    #dark-arrow {
+                stroke: #03051af8;
+                fill: #03051af8;
+            }
+    #blue-arrow {
+                stroke:#0e1abd;
+                fill: #0e1abd;
+                }
+
+    #red-arrow {
+                stroke: #bb0b37;
+                fill:  #bb0b37;
+                }
+    #green-arrow {
+                stroke: #4eda0d;
+                fill:  #4eda0d;
+                }
+    #sgv-text{
+        fill:black;
+        font-size:30px;
+    }
+     </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+MathJax.Hub.Config({
+extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+jax: ["input/TeX", "output/HTML-CSS"],
+tex2jax:
+{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+"HTML-CSS": { availableFonts: ["TeX"] }
+});
+</script>
+ </head>
+
+<body>
+    <h2 class="inline">Predator - Prey 모형 </h2><sup><a href="#fn1" id="ref1">1</a></sup>
+
+<p>두 종 사이의 포식자-먹이 상호작용(predator-prey interaction)은 한 종(포식자)이 다른 종을 먹이로 삼을 때 발생한다.</p>   
+  
+<p>적어도 하나의 주기해를 갖는 평면자율계로 유도되는 포식자-먹이 모형은 많이 있는데 x가 포식자의 수이고 y가 먹이의 수라고 하면 predator-prey 모형은 다음과 같은 형태이다. </p>
+
+<p>(Prey)</p>
+<p>
+$
+ \dfrac{dx}{dt} /x = b−py , \qquad (b, p > 0)
+ $
+</p>
+<p>(Predators)</p>
+<p>
+ $
+\dfrac{dy}{dt}/y = rx−d , \qquad (d, r > 0)
+$
+</p>
+ <p> y가 포식자(predator)의 수이고 x가 먹이(the prey)의 수라고 하면</p>
+ <UL>
+    <LI> b는 포식자가 없을 때 먹이의 자연 증가율을 의미</LI> 
+    <LI>  포식자가 없으면 먹이의 인구는 b의 비율로 지수적으로 증가한다. 포식자가 있으면 먹이의 인구는 p의 비율로 지수적으로 감소한다.</LI>
+    <LI> 포식자는 d의 비율로 자연 감소(사망). </LI>
+    <LI> 포식자는 먹이가 있으면 r의 비율로 증가</LI>
+</UL>
+
+<h3>(풀이)</h3>
+<p>
+$
+ \dfrac{dx}{dt}  = (b−py)x \\
+ \dfrac{dy}{dt} = (rx−d)y
+ $
+</p>
+<p>이는 비선형 연립미분방정식(nonlinear differential equation systems)이다.</p>
+
+<p>비선형 연립미분방정식이므로 Jacobian을 구해 균형점에서 해의 수렴, 발산을 판정한다.</p>
+ <p> 이 연립미분방정식의 Jacobian은 </p>
+ <p>
+ $
+ \mathbf{J} =
+ \left( \begin{array}{ccc}
+ b-py & -px   \\
+ ry & rx-d  \\
+ \end{array} \right)
+ $
+ </p>
+
+ <p>균형점은 $ \dfrac{dx}{dt} = \dfrac{dy}{dt} = 0 $ 에서 결정되므로 </p>
+<p>
+  $
+  (b−py)x = 0  \\
+  (rx−d)y = 0  
+  $
+</p> 
+ <p> 이 두 연립방정식의 해는 아래 ①, ②를 동시에 만족시켜야 한다.</p>
+
+ <p>
+  $
+   x = 0 \qquad or \qquad b−py = 0  ........... ① \\
+   y = 0 \qquad or \qquad rx−d = 0  ........... ② 
+   $
+ </p>
+
+ <p>따라서 균형점은 $(0, 0), (0, \dfrac{b}{p}), (\dfrac{d}{r}, 0), (\dfrac{d}{r}, \dfrac{b}{p})$ 네 개가 된다.</p>
+
+
+ <h3>(i) $(x^*, y^*) = (0, 0)$</h3>
+ <p>
+  $
+ \mathbf{J} =
+ \left( \begin{array}{ccc}
+ b & 0   \\
+ 0 & -d  \\
+ \end{array} \right)
+ $
+ </p>
+
+ <p>대각행렬이므로 고유치는 b, -d</p>
+ 
+ <p>b > 0, -d < 0 이므로 (0, 0) 근방에서 해의 경로는 불안정하고 안장경로를 갖는다.</p>
+ 
+ <p>(x, 0)일 경우 x축을 따라 발산 ⇒ predator가 없는 경우이므로 prey는 기하급수적으로 성장</p>
+ <p>(0, y)일 경우 y축을 따라 0에 수렴 ⇒ prey가 없는 경우이므로 predator는 굶어 죽음</p>
+ 
+ <h3>(ii) $(x^*, y^*) = (0, \dfrac{b}{p} )$</h3>
+ <p>
+  $
+ \mathbf{J} =
+ \left( \begin{array}{ccc}
+ 0 & 0   \\
+ \dfrac{rb}{p} & -d  \\
+ \end{array} \right)
+ $
+ </p>
+
+<p> $ \textrm{tr(J)} = -d $, $ \textrm{det(J)} = 0 $이므로 고유근은 -d, 0 </p>
+<p> -d < 0 이므로 해의 경로는 $(0, \dfrac{b}{p} )$ 로 수렴.</p>
+
+ <h3>(iii) $(x^*, y^*) = (\dfrac{d}{r}, 0 )$</h3>
+ <p>
+  $
+  \mathbf{J} =
+  \left( \begin{array}{ccc}
+  b & -\dfrac{dp}{r}   \\
+  0 & 0  \\
+  \end{array} \right)
+  $
+  </p>
+
+<p> $ \textrm{tr(J)} = b $, $ \textrm{det(J)} = 0 $이므로 고유근은 b, 0 </p>
+<p> b > 0 이므로 해의 경로는 $(\dfrac{d}{r}, 0 )$ 에서 발산.</p>
+
+ <h3>(iv) $(x^*, y^*) = (\dfrac{d}{r}, \dfrac{b}{p} )$</h3>
+ <p>
+  $
+ \mathbf{J} =
+ \left( \begin{array}{ccc}
+ 0 & -\dfrac{pd}{r}   \\
+ \dfrac{rb}{p} & 0  \\
+ \end{array} \right)
+ $
+ </p>
+
+ <p> 특성방정식은 </p>
+ <p>
+  $
+ \phi(\lambda) = \lambda^2 + bd \\
+ ∴ \lambda = \pm i \sqrt{bd}
+ $
+ </p>
+ <p>
+     고유치가 허수이므로 해는 회전한다. 특히 실수부분이 0 이므로 나선형으로 수렴하거나 발산하는 것이 아니라 일정하게 회전한다.<sup><a href="#fn2" id="ref2">2</a></sup>
+ </p>
+
+
+ <svg xmlns="http://www.w3.org/2000/svg" width="900px" height="700px" viewBox="-100 0 800 700" >
+    <!-- x1 : 시작점 x좌표, y1 : 시작점 y좌표, x2 : 끝점 x좌표, y2 : 끝점 y좌표 -->
+    <line x1="100" y1="400" x2="600" y2="400"
+          style="stroke:red; stroke-width:5; stroke-opacity:0.5;" />
+          <line x1="580" y1="380" x2="600" y2="400"
+          style="stroke:red; stroke-width:5; stroke-opacity:0.5;" />
+          <line x1="580" y1="420" x2="600" y2="400"
+          style="stroke:red; stroke-width:5; stroke-opacity:0.5;" />
+    <line x1="450" y1="50" x2="450" y2="500"
+          style="stroke:red; stroke-width:5; stroke-opacity:0.5;" />
+    <line x1="250" y1="50" x2="250" y2="500"
+          style="stroke:rgb(66, 0, 128); stroke-width:5; stroke-opacity:0.5;" />
+          <line x1="230" y1="80" x2="250" y2="50"
+          style="stroke:rgb(66, 0, 128); stroke-width:5; stroke-opacity:0.5;" />
+          <line x1="270" y1="80" x2="250" y2="50"
+          style="stroke:rgb(66, 0, 128); stroke-width:5; stroke-opacity:0.5;" />
+    <line x1="100" y1="200" x2="600" y2="200"
+          style="stroke:rgb(66, 0, 128); stroke-width:5; stroke-opacity:0.5;" />
+    <text x="240" y="30"  font-size="30"> y </text>
+    <text x="60" y="410"  font-size="30"> x </text>
+    <text x="220" y="440"  font-size="30"> 0 </text>
+    
+    <foreignObject x="620" y="180" width="100" height="100">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+      $ b-py $
+      </div>
+    </foreignObject>
+    <foreignObject x="400" y="20" width="100" height="100">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+      $ rx-d $
+      </div>
+    </foreignObject>
+    <foreignObject x="210" y="220" width="100" height="100">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+      $ \dfrac{b}{p} $
+      </div>
+    </foreignObject>
+    <foreignObject x="420" y="410" width="100" height="100">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+      $ \dfrac{d}{r} $
+      </div>
+    </foreignObject>
+    <text x="300" y="600"  font-size="30"> (그림 1) 기준선</text>
+</svg>
+
+<br>
+
+<p>$(0, 0)$ 이하의 점들은 비현실적이므로 $(\dfrac{d}{r}, \dfrac{b}{p})$ 만 고려한다. </p> 
+
+<h4> i) $ \dfrac{dx}{dt} > 0 $ 인 경우</h4>
+<p> $ \dfrac{dx}{dt}  = (b−py)x  > 0 $ 에서 $ x > 0 $인 경우만 고려하므로 $ b−py > 0 $</p>
+<p> 따라서 $ y < \dfrac{b}{p} $</p>
+<p> 즉 $ y < \dfrac{b}{p} $ 에서 x는 시간의 증가에 따라 증가한다.</p>
+<p> 반대로 $ y > \dfrac{b}{p} $ 에서 x는 시간의 증가에 따라 감소한다.</p>
+<p> $ x = \dfrac{d}{r} $ 인 선상에서는 y의 증가율이 0이므로 방향만 반대되는 수평선이다.</p>
+
+<h4> ii) $ \dfrac{dy}{dt} > 0 $ 인 경우</h4>
+<p> $ \dfrac{dy}{dt}  = (rx−d)y  > 0 $ 에서 $ y > 0 $인 경우만 고려하므로 $ rx−d > 0 $</p>
+<p> 따라서 $ x > \dfrac{d}{r} $</p>
+<p> 즉 $ x > \dfrac{d}{r} $ 에서 y는 시간의 증가에 따라 증가한다.</p>
+<p> 반대로 $ x < \dfrac{r}{d} $ 에서 y는 시간의 증가에 따라 감소한다.</p>
+<p> $ y = \dfrac{b}{p} $ 인 선상에서는 x의 증가율이 0이므로 방향만 반대되는 수직선이다.</p>
+
+<div class="digitDiv">
+<svg width="1000px" height="850px" viewBox="-200 0 1200 850" 
+    xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+        <marker id="dark-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" />
+        </marker>
+        <marker id="blue-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" />
+        </marker>
+        <marker id="red-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" />
+        </marker>
+        <marker id="green-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+        markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" />
+      </marker>
+     </defs>
+
+  <polyline points="100,700 800,700" fill="none" stroke="red" 
+      stroke-width="2" marker-end="url(#dark-arrow)" />
+  <polyline points="200,800 200,100" fill="none" stroke="blue" 
+      stroke-width="2" marker-end="url(#blue-arrow)" />
+<polyline points="100,400 800,400" fill="none" stroke="blue" 
+      stroke-width="2" />
+  <polyline points="500,800 500,100" fill="none" stroke="red" 
+      stroke-width="2" />
+    <text id = "sgv-text" x="180" y="70"> y </text>
+    <text id = "sgv-text" x="820" y="700" > x </text>
+    <text id = "sgv-text" x="180" y="730" > 0 </text>
+    
+    <foreignObject x="800" y="360" width="200" height="100">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+        $ y^* = \dfrac{b}{p} $
+        </div>
+      </foreignObject>
+    <foreignObject x="470" y="50" width="200" height="100">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+        $ x^* = \dfrac{d}{r} $
+        </div>
+      </foreignObject>
+    <foreignObject x="300" y="820" width="500" height="150">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+        (그림 2) $ \dfrac{dy}{dt} = 0 $, $ \dfrac{dx}{dt} = 0 $ 의 위상도
+        </div>
+      </foreignObject>
+    
+    <polyline points="400,150 300,150" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="400,150 400,250" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="400,150 300,250" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />  
+    <polyline points="700,250 700,150" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="700,250 600,250" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="700,250 600,150" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="300,500 300,600" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="300,500 400,500" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="300,500 400,600" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="600,600 600,500" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="600,600 700,600" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="600,600 700,500" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="550,200 450,200" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="700,450 700,350" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="450,550 550,550" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+    <polyline points="350,350 350,450" fill="none" stroke="green" 
+      stroke-width="2" marker-end="url(#green-arrow)" />
+
+</svg>
+</div>
+
+<p> 이를 상변화도로 표현하면 (그림 2)와 같다.</p>
+
+<div style="text-align : center;">
+<img src="p-p model.bmp"><br>
+(그림 3) b = 4, p = 2, r = 3, d = 3 인 경우 pradator-prey 모형의 위상도
+</div>
+
+<p> (그림 3)은 b = 4, p = 2, r = 3, d = 3 인 경우를 예시한 것이다. </p>
+
+<p>
+    앞의 미분방정식을 정리하여 풀면 다음과 같다.<sup><a href="#fn3" id="ref3">3</a></sup> 
+</p>
+
+<p> $ \dfrac{dx}{dt}  = (b−py)x \quad.............③ $</p>
+<p> $ \dfrac{dy}{dt} = (rx−d)y \quad.............④ $</p>
+
+<p> $ ③÷④ \Longrightarrow \dfrac{dx/dt} {dy/dt} = \dfrac{(b−py)x}{(rx−d)y} $ </p>
+
+<p> $ \Longrightarrow \dfrac{dx/dt}{x}(rx-d) = \dfrac{dy/dt}{y}(b-py) $ </p>
+
+<p> $ \Longrightarrow r\dfrac{dx}{dt}-d \dfrac{1}{x} \dfrac{dx}{dt} = b \dfrac{1}{y} \dfrac{dy}{dt} - p \dfrac{dy}{dt} $ </p>
+
+ <p> 양변 적분하면 </p>
+
+ <p> $ rx-d \ln x+C_1 = b \ln y -py + C_2, \quad where \quad C_1, C_2 \quad 는 \quad 상수 $ </p>
+ <p>∴ $ rx+py-d \ln x - p \ln y = C, \quad where \quad C = C_1 + C_2 \quad..............⑤ $ </p>
+
+ <p> 시스템의 해의 경로들 (x(t),y(t))는 위 항등식 ⑤를 만족한다. </p>
+ <p> 이 항등식을 보존법칙(conservation law)라 한다.
+ </p>
+<br>
+
+ <h4>예)</h4>
+<p>
+  $
+ \dfrac{dx}{dt}  = (4−2y)x 
+ $
+</p>
+<p>
+  $
+ \dfrac{dy}{dt} = (3x−3)y 
+ $
+</p>
+ <h4>(풀이)</h4>
+
+<p> 임계점은 (0, 0), (1, 2)</p>
+
+<p> 한편 연립미분방정식의 Jacobian은 </p>
+<p>
+  $
+\mathbf{J} =
+\left( \begin{array}{ccc}
+4-2y & -2x   \\
+3y & 3x-3  \\
+\end{array} \right)
+$
+</p>
+<p>(i) $(x, y) = (0, 0)$</p>
+<p>
+  $
+\mathbf{J} =
+\left( \begin{array}{ccc}
+4 & 0   \\
+0 & -3  \\
+\end{array} \right)
+$
+</p>
+<p>대각행렬이므로 고유치는 4, -3</p>
+
+<p>4 > 0, -3 < 0 이므로 해는 불안정하고 안장 경로를 갖는다.<br></p>
+
+<p>(ii) $(x, y) = (1, 2)$<br></p>
+<p>
+  $
+\mathbf{J} =
+\left( \begin{array}{ccc}
+0 & -2   \\
+6 & 0  \\
+\end{array} \right)
+$
+</p>
+<p> 특성방정식은 </p>
+<p>
+  $
+\phi(\lambda) = \lambda^2 + 12 \\
+∴ \lambda = \pm i 2\sqrt{3}
+$
+</p>
+<p> 고유치가 허수이므로 해는 회전한다. 특히 실수부분이 0 이므로 나선형으로 수렴하거나 발산하는 것이 아니라 일정하게 회전한다.</p>
+
+<p>앞의 보존법칙 등식에 대입하면 </p>
+<p>$ 3x+2y-3 \ln x - 4 \ln y = C $</p>
+
+<p>(그림 4)는 C= 5, 6,..., 15 대해 수치분석을 통해 그래프를 그린 것이다. 5가 가장 안쪽이고 15가 가장 바깥쪽이다. </p>
+
+<p> (그림 4)의 등고선들은 초기값에 대응하는 시스템의 해들을 묘사한 것이다. 이들은 폐곡선이므로 시간에 따라 진동함을 알 수 있다. </p>
+
+    <div style="text-align : center;">
+        <img src="p-p model2.bmp"><br>
+        (그림 4) pradator-prey 모형의 위상도2
+    </div>
+
+<p>  x(t) > 0, y(t) > 0이므로 조개모양의 원들은 결코 x축 또는 y 축과 만나지 않는다.</p>
+    
+<p>  처음에 좌하부분에서 시작한다고 가정. 어느 부분에서 시작해도 진행상황은 같다.</p>
+<p>   포식자가 적어서 먹이는 증가하지만 (좌하 → 우하부분) </p>
+<p>  먹이의 증가는 포식자의 증가를 가져오고(우하 → 우상부분)</p>
+<p>  이는 먹이의 감소를 야기한다.(우상 → 좌상부분) </p>
+<p> 먹이가 되는 먹이의 감소는 다시 포식자의 감소를 가져오고(좌상→좌하부분)</p>
+<p>  포식자의 감소로 먹이는 증가한다.(좌하 → 우하부분)</p>
+<p>  이와 같은 현상이 반복해서 일어나므로 주기적 진동(periodic oscillations)이라 한다.</p>
+   
+<p>  포식자와 먹이의 개체수변화를 시간에 따라 표현한 것이 (그림 5)이다. <sup><a href="#fn4" id="ref4">4</a></sup> </p>
+<div style="text-align : center;">
+    <img src="p-p model3.bmp"><br>
+    (그림 5) pradator-prey 모형의 시간에 따른 변화
+</div>
+
+<p> 포식자(빨간색)가 먹이(파란색)보다 약간 지체되서 움직인다.   </p>
+
+   <div style="text-align : right;">   (풀이끝)</div>
+
+<h3>predator-prey 모형의 한계</h3>
+
+   <p>  a) the fact that the Lotka-Volterra equations are a continuous, rather than discrete, model</p>
+   <p>  b) only two species can be accounted</p>
+
+<hr>
+<span style = " font-size:0.7em;  color: green; line-height: 1.5em;">
+<sup id="fn1"> 
+  1.Lotka-Volterra Model 이라고도 함. In 1926, the famous Italian mathematician Vito Volterra proposed a differential equation model to explain the observed increase in predator fish (and corresponding decrease in prey fish) in the Adriatic Sea during World War I. At the same time in the United States, the equations studied by Volterra were derived independently by Alfred Lotka (1925) to describe a hypothetical chemical reaction in which the chemical concentrations oscillate.
+    <a href="http://www.scholarpedia.org/article/Predator-prey_model">http://www.scholarpedia.org/article/Predator-prey_model</a>
+
+</sup>
+<br>
+<sup id="fn2">
+2. $ \pi(\lambda) = \lambda^2 - tr(A)\lambda + det(A) $ 일 때 이차방정식 근의 공식은 $ \lambda^* = \dfrac{-tr(A) \pm \sqrt{tr(A)^2 - 4det(A)} }{2} $ <br>
+ $ tr(A) = 0, det(A) = bd $, 근의 판정은 $tr(A)^2 - 4det(A) = -4bd < 0 $, 따라서 근은 허근이다.
+</sup>
+<br>
+<sup id="fn3"> 
+    3. Unfortunately, there is no decent way to express analytic solutions to the Lotka-Volterra equations in terms of elementary functions
+</sup>
+<br>
+<sup id="fn4"> 
+    4. 시간이 음수로 표현되어 있지만 무시한다.
+    </sup>
+</span>
+</body>
+
+
+</html>

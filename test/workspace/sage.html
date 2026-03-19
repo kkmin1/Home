@@ -1,0 +1,43 @@
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>simple example which prints a python file</title>
+    <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
+    <script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
+    <script>
+$(function () {
+    // Make *any* div with class 'compute' a Sage cell
+    sagecell.makeSagecell({inputLocation: 'div.compute',
+  //  template:sagecell.templates.minimal, // minimal이면 sage 창 안나타냄
+    evalButtonText: 'Evaluate', 
+  // autoeval:false // true면 웹 로드시 자동 실행 
+});
+});
+    </script>
+  </head>
+  <body style="width: 1000px;">
+
+  <h1>A simple example which prints a python file</h1>
+
+<p>An Interactive Applet powered by Sage and MathJax.</p>
+<p>(By Prof. Jane Long, based on an activity of Prof. Tom Judson, with some tiny modifications by Prof. Gregory Bard)</p>
+
+<hr>
+
+<h2>Overview</h2>
+<p>click the button</p>
+
+
+
+<div class="compute">
+a=input("성 : ")
+b=input("이름:")
+print("안녕하세요", a+b+"님")
+</div>
+<hr>
+Last modified on February 11th, 2016.
+</body>
+</html>

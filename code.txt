@@ -1,0 +1,4119 @@
+<head>
+<meta charset="utf8">
+<link rel="stylesheet" type="text/css" href="code.css">
+</head>
+
+
+<div>
+
+<pre id="c1">
+<xmp>
+// 주석
+// 확장자 *.c
+// 컴파일 >> gcc hello.c  ==> 기본으로 리눅스는  a.out 또는 윈도우는 a.exe 파일이 자동으로 생성
+// 리눅스 실행  >> ./a.out
+// 윈도우 실행  >> a.exe
+// 실행 파일명을 지정하고 싶은 경우
+// 컴파일 >> gcc -o hello.out hello.c
+// 리눅스 실행  >> ./hello.out
+// 윈도우 실행  >> hello.exe
+
+#include <stdio.h>
+
+int main()
+{
+    int sum = 1560, n = 23, age = 24; // 정수형 변수 선언
+    float average; // 실수형 변수 선언
+    char name[] = "홍길동", hello[] = "hello C!"; // 문자열형 변수는 배열로 선언
+    
+    printf("안녕하세요!\n");  // \n 은 줄바꿈 표시
+    printf("내 이름은 ");  // 개행 없음
+    printf("%s이고 나이는 %d살입니다.\n", name, age);
+    
+    // 형식제어문자
+    // %d:  정수, %f: 실수, %c: 단일문자, %s: 문장 또는 문자들
+    average = (float)sum/n; //(float)는 정수형을 실수형으로 형 변환
+    printf("반평균은 %.2f점입니다.\n", average); //.2f는 소수점 이하 두째 자리까지 출력
+    
+    puts("hello world!"); // 자동 개행
+    puts(hello); // 공백 포함 문장을 변수로 출력
+    
+    return 0;
+}
+</xmp>
+</pre>
+
+<pre id="c2">
+<xmp>
+#include <stdio.h>
+
+int main()
+{
+    int age, year, num1, num2;
+    float div;
+    char name[100];
+    
+    printf("출생년도, 나이, 이름 입력(띄어쓰기) : ");
+    scanf("%d %d %s", &year, &age, name);    
+// 입력을 받아서 변수에 저장
+// 숫자는 pointer를 쓰고 문자열은 배열이므로 pointer불필요
+
+    puts("");
+    printf("당신은 %d년 생이고, 이름은 %s이며, 나이는 %d살입니다. \n", year, name, age);
+  
+  printf("정수 2개 입력(띄어쓰기) : ");
+  scanf("%d %d", &num1, &num2);
+  printf("%d \n", num1+num2);
+  printf("%f \n", (float)num1/num2);
+  div = (float)num1/num2;
+  printf("%.2f \n", div);
+   
+    return 0;
+}
+</xmp>
+</pre>
+
+<pre id="c3">
+<xmp>
+#include <stdio.h>
+
+void star1(char, char, int); // 삼각형 1
+void star2(char, char, int); // 삼각형 2
+void star3(char, char, int); // 삼각형 3
+void star4(char, char, int); // 삼각형 4
+void star5(char, char, int); // 피라미드형
+void star7(char, char, int); // 마름모
+void star8(char, char, int); // 모래시계
+
+int isValidLine(int);
+int i, j, cnt = 0;
+char star = '*'; // 단일 문자는 싱글 따옴표를 써야함
+char spc = ' ';
+int num; // 홀수 입력
+
+int main() {
+
+	printf("3 이상의 홀수 정수를 입력하세요: ");
+	scanf("%d", &num);
+	printf("\n");
+
+	if (num <= 2 || num % 2 == 0){
+	   printf("3 이상의 홀수를 입력하세요");
+	   return 0;
+	   }
+	else
+	star1(star, spc, num);
+	star2(star, spc, num);
+	star3(star, spc, num);
+	star4(star, spc, num);
+	star5(star, spc, num);
+	star7(star, spc, num);
+	star8(star, spc, num);
+	return 0;
+}
+
+void star1(char ch1, char ch2, int line) {
+	printf("%d. 왼쪽 붙은 직각삼각형\n", ++cnt);
+	printf("\n");
+	
+	for (i = 0; i < line; i++) {
+		for (j = 0; j < line; j++) {
+			if (j <= i)
+				printf("%c", ch1);
+			else
+				printf("%c", ch2);
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
+void star2(char ch1, char ch2, int line) {
+	printf("%d. 왼쪽 붙은 역직각삼각형\n", ++cnt);
+	printf("\n");
+	
+	for (i = 0; i < line; i++) {
+		for (j = line - 1; j >= 0; j--) {
+			if (j >= i)
+				printf("%c", ch1);
+			else
+				printf("%c", ch2);
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
+void star3(char ch1, char ch2, int line) {
+	printf("%d. 오른쪽 붙은 직각삼각형\n", ++cnt);
+	printf("\n");
+	
+	for (i = 0; i < line; i++) {
+		for (j = line - 1; j >= 0; j--) {
+			if (j <= i)
+				printf("%c", ch1);
+			else
+				printf("%c", ch2);
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
+void star4(char ch1, char ch2, int line) {
+	printf("%d. 오른쪽 붙은 역직각삼각형\n", ++cnt);
+	printf("\n");
+	
+	for (i = 0; i < line; i++) {
+		for (j = 0; j < line; j++) {
+			if (j >= i)
+				printf("%c", ch1);
+			else
+				printf("%c", ch2);
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
+void star5(char ch1, char ch2, int line) {
+	printf("%d. 피라미드형\n", ++cnt);
+	printf("\n");
+	
+ for(i=0; i<line; i++)
+ {
+     for(j=0; j<line-1-i; j++)
+         printf("%c", ch1); 
+     for(j=0; j<i*2+1; j++)
+         printf("%c", ch2);
+      printf("\n");
+ }
+  printf("\n");
+}
+ 
+void star7(char ch1, char ch2, int line) {
+	int k, l;
+
+	printf("%d. 다이아몬드형\n", ++cnt);
+	printf("\n");
+	
+	for (i = 0; i < line; i++) {
+		for (j = 0; j < line; j++) {
+			if (i > line / 2)
+				k = i - line / 2;
+			else
+				k = line / 2 - i;
+			if (j > line / 2)
+				l = line - j - 1;
+			else
+				l = j;
+
+			if (l >= k)
+				printf("%c", ch1);
+			else
+				printf("%c", ch2);
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
+void star8(char ch1, char ch2, int line) {
+	int k, l;
+
+	printf("%d. 모래시계형\n", ++cnt);
+	printf("\n");
+	
+	for (i = 0; i < line; i++) {
+		for (j = 0; j < line; j++) {
+			if (i > line / 2)
+				k = line - i - 1;
+			else
+				k = i;
+			if (j > line / 2)
+				l = line - j - 1;
+			else
+				l = j;
+
+			if (l >= k)
+				printf("%c", ch1);
+			else
+				printf("%c", ch2);
+		}
+		printf("\n");
+	}
+	printf("\n");
+}
+
+</xmp>
+</pre>
+
+<pre id="cp1">
+// 주석
+// 확장자 *.cpp
+// 컴파일 >> g++ hello.cpp  ==> 기본으로 리눅스는  a.out 또는 윈도우는 a.exe 파일이 자동으로 생성
+// 리눅스 실행  >> ./a.out
+// 윈도우 실행  >> a.exe
+// 실행 파일명을 지정하고 싶은 경우
+// 컴파일 >> gcc -o hello.out hello.cpp
+// 리눅스 실행  >> ./hello.out
+// 윈도우 실행  >> hello.exe
+
+#include &lt;iostream>
+using namespace std;
+
+int main()
+{
+    int age = 20;  // 정수형
+    string name = "홍길동";  // 문장형
+    float wt = 78.5; // 실수형, double은 더 큰 자릿수 표현
+    
+    cout << "Hello, World!\n";  // \n은 c식 줄 바꿈
+    cout << "안녕하세요!"<< endl; // << endl은 c++에서 줄 바꿈
+
+    cout << "당신의 이름은 " << name << "이고 나이는 " << age << "살입니다."<< endl;
+    cout << "당신의 몸무게는 " << wt << "kg 입니다."<< endl;
+
+  int a=7;
+  int b=3;
+  float c=(float)a/b; // 형변환을 해줘야 함, 형변환 하지 않으면 정수가 출력됨
+  
+ cout << "a / b= " << (float)a/b << endl;
+ 
+ cout.precision(3); // 소수포함 총 3자릿수로 함
+ cout << "a / b= " << c << endl;
+	
+	char message[100] = "\"안녕하세요, 반갑습니다.!\"";  
+	// 긴 문장은 배열로 표시할 수 있다.
+   //     \"는 겹따옴표 "를 출력하는 명령
+  cout << message << endl;
+    return 0;
+}
+</pre>
+
+<pre id="cp2">
+#include &lt;iostream>
+using namespace std;
+
+int main() {
+    int age, kor, eng, math, sum;
+    string name, message;
+    char message2[100];
+    float ave;
+ 
+    cout << "나이(정수 입력) : ";
+    cin >> age;
+
+    cout << "당신의 나이는" << age <<"살입니다."<< endl;
+
+    cout << "이름 : ";
+    cin >> name;
+    cout << "당신의 이름은 " << name <<"입니다."<< endl;
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // 입력버퍼를 지움 
+
+    cout << "여백있게 문장을 입력하세요 "<< endl;;
+    cin.getline(message2, 100); // getline은 공백도 문자로서 받아들임
+    cout << message2 << endl;
+
+    cout << "Enter a message (with spaces): ";
+    getline(cin, message);  // Read input from cin into message
+    cout << message << endl;
+
+    cout  << "과목 점수를 정수로 입력해 주세요" << endl;
+    cout  << "국어  : ";
+    cin >> kor;
+    cout  << "영어  : ";
+    cin >> eng;
+    cout  << "수학  : ";
+    cin >> math;
+    
+    sum = kor + eng + math; // 자동 형변환
+    ave = (float)sum/3;
+    cout  << "총점은 " << sum << "이고 평균은 " ;
+    cout.precision(4); // 소수포함 총자릿수 4자리로 함
+    cout << ave << "점입니다." << endl;
+    return 0;
+    }
+}
+</pre>
+
+<pre id="cp3">
+#include &lt;iostream> 
+#include &lt;vector>
+#include &lt;algorithm> // reverse()
+#include &lt;numeric>  // iota()
+using namespace std;
+
+void star1(int);
+void star2(int);
+
+int main() {
+int n =7;
+star1(n);
+star2(n);
+}
+
+void star1(int n){
+for (int y = 0; y < n; y++) {
+  for (int x = 0; x < n; x++){
+    if (y <= x) cout << "*"; // c++는 char 변수에 쌍따옴표를 써도 됨.
+    else cout << " ";}
+  cout << endl;
+ }
+ }
+
+void star2(int n){
+vector<int> l1(n); // n개의 정수형 원소를 갖는 벡터 선언
+vector<int> l2(n);
+
+iota(l1.begin(), l1.end(), 0); // 0부터 시작하는 n 개의 list를 만듬(1씩 증가)
+iota(l2.begin(), l2.end(), 0);
+reverse(l1.begin(), l1.end());  // l1 역순으로 재 배치
+for(auto y: l1) {
+   for(auto x: l2) {
+      if (y <= x) cout << '*';
+      else cout << ' ';}
+   cout << endl;
+}
+}
+</pre>
+
+<pre id="cs1">
+// 한 줄 주석
+/*
+여러 줄 주석.
+
+1. 윈도우(또는 .net환경)
+컴파일은 visual studio 이용.
+컴파일 >> csc hello.cs
+실행 >> hello.exe
+
+2. 우분투
+monodevelop 설치
+컴파일 >> mcs -out:hello.o hello.cs
+실행 >> mono hello.o
+
+*/
+
+using System;
+
+namespace HelloWorld {
+    class HelloWorld {
+
+        static void Main() {
+        Console.Write("Hello, "); // no 개행
+        Console.WriteLine("World");  // 개행
+        Console.WriteLine("안녕하세요!");
+        
+        int age = 32;
+        String name1 = "홍길동";
+        var name2 = "김병장";   // 자동 변수형 추론
+        Console.WriteLine("당신의 이름은 {0}이고 나이는 {1}살입니다.", name1, age);
+        Console.WriteLine("Hello " + name2 + "!");
+        
+    
+    // 변수형을 var로 설정 가능, 자동추론, 단 한 줄로 복수 선언은 불가
+        var a = 3; 
+        var b = 4.1; 
+        var c = 7;
+        
+        Console.WriteLine("{0} + {1} = {2}", a, b, a+b); // a+b는 실수형.
+        Console.WriteLine("{0} / {1} = {2:F2}", a, c, a/b); // a/c는 실수형. 자동형변환
+        // F2는 소숫점 이하 두자리까지
+        }
+    }
+}
+
+</pre>
+
+<pre id="cs2">
+using System; 
+
+namespace 성적처리 { 
+    class Program { 
+
+        static void Main(string[] args) { 
+        String name; 
+        int kor, eng, math, total; 
+        float avg; 
+        
+        Console.Write("이름 :"); 
+        name = Console.ReadLine(); 
+        Console.Write("국어 :"); 
+        kor = int.Parse(Console.ReadLine()); // string을 숫자로 변환
+        Console.Write("영어 :"); 
+        eng = int.Parse(Console.ReadLine()); 
+        Console.Write("수학 :"); 
+        math = int.Parse(Console.ReadLine()); 
+        total = kor + eng + math; 
+        // 실수는 기본적으로 Double로 받아들여서 Float하고 연산시 경고가 나옵니다.
+        avg = (float)total / 3; 
+        Console.WriteLine("{0} 님의 총점은 {1} 이고 평균은 {2:f2} 입니다.", name, total, avg); // f2는 소수점 2째자리까지 출력
+        } 
+    } 
+}
+</pre>
+
+<pre id="cs3">
+
+using System;
+
+class Program
+{
+static void Main(string[] args)
+{
+    int num = 8;
+       
+        star1(num);
+        Console.WriteLine();
+        star2(num);
+}    
+
+        static void star1(int n){
+         int row, col;
+         for (row = 1; row <= n; ++row)
+           { for (col = 1; col <=  row; ++col) 
+           Console.Write("*");
+             Console.WriteLine();
+           }
+      }
+
+     static void star2(int n){
+        int y, x;
+         for (y = 1; y <= n; ++y) 
+           { for (x = 1; x <= n; ++x)
+              if (y > n-x)
+                  Console.Write("*"); 
+              else
+                  Console.Write(" "); 
+      
+               Console.WriteLine(); 
+             
+           }
+      }
+
+}
+
+</pre>
+
+<pre id="j1">
+// single line comment
+/* multi line comment
+컴파일 >> javac out.java
+실행 >> java out
+java에서는 파일명과 public class명이 같아야 함.
+*/
+public class out {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!"); // 자동 줄 바꿈. 빤드시 쌍따옴표("")로 묶어야 함.
+        System.out.println("안녕하세요!");
+        System.out.print("내 이름은 "); // 줄 바꿈 안함.
+        System.out.printf("홍길동입니다.\n"); // \n은 줄 바꿈
+
+        int ht = 178; // 정수형
+        double wt = 77.7;  // 실수형
+        String name = "홍길동"; // 문자열(string) 변수선언. 앞의 다른 변수형 선언과 달리 String의 S가 대문자임에 주의
+        System.out.println("당신의 키는 " + ht +" cm이고, 몸무게는 " + wt + "kg이며, 이름은 " + name + "입니다.");
+
+        int a = 2;
+        int b = 3;
+        
+        System.out.println(a+b);
+        System.out.printf("a + b = %d \n", a+b);
+        System.out.format("a + b = %d \n", a+b);
+        System.out.println(a/b); // 정수형 나누기 정수형은 정수형이므로 결과는 0, 실수가 아니다.
+        // 실수가 나오기 위해서는 정수를 실수로 바꿔줌
+        System.out.println(a*1.0/b);
+        System.out.printf("a/b = %.2f \n", (double)a/b);
+        }
+}
+</pre>
+
+<pre id="j2">
+import java.util.Scanner;
+
+public class input {
+
+public static void main(String []args) {
+
+    import java.util.Scanner;
+
+    public class input {
+    
+    public static void main(String []args) {
+    
+    String name;
+    int age;
+    Scanner read = new Scanner(System.in);  // Scanner class에서 name 이라는 객체 생성
+    
+    System.out.print("이름 : ");
+    name = read.nextLine(); // 줄 입력은 nextLine()
+    System.out.print("나이 : ");
+    age = read.nextInt(); // 입력값은 항상 문자이므로 이를 정수화함
+    
+    System.out.println("당신의 이름은 "+name+"이고, 당신의 나이는 " +age+ "살입니다.");
+    read.close();
+
+    /////////////////////////////////////////////////////////////
+
+    int num;
+    double real;
+    String str;
+        Scanner s1 = new Scanner(System.in);
+
+        System.out.print("정수:");  // 실수를 입력하면 에러남.
+        num = s1.nextInt();    // 정수 입력
+        System.out.println("당신이 입력한 숫자는 " + num + " 입니다."); // java와 javac의 버전이 다르면 에러남.
+        System.out.printf("입력한 숫자는 %d 입니다.\n",num);   // %d 는 정수 
+        
+        Scanner s2 = new Scanner(System.in);
+        System.out.print("실수:");
+        real = s2.nextDouble();   // 실수 입력
+        System.out.println("당신이 입력한 숫자는 " + real + " 입니다."); 
+        System.out.format("입력한 숫자는 %.2f 입니다.\n",real);
+        
+        Scanner s3 = new Scanner(System.in);
+        System.out.print("문자열:");
+        str = s3.nextLine(); // 공백있는 문자열 입력. 공백없는 한 단어의 경우는 s1.next(); 로 쓴다.
+        System.out.println("당신이 입력한 문자는 " + str + " 입니다."); 
+        System.out.printf("입력한 문자는 %s 입니다.\n",str);  // %s 는 문자열 , %c는 단일 문자 
+        
+        ////////////////////////////////////////////////////////////
+
+        int num1, num2, num3 ;
+        double num4 ;
+    
+        Scanner sc = new Scanner(System.in);
+    
+        System.out.println("두 정수를 입력하시오");
+        System.out.print("num1 : ");
+            num1 = sc.nextInt();
+            System.out.print("num2 : ");
+            num2 = sc.nextInt();
+            
+        num3 = num1+num2;
+        num4 = (double)num1/num2;
+        String sum = String.valueOf(num3);
+        System.out.println("num1 + num2 = " +sum);
+        System.out.printf("num1 + num2 = %d \n", num3);
+        System.out.printf("num1 / num2 = %.2f \n", num4);
+   }
+}
+
+</pre>
+
+<pre id="j3">
+import java.util.Scanner;
+
+public class star2 {
+ 
+    public static void main(String[] args) {
+ 
+     System.out.print("정수 입력 : ");
+     Scanner input = new Scanner(System.in);
+     int n = input.nextInt(); 
+     String star = "*";
+     String spc = " ";
+
+// 좌측 붙은 삼각형
+      for (int y = 0; y < n; y++) {
+           for (int x = 0; x < n; x++) {
+              if (x<y) 
+                 System.out.printf("%s",star);
+              else 
+                 System.out.printf("%s", spc);
+              }
+          System.out.println();
+        }
+      System.out.println();
+
+
+// 우측 붙은 삼각형
+    for (int y = 0; y < n; y++) {
+           for (int x = 0; x < n; x++) {
+              if (x >= n-y) 
+                 System.out.printf("%s",star);
+              else 
+                 System.out.printf("%s", spc);
+              }
+          System.out.println();
+        }
+      System.out.println();
+     }
+ }
+
+</pre>
+
+<pre id="py1">
+
+# 한 줄 주석
+# no multi line comment
+
+print("Hello, World!") # 자동 줄바꿈됨
+
+print('안녕하세요!') # 문자열 출력시 '', "" 둘 다 사용 가능
+
+print("홍", end="") # 자동 줄바꿈 안함
+print("길동")
+
+print("Hi, '홍길동'") # 문장에 따옴표 넣을 때는 ' 기호가 있는 경우에는 “ ”로 “ 기호가 있는 경우에는 ‘ ’를 사용
+    # 출력 : Hi, '홍길동'
+
+print('안녕', '하세요') # 콤마(,)로 문자열을 나열할 경우 공백이 자동 추가
+    # 출력 : 안녕 하세요
+
+print('안녕' + '하세요') # 더하기(+)는 공백없음
+    # 출력 : 안녕하세요
+
+ # 긴 문자열은 \ 기호로 사용하여 여러 줄에 작성할 수 있다.
+print('I like Python. \
+But I do not like Ruby.')
+    # 출력 : I like Python. But I do not like Ruby.
+
+
+# \n 개행, \t 탭키, \\ \, \‘, \“ 등 이스케이프 문자(Escape character)는 \를 사용하여 출력한다.
+print('my daughter\'s birthday')
+    # 출력 : my daughter's birthday
+
+# 변수 형은 자동 결정
+ht = 178 # 정수형
+wt = 77.7  # 실수형
+name = '홍길동' # 문자열(string)
+
+print('당신의 키는 %dcm이고, 몸무게는 %.2fkg이며, 이름은 %s입니다.' % (ht,wt,name))  
+
+print('당신의 키는 {0}cm이고, 몸무게는 {1:.2f}kg이며, 이름은 {2}입니다.'.format(ht,wt,name)) 
+
+a=7
+b=3
+c=a/b # 자동 형변환
+print(a+b)
+print("%.2f" %c)
+
+</pre>
+
+<pre id="py2">
+
+name = input("이름 : ")
+print("안녕하세요", name +"님") # , 는 한칸 띄기. 붙여쓸려면 + 사용
+
+age = input("나이 : ") #정수를 입력
+print("당신의 나이는" + age + " 살입니다.")
+
+# 실수 2개를 두 줄에 입력
+print ("<나누기>")
+print ("실수 두 개를 입력하시오")
+a = float(input("a: ")) #input값은 문자열로 인식되므로 실수로 형 변환함
+b = float(input("b: "))
+print ('{0:.2f} ÷ {1:.2f} = {2:.2f}' .format(a, b, a / b))
+
+# 정수 2개를 한줄에 입력. 공백으로 구분
+print ("<더하기>")
+print ("정수 두 개를 입력하시오")
+m, n = map(int, input('정수 2 개를 한 칸 띄어 입력하시오\n').split()) 
+# map은 리스트를 모두 형변환할 때 씀. 정수로 형 변환
+
+print('{0} + {1} = {2}'.format(m, n, m+n))
+
+print ("<빼기>")
+print ("임의의 수 두 개를 입력하시오")
+c, d = map(eval, input('수 2개를 한 칸 띄어 입력하시오\n').split()) 
+# eval은 입력형에 따라 자동 형변환
+
+print('{0:.1f} - {1:.1f} = {2:.1f}'.format(c, d, c- d))
+</pre>
+
+<pre id="py3">
+# 왼쪽 붙은 직각삼각형
+def leftRightTriangle(n):
+    for i in range(1, n):
+	    print ("*" * i)  # *를 i 개 찍어라
+
+# 왼쪽 붙은 직각삼각형
+def leftRightTriangle2(n):
+# join 함수는 배열의 각 요소간에 특정 문자를 넣을 수 있게함.
+# 아래에는 줄바꿈 문자
+    print("\n".join("*" * i for i in range(1, 6)))
+
+# 오른쪽 붙은 직각삼각형
+def rightRightTriangle(n):
+    for y in range (n, 0, -1): # n부터 0까지 1씩 감소
+       print(y * ' ' + (n - y) * '*') # 공백을 y개, *를 n - y개 찍어라
+
+# 왼쪽 붙은 역직각삼각형
+def revLeftRightTriangle(n):
+	print("\n".join("*" * i for i in range(n, 0, -1)))
+
+# 오른쪽 붙은 역직각삼각형
+def revRightRightTriangle(n):
+	print("\n".join(" " * i + "*" * (n - i) for i in range(1, n)))
+
+n = input("정수 : ") 
+n = int(n)
+leftRightTriangle(n)
+print('')
+leftRightTriangle2(n)
+print('')
+rightRightTriangle(n)
+print('')
+revLeftRightTriangle(n)
+print('')
+revRightRightTriangle(n)
+print('')
+</pre>
+
+<pre id="pl1">
+# single line comment
+=for comment
+multi line comment, '=' 다음에 붙여 쓸 것
+=cut
+
+print "Hello world!\n"; # \n은 개행
+print "안녕하세요 \n";
+
+# 변수 선언은 my, $는 스칼라 변수, @는 배열 변수
+# 변수와 문자열을 같이 써도 됨
+my $age = 25;
+print "$age \n"; 
+
+my $name = "홍길동";
+print "$name \n"; 
+
+# 문자열 결합은 . 연산자로 한다(PHP와 같다)
+print ("내 이름은 ".$name. "이고 나이는 ". $age."살입니다. \n");
+
+@num = (3,6,8.1,0,12);
+ 
+my $sum = $num[0] + $num[2]; # 변수형은 자동 조정
+my $div = $num[0] / $num[2];
+print($num[0]." + ".$num[2]." = "."$sum \n");
+
+# 형식 있는 출력은 'C'의 printf 사용
+printf("%d / %.2f = %.2f \n",$num[0],$num[2],$div);
+
+</pre>
+
+<pre id="pl2">
+$name = <STDIN>;
+$age = <>; # <>안의 stdin은 생략 가능
+chomp $name; # chomp는 입력시 return키 제거 함수
+chomp $age;
+
+print "당신의 이름은 $name이고 나이는 $age살입니다.\n";
+
+print("정수: ");
+$a = <>;
+chomp $a;
+print("실수: ");
+$b = <>;
+chomp $b;
+print("\n");
+$sum = $a+$b;
+$div = $a/$b;
+print("$a + $b = $sum \n");
+printf("%d / %.2f = %.2f \n", $a, $b, $div);
+
+
+</pre>
+
+<pre id="pl3">
+
+my $num = 7;
+
+# 왼쪽붙은 직각삼각형
+sub star1{
+my $n=shift @_;  # perl에서는 함수의 인자를 이렇게 선언, @_는 기본 변수
+for (my $y = $n; $y >0; $y-- ) {
+for (my $x = 0; $x < $n; $x++ ) {
+if ($y <= $n - $x)
+{ print "*";}
+else
+{print " ";}
+}
+print "\n";
+}
+}
+
+# 왼쪽붙은 직각삼각형
+sub star2{
+my $n=shift @_;  
+for my $y (reverse 0 .. $n) { # 역순으로 시작
+for my $x (0 .. $n ) {
+if ($y < $n - $x)
+{ print "*";}
+else
+{print " ";}
+}
+print "\n";
+}
+}
+
+
+# 오른쪽붙은 직각삼각형
+sub star3{
+my $n=shift @_;  
+for my $y (reverse 1 .. $n) {
+print " " for 0..$y;
+print "*" for $y..$n;
+print "\n";
+}
+}
+
+# 오른쪽붙은 직각삼각형
+sub star4{
+my $n=shift @_;  
+print " " x $_, "*" x ($n-$_), "\n" for 0..$n;
+}
+
+
+# 왼쪽붙은 역직각삼각형
+sub star5{
+my $n=shift @_;
+print map { "*" x $_, "\n" } reverse 1 .. $n;  # $_ 는 기본 변수, x 연산자는 스트링 반복
+}
+
+# 왼쪽붙은 직각삼각형
+sub star6{
+  my $n=shift @_;
+  print "*" x $_."\n" for 1..$n;   
+}
+
+# 피라미드형
+sub star7{
+my $n=shift @_;  
+for my $y (reverse 0 .. $n) { 
+for my $x (-$n .. 0 ) {
+if ($y <= $n + $x)
+{ print "*";}
+else
+{print " ";}
+}
+for my $x (1 .. $n) {
+if ($y <= $n - $x)
+{ print "*";}
+else
+{print " ";}
+}
+
+print "\n";
+}
+}
+
+star1($num);
+print "\n";
+star2($num);
+print "\n";
+star3($num);
+print "\n";
+star4($num);
+print "\n";
+star5($num);
+print "\n";
+star6($num);
+print "\n";
+star7($num);
+</pre>
+
+<pre id="r1">
+<xmp>
+# single line comment
+
+=begin
+multi line comment
+실행
+> ruby out.rb
+=end
+
+puts '안녕하세요'; # 자동 개행
+print "내 이름은 홍길동입니다.\n"; #  자동 개행 안됨. \n 포함시 싱글 따옴표 안됨
+p "hello!"; # "hello!", 따옴표도 출력, 자동 개행
+
+print <<aaa    
+   이 행은 연습입니다.  공백도 그대로 출력됩니다.
+       두 줄 이상 출력시 이렇게 하면 됩니다.
+aaa
+#  <<와 aaa 사이에 여백이 있으면 안됨. aaa은 식별자. 이름은 아무거나 쓰면됨
+
+# 변수형 자동 결정 , 연속 선언도 가능
+name, age = '홍길동', 25;
+
+puts "내 이름은 #{name}이고 나이는 #{age}살입니다."; 
+print "내 이름은 ", name, "이고 나이는 ", age, "살 입니다.\n"; 
+printf "내 이름은 %s이고 나이는 %d살입니다. \n", name, age
+
+num= [3, 7, 2.2] ; 
+sum = num[0] + num [2];
+div = num[0].to_f / num[1];
+# 정수끼리 나누는 것이므로 div도 정수가 된다. 
+# 이를 피하려면 두 수 중 하나를 실수로 만들면 된다.
+
+
+puts "#{num[0]} + #{num[2]} = #{sum}";
+puts "#{num[0]} / #{num[1]} = #{div}";
+printf  "%d / %d = %.2f \n", num[0], num[1], div;
+
+</xmp>
+</pre>
+
+<pre id="r2">
+
+# gets는 입력값 받는 메서드
+# chomp는 입력값에서 앤터값을 제거하는 메서드
+
+puts '이름 :'
+name = gets.chomp
+puts '나이 :'
+age = gets.chomp
+print "당신의 이름은 ", name, "이고 나이는 ", age, " 살입니다.\n"
+
+print "당신의 이름은 #{name}이고 나이는 #{age} 살입니다.\n"
+
+puts '정수 :'
+a = gets.chomp.to_i   # to_i는 입력받은 문자열을 정수로 변환
+puts '정수 :'
+b = gets.chomp.to_i
+
+c = (a / b).to_f  # to_f는 입력받은 문자열을 실수로 변환
+
+
+printf "%d / %d =  %.2f ", a, b, c
+</pre>
+
+<pre id="r3">
+# 왼쪽 붙은 직각삼각형
+# 아래 방식 모두 같은 결과
+
+def leftRightTringle(n)
+for i in 1..n
+   puts("*" * i) # 개행
+end
+end
+
+def leftRightTringle2(n)
+n.times do
+  |i| puts ("*" * (i+1)) # 5는 [0,1,2,3,4]를 의미
+end
+end
+
+def leftRightTringle3(n)
+n.times { |i| puts "*" * (i+1) }
+end
+
+def leftRightTringle4(n)
+puts ((1..n).map{ |i| "*" * i }.join("\n"))
+end
+
+def leftRightTringle5(n)
+(1..n).each{ |i| puts "*" * i}
+end
+
+n = 5
+leftRightTringle(n)
+leftRightTringle2(n)
+leftRightTringle3(n)
+leftRightTringle4(n)
+leftRightTringle5(n)
+</pre>
+
+<pre id="l1">
+-- single line comment
+--[[
+여러 줄 주석
+실행
+> lua out.lua
+--]]
+
+io.write("Hello ") -- no 개행
+io.write("World")
+print("")
+print("안녕하세요!") -- 개행
+
+name = "홍길동"
+age = 27
+wt = 67.8
+
+print("내 이름은 ", name, "이고 나이는 ", age, "살이며 몸무게는 ", wt, "kg 입니다.")
+print("내 이름은 ".. name.. "이고 나이는 ".. age.. "살이며 몸무게는 ".. wt.. "kg 입니다.")
+--  ,연결은 한칸 여백이 생긴다. ..연결은 한칸 여백이 안생긴다.
+print(string.format("내 이름은 %s이고 나이는 %d살이며 몸무게는 %.1fkg 입니다.", name, age, wt))
+
+a = 7
+b = 3
+c = a/b -- 자동 형변환
+print(c)
+print(string.format("%d / %d = %.2f", a,b,c)) 
+</pre>
+
+<pre id="l2">
+io.write('이름 : ')
+local name = io.read()
+io.write('나이 : ')
+local age = io.read()
+print('내 이름은 '.. name.. "이고 나이는 " .. age .. "살입니다.")
+
+io.write('정수 = ')
+local a = io.read()
+io.write('정수 = ')
+local b = io.read()
+
+c = a/b 
+print(c)
+print(string.format("%d / %d = %.2f", a,b,c)) 
+</pre>
+
+<pre id="l3">
+function Tringle1(n)
+
+ for y = 1, n do
+  for x = 1,n do
+    if x <= y then
+    io.write("*")
+    end
+  end
+  io.write("\n") 
+ end
+end
+
+function Tringle2(n)
+
+ for y = 1, n do
+  for x = 1, y do
+    io.write("*")
+  end
+  print("")
+ end
+end
+
+print("")
+n = 7
+Tringle1(n)
+print("")
+Tringle2(n)
+</pre>
+
+<pre id="k1">
+// single line comment
+
+/*
+compile >> kotlinc hello.kt -include-runtime -d hello.jar
+run     >> java -jar hello.jar
+*/
+
+fun main(args: Array<String>) {
+	print("Hello, ") // no 개행
+	println("World!") // 개행
+   println("안녕하세요")
+   
+// 변수선언은 val 혹은 var
+// val : 변경 불가능한 값, 상수
+// var : 변경 가능한 값, 변수
+// 변수든 상수든 무조건 초기화해야 함
+
+  var name = "홍길동" 
+   println("내 이름은 $name 입니다.")
+   
+   // 변수명 한글도 가능
+
+   val 성 = "홍" 
+   val 이름 = "길동"
+   println("당신의 이름은 ${성+이름}입니다.")
+   
+   var a : Int = 5 // 변수형은 변수명 뒤에 표시. 자동 추론에 의해 생략 가능
+   var b : Double = 3.1
+   var c : Float = 3.13f // float type은 값 뒤에 f를 붙여야 함
+   println("$a + $b = ${a + b}")// ${ }로 지정한 부분은 그대로 출력되지 않고, 표현식(expression)으로 인식되어 해당 수식을 계산한 후 출력합니다.
+   println("$a / $b = ${a / b}")
+   println("%d / %.1f = %.2f".format(a, b, (a/b)))
+
+ val d = 3 // 변수형은 자동 결정
+ val e = 1.5 
+   println("d + e = ${d + e}") 
+
+   val r = 5
+   val pi = 3.141592
+    println("반지름이 $r 일 때 원주의 길이는 %.2f입니다.".format(2 * pi * r))
+}
+</pre>
+
+<pre id="k2">
+import java.util.Scanner
+
+fun main(args: Array<String>){
+  print("이름: ")
+  var name  = readLine()!!  
+    // !!는 입력값이 null 여부 체크
+  print("나이: ")
+  var age  = readLine()!! 
+  println("내 이름은 ${name}이고 나이는 ${age} 살입니다.")
+  
+print("정수 입력:") 
+var i:Int=readLine()!!.toInt() 
+print("실수 입력:") 
+var d:Double=readLine()!!.toDouble() 
+print(i+d)
+
+  // 두 숫자를 다른 줄에 입력
+  println("두 정수를 다른 줄에 입력")
+  var var1 = readLine()!!.toInt() // 문자열의 정수화
+  var var2 = readLine()!!.toInt()
+  println("$var1 + $var2 = ${var1 + var2}")
+  
+  // 두 숫자를 한 줄에 입력
+  println("두 실수를 같은 줄에 입력")
+  var (a, b) = readLine()!!.split(' ') 
+  println("$a / $b = ${(a.toFloat() / b.toFloat())}")
+}
+
+</pre>
+
+<pre id="k3">
+fun main(args: Array<String>){
+var n = 7
+println("왼쪽붙은 삼각형")
+star1(n)
+println()
+println("오른쪽 붙은 삼각형")
+star2(n)
+}
+
+// 왼쪽붙은 삼각형
+fun star1(n : Int){
+
+for (y in 0 until n) { // n을 안 포함, 0..n 은 n을 포함
+for (x in 0 until n){
+if (y>=x) print("*") // print는 줄바꿈 안함
+}
+println()
+}
+}
+
+// 오른쪽 붙은 삼각형
+fun star2(n : Int){
+
+for (y in 0 until n) { 
+for (x in 0 until n){
+if (y>=n-x) print("*")
+else print(" ")
+}
+println()
+}
+}
+</pre>
+
+<pre id="s1">
+// single line comment
+
+/*
+multiline comment
+*/
+
+object output // 자바와 같이 파일명과 객체명이 같아야 함. 
+{
+  def main(args: Array[String]) {
+    print("Hello, world!")  // no 개행
+    println("안녕하세요!") // 개행
+    
+  // Float 실수형, Int 정수형, String 문자열
+    var (name, age)= ("홍길동", 30) // 값이 있으면 타입은 자동 판정
+    var (kor, eng, math)=(35, 53, 73)
+    var ave : Float = ((kor+eng+ math):Float)/3 
+// 정수를 실수로 형변환. 안하면 나머지 없는 정수 반환
+    
+   println("당신의 이름은 " + name + "이고 나이는 " + age + "살입니다.") // java 형식
+    println(s"당신의 이름은 ${name}이고 나이는 ${age}살입니다.") // 문자열 앞에 s를 쓰면 $를 쓰고 변수이름을 바로 쓸 수 있음
+    println(s"$kor + $eng + $math = ${kor+eng+ math}이고 평균은 ${ave}입니다.")
+    
+    // c의 printf 형식
+     //java.lang.*은 자동으로 import
+     printf("%d + %d + %d = %d이고 평균은 %.2f입니다.\n",kor, eng, math, kor+eng+ math, ave)
+    println(f"$kor + $eng + $math = ${kor+eng+ math}%d이고 평균은 ${ave}%.2f입니다.") 
+  }
+}
+
+</pre>
+
+<pre id="s2">
+import scala.io.StdIn._
+object input 
+{
+  def main(args: Array[String]) {
+
+val name = readLine("이름: ")
+val age = readLine("나이: ")
+println(s"당신의 이름은 ${name}이고 나이는 ${age}살입니다.")
+ print("정수: ")
+ val a = readInt()
+ print("정수: ")
+ val b = readInt()
+ val c : Float = (a:Float) / b
+ println(f"${a} / ${b} = ${c}%.2f")
+  }
+}
+
+</pre>
+
+<pre id="s3">
+object star 
+
+  def main(args: Array[String]) {
+    var n=7;
+    star1(n);
+    star2(n);
+  }
+  
+def star1(n:Int)={
+     for (y <- 0 until n){   // 0에서 (n-1)까지
+       for (x <- 0 to n){  //  0부터 n까지
+	       if (y >= x) print("*");
+	       else print(" ");
+        }
+        println();
+      }
+   }
+   
+def star2(n:Int)={
+     for (y <- n-1 to 0 by -1){  // (n-1)에서 0까지 -1씩 감소
+       for (x <- 0 to n){
+	       if (y < x) print("*");
+	       else print(" ");
+        }
+        println();
+      }
+   }   
+   
+}
+
+</pre>
+
+
+<pre id="h1">
+<xmp>
+<!-- html 주석문 -->
+<!-- 실행은 *.html을 웹브라우저의 주소창에 입력-->
+
+<head>
+    <meta charset="utf8"> <!-- 한글 표기 -->
+    <title>  html 출력 예  </title>  
+<!-- title tag는 웹 브라우저 표시되지 않지만 브라우저 태그창에 표시 -->
+     <!-- style tag는 문장의 내용을 제외한 틀, 색, 구성 등을 정함-->
+    <style> 
+    /* 스타일 문 내에서 주석은 이렇게 표시한다. */
+    
+     /* class = cls1인 태그 */
+        .cls1{  
+                  border: 1px solid;     /* 굵기 1픽셀의 외각선 */
+                  padding: 30px;     /* 문장과 30픽셀 여유 */
+                  margin-left: 20px;      /* 왼쪽 여백 20픽셀 */
+                } 
+      
+       .cls2{  
+                  padding: 30px;  
+                  margin-left: 20px;   
+                } 
+          
+            /* id = id2 인 태그 */
+        #id2{  
+            border: 1px solid gray; 
+            padding:10px; 
+            margin-left: 20px; 
+            background-color: yellow;     /* 배경색 */
+            color:red;     /* 글자색 */
+            width: 400px;     /* 박스 폭 */
+            height: 200px     /* 높이 */
+            }
+            
+        #id1{  
+                text-align: center;   /* 문장 중앙 정렬 */
+                color:green;
+                 }
+                 
+           /* p 태그 */
+        p{ 
+            line-height: 32px;
+            }
+            
+         #id3{
+              font-style: italic;
+              font-weight: bold;
+              font-size: 24px;
+              color: black;
+              font-family: arial, "Times New Roman";
+             }
+    </style>
+    
+        <style>
+  /* table 서식 스타일문 */
+      table{
+        border-collapse: collapse;
+        table-layout: fixed;
+        border : 1px solid black;
+        width : 400px;
+        margin:auto; /*테이블 가운데 중앙정렬*/
+        font-size:22px
+      }
+      tr, td, th{
+        text-align: center;
+        height:50px;
+      }
+      /* 표에 대각선을 긋는 코드, 여기서는 th 태그의 id = diag 셀에 대각선을 긋는다. */
+      table:nth-of-type(1) th#diag { /* 첫번째 표에 대각선을 긋는다. */
+        background-image: linear-gradient(
+          to top right,
+          white 49%,black,white 51%
+        );
+      }
+
+      caption {
+          text-align: center;
+          margin-bottom: 5px;
+          text-transform: lowercase;
+          font-size: 100%;
+          padding: 10px;
+          /*letter-spacing: 10px;*/
+          font-weight: bold;
+          color:#ff9999;
+      }
+     </style>
+     
+    <!-- 외부 스타일 파일 test.css 적용. -->
+    <link rel="stylesheet" type="text/css" href="test.css"> 
+</head>
+    
+<body>
+	<!-- div tag는 단락을 구분짓는 태그, 여러개의 div가 있을 경으 id, class로 구분 -->
+    <div class = cls1> 
+    	
+    	<!-- h tag는 글자 크기 큰 것 부터 -->
+        <h1 id=id1> 1. 제목1 </h1> 
+        <h2 > 제목2 </h2>
+        <h3 > 제목3 </h3>
+    </div>
+    
+        <div id = id2> 
+       <h2 > 2. 문장 </h2>
+        <p id = id3>Hello, world! </p>
+        <p >안녕하세요! <br> <!-- 줄바꿈 -->
+        	반갑습니다.</p>
+        </div>
+      
+    <div class = cls2>
+           <!-- 이미지 삽입 -->
+           	<h2 > 3. 이미지 삽입 </h2>
+    <p>    <img src="https://raw.githubusercontent.com/kkmin1/kkmin/master/image-test.jpg" width = "400" height = "400" alt="My Image"></p>
+        </div>
+        
+     <div class = cls2>
+       <!-- 하이퍼 텍스트 링크 삽입 -->
+        <h2 > 4. 하이퍼 텍스트  </h2>	
+     <p>   <a href = "http://www.naver.com"> 네이버 <a> <!-- 외부 주소 링크 --></p>
+    </div>
+    
+  <div class = cls2>
+     <!-- 테이블 만들기 -->
+    <h2> 5. 테이블 예</h2>
+<br>
+   <table border="1">
+  <caption>표 1. 죄인들의 딜렘마</caption>
+  <tr >
+    <th id = "diag"> <pre>갑      을</pre> </th>
+    <th > C </th>
+    <th > D </th>
+  </tr>
+  <tr >
+    <th > C </th>
+    <td > -1,-1 </td>
+    <td > -9, 0 </td>
+  </tr>
+  <tr >
+    <th > D </th>
+    <td >  0, -9 </td>
+    <td > -5, -5 </td>
+  </tr>
+
+     </table>
+ </div>
+</body>
+
+</xmp>
+</pre>
+
+<pre id="h2">
+<xmp>
+
+<html>
+	<head>
+        <meta charset="utf8"> 
+    </head>
+    
+<body>
+
+<h2>입력방식 예</h2>
+
+<form action="/myscript" method="post">   
+<!--박스형 입력-->
+아이디 :<br>
+<input type="text" name="userid" value="your ID">  <!-- value=" "는 기본 입력값-->
+<br><br>
+패스워드 :<br>
+<input type="password" name="psw" value="your passward"><br>
+<br>
+<!-- 패스워드는 입력값이 안보임-->
+출생연도 :<br>
+<input type="number" name="num" step="any"> <br>
+<!-- 정수 입력은  type="number", 소숫점 포함 실수를 입력하려면 step="any" 추가-->
+<br>
+<input type="submit" value="Submit"><br>
+<br><br>
+	
+성별:<br>
+<!--라디오 단추형 입력-->
+  <input type="radio" name="gender" value="male" checked> Male<br>  
+<!-- checked는 기본값-->
+  <input type="radio" name="gender" value="female"> Female<br>
+
+<br><br>
+
+출신지:<br>
+<!--drop down 형 입력-->
+<select name="do">
+  <option value="경기">경기도</option>
+  <option value="충청">충청도</option>
+  <option value="강원">강원도</option>
+  <option value="전라">전라도</option>
+</select>
+<br><br>
+
+<!--문장형 입력-->
+기타:<br>
+<textarea name="message" rows="10" cols="30">
+기본 입력문.
+</textarea>
+<br><br>
+	
+<button>submit</button>
+
+</form>
+
+</body>
+</html>
+
+</xmp>
+</pre>
+
+<pre id="h3">
+javascript 를 이용해서 별찍기를 할 수 있다.
+ <a href = "https://kkmin1.github.io/kkmin/star.html" target="_blank"> 별찍기 알고리듬 </a> 참조
+</pre>
+
+<pre id="ph1">
+<xmp>
+<html>
+ <head>
+  <title>PHP 테스트</title>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ </head>
+ <body>
+ 
+ <?php 
+// This is a single-line comment
+
+# This is also a single-line comment
+
+/*
+multiple-lines comment 
+웹서버 구축 후 php 파일을 지정 폴더에 넣고
+웹브라우저에서 서버 ip 주소로 접속하여 실행한다.
+예) 테스트용으로 http://localhost/test.php 
+*/
+
+$name = "홍길동"; 
+echo '<p>Hello World</p>'; 
+echo $name."님 안녕하세요<br>"; // string 연결은 .로 한다.
+echo "내 이름은 $name 입니다.<br>"; // 이렇게 표현해도 된다. $name 과 입니다. 사이를 띄어야 함. 
+echo "내 이름은 ${name}입니다.<br>"; 
+?> 
+
+<?php
+$x = 5.3;
+$y = 3;
+$z = $x + $y;
+$a = $x/$y;
+echo "x = $x <br>"; // 자동 타입 추정
+echo "y = $y <br>";
+echo "$x + $y = ".$z."<br>";
+echo "$x / $y = $a <br>";
+printf( "%.1f / %d = %.2f \n", $x, $y, $a);
+?>
+
+</xmp>
+</pre>
+
+<pre id="ph2">
+<xmp>
+</html>
+<head>
+   <meta charset="UTF-8">
+   <title> PHP 입력 </title>
+     <style> 
+    #post{  
+            border: 1px solid gray; 
+            padding:10px; 
+            margin-left: 20px; 
+            background-color: yellow;    
+            color:red;     
+            width: 400px;    
+            height: 150px    
+            }
+            #get{  
+            border: 1px solid gray; 
+            padding:10px; 
+            margin-left: 20px; 
+            background-color: grey;    
+            color:darkred;     
+            width: 400px;    
+            height: 150px    
+            }
+            #get2{  
+            border: 1px solid gray; 
+            padding:10px; 
+            margin-left: 20px; 
+            width: 400px;    
+            height: 150px    
+            }
+           </style> 
+</head>
+
+<body>
+<!-- post 방식은 정보 노출 안됨 -->
+<form action = "input.php" method="post">
+Name: <input  type="text" name="name"><br>
+E-mail: <input  type="text" name="email"><br>
+post 방식: <input type="submit">
+</form>
+
+<!-- get 방식은 url에 정보 노출  -->
+<form action = "input.php" method="get">
+Name: <input  type="text" name="name"><br>
+E-mail: <input  type="text" name="email"><br>
+get 방식: <input type="submit">
+</form>
+
+<form action = "input.php" method="get">
+<!-- step = "any" 는 실수 입력 가능, 이게 없으면 정수만 입력 가능-->
+
+정수: <input  type="number" name="var1"><br>
+정수: <input  type="number" name="var2"><br>
+실수: <input  type="number" step="any" name="var3"><br>
+<input type="submit" value="계산">
+</form>
+
+
+<div id ='post'>
+<h2> post 방식 출력</h2>
+ <?php
+if (isset( $_POST["name"]) || isset($_POST["email"])) { // isset() 함수는 변수의 존재 여부 확인
+
+echo "<p> 당신의 이름은 ".$_POST["name"]."입니다.</p>";
+echo "<p> 당신의 메일 주소는 ".$_POST["email"]. "입니다.</p>";
+
+exit();
+}
+?>
+</div>
+
+<div id = 'get'>
+<h2> get 방식 출력</h2>
+ <?php
+ if (isset( $_GET["name"]) || isset($_GET["email"] )) {
+echo "<p> 당신의 이름은 ".$_GET["name"]."입니다.</p>";
+echo "<p> 당신의 메일 주소는 ".$_GET["email"]."입니다.</p>";;
+exit();
+}
+?>
+</div>
+
+<div id = 'get2'>
+<h2> 계산</h2>
+ <?php
+ if (isset( $_GET["var1"]) || isset($_GET["var2"]) || isset($_GET["var3"] )) {
+
+echo "<textarea rows=\"4\" cols=\"50\">";  // 따옴표 출력위해 이스케이프 \" 사용
+$var1 = $_GET["var1"];
+$var2 = $_GET["var2"];
+$var3 = $_GET["var3"];
+$frac = $var1/$var2;   // 변수의 타입 추론 
+echo "${var1} + ${var3} = ",$var1+$var3,"\n";  // textarea 내에서는 개행 명령이 \n
+echo "${var1} / ${var2} = ${frac}\n";
+
+printf("%d / %d = %.2f\n", $var1, $var2, $var1/$var2); // 소숫점 이하 두째자리까지
+echo "</textarea>";
+exit();
+}
+?>
+</div>
+</body>
+</html>
+</xmp>
+</pre>
+
+<pre id="ph3">
+<xmp>
+<?php
+$n = 10; 
+echo "왼쪽 붙은 삼각형<br>";
+star1($n);
+echo "<br>";
+echo "오른 쪽붙은 삼각형<br>";
+star2($n);
+
+// 왼쪽붙은 삼각형
+function star1($n){
+for ($y=0; $y < $n ; $y++) {
+  for($x = 0; $x < $n; $x++ ) {
+    if ($x < $y) echo "*";
+    else echo "&nbsp";
+  }
+  echo "<br>";
+}
+}
+
+// 오른쪽 붙은 삼각형
+function star2($n){
+for ($y = $n-1; $y >= 0 ; $y--) {
+  for($x = 0; $x < $n; $x++ ) {
+    if ($x > $y) echo "*";
+    else echo "&nbsp";
+  }
+  echo "<br>";
+}
+}
+?>
+</xmp>
+</pre>
+
+<pre id="js1">
+<xmp>
+<html>
+<!--
+html 파일내 임의의 자리에 올 수 있으나 <body> 맨 밑줄을 권장함.
+파일을 따로 만드는 경우는 <script> 태그 없이 만든 후 *.js 파일로 저장.
+<head>태그 사이, 또는 <body> 맨 밑줄에 <script src="./your folder/mytest.js"></script>
+-->
+
+<head>
+    <meta charset=utf8> 
+    	<script src="./out2.js"></script>
+</head>
+
+<body>
+    <div id = test> </div>
+    <p id = test2> </p>
+    <p id = test6> </p>
+    <p id = test3> </p>
+    <p id = test4> </p>
+    <p id = test5> </p>
+ 
+</body>
+
+<script>
+// 한 줄 주석
+/*
+여러줄 주석
+*/
+
+alert("Hello, world! \n 안녕하세요!"); // alert box로 출력
+
+// 모든 변수는 변수형에 무관하게 var로 선언
+var ht = 178; 
+var wt = 77.7;
+var name = "홍길동";
+var age = 33;
+
+const 이름 = "김철수";  // const는 변하지 않는 상수
+const 나이 = 42;
+
+// html tag내 출력
+document.getElementById("test").innerHTML = "<h2>javascript 연습</h2>"; // id = test 를 갖는 태그안에 출력 
+document.getElementById("test2").innerHTML = "당신의 이름은 "+name+"이고 나이는 "+age+"살입니다.<br>";
+document.getElementById("test6").innerHTML = `당신의 이름은 ${이름}이고 나이는 ${나이}살입니다.<br>`;
+
+var a = 3;
+var b = 4.1;
+var c = 7;
+document.getElementById("test3").innerHTML = a+" + "+b+" = "+(a+b)+"<br>";  // 자동 타입 추론
+document.getElementById("test4").innerHTML = a+" / "+c+" = "+(a/c)+"<br>";  
+document.getElementById("test5").innerHTML = a+" / "+c+" = "+(a/c).toFixed(2)+"<br>";  // 소숫점 이하 2자리까지
+
+</script>
+
+<script>
+document.write("Hello, javascript!<br>"); 
+// document.write()는 기존의 웹페이지 내용을 다 지우고 그 위에 덮어 쓰는 것이므로 코딩 연습의 경우 외에는 쓰면 안됨.
+</script>
+
+<script>
+// 브라우저내 콘솔창에 출력. 웹브라우저에서 F12키로 콘솔창 실행
+// 모든 변수는 변수형에 무관하게 var로 선언
+var ht = 178; 
+var wt = 77.7;
+var name = "홍길동";
+var age = 33;
+
+console.log("당신의 키는 " +ht+"cm이고, 몸무게는 "+wt+"kg이며, 이름은 "+name+"입니다.");
+
+const 이름 = "김철수";  // const는 변하지 않는 상수
+const 나이 = 42;
+
+// 테플릿 리터럴을 사용하기 위해 괄호안은 따옴표가 아닌 백틱 ` 사용
+console.log(`당신의 이름은 ${이름}이고 나이는 ${나이}살입니다.`);
+</script>
+
+</html>
+</xmp>
+</pre>
+
+<pre id="js2">
+<xmp>
+<head>
+   <meta charset="UTF-8">
+   <title> javascript 입력 </title>
+   
+    <script>
+    	var now = new Date();	// 현재 날짜 및 시간
+var year = now.getFullYear();	// 연도
+
+    	function input(){
+            var name = document.getElementById("text").value;
+            var birth = document.getElementById("birth").value;
+            var age = year - birth;
+      //      out1.innerHTML= name;
+            document.getElementById("out1").innerHTML = "당신의 이름은 "+name+"이고 나이는 "+age+"살입니다.";
+        }
+        
+        function showMessage(){
+            var message = document.getElementById("message").value;
+            display_message.innerHTML= message;
+        }
+        
+        function calc(){
+            var num1 = document.getElementById("num1").value;
+          var num2 = document.getElementById("num2").value;
+          var num3 = +num1 + +num2;
+          var num4 = +num1 / +num2;
+          var num4 = num4.toFixed(2);
+          // 입력값은 string이므로 변수 앞에 +를 붙여 숫자화
+          document.getElementById("out2").innerHTML = num1 + ' + ' + num2 + ' = ' + num3;
+            document.getElementById("out3").innerHTML = num1 + ' / ' + num2 + ' = ' + num4;
+        }
+        
+    </script>
+
+</head>
+
+<body>
+
+<form>
+<div>이   름     : <input type="text" id="text"> </div>
+<div>출생년도 : <input type="number" id="birth"> </div>
+
+<input type="button" id="btn" onclick="input()" value="제출"> <br><br>
+
+<p> 출력 : <span id = "out1"></span> </p>
+<br><br>
+	
+<div>기타의견 : <input type="text" id = "message"></div>
+<input type="button" onclick="showMessage()" value="submit" />
+
+
+<p> 출력 : <span id = "display_message"></span> </p>
+<br><br>
+	
+<div> 숫자 입력 : <input type="number" id="num1" step="any"> </div>
+<!-- 정수 입력은  type="number", 소숫점 포함 실수를 입력하려면 step="any" 추가-->
+<div> 숫자 입력 : <input type="number" id="num2" step="any"> </div>
+<input type="button" onclick="calc()" value="submit" />
+
+	<h3>출력</h3>
+<p id = "out2">  </p>
+ <p id = "out3"> </p>
+	
+</form>
+</body>
+
+</xmp>
+</pre>
+
+<pre id="js3">
+
+ <a href = "https://kkmin1.github.io/kkmin/star.html" target="_blank"> 별찍기 알고리듬 </a> 참조
+
+</pre>
+
+<pre id="jq1">
+<xmp>
+
+<html>
+<head>
+	 <meta charset="UTF-8">
+   
+<title> jQuery 연습 </title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--외부의 jQuery 파일을 불러 온다. 다운로드 받아서 사용할 수도 있다. 자세한 것은 <a href = "https://jQuery.com"> jQuery 홈페이지 </a> 참조.
+-->
+	
+<style> 
+#div1{padding:20px;}
+#flip {
+    padding: 5px;
+    text-align: center;
+    background-color: #e5eecc;
+    border: solid 1px #c3c3c3;
+    width: 100px;
+}
+
+#panel {
+    padding: 5px;
+    text-align: center;
+    background-color: #0d0522;
+    color:aqua;
+    border: solid 1px #c3c3c3;
+    width: 100px;
+	height: 150px;
+    display: none; /*처음 시작시 보이지 않음*/
+}
+
+</style>
+
+</head>
+
+<script>
+
+$(document).ready(function(){
+
+//   $(function() {});로 줄여 써도 된다.
+
+    $("#test1").html("Hello World<br>");  
+    //  id="test1" 태그에 html(" ")내용 출력.
+    $(".test1").html("안녕하세요<br>");
+    //  class="test1" 태그에 html(" ")내용 출력
+    
+    var 이름 = "홍길동";  
+    var 나이 = 25;
+    $("#test2").html("당신의 이름은 " + 이름 + "이고 나이는 " + 나이 +" 살입니다.");
+    $(".test2").html(`당신의 이름은 ${이름}이고 나이는 ${나이}살입니다.`);   // 백틱 ` ` 사용
+});
+
+$(function(){
+var num = [3, 4.1, 7];
+
+$("#test3").html( num[0] + " + " + num[1] + " = " +(num[0]+num[1]) + "<br>");  // 자동 타입 추론
+$("#test4").html( num[0] + " / "+ num[2] + " = "+(num[0]/num[2]) + "<br>");  
+$("#test5").html( `${num[0]} / ${num[2]} = ${(num[0]/num[2]).toFixed(2)} <br>`);  // 소숫점 이하 2자리까지
+
+});
+</script>
+
+<script>
+$(function(){
+	 $("#flip").click(function(){
+          $("div#panel").slideToggle();
+      });
+	
+    $("button.b1").click(function(){$("#h2").hide();});
+    $("button.b2").click(function(){$("#p1").hide();});
+    $("button.b3").click(function(){$("#p2").hide();});
+    $("button.s1").click(function(){$("#h2").show();});
+    $("button.s2").click(function(){$("#p1").show();});
+    $("button.s3").click(function(){$("#p2").show();});
+    $(".toggle").click(function(){$("#toggle").toggle();}); // 클릭할 때마다 사라지고 나타나기를 반복함
+    $("#self").click(function(){$(this).hide();});  // 자기 자신이 사라짐
+   
+    $(".color").on({
+       mouseenter: function(){
+           $(this).css("background-color", "lightgray");
+       },
+       mouseleave: function(){
+           $(this).css("background-color", "lightblue");
+       },
+       click: function(){
+           $(this).css("background-color", "yellow");
+        }
+    }); 
+});
+</script>
+
+
+<body>
+<div id="div1">
+ 
+<p id="test1"> </p>
+<p class="test1"> </p>
+<p id ="test2"> </p>
+<p class="test2"> </p>
+<p id ="test3"> </p>
+<p id ="test4"> </p>
+<p id ="test5"> </p>
+<hr>
+	
+<h2 id="h2"> jquery 연습 </h2>
+<button class="b1"> 제목 사라지기</button><br><br>
+<button class="s1"> 제목 나타나기 </button><br><br>
+<hr>
+
+<p id="p1"> 인생은 짧고, </p>
+<p id="p2"> 예술은 길다.</p>
+
+<button class="b2">Click me to hide first paragraphs</button><br><br>
+<button class="s2">Click me to show first paragraphs</button><br><br>
+<button class="b3">Click me to hide second paragraphs</button><br><br>
+<button class="s3">Click me to show second paragraphs</button><br><br>
+
+<hr>
+<p id="self"> 나를 클릭하면 내가 사라짐 </p>
+<hr>
+	
+<p class="color"> 내 위에 마우스 대거나 나를 클릭하면 색이 변함 </p>
+<hr>
+	
+<p id="toggle"> 토글 메세지</p>
+<button class="toggle"> 토글 버튼</button>
+<br>
+<hr>
+<div id="flip"> 판넬 slide </div>
+<br>
+<div id="panel"> 안녕 jquery! </div><br>
+</div>
+
+</body>
+</html>
+</xmp>
+</pre>
+
+<pre id="jq2">
+<xmp>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> jquery 입력 연습 </title>
+
+<style>
+
+input button textarea{
+  position: relative;
+  display: block;
+  width: 30%;
+  margin: 5px auto;
+  font-size: 20px;
+  padding: 10px;
+  box-shadow: 4px 0px 12px black inset;
+}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+</head>
+
+<body>
+<h1> 클릭시 출력 </h1>
+입력 : <input type="text" id="textIn" >
+<button id = prn >제출</button><br><br>
+출력: <textarea id="textOut"></textarea><br><br>
+	
+<h1>  입력시 출력 </h1>
+입력 : <input type="text" id="textIn2" ><br><br>
+출력 : <textarea id="textOut2"></textarea><br><br>
+	
+	<h1>  신상정보 입력 </h1>
+	    <form id="signup">
+        <label for="name" class="label">이 름 :</label>
+        <input type="text" name="name" id="name" title="Required" class="required"><br><br>
+
+        <label for="theage" class="label">나 이 :</label>
+        <input type="text" name="theage" id="theage" title="Required" class="required digits"><br><br>
+
+        <label for="theemail" class="label">이메일 :</label>
+        <input type="text" name="theemail" id="theemail" title="Please enter a valid email address" class="required email"><br><br>
+
+        <input type='submit' value='Submit' name="submit" id='submitme'>
+    </form>
+
+    <p> 이름: <span id = name2></span></p>
+    <p> 나이: <span id = age2></span></p>
+    <p> Email: <span id = email2></span></p>
+    <p></p>
+	<br>
+
+
+<script >
+$(function (){
+	
+	// 클릭시 출력
+	$( "#prn" ).click(function() {
+    var value = $("#textIn").val();
+    $( "#textOut" ).text( value );
+  })
+	
+	// 입력시 출력
+	$( "#textIn2" ).keyup(function() {
+    var value = $( this ).val();
+    $( "#textOut2" ).text( value );
+  })
+  .keyup();
+	
+	// 신상 입력
+    $("#signup").validate();
+
+    $("#signup").submit(function(e) {
+        e.preventDefault();
+
+
+    var myname = $("#name").val();
+    var myage = $("#theage").val();
+    var myemail = $("#theemail").val();
+        
+        $("#name2").html(myname);
+        $("#age2").html(myage);
+        $("#email2").html(myemail);
+    }); 
+	
+
+})
+
+
+</script>
+
+</body>
+</html>
+
+</xmp>
+</pre>
+
+<pre id="jl1">
+# single line comment
+
+#=
+multi-line comment
+
+1. 실행
+>> julia hello.jl
+
+2. 또는 julia 실행 후 julia 화면에서 include("hello.jl")
+>> julia
+julia> include("hello.jl")
+=#
+
+println("Hello World")  # 개행
+print("안녕하세요!")  # 개행 없음
+
+println("") 
+print("hi \n")  # 개행
+
+성="홍"
+이름="길동"
+
+println("나의 이름은 ",성,이름, "입니다.")
+# println('홍'+'길동')
+# python과 달리 + 는 에러
+
+ht = 178 # 정수형
+wt = 77.7  # 실수형
+
+println("키는 ", ht,"cm,", " 몸무게는 ", wt, "kg")
+
+name = "철수"
+age = 33
+println("내 이름은 $(name)이고 나이는 $(age)살입니다.")
+
+a = 3
+b = 4.1
+c = 7
+println(a, " + " , b, " = " , (a+b))   # 타입 자동추론
+println("$(a) / $(b) = $(a/c)")
+
+
+# 배열
+성 = ["김", "이", "박", "조"]
+println(성[1])   # 김,주의 :  index는 1부터 시작, 
+
+#=
+
+c 언어와 같이 % 기호를 활용하여 변수값을 출력할 수 있다. (%d 정수, %f 실수, %s 문자열)
+
+%5.2f처럼 출력하는 모양을 지정할 수 있다. (총 자릿수 5, 소수점 2자리까지)
+
+format 함수를 사용하면 좀 더 다양한 방식으로 출력을 할 수 있다.
+
+=#
+
+using Printf     # P는 대문자 주의!
+@printf("%d / %d = %.2f \n", a, c, (a/c))  # c언어형 출력. 소숫점 이하 두자리까지
+
+@printf("당신의 키는 %dcm이고, 몸무게는 %.2fkg이며, 이름은 %s입니다.\n", ht,wt,name)  # .2f는 wt는 소숫점 2자리까지만 출력
+
+    # 출력 : 당신의 키는 178cm이고, 몸무게는 77.70kg이며, 이름은 홍길동입니다.
+
+</pre>
+
+<pre id="jl2">
+print("이름 : ")
+name = readline()
+print("나이 : ")
+age = readline()
+println("당신의 이름은 $(name)이고 나이는 $(age)살입니다.")
+
+print("정수 입력 : ")
+var1 = readline()
+print("실수입력 : ")
+var2 = readline()
+
+# 입력값은 string이므로 계산을 하기 위해서는 숫자화해야 함
+var1 = parse(Int, var1)
+var2 = parse(Float32, var2)
+var3 = var1 + var2
+var4 = var1 / var2
+
+println("$(var1) + $(var2) = $(var3)")
+println("$(var1) / $(var2) = $(var4)")
+
+</pre>
+
+<pre id="g1">
+
+// single line comment
+/* multiline comment
+// 컴파일 >> go build -o hello.out hello.go
+// run >> ./hello.out
+*/
+  
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("hello, world")
+    fmt.Printf("안녕하세요\n")
+    const (
+    age = "25" // 문자열
+    name = "홍길동"
+    )
+    fmt.Println("내 이름은",name, "이고 나이는",age, "살 입니다.")
+    fmt.Println("내 이름은 " + name + "이고 나이는 " + age + "살 입니다.")
+  
+    num1 := 7 // 자동 변수형 결정
+    var num2 float32 = 3.2 // 실수형 변수
+    num3 := float32(num1) + num2 // 연산을 위해서는 변수형이 같아야 함
+    num4 := float32(num1) / num2 
+    fmt.Printf("%d + %.1f = %.2f \n", num1, num2, num3)
+    fmt.Printf("%d / %.1f = %.2f \n", num1, num2, num4)
+}
+ 
+</pre>
+
+<pre id="g2">
+package main
+import ("fmt")
+ 
+func main() { 
+
+var age, name  string
+var a, b, c int 
+var d float32
+fmt.Print("나이 :") 
+fmt.Scan(&age) 
+
+fmt.Print("이름 :") 
+fmt.Scan(&name)
+fmt.Println("당신의 이름은 " + name + "이고 나이는 " + age + "살입니다.")
+
+fmt.Print("정수 :") 
+fmt.Scan(&a) 
+fmt.Print("정수 :") 
+fmt.Scan(&b) 
+
+c = a + b 
+d = float32(a) / float32(b)
+fmt.Printf("%d + %d = %d \n", a, b, c)
+fmt.Printf("%d / %d = %.2f \n", a, b, d)
+} 
+
+
+</pre>
+
+<pre id="g3">
+package main
+
+import (
+    "fmt"
+    "strings"
+    "strconv"  // strconv용
+)
+
+func main() {
+	n := 6
+	star1(n)
+	star2(n)
+	star3(n)
+	star4(n)
+	star5(n)
+	star6(n)
+	}
+
+func star1(n int){
+for y:= 0; y <= n; y++ {
+	for x:=0; x<=n; x++{
+		if y>x {
+fmt.Printf("*")
+} else{
+
+fmt.Printf(" ")
+}
+}
+fmt.Printf("\n")
+}
+}
+
+func star2(n int){
+list := make([]int, n+1) // 0에서 n까지 정수 숫자 배열을 만듬
+for y := range list {
+	for x:= range list{
+if y>x {
+fmt.Printf("*")
+} else{
+
+fmt.Printf(" ")
+}
+}
+fmt.Printf("\n")
+}
+}
+
+func star3(n int){
+for y := range [7] int{} { // 7개의 정수 리스트, 변수 n을 쓸 수 없음
+	for x:= range [7] int{} {
+if y>x {
+fmt.Printf("*")
+} else{
+fmt.Printf(" ")
+}
+}
+fmt.Printf("\n")
+}
+}
+
+func star4(n int){
+for i := 1; i <= n; i++ {
+fmt.Printf("%s\n", strings.Repeat("*", i)) //  *는 i회 반복
+}
+}
+
+func star5(n int){
+for i := 1; i <= n; i++ {
+fmt.Printf("%6s\n", strings.Repeat("*", i)) // 6개의 string 자릿수, *는 i회 반복
+}
+}
+
+func star6(n int){
+fmtString := "%" + strconv.Itoa(n) + "s\n"  // n개의 string 자릿수, Itoa => interger to string
+for i := 1; i <= n; i++ {
+fmt.Printf(fmtString, strings.Repeat("*", i))
+}
+}
+</pre>
+
+<pre id="ex1">
+
+# single line comment, no multiline comment
+# 실행 >> elixirc hello.ex # 컴파일 및 실행
+# 실행 >> elixir hello.exs # 스크립트 파일
+
+IO.puts "Hello, Elixir" # 개행
+IO.puts("안녕하세요")
+name = "홍길동"
+age = 25
+IO.puts("내 이름은 #{name}이고 나이는 #{age}살입니다.")
+IO.puts("내 이름은 " <> name <> "이고 나이는 " <> to_string(age) <> "살입니다.")
+a = 2
+b = 3
+c = a/b # 자동 변수형 결정
+c = Float.round(c,2) # 소숫점 2 자리까지
+IO.puts("#{a} + #{b} = #{a+b}")
+IO.puts("#{a} / #{b} = #{c}")
+</pre>
+
+<pre id="ex2">
+name=IO.gets("이름 : ")
+name=String.trim(name) # 개행문자 제거
+age=IO.gets("나이 : ")
+age=String.trim(age) 
+IO.puts("당신의 이름은 #{name}이고 나이는 #{age}살입니다.")
+
+a=IO.gets("정수 입력 : ")
+a=String.trim(a) 
+a=String.to_integer(a)
+b=IO.gets("정수 입력 : ")
+b=String.trim(b) 
+b=String.to_integer(b)
+IO.puts("#{a} / #{b} = #{a/b}")
+c = a/b # 자동 변수형 결정
+c = Float.round(c,2) # 소숫점 2 자리까지
+IO.puts("#{a} + #{b} = #{a+b}")
+IO.puts("#{a} / #{b} = #{c}")
+</pre>
+
+<pre id="ex3">
+</pre>
+
+<pre id="cl1">
+
+; 한줄 주석
+(comment
+여러줄 주석
+)
+
+
+(ns examples.hello (:gen-class))
+(defn hello [] (println "안녕하세요")) ;hello 는 함수명.
+(hello) ; hello 함수를 호출
+
+(defn yourName [name age]
+   (println (format "당신의 이름은 %s이고 나이는 %d살입니다." name age)))
+
+(yourName "홍길동" 25)
+
+(defn Example []
+   (def x 1)
+   (def y 3)
+  
+   (println (+ x y)) ; 더하기
+   (println (/ x y)) ; 나누기, 1/3
+   (println (float(/ x y))) ; 0.3333
+   
+   (def z (float(/ x y)))
+   (println (format "%d / %d = %.2f" x y z)) ; 
+ )
+(Example)
+
+</pre>
+
+<pre id="cl2">
+(println "이름 : ")
+(def Name (read-line)) ; (read-line)은 입력 함수
+
+(println "나이 : ")
+(def age (read-line)) ;
+(println (format "당신의 이름은 %s이고 나이는 %s살입니다." Name age))
+; 입력값은 문자열
+
+; 줄 단위 입력. 각 정수를 다른 줄에 입력
+(println "두 정수를 줄 바꿔서 입력하시오")
+(def num1 (read-line))
+(def num2 (read-line))
+(def m (Integer/parseInt num1)) ; 문자열의 정수화, java 문법
+(def n (Integer/parseInt num2))
+(def var1 (read-string num1)) ; 문자열의 정수화, clojure 문법
+(def var2 (read-string num2))
+(def var3 (+ m n))
+(def var4 (double(/ var1 var2)))  ; 정수의 실수화
+(println (format "%d + %d = %d" m, n, var3))
+(println (format "%d / %d = %.2f" var1, var2, var4))
+</pre>
+
+<pre id="cl3">
+; 왼쪽붙은 삼각형
+(defn star1 [n]
+    ; y 0에서 (n-1)까지
+(loop [y 0]
+  (when (< y n)
+      ; x 0에서 (n-1)까지
+     (loop [x 0]    
+        (when (< x n)
+           (if (> y x)
+               (print "*")
+               (print " ")
+            )
+        (recur (inc x))   ; x 1씩 증가
+        )
+     )
+     (println)           ; 줄바꿈
+    (recur (inc y))
+   )
+)
+)
+
+
+; 왼쪽붙은 삼각형
+(defn star2 [n]
+(doseq [y (range 0 n)] ; 0에서 (n-1)까지
+(doseq [x (range 0 n)]
+           (if (> y x) (print "*")(print " "))
+        )
+             (println) 
+     )
+)
+
+(def n 7)
+(star1 n)
+(star2 n)
+
+</pre>
+
+<pre id="rs1">
+// single line comment
+
+/* multiline comment
+컴파일  >> rustc hello.rs
+실행 (리눅스)     >> ./hello
+실행 (윈도우)     >> .\hello.exe
+*/
+
+fn main() {
+    print!("Hello, Rust!");  // no 개행, !는 매크로를 의미
+    println!("안녕하세요!"); // 개행
+
+let str1 = "홍길동"; // 문자열
+let x : i32 = 25; //immutable, (default), i32는 32비트 정수형
+let y = 68.50f32; // f32는 실수형, type 선언시 값뒤에 적어도 됨, 단 붙여 써야함.
+println!("내 이름은 {}이고 나이는 {}살이고 몸무게는 {:.2}kg입니다.", str1, x, y);
+
+println!("{0} / {1:.2} = {2:.2}", x, y, x as f32/y); // {0}{1}{2}는 각자 첫번째, 두번째, 세번째 인자
+// x as f32는 정수형 x를 실수형으로 형변환
+
+}
+
+</pre>
+
+<pre id="rs2">
+use std::io;
+    
+fn main() {
+    println!("이름");
+    let mut name = String::new();
+    io::stdin().read_line(&mut name).expect("Failed to read line"); // expect()는 예외 처리
+    if let Some('\n')=name.chars().next_back() {
+        name.pop();} // 개행문자 제거
+    println!("나이");
+    let mut age = String::new();
+    io::stdin().read_line(&mut age).expect("Failed to read line");
+    if let Some('\n')=age.chars().next_back() {
+        age.pop();}
+    println!("당신의 이름은 {}이고 나이는 {}살 입니다.", name, age);
+ 
+ // 숫자 입력시 줄바꿈  
+    println!("정수 : "); 
+    let mut x = String::new();
+    io::stdin().read_line(&mut x).expect("failed to read input.");
+    let x: i32 = x.trim().parse().expect("invalid input");  // trim은 개행문자 제거, parse는 문자의 숫자화
+    println!("정수 : "); 
+    let mut y = String::new();
+    io::stdin().read_line(&mut y).expect("failed to read input.");
+    let y: i32 = y.trim().parse().expect("invalid input");  
+    println!("{} + {} =  {}", x, y, x + y);
+    println!("{0} / {1} =  {2:.2}", x, y, (x as f32 / y as f32));
+    }
+
+</pre>
+
+<pre id="rs3">
+fn main(){
+let n = 7i32;
+star1(n);
+println!("");
+star2(n);
+}
+
+fn star1(n : i32){
+for y in 0..n {
+for x in 0..n {
+	if x <= y {print! ("*");}
+	else {print! (" ");}
+}
+println!("");
+}
+}
+
+fn star2(n : i32){
+for y in (0..n).rev() {  // rev()는 역순으로 배열
+for x in 0..n {
+	if x >= y {print! ("*");}
+	else {print! (" ");}
+}
+println!("");
+}
+}
+
+</pre>
+
+<pre id="hs1">
+-- 한줄 주석
+{--
+여러줄 주석
+ haskell은 함수지향형 언어로서. 변수명, 객체 등 모든 것을 함수로 봄
+실행: > runhaskell hello.hs
+--}
+
+import Text.Printf  -- printf 함수에 사용 
+
+num = 8  -- 정수형, 자동추론
+num1 = 8  -- 타입을 명시하지 않으면 아래 더하기 계산이 있으므로 타입을 일치하기 위해 실수형으로 추론
+num2 = 4.5 -- 실수형
+c1 = 'a' -- char 형
+a = "hello" -- [char],  문자 list 형
+b = "haskell"
+
+{-- 
+main 함수는 c의 main 함수,   java의 main 클래스에 대응하는 haskell의 기본 입출력 함수
+main = { }, 명령이 여러개일 때는 do 사용하여 ;로 구분, 
+중괄호는 생략 가능하며 줄바꿈으로 ; 대체. 대신 줄은 맞춰야 함
+--}
+
+main = do
+        putStr "Hello"     -- no 개행
+        putStrLn "World"      -- 개행, HelloWorld. 따옴표가 안찍힘.
+        print "Hello World"   -- "Hello World". 따옴표가 찍힘.
+
+        print (num*4)    -- 32, 괄호가 있어야 함, 개행
+        print(num /= 8) -- False, /=은 다르다 기호. 다른 언어와 다름
+        print (num1*4)    -- 32.0
+        print $ num1*4     -- 32.0, $를 쓰면 괄호안해도 됨
+        putStrLn (a++" "++b)      -- hello haskell, 두 문자열의 합은 ++
+        print (num1 + num2)    -- 12.5
+        putStrLn(show(num1 + num2))   -- 12.5, putStrLn는 문자를 출력, show 함수는 숫자를 문자화
+        print $ show(num1)++" + "++show(num2)++" = " ++show(num1+num2) -- 출력시 타입을 일치시켜야 함. 따라서 숫자를 문자화
+        putStrLn $ show $ num1 + num2    -- 12.5
+        (putStrLn.show)(num1) -- .은 두 함수를 연결하는 역할
+
+
+        let var1 = 11 -- main 함수내 변수 설정은 let을 써야함
+        let var2 = 3 
+        printf "%d \n" (var1::Int)
+        printf "%d + %d = %d \n" var1 var2 (var1+var2)
+        let a = fromIntegral var1 :: Float  -- 정수를 실수로 변환
+        let b = fromIntegral var2 :: Float
+        printf "%f / %f = %.2f \n" a b (a / b)
+
+</pre>
+
+<pre id="hs2">
+main = do
+
+  putStrLn "이름 : "
+
+  name <- getLine
+  putStrLn "나이 : "
+
+  age <- getLine
+
+  putStrLn ("내 이름은 " ++ name ++ "이고 나이는 " ++ age ++ "살입니다.")
+
+  
+  putStrLn "enter value for x: "
+  input1 <- getLine
+  putStrLn "enter value for y: " 
+  input2 <- getLine 
+  let x = (read input1 :: Int)
+  let y = (read input2 :: Int)
+  print (show(x)++ " + " ++show(y)++ " = " ++show(x + y))
+  let x1 = fromIntegral x :: Float 
+  let y1 = fromIntegral y :: Float 
+  print(show(x1)++ " / " ++show(y1)++ " = " ++show(x1 / y1))
+</pre>
+
+<pre id="hs3">
+-- 한줄 별출력 함수
+starRow 0 = return ()
+starRow n =
+  do
+    putStr "*"
+    starRow (n-1)
+
+
+-- 한줄 공백 출력 함수
+spaceRow 0 = return ()
+spaceRow n =
+  do
+    putStr " "
+    spaceRow (n-1)
+
+
+-- 왼쪽 붙은 삼각형
+star1 0 = return ()
+star1 n =
+  do
+    star1 (n-1)
+    starRow (n)
+    putStrLn ""
+
+
+-- 오른쪽 붙은 삼각형
+star2 (0, sp) = return ()
+star2 (st, sp) =
+  do 
+    star2 (st-1, sp+1)
+    putStrLn ""
+    spaceRow (sp)
+    starRow (st)
+
+
+-- 피라미드형
+star3 (0, sp) = return ()
+star3 (st, sp) =
+  do 
+    star3 (st-1, sp+1)
+    putStrLn ""
+    spaceRow (sp)
+    starRow (2*st-1)
+
+
+-- 왼쪽 붙은 삼각형
+star4 =  concat[starLow1(y) ++ "\n"| y <- [1..n]]
+starLow1(y) =  concat["*" ++ ""| x <- [1..n], y > x]
+
+-- 왼쪽 붙은 역삼각형
+star5 =  concat[concat ["*" ++ ""| x <- [1..n], y < x] ++ "\n"| y <- [1..n]]
+
+-- 오른쪽 붙은 역삼각형
+star6 =  concat[concat [" " ++ ""| x <- [1..n], y > x] ++ concat ["*" ++ ""| x <- [1..n], y < x]++"\n"| y <- [1..n]]
+
+-- 오른쪽 붙은 삼각형
+star7 =  concat[concat [" " ++ ""| x <- [1..n], y < x] ++ concat ["*" ++ ""| x <- [1..n], y > x]++"\n"| y <- [1..n]]
+
+n = 7
+
+main = 
+  do
+    star1 n
+    putStrLn ""
+    star2 (n,0)
+    putStrLn ""
+    star3 (n,0)
+    putStrLn "" 
+    putStr star4
+    putStrLn ""
+    putStr star5
+    putStrLn ""
+    putStr star6
+    putStrLn ""
+    putStr star7
+
+
+</pre>
+
+<pre id="ns1">
+<xmp>
+/*
+node.js 설치
+현재 웹 페이지 전체 문장 복사후  Myserver.js 만듦
+
+>> node MyServer.js
+>> Server running on 8080
+웹브라우저에서 localhost:8080 입력
+웹브라우저에 "Hello 안녕! Express" 출력
+*/
+	
+// 서버 실행을 위해 express 프레임워크 사용
+// 서버가 실행되는 디렉토리가 루트 디렉토리
+
+/* 루트 디렉토리에 test.html 작성
+
+<html>
+  <head>
+    <title>Main</title>
+    <link rel="stylesheet" type="text/css" href="/test.css">
+  </head>
+  <body>
+      <p> node.js  연습 </p>
+   
+	<img src="go.jpg" width = "200" height = "200" alt="My Image" >
+  </body>
+</html>
+*/
+	
+/* 루트/public 디렉토리에 test.css 작성
+	body{
+	background-color: black;
+	color: white;
+}
+*/
+	
+const express = require('express'); // express 불러옴
+const app = express();
+
+// localhost:port 접속시  Hello 안녕! 띄움. 한글 인식
+app.get('/', (req, res) => res.send('Hello 안녕!Express'))
+
+// localhost:port/home 접속시 test.html 파일 띄움
+app.get('/home',function(req,res){ res.render('test.html')});
+app.set('views', __dirname + '/');
+
+// html 처리를 위해 EJS template engine 사용
+app.set('view engine', 'html');
+app.engine('html', require('ejs').renderFile);
+app.listen(8080, function() {
+    console.log('server running on 8080')
+})
+
+// 루트/public/ 내의 css, image 파일 사용
+app.use(express.static('public'));
+
+// 모든 파일을 루트에 놓으려면 app.use(express.static(''));
+
+</xmp>
+</pre>
+
+<pre id="ns2">
+
+</pre>
+
+<pre id="ns3">
+
+</pre>
+
+<pre id="mt1">
+% single line comment
+%{
+multiline comment
+실행
+>> *.m 
+%}
+% octave는 한글 안됨
+
+disp("hello world") % 개행
+disp("안녕")
+name = '홍길동';   % semicolon is needed for no display
+age = 25;
+
+X = ['내 이름은 ' ,name,'이고 나이는 ',num2str(age),' 살입니다.']; 
+disp(X)  % num2str()는 숫자의 문자화
+
+fprintf('내 이름은 %s이고 나이는 %d 살입니다. \n',name,age);
+
+a = [3 7 1.2];
+Z = [num2str(a(1)), ' + ', num2str(a(3)), ' = ', num2str((a(1)+a(3)))];
+disp(Z)
+% matlab에서 첫번째 원소는 a(1)
+
+Y = [num2str(a(1)), ' / ', num2str(a(2)), ' = ', num2str((a(1)/a(2)))];
+disp(Y)
+
+fprintf('%d / %d = %.2f \n',a(1),a(2), a(1)/a(2));
+
+</pre>
+
+<pre id="mt2">
+name = input('이름: ', 's');   % string input
+age = input('나이: ');    % number input
+X = ['내 이름은 ' name,'이고 나이는 ',num2str(age),' 입니다.'];
+disp(X)
+
+disp('숫자 입력(real or integer)') % no type check, any type is possible.
+a = input('숫자: ');
+b = input('숫자: ');
+c = a+b;
+d = a/b;
+out1 = [num2str(a), ' + ', num2str(b), ' = ', num2str(c)];
+out2 = [num2str(a), ' / ', num2str(b), ' = ', num2str(d)];
+disp(out1)
+disp(out2)
+
+
+</pre>
+
+<pre id="mt3">
+% print star image
+
+star1(7);
+disp(" ");
+star2(7);
+disp(" ");
+star3(7);
+disp(" ");
+star4(7);
+disp(" ");
+star5(7);
+
+% 왼쪽 붙은 직각삼각형
+function star1(n)
+for y=1:n
+for x=1:n
+  if x < y
+  fprintf('*');
+  end
+end
+fprintf('\n');
+end
+end
+
+% 오른쪽 붙은 직각삼각형
+function star2(n)
+for y=1:n
+for x=1:n
+  if n-x < y
+    fprintf('*');
+  else
+    fprintf(' ');
+  end
+end
+fprintf('\n');
+end
+end
+
+% 왼쪽 붙은 직각삼각형
+function star3(n)
+x = [];
+for i = 1 : n
+    x = strcat(x,'*');
+    disp(x)
+end
+end
+
+% 오른쪽 붙은 직각삼각형
+function star4(n)
+x = [];
+for i = 1 : n
+    x = strcat(x,'*');
+    s = [blanks(n-i) x];
+    disp(s)
+end
+end
+
+% 정삼각형
+function star5(n)
+
+x = [];
+for i = 1 : n
+    x = strcat(x,'*');
+    s = [blanks(n-i) x];
+    if i == 1
+      disp([s]); % no symmetry print in first line
+    end
+    disp([s fliplr(s)])
+end
+end
+</pre>
+
+<pre id="str1">
+# single line comment
+# no multi line comment
+# (Rstudio) multiline comment: Highlight text, press the keys (ctrl + shift + c)
+#
+# 터미널에서 스크립트 실행
+# >> source('out.R', encoding='utf-8')
+# 현재 폴더 getwd()
+# 작업 폴더 이동 : setwd('c:/myfolder')
+#
+# (Rstudio) console 창 지우기 : ctrl + l
+# (Rstudio) 스크립트 실행 : ctrl + Alt + r
+# (Rstudio) 스크립트 부분 실행 : Highlight text, press the keys (ctrl + Alt + r)
+
+print("Hello World!") # 개행
+cat("안녕하세요 \n")  # no 개행. \n 개행문자
+
+name = "홍길동"
+age = 24
+
+cat("내 이름은", name, "이고 나이는", age,"살입니다.\n")
+x<-sprintf("내 이름은 %s이고 나이는 %d살입니다.", name, age)
+print(x)
+# sprintf는 직접 출력되지 않는다.
+
+print(paste0("내 이름은 ", name, "이고 나이는 ", age,"살입니다."))
+# paste는 콤마로 나열된 원소를 이어붙임
+# paste()는 여백, paste0()는 여백없이 출력
+
+num <- c(3, 7, 1.2)
+x<-sprintf("%d + %d = %d ", num[1], num[2], num[1]+num[2]) # 첫 원소가 [1]임에 주의
+print(x)
+x<-sprintf("%d - %.1f = %.1f ", num[1], num[3], num[1]-num[3])
+print(x)
+x<-sprintf("%d / %d = %.2f ", num[1], num[2], num[1]/num[2])
+print(x)
+
+x <- c(2, 4, 5, 3, 6, 1, 6, 4, 5, 3)
+y <- c(6, 7, 4, 9, 8, 9, 7, 9, 8, 9)
+cat("x =", x, "\n")
+cat("x의 평균 =", mean(x), "\n")
+cat("x의 분산 =", var(x), "\n")
+cat("x의 표준편차 =", sd(x), "\n")
+
+## table 생성 ##
+name <- c("김철수", "박영희", "홍길동", "최만리")
+eng.result <- c(76, 82, 84, 67)
+eng.grade <- c("B", "A", "A", "C")
+
+# 문자벡터는 factor형이 아님
+class1 <- data.frame(name, eng.result, eng.grade, string=FALSE)
+print(class1)
+
+# 열 추가 방법1
+class1$sex = c('m', 'f', 'm', 'm')
+print(class1)
+
+# 열 추가 방법2
+class1 = transform(class1, age=c(17,17,16,17))
+print(class1)
+
+# 열 추가 방법3
+id = c(2354, 6853, 3210, 6087)
+class1 = cbind(class1, id)
+print(class1)
+
+## 도표 그리기 ##
+# Rstudio figure margin 에러 방지 코드
+par(mar=c(4,5,2,4))
+
+# 두 개의 그림을 2행 1열로 표시
+# par(mfrow = c(m,n)) 은 m행 n열
+par(mfrow = c(2,1))
+
+x1 = 1:100 # (1, 2, 3, ..., 100) 열백터
+y1 = x1^2
+plot(x1,y1, type='p', col="blue", main="y=x^2", xlab='', ylab='y')
+title(xlab="사람", line=2) # x축 제목을 도형에 바짝 붙임, default는 line=0
+
+x2 = seq(-10, 10, 0.1) # -10 부터 10 까지 0.1씩 증가하는 수
+y2 = sin(x2)
+plot(x2, y2, type='l', col='red', main='y=sin(x)', xlab='', ylab='y')
+title(xlab="x", line=2)
+
+</pre>
+
+<pre id="str2">
+my.name <- readline(prompt="이름 : ")
+my.age <- readline(prompt="나이 : ")
+
+# 입력받은 것은 문자열이므로 정수로 변환
+my.age <- as.integer(my.age)
+print(paste0("내 이름은 ", my.name, "이고 나이는 ", my.age, "살입니다."))
+
+num1 = readline(prompt="정수 : ")
+num1 = as.integer(num1)
+num2 = readline(prompt="정수 : ")
+num2 = as.integer(num2)
+x = sprintf("%d / %d = %.2f ", num1, num2, num1/num2)
+print(x)
+
+</pre>
+
+<pre id="str3">
+star1 = function(n){
+    for (y in 0:n) {
+        for (x in 0:n) {
+            if (y <= x)  cat("*")
+            else cat(" ")
+        }
+        cat("\n")
+    }
+}
+
+star2 = function(n){
+    for (y in 0:n) {
+        for (x in 0:n) {
+            if (y >= x)  cat("*")
+            else cat(" ")
+        }
+        cat("\n")
+    }
+}
+
+star3 = function(n){
+    for (y in n:0) {
+        for (x in 0:n) {
+            if (y >= x)  cat("*")
+            else cat(" ")
+        }
+        cat("\n")
+    }
+}
+
+n = 5
+star1(n)
+cat("\n")
+star2(n)
+cat("\n")
+star3(n)
+</pre>
+
+<pre id="sh1">
+# single line comment
+: '   
+multi line comment
+실행
+> bash filename
+파일명에 확장자 sh는 안써도 된다.
+'
+printf "hello world \n"  # no 개행 '\n'은 개행 문자
+echo "안녕하세요" # 개행
+
+# 변수형은 구분 않함
+# 모든 변수는 문자열
+name="홍길동"
+age=24
+echo "내 이름은 ${name}이고 나이는 ${age}살입니다."
+printf "내 이름은 %s이고 나이는 %d살입니다.\n" $name $age
+
+# shell에서는 정수만 됨
+num=(3 7 1)
+echo $((${num[0]}+${num[1]}))
+</pre>
+
+<pre id="sh2">
+read -p "이름 : " name  
+read -p "나이 : " age
+echo "내 이름은 ${name}이고, 나이는 ${age}살입니다."  
+printf "내 이름은 %s이고, 나이는 %s살입니다.\n" $name $age
+
+read -p "정수 : " num1
+read -p "정수 : " num2
+sum=$((num1+num2))
+printf "%d + %d = %d\n" $num1 $num2 $sum
+
+# ================================
+: ' 파일 뒤에 입력 변수를 쓸 수도 있다.
+변수명은 순서 대로 $1, $2... 로 쓴다. 
+
+>>sh input.sh "홍길동" 23
+
+echo "내 이름은 $1이고, 나이는 $2살입니다." 
+'
+</pre>
+
+<pre id="sh3">
+n=5
+
+star1(){
+for ((i=1; i<=n; i++)) ; do 
+    for ((j=1; j<=n; j++)) ; do
+     if [ $j -ge $((n+1-$i)) ] ; then                                                                  
+        echo -n "*"
+     else
+        echo -n " "
+      fi                                                                  
+    done                                                                              
+  echo                                                                                
+done
+}
+
+star2(){
+for ((i=1;i<=n;i++));         
+do 
+  for((k=1;k<=(n-i);k++));  
+  do 
+    printf "%s" " ";
+  done;
+  for ((j=1;j<=i;j++));        
+  do 
+    printf "%s" "*";
+  done;
+  printf "\n";         
+done
+}
+
+star3(){
+for((i=1; i<=n; i++))
+do
+  for((j=1; j<=i; j++))
+  do
+    echo -n "*"
+  done
+  echo
+done
+}
+
+star1
+echo ""
+star2
+echo ""
+star3
+
+</pre>
+
+<pre id="lx1">
+
+% 한줄 주석
+\documentclass[12pt]{article} % [12pt]는 글자 크기
+\usepackage[left=2cm, right=2cm, top=2cm]{geometry}
+\usepackage{kotex} % 한글
+\usepackage{graphicx} % 그림
+\usepackage{verbatim} % 문장 있는 그대로 표현
+\usepackage{comment} % multiline comment
+\usepackage{enumitem} % \begin{enumerate} 옵션 설정
+\usepackage{sectsty} % chapter, section 색 설정 
+\sectionfont{\color{red}}  % section 컬러 red
+\usepackage[table]{xcolor} % 글자, 테이블 cell 색 설정
+\usepackage[onehalfspacing]{setspace}  % 문장 줄간격 설정
+\usepackage{hyperref} % 하이퍼링크 설정, 목차 링크 설정
+\hypersetup{ colorlinks=true, linkcolor=red, filecolor=magenta, urlcolor=blue, }
+\usepackage{array} % 표의 열 넓이를 고정
+\usepackage{diagbox} % 표에 대각선을 넣음
+\usepackage{multirow} % 표의 행 합침
+\usepackage{makecell} % 표의 특정 행의 높이를 조절
+\usepackage{tikz} % 그림 패키지
+\usetikzlibrary{positioning} % 노드 그릴 때 위치지정
+
+\usepackage{titlesec}
+\titlelabel{\thetitle.\;}
+\title{LaTeX 연습} % 제목 설정
+\author{홍길동} % 저자 설정
+\begin{document}
+
+\maketitle % 앞에 설정한 제목, 저자, 추가로 현재 시간 표기
+
+\begin{comment}
+multiline comment
+\documentclass[12pt]{book}은 많은 분량의 내용을 만들 때 사용. 
+
+내용이 많으므로 여러 개의 파일로 나누어 main 파일에서 합친다.
+컴파일 검증을 위해 \includeonly 명령을 사용해서 특정 부분만 실행하도록 하여 컴파일 시간 효율을 높임.
+
+\documentclass{book}
+
+\includeonly{chapter1}
+
+\begin{document}
+
+\include{chapter1}
+\include{chapter2}
+
+\end{document}
+
+각 챕터는 내용만으로 구성
+예를 들어 chapter1.tex
+\chapter{chapter heading}
+\section{Section heading}
+\begin{example}
+...
+\end{example}
+...
+
+\end{comment}
+\tableofcontents % 본문의 \section{}, \subsection{}으로 목차를 자동으로 만들어 줌
+\newpage % 페이지 갱신
+
+\listoffigures % 그림 목차 생성
+\listoftables % 표 목차 생성
+
+\newpage
+
+\setlength{\parindent}{0pt}
+% 들여쓰기 간격 설정, 0은 이 명령 이후로 들여쓰기 안한다는 의미
+\section{문장}
+\subsection{문장 모양}
+\subsubsection{글자 크기}
+% 줄바꾸기 : \\ 또는 \newline, 빈줄에는 사용 안됨
+% 쪽 나누기 : \newpage, \clearpage
+
+% 그림 또는 표가 있는 경우에 개체랑 새로 시작하는 챕터가 같은 페이지에 나옴.\\
+% 이런 경우에 \newpage 대신에 \clearpage를 사용하면 그림 또는 표 아래도 깔끔하게 되고 다음 장에 새로운 챕터가 시작됨.\\
+
+% 글자 크기는 \Huge -> \huge -> \Large -> \large 순
+% \textless : < 
+% \textgreater : >
+\vspace{1cm} % 1cm 줄간격 띄기
+{\huge \textless 데빌맨 : 이타성과 정의감의 역설 \textgreater}
+\\\\
+"일본은 전쟁의 패전국 이란 걸 잊고 있으며..
+전쟁 당시에 젊은이들의 목숨을 애국심이라며 이용해 먹고 병기이자 도구로 그들을 이용했다. 인간 어뢰, 가미카제가 바로 그것이다. 그건 인간이 해서는 안될 짓이며 그들을 도구로써 이용했다는 증거이다.\\\\
+{\large 일본은 미래에 다가올 수록 역사 왜곡으로 인해 젊은 세대 들은 이러한 역사를 기억하지 못하게 될 것이다.}\\\\ 
+{\Large 그리고 일본 윗 대가리들은 그런 젊은 세대 들을 이용해서 다시 전쟁이 가능한 국가로 만들어 평화를 망가뜨릴 것이다.}\\\\
+그 모습 그 자체가 악마 그자체 인게 아닌가?!"\\
+
+\subsubsection{수평 띄어쓰기}
+
+아\,아\;아\quad아\qquad아\\
+% \, : 한칸 띄어쓰기
+% \; : 두칸 띄어쓰기
+% \quad : 네칸 띄어쓰기
+% \qquad : 여덟칸 띄어쓰기
+
+\subsubsection{수직 띄어쓰기}
+% \vspace{1cm} % 1cm 줄간격 띄기
+인간의 삶에서 갈등은 공기와도 같이 늘 상존하는 것이다.\\
+인간의 삶에서 갈등은 공기와도 같이 늘 상존하는 것이다.\\
+\smallskip
+인간의 삶에서 갈등은 공기와도 같이 늘 상존하는 것이다.\\
+\medskip
+인간의 삶에서 갈등은 공기와도 같이 늘 상존하는 것이다.\\
+\bigskip
+인간의 삶에서 갈등은 공기와도 같이 늘 상존하는 것이다.\\
+\vspace{10mm}
+인간의 삶에서 갈등은 공기와도 같이 늘 상존하는 것이다.\\
+
+\subsection{글자 표현}
+
+% \underline{...} : 밑줄
+% \textbf{...} : 굵게
+% \textit{...} : 기울임
+
+"\underline{역사의 반복}이란게 똑같은 모습으로 오는 게 아니죠. 그 밑에 담긴 \textbf{의도와 본질}이 \textit{유사}한겁니다."\\ 
+
+% \fbox : 문장의 box화
+% \begin{minipage}{...}...\end{minipage}는 문장 넓이 설정
+
+\fbox{
+	\begin{minipage}{30em}
+		"한·미 동맹은 몇 장의 종이 위에 서명으로 맺어진 약속이 아니다. 양국 국민 한 사람 한 사람의 삶과 강하게 연결돼 있다."
+	\end{minipage}
+}\\
+
+\textcolor{red}{"사람이 가장 잔혹해지는 것은 아이러니하게도 자신이 절대적 정의라고 굳게 믿을 때이다."}\\
+
+"\emph{잘 모르고 무식한 사람이 신념을 가지면 무섭습니다."}\\
+
+— 찰스 다윈\\
+\textbf{\textit{"무지는 지식보다 더 확신을 가지게 한다."}}\\
+
+— 니체\\ 
+\emph{\textcolor{blue}{"강한 신념이야말로 거짓보다 더 위험한 진리의 적이다."}}\\
+
+
+
+\subsection{문장 정렬}
+
+다음은 수주 변영로 선생의 시 '논개'이다.\\
+
+거룩한 분노는\\ 
+종교보다도 깊고\newline 
+불붙는 정열은\\
+사랑보다도 강하다.\newline
+
+\begin{center} % 중앙 정렬
+아! 강낭콩 꽃보다도 더 푸른\\
+그 물결 위에\\
+양귀비 꽃보다도 더 붉은\\
+그 마음 흘러라.\\
+아리땁던 그 아미(蛾眉)\\
+높게 흔들리우며\\
+그 석류 속 같은 입술\\
+죽음을 입맞추었네.\\
+\end{center}
+
+\begin{flushright} % 우측 정렬
+아, 강낭콩 꽃보다도 더 푸른\\
+그 물결 위에\\
+양귀비 꽃보다도 더 붉은\\
+그 마음 흘러라.\\
+흐르는 강물은\\
+길이길이 푸르리니\\
+그대의 꽃다운 혼(魂)\\
+어이 아니 붉으랴.\\
+\end{flushright}
+
+\begin{flushleft} % 좌측 정렬
+아, 강낭콩 꽃보다도 더 푸른\\
+그 물결 위에\\
+양귀비 꽃보다도 더 붉은\\
+그 마음 흘러라.\\
+\end{flushleft}
+\newpage
+
+
+\subsection{문장을 있는 그대로 표현 방법}
+
+\subsubsection{특정 문자만}
+% \verb|...|
+
+The \verb|\ldots|은 \ldots를 표기하는 명령어이다.
+
+\subsubsection{문장 일부}
+% \begin{verbatim} ...\end{verbatim}
+
+\begin{verbatim} 
+   인생은 짧고
+          예술은 길다.
+\end{verbatim}
+
+\begin{verbatim} 
+	The \verb|\ldots|은 \ldots를 표기하는 명령어이다.
+\end{verbatim}
+
+	
+\subsection{목록 나열}
+% 단순 나열 : \begin{itemize} ... \end{itemize}
+% 번호붙은 나열 : \begin{enumerate} ... \end{enumerate}
+\vspace{0.5mm}
+\subsubsection{단순 나열}
+\begin{itemize}
+\item 목록1
+\item 목록2
+\item 목록3
+\item[-] 목록1
+\item[-] 목록2
+\item[-] 목록3
+
+\end{itemize}
+\vspace{0.5mm}
+
+\subsubsection{번호붙은 나열}
+\begin{enumerate} 
+\item 목록1
+\item 목록2
+\item 목록3
+\end{enumerate}
+
+% 다른 문자 목록 사용
+\begin{enumerate}[label=\Alph*.] % \usepackage{enumitem} 사용
+\item 목록1
+\item 목록2
+\item 목록3
+\end{enumerate}
+
+\newpage
+
+\section{링크}
+
+\subsection{하이퍼 링크}
+
+% \href{http://https://ko.overleaf.com/}{overleaf}
+
+\LaTeX  온라인 편집
+\begin{itemize} 
+	\item \href{http://https://ko.overleaf.com/}{overleaf} 
+	\item \href{http://http://www.sharelatex.com/}{sharelatex} 
+\end{itemize}
+
+\subsection{문장내 링크}
+% \label{...} 명령이 쓰인 곳을 찾아서 장, 절, 그림, 표, 정리 등을 번호로 \ref{...}를 바꾸어 넣는다.
+% \pageref는 해당하는 \label 명령이 쓰인 쪽의 쪽수를 표시한다.
+
+링크의 예는 페이지 \pageref{sec:this}의 그림 링크 \ref{sec:this}를 참조하시오
+
+\subsection{각주}
+% \footnote{각주 내용}
+
+"IT 산업은 흔히 가트너 성장곡선 {\footnote{\href{https://en.wikipedia.org/wiki/Hype_cycle}{하이프 사이클} 참조}을 따른다고 알려져 있는데 이는 거시적으로 보면 충격파의 파동을 나타내는 것에 다름이 아니다."
+	
+% 장, 절 제목내에 각주가 있을 경우 에러가 발생하므로 앞에 \protect\footnote{...}를 붙여줌
+
+\newpage
+
+\section{그림 입력}
+
+\subsection{그림 위치}
+The [htbp] controls where the table or figure is placed. Tables
+and figures do not need to go where you put them in the text.
+LATEX moves them around to prevent large areas of white space
+from appearing in your paper. \\
+
+
+\begin{tabular}{|c|l|}
+	\hline
+	b(Bottom) & Place the table at the bottom of the current page. \\
+	\hline
+	h(Here) & Place the table at the spot where the table
+	environment appears in the text \\
+	\hline
+	p(Page) & Place the table at the top of the next page. \\
+	\hline
+	t(Top) & Place the table at the top of the current \\
+	\hline
+\end{tabular}
+
+The first letter inside brackets has highest priority. In the
+example on the previous page, if LATEX couldn’t put the table
+or figure “here,” it tried to put it at the top of the current
+page, then on the bottom of the current page, then at the top
+of the next page. \\
+
+\subsection{그림 입력 및 링크}
+% \includegraphics[width=100mm]{*.*}
+
+\label{sec:this}
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=100mm]{image-test.jpg}
+	\end{center}
+	\caption{홍길동의 기보} % 그림 제목
+	\label{fig:gibo} % 문장내 인용을 위한 레벨화
+\end{figure}
+
+[그림 \ref{fig:gibo}]는 홍길동의 기성전 대국 기보이다.\\
+\newpage
+
+
+\section{표 그리기}
+
+\subsection{표 입력 및 링크}
+
+$<$ 표 \ref{tab:aa} $>$은 용의자들의 딜렘마라고 하는 유명한 게임의 예이다.\\
+
+\begin{table}[!htbp]
+	\caption{죄인들의 딜렘마}
+	\begin{center}
+		%	\renewcommand{\arraystretch}{2} % 모든 행의 높이를 두배로 늘림.
+		\begin{tabular}{|c|c|c|} % 수직선 그림. 가운데 정렬
+			\hline  % 수평선 그림
+			\diagbox[width=4em]	{갑} {을} & C & D \\
+			\hline
+			C & \Gape[6pt]{-1,\; -1} & -9,\; 0 \\ 
+			\hline % 행의 높이를 6pt 로 늘림
+			D & \Gape[6pt]{0,\; -9} & \cellcolor{blue!10} -5,\; -5 \\ 
+			\hline
+		\end{tabular}
+	\end{center}
+	
+\end{table}
+
+
+
+% c : 중앙정렬, r : 우측정렬, l : 좌측정렬
+% ccc는 열이 3개
+% |c|c|c|는 열의 테두리
+% \hline 수평선
+% \diagbox[width=4em] 대각선을 넣음. 폭은 4em
+
+
+\subsection{열합치기}
+
+$<$ 표  \ref{tab:bb}  $>$은 열 합치기의 예이다.\\
+
+% \multicolumn{합칠 열의 수}{정렬과 선그리기}{내용}
+
+\begin{table}[!htbp]
+\caption{열합치기}
+\begin{center}
+\begin{tabular}{|c|c|}
+	\hline
+	\multicolumn{2}{|c|}{Ene} \\
+	\hline
+	Mene & Muh! \\
+	\hline
+\end{tabular}
+\end{center}
+\label{tab:bb}
+\end{table}
+
+\subsection{행합치기}
+
+$<$ 표  \ref{tab:cc}  $>$은 행 합치기의 예이다.\\
+
+% \multirow{합칠 행의 수}{정렬과 선그리기}{내용}
+\begin{table}[htbp]
+
+\centering
+\begin{tabular}{|c|c|c|} \hline \multicolumn{2}{|c|}{\multirow{2}{*}{combined cells}} & top right\\ \cline{3-3} \multicolumn{2}{|c|}{} &middle right\\ \hline bottom left &bottom center &bottom right\\ \hline 
+\end{tabular}
+\caption{행합치기}
+\label{tab:cc}
+\end{table}
+
+% 행을 합칠때는 선을 긋지 않는것만으로도 그 효과를 볼수 있다.
+% \cline{선긋기를 시작할 칸 - 끝낼칸}
+행을 합칠때는 선을 긋지 않는것만으로도 그 효과를 볼수 있다.
+
+\begin{table}[htbp]
+\caption{행 합치기2}
+\begin{center}
+	\begin{tabular}{|c|c|r|}\hline
+		& a & b \\ \cline{2-3}
+		c & d & e \\ \cline{2-3}
+		& f & g \\ \hline
+	\end{tabular}
+\end{center}
+\label{tab:dd}
+\end{table}
+
+\clearpage
+
+\section{수식 표현}
+
+\subsection{inline 표현}
+
+% $...$ 또는 \(...\) 사용
+
+원의 방정식은 $x^2+y^2=1$ 입니다.\\
+
+"금성은 태양에서 두 번째로 가까운 행성이자 태양계에서 가장 뜨거운 행성으로, 표면온도는 납을 녹일만큼 뜨거운 \(500^{\circ}\mathrm{C}\) 안팎에 달한다."\\
+
+\subsection{block 표현}
+
+% $$...$$ 또는 \[...\],  \begin{displaymath} ... \end{displaymath} 사용
+
+\begin{itemize} 
+
+\item \textbf{근의 공식}
+
+ $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$ 
+\\
+
+\item \textbf{오일러 공식}
+
+\[ e^{i \pi} + 1 = 0 \]
+
+\item \textbf{행렬 표현}
+
+\begin{displaymath} 
+\mathbf{X_{mn}} = % \mathbf{} 수식 굵게
+\left( 
+\begin{array}{cccc} %{cccc}중앙 정렬, 컬럼 갯수 만큼, l은 왼쪽 정렬
+x_{11} & x_{12} & \ldots & x_{1n}\\ 
+x_{21} & x_{22} & \ldots & x_{2n}\\ 
+\vdots & \vdots & \ddots & \vdots\\
+x_{m1} & x_{m2} & \ldots & x_{mn}\\ 
+\end{array} 
+\right) 
+\end{displaymath}
+
+\item \textbf{수식번호 추가}
+% 수식 번호 추가 \begin{equation} ... \end{equation}
+
+\begin{equation} 
+s_i(x,N)=\frac{N_ix_i}{x} \frac{L_i}{T} \label{eq:f1}
+\end{equation}
+
+\begin{equation} \label{eq:f2}
+\epsilon > 0
+\end{equation} \\
+
+(식 \ref{eq:f1}), (식 \ref{eq:f2})으로부터 다음을 알 수 있다.\\
+
+\item \textbf{최대화 문제}
+\begin{eqnarray*}
+	max &F(x_1, \cdots, x_n) \\
+	subject \; to &\Phi(x_1, \cdots, x_n)=0
+\end{eqnarray*}
+
+\item \textbf{수식 정렬}
+\begin{displaymath}
+	y = \left\{ \begin{array}{ll}
+		a & \textrm{if $d>c$}\\
+		b+x & \textrm{in the morning}\\
+		l & \textrm{all day long}
+	\end{array} \right.
+\end{displaymath}
+
+\end{itemize}
+
+
+\subsection{inline 방식 vs block 방식의 수식 모양 차이}
+
+inline 방식과 block 방식 사이에는 조판 스타일에 차이가 있다는 점을 유의하자.\\
+
+inline 방식 : 
+$\lim_{n \to \infty}\sum_{k=1}^n \frac{1}{k^2}= \frac{\pi^2}{6}$\\
+
+block 방식 :
+$$\lim_{n \to \infty}\sum_{k=1}^n \frac{1}{k^2}= \frac{\pi^2}{6}
+$$
+
+inline 방식 : \(\int_{a}^{b} x^2 dx\) \\
+block 방식 : \[\int_{a}^{b} x^2 dx\]
+
+
+\subsection{inline 방식의 block 방식 표현}
+
+inline 방식의 수식 모양이 안좋아서 행간에 block 방식으로 수식을 표현하기 원한다면 \verb|$\displaystyle{수식}$|을 사용한다.\\
+
+% inline mode의 수식 모양을 block mode로 만들려면 \displaystyle 명령을 사용
+
+$\displaystyle{\lim_{n \to \infty}
+\sum_{k=1}^n \frac{1}{k^2}
+= \frac{\pi^2}{6}}$ \\
+
+\(\displaystyle{\int_{a}^{b} x^2 dx}\)\\
+
+\clearpage
+
+
+\section{그림 그리기}
+
+\subsection{기초}
+
+\begin{tikzpicture}
+	\draw (0,0) -- (0,2) -- (2,0)-- (0,0);
+	\draw[line width=2mm] (3,0) -- (3,4);
+	\filldraw [gray] (5,0) circle (10pt); 
+	% 점(0,0)에 10pt 크기의 속이 회색으로 칠해진 원을 그림
+	
+\end{tikzpicture}
+
+\vspace{5mm}
+
+\begin{tikzpicture}
+	\draw[red, thick, ->] (-1,2) -- (2,-2); 
+	% 붉은색 선 굵게 그림
+	\draw[blue, very thick, ->] (-1,-1) -- (2,2);
+	% 푸른색 선 더 굵게 그림
+	
+	\filldraw[black] (0,0) circle
+	(2pt) node[anchor=west]{a};
+	% 검은색 원 그림. 글자는 왼쪽에 a라고 씀
+	
+\end{tikzpicture}
+
+\vspace{5mm}
+
+\begin{tikzpicture}
+	\filldraw[color=red!60,
+	fill=red!5, very thick](-1,0)
+	circle (1.5);
+	% 원의 외각선 색은 빨간색의 60%, 내부는 5%의 빨간색으로 채움.원중심(-1,0), 반경 1.5cm
+	\fill[blue!50] (2.5,0) ellipse
+	(1.5 and 0.5);
+	% 와곽선과 내부를 구분할 필요가 없을 때는 \fill을 사용. 타원의 중심점, 기준점 2개 제시
+	\draw[ultra thick, ->] (6.5,0) arc
+	(0:220:1);
+\end{tikzpicture}
+
+\vspace{5mm}
+
+\subsection{곡선그리기}
+
+\begin{figure}[!h]
+\centering
+	
+\begin{tikzpicture} % 그림 시작
+
+% xy 좌표계를 고려한다.
+
+\draw (-2,0) -- (2,0); % 점(-2,0)에서 점(2,0)을 잇는 선을 그림
+
+\draw (-2,-2) .. controls (0,0) .. (2,-2); % 점(-2,-2)에서 점(2,-2)을 잇는 선을 그리는데 점(0,0) 방향으로 부드럽게 그림
+
+\draw (-2,2) .. controls (-1,0) and (1,0) .. (2,2); 
+% 점(-2,2)에서 점(2,2)을 잇는 선을 그리는데 점(-1,0), 점(1,0) 방향으로 부드럽게 그림
+
+\end{tikzpicture} % 그림 끝
+\caption{tikz 예}
+\label{fig3.2}
+\end{figure}
+
+[그림 \ref{fig3.2}]는 tikz 그림의 예이다.\\
+
+\vspace{5cm}
+
+\subsection{함수 그리기}
+
+\begin{figure}[!h]
+\begin{tikzpicture}[domain=0:2]
+	\draw[->] (-3, 0) -- (4.2, 0) node[right] {$x$};
+	\draw[->] (0, -3) -- (0, 4.2) node[above] {$y$};
+	\draw[scale=0.5, domain=-3:3, smooth, variable=\x, blue] plot ({\x}, {\x*\x-2*\x+3});
+	% y = x^2+2x+3
+	\draw[scale=0.5, domain=-3:3, smooth, variable=\y, red]  plot ({\y*\y}, {\y});
+	% x = y^2
+\end{tikzpicture}
+\caption{함수 그리기 예}
+\label{fig3.3}
+\end{figure}
+
+[그림 \ref{fig3.3}]는 함수그리기의 예이다. 파란선의 식은 $ y = x^2-2x+3 $, 빨간선의 식은 $ x = y^2 $ \\
+
+\vspace{5cm}
+
+\subsection{노드 그리기}
+
+\begin{tikzpicture}[
+	roundnode/.style={circle,
+		draw=green!60, fill=green!5, very
+		thick, minimum size=7mm},
+	squarednode/.style={rectangle,
+		draw=red!60, fill=red!5, very
+		thick, minimum size=5mm},
+	]
+	
+	% 노드들
+	\node[squarednode](id1){갑};
+	\node[roundnode](uc) [above=of id1] {을};
+	\node[squarednode](rs) [right=of id1] {병};
+	\node[roundnode](lc) [below=of id1] {정};
+	
+	% 선들
+	\draw[->] (uc.south) -- (id1.north);
+	\draw[->] (id1.east) -- (rs.west);
+	\draw[->] (rs.south) .. controls +(down:7mm) and
+	+(right:7mm) .. (lc.east);
+\end{tikzpicture}
+\end{document}
+
+</pre>
+
+<pre id="md1">
+<xmp>
+<!--주석문 -->
+<!--markdown은 표준화가 안되서 특히 일부 latex 수식의 경우 구현이 안되는 경우도 있다. 본 문장은 vscode를 기준으로
+한 것이다. -->
+
+<style>
+r { color: Red }
+o { color: Orange }
+g { color: Green }
+b { color: Blue }
+</style>
+
+markdown 연습
+================
+
+# <a id="con"> 목차 <a>
+
+- [1. 제목](#1-제목)
+- [2. 문장](#2-문장)
+- [3. 링크](#3-링크) 
+- [4. 표](#4-표)
+- [5. 수식](#5-수식)
+- [6. 문장내 링크](#6-문장내-링크)
+
+
+<br><br>
+
+## <r> 1. 제목
+<br>
+
+대제목은 '#'를 붙이거나 '===='로 밑줄친다.
+
+```
+# 대제목(H1 태그)
+```
+
+# 대제목(H1 태그)
+
+```
+대제목(H1 태그)
+====
+```
+
+대제목(H1 태그)
+====
+
+중제목은 '##'를 붙이거나 '----'로 밑줄친다.
+
+```
+## 중제목(H2 태그)
+```
+
+## 중제목(H2 태그)
+
+```
+중제목(H2 태그)
+----
+```
+
+중제목(H2 태그)
+----
+
+<br>
+
+소제목은 '###', 이후로 # 갯수가 늘수록 크기가 작아짐
+
+```
+### 소제목(H3 태그)
+```
+
+### 소제목(H3 태그)
+
+<br>
+
+## <r> 2. 문장
+<br>
+
+### <o> ■ 문장 형식
+
+```
+<p>HTML 문법을 사용할 수 있다.</P>
+
+이텔릭체는 *별표* 또는 _언더바_ 사용
+
+찐한체는 **쌍별표** 혹은 __쌍언더바__ 사용
+
+이텔릭체와 찐한체 **_동시_** 사용
+
+취소선은 ~~물결표시(tilde)~~ 사용
+
+<u>밑줄</u>은 `<u></u>`를 사용
+```
+
+<p>HTML 문법을 사용할 수 있다.</P>
+
+이텔릭체는 *별표* 또는 _언더바_ 사용
+
+찐한체는 **쌍별표** 혹은 __쌍언더바__ 사용
+
+이텔릭체와 찐한체 **_동시_** 사용
+
+취소선은 ~~물결표시(tilde)~~ 사용
+
+<u>밑줄</u>은 `<u></u>`를 사용
+<br><br>
+
+### <o> ■ 인라인(inline) 코드 강조
+<br>
+
+```
+백틱(ˋ)으로 문자열을 두름
+`background` 혹은 `background-image` 속성으로 요소에 배경 이미지를 삽입할 수 있습니다.
+```
+
+백틱(ˋ)으로 문자열을 두름
+`background` 혹은 `background-image` 속성으로 요소에 배경 이미지를 삽입할 수 있습니다.
+
+### <o> ■ 블록(block) 코드 강조
+<br>
+3개의 백틱(ˋˋˋ)으로 문장을 두름
+
+```
+마크다운(Markdown)은 존 그루버(John Gruber)와 아론 스워츠
+(Aaron Swartz)가 만들었다. 온갖 태그로 범벅된 HTML 문서 
+등과 달리, 읽기도 쓰기도 쉬운 문서 양식을 지향한다. 
+```
+
+```
+html
+<a href="https://www.google.co.kr/" target="_blank">GOOGLE</a>
+```
+
+```c
+#include <stdio.h>
+int main()
+{
+    printf("Hello, world!\n");
+    return 0;
+}
+```
+
+### <o> ■ 목록 표현
+
+목록에는 번호를 순서대로 매기지 않아도 자동 정렬된다.
+```
+1. 순서가 필요한 목록
+3. 순서가 필요한 목록 
+     - 순서가 필요하지 않은 목록(서브) 
+     - 순서가 필요하지 않은 목록(서브) 
+2. 순서가 필요한 목록 
+    1. 순서가 필요한 목록(서브) 
+    1. 순서가 필요한 목록(서브)
+1. 순서가 필요한 목록
+- 순서가 필요하지 않은 목록에 사용 가능한 기호
+
+    - 대쉬(hyphen) 
+    * 별표(asterisks) 
+    + 더하기(plus sign)
+```
+
+1. 순서가 필요한 목록
+1. 순서가 필요한 목록 
+     - 순서가 필요하지 않은 목록(서브) 
+     - 순서가 필요하지 않은 목록(서브) 
+1. 순서가 필요한 목록 
+    1. 순서가 필요한 목록(서브) 
+    1. 순서가 필요한 목록(서브)
+1. 순서가 필요한 목록
+- 순서가 필요하지 않은 목록에 사용 가능한 기호
+
+    - 대쉬(hyphen) 
+    * 별표(asterisks) 
+    + 더하기(plus sign)
+<br>
+
+### <o> ■ 수평선
+
+-, *, _ 각 기호를 3개 이상 입력
+
+```
+---
+(Hyphens)
+
+***
+(Asterisks)
+
+___
+(Underscores)
+```
+
+---
+(Hyphens)
+
+***
+(Asterisks)
+
+___
+(Underscores)
+
+
+<br><br>
+
+## <r> 3. 링크 
+<br>
+
+### <o> ■ 웹페이지 링크
+<br>
+
+링크는 대괄호로 묶음
+
+```
+[GOOGLE](https://google.com)
+```
+
+[GOOGLE](https://google.com)
+
+```
+[GitHub][1]
+
+[1]: https://github.com
+```
+
+[GitHub][1]
+
+[1]: https://github.com
+
+```
+[참조 링크]: https://naver.com
+``` 
+
+문서 안에서 [참조 링크]를 그대로 사용할 수도 있다.
+
+[참조 링크]: https://naver.com
+
+문서 내 URL이나 꺾쇠(<...>)안의 URL은 자동으로 링크를 적용
+```
+구글 홈페이지: https://google.com 
+
+네이버 홈페이지: <https://naver.com> 
+```
+구글 홈페이지: https://google.com 
+
+네이버 홈페이지: <https://naver.com> 
+<br><br>
+
+### <o> ■ 이미지 링크
+<br>
+
+대괄호 앞에 ! 붙임
+
+```
+![그림1](./image-test.jpg)
+![그림2](http://www.gstatic.com/webp/gallery/5.jpg)
+![그림3][logo]
+
+ [logo]: http://www.gstatic.com/webp/gallery/2.jpg
+ ![그림4](./images/vue.png)](https://kr.vuejs.org/)
+```
+```
+[그림3][logo]와 [logo]: http://www.gstatic.com/webp/gallery/2.jpg 사이에 한 줄 띄어야 됨. md 명령은 명령줄간 한 줄 띄어써야 실행되는 경우가 많음
+```
+![그림1](./image-test.jpg)
+![그림2](http://www.gstatic.com/webp/gallery/5.jpg)
+![그림3][logo]
+
+ [logo]: http://www.gstatic.com/webp/gallery/2.jpg
+ ![그림4](./images/vue.png)](https://kr.vuejs.org/)
+<br><br>
+
+### <o> 목차 및 문장내 링크
+<br>
+본문 처음의 목차는 다음 코드로 작성된 것이다.
+공백은 -으로 연결, 
+.(구둣점)은 제외,
+영어의 경우 첫 글자는 소문자로 시작
+
+```
+# <a id="con"> 목차 <a>
+
+- [1. 제목](#1-제목)
+- [2. 문장](#2-문장)
+- [3. 링크](#3-링크) 
+- [4. 표](#4-표)
+- [5. 수식](#5-수식)
+- [6. 문장내 링크](#6-문장내-링크)
+```
+
+html 같이 id tag를 사용해 연결할 수도 있다.
+
+```
+<a id="con"> 목차 <a>
+...
+[TOP](#con)
+```
+
+[TOP](#con)
+
+### <o> 각주
+
+마크다운 (Markdown)은 마크업 언어의 일종으로, 존 그루버(John Gruber)[^f1]와 아론 스워츠(Aaron Swartz)[^f2]가 만들었다. 확장자는 .md
+
+[^f1]: 유명한 애플 관련 블로거
+[^f2]: 레딧의 공동설립자이자 RSS를 고안하고 정보자유를 중점적으로 주장한 인터넷 활동가이자 프로그래머. 재판기록 같은 각종 공공정보를 무료로 대중에게 공개해야한다는 신념으로 활동하던 중 유료 저널 검색엔진 및 저장소인 JSTOR의 논문들을 다운받아 공개하려한 건으로 FBI 수사로 기소되어 재판과정 중에 자살로 생을 마감했다.
+
+## <r> 4. 표
+<br>
+헤더 셀을 구분할 때 3개 이상의 -(hyphen/dash) 기호가 필요합니다.
+헤더 셀을 구분하면서 :(Colons) 기호로 셀(열/칸) 안에 내용을 정렬할 수 있습니다.
+가장 좌측과 가장 우측에 있는 |(vertical bar) 기호는 생략 가능합니다.
+
+```
+#### <b> 용의자의 딜레마
+| 갑\을 | 협조 | 배신 |
+|---|---|---|
+| **협조** | -1,-1 | -9,0 |
+| **배신** | 0,-9 | -5,-5 |
+```
+#### <b> <표> 용의자의 딜레마 </b>
+| 갑\을 | 협조 | 배신 |
+|---|---|---|
+| **협조** | -1,-1 | -9,0 |
+| **배신** | 0,-9 | -5,-5 |
+
+
+
+<br><br>
+
+## <r> 5. 수식
+<br>
+수식은 latex 명령어를 쓴다.
+
+### <o> ■ block 수식
+
+- block 수식은 `$$...$$`, 혹은 `\[...\]` 를 사용한다.
+- viewer에 따라 수식표현이 안 되는 것도 있다.
+- viewer에 따라 `\[...\]` 이 안 되는 것도 있다.
+- viewer에 따라  `\`(백슬래쉬)를 인식하기 위해 \를 앞에 추가해야 하는 경우도 있다.
+
+```
+$$x=\frac{-b+\sqrt{b^2-4ac}}{2a}$$
+
+\[ \frac{1+s}{s(s+2)} \]
+
+$$\begin{pmatrix}1&2 \\ 3&4 \\ \end{pmatrix}$$
+
+$$\vert x\vert=
+\begin{cases}
+-x,\;if\;x<0 \\\\
++x,\;if\;x\geq0
+\end{cases}$$
+```
+
+$$x=\frac{-b+\sqrt{b^2-4ac}}{2a}$$
+\[ \frac{1+s}{s(s+2)} \]
+$$\begin{pmatrix}1&2 \\ 3&4 \\ \end{pmatrix}$$
+
+$$\vert x\vert=
+\begin{cases}
+-x,\;if\;x<0 \\\\
++x,\;if\;x\geq0
+\end{cases}$$
+<br>
+
+### <o> ■ inline 수식
+
+- inline 수식은 `$...$`, 혹은 `\(...\)` 를 사용한다. 
+- viewer에 따라 `\(...\)`이 안되는 것도 있다.
+
+```
+This expression $\sqrt{3x-1}+(1+x)^2$ is an example of an inline equation.
+This expression \( \sqrt{3x-1}+(1+x)^2 \) is an example of an inline equation.
+```
+
+This expression $\sqrt{3x-1}+(1+x)^2$ is an example of an inline equation.
+
+This expression \(  \sqrt{3x-1}+(1+x)^2  \) is an example of an inline equation.
+<br><br>
+
+
+
+
+</xmp>
+</pre>
+
+</div>

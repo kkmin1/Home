@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="blog.css">
+    <title>반복게임 (Repeated Game) - 상세 분석</title>
+    <style>
+        .payoff-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .payoff-table th,
+        .payoff-table td {
+            border: 2px solid var(--border-color);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .payoff-table th {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        .player-label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .payoff-cell {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .strategy-box {
+            background: #f8fafc;
+            border-left: 5px solid var(--accent-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .model-desc-box {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax:
+            {
+                inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                displayMath: [['$$', '$$'], ["\\[", "\\]"]],
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
+</head>
+
+<body class="sub-page-body">
+    <div id="min2">
+        <h1>반복게임 (Repeated Game): 전략적 협력과 보복의 경제학</h1>
+
+        <h2>1. 서론: 왜 반복인가?</h2>
+        <p>현실 세계의 많은 경제적 상호작용은 일회성으로 끝나지 않습니다. '용의자의 딜레마' 게임이 단 한 번만 진행된다면, 합리적인 경기자들은 서로를 배신하는 것이 지배전략이 됩니다. 그러나 게임이
+            반복된다면, '미래의 그림자(Shadow of the Future)'가 현재의 결정에 결정적인 영향을 미칩니다.</p>
+
+        <h2>2. 수학적 모델의 설정 (Model Setup)</h2>
+        <p>반복게임을 엄밀하게 분석하기 위해 다음과 같은 수학적 환경을 설정합니다.</p>
+        <div class="model-desc-box">
+            <ul>
+                <li><strong>경기자(Players):</strong> $i \in \{1, 2, \dots, n\}$ 명이 참여합니다.</li>
+                <li><strong>스테이지 게임(Stage Game):</strong> 매 기수($t$)마다 반복되는 기초적인 게임 $G$입니다.</li>
+                <li><strong>보수(Payoff):</strong> 경기자 $i$가 시점 $t$에서 얻는 보수를 $\pi_i(t)$라 합니다.</li>
+                <li><strong>할인 인자(Discount Factor, $\delta$):</strong> 미래의 보수를 현재 가치로 환산하는 비율입니다 ($0 \le \delta < 1$).
+                        이는 미래에 대한 인내심이나 게임이 계속될 확률을 의미합니다.</li>
+                <li><strong>전체 보수(Total Payoff):</strong> 시점 $t=0$부터 무한히 반복될 때의 총 보수 $V_i$는 다음과 같이 정의됩니다.
+                    <p>$$ V_i = \sum_{t=0}^{\infty} \delta^t \pi_i(t) = \pi_i(0) + \delta \pi_i(1) + \delta^2 \pi_i(2) +
+                        \cdots $$</p>
+                </li>
+            </ul>
+        </div>
+
+        <h2>3. 표준 모델: 용의자의 딜레마 스테이지 게임</h2>
+        <p>위 모델을 구체적인 수치로 분석하기 위해, 아래의 보수 행렬을 가진 일회성 게임이 매 기수 반복된다고 가정합니다.</p>
+
+        <table class="payoff-table">
+            <tr>
+                <th colspan="2" rowspan="2"></th>
+                <th colspan="2">경기자 B</th>
+            </tr>
+            <tr>
+                <th>협력 (C)</th>
+                <th>배신 (D)</th>
+            </tr>
+            <tr>
+                <th rowspan="2" style="writing-mode: vertical-rl; text-orientation: mixed;">경기자 A</th>
+                <th>협력 (C)</th>
+                <td class="payoff-cell">(3, 3)</td>
+                <td class="payoff-cell" style="color: #e11d48;">(0, 5)</td>
+            </tr>
+            <tr>
+                <th>배신 (D)</th>
+                <td class="payoff-cell" style="color: #059669;">(5, 0)</td>
+                <td class="payoff-cell">(1, 1)</td>
+            </tr>
+        </table>
+        <p style="text-align: center; font-size: 0.9rem; color: #64748b;">[표 1] 표준 용의자의 딜레마 보수 행렬</p>
+
+        <h2>4. 협력의 유인 조건 분석</h2>
+        <p>경기자 A가 '함정 전략(Grim Trigger)'을 사용한다고 가정합시다. 이 전략이 내쉬균형이 되려면, <strong>협력을 유지할 때의 총 보수($V_{coop}$)</strong>가
+            <strong>배신했을 때의 총 보수($V_{defect}$)</strong>보다 크거나 같아야 합니다.</p>
+
+        <div class="strategy-box">
+            <ul>
+                <li><strong>협력 시 ($V_{coop}$):</strong> 매 라운드 3씩 받으므로, $3 + 3\delta + 3\delta^2 + \cdots =
+                    \frac{3}{1-\delta}$</li>
+                <li><strong>배신 시 ($V_{defect}$):</strong> 첫 라운드에 배신해서 5를 얻지만, 그 후 영원히 배신당해 1씩 받으므로, $5 + 1\delta +
+                    1\delta^2 + \cdots = 5 + \frac{\delta}{1-\delta}$</li>
+            </ul>
+            <p>따라서 조건은: $$ \frac{3}{1-\delta} \ge 5 + \frac{\delta}{1-\delta} $$</p>
+            <p>이 부등식을 풀면 <strong>$\delta \ge \frac{1}{2}$</strong> 일 때 협력이 가능함을 알 수 있습니다.</p>
+        </div>
+
+        <h2>5. 결론: 상호 신뢰의 수학적 토대</h2>
+        <p>반복게임 모델은 '미래'라는 변수가 이기적인 개인들을 어떻게 협력으로 이끄는지 증명합니다. 할인 인자 $\delta$가 높다는 것은 경기자들이 서로를 다시 볼 가능성이 높거나 미래를 소중히
+            여긴다는 뜻이며, 이것이 바로 건강한 사회를 유지하는 수학적 토대가 됩니다.</p>
+
+        <br>
+        <a href="game.html">뒤로 가기</a>
+    </div>
+</body>
+
+</html>

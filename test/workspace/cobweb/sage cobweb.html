@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>A Miniature Grapher of Polynomials</title>
+    <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
+    <script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
+    <script>
+$(function () {
+    // Make *any* div with class 'compute' a Sage cell
+    sagecell.makeSagecell({inputLocation: 'div.compute',
+    						template:       sagecell.templates.minimal, 
+            //               evalButtonText: 'Launch the Interactive Applet Now',
+                            autoeval:true});
+});
+    </script>
+  </head>
+  <body style="width: 1000px;">
+
+<! you may start modifying below this point!>
+<! you may start modifying below this point!>
+<! you may start modifying below this point!>
+<! you may start modifying below this point!>
+<! you may start modifying below this point!>
+
+  <h1>cobweb diagram</h1>
+
+<p>An Interactive Applet powered by Sage and MathJax.</p>
+<p>(By Kwanki Min)</p>
+
+<hr>
+
+<h2>개요</h2>
+<p>blah blah blah</p>
+
+<p>yada yada yada</p>
+
+<p>blah blah blah</p>
+
+<h2>Instructions</h2>
+<p>blah blah blah</p>
+
+<p>yada yada yada</p>
+
+<div class="compute">
+	
+<script type="text/x-sage">
+
+# 역함수 구하는 함수
+def inv(f, x):
+    y = SR.var('y')
+    g = (f - y).roots(x, multiplicities=False)
+    return [expr.subs(y=x) for expr in g]
+
+
+@interact
+def grapher(start=range_slider(0,3, default=(0,3)),  dem=input_box(5-0.7*x, label="수요함수"), sup=input_box(1.1*x+1, label="공급함수"), min=0, max=10, iterations=10):
+    sinv=inv(sup, x)
+    d=plot(dem, min, max, ymin=min, ymax=max)
+    s=plot(sup, min, max, ymin=min, ymax=max)
+   
+    iter= [[start,0], [start, dem(x=start)]]
+    cur=dem(x=start)
+    for i in range(iterations):
+          cur2= sinv(x=cur)
+          iter.append([cur2,cur])
+          cur=dem(x=cur2)
+          iter.append([cur2,cur])
+# cobweb = line(iter_list, color = 'red')
+    cobweb=sum([arrow(iter[i],iter[i+1], width=1, arrowsize=2, rgbcolor=(1,0,0)) for i in range(iterations)])
+    demand = text( "d",(5, 2), fontsize=20 )
+    supply = text( "s",(5, 7), fontsize=20 )
+    grp = d+s+cobweb+demand+supply
+    grp.axes_labels(["Q", "P"])
+ #   P=p1+p2+p3
+    show(grp)
+    
+</script>
+</div>
+
+<h2>Discussion</h2>
+
+<p>blah blah blah</p>
+
+<p>yada yada yada</p>
+
+<p>blah blah blah</p>
+
+<hr>
+Last modified on July 15th, 2014.
+</body>
+</html>

@@ -1,0 +1,180 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./jquery.svg.css"> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="./jquery-svg/jquery.svg.js"></script>
+<script type="text/javascript" src="./jquery-svg/jquery.svgdom.js"></script>
+<script type="text/javascript" src="./jquery-svg/jquery.svganim.js"></script>
+
+<style>
+body {
+    background-color: #b2e9e4;
+}
+
+svg.graph {
+    height: 500px;
+    width: 800px;
+}
+
+svg.graph .grid {
+    stroke: white;
+    stroke-dasharray: 1 2;
+    stroke-width: 1;
+}
+svg.graph .points .plain {
+    stroke: white;
+    stroke-width: 3;
+}
+svg.graph .first_set {
+    fill: #00554d;
+}
+svg.graph .surfaces {
+    fill-opacity: 0.5;
+}
+svg.graph .grid.double {
+    stroke-opacity: 0.4;
+}
+svg.graph .labels {
+    font-family: Arial;
+    font-size: 14px;
+    kerning: 1;
+}
+svg.graph .labels.x-labels {
+    text-anchor: middle;
+}
+svg.graph .labels.y-labels {
+    text-anchor: end;
+}
+svg.graph rect.indicator {
+    stroke-width: 1px;
+    stroke: #bfcdcb;
+    fill: white;
+    display: none;
+}
+svg.graph .triggerLines {
+    stroke-width: 60;
+    stroke: transparent;
+}
+#tooltip {
+    position: absolute;
+    background: black;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: lighter;
+    padding: 9px 11px 0px 11px;
+    display: none;
+    z-index: 100 !important;
+    width: 165px;
+    min-height: 80px;
+    box-shadow: 1px 1px 1px 0px #000;
+}
+#tooltip.right {
+    box-shadow: -1px 1px 1px 0px #000;
+}
+#tooltip.right svg {
+    left: auto;
+    right: 0px;
+}
+#tooltip svg {
+    position: absolute;
+    display: inline;
+    float: right;
+    left: 0px;
+    right: auto;
+    top: -13px;
+    width: 11px;
+    height: 13px;
+}
+#tooltip #tooltip-triangle {
+    background: black;
+    fill: rgba(0, 0, 0, 0.8);
+}
+#tooltip .value .value-part {
+    font-size: 32px;
+    vertical-align: top;
+    position: relative;
+    top: -3px;
+}
+</style>
+</head>
+	
+<body>
+<div id="tooltip" style="">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <polygon id="tooltip-triangle" points="0,0 11,13 0,13"></polygon>
+    </svg>
+    <p id="tooltip-title"></p>
+    <div class="value"> <span class="value-part"></span>
+ <span class="value-total">Weeks</span>
+
+    </div>
+</div>
+<svg class="graph" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" id="gradientShadow" r="55%">
+            <stop offset="0%" style="stop-color:rgb(0,0,0); stop-opacity:1"></stop>
+            <stop offset="100%" style="stop-color: #AAA; stop-opacity:0"></stop>
+        </radialGradient>
+    </defs>
+    <g class="grid x-grid" id="xGrid">
+        <line x1="113" x2="113" y1="10" y2="380"></line>
+        <line x1="259" x2="259" y1="10" y2="380"></line>
+        <line x1="405" x2="405" y1="10" y2="380"></line>
+        <line x1="551" x2="551" y1="10" y2="380"></line>
+        <line x1="697" x2="697" y1="10" y2="380"></line>
+    </g>
+    <g class="grid y-grid" id="yGrid">
+        <line x1="86" x2="697" y1="10" y2="10"></line>
+        <line x1="86" x2="697" y1="68" y2="68"></line>
+        <line x1="86" x2="697" y1="126" y2="126"></line>
+        <line x1="86" x2="697" y1="185" y2="185"></line>
+        <line x1="86" x2="697" y1="243" y2="243"></line>
+        <line x1="86" x2="697" y1="301" y2="301"></line>
+        <line x1="86" x2="697" y1="360" y2="360"></line>
+    </g>
+    <g class="surfaces">
+        <path class="first_set" d="M113,360 L113,192 L259,171 L405,179 L551,200 L697,204 L697,360 Z"></path>
+    </g>
+    <use class="grid double" xlink:href="#xGrid" style=""></use>
+    <use class="grid double" xlink:href="#yGrid" style=""></use>
+    <rect class="indicator" height="192" width="3" x="111" y="192"></rect>
+    <g class="triggerLines">
+        <line x1="113" x2="113" y1="360" y2="192"></line>
+        <line x1="259" x2="259" y1="360" y2="171"></line>
+        <line x1="405" x2="405" y1="360" y2="179"></line>
+        <line x1="551" x2="551" y1="360" y2="200"></line>
+        <line x1="697" x2="697" y1="360" y2="204"></line>
+    </g>
+    <g class="first_set points" data-setname="Submission to first decision">
+        <circle class="shadow" cx="113" cy="192" r="5" stroke="#AAA" stroke-width="4" stroke-opacity="1" style="fill: url(#gradientShadow);"></circle>
+        <circle class="plain" cx="113" cy="192" data-value="7.2" r="5"></circle>
+        <circle class="shadow" cx="259" cy="171" r="5" stroke="#AAA" stroke-width="4" stroke-opacity="1" style="fill: url(#gradientShadow);"></circle>
+        <circle class="plain" cx="259" cy="171" data-value="8.1" r="5"></circle>
+        <circle class="shadow" cx="405" cy="179" r="5" stroke="#AAA" stroke-width="4" stroke-opacity="1" style="fill: url(#gradientShadow);"></circle>
+        <circle class="plain" cx="405" cy="179" data-value="7.7" r="5"></circle>
+        <circle class="shadow" cx="551" cy="200" r="5" stroke="#AAA" stroke-width="4" stroke-opacity="1" style="fill: url(#gradientShadow);"></circle>
+        <circle class="plain" cx="551" cy="200" data-value="6.8" r="5"></circle>
+        <circle class="shadow" cx="697" cy="204" r="5" stroke="#AAA" stroke-width="4" stroke-opacity="1" style="fill: url(#gradientShadow);"></circle>
+        <circle class="plain" cx="697" cy="204" data-value="6.7" r="5"></circle>
+    </g>
+    <g class="labels x-labels">
+        <text x="113" y="400">2008</text>
+        <text x="259" y="400">2009</text>
+        <text x="405" y="400">2010</text>
+        <text x="551" y="400">2011</text>
+        <text x="697" y="400">2012</text>
+    </g>
+    <g class="labels y-labels">
+        <text x="80" y="15">15</text>
+        <text x="80" y="131">10</text>
+        <text x="80" y="248">5</text>
+        <text x="80" y="365">0</text>
+        <text x="50" y="15">Weeks</text>
+    </g>
+</svg>
+
+  <script src="tooltip.js">This is the inside of the script tag.</script>
+</body>
+</html>

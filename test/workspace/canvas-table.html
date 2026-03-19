@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas Table</title>
+    <script src="canvas-table.js"></script>
+</head>
+<body>
+
+<canvas id="canvas-table"></canvas>
+
+<script type="text/javascript" language="javascript">
+    function drawSampleTable(cols, rows) {
+        const table = new CanvasTable('canvas-table', 50, 30, cols, rows);
+
+        table.insertMenuItem("Item 1");
+        table.insertMenuItem("Item 2");
+        table.insertMenuItem("Item 3");
+
+        table.insertItem(0, 0, "Col 1", true);
+        table.insertItem(1, 0, "Col 2", true);
+        table.insertItem(2, 0, "Col 3", true);
+        table.insertItem(3, 0, "Col 4", true);
+
+        table.insertItem(1, 2, "Val 1");
+        table.insertItem(2, 3, "Val 2");
+        table.draw();
+    }
+
+    k = 4;
+    n = 5;
+    drawSampleTable(k, n);
+</script>
+
+</body>
+</html>

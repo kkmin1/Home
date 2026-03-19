@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>cobweb.js</title>
+  </head>
+  <body>
+    <!-- add CSS for canvas to be a fixed % of screen size? -->
+
+    <!-- brief intro -->
+    <h1>Welcome to cobweb.js, a <a href="https://en.wikipedia.org/wiki/Cobweb_plot">cobweb diagram</a> applet using <a href="https://en.wikipedia.org/wiki/Canvas_element">HTML5 canvas</a></h1>
+
+    <!-- boxes for equation and parameters -->
+    <!-- TODO: use a table for allignment? -->
+    <p>Function: <input type="text" id="func" autofocus="true" placeholder="1.95*x*Math.sin(1/x)" /> &nbsp;(Note: This uses JavaScript syntax. See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math">here</a> for math syntax.)</p>
+    <p>XMin: <input type="text" id="xmin" size="5" placeholder="-.5"/> &nbsp;&nbsp;&nbsp; YMin: <input type="text" id="ymin" size="5" placeholder="-.5"/></p>
+    <p>XMax: <input type="text" id="xmax" size="5" placeholder=".5"/> &nbsp;&nbsp;&nbsp; YMax: <input type="text" id="ymax" size="5" placeholder=".5"/></p>
+    <p>Initial value: <input type="text" id="x1" size="8" placeholder="0.51"/></p>
+    <p>Iterations: <input type="text" id="iters" size="5" placeholder="100"/> &nbsp;(Note: Performance may suffer above 10000.)</p>
+
+    <!-- TODO: consider adding transient iterations and invert mode -->
+
+    <!-- button to activate script that generates canvas content -->
+    <p><button id="generate" onclick="generate()">Generate cobweb diagram!</button>
+	<button id="cont" onclick="cont()">Moar iterations!</button>
+	<button id="clearCont" onclick="clearCont()">Clear and MOAR iterations!</button></p>
+
+    <!-- <canvas> that it's actually drawn onto; generate at high resolution and use CSS to scale it? -->
+    <canvas id="canvas" width="600" height="600">If your browser supported the <a href="https://en.wikipedia.org/wiki/Canvas_element">HTML5 canvas element</a>, then the cobweb diagram would display here.</canvas>
+
+    <!-- copyright and author notice -->
+    <p>The cobweb.js code is copyright ®2017 Mark Haferkamp. This is available under <a href="LICENSE">the MIT license</a> and the latest code will generally be available at <a href="https://github.com/refola/cobweb.js">github.com/refola/cobweb.js</a>.</p>
+
+    <!-- load scripts -->
+    <script src="./cobweb.js">This is the inside of the script tag.</script>
+    <script src="./params.js"></script>
+    <noscript>Please enable JavaScript for this to work.</noscript>
+    <p>Graph URL: <span id="url">???</span></p>
+    <p>Examples:
+	<ul><li><a href="#{%22xmin%22:0,%22xmax%22:1,%22ymin%22:0,%22ymax%22:1,%22x1%22:0.51,%22iters%22:100,%22func%22:%224*x*(1-x)%22}">Logistic map</a></li>
+	<li><a href="#{%22xmin%22:-1,%22xmax%22:1,%22ymin%22:-1,%22ymax%22:1,%22x1%22:0.2,%22iters%22:100,%22func%22:%221.95*x*Math.sin(1/x)%22}">Does it converge?</a></li>
+	<li><a href="#{%22xmin%22:0,%22xmax%22:1,%22ymin%22:0,%22ymax%22:1,%22x1%22:0.51,%22iters%22:100,%22func%22:%223.57*x*(1-x)%22}">a=3.57</a></li>
+	<li><a href="">x </a></li>
+	<li><a href="">x </a></li>
+	</ul>
+  </body>
+</html>

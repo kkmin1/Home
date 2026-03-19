@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="blog.css">
+    <title>진화게임 (Evolutionary Game) - 상세 분석</title>
+    <style>
+        .payoff-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .payoff-table th,
+        .payoff-table td {
+            border: 2px solid var(--border-color);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .payoff-table th {
+            background-color: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .hawk-color {
+            color: #b91c1c;
+            font-weight: bold;
+        }
+
+        .dove-color {
+            color: #0891b2;
+            font-weight: bold;
+        }
+
+        .dynamics-box {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 150px;
+            border-bottom: 3px solid #64748b;
+            margin: 40px 0;
+            padding-bottom: 10px;
+        }
+
+        .bar {
+            width: 60px;
+            transition: height 0.5s ease;
+            position: relative;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .model-spec {
+            background: #fff1f2;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #fecdd3;
+            margin: 20px 0;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax:
+            {
+                inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                displayMath: [['$$', '$$'], ["\\[", "\\]"]],
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
+</head>
+
+<body class="sub-page-body">
+    <div id="min2">
+        <h1>진화게임 (Evolutionary Game): 자연선택과 전략의 공진화</h1>
+
+        <h2>1. 진화 게임의 수학적 환경 (Model Setup)</h2>
+        <p>진화게임은 합리적인 의사결정 대신 <strong>적응적 동학</strong>을 중시합니다. 모형의 핵심 설정은 다음과 같습니다.</p>
+
+        <div class="model-spec">
+            <ul>
+                <li><strong>모집단 (Population):</strong> 무한히 큰 개체군에서 무작위로 두 개체가 만난다고 가정합니다.</li>
+                <li><strong>전략 집합 ($S$):</strong> 개체들이 물려받은 행동 형질입니다 (예: 매, 비둘기).</li>
+                <li><strong>분포 ($x_i$):</strong> 전체 집단에서 전략 $i$를 사용하는 개체의 비율입니다 ($0 \le x_i \le 1$).</li>
+                <li><strong>적합도 (Fitness, $f_i$):</strong> 게임에서 얻은 보수가 곧 생존과 번식 확률로 직결된다고 봅니다.</li>
+                <li><strong>복제자 동학 (Replicator Dynamics):</strong> 전략 점유율 $x_i$가 시간에 따라 변하는 법칙입니다.
+                    <p>$$ \dot{x}_i = x_i [f_i(x) - \bar{f}(x)] $$</p>
+                    <p style="font-size: 0.85rem; color: #64748b;">(단, $f_i(x)$는 전략 $i$의 보수, $\bar{f}(x)$는 집단 전체의 평균 보수)
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <h2>2. 고전적 사례: 매-비둘기(Hawk-Dove) 모델</h2>
+        <p>자원을 놓고 경쟁하는 두 개체 사이의 보수 파라미터를 다음과 같이 설정합니다.</p>
+        <div style="padding-left: 20px; font-style: italic;">
+            - $V$: 자원의 가치 (얻었을 때의 이득)<br>
+            - $C$: 싸움의 비용 (부상 당했을 때의 손실)
+        </div>
+
+        <table class="payoff-table">
+            <tr>
+                <th colspan="2" rowspan="2"></th>
+                <th colspan="2">상대 개체</th>
+            </tr>
+            <tr>
+                <th class="hawk-color">매 (Hawk)</th>
+                <th class="dove-color">비둘기 (Dove)</th>
+            </tr>
+            <tr>
+                <th rowspan="2" style="writing-mode: vertical-rl; text-orientation: mixed; background: #fff;">나의 전략</th>
+                <th class="hawk-color">매 (H)</th>
+                <td style="background: #fee2e2;">($\frac{V-C}{2}, \frac{V-C}{2}$)</td>
+                <td>($V, 0$)</td>
+            </tr>
+            <tr>
+                <th class="dove-color">비둘기 (D)</th>
+                <td>($0, V$)</td>
+                <td style="background: #ecfdf5;">($\frac{V}{2}, \frac{V}{2}$)</td>
+            </tr>
+        </table>
+
+        <h2>3. 진화적 안정 전략(ESS)의 수리적 도출</h2>
+        <p>만약 $V < C$라면 (싸움의 비용이 크다면), 어떤 전략이 집단을 지배할까요? 매의 비율을 $p$라 할 때 각 전략의 기대 보수(적합도)를 계산합니다.</p>
+
+                <div
+                    style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin: 20px 0;">
+                    <p>1. 매의 기대 적합도: $f_H = p(\frac{V-C}{2}) + (1-p)V$</p>
+                    <p>2. 비둘기의 기대 적합도: $f_D = p(0) + (1-p)\frac{V}{2}$</p>
+                    <p><strong>균형 조건 ($f_H = f_D$):</strong> 두 전략의 보수가 같아야 더 이상의 비율 변화가 멈춥니다.</p>
+                    <p>이를 정리하면 최종적인 매의 비율 $p$는 다음과 같습니다: $$ p^* = \frac{V}{C} $$</p>
+                </div>
+
+                <h2>4. 결론: 상호 공존의 지혜</h2>
+                <p>수학적으로 $p^* = V/C$라는 결과는 자원의 가치가 클수록 매가 많아지고, 싸움의 비용이 클수록 비둘기가 많아짐을 의미합니다. 진화게임 모델은 이기적인 개체들 사이에서도 왜
+                    무조건적인 폭력 대신 '섞임'과 '공존'이 나타나는지를 명쾌하게 설명해 줍니다.</p>
+
+                <br>
+                <a href="game.html">뒤로 가기</a>
+    </div>
+</body>
+
+</html>

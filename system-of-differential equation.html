@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="blog.css">
+    <title>미분방정식과 응용</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax:
+            {
+                inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                displayMath: [['$$', '$$'], ["\\[", "\\]"]],
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
+</head>
+
+<body class="sub-page-body">
+    <div id="min2">
+        <h1>미분방정식과 응용 (Differential Equations)</h1>
+
+        <h2>1. 개요</h2>
+        <p>경제학에서 미분방정식은 시간에 따라 연속적으로 변화하는 변수들 간의 관계를 분석하는 데 사용됩니다. 지속적인 동태적 변화를 묘사하는 데 핵심적인 도구입니다.</p>
+
+        <h2>2. 1계 선형 미분방정식</h2>
+        <p>가장 기본적인 형태로, $\frac{dy}{dt} + ay = b$의 꼴을 가집니다. 일반해는 동차해(Complementary Function)와 특수해(Particular Integral)의
+            합으로 구성됩니다.</p>
+        <p>수렴 조건은 계수 $a > 0$일 때 시간이 흐름에 따라 균형값 $b/a$로 수렴하게 됩니다.</p>
+
+        <h2>3. 미분방정식계</h2>
+        <p>두 개 이상의 상호 의존적인 변수들의 변화를 다룹니다. 고유값(Eigenvalues)과 고유벡터(Eigenvectors)를 이용하여 시스템의 안정성을 분석합니다.</p>
+        <p>고유값의 실수 부분이 모두 음수이면 시스템은 안정적(Stable)입니다.</p>
+
+        <h2>4. 경제학적 응용</h2>
+        <p><strong>성장이론:</strong> 솔로우 모델(Solow Model)에서 자본 축적 경로 $ \dot{k} = sf(k) - (n+\delta)k $ 분석에 사용됩니다.</p>
+        <p><strong>가격 동학:</strong> 초과 수요에 따른 가격 변동 메커니즘을 묘사할 때 필수적입니다.</p>
+
+        <br>
+        <a href="eco-math2.html">뒤로 가기</a>
+    </div>
+</body>
+
+</html>

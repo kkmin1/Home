@@ -1,0 +1,169 @@
+<html>
+
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" type="text/css" href="eco-math.css">
+  <link rel="stylesheet" type="text/css" href="footnote.css">
+
+<title>
+    comparative advantage
+</title>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+<script src="./latex.js"></script>
+
+</head>
+<body>
+
+<h1> 비교우위(comparative advantage)</h1>
+<br>
+
+<h2> 정의 </h2>
+<p> In an economic model, agents have a comparative advantage over others in producing a particular good if they can produce that good at a lower relative opportunity cost or autarky price, i.e. at a lower relative marginal cost prior to trade. Comparative advantage describes the economic reality of the work gains from trade for individuals, firms, or nations, which arise from differences in their factor endowments or technological progress.
+</p>
+<p>David Ricardo developed the classical theory of comparative advantage in 1817 to explain why countries engage in international trade even when one country's workers are more efficient at producing every single good than workers in other countries. He demonstrated that if two countries capable of producing two commodities engage in the free market (albeit with the assumption that the capital and labour do not move internationally), then each country will increase its overall consumption by exporting the good for which it has a comparative advantage while importing the other good, provided that there exist differences in labor productivity between both countries. Widely regarded as one of the most powerful yet counter-intuitive insights in economics, Ricardo's theory implies that comparative advantage rather than absolute advantage is responsible for much of international trade. </p>
+
+<h2> 가정</h2>
+<p>Let us consider two country A, B able to produce the goods \(\alpha\) and \(\beta\) by spending some time (the factor of production).</p>
+<p>The amounts of time that A has to use to produce one unit of the goods \(\alpha\) and \(\beta\) are respectively \(a_{1\alpha}\) and \(a_{1\beta}\). Similarly, the amounts of time that B has to use to produce one unit of the goods \(\alpha\) and \(\beta\) are respectively \(a_{2\alpha}\) and \(a_{2\beta}\). We assume that this \(a\) coefficients are strictly positive real numbers.</p>
+<p>While considering a trade between A and B, we can observe the amount of time that they actually chose to spend for the production of both good \(\alpha\) and \(\beta\). The amounts of time the country A spent on the production of goods \(\alpha\) and \(\beta\) are noted respectively \(L_{1\alpha}\) and \(L_{1\beta}\). Likewise, the amounts of time the country B spent on the production of goods \(\alpha\) and \(\beta\) are noted respectively \(L_{2\alpha}\) and \(L_{2\beta}\). We assume that the \(L\) coefficients are strictly positive real numbers.</p>
+
+<p>From this we can deduce that the production of goods \(\alpha\) by country A amounts to \(\dfrac{L_{1\alpha}}{a_{1\alpha}}\) units, whereas the production of goods \(\alpha\) by country A amounts to \(\dfrac{L_{1\beta}}{a_{1\beta}}\) units. In the same way, the production of goods \(\alpha\) by country B amounts to \(\dfrac{L_{2\alpha}}{a_{2\alpha}}\) units, whereas the production of goods \(\beta\) by country B amounts to \(\dfrac{L_{2\beta}}{a_{2\beta}}\)  units.</p>
+
+<p>After the trade has taken place, the country A possesses a quantity \(Q_{1\alpha}\) of goods \(\alpha\) and a quantity \(Q_{1\beta}\) of goods \(\beta\), and the country B possesses a quantity \(Q_{2\alpha}\) of goods \(\alpha\) and a quantity \(Q_{2\beta}\) of goods \(\beta\).</p>
+<p>For each country, the quantity of goods given to or received from the other country can be deduced from the difference between the quantity they possess in the end and the quantity they produce before the trade took place.</p>
+<p>For example, if the quantity of goods \(\alpha\) produced by the country A exceeds the quantity of goods \(\alpha\) possessed in the end by the country A, it means that A gave a quantity \(\dfrac{L_{1\alpha}}{a_{1\alpha}} - Q_{1\alpha}\) to the country B. In that case, the quantity of goods \(\alpha\) produced by the country B is inferior to the quantity of goods \(\alpha\) possessed in the end by the country B, meaning that B received \(Q_{2\alpha} - \dfrac{L_{2\alpha}}{a_{2\alpha}}\).</p>
+
+<p> country A has a comparative advantage in the production of a good relative to country B if it can produce that good at a lower opportunity cost relative to another country. Thus the US has a comparative advantage in cheese production relative to France if:
+</p>
+
+<p>\[\dfrac{a_{1\beta}}{a_{1\alpha}} < \dfrac{a_{2\beta}}{a_{2\alpha}} \]</p>
+<p>This means that the US must give up less wine to produce another pound of cheese than France must give up to produce another pound. </p>
+<br>
+
+<h2>The theorem</h2>
+<p>What we want to show is that, if the trade is advantageous for both countrys A and B, then they should specialize in the production of the good for wich they have a comparative advantage. In mathematical terms:</p>
+
+<h3 id="theorem1">Theorem 1</h3>
+<p>Under the assumptions detailed in the previous section, and if the trade is benefitting both countrys engaged in it, then:</p>
+<p>\[\left(\dfrac{a_{1\beta}}{a_{1\alpha}}-\dfrac{a_{2\beta}}{a_{2\alpha}}\right)\left(Q_{2\beta} - \dfrac{L_{2\beta}}{a_{2\beta}}\right) < 0\]</p>
+
+
+
+<p>Such an equation means that the country \({2}\) is exporting goods \({\beta}\) if this country has a comparative advantage for the production of these goods, and is importing them otherwise.</p>
+<p>Reciprocally, because goods \({\beta}\) can only be exchanged for goods \({\alpha}\), the country \({2}\) is exporting goods \({\alpha}\) if this country has a comparative advantage for the production of these goods, and is importing them otherwise.</p>
+<p>The same applies to the country A.</p>
+
+<h3>Corollary 1</h3>
+<p>Trade allows to increase productivity, and the productivity increase is solely due to the comparative advantages.</p>
+
+<p> (Proof of the corollary).  The fact that trade sometimes allows to increase productivity is shown by the classic example of England and Portugal exchanging wine and cloth. Furthermore, the above theorem shows that the comparative advantage is a necessary condition of a mutually beneficial trade.</p>
+<br>
+
+<h2>Equations and inequalities</h2>
+<p>In order to be able to prove the theorem, we need to write the hypotheses in a mathematical way.</p>
+<p>The first thing to notice is that there is, for each type of goods produced, an equality between the quantities produced by the two countrys, and the quantities possessed by them in the end. This provides us with a system of equations:</p>
+<p>\[
+\begin{cases}
+  \dfrac{L_{1\alpha}}{a_{1\alpha}} + \dfrac{L_{2\alpha}}{a_{2\alpha}} = Q_{1\alpha} + Q_{2\alpha}
+\\
+  \dfrac{L_{1\beta}}{a_{1\beta}} + \dfrac{L_{2\beta}}{a_{2\beta}} = Q_{1\beta} + Q_{2\beta}
+\end{cases}
+\tag{1}
+\label{eqn:formula1}
+\]</p>
+<p>The second thing to notice is that we want to be sure that the trades we are analysing are beneficial to both countrys, meaning that thanks to the trade each country must have spent strictly less time in producing than what would have been necessary to get this country the same amount of goods. this can be mathematically expressed as follows:</p>
+<p>\[
+\begin{cases}
+  a_{1\alpha}Q_{1\alpha} + a_{1\beta}Q_{1\beta} > L_{1\alpha} + L_{1\beta}
+\\
+  a_{2\alpha}Q_{2\alpha} + a_{2\beta}Q_{2\beta} > L_{2\alpha} + L_{2\beta}
+\end{cases}
+\tag{2}
+\label{eqn:formula2}
+\]</p>
+
+<p>With these two systems, we shall be able to prove the above theorem </p>
+<br>
+
+<h2> Proof of the theorem</h2>
+<p>We can rewrite \(\eqref{eqn:formula2}\) as:</p>
+<p>\[
+\begin{cases}
+  \left(a_{1\alpha}Q_{1\alpha} - L_{1\alpha}\right) + \left(a_{1\beta}Q_{1\beta} - L_{1\beta}\right) > 0
+\\
+  \left(a_{2\alpha}Q_{2\alpha} - L_{2\alpha}\right) + \left(a_{2\beta}Q_{2\beta} - L_{2\beta}\right) > 0
+\end{cases}
+\]</p>
+
+<p>We can now divide the first inequality by \(a_{1\alpha}\), and the second by \(a_{2\alpha}\) (the \(a\) coefficients being strictly positive). The inequalities become:</p>
+<p>\[
+\begin{cases}
+  \left(Q_{1\alpha} - \dfrac{L_{1\alpha}}{a_{1\alpha}}\right) + \dfrac{a_{1\beta}}{a_{1\alpha}} \left(Q_{1\beta} - \dfrac{L_{1\beta}}{a_{1\beta}}\right) > 0
+\\
+  \left(Q_{2\alpha} - \dfrac{L_{2\alpha}}{a_{2\alpha}}\right) + \dfrac{a_{2\beta}}{a_{2\alpha}} \left(Q_{2\beta} - \dfrac{L_{2\beta}}{a_{2\beta}}\right) > 0
+\end{cases}
+\]</p>
+
+<p>From \(\eqref{eqn:formula1}\) (equality between production and consumption) we know that:</p>
+<p>\[
+\left(Q_{1\alpha} - \dfrac{L_{1\alpha}}{a_{1\alpha}}\right)
++ \left(Q_{2\alpha} - \dfrac{L_{2\alpha}}{a_{2\alpha}}\right) = 0
+\]</p>
+
+<p>So if we sum the two previous inequalities, we can easily get:</p>
+<p>\[
+- \dfrac{a_{1\beta}}{a_{1\alpha}} \left(Q_{1\beta} - \dfrac{L_{1\beta}}{a_{1\beta}}\right)
+- \dfrac{a_{2\beta}}{a_{2\alpha}} \left(Q_{2\beta} - \dfrac{L_{2\beta}}{a_{2\beta}}\right) < 0
+\tag{3}
+\label{eqn:formula3}
+\]</p>
+
+ <p> Because from second inequality of \(\eqref{eqn:formula1}\), following is true </p>
+ <p>\[\left[\left(Q_{1\beta} - \dfrac{L_{1\beta}}{a_{1\beta}}\right)
+    + \left(Q_{2\beta} - \dfrac{L_{2\beta}}{a_{2\beta}}\right)\right]
+     = 0 \] </p>
+
+<p>so </p>
+<p>\[
+\dfrac{a_{1\beta}}{a_{1\alpha}}
+\left[\left(Q_{1\beta} - \dfrac{L_{1\beta}}{a_{1\beta}}\right)
++ \left(Q_{2\beta} - \dfrac{L_{2\beta}}{a_{2\beta}}\right)\right]
+ = 0 \]</p>
+<p>therefore</p>
+<p>\[
+    -\dfrac{a_{1\beta}}{a_{1\alpha}}
+    \left(Q_{1\beta} - \dfrac{L_{1\beta}}{a_{1\beta}}\right)
+    = \dfrac{a_{1\beta}}{a_{1\alpha}}\left(Q_{2\beta} - \dfrac{L_{2\beta}}{a_{2\beta}}\right)
+    \tag{4}
+\label{eqn:formula4}
+      \]</p>
+
+<p>Now if we substitute \(\eqref{eqn:formula4}\) into \(\eqref{eqn:formula3}\), we proved the <a href="#theorem1">theorem 1</a>:</p>
+<p>\[
+\left(\dfrac{a_{1\beta}}{a_{1\alpha}} - \dfrac{a_{2\beta}}{a_{2\alpha}}\right) \left(Q_{2\beta} - \dfrac{L_{2\beta}}{a_{2\beta}}\right) < 0
+\tag{5}
+\label{eqn:formula5}
+\]</p>
+
+<br>
+
+<h2> Generality of the theorem</h2>
+<p>The proof of the theorem is more general than the ones usually given to buttress the theory of comparative advantage. The approach proposed is indeed the mathematical fundamental reason why it is not possible to consider a profitable trade without considering the comparative advantage.</p>
+
+<p> Remark. Many of the hypotheses usually used to prove the theory of comparative advantage were not used:</p>
+<div id="min4">
+<ul>
+<li>the intercountryal immobility of the factor of production</li>
+<li>the countryal mobility of the factor of production</li>
+<li>the negligible costs of trade</li>
+<li>the unicity of the price of each type of goods, countryally or intercountryally (depending on the case considered, autarky or free trade)</li>
+<li>the equality of hourly profitabilities for the production of goods \(\alpha\) and \(\beta\) (labour market equilibrium).</li>
+</ul>
+</div>
+<br>
+
+
+    
+</body>
+</html>

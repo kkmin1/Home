@@ -1,0 +1,10 @@
+
+body{margin:0;padding:0}
+ul{list-style-type:none;margin:0;padding:0;overflow:hidden;background-color:#333;-moz-user-select:-moz-none;-khtml-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}
+li{float:left;display:block;color:#EEE;text-align:center;padding:8px;cursor:pointer}
+li:hover{background-color:blue}
+li:active{background-color:gray}
+.background_selected{background-color:#111}
+b{color:orange}
+span#code{color:#0CF;white-space:pre-line;background-color:gray}
+div{background-color:gray}

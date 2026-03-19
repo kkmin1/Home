@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	
+<HEAD>
+<TITLE> SVG 연습 </TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8" /> <!-한글을 표시하기 위해 필요 ->
+
+<style>
+body { text-align: center; /* 가운데 정렬 */ } 
+ 
+
+      table{
+        border-collapse: collapse;
+        table-layout: fixed;
+        border : 1px solid black;
+        width : 400px;
+        margin:auto; /*테이블 가운데 중앙정렬*/
+        font-size:22px
+      }
+      tr, td, th{
+        text-align: center;
+        height:50px;
+      }
+      /* 표에 대각선을 긋는 코드, 여기서는 th 태그의 id = diag 셀에 대각선을 긋는다. */
+      table:nth-of-type(1) th#diag { /* 첫번째 표에 대각선을 긋는다. */
+        background-image: linear-gradient(
+          to top right,
+          white 49%,black,white 51%
+        );
+      }
+      table:nth-of-type(2) th#diag { /* 두번째 표에 대각선을 긋는다. */
+        background-image: linear-gradient(
+          to top right,
+          white 49%,black,white 51%
+        );
+      }
+      caption {
+          text-align: center;
+          margin-bottom: 5px;
+          text-transform: lowercase;
+          font-size: 100%;
+          padding: 10px;
+          /*letter-spacing: 10px;*/
+          font-weight: bold;
+          color:#ff9999;
+      }
+</style>
+
+</HEAD>
+
+<body>
+
+<h1>SVG 연습</h1>
+
+<svg width="800" height="800"> <!--800×800 캔버스를 준비한다. 도형이나 문자가 이 범위를 초월하면 잘린다. 폭 800, 아래로 800. 모든 y좌표는 아래로 방향울 의미 -->
+
+
+  <foreignObject x="300" y="300" width="400" height="300">
+    <body xmlns="http://www.w3.org/1999/xhtml">
+   
+      	<table border="1">
+  <caption>표 1. 죄인들의 딜렘마</caption>
+  <tr >
+    <th id = "diag"> <pre>갑    을</pre> </th>
+    <th > C </th>
+    <th > D </th>
+  </tr>
+  <tr >
+    <th > C </th>
+    <td > -1,-1 </td>
+    <td > -9, 0 </td>
+  </tr>
+  <tr >
+    <th > D </th>
+    <td >  0, -9 </td>
+    <td > -5, -5 </td>
+  </tr>
+</table>
+
+    </body>
+  </foreignObject>
+  
+      <rect x="50" y="50" width="150" height="100" style="fill:blue;stroke:black;stroke-width:5;opacity:0.5" /> */ 좌상측 꼭지점이 (50,50)인 150×100 직사각형 */
+     <circle cx="100" cy="100" r="40" stroke="green" stroke-width="4" fill="yellow" /> */ 원 중심 좌표가 (100,100), 반지름이 40인 원 */
+     <text x="30" y="30" fill="red" font-family="Verdana" font-size="35">안녕하세요!</text> */ 첫글자의 좌하 좌표가 (30,30)에서 시작 */
+      <rect x="150" y="80" rx="20" ry="20" width="150" height="150" style="fill:red;stroke:black;stroke-width:5;opacity:1" /> */ rx, ry는 모서리가 둥근 정도. 뒤에 그려진 그림이 앞에 그려진 그림을 덮어씌운다.*/
+     <line x1 = "100" y1 = "400" x2 = "400" y2 = "200" style = "stroke: yellow;stroke-width:2"/>
+</svg>
+
+</body>
+</html>

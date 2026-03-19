@@ -1,0 +1,28 @@
+<script>
+var start = 1;
+var end = 10;
+var c = [];
+
+for(var i = start; i<=end; )
+var items = [
+ ["code.txt pre#c1", "code.txt pre#c2"],
+ ["code.txt pre#cp1", "code.txt pre#cp2"],
+ ["code.txt pre#cs1", "code.txt pre#cs2"]
+];
+
+
+document.write(items[0][0]); 
+document.write("<br>");
+document.write(items[2][1]); 
+document.write("<br>");
+document.write(items); 
+document.write("<br>");
+document.write("<br>");
+
+for(var i=0; i<items.length; i++){
+   for(var j=0; j<items[i].length; j++){
+       document.write(items[i][j]); 
+       document.write("<br>");
+   }
+}
+</script>

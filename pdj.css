@@ -1,0 +1,208 @@
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: "Noto Sans KR", sans-serif;
+    background: #f4f7fb;
+    color: #122033;
+    font-size: 15px;
+}
+
+.panel {
+    max-width: 980px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(18, 32, 51, 0.08);
+    padding: 16px;
+}
+
+h1 {
+    margin: 0;
+    color: #4c5c96;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.desc {
+    margin: 0 0 12px;
+    color: #4d5d73;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+    width: 66.6%;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: row;
+    /* 가로 배열 */
+    align-items: center;
+    /* 수직 중앙 정렬 */
+    gap: 12px;
+}
+
+.controls label {
+    font-size: 26px;
+    /* 기존 13px에서 2배 확대 */
+    font-weight: 600;
+    color: #344767;
+    white-space: nowrap;
+    /* 수식이 줄바꿈되지 않도록 설정 */
+}
+
+.controls input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #d2d6da;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #ffffff;
+    /* 더 명확한 대비를 위해 흰색 배경 사용 */
+    color: #000000;
+    /* 선명한 검정색 텍스트 */
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.controls input:focus {
+    outline: none;
+    border-color: #1f5fb3;
+    box-shadow: 0 0 0 2px rgba(31, 95, 179, 0.2);
+    background-color: #fff;
+}
+
+.range-controls {
+    display: flex;
+    flex-direction: column;
+    /* 세로 배열로 변경 */
+    gap: 16px;
+    margin-bottom: 20px;
+    padding: 12px;
+    background: #fdfdfd;
+    border: 1px dashed #d2d6da;
+    border-radius: 8px;
+    /* width: 50%를 제거하여 다시 길게 만듦 */
+}
+
+.range-input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.range-input-wrapper span {
+    font-size: 15px;
+    /* 다른 텍스트와 맞춤 */
+    font-weight: 600;
+    color: #495e7a;
+    min-width: 30px;
+}
+
+.range-input-wrapper .max-label {
+    margin-left: 8px;
+}
+
+.range-controls .input-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+}
+
+.range-controls label {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.range-input-wrapper input {
+    padding: 6px 10px;
+    font-size: 15px;
+    /* 다른 텍스트와 맞춤 */
+    width: 80px;
+    flex: none;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    align-items: center;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    padding-left: 66%;
+}
+
+button {
+    background: #1f5fb3;
+    color: #fff;
+    border: 0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#renderBtn {
+    background: #87ceeb;
+    color: #0f172a;
+    border: 1px solid #5fb7db;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-weight: 600;
+}
+
+.diagram-divider {
+    margin: 14px 0 12px;
+    border: 0;
+    border-top: 1px solid #d8dfeb;
+}
+
+.eqn {
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    color: #203652;
+    background: #f5f8ff;
+    border: 1px solid #d9e3f5;
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    border: 1px solid #d6deea;
+    border-radius: 10px;
+    background: #ffffff;
+    display: block;
+}
+
+#diagram {
+    margin-top: 16px;
+    text-align: center;
+}
+
+#diagram svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    background: #fff;
+}
+
+#diagram div {
+    text-indent: 0;
+    font-size: inherit;
+}
+
+.status {
+    min-height: 20px;
+    color: #b91c1c;
+    font-size: 13px;
+}

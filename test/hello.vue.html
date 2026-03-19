@@ -1,0 +1,72 @@
+<!-- Created by kkmin -->
+
+<html>
+
+<head>
+<meta charset="utf8">
+<title> vue hello world </title>
+
+<!--<script src=https://code.jquery.com/jquery-3.1.1.js></script>-->
+<!--<script src="https://unpkg.com/vue"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<style> 
+h1, div, footer{
+	text-align:center;
+	}
+#input{text-align:center;}
+</style>
+
+</head>
+
+<body>
+
+<h1> Hello Vue print</h1>
+<div id="app">
+  {{ message }}
+</div>
+
+<h1> 반응적 입력 </h1>
+<div id="app-6">
+ <p> 이름을 입력하세요 </p>
+ 이름 : <input id = "input" v-model="message"><br><br>
+  <textarea>내 이름은 {{ message }} 입니다.</textarea><br>
+</div>
+
+<br><br>
+<div id="app-7">
+<span>여러 줄을 가지는 메시지:</span>
+<p style="white-space: pre-line">{{ message }}</p>
+<br>
+<textarea v-model="message" placeholder="여러줄을 입력해보세요"></textarea>
+</div>
+
+
+
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+
+var app6 = new Vue({
+  el: '#app-6',
+  data: {
+    message: ''
+  }
+})
+
+var app7 = new Vue({
+  el: '#app-7',
+  data: {
+    message: ''
+  }
+})
+</script>
+        
+</body>
+
+</html>
+

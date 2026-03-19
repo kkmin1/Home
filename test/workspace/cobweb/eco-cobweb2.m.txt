@@ -1,0 +1,36 @@
+function cobweb(min,max,a,b,c,d,n,N)
+x=linspace(min,max,n);  
+% which we use to plot the 
+de=@(x) a+b*x;
+su=@(x) c+d*x;
+si=@(x) (x-c)/d;
+% turn hold on to gather up all plots in one
+hold on;
+plot(x,de(x),'r'); % plot the function
+plot(x,su(x),'r'); % plot the straight line
+axis([0 10 0 10])
+text(6,8,'supply')
+text(6,1,'demand')
+x(1)=1.1; % plot orbit starting at x0
+    y(1)=de(x(1));
+    x(2)=si(y(1));
+    y(2)=de(x(2));
+plot([x(1),x(1)],[0,y(1)]);
+plot([x(1),x(2)],[y(1),y(1)]);
+plot([x(2),x(2)],[y(1),y(2)]);
+
+for i=1:N
+    y(i)=de(x(i));
+   x(i+1)=si(y(i));
+    y(i+1)=de(x(i+1));
+
+plot([x(i),x(i+1)],[y(i),y(i)]);
+  plot([x(i+1),x(i+1)],[y(i),y(i+1)]);
+    
+end
+title('Cobweb diagram of market','FontSize',18)
+xlabel('quantity','Fontsize',16)
+ylabel('price','Fontsize',16)
+hold off;
+end
+cobweb(0,10,5,-0.7,1,1,10,10)

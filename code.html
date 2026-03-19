@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>프로그래밍 코드 요약 요약집</title>
+
+	<!-- Font & Syntax Highlighting -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+	<link rel="stylesheet" type="text/css" href="blog.css">
+	<link rel="stylesheet" type="text/css" href="code.css">
+
+	<!-- Scripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+	<script src="data.js"></script>
+</head>
+
+<body class="sub-page-body">
+	<div class="code-page-wrapper">
+		<aside class="code-sidebar">
+			<div class="sidebar-header">
+				<h1>코드 요약집</h1>
+				<p>Language Snippets</p>
+			</div>
+
+			<div class="search-box">
+				<input type="text" id="lang-search" placeholder="Search language...">
+			</div>
+
+			<nav id="dynamic-nav" class="nav-list">
+				<!-- Menu items will be generated here by code.js -->
+			</nav>
+
+			<div class="sidebar-links">
+				<p>온라인 실습</p>
+				<div class="links-row">
+					<a href="http://ideone.com" target="_blank">ideone</a>
+					<a href="http://replit.com" target="_blank">replit</a>
+				</div>
+			</div>
+		</aside>
+
+		<main class="code-main">
+			<div id="content-display" class="content-view">
+				<div class="welcome-message">
+					<div class="welcome-icon">⚡</div>
+					<h2>프로그래밍 언어별 문법</h2>
+					<p>좌측 사이드바에서 언어와 주제를 선택하여<br>핵심 코드 스니펫을 확인하세요.</p>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<!-- Mobile Toggle -->
+	<button class="menu-toggle" id="mobile-toggle">
+		<span></span>
+	</button>
+
+	<!-- Core Logic -->
+	<script src="code.js"></script>
+</body>
+
+</html>

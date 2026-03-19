@@ -1,0 +1,41 @@
+
+<body>
+
+<h2> 주석 </h2>    
+% single line comment
+% octave는 한글 안됨
+%{
+multiline comment
+....
+....
+....
+%}
+
+<h2>실행</h2>
+
+1. 편집창에서 코드 작성후 실행
+2. 파일로 실행
+    >> run("*.m")
+
+<h2> 코드 문법 </h2>
+disp("hello world") % 개행
+disp("안녕")
+name = '홍길동';   % semicolon is needed for no display
+age = 25;
+
+X = ['내 이름은 ' ,name,'이고 나이는 ',num2str(age),' 살입니다.']; 
+disp(X)  % num2str()는 숫자의 문자화
+
+fprintf('내 이름은 %s이고 나이는 %d 살입니다. \n',name,age);
+
+a = [3 7 1.2];
+Z = [num2str(a(1)), ' + ', num2str(a(3)), ' = ', num2str((a(1)+a(3)))];
+disp(Z)
+% matlab에서 첫번째 원소는 a(1)
+
+Y = [num2str(a(1)), ' / ', num2str(a(2)), ' = ', num2str((a(1)/a(2)))];
+disp(Y)
+
+fprintf('%d / %d = %.2f \n',a(1),a(2), a(1)/a(2));
+
+</body>

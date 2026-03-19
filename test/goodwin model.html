@@ -1,0 +1,343 @@
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Goodwin의 경기순환 모형</title>
+
+    <style>
+    body { line-height:2.3em }
+    p{  text-indent: 2em;  }
+    h1{ color: blue; }
+    h2{ color: red; }
+    h3{ color: green; }
+    ul{list-style:none; }
+    .inline{ display: inline; }
+    #sgv-text{
+        fill:black;
+        font-size:40px;
+    }
+    #sgv-text2{
+        fill:black;
+        font-size:30px;
+    }
+     </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+MathJax.Hub.Config({
+extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+jax: ["input/TeX", "output/HTML-CSS"],
+tex2jax:
+{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+"HTML-CSS": { availableFonts: ["TeX"] }
+});
+</script>
+ </head>
+
+<body>
+    <h2 class="inline">Goodwin의 경기순환 모형 </h2><sup><a href="#fn1" id="ref1">1</a></sup>
+
+    <p>기본 아이디어는 다음과 같다.</p>
+    <p> 한 나라의 경제는 자본가와 노동자 계급으로 구성되어 있다. 국민총생산(= 총국민소득)은 자본가의 투자와 노동자의 소비로 구성되며 정부지출이나 무역수지는 고려하지 않는다.</p>
+    <p> 자본가와 노동자간의 소득 배분의 변동이 경기변동을 가져오는 주 요인이라는 주장이다.</p>
+    <p> 경기가 활황이라서 노동자에 대한 수요가 높고 따라서 임금이 올라간다면 노동자의 소득이 올라가고 상대적으로 자본가의 지분이 낮아지므로 투자가 줄고 이에 따라 경기침체가 다가오며 이는 노동수요 감소, 임금하락을 유발하고 노동자의 소득이 낮아지므로 상대적으로 자본가의 지분이 올라가고 이는 투자를 증대시켜 경기는 상승하고 이러한 과정이 반복된다는 주장</p>
+
+<h3>[모형] </h3>
+
+<p>총생산함수</p>
+
+<p> $ Y = \min(aL, \frac{K}{\sigma})$ </p>
+
+ <p>where</p>
+ <UL>
+<li>$Y(t)$ = 총생산, 국민소득</li>
+<li>$L(t)$ = 노동</li>
+<li>$K(t)$  = 자본</li>
+<li>$a(t)$  = 노동 생산성</li>
+<li>$\sigma $ = 자본/생산물 비율($ K/Y $, 상수)</li>
+ </UL>
+
+ <h3>[가정] </h3>
+ <p> i)   모든 변수는 시간의 함수이다.</p> 
+ <p> ii)  경제는 노동자와 자본가로 구성되며 노동자는 저축 않고 모두 소비하며, 자본가는 $s$ 비율로 저축한다.</p> 
+ <p> iii) 해롯 - 도마 모형과 달리 자본의 완전한 활용을 가정한다.   </p>
+
+<p> 그러므로 항상 $ aL = \dfrac{K}{\sigma} = Y $ 이 성립한다. </p>
+
+<p> iv)  고용률($e$)는 다음과 같다.</p>
+    
+<p>  $ e = \dfrac{L}{N} $</p>
+
+
+<p> v) $N$ 은 총노동 가능인구로 매 기간 $\beta(= \dfrac{dN/dt}{N} = \dfrac{\dot{N}}{N})$ 비율로 증가. </p>
+
+<p> vi) 노동 생산성 $a$는 매 기간 $\alpha(= \dfrac{da/dt}{a} = \dfrac{\dot{a}}{a})$ 비율로 증가. </p>
+<p> 노동 증가율 $ g_l = \dfrac{dL/dt}{L} = \dfrac{\dot{L}}{L} $ 라 하면</p>
+<p> 고용 증가율은 </p>
+    
+<p>$ g_e = \dfrac{\dot{e}}{e} $ </p>
+
+<p> $ = g_l - g_n $ </p>
+<p> $ = g_l - \beta $ <sup><a href="#fn2" id="ref2">2</a></sup></p>
+
+<p> $ g_y = \dfrac{\dot{Y}}{Y} $ </p>
+<p> $   = g_a + g_l $</p>
+<p> $   = \alpha + g_l $</p>
+
+<p> 따라서 $ g_e = g_y - \alpha - \beta $ </p>
+
+<p> vii) 임금은 $w$로 임금 증가율($g_w$)은 선형 필립스곡선을 가진다고 가정</P>
+    <P>$ g_w = \dfrac{\dot{w}}{w} = \rho e - \gamma $ </p>
+
+
+<p> 즉 고용률이 높을 수록(노동시장이 완전고용에 가까울 수록) 임금 상승 압력이 있다. 여기서 $e$의 계수 $\rho$는 노동자 집단의 협상력을 의미한다.</p>
+    <p>   임금 증가율과 노동생산성 증가율이 서로 무관한 것은 계급투쟁설의 가능을 의미한다.</p>
+
+<p> $ aL = Y $ 이므로 총생산물 중 노동자의 지분($u$)은 </p>
+<p>  $ u = \dfrac{wL}{Y} = \dfrac{w}{a} $ </p>
+
+<p>Hence the growth rate of the workers' share is $ g_u = \dfrac{du/dt}{u} = g_w - \alpha $ </p>
+
+<p>Labor's share in output increases with wages but declines with productivity growth as less woryers are needed to produce the same amount of output.</p>
+<p>
+Goodwin's essential setup is to begin with two classes of income recipients, wage-earning workers and profit-earning capitalists and output $Y$ is divided between them so that $wL$ represents the wage bill  and $P = Y - wL$ are total profits. </p>
+<p> Thus, $wL/Y$ is the wage share and $P/Y$ is the profit share so that $wL/Y + P/Y = 1$. then the wage share can be rewritten $u$ while the profit share is $1-u$.
+</p>
+<p> Finally we have the capital accumulation equation and the resulting growth rate for output (since K and Y grow at the same rate by assumption of full utilization of capital and constant returns to scale). </p>
+<p> $ Y = \dfrac{K}{\sigma} $ 이므로 $g_y = g_k $ ($ \because \sigma $는 상수이므로 미분하면 0)</p>
+<p> 자본가의 지분, 즉 총이윤은 $ P = (1-u )Y $. </p>
+<p>   자본가의 이윤 중 $s$ 비율만 저축되어 자본을 증가하기 위해 투자되므로, 
+단위기간당 투자액은 $ s(1-u )Y $</p>
+
+<p>자본은 $ \delta $의 비율로 부식(감가상각)된다고 가정하면</p>
+<p>단위기간당 순투자액은 $ \dot {K} = s(1-u )Y -\delta K $</p>
+<p> The growth rate of output and capital is then given by</p>
+<p>  $ g_y = g_k = \dfrac{\dot{K}}{K} =  s(1-u) \dfrac{Y}{K} - \delta, \qquad where \quad \delta  $ 는 자본의 감가상각률</p>
+<p>  $ = s(1-u)\dfrac{1} {\sigma} - \delta $ </p>
+
+<p> $ g_e = g_y - \alpha - \beta $  </p>
+<p>   $ = \dfrac{s(1-u)}{\sigma} -(\delta+\alpha+\beta) $ </p>
+<p>The time change in the employment rate is decreasing
+  in the labor share ω, which is consistent with standard descriptions of the labor market.
+  The more labor becomes expensive, the lower demand for labor by firms.</p>
+<br>
+<h3>[해의 도출]</h3>
+
+<p>The two differential equations</p>
+
+<p>   $ g_e = \dfrac{\dot{e}}{e} = \dfrac{s(1-u)}{\sigma} -(\delta+\alpha+\beta) $ .................... ①</p>
+<p>  $ g_u = \dfrac{\dot{u}}{u} = g_w - \alpha = \rho e - \gamma - \alpha $ ...............②</p>
+
+<p>
+①, ②는 노동자의 지분($u$)와 노동고용률($e$)로 이루어진 pradator-prey 모형과 같은 구조임을 알 수 있다. </p>
+
+<p>이를 비선형 연립미분방정식 형태로 변형하면 다음과 같다.</p>
+<p> $ \dot{e} = \Big( \dfrac{s(1-u)}{\sigma} -(\delta+\alpha+\beta) \Big)e $  </p>
+<p> $ \dot{u} = (\rho e - \gamma - \alpha)u $ </p>
+
+<p> 비선형 연립미분방정식이므로 Jacobian을 구해 균형점에서 해의 수렴, 발산을 판정한다.</p>
+ <p> 이 연립미분방정식의 Jacobian은 </p>
+ <p>
+ $
+ \mathbf{J} =
+ \left( \begin{array}{ccc}
+ \dfrac{s(1-u)}{\sigma} -(\delta+\alpha+\beta) & -\dfrac{s}{\sigma}e   \\
+ \rho u & \rho e - \gamma - \alpha  \\
+ \end{array} \right)
+ $
+ </p>
+
+<p>균형점은 $ \dfrac{de}{dt} = \dfrac{du}{dt} = 0 $ 에서 결정되므로 </p>
+<p> $ \Big( \dfrac{s(1-u)}{\sigma} -(\delta+\alpha+\beta) \Big)e = 0 $ </p>
+<p> $ (\rho e - \gamma - \alpha)u = 0 $ </p>
+
+<p>따라서 이 두 연립방정식의 해는 아래 ①, ②를 동시에 만족시켜야 한다.</p>
+ <p> $ e = 0 \qquad or \qquad \dfrac{s(1-u)}{\sigma} -(\delta+\alpha+\beta) = 0 $ ........... ① </p>
+<p> $ u = 0 \qquad or \qquad \rho e - \gamma - \alpha = 0 $  ........... ② </p>
+
+<p>따라서 균형점은 네 개이다.</p>
+<p>즉 </p>
+<p>
+$e^* = 0$, $u^* = 0$, $ u^* = 1 - \dfrac{(\delta + \alpha + \beta)\sigma}{s} $, $ e^* = \dfrac{(\gamma + \alpha)}{\rho} $
+</p>
+<p>0 이하의 구간은 비현실적이므로 0 이상의 교차점만 고려한다. </p>
+
+<p>$ (e^*, u^*) = \Big(1 - \dfrac{(\delta + \alpha + \beta)\sigma}{s}, \dfrac{(\gamma + \alpha)}{\rho} \Big)$ 인 경우</p>
+
+<p> 이 점에서 Jacobian은 </p>
+ <p>
+ $
+ \mathbf{J} = 
+ \left( \begin{array}{ccc}
+ 0 & -\dfrac{(\gamma + \alpha)}{\rho} \dfrac{s}{\sigma}   \\
+ \rho \Big(1 - \dfrac{(\delta + \alpha + \beta)\sigma}{s} \Big) & 0  \\
+ \end{array} \right)
+ $
+ </p>
+<p>따라서 $\textrm{tr(J)} = 0$ 이므로 실근이 없다. $ \textrm{det(J)} > 0$ , $ \textrm{tr(J)}^2 - 4 \textrm{det(J)} < 0 $ 이므로 허근을 갖는다.<sup><a href="#fn3" id="ref3">3</a></sup> </p>
+
+<p>허수를 가지므로 해의 경로는 회전한다. 실근이 없으므로 나선형으로 증가 또는 감소하는 것이 아니라 일정하게 회전한다. </p>
+<p>Observe that the steady state value for the employment rate is independent of the labor
+  share, and that the steady state value of the labor share is independent of the employment
+  rate.</p>
+<p> 교용률과 노동자의 지분은 0과 1 사이이므로 $ \dfrac{s}{\sigma} < \delta + \alpha + \beta$, $ \gamma + \alpha < \rho $</p>
+<p></p>
+<p>①에서 $\dot e$는 $u$의 감소함수이므로 $u^*$보다 큰 구간에서 $\dot e$는 감소, $u^*$보다 작은 구간에서 $\dot e$는 증가</p>
+<p>②에서 $\dot u$는 $e$의 증가함수이므로 $e^*$보다 큰 구간에서 $\dot e$는 증가, $e^*$보다 작은 구간에서 $\dot e$는 감소</p>
+<p>이상을 구간별 위상도로 표현하면 (그림 1)과 같다.</p>
+
+<div class="digitDiv">
+    <svg width="1000px" height="900px" 
+        xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+            <marker id="dark-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+            <marker id="blue-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+            <marker id="red-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+            <marker id="green-arrow" viewBox="0 0 10 10" refX="1" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" />
+          </marker>
+         </defs>
+    
+      <polyline points="100,700 800,700" fill="none" stroke="red" 
+          stroke-width="2" marker-end="url(#dark-arrow)" />
+      <polyline points="200,800 200,100" fill="none" stroke="blue" 
+          stroke-width="2" marker-end="url(#blue-arrow)" />
+    <polyline points="100,400 800,400" fill="none" stroke="blue" 
+          stroke-width="2" />
+      <polyline points="500,800 500,100" fill="none" stroke="red" 
+          stroke-width="2" />
+        <text id = "sgv-text" x="180" y="70"> e </text>
+        <text id = "sgv-text" x="820" y="700" > u </text>
+        <text id = "sgv-text" x="180" y="730" > 0 </text>
+        
+        <foreignObject x="820" y="380" width="200" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ g_u = 0 $
+            </div>
+          </foreignObject>
+        <foreignObject x="170" y="400" width="200" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ e^* $
+            </div>
+          </foreignObject>
+        <foreignObject x="470" y="50" width="200" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ g_e = 0 $
+            </div>
+          </foreignObject>
+        <foreignObject x="470" y="710" width="200" height="100">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Times; font-size:30px">
+            $ u^* $
+            </div>
+          </foreignObject>
+        
+        <text id = "sgv-text2" x="200" y="880" > (그림 1) Goodwin 경기순환모형 위상도 </text>
+
+        <polyline points="300,250 300,150" fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="300,250 400,250" fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="300,250 400,150" fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />  
+        <polyline points="600,150 700,150" fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="600,150 600,250" fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="600,150 700,250 " fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="400,600 300,600" fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="400,600 400,500" fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="400,600 300,500 " fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="700,500 600,500" fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="700,500 700,600" fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="700,500 600,600 " fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="450,200 550,200 " fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="700,350 700,450 " fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="550,550 450,550 " fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="350,450 350,350 " fill="none" stroke="green" 
+          stroke-width="2" marker-end="url(#green-arrow)" />
+        <path d="M304,400
+           C331,300 450,150 728,400" fill="none" stroke="#cc3300" stroke-width="5"/>
+        <path d="M304,400
+           C331,500 450,650 728,400" fill="none" stroke="#cc3300" stroke-width="5"/>
+        <polyline points="320,360 325,350" fill="none" stroke="none" 
+           stroke-width="2" marker-end="url(#green-arrow)" /> 
+        <polyline points="420,270 425,269" fill="none" stroke="none" 
+           stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="560,285 565,288" fill="none" stroke="none" 
+           stroke-width="2" marker-end="url(#green-arrow)" />  
+        <polyline points="650,335 655,340" fill="none" stroke="none" 
+           stroke-width="2" marker-end="url(#green-arrow)" />  
+        <polyline points="325,450 320,440 " fill="none" stroke="none" 
+           stroke-width="2" marker-end="url(#green-arrow)" /> 
+        <polyline points="425,531 420,530 " fill="none" stroke="none" 
+           stroke-width="2" marker-end="url(#green-arrow)" />
+        <polyline points="565,512 560,515 " fill="none" stroke="none" 
+           stroke-width="2" marker-end="url(#green-arrow)" />  
+        <polyline points="655,461 650,465 " fill="none" stroke="none" 
+           stroke-width="2" marker-end="url(#green-arrow)" />  
+    </svg>
+    </div>
+
+<p>
+    경기가 활성화하고 고용이 증가하면 임금이 상승하고 국민 소득중 노동자의 지분이 늘어난다. 즉 상대적으로 자본가의 지분 감소로 나타나고 이는 투자 감소 -> 경기 하강 -> 고용 감소 -> 임금 하락 -> 노동자 지분 감소 -> 자본가 지분 증가 -> 투자 증가 -> 경기 상승 -> 고용 증가 -> ....
+</p>
+<p>
+    위와 같이 경기 순환 현상이 발생함. 노동자와 자본가간의 분배적 갈등이 내생적인 경기순환 현상을 유발. 즉 경기변동이 외부의 충격에 의해 발생하는 것이 아니라 내적 요인에 의해 발생함을 주장. 
+</p>
+<p>Hence, the economy never gets to the steady state, but cycles around it forever, depending on initial conditions. In other words, distributional cycles (conflict) are persistent in the
+  Goodwin model.</p>
+<p>
+  <div style="text-align : center;">
+    <img src="Goodwin model.png"><br>
+    (그림 2) 다양한 시작점에 따른 Goodwin 모형 위상도
+</div>
+(그림 3) 는 illustrates the movement of potential output (output at full employment), actual output and wages over time.
+As can be seen the Goodwin model can generate endogenous fluctuations in economic activity without relying on extraneous assumptions of outside shocys, whether on the demand or supply side.
+</p>
+
+
+<div style="text-align : center;">
+    <img src="goodwin model2.bmp"><br>
+    (그림 3) Goodwin 경기순환모형 시간 변화도 
+</div>
+
+
+
+<hr>
+
+<span style = " font-size:0.7em;  color: green; line-height: 1.5em;">
+    <sup id="fn1"> 
+         1. 노동자와 자본가의 갈등을 묘사하므로 Goodwin의 계급투쟁모형이라고도 한다.
+    </sup>
+    <br>
+    <sup id="fn2"> 
+        2. 변수 $y$가 시간의 함수 $y(t)$일 때 순간성장률의 정의는 $ \frac{dy/dt}{y} $ 와 같다.
+           $ \frac{\ln y(t)}{dy} = \frac{y'}{y} $ 이므로 $ \frac{dy/dt}{y} = \frac{\ln y(t)}{dy} $ <br>
+           두 변수 곱의 성장률은 다음과 같다. $y(t) = f(t)g(t)$, 양변 로그를 취하면 $ \ln y(t) = \ln f(t) + \ln g(t) $, 양변 미분하면 $ \frac{y'}{y} = \frac{f'}{f} + \frac{g'}{g} $, 즉 두 변수 곱의 성장률은 각 변수 성장률의 합과 같다. 비슷하게 두 변수 나누기의 성장률은 각 변수 성장률의 차와 같다.
+    </sup>
+    <br>
+    <sup id="fn3"> 
+    3. 왜냐하면 균형점은 정의에서 0과 1 사이이므로 $ \dfrac{(\gamma + \alpha)}{\rho} > 0, \dfrac{s}{\sigma} > 0, 1 - \dfrac{(\delta + \alpha + \beta)\sigma}{s} > 0, \rho > 0 $
+  </sup>
+</span>
+</body>
+</html>

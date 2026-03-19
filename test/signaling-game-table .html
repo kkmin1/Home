@@ -1,0 +1,59 @@
+<html lang="ko"> 
+<head>
+    <meta charset="utf-8">
+    <title>HTML</title>
+    <style>
+    .slash {
+	background: url('http://cdn.zetawiki.com/png/slash.png');
+	background-size: 100% 100%;
+        text-align: left;
+        }
+    .backslash {
+        background: url('http://cdn.zetawiki.com/png/backslash.png');
+	background-size: 100% 100%;
+         }
+    .slash div, .backslash div { text-align: right; }
+      table {width: 100%; /* 100%로 하면 전체를 차지 */      
+             height: 30%;
+             margin-left: auto; /*표를 가운데 정렬할 때는 좌우 margin 속성값을 auto로 정합니다.*/
+             margin-right: auto;
+             /* float: right; 표를 오른쪽 정렬할 때는 float 속성값을 right로 정합니다.*/
+             } 
+      
+   /* 셀 안의 내용 가로 정렬은 text-align 속성을 사용합니다. 왼쪽 정렬은 left, 가운데 정렬은 center, 오른쪽 정렬은 right가 속성값입니다.*/
+   /* th {text-align: left;} */
+      td {text-align: center;}
+      table{border: 1px solid #bcbcbc;}
+      th, td{border: 1px solid #bcbcbc; width: 200px; height: 50px}
+     /*.jb-th-1 {width: 100px; height: 100px;} 헤더셀1의 가로크기, 세로높이 설정 */
+     </style>  
+
+ </head> 
+	
+	  <body>
+ 
+<table style = "font-size: 30pt"> 
+<caption> < 핵무기 개발 - 포기 모형 > </caption><br>
+ <tr>  <!--table row  약자로 행을 만드는역할 (기본값은보통글씨체에, 왼쪽정렬) -->
+<th class="backslash" style='letter-spacing:50px'><div>을</div>갑</th>
+<th>포기-->무대응<br>  개발-->강공</th> <!-- th : header cell , table head  약자로 표의 제목을쓰는역할 ? (기본값은굵은글씨체에, 중앙정렬)-->
+ <th>포기-->무대응<br>  개발-->용인</th> 
+ </tr>  
+<tr>
+<th>포기 <br> 포기</th> 
+ <td>3|5<br>-3|5</td> 
+ <td>3|-5<br>3|5</td>
+ </tr> 
+
+
+ <tr>  
+<th>개발<br>개발</th>
+<td>-5|-3<br>-5|3</td>  
+<td >5|0<br>5|0</td>  
+</tr> 
+</table>
+ <br> <br>
+
+
+ </body> 
+</html>

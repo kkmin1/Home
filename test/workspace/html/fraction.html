@@ -1,0 +1,316 @@
+<!-- 주석 -->
+<head>
+<!-- xml 사용. -->
+<script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"]}};</script>
+
+<!-- latex수식 사용. -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+
+body{padding:10px; margin-left: 20px;}
+
+.frac { display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    letter-spacing: 0.001em;
+    text-align: center;
+}
+.frac > span {
+    display: block;
+    padding: 0.1em;
+}
+.frac span.bottom {
+    border-top: thin solid black;
+}
+.frac span.symbol {
+    display: none;
+}
+
+span.frac {
+  display: inline-block;
+  font-size: 100%;
+  text-align: center;
+}
+span.frac > sup {
+  display: block;
+  border-bottom: 1px solid;
+  font: inherit;
+}
+span.frac > span {
+  display: none;
+}
+span.frac > sub {
+  display: block;
+  font: inherit;
+}
+
+pre#html1 {background:gray; width:700; height:100px; padding:10px}
+pre#html2 {background:gray; width:1000; height:900px; padding:10px}
+pre#html3 {background:gray; width:700; height:500px; padding:10px}
+pre#html4 {background:gray; width:1000; height:700px; padding:10px}
+
+
+</style>
+</head>
+<meta charset="utf8">
+
+<body>
+<h1>웹에서 분수, 수식 표현하는 방법</h1>
+
+<h2>1. 그냥 역슬래쉬 /로 표기 </h2>
+html 코드 :
+<pre id=html1>
+&lt;body&gt;
+    &lt;p&gt;정답은 1 1/10 입니다.&lt;/P&gt;
+&lt;/body&gt;
+</pre>
+<p>출력 : 정답은 1 1/10 입니다.</P>
+
+<h2>2. 역슬래쉬 대신 특수기호 &amp;frasl; 사용 </h2>
+html 코드 :
+<pre id=html1>
+&lt;body&gt;
+    &lt;p&gt;정답은 1 1&amp;frasl;10 입니다.&lt;/P&gt;
+&lt;/body&gt;
+</pre>
+<p>출력 : 정답은 1 1&frasl;10 입니다.</P>
+
+<h2>3. 특수기호 &amp;frasl;와 윗첨자 &lt;sup &gt; 아랫첨자 &lt;sub &gt; 사용 </h2>
+html 코드 :
+<pre id=html1>
+&lt;body&gt;
+    &lt;p&gt;정답은 1 &lt;sup &gt; 1 &lt;/sup &gt; &amp;frasl; &lt;sub &gt;10 &lt;/sub &gt;입니다.&lt;/P&gt;
+&lt;/body&gt;
+</pre>
+<P>출력 : 정답은 &nbsp;1<sup>1</sup>&frasl;<sub>10</sub>입니다.</P>
+
+<h2>4. CSS 스타일 사용 $1$ </h2>
+html 코드 :
+<pre id=html2>
+&lt;head&gt;
+.frac { display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    letter-spacing: 0.001em;
+    text-align: center;
+}
+.frac > span {
+    display: block;
+    padding: 0.1em;
+}
+.frac span.bottom {
+    border-top: thin solid black;
+}
+.frac span.symbol {
+    display: none;
+}
+&lt;/head&gt;
+
+&lt;body&gt;
+    정답은 1&lt;div class="frac"&gt;
+    &lt;span>11&lt;/span&gt;
+    &lt;span class="symbol">&lt;/span&gt;
+    &lt;span class="bottom">2 &lt;/span>&lt;/div>입니다.
+&lt;/body&gt;
+</pre>
+
+출력 : 정답은 &nbsp;1<div class="frac">
+    <span>11</span>
+    <span class="symbol"></span>
+    <span class="bottom">2</span>
+</div>입니다.
+
+<h2>5. CSS 스타일 사용 $2$ </h2>
+html 코드 :
+<pre id=html2>
+&lt;head&gt;
+span.frac {
+  display: inline-block;
+  font-size: 100%;
+  text-align: center;
+}
+span.frac > sup {
+  display: block;
+  border-bottom: 1px solid;
+  font: inherit;
+}
+span.frac > span {
+  display: none;
+}
+span.frac > sub {
+  display: block;
+  font: inherit;
+}
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;p>출력 : 정답은 1 &lt;span class="frac">&lt;sup>1&lt;/sup>&lt;span>/&lt;/span>&lt;sub>10&lt;/sub>&lt;/span>입니다.&lt;/p>
+&lt;/body&gt;
+</pre>
+<p>출력 : 정답은 &nbsp; 1 <span class="frac"><sup>1</sup><span>/</span><sub>10</sub></span>입니다.</p>
+
+<h2>6. table tag 사용 </h2>
+html 코드 :
+<pre id=html4>
+&lt;body&gt;
+
+           &lt;table>
+              &lt;tbody>
+                &lt;tr>
+                  &lt;td rowspan="2">출력 : 정답은 &lt;/td>
+                  &lt;td rowspan="2">1&lt;/td>
+                  &lt;td style="border-bottom:solid 1px">1&lt;/td>
+                  &lt;td rowspan="2">입니다. &lt;/td>
+                &lt;/tr>
+                &lt;tr>
+                  &lt;td>2&lt;/td>
+               &lt;/tr>
+              &lt;/tbody>
+           &lt;/table>
+
+&lt;/body&gt;
+</pre>
+           <table>
+              <tbody>
+                <tr>
+                  <td rowspan="2">출력 : 정답은 </td>
+                  <td rowspan="2">1</td>
+                  <td style="border-bottom:solid 1px">1</td>
+                  <td rowspan="2">입니다. </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+               </tr>
+              </tbody>
+           </table>
+
+<h2>7. xml 사용 </h2>
+<p>아래 xml표현을 크롬에서 쓰기 위해서는 javascript를 설치해야 함. firefox에서는 그냥 됨.</p>
+
+<pre id=html4>
+&lt;head>
+&lt;!-- xml 사용. -->
+&lt;script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"]}};&lt;/script>
+
+&lt;/head>
+
+&lt;body>
+&lt;p>출력 : 정답은
+&lt;math>
+  &lt;mrow>
+    &lt;mn>1</mn>
+    &lt;mfrac>
+      &lt;mn>1</mn>
+      &lt;mn>10</mn>
+    &lt;/mfrac>
+  &lt;/mrow>
+&lt;/math>
+입니다.&lt;/p>
+&lt;/body>
+</pre>
+
+
+<p>출력 : 정답은
+<math>
+ <mrow>
+  <mn>1</mn>
+  <mfrac>
+   <mn>1</mn>
+   <mn>10</mn>
+  </mfrac>
+ </mrow>
+</math>
+입니다.</p>
+<br>
+
+<h2>8. 수식 입력 </h2>
+(1) mathML 이용
+
+<pre id=html2>
+  &lt;math>
+  &lt;apply>
+      &lt;eq/>
+      &lt;apply>
+          &lt;plus/>
+          &lt;apply>
+              &lt;power/>
+              &lt;ci>x</ci>
+              &lt;cn>2</cn>
+          &lt;/apply>
+          &lt;apply>
+              &lt;times/>
+              &lt;cn>4</cn>
+              &lt;ci>x</ci>
+          &lt;/apply>
+         &lt;cn>4</cn>
+      &lt;/apply>
+      &lt;cn>0</cn>
+    &lt;/apply>
+   &lt;/math>
+</pre>
+
+<p>출력 :
+<math>
+<apply>
+    <eq/>
+    <apply>
+        <plus/>
+        <apply>
+            <power/>
+            <ci>x</ci>
+            <cn>2</cn>
+        </apply>
+        <apply>
+            <times/>
+            <cn>4</cn>
+            <ci>x</ci>
+        </apply>
+       <cn>4</cn>
+    </apply>
+    <cn>0</cn>
+  </apply>
+ </math>
+</p>
+
+<pre id=html3>
+    &lt;math>
+      &lt;mrow>
+        &lt;mi>a</mi>
+        &lt;mo>+</mo>
+        &lt;mrow>
+          &lt;mi>b</mi>
+          &lt;mo>-</mo>
+          &lt;mi>c</mi>
+        &lt;/mrow>
+      &lt;/mrow>
+    &lt;/math>
+</pre>
+
+<p>출력 :
+  <math>
+    <mrow>
+      <mi>a</mi>
+      <mo>+</mo>
+      <mrow>
+        <mi>b</mi>
+        <mo>-</mo>
+        <mi>c</mi>
+      </mrow>
+    </mrow>
+  </math>
+</p>
+
+
+(2) mathjax 이용
+
+
+<p>$ x $에 관한 이차방정식 $ ax^2 + bx + c = 0 $의 해는 다음과 같다.</p>
+    <p>$$ x = \frac{-b \pm \sqrt{b^2-4ac}}{2a} $$</p>
+
+</body>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	
+<HEAD>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="eco-math.css">
+    <link rel="stylesheet" type="text/css" href="footnote.css">
+<TITLE> SVG 연습 </TITLE>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+  <script src="./latex.js"></script>
+
+  
+</HEAD>
+
+<body>
+
+<h1>SVG 연습</h1>
+
+<svg width="1000" height="600"> 
+
+  <foreignObject x="10" y="300" width="1000" height="300">
+    <body >
+          <div class="flex-container2">
+            <div style="width:13%;float:left;">
+                <table id="tbl1", border="1">
+                <tr >
+                <th id = "diag"> 갑 &nbsp;&nbsp;   을 </th>
+                <th > A </th>
+                <th > B </th>
+              </tr>
+              <tr >
+                <th > A </th>
+                <td > 1, 2 </td>
+                <td > -1, -1 </td>
+              </tr>
+              <tr >
+                <th > B </th>
+                <td >  -1, -1 </td>
+                <td > 2, -2 </td>
+              </tr>
+              </table>
+              </div>
+            
+              <div style="width:85%;float:right;">
+                <table id="tbl2", border="1">
+              <tr >
+                <th id = "diag"> 갑 &nbsp;&nbsp;   을 </th>
+                <th > A </th>
+                <th > B </th>
+              </tr>
+              <tr >
+                <th > A </th>
+                <td > -2, 2 </td>
+                <td > -1, -1 </td>
+              </tr>
+              <tr >
+                <th > B </th>
+                <td >  -1, -1 </td>
+                <td > 2, 1 </td>
+              </tr>
+                </table>
+              </div>
+            </div>
+    </body>
+  </foreignObject>
+  
+  
+  <circle cx="370" cy="50" r="20" stroke="black" stroke-width="1" fill="yellow"/> 
+  <text x="355" y="60" fill="red" font-family="Verdana" font-size="35">N</text> 
+  <line x1 = "390" y1 = "70" x2 = "580" y2 = "270" style = "stroke: black; stroke-width:1"/>
+  <line x1 = "350" y1 = "70" x2 = "180" y2 = "270" style = "stroke: black; stroke-width:1"/>
+</svg>
+
+</body>
+</html>

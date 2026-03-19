@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>함수 그래프</title>
+	<style>
+		canvas {
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="graph" width="500" height="500"></canvas>
+	<script>
+		const canvas = document.getElementById("graph");
+		const ctx = canvas.getContext("2d");
+		
+		// 그리드 그리기
+		const gridSize = 10;
+		ctx.strokeStyle = "#ccc";
+		ctx.lineWidth = 1;
+		for (let i = gridSize; i < canvas.width; i += gridSize) {
+			ctx.beginPath();
+			ctx.moveTo(i, 0);
+			ctx.lineTo(i, canvas.height);
+			ctx.stroke();
+		}
+		for (let i = gridSize; i < canvas.height; i += gridSize) {
+			ctx.beginPath();
+			ctx.moveTo(0, i);
+			ctx.lineTo(canvas.width, i);
+			ctx.stroke();
+		}
+
+		// x, y 좌표축 그리기
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+
+        // x축 그리기
+        ctx.moveTo(0, canvas.height/2);
+        ctx.lineTo(canvas.width, canvas.height/2);
+
+        // y 축 그리기
+        ctx.moveTo(canvas.width/2, 0);
+        ctx.lineTo(canvas.width/2, canvas.height);
+        ctx.stroke();
+
+        // 글자 넣기
+        ctx.font = "12px sans-serif";
+		ctx.fillStyle = "black";
+		ctx.fillText(0, canvas.width/2 - 15, canvas.height/2 + 15);
+
+		// 함수 그리기
+		ctx.strokeStyle = "red";
+		ctx.lineWidth = 2;
+		ctx.beginPath();
+		ctx.moveTo(0, canvas.height/2);
+		for (let x = 0; x < canvas.width; x++) {
+		    const y = x;
+			ctx.lineTo(x, y);
+		}
+		ctx.stroke();
+        
+    /* 함수를 변경하려면 y 변수를 계산하는 부분을 원하는 함수로 변경하면 됩니다. 예를 들어, 다음과 같이 y 변수를 계산하면 2차 함수를 그릴 수 있습니다. 
+    const y = -(x-canvas.width/2)*(x-canvas.width/2)/100 + canvas.height/2;
+    캔버스는 y축이 역전으로 그려지므로 -를 붙여야 데카르트 좌표축이 표현된다. 
+    x-canvas.width/2는 함수의 꼭짓점을 x=canvas.width/2에서 만들기 위한 변환입니다. 100은 함수의 폭을 결정합니다.
+    */
+
+        // 함수 그리기
+		ctx.strokeStyle = "red";
+		ctx.lineWidth = 2;
+		ctx.beginPath();
+		ctx.moveTo(0, canvas.height/2);
+		for (let x = 0; x < canvas.width; x++) {
+			const y = -Math.sin((x-canvas.width/2)/25) * 50 + canvas.height/2;
+        //  const y = (x-250)*(x-250)/100 + canvas.height/2;
+        	ctx.lineTo(x, y);
+		}
+		ctx.stroke();
+	</script>
+
+
+
+</body>
+</html>

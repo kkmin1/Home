@@ -1,0 +1,597 @@
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Dornbusch’s overshooting model</title>
+
+    <style>
+    body { line-height:2.3em }
+    p{  text-indent: 2em;  }
+    h1{ color: blue; }
+    h2{ color: red; }
+    h3{ color: green; }
+    h4{ color: rgb(85, 7, 81); }
+    .inline{ display: inline; }
+
+    div.digitDiv {
+      font-size:10vw;
+      font-family: monospace;
+      display:inline-block;
+      width:1em;
+      margin-left:1em;
+    /* border:1px solid red; */
+    }
+    #boder{border:1px solid red;}
+    #dark-arrow {
+                stroke: #03051af8;
+                fill: #03051af8;
+            }
+    #blue-arrow {
+                stroke:#0e1abd;
+                fill: #0e1abd;
+                }
+
+    #red-arrow {
+                stroke: #bb0b37;
+                fill:  #bb0b37;
+                }
+    #green-arrow {
+                stroke: #4eda0d;
+                fill:  #4eda0d;
+                }
+    #sgv-text{
+        fill:black;
+        font-size:30px;
+    }
+     </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+MathJax.Hub.Config({
+extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+jax: ["input/TeX", "output/HTML-CSS"],
+tex2jax:
+{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+"HTML-CSS": { availableFonts: ["TeX"] }
+});
+</script>
+ </head>
+
+<body>
+    <h2 class = inline> 돈부시 환율결정이론(Dornbusch’s overshooting model)</h2><sup><a href="#fn19" id="ref19">주1)</a></sup> 
+<br>
+
+<p>
+    The simple monetary model is incapable of explaining basic fact on international prices 
+    PPP is the critical assumption 
+    Observed exchange rate volatility far greater than the simple model implies 
+    The Mundell-Fleming model, by assuming fixed or sticky prices, is relevant for the very shortest horizons
+    
+    Dornbusch's model, introduced in 1976, is a hybrid 
+    short-run price stickiness -> Keynesian features
+    long-run characteristics like in the monetary model 
+    Key idea: differential adjustment speed in goods and financial markets 
+    goods markets: slow, financial markets: fast
+    </p>
+    <p>
+    Implication: the burden of short-run adjustment falls on financial markets which overreact to different shocks, monetary shocks in particular 
+    financial markets overshoot relative to long-run equilibrium 
+    Why? Price level initially fixed, a change in the nominal money stock is a change in the real money stock
+        an instantaneous change in the money demand has to result 
+        only possible, if the interest rate changes appropriately, if, in particular, output is assumed xed 
+    In the short-run, monetary policy changes have what is nowadays
+        known as the liquidity effect
+    
+    Change in interest rates only temporary and the price level will start
+        its delayed response
+        real money stock will starts to revert itself back to the original level driving interest rates, aggregate demand and the real exchange rate back to their original level 
+    </p>
+    <p>
+    Hence, over the long-run all real variables have reverted back to their original values
+        a flavour from the monetary model!
+        Change in the nominal exchange rate in the long-run equilibrium reflects the proportionate change in the nominal money supply
+    We will next outline the overshooting model, with two conventions
+        focus on a small open economy  
+        takes intl prices and quantities as given, ie. does not affect them 
+        comparative statics: we will start from an initial equilibrium position and consider what happens to the level of the exchange rate once we change the level of the money supply
+       
+    </p>
+    
+<p>오버슈팅이란 경제에 어떤 충격이 가해졌을 때 변수가 장기적인 수준에서 크게 벗어난 후 시간이 지남에 따라 장기균형 수준으로 수렴해가는 현상을 말한다. 환율·물가 등의 변수에서 자주 나타난다.</p>
+<p>환율의 오버슈팅 현상이란 정부가 정책적으로 통화를 팽창시키면 자국의 통화가치가 하락(환율 상승)하는데 처음에는 균형수준 이하로 크게 하락했다가 차츰 통화가치가 상승(환율 하락)하여 새로운 균형수준에 이르게 되나 원래의 균형점보다 하락되어 있는 상태를 말한다. </p>
+<p>즉 통화교란 현상이 발생할 때 환율이 새로운 균형으로 이행되기까지 장기적인 균형경로에서 벗어나 기적으로는 더 큰 폭으로 변하는 것을 말한다. 이는 통화변동에 따른 금융·외환시장에서의 반응이 상품시장에서 보다 빠르게 나타나기 때문이다. </p>
+<p>The key features of the model include the assumptions that goods' prices are sticky, or slow to change, in the short run, while the prices of currencies are flexible, that arbitrage in asset markets holds, via the uncovered interest parity equation, and that expectations of exchange rate changes are "consistent" — that is, rational.   </p>
+<p>
+Dornbusch’s key result was that even though agents have “perfect foresight” the nominal exchange rate can “overshoot” its long term value. At times, for example the exchange rate depreciates sharply, only to appreciate again at a steady rate. This excessive volatility seemed to
+match the behavior of newly floating exchange rates, and it matches what happens when an economy “jumps” onto its saddle path. The results derived from Dornbusch overshooting model made him famous and
+bolstered the rational expectations revolution in macro-economics, despite complaints that the Mundell-Fleming model lacks microfoundations.
+</p>
+
+<h4>(가정)</h4>
+
+<ol>
+    <li>실질화폐수요는 소득에 비례, 이자율에 반비례(LM 곡선) </li>
+    <li>화폐시장은 균형이고(화폐수요와 화폐공급이 일치), 화폐공급은 중앙은행에 의해 결정(IS 곡선)</li>
+    <li>수출, 수입은 실질환율의 함수.</li>
+    <li>자본시장은 외부 충격에 즉각 반응하고 투자자는 위험 중립적</li>
+    <li>완전고용 국민소득은 일정</li>
+    <li>물가는 생산량과 비례관계(Phillips 곡선)</li>
+  </ol>
+<br>
+
+<h4>(설명)</h4>
+
+<p> ○ 실질화폐수요는 소득에 비례, 이자율에 반비례(LM 곡선) </p>
+
+<p> $ \dfrac{M_t}{P_t} = Y_t^a e^{-br_t}, \quad e 는 \, 자연대수, \quad a, b > 0 ........... ① $ <sup><a href="#fn20" id="ref20">주2)</a></sup> </p>
+
+<p> $ M_t $ : t 기의 명목 화폐수요</p>
+<p> $ P_t $ : t 기의 물가</p>
+<p> $ Y_t $ : t 기의 국민소득</p>
+<p> $ r_t $ : t 기의 명목이자율</p>
+<br>
+
+<p> ○ 화폐시장은 균형이고(화폐수요와 화폐공급이 일치), 화폐공급은 중앙은행에 의해 결정 </p>
+<p> $ M_t^d = M_t^s = M, \qquad M_t^d : 화폐수요, \qquad M_t^s : 화폐공급 $ </p>
+<p> ①에 양변로그를 취하고 화폐시장의 균형조건을 대입(소문자는 로그 표시, 단 이자율은 제외). </p>
+
+<p> $ m - p_t = ay_t - br_t $ </p>
+<br>
+
+<p> ○ 총수요는 개방경제하의 IS 곡선에 따른다.  </p>
+<p> $ Y_t = C_t + I_t + G_t + X_t - M_t $ </p>
+<br>
+<p> $ X_t $ : t 기의 수출</p>
+<p> $ M_t $ : t 기의 수입</p>
+<br>
+
+<p> ○ 수출, 수입은 실질환율의 함수</p>
+<p>다른 변수를 상수로 가정하면, 총수요는 실질 환율에 비례적으로 영향을 받는다.<sup><a href="#fn1" id="ref1">1</a></sup></p>  
+
+<p> $ Y_t = RE_t^{\delta}, \qquad \delta > 0 $ </p>
+<p> 실질 환율은 <sup><a href="#fn2" id="ref2">2</a></sup> 
+<br>   
+
+<p> $ RE_t = E_t \dfrac{P_t^*}{P_t} $ </p>
+<br>
+<p> $ RE_t $ : 실질환율  </p>
+<p> $ E_t $ : 명목환율  </p>
+<p> $ P_t^* $ : 외국의 물가  </p>
+<p> $ P_t $: 자국의 물가  </p>
+<br>
+<p> 양변로그를 취하고 로그를 소문자로 표시하면</p>
+<p> $ re_t = e_t + p_t^* - p_t $ </p>
+<p> 따라서 총수요를 나타내는 식은 </p>
+<p> $ y_t = \delta(e_t + p_t^* - p_t) $ </p>
+<br>
+<p> ○ 자본시장은 외부 충격에 즉각 반응하고 투자자는 위험 중립적이다.(UIRP:Uncovered Interest Rate Policy 가정)<sup><a href="#fn3" id="ref3">3</a></sup> </p>
+<p> 1년 뒤 돈을 받는다고 할 때 환율을 당시 시세로 맡기기로 하면 재정거래(arbitrage)가 일어나지 않을 조건은 다음과 같다. </p>
+<p> $ 1 + r_t = \dfrac{(1+r_t^*)E_{t+1}}{E_t}, \qquad r_t^* $는 타국의 명목이자율 </p>
+<p> $ \Longrightarrow E_t(1 + r_t) = (1+r_t^*)E_{t+1} $ </p>
+<p> 양변로그를 취하고 소문자를 로그로 표시하면(이자율은 제외) </p>
+<p> $ e_t + r_t = e_{t+1} + r_t^*, \qquad \log(1+r_t) \cong r_t $ <sup><a href="#fn4" id="ref4">4</a></sup> </p>
+<br>
+<p> ○ 완전고용 국민소득은 일정하다. </p>
+<p> $ y_t^s = \bar{y}, \qquad y_t^s : 총공급, \qquad \bar{y} : 상수 $ </p>
+<p>Since the focus is short term price dynamics we take the
+    level of output is fixed ( ys = y ) because our focus is on short-run
+    dynamics.</p>
+<br>
+<p> ○ 물가는 생산량과 비례관계에 있다.(Phillips 곡선, 총공급(AD)곡선) </p>
+<p>초과수요가 있으면 물가 상승, 초과공급이면 물가 하락</p>
+<p>단, 물가는 즉시 균형수준으로 회복되는 것이 아니라 천천히 반응한다.(고정가격모형)<sup><a href="#fn5" id="ref5">5</a></sup> </p>
+<p> $ p_{t+1} - p_t = \pi(y_t - \bar{y}), \qquad \pi > 0 $ </p>
+<br>
+
+<h4>(풀이)</h4>
+<p> 이상을 정리하면 다음의 네 개의 방정식으로 표현된다. </p>
+<p>가정이 복잡한 것처럼 보이지만 기존의 IS/LM 모형과 총공급곡선 모형에 개방경제하의 비재정거래인 UIRP를 추가한 것이다. </p>
+<br>
+<p> $ m - p_t = ay_t - br_t $ ........... ① (LM 곡선)</p>
+<p> $ y_t = \delta(e_t + p_t^* - p_t) $ ........... ② (IS 곡선)</p>
+<p> $ e_t + r_t = e_{t+1} + r_t^* $ .............③ (UIRP) </p>
+<p> $ p_{t+1} - p_t = \pi(y_t - \bar{y}) $ .............④ (필립스 곡선, 총공급(AD)곡선) </p>
+<br>
+<p> 우리가 알고 싶은 것은 통화량 변동시 자국의 환율과 물가의 움직임이므로 위 식에서 $ y_t, r_t $를 제거한다. </p>
+<p> $p_t^*, r_t^* $는 외국의 물가, 외국의 이자율이므로 외생변수로 본다.  </p>
+
+<p> ③에서 $ r_t = r_t^* + e_{t+1} - e_t  $ .............③$'$ </p>
+<p> ②, ③$'$을 ①에 대입하면 </p>
+<p> $ m - p_t = a\delta(e_t + p_t^* - p_t) - b(r_t^* + e_{t+1} - e_t) $ </p>
+<p> $ \Longrightarrow e_{t+1} - e_t = \dfrac{1}{b}[(1-a \delta)p_t + a \delta e_t] + \dfrac{a \delta}{b}p_t^* - \dfrac{m}{b} - r_t^* $ .............⑤ </p>
+<p> ②를 ④에 대입하면 </p>
+<p> $ p_{t+1} - p_t = \pi(\delta(e_t + p_t^* - p_t) - \bar{y}) $ </p>
+<p> $ \Longrightarrow p_{t+1} - p_t = \pi \delta e_t + \pi \delta p_t^* - \pi \delta p_t  - \pi \bar{y} $ ..................⑥ </p>
+<p> ⑤, ⑥은 $ e_t, p_t $ 의 연립 비동차 차분방정식이다. </p>
+
+<p> 정상상태(균형)에서 $ e_t = e_{t+1} = \bar{e} $ </p>
+<p>  $ p_t = p_{t+1} = \bar{p} $  이므로    </p>
+<p> $ (1 - a \delta)\bar{p} + a \delta \bar{e} + a \delta p_t^* - m - br_t^* = 0 $ </p>
+<p> $ \delta \bar{e} + \delta p_t^* - \delta \bar{p}  - \bar{y} = 0 $ </p>
+<p> 위 연립방정식을 행렬 표현으로 고치면 </p>
+<p>
+    $
+    \left( \begin{array}{ccc}
+    1 - a \delta & a \delta   \\
+    -\delta & \delta  \\
+    \end{array} \right)
+    
+    \left( \begin{array}{ccc}
+    \bar{p}  \\
+    \bar{e}  \\
+    \end{array} \right) =
+    \left( \begin{array}{ccc}
+    m + br_t^* + a \delta p_t^*  \\
+    \bar{y} - \delta p_t^*  \\
+    \end{array} \right)
+    $
+</p>
+
+<p>
+        $ \det
+        \left( \begin{array}{ccc}
+        1 - a \delta & a \delta   \\
+        -\delta & \delta  \\
+        \end{array} \right) = \delta \neq 0
+        $
+        이므로 역함수가 존재하고 따라서 정상상태가 존재한다. 
+    </p>   
+
+<p> 정상상태는 </p>
+
+<p>
+    $
+    \left( \begin{array}{ccc}
+    \bar{p}  \\
+    \bar{e}  \\
+    \end{array} \right) =
+
+    \left( \begin{array}{ccc}
+    1 - a \delta & a \delta   \\
+    -\delta & \delta  \\
+    \end{array} \right)^{-1}
+
+    \left( \begin{array}{ccc}
+    m + br_t^* + a \delta p_t^*  \\
+    \bar{y} - \delta p_t^*  \\
+    \end{array} \right)
+    $
+</p>
+<p>
+    $ = \dfrac{1}{\delta}
+    
+    \left( \begin{array}{ccc}
+    \delta & -a \delta   \\
+    \delta & 1 - a \delta  \\
+    \end{array} \right)^{-1}
+
+    \left( \begin{array}{ccc}
+    m + br_t^* + a \delta p_t^*  \\
+    \bar{y} - \delta p_t^*  \\
+    \end{array} \right) 
+    $
+</p>
+<p>
+        $ = 
+    \left( \begin{array}{ccc}
+    m + br_t^* + a \bar{y}  \\
+    m + br_t^* - p_t^* + \dfrac{1 - a \delta}{\delta} \bar{y}  \\
+    \end{array} \right)
+
+    $
+</p>
+<p> 따라서 통화량($ m $)이 증가하면 균형 물가($\bar{p}$)와 균형 환율($\bar{e}$)이 증가함을 알 수 있다. </p>
+
+<h4> 해의 수렴, 발산 </h4>
+<p> 위 연립차분방정식을 다시 쓰면 </p>
+<p> $ e_{t+1} = (1+ \dfrac{a \delta}{b})e_t + (1+ \dfrac{a \delta}{b})p_t + \dfrac{a \delta}{b}p_t^*
+    - \dfrac{m}{b} - r_t^* $ </p>
+
+<p> $ p_{t+1} = \pi \delta e_t + (1 - \pi \delta) p_t + \pi \delta p_t^*  - \pi \bar{y}  $ </p>
+<p> $ \Longrightarrow 
+    \left( \begin{array}{ccc}
+    e_{t+1}  \\
+    p_{t+1}  \\
+    \end{array} \right) =
+
+    \left( \begin{array}{ccc}
+    1 + \dfrac{a \delta}{b} & \dfrac{1 - a \delta}{b}   \\
+    \pi \delta & 1 - \pi \delta  \\
+    \end{array} \right)
+
+    \left( \begin{array}{ccc}
+    e_t  \\
+    p_t  \\
+    \end{array} \right) + 
+
+    \left( \begin{array}{ccc}
+    \dfrac{a \delta}{b} p_t^* - - \dfrac{m}{b} - r_t^* \\
+    \pi \delta  p_t^* - \pi \bar{y} \\
+    \end{array} \right)
+
+    $ </p>
+<p> 해의 수렴, 발산을 판정하기 위해서는 계수행렬(A)의 고유값을 구해야 한다. </p>
+<p> 특성방정식은 </p>
+<p> $ \Phi(\lambda) = (1 + \dfrac{a \delta}{b} - \lambda)(1 - \pi \delta - \lambda) - (\dfrac{1 - a \delta}{b}) \pi \delta$ </p>
+<p> 따라서 </p> 
+<p> $ \Phi(\lambda) = \lambda^2 - (2 + \dfrac{a \delta}{b} - \pi \delta)\lambda + 1 - \pi \delta + \dfrac{a \delta}{b} - \dfrac{\pi \delta}{b}$ </p>
+<p> $ \textrm{tr(A)} = 2 + \dfrac{a \delta}{b} - \pi \delta $, </p>
+<p> $ \textrm{det(A)} = 1 - \pi \delta + \dfrac{a \delta}{b} - \dfrac{\pi \delta}{b}$ 에서  </p>
+
+<p> 고유값의 실수 여부를 판정하기 위해 판별식을 검토 </p>
+
+<p> 근의 판정은 $ \textrm{tr(A)}^2 - 4\textrm{det(A)} $ </p>
+<p> $ = {(2 + \dfrac{a \delta}{b} + 1 - \pi \delta)}^2 - 4{(1 - \pi \delta + \dfrac{a \delta}{b} - \dfrac{\pi \delta}{b})} $ </p>
+<p> $ = {(\dfrac{a \delta}{b} - \pi \delta)}^2 + 4{\dfrac{\pi \delta}{b}} > 0, \qquad (\because a, b, \pi, \delta > 0)  $ </p>
+
+<p> 따라서 고유값은 복소수가 아닌 실수이다. </p>
+<p> 해의 수렴, 발산 여부를 판정하기 위해서는 고유값이 1보다 큰지 여부를 알아야 한다.  </p>
+<p> 고유값을 직접 계산하는 것은 복잡하므로 다음의 관계를 이용한다. </p>
+<p> 이차방정식 $ f(x) = x^2 + (\alpha + \beta)x + \alpha \beta $에서 $ \alpha, \beta $가 두 실근이면  </p>
+
+<div style="text-align : center;">
+    <img src="donbush.bmp" width=500px, height=500px><br>
+    (그림 1) 2차 방정식 근의 그래프
+</div>
+
+<p>  $ f(1) < 0 $ 이면 두 근은 1의 좌우에 있다. 즉  $ \beta < 1 < \alpha $ </p>
+<p>  $ f(-1) > 0 $ 이면 1 보다 작은 근은 –1 보다 크다. 즉  $ -1 < \beta < 1 $ </p>
+
+<p> 이를 이용하면 </p>
+<p> $ \Phi(1) = 1 - (2 + \dfrac{a \delta}{b} - \pi \delta) + 1 - \pi \delta + \dfrac{a \delta}{b} - \dfrac{\pi \delta}{b} = - \dfrac{\pi \delta}{b} < 0 $ </p>
+
+<p> $ \Phi(1) < 0 $는 두 근이 1의 좌우에 있음을 의미한다.  $ \lambda_2 < 1 < \lambda_1 $ </p>
+<p> 한 근 $ \lambda_1 $이 1보다 크므로 $ \lambda_1 $는 발산한다. </p>
+
+<p>  해가 무한대로 발산하면 경제적으로 의미가 없으므로 경제적으로 유의미한 해석을 도출하기 위해 1보다 작은 다른 고유값 $ \lambda_2 $ 은 1과 –1 사이에 있기를 바란다.  </p>
+
+<p> $ \Phi(-1) = 1 + (2 + \dfrac{a \delta}{b} - \pi \delta) + 1 - \pi \delta + \dfrac{a \delta}{b} - \dfrac{\pi \delta}{b} =  4 - 2\pi \delta + 2\dfrac{a \delta}{b} - \dfrac{\pi \delta}{b}  $ ..............⑦ </p>
+<p> 불행히도 이의 부호는 쉽게 판정할 수 없다. </p>
+<p> $ \textrm{tr(A)} = 2 + \dfrac{a \delta}{b} - \pi \delta $, </p>
+<p> $ \textrm{det(A)} = 1 - \pi \delta + \dfrac{a \delta}{b} - \dfrac{\pi \delta}{b}$ 에서  </p>
+
+<p> $ \Phi(-1) = 1 + \textrm{tr(A)} + \textrm{det(A)} $ </p>
+<p> $ a \delta $가 매우 작은 값이라 가정하면 </p>
+<p> $ \textrm{tr(A)} = 2 + \dfrac{a \delta}{b} - \pi \delta < 2 $ </p>
+<p> $ \textrm{det(A)} = 1 - \pi \delta + \dfrac{a \delta}{b} - \dfrac{\pi \delta}{b} < 1 $ </p>
+<p> $ \textrm{tr(A)} + \textrm{det(A)} = 3 - 2 \pi \delta + 2 \dfrac{a \delta}{b} - \dfrac{\pi \delta}{b} < 3 $ </p>
+<p> ⑦에서 $ \Phi(-1) = 4 - 2\pi \delta + 2\dfrac{a \delta}{b} - \dfrac{\pi \delta}{b}  $ 이므로 </p>
+<p> 따라서 $ \Phi(-1) > 0 $ </p>
+
+<p>   즉 작은 근은 $ -1 < \lambda_2 < 1  $ </p>
+
+<p> 차분방정식의 일반해는 다음과 같이 표시되므로 </p>
+<p> $  
+    \left( \begin{array}{ccc}
+    e_t  \\
+    p_t  \\
+    \end{array} \right) = c_1 {\lambda_1}^t
+
+    \left( \begin{array}{ccc}
+    q_{11}   \\
+    q_{12}  \\
+    \end{array} \right) + c_2 {\lambda_2}^t
+
+    \left( \begin{array}{ccc}
+    q_{21}   \\
+    q_{22}  \\
+    \end{array} \right) + 
+
+    \left( \begin{array}{ccc}
+    \bar{e}  \\
+    \bar{p}  \\
+    \end{array} \right)
+
+    $ </p>
+<p> $ \qquad where 
+    \left( \begin{array}{ccc}
+    q_{11}   \\
+    q_{12}  \\
+    \end{array} \right), 
+    
+    \left( \begin{array}{ccc}
+    q_{21}   \\
+    q_{22}  \\
+    \end{array} \right)는 \quad 각각 \, \lambda_1, \, \lambda_2의 고유벡터 $ 
+</p>
+
+<p> $ c_1 = 0 $일 때 $ \lambda_2 < 0  $ 이면 환율은 균형점 주위에서 진동하면서 수렴, 또는 발산한다. 이는 다분히 비현실적이다. 환율은 점진적으로 균형에 수렴하는 것이 경제적 현실에 타당하다. 따라서 $ \lambda_2 > 0  $을 가정하면 $ 0 < \lambda_2 < 1 $ 이므로 해는 안장경로를 갖는다. </p>
+<p> 해가 안장경로일 경우 유일하게 균형으로 수렴하는 경로가 존재한다. </p>
+<p> 그것은 차분방정식의 해에서 $\lambda_1$의 계수인 $ c_1 = 0 $ 일 때이다. 따라서 우리는 경제적으로 유의미한 결론을 유도해낼 수 있다.  </p>
+<br>
+
+<h4> 물가와 환율의 위상도 </h4>
+<p> 이상을 위상도로 표현하면 다음과 같다. </p>
+<p>  기준선 $ e_{t+1} = e_t = 0$를 고려하자. 앞의 식 ⑤에서     </p>
+<p> $ e_{t+1} - e_t = \dfrac{1}{b}[(1-a \delta)p_t + a \delta e_t] + \dfrac{a \delta}{b}p_t^* - \dfrac{m}{b} - r_t^* = 0 $ 에서 기준선은 </p>
+
+<p> $ p_t = - \dfrac{a \delta}{1 - a \delta} e_t - \dfrac{1}{1 - a \delta}(a \delta p_t^* - m - br_t^*)  $ </p>
+
+<p> $ e_{t+1} - e_t $는 $e_t$ 의 증가함수 </p>
+<p> 즉 기준선 윗쪽에서 환율 증가 </p>
+<p> 기준선 아랫쪽에서 환율 감소 </p>
+
+<p> $ a \delta $가 매우 작은 값이라고 가정했으므로 $ 1 - a \delta > 0 $ </p>
+<p> $ \dfrac{a \delta}{1 - a \delta} > 0 $ 이므로 기준선은 음의 기울기<sup><a href="#fn6" id="ref6">6</a></sup> </p> </p>
+<p> m은 통화 공급량 로그값이므로 물가나 이자율에 비해 상당히 큰 수치이다.</p> 
+<p> 따라서 $e_t = 0$ 일 때 $p_t$은 $ - \dfrac{1}{1 - a \delta}(a \delta p_t^* - m - br_t^*) > 0 $ </p>
+<p> 즉 절편이 양수이다. </p>
+
+<p>  기준선 $ p_{t+1} = p_t = 0$를 고려하자. 앞의 식 ⑥에서     </p>
+<p> $ p_{t+1} - p_t = \pi \delta e_t + \pi \delta p_t^* - \pi \delta p_t  - \pi \bar{y} $  </p>
+<p> $ p_{t+1} - p_t $는 $ p_t $의 감소함수이므로 </p>
+
+<p> 즉 기준선 윗쪽에서 물가 감소 </p>
+<p> 기준선 아랫쪽에서 물가 증가 </p>
+<p> 기준선은 $ p_t = e_t + p_t^* - \dfrac{1}{\delta} - \bar{y}  $ </p>
+<p> 기준선의 기울기는 1이고, 절편은 $ p_t^* - \dfrac{1}{\delta} - \bar{y}  $ </p>
+<p>  $\bar{y} $는 국민소득의 로그값을 의미하므로 물가에 비해 상당히 큰 수치이다. 따라서 절편이 음수라고 추정할 수 있다.  </p>  
+
+<p> 이상을 고려하여 위상도를 그리면 다음과 같다. </p>
+
+<div style="text-align : center;">
+    <img src="donbush-phase-diag.bmp" width=600px, height=500px><br>
+    (그림 2) Donbush 모형 위상도
+</div>
+
+<p> 두 기준선의 교차점은 정상상태, 즉 균형점을 의미한다. 그림에서 해의 경로는 균형을 향해 가다가 발산하는 안장경로를 보임을 알 수 있다.<sup><a href="#fn7" id="ref7">7</a></sup> </p>
+<br>
+
+<h4> 수렴하는 안장경로의 도출 </h4>
+<p> 환율과 물가가 무한대로 발산하는 경로는 버블을 포함하는 경로로서 경제적으로는 의미가 없는 해이다. 따라서 균형 상태로 수렴하는 경로를 구한다. </p>
+<p> 차분방정식의 일반해는 다음과 같이 표시되므로 </p>
+<p> $  
+    \left( \begin{array}{ccc}
+    e_t  \\
+    p_t  \\
+    \end{array} \right) = c_1 {\lambda_1}^t
+
+    \left( \begin{array}{ccc}
+    q_{11}   \\
+    q_{12}  \\
+    \end{array} \right) + c_2 {\lambda_2}^t
+
+    \left( \begin{array}{ccc}
+    q_{21}   \\
+    q_{22}  \\
+    \end{array} \right) + 
+
+    \left( \begin{array}{ccc}
+    \bar{e}  \\
+    \bar{p}  \\
+    \end{array} \right)
+    $ 
+</p>
+
+
+<p> $ \lambda_1 > 0 $ 이므로 발산하는 경로를 없애기 위해 $ c_1 = 0$ 라 하고 풀어쓰면 </p>
+<p> $ e_t = c_2 {\lambda_2}^t q_{12} + \bar{e} $.................⑦ </p>
+<p> $ p_t = c_2 {\lambda_2}^t q_{22} + \bar{p} $.................⑧ </p>
+<p>  ⑧에 초기조건 $p_0$ 를 대입하면 $c_2$를 구할 수 있다.  </p>
+<p> $ p_0 = c_2 q_{22} + \bar{p} $ </p>
+<p> $ \Longrightarrow c_2 = \dfrac{p_0 - \bar{p}}{q_{22}} $ </p>
+<p> ⑦, ⑧를 에 $ {\lambda_2}^t $ 에 대해 정리하면  </p>
+<p> $  {\lambda_2}^t = \dfrac{e_t - \bar{e}}{c_2 q_{12}} = \dfrac{p_t - \bar{p}}{c_2 q_{22}} $ </p>
+<p> $ \Longrightarrow p_t = \bar{p} + \dfrac{q_{22}}{q_{12}}(e_t - \bar{p}) $ </p>
+
+<p> $ e_t, p_t $ 가 이 경로상에 있을 때는 균형 $(\bar{e}, \bar{p})$에 수렴한다.  </p>
+<p> 이는 유일한 수렴하는 안장경로이다.  </p>
+<p> 수렴하는 안장경로의 경제적 의미는 다음과 같다.  </p>
+<p>물가와 환율이 비례적으로 움직여야 한다는 의미이다. 그렇지 않으면 arbitrage가 발생해서 환투자할 경우 이득을 볼 수 있을 것이다.  </p>
+<p> 따라서 이는 no arbitrage 조건이라고도 한다. </p>
+<p> (그림 2)에서 보듯이 만약 경제상황이 균형경로 밖에 있다면 물가와 환율은 무한대로 커지거나 무한대로 작아질 것이다. </p>
+<p> 경제현실에서 물가와 환율이 무한대로 작아지는 경우는 상정할 수 없으므로 (그림 2)의 II나 III에 걸치는 1/4 분면의 상황을 고려할 수 있을 것이다.</p>
+<p> 이는 해가 무한정으로 증가하는 비현실적인 버블해를 제외한다는 의미이다.  </p>
+<p> 수렴하는 안장경로의 기울기는 다음과 같이 하여 파악할 수 있다. </p>
+
+<p> $ \left( \begin{array}{ccc}
+    q_{12}   \\
+    q_{22}  \\
+    \end{array} \right)$ 는 고유벡터이므로 특성방정식 $ \mathbf{(A-I)x} = 0 $ 에서  </p>
+
+    <p> $
+    \left( \begin{array}{ccc}
+    1 + \dfrac{a \delta}{b} - \lambda_2 & \dfrac{1 - a \delta}{b}   \\
+    \pi \delta & 1 - \pi \delta - \lambda_2 \\
+    \end{array} \right)
+    \left( \begin{array}{ccc}
+    q_{12}   \\
+    q_{22}  \\
+    \end{array} \right) = 0
+
+$ </p>
+<p> $ \Longrightarrow (1 + \dfrac{a \delta}{b} - \lambda_2) q_{12} + (\dfrac{1 - a \delta}{b}) q_{22} = 0 $ </p>
+<p> $ 0 < \lambda_2 < 1 $ 이므로 $ 1 + \dfrac{a \delta}{b} - \lambda_2 > 0 $</p>
+<p> 앞에서 $ 1 - a \delta > 0 $을 가정했으므로 $ \dfrac{1 - a \delta}{b} > 0 $ </p>
+<p> 따라서 $ q_{12}, q_{22} $  는 부호가 반대이다.  </p>
+<p> 따라서 $ p_t = \bar{p} + \dfrac{q_{22}}{q_{12}}(e_t - \bar{p})  $ 의 기울기는 음수임을 알 수 있다. 또한</p>
+<p> $ (1 + \dfrac{a \delta}{b} - \lambda_2) q_{12} + (\dfrac{1 - a \delta}{b}) q_{22} = 0 $ </p>
+<p> $ \Longrightarrow (\dfrac{1 - a \delta}{b}) q_{22} = -(1 + \dfrac{a \delta}{b} - \lambda_2) q_{12} $ </p>
+<p> $ \Longrightarrow \Big | \dfrac{q_{22}}{q_{12}} \Big | = 
+    \dfrac {1 + \dfrac{a \delta}{b} - \lambda_2}{\dfrac{1 - a \delta}{b}} >
+    \dfrac {\dfrac{a \delta}{b}}{\dfrac{1 - a \delta}{b}}
+    = \dfrac {a \delta}{1 - a \delta} $, $ (\because | \lambda_2| < 1) $ </p>
+
+<p> $ \dfrac {a \delta}{1 - a \delta} $는 환율 기준선의 기울기의 절대값이므로 따라서 수렴하는 안장경로의 기울기는 환율 기준선보다 더 가파름을 알 수 있다.</p> 
+<p> 이를 위상도 그림에 포함하면 (그림 3)과 같다. </p>
+
+<div style="text-align : center;">
+    <img src="donbush-phase-diag2.bmp" width=600px, height=500px><br>
+    (그림 3) Donbush 모형 위상도
+</div>
+
+<br>
+
+<h4> 통화정책의 효과 </h4>
+<p> 앞서 통화량의 증가는 균형 물가와 균형 환율을 증가시킴을 보았다. </p>
+<p> 이제 통화량의 변동이 어떤 과정을 거쳐 균형에 도달하는지 파악한다.  </p>
+<p> 환율 기준선과 물가 기준선은 다음과 같았다. </p>
+
+<p> $ p_t = - \dfrac{a \delta}{1 - a \delta} e_t - \dfrac{1}{1 - a \delta}(a \delta p_t^* - m - br_t^*)  $ </p>
+<p> $ p_t = e_t + p_t^* - \dfrac{1}{\delta} \bar{y} $ </p>
+
+<p> 정책당국이 통화공급을 예상치 못하게 증가했다면 m이 증가하면 환율 기준선이 위로 올라간다.  </p>
+<p> 물가기준선은 영향이 없다. </p>
+<p> 환율 기준선이 이동하므로 새로운 균형은 (그림 4)의 $(e^{*'}, p^{*'}) $에서 발생한다.  </p>
+<p> 수렴하는 안장경로도 새로운 균형점을 지나도록 형성된다.  </p>
+
+<div style="text-align : center;">
+    <img src="donbush-phase-diag3.bmp" width=600px, height=500px><br>
+    (그림 4) Donbush 모형 위상도
+</div>
+
+<p> 가격이 경직적이지 않다면 균형은 과거의 균형점$(e^{*}, p^{*}) $에서 즉시 새로운 균형점$(e^{*'}, p^{*'}) $으로 옮겨갈 것이다. </p>
+<p> 그러나 가격이 경직적이어서 $ p^* $에서 변동이 없다면 $ p^* $는 고정이고 $ e^* $는  $ p^* $수평선을 따라 수평으로 이동한다. </p>
+<p> $ p^* $ 수평선상의 다른 모든 점은 발산하므로 수렴하는 유일한 점은 안장선과 만나는 $ e_0 $ 점이다. 따라서 단기적으로 $(e_0, p^{*}) $에서 균형이 형성된다.  </p>
+<p> 그림을 보면 $ e_0 $는 새로운 균형인 $ e^{*'} $보다 과도하게 환율이 증가했음을 보여준다. 이를 <span style="color: red;">환율의 오버슈팅(overshooting)</span>이라 한다. 이 모형을 overshooting 모형이라 부르는 이유이다.  </p>
+<p> 환율은 가격 경직성 때문에 단기적으로 $ e_0 $로 점프하지만 장기적으로는 가격이 점진적으로 변하면서 균형$(e^{*'}, p^{*'}) $에 수렴한다.  </p>
+<p> 즉 통화 공급을 늘리면 환율은 큰 폭으로 증가하지만 점차 내려가서 새로운 균형인 $ e^{*'} $에서 안정된다.  </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+<p> $  $ </p>
+
+<hr>
+
+<span style = " font-size:0.7em;  color: green; line-height: 1.5em;">
+    <sup id="fn19"> 
+      주1) Difference Equations for Economists, Klaus Neusser, 2012 참조
+     </sup>
+     <br>
+     <sup id="fn20"> 
+        주2) This represents a simplication because money demand should depend on aggregate
+        demand, $ {y_t}^d $, and not on potential output, $ y $. However, we adopt this simplied version for expositional purposes.
+       </sup>
+    <br>
+    <sup id="fn1"> 
+       1. 환율이란 자국화폐로 표현한 외국화폐 1단위의 가격을 의미한다. 따라서 환율이 높다는 것은 자국의 화폐가치가 하락한다는 것을 의미한다.
+    </sup>
+    <br>
+    <sup id="fn2"> 
+        2. 실질환율은 실질환율은 자국의 환율을 물가차이로 나눈 것이다. <a href="http://terms.naver.com/entry.nhn?docId=779274&cid=520&categoryId=520 ">여기</a> 참조</sup>
+     <br>
+    <sup id="fn3"> 
+        3. 국제금융거래에는 계약시점과 거래시점이 동시에 이루어지지 않을 수 있다. 이 때문에 거래에 있어 리스크가 발생하게 되는데, 거래시점 환율을 미리 결정하여 리스크를 없애는 것을 ‘Covered’라 하고, 거래시점 환율을 그 때의 시세에 맡기는 것을 ‘Uncovered’라 한다. 
+     </sup>
+     <br>
+    <sup id="fn4"> 
+        4. r이 0에 근접한 작은 값이면 성립. ‘테일러급수’ 참조
+     </sup>
+     <br>
+    <sup id="fn5"> 
+        5. 유동가격모형(Flexible Price Model)은 화폐수요나 총생산, 이자율이 변할 경우 가격이 즉시 신축적으로 반응하면서 환율을 결정한다는 이론이다. 가격이 즉시 변동한다는 점이 고정가격모형과의 차이이다. 유동가격모형의 전제는 PPP 유지, UIRP 유지이다. 고정가격모형의 전제는 PPP 비유지, UIRP 유지이다.
+     </sup>
+     <br>
+    <sup id="fn6"> 
+        6. $ a \delta \to 0 $ 이면 기울기는 수평이 된다. $ a \delta \to 1 $ 이면 기울기는 수직이 된다.
+     </sup>
+     <br>
+     <sup id="fn7"> 
+        7. 고유값이 모두 양수이어야 위상도 분석이 의미가 있다. 어느 한 고유값이 음수라면 해의 경로가 진동하므로 위상도 분석은 실제 결과와 다를 수 있다. 이에 대해서는 앞의 ‘위상도 분석의 문제점’ 참조.
+     </sup>
+</span>
+
+</body>
+</html>

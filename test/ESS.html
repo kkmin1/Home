@@ -1,0 +1,104 @@
+Evolutionary game theory (EGT) is the application of game theory to evolving populations in biology. It defines a framework of contests, strategies, and analytics into which Darwinian competition can be modelled. It originated in 1973 with John Maynard Smith and George R. Price's formalisation of contests, analysed as strategies, and the mathematical criteria that can be used to predict the results of competing strategies.
+
+Evolutionary game theory differs from classical game theory in focusing more on the dynamics of strategy change. This is influenced by the frequency of the competing strategies in the population.
+
+Evolutionary game theory has helped to explain the basis of altruistic behaviours in Darwinian evolution. It has in turn become of interest to economists,[4] sociologists, anthropologists, and philosophers.
+
+<h2> replicator dynamics </h2>
+
+These show the growth rate of the proportion of organisms using a certain strategy and that rate is equal to the difference between the average payoff of that strategy and the average payoff of the population as a whole.
+
+A strategy which can survive all "mutant" strategies is considered evolutionarily stable. In the context of animal behavior, this usually means such strategies are programmed and heavily influenced by genetics, thus making any player or organism's strategy determined by these biological factors
+
+Hawk dove
+The first game that Maynard Smith analysed is the classic hawk dove[a] game. It was conceived to analyse Lorenz and Tinbergen's problem, a contest over a shareable resource. The contestants can be either a hawk or a dove. These are two subtypes or morphs of one species with different strategies. The hawk first displays aggression, then escalates into a fight until it either wins or is injured (loses). The dove first displays aggression, but if faced with major escalation runs for safety. If not faced with such escalation, the dove attempts to share the resource
+
+Given that the resource is given the value V, the damage from losing a fight is given cost C
+
+If a hawk meets a dove, the hawk gets the full resource V
+If a hawk meets a hawk, half the time they win, half the time they lose, so the average outcome is then V/2 minus C/2
+If a dove meets a hawk, the dove will back off and get nothing 0
+If a dove meets a dove, both share the resource and get V/2
+
+       hawk	   dove
+ hawk V/2-C/2	V
+ dove   0	   V/2
+
+ The actual payoff, however, depends on the probability of meeting a hawk or dove, which in turn is a representation of the percentage of hawks and doves in the population when a particular contest takes place. That, in turn, is determined by the results of all of the previous contests. If the cost of losing C is greater than the value of winning V (the normal situation in the natural world) the mathematics ends in an evolutionarily stable strategy (ESS), a mix of the two strategies where the population of hawks is V/C. The population regresses to this equilibrium point if any new hawks or doves make a temporary perturbation in the population. The solution of the hawk dove game explains why most animal contests involve only ritual fighting behaviours in contests rather than outright battles. The result does not at all depend on "good of the species" behaviours as suggested by Lorenz, but solely on the implication of actions of so-called selfish genes.
+
+
+
+
+
+
+ the notion of player is displaced by that of strategy, and consequently the notion of a player’s knowledge, complete or incomplete, is dispensed with. What drives systems is not the rationality of the players but the differential success of the strategies. 
+
+ A game with strategies s1,…..sn for both 
+players is strategy symmetric (symmetric, in brief) if: 
+1. when i=j the payoffs for the two identical strategies are the same, which means 
+that along the main diagonal (top left to bottom right) the payoffs in each box are 
+the same
+2. the payoffs in the remaining boxes on one side of the main diagonal are mirror 
+images of their counterparts on the other side. 
+
+For example, The Prisoners’ Dilemma is a symmetric game. Along the main diagonal, 
+the payoffs are the same in each box that is, (1,1) and (6,-6); moreover, we have (-10, 10) in the top right box and (10, -10) in the bottom left, which are mirror images of each 
+other.
+
+   S    C
+S 1;1 10;-10
+C -10;10 -6;-6
+
+A symmetric matrix can be simplified by writing only the payoffs of the row player, as 
+those of the column player can be easily obtained by exploiting the symmetry of the 
+game. So, the previous matrix can be simplified as
+
+  S C
+S 1 10
+C -10 -6
+
+Evolutionary Stable Strategies (ESS)
+Suppose that all the players (the incumbents) play strategy X, which can be a pure or a 
+mixed strategy. If X is stable in the sense that a mutant playing a different strategy Y
+(pure or mixed) cannot successfully invade, then X is an ESS.
+More precisely, X is an ESS if either
+
+1. E(X,X)>E(Y,X),
+that is, the payoff for playing X against (another playing) X is greater than that for 
+playing any other strategy Y against X 
+or
+2. E(X,X)=E(Y,X) and E(X,Y)>E(Y,Y)
+that is, the payoff of playing X against itself is equal to that of playing Y against X 
+but the payoff of playing Y against Y is less than that of playing X against Y. 
+Note that either (1) or (2) will do and that the former is a stronger condition than the 
+latter.
+
+Obviously, if (1) obtains, the Y invader typically loses against X, and therefore it cannot even begin to multiply with any success. If (2) obtains, the Y invader does as well 
+against X as X itself, but it loses to X against other Y invaders, and therefore it cannot 
+multiply. In short, Y players cannot successfully invade a population of X players. 
+It is possible to introduce a strategy that is stronger than an ESS, namely, an unbeatable 
+strategy. Strategy X is unbeatable if, given any other strategy Y
+
+● The population has to be infinite.
+● The notion of ESS, as we defined it, applies only to repeated symmetric games.
+● Every ESS is a strategy in a Nash equilibrium, although the reverse is not true 
+(not all Nash equilibria are made up of ESS).
+● A strict Nash equilibrium in which both players follow the same strategy is made 
+up of ESS. So, for example, in The Prisoners’ Dilemma the strict Nash 
+equilibrium (which is also a dominance equilibrium) is constituted by ESS. 
+Squealing does better against squealing than keeping silent: in a population of 
+squealers keeping silent is a losing strategy, and therefore it cannot invade.
+● If E(X,X)=E(Y,X) and E(X,Y)>E(Y,Y) obtains, one Y invader would do as well 
+as any X, which means that an ESS need not guarantee the highest payoff. 
+● An ESS can be defeated since it can have a lower payoff than one of two or more
+simultaneously invading strategies.
+● One can relax the requirements for an ESS. For example, X may be stable against 
+Y if Y is pure but not if Y is mixed, in which case X may be said, confusingly, to 
+be an ESS (of sorts) in pure strategies. 
+
+Often, ESS are associated with mixed strategy equilibriums. For example, Chicken
+(Snowdrift is essentially the same game) has two pure strategy Nash equilibriums, 
+neither of which rest on ESS. However, the mixed strategy resulting in a Nash equilibirum is an ESS. (Note that in this context mixed strategies are understood in terms 
+of frequencies of players in a population each playing a pure strategy). A very famous 
+version of ESS is the mixed strategy resulting in Nash equilibrium in Hawk-Dove, a 
+biology oriented version of Chicken.

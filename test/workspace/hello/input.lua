@@ -1,0 +1,5 @@
+io.write('Hello, ')
+print('what is your name? ')
+local name = io.read()
+print('내 이름은 '.. name.. "입니다.\n")
+io.write('Nice to meet you, ', name, '!\n')

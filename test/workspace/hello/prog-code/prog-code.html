@@ -1,0 +1,82 @@
+<!-- Created by Jafca, Remaked by kkmin -->
+
+	
+<!DOCTYPE html>
+
+<html>
+
+	
+<head>
+
+<meta charset="utf8">
+<script src=https://code.jquery.com/jquery-3.1.1.js>
+</script>
+
+<link rel="stylesheet" type="text/css" href="code.css">
+</head>
+
+
+<body>
+<div style=margin:10px>
+<h1>프로그래밍 언어별 "Hello World" 출력 문법</h1>
+</div>
+
+<div id="left">
+<ul>
+<li id=0>
+<div class="dropdown">
+<button onclick="myFunction()" class="dropbtn">C</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="hello.c.html" target="code0">output</a>
+    <a href="#about">input</a>
+    <a href="#contact">function</a>
+  </div>
+</div>
+</li>
+<li id=1>C#</li>
+<li id=2><a href="hello.java.html" target="code0">Java</a></li>
+<li id=3><a href="hello.py.html" target="code0">Python</a></li>
+<li id=4>Ruby</li>
+<li id=5>PHP</li>
+<li id=6>HTML</li>
+<li id=7>CSS</li>
+<li id=8>JavaScript</li>
+</ul>
+</div>
+
+
+<div id="center">
+<iframe height="300px" width="50%" src="code0.html" name="code0"></iframe>
+</div>
+
+<footer>
+      Created by &copy; kkmin 2018
+</footer>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+      
+</body>
+
+</html>
+

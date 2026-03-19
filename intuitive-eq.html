@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="eco-math.css">
+    <link rel="stylesheet" type="text/css" href="footnote.css">
+  <title>직관균형(Intuitive Criterion) </title>
+  <script src="./latex.js"></script>
+</head>
+
+<body >
+
+    <h1>직관균형 (Intuitive Criterion)</h1>
+
+    <p>직관균형은 신호 발송 게임(Signaling Game)에서 나타나는 수많은 완전 베이지안 평형(Perfect Bayesian Equilibrium, PBE)들 중, 비합리적인 믿음에 기반한 평형을 제거하기 위해 고안된 정교화 방법이다. 1987년 조인호(In-Koo Cho)와 데이비드 크렙스(David Kreps)에 의해 제안되었다.</p>
+
+    <h2>1. 도입 배경</h2>
+    <p>신호 발송 게임에서는 정보가 없는 수신자가 정보가 있는 발송자의 행동(신호)을 관찰한 뒤, 상대방이 어떤 유형인지에 대한 믿음을 갱신한다. 하지만 베이즈 규칙은 평형 경로 밖의 행동(Off-the-equilibrium path)에 대해서는 믿음을 자유롭게 설정할 수 있도록 허용한다. 이로 인해 "상대방이 평형 이외의 행동을 하면 무조건 최악의 유형일 것이다"라는 식의 위협적이고 비합리적인 믿음이 평형을 지탱하는 문제가 발생한다.</p>
+
+    <h2>2. 직관균형의 핵심 논리</h2>
+    <p>직관균형은 다음과 같은 단계로 비합리적인 평형을 걸러낸다.</p>
+    <ul>
+        <li>평형 지배(Equilibrium Dominance): 어떤 유형 t가 평형에서 벗어나 새로운 신호 s를 보냈을 때 얻을 수 있는 이론상의 최대 보수가 현재의 평형 보수보다 작다면, 유형 t는 결코 신호 s를 보낼 유인이 없다.</li>
+        <li>수신자의 합리적 추론: 수신자는 신호 s를 관찰했을 때, 위와 같이 이득을 볼 가능성이 전혀 없는 유형 t를 믿음의 대상에서 제외해야 한다.</li>
+        <li>평형의 파괴: 남은 유형들이 신호 s를 보냈을 때, 수신자가 합리적으로 대응하여 얻는 보수가 기존 평형 보수보다 높다면, 기존 평형은 직관적이지 않은 것으로 간주되어 파괴된다.</li>
+    </ul>
+
+    <h2>3. 맥주와 퀴슈 게임 (Beer-Quiche Game) 예시</h2>
+    <p>이 게임에는 강한 유형(Strong)과 약한 유형(Weak)의 발송자가 있다. 강한 유형은 아침으로 맥주(Beer)를 선호하고, 약한 유형은 퀴슈(Quiche)를 선호한다. 도전자는 발송자가 약해 보이면 싸움을 걸고, 강해 보이면 피한다. 둘 다 싸우는 것은 싫어한다.</p>
+    
+    
+    
+    <p>만약 두 유형 모두 퀴슈를 먹는 평형이 존재한다고 가정해 봅시다. 도전자는 "맥주를 마시는 자는 무조건 약하다"고 믿어 맥주 마시는 자에게 싸움을 겁니다. 하지만 강한 유형 입장에서는 맥주를 마시고 싸움을 피할 때 얻는 이득이 퀴슈를 먹고 싸움을 피할 때보다 큽니다. 반면 약한 유형은 맥주를 마셨을 때의 보상이 퀴슈 평형보다 나쁠 수 있다. 따라서 도전자는 맥주를 마신 자를 강한 유형으로 간주해야 하며, 결국 강한 유형은 맥주를 선택함으로써 기존의 퀴슈 평형이 깨지게 된다.</p>
+
+    <h2>4. LaTeX를 이용한 게임 트리 코드</h2>
+    <p>아래 코드는 TikZ 패키지를 사용하여 위 게임의 구조를 시각화하는 LaTeX 코드이다. 문서 작성 시 활용할 수 있다.</p>
+
+    <div class="latex-container">
+<p>$$
+\begin{tikzpicture}[scale=1.5, font=\small]
+% Nature node (초기 노드)
+\node (N) at (0,0) [circle, draw] {N};
+
+% Types (유형 선택)
+\draw (N) -- (-2,-1) node[midway, left] {Strong (0.9)};
+\draw (N) -- (2,-1) node[midway, right] {Weak (0.1)};
+
+% Sender nodes
+\node (S1) at (-2,-1) [circle, fill, inner sep=1.5pt] {};
+\node (S2) at (2,-1) [circle, fill, inner sep=1.5pt] {};
+
+% Signals (신호 선택)
+\draw (S1) -- (-3,-2) node[midway, left] {Beer};
+\draw (S1) -- (-1,-2) node[midway, right] {Quiche};
+\draw (S2) -- (1,-2) node[midway, left] {Beer};
+\draw (S2) -- (3,-2) node[midway, right] {Quiche};
+
+% Information sets (정보집합)
+\draw[dashed] (-3,-2) -- (1,-2) node[midway, above] {Receiver Info Set (Beer)};
+\draw[dashed] (-1,-2) -- (3,-2) node[midway, below] {Receiver Info Set (Quiche)};
+
+% Receiver actions (수신자 대응)
+\node (R1) at (-3,-2) [circle, fill, inner sep=1.2pt] {};
+\node (R2) at (-1,-2) [circle, fill, inner sep=1.2pt] {};
+\node (R3) at (1,-2) [circle, fill, inner sep=1.2pt] {};
+\node (R4) at (3,-2) [circle, fill, inner sep=1.2pt] {};
+
+\draw (R1) -- (-3.5,-3) node[below] {(3,0)} node[midway, left] {Fight};
+\draw (R1) -- (-2.5,-3) node[below] {(3,1)} node[midway, right] {Not};
+% ... (기타 노드 및 보수 생략)
+\end{tikzpicture}
+$$</p>
+<br>
+
+
+    <h2>5. 결론</h2>
+    <p>직관균형은 수신자의 믿음이 발송자의 유형별 유인 구조를 합리적으로 반영해야 함을 강조한다. 이는 단순한 수학적 균형을 넘어, 경제 주체들의 심리와 전략적 의도를 보다 현실적으로 모델링하는 데 기여한다.</p>
+</div>
+</body>
+</html>

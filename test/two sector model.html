@@ -1,0 +1,108 @@
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="eco-math.css">
+    <link rel="stylesheet" type="text/css" href="footnote.css">
+    <title>two sector model</title>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+    <script src="./latex.js"></script>
+     
+ </head>
+
+<body>
+<h1 > two sector model</h1>
+    
+<br>    
+<br>
+
+<h2> 개요 </h2>
+
+<br>
+<p>Let us follow the basic setup of the Uzawa two-sector model. We begin with the following definitions:</p>
+
+\begin{align*}
+Y_c &= \text{output of consumer good} \\
+L_c &= \text{labor used in consumer good sector} \\
+K_c &= \text{capital used in consumer good sector} \\
+Y_i &= \text{output of investment good} \\
+p &= \text{price of investment good (in terms of consumer good)} \\
+L_i &= \text{labor used in investment good sector} \\
+K_i &= \text{capital used in investment good sector} \\
+Y &= \text{total output of economy} \\
+L &= \text{total supply of labor} \\
+K &= \text{total supply of capital} \\
+w &= \text{return to labor (wages)} \\
+r &= \text{return to capital (profit/interest)}
+\end{align*}
+
+<p>he principal equations of the two-sector model can thus be set out as follows:</p>
+
+\begin{align}
+Y_c &= F_c(K_c, L_c) && \text{(1) consumer sector production function} \\
+Y_i &= F_i(K_i, L_i) && \text{(2) investment sector production function} \\
+Y &= Y_c + pY_i && \text{(3) aggregate output} \\
+L_c + L_i &= L && \text{(4) labor market equilibrium} \\
+K_c + K_i &= K && \text{(5) capital market equilibrium} \\
+w &= \frac{\partial Y_c}{\partial L_c} = p \cdot \frac{\partial Y_i}{\partial L_i} && \text{(6) labor market prices} \\
+r &= \frac{\partial Y_c}{\partial K_c} = p \cdot \frac{\partial Y_i}{\partial K_i} && \text{(7) capital market prices} \\
+g_L &= n && \text{(8) labor supply growth} \\
+g_K &= \frac{Y_i}{K} && \text{(9) capital supply growth}
+\end{align}
+
+We would now like to express everything in intensive form, i.e. in per capita or per labor unit terms. This gets a bit tricky. But defining:
+
+\begin{align*}
+y_c &= \frac{Y_c}{L} \\
+l_c &= \frac{L_c}{L} \\
+k_c &= \frac{K_c}{L_c} \\
+\phi_c(k_c) &= \frac{F_c(K_c, L_c)}{L_c} \\
+y_i &= \frac{Y_i}{L} \\
+l_i &= \frac{L_i}{L} \\
+k_i &= \frac{K_i}{L_i} \\
+\phi_i(k_i) &= \frac{F_i(K_i, L_i)}{L_i} \\
+y &= \frac{Y}{L} \\
+k &= \frac{K}{L}
+\end{align*}
+
+Then equations (1)-(9) above can be converted to the following:
+
+\begin{align}
+y_c &= l_c\phi_c(k_c) && \text{(1¢) consumer sector intensive production function} \\
+y_i &= l_i\phi_i(k_i) && \text{(2¢) investment sector intensive production function} \\
+y &= y_c + py_i && \text{(3¢) aggregate output per capita} \\
+l_c + l_i &= 1 && \text{(4¢) labor market equilibrium} \\
+l_ck_c + l_ik_i &= k && \text{(5¢) capital market equilibrium} \\
+w &= \phi_c - k_c\phi'_c = p(\phi_i - k_i\phi'_i) && \text{(6¢) labor market prices} \\
+r &= \phi'_c = p\phi'_i && \text{(7¢) capital market prices} \\
+g_L &= n && \text{(8¢) labor supply growth} \\
+g_K &= \frac{y_i}{k} && \text{(9¢) capital supply growth}
+\end{align}
+
+Equations (1¢) and (2¢) are the intensive production functions. These are derived as follows. Recall from (1) that $Y_c = F_c(K_c, L_c)$, then dividing through by $L_c$, we obtain $\frac{Y_c}{L_c} = F_c\left(\frac{K_c}{L_c}, 1\right) = \phi_c(k_c)$. But $\frac{Y_c}{L_c} = \left(\frac{Y_c}{L}\right)\left(\frac{L}{L_c}\right) = \frac{y_c}{l_c}$. Thus $y_c = l_c\phi_c(k_c)$, which is (1¢). The transformation from (2) to (2¢) follows a similar procedure.
+
+Each of these intensive production functions have simple properties. For instance, their first derivatives are the marginal product of capital, i.e. $\frac{\partial F_c}{\partial K_i} = \phi'_c(k_c)$ and $\frac{\partial F_i}{\partial K_i} = \phi'_i(k_i)$, so diminishing marginal productivity implies $\phi''_c(k_c) < 0$ and $\phi''_i(k_i) < 0$.
+
+The production functions also fulfill the famous "Inada conditions", formulated by Ken-Ichi Inada (1963). Specifically:
+
+\begin{align*}
+\phi_c(0) &= 0, & \phi_c(\infty) &= \infty \\
+\phi'_c(0) &= \infty, & \phi'_c(\infty) &= 0
+\end{align*}
+
+for the intensive production function for the consumption good. The equivalent Inada conditions apply to the intensive production function for the investment good:
+
+\begin{align*}
+\phi_i(0) &= 0, & \phi_i(\infty) &= \infty \\
+\phi'_i(0) &= \infty, & \phi'_i(\infty) &= 0
+\end{align*}
+
+(see also our discussion of production functions).
+
+Equations (3¢) and (4¢) are obtained merely by dividing (3) and (4) by $L$. Equation (5¢) is obtained by dividing (5) by $L$, which yields $\frac{K_c}{L} + \frac{K_i}{L} = \frac{K}{L} = k$, but as $\frac{K_c}{L} = \left(\frac{K_c}{L_c}\right)\left(\frac{L_c}{L}\right) = k_cl_c$ and $\frac{K_i}{L} = \left(\frac{K_i}{L_i}\right)\left(\frac{L_i}{L}\right) = k_il_i$. So, $l_ck_c + l_ik_i = k$, as we have in (5¢).
+
+Equations (6¢) and (7¢) use Euler's theorem. Now, it is a simple matter to show that $\frac{\partial Y_c}{\partial K_c} = \phi'_c(k_c)$ and $\frac{\partial Y_i}{\partial K_i} = \phi'_i(k_i)$. So, the competitive condition in (7) is converted to $r = \phi'_c = p\phi'_i$. By constant returns to scale, we know from Euler's theorem that $Y_c = \left(\frac{\partial Y_c}{\partial K}\right)\cdot K + \left(\frac{\partial Y_c}{\partial L_c}\right)\cdot L_c$, thus dividing through by $L$ and rearranging: $\frac{\partial Y_c}{\partial L_c} = \left(\frac{Y_c}{L}\right) - \left(\frac{K}{L}\right)\cdot\left(\frac{\partial Y_c}{\partial K}\right) = y - k\cdot\phi'_c$. The corresponding transformation can be done for $\frac{\partial Y_i}{\partial L_i}$. This is how we convert (6) to (6¢). Finally, equation (9¢) is obtained simply by multiplying (9) through by $1 = \frac{L}{L}$, so $g_K = \left(\frac{Y_i}{L}\right)/\left(\frac{K}{L}\right)= y_i/k$.
+
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!-- Created by kkmin -->
+
+<html>
+
+<head>
+
+<meta charset="utf8">
+<title> </title>
+
+<script src=https://code.jquery.com/jquery-3.1.1.js></script>
+
+<link rel="stylesheet" type="text/css" href="code.css">
+
+<style>
+h1{
+	text-align:center;
+	}
+
+#idname{
+	border-style:solid;
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    }
+
+.bar-chart {
+  display: inline-block;
+  margin-right: 1px;
+  background-color: hotpink;
+}
+</style>
+<script src = "http://d3js.org/d3.v3.min.js"> </script>
+</head>
+
+
+<body>
+
+<h1>d3 test </h1>
+
+<div id = "svg"> </div>
+
+<script>
+
+	d3.select("body")
+      .append("p")
+      .style("color", "red")
+      .text("my first exercise");
+
+    d3.select("body")
+      .append("div")
+      .style("color", "green")
+      .text("안녕하세요");
+
+var canvas = d3.select("#svg")
+                   .append("svg")
+                   .attr("width", 500)
+                   .attr("height", 500);
+
+
+  canvas.append("rect")
+                    .attr("x", 10)
+                    .attr("y", 20)
+                    .attr("height", 100)
+                    .attr("width", 50)
+                    .attr("fill", "green");
+
+   canvas.append("circle")
+                     .attr("cx", 250)
+                     .attr("cy", 250)
+                     .attr("r", 10)
+                     .attr("fill", "red");
+</script>
+
+<footer>
+      Created by &copy; kkmin 2018
+</footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+
+cobweb<- function(a= 1, b=2, c=3, d=4, start = runif(1,0,1), n = 20,...) 
+#default values: r = 1, x0 = random uniform between 0 & 1, 10 steps
+{
+# dlog<- function(r, x){r*x*(1-x)} #the discrete logistic map
+de<- function(a, b, x){a+b*x} #수요함수
+su<- function(c, d, x){c+d*x} #공급함수
+si<- function(c, d, x){(x-c)/d} # s inverse function
+ x<-seq(from=0,to=20,length.out=100)
+plot(x, de(a, b, x), type='l',xlab=expression(Q(quantity)),ylab=expression(P(price)), ylim=c(0,20), col="red")
+lines(x, su(c, d, x), col="red") #  plot에 추가하여 함수그림 그릴때 사용
+text(15,13,labels="supply curve")
+text(15,1,labels="demand curve")
+# abline(a=0,b=1) # y절편 a, 기울기 b 인 직선
+
+xa = start
+ya <- de(a,b, xa)
+xb <- si(c, d, ya)
+yb <- de(a,b, xb)
+points(start, 0, pch = 20)  #show the initial point
+lines(x=c(xa,xa),y=c(0,ya), col="blue" )  #first draw line from (xa, 0) to (xa, ya)
+# x=c(a,b) : x좌표, y=c(c,d) : y좌표, 점 (a,c), 점 (b,d)를 잇는 선분을 의미
+lines(x=c(xa,xb),y=c(ya,ya), col="blue" )  
+lines(x=c(xb,xb),y=c(ya,yb), col="blue" )  
+vert=FALSE  #2nd line will be horizonatal from (x0,d(x0) to (si(x0),d(x0))
+for(i in 1:n)
+{
+if(vert) #draw vertical line 
+{
+lines(x=c(xb,xb),y=c(ya,yb), col="blue" )
+vert=FALSE
+}
+else  #draw horizontal line 
+{
+xa <- xb
+ya <- yb
+xb <- si(c, d, ya)
+yb <- de(a,b, xb)
+lines(x=c(xa,xb),y=c(ya,ya), col="blue" )  
+vert=TRUE
+}
+}
+}
+
+###Call the cobweb plot function 
+cobweb(a=10, b=-0.7, c=1, d=1, start = 0.5)

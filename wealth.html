@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="blog.css">
+    <title>부의 분포 (Wealth Distribution)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax:
+            {
+                inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                displayMath: [['$$', '$$'], ["\\[", "\\]"]],
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
+</head>
+
+<body class="sub-page-body">
+    <div id="min2">
+        <h1>부의 분포 (Wealth Distribution)</h1>
+
+        <h2>1. 파레토 법칙 (Pareto Law)</h2>
+        <p>상위 20%의 인구가 전체 부의 80%를 차지한다는 법칙으로, 멱함수 분포(Power Law)로 설명됩니다.</p>
+        <p>수식으로는 $ P(X > x) \sim x^{-\alpha} $ 와 같이 표현됩니다.</p>
+
+        <h2>2. 지니 계수 (Gini Coefficient)</h2>
+        <p>소득 불평등도를 나타내는 지표로, 로렌츠 곡선과 대각선 사이의 면적을 통해 산출됩니다. 0에 가까울수록 평등, 1에 가까울수록 불평등을 의미합니다.</p>
+
+        <h2>3. 경제물리학적 접근</h2>
+        <p>입자들 간의 에너지 교환 모델을 자산 교환에 비유하여, 통계역학적 기법으로 부의 분포가 어떻게 지수 분포나 멱함수 분포를 따르게 되는지 분석합니다.</p>
+
+        <br>
+        <a href="eco-physic.html">뒤로 가기</a>
+    </div>
+</body>
+
+</html>

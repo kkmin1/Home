@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="eco-math.css">
+    <link rel="stylesheet" type="text/css" href="footnote.css">
+    <title>내쉬균형 도출 </title>
+    <script src="./latex.js"></script>
+    
+</head>
+
+<body >
+    <div >
+        <h1>내쉬균형 도출: 수학적 방법론과 최적대응의 원리</h1>
+
+        <h2>게임의 수리적 모델링 (Model Setup)</h2>
+        <p>내쉬균형을 도출하기 위해, 우리는 전략형 게임(Strategic Form Game)을 다음과 같이 정의한다.</p>
+
+        <div >
+            정의: 게임 $$G = \langle N, (S_i)_{i \in N}, (u_i)_{i \in N} \rangle$$
+            <ul>
+                <li> 경기자 집합 $$N$$: 경기에 참여하는 모든 경기자들의 집합.</li>
+                <li> 집합 $$N$$: 참여하는 경기자들의 집합 $$\{1, 2, \dots, n\}$$.</li>
+                <li> 전략 공간 $$S_i$$: 각 경기자 $$i$$가 선택할 수 있는 가능한 모든 행동들의 집합.</li>
+                <li> 보수함수 $$u_i$$: 각 경기자의 전략 조합($$s_1, \dots, s_n$$)이 주어졌을 때 경기자 $$i$$가 얻는 보수. <br><br>
+                    <p>$$ u_i: S_1 \times S_2 \times \dots \times S_n \to \mathbb{R} $$</p>
+                </li>
+            </ul>
+        </div>
+<br>
+        <h2>균형의 상태: 보수 행렬 시각화</h2>
+        <p>각 경기자의 보수 함수를 표로 정리한 것이 '보수 행렬'이다. 형광색으로 표시된 지점이 바로 내쉬균형점이다.</p>
+
+        <div >
+            <table border="1">
+            <caption>표 1. 사슴사냥게임 </caption>
+                    <tr>
+                        <th id = "diag"> <pre>갑   을</pre> </th>
+                        <th>사슴</th>
+                        <th>토끼</th>
+                    </tr>
+                    <tr>
+                        <th>사슴</th>
+                        <td class="ne">(5, 5)</td>
+                        <td>(0, 3)</td>
+                    </tr>
+                    <tr>
+                        <th>토끼</th>
+                        <td>(3, 0)</td>
+                        <td class="ne">(3, 3)</td>
+                    </tr>
+                </table>
+            </div>
+<p>(사슴, 사슴), (토끼, 토끼)가 내쉬균형이다.</p>
+<br>
+<br>
+
+            <div>
+                <table border="1">
+                    <caption>표 2. 동전 맞추기</caption>
+                    <tr>
+                        <th></th>
+                        <th>앞면</th>
+                        <th>뒷면</th>
+                    </tr>
+                    <tr>
+                        <th>앞면</th>
+                        <td>(1, -1)</td>
+                        <td>(-1, 1)</td>
+                    </tr>
+                    <tr>
+                        <th>뒷면</th>
+                        <td>(-1, 1)</td>
+                        <td>(1, -1)</td>
+                    </tr>
+                </table>
+            </div>
+<p> 이 게임은 내쉬균형이 존재하지 않는다.</p>
+<br>
+
+
+        <h2>균형의 조건: 내쉬균형의 정의</h2>
+        <p>내쉬균형은 모든 경기자가 자신의 전략을 고려하여 상대방의 전략을 고려한 상태에서 최적의 선택을 했을 때의 상태를 의미한다.</p>
+
+        <h2>도출의 핵심: 최적대응함수 (Best Response)</h2>
+        <p>전략 공간이 연속적인 경우(예: 수량 $$q \in [0, \infty)$$), 보수 함수를 미분하여 최적의 선택을 찾아낸다.</p>
+
+        <div
+            style="background: #f8fafc; padding: 25px; border-radius: 12px; border-left: 6px solid #10b981; margin: 20px 0;">
+            <p><strong>수리적 예시: 쿠르노(Cournot) 경쟁 모형</strong></p>
+            <ul>
+                <li>수요 함수: $$P = A - B(q_1 + q_2)$$</li>
+                <li>기업 1의 이윤: $$\pi_1 = (A - Bq_1 - Bq_2)q_1 - Cq_1$$</li>
+                <li>1차 조건 (FOC): 자신의 전략 $$q_1$$에 대해 미분하여 0이 되는 지점을 구함.<br><br>
+                    <p>$$ \frac{\partial \pi_1}{\partial q_1} = A - 2Bq_1 - Bq_2 - C = 0 $$</p>
+                </li>
+            </ul>
+        </div>
+
+        <h2>4. 결론: 전략적 안정을 찾아서</h2>
+        <p>내쉬균형이란 결국 모델 내의 모든 수식과 변수들이 충돌을 멈추고 서로가 서로를 납득시킨 상태이다. 우리는 이 도출 과정을 통해 파편화된 개인의 이기적 선택이 어떻게 사회적인 거대한 안정
+            상태(Equilibrium)를 형성하는지 수학적으로 이해할 수 있다.</p>
+
+        <br>
+        <a href="eco-physic.html">뒤로 가기</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="blog.css">
+    <title>Goodwin의 계급투쟁 모형</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+            tex2jax:
+            {
+                inlineMath: [['$', '$'], ["\\(", "\\)"]],
+                displayMath: [['$$', '$$'], ["\\[", "\\]"]],
+            },
+            "HTML-CSS": { availableFonts: ["TeX"] }
+        });
+    </script>
+</head>
+
+<body class="sub-page-body">
+    <div id="min2">
+        <h1>Goodwin의 계급투쟁 모형</h1>
+
+        <h2>1. 개요</h2>
+        <p>리차드 굿윈(Richard Goodwin)이 제안한 모델로, 자본가와 노동자 사이의 소득 분배가 경기 변동을 일으키는 메커니즘을 설명합니다.</p>
+
+        <h2>2. 포식자-피식자 모형과의 유사성</h2>
+        <p>생태계의 로트카-볼테라(Lotka-Volterra) 방정식과 유사한 구조를 가집니다. 임금 비중 $u$와 고용률 $v$ 사이의 동학을 다룹니다.</p>
+        <p>$$ \dot{v} = v [ (1-u)/k - (\alpha + \beta) ] $$</p>
+        <p>$$ \dot{u} = u [ -\gamma + \rho v - \alpha ] $$</p>
+
+        <h2>3. 순환 메커니즘</h2>
+        <p><strong>고용률 상승:</strong> 임금 상승 압력이 발생하여 자본가의 이윤율이 하락하고 투자가 감소하여 고용률이 다시 낮아집니다.</p>
+        <p><strong>고용률 하락:</strong> 임금 압력이 완화되어 이윤율이 회복되고 투자가 증가하여 고용률이 다시 상승합니다.</p>
+
+        <br>
+        <a href="hum-math.html">뒤로 가기</a>
+    </div>
+</body>
+
+</html>

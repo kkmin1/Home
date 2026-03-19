@@ -1,0 +1,1217 @@
+<html lang="ko"> 
+<head>
+    <meta charset="utf-8">
+    <title>신호게임</title>
+    <head>
+      <style>
+        body { line-height:2.3em }
+        div{width:100%}
+        p{  text-indent: 2.3em;  }
+        h1{ color: blue; }
+        h2{ color: red; }
+        h3{ color: green; }
+        h4{ color: rgb(85, 7, 81); }
+        .inline{ display: inline; }
+   /*     #border{border:1px solid red;} */
+        #sgv-text{
+            fill:black;
+            font-size:50px;
+            font-family:Times;}
+         #sgv-text2{
+            fill:black;
+            font-size:30px;
+            font-family:Times; }
+        
+         </style>
+        </head>   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+MathJax.Hub.Config({
+extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+jax: ["input/TeX", "output/HTML-CSS"],
+tex2jax: 
+{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+"HTML-CSS": { availableFonts: ["TeX"] }
+});
+</script>
+ </head> 
+<body> 
+	
+<h2>1. 신호게임 모형 </h2> 
+
+<svg id = "border" width="1600" height="1000">
+  <circle cx="400" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="800" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="1200" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="400" cy="700" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="800" cy="700" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="1200" cy="700" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="800" cy="450" r="40" stroke="green" stroke-width="4" fill="yellow" />
+
+  <polyline points="200,150 360,200" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,250 360,200" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,650 360,700" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,750 360,700" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1240,200 1400,150" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1240,200 1400,250" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1240,700 1400,650" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1240,700 1400,750" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="440,200 760,200" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="840,200 1160,200" fill="none" stroke="black" 
+    stroke-width="2" />   
+  <polyline points="440,700 760,700" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="840,700 1160,700" fill="none" stroke="black" 
+    stroke-width="2" /> 
+  <polyline points="800,240 800,410" fill="none" stroke="black" 
+    stroke-width="2" /> 
+  <polyline points="800,490 800,660" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="400,240 400,660" fill="none" stroke="black" 
+    stroke-width="2" stroke-dasharray="4"/>
+  <polyline points="1200,240 1200,660" fill="none" stroke="black" 
+    stroke-width="2" stroke-dasharray="4"/>
+
+  <text id = "sgv-text" x="385" y="215" > R </text>
+  <text id = "sgv-text" x="785" y="215" > S </text>
+  <text id = "sgv-text" x="1185" y="215" > R </text>
+  <text id = "sgv-text" x="385" y="715" > R </text>
+  <text id = "sgv-text" x="785" y="715" > S </text>
+  <text id = "sgv-text" x="1185" y="715" > R </text>
+  <text id = "sgv-text" x="785" y="465" > N </text>
+  <text id = "sgv-text" x="600" y="190" > A </text>
+  <text id = "sgv-text" x="1000" y="190" > B </text>
+  <text id = "sgv-text" x="600" y="690" > A </text>
+  <text id = "sgv-text" x="1000" y="690" > B </text>
+  <text id = "sgv-text" x="810" y="350" > H(p)</text>
+  <text id = "sgv-text" x="810" y="600" > L(1-p)</text>
+  
+  <text id = "sgv-text" x="250" y="160" > u </text>
+  <text id = "sgv-text" x="250" y="270" > d </text>
+  <text id = "sgv-text" x="250" y="660" > u </text>
+  <text id = "sgv-text" x="250" y="770" > d </text>
+  <text id = "sgv-text" x="1320" y="160" > u </text>
+  <text id = "sgv-text" x="1320" y="270" > d </text>
+  <text id = "sgv-text" x="1320" y="660" > u </text>
+  <text id = "sgv-text" x="1320" y="770" > d </text>
+  <text x="700" y="950" style="font-size:30px"> (그림 1) 신호게임 </text>
+
+  <foreignObject x="425" y="245" width="100" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" id = "sgv-text">
+    $ \alpha $
+    </div>
+  </foreignObject>
+  <foreignObject x="425" y="625" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" id = "sgv-text">
+    $ 1-\alpha $
+    </div>
+  </foreignObject>
+  <foreignObject x="1140" y="245" width="100" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" id = "sgv-text">
+    $ \beta $
+    </div>
+  </foreignObject>
+  <foreignObject x="1070" y="625" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" id = "sgv-text">
+    $ 1-\beta $
+    </div>
+  </foreignObject>
+</svg>
+
+<div>
+신호게임은 (그림 1)과 같은 구조를 갖는 게임이다. 
+이 게임은 발신자(sender:S)와  수신자(receiver:R)로 구성된 순차적 게임이다. 
+수신자가 정보집합으로 연결되어 있기 때문에 부분게임은 존재하지 않는다. 
+순차적 게임이면서 불확실성이 존재하므로 균형의 개념은 완전베이지안균형이다.
+</div>
+<p> 발신자의 유형은 (H, L) 두 가지가 있다. 발신자(S)는 자신의 유형을 알지만 수신자(R)는 발신자의 유형을 모르고 H 유형일 확률 $p$, L 유형일 확률 $1-p$ 만 알고 있다.
+수신자는 발신자가 보내는 신호 또는 행동((그림 1)에서 A, B)을 통해 발신자의 유형을 추정한다.</p>
+<br>
+
+<h2>2. 신호게임에서 전략의 정의</h2>
+
+<p>발신자의 전략은 유형별로 신호를 보내는 네 가지이다.</p>
+<p>
+\[
+\begin{Bmatrix} H \rightarrow A \\ L \rightarrow A \end{Bmatrix}
+,\quad
+\begin{Bmatrix} H \rightarrow B \\ L \rightarrow B \end{Bmatrix}
+,\quad
+\begin{Bmatrix} H \rightarrow A \\ L \rightarrow B \end{Bmatrix}
+,\quad
+\begin{Bmatrix} H \rightarrow B \\ L \rightarrow A \end{Bmatrix}
+\]
+</p>
+
+<p>
+처음 두 전략은 유형에 상관없이 같은 신호(행동)를 보내므로 통합전략(pooling strategy)이라 하고 뒤의 두 전략은 유형별로 다른 신호를 보내므로 분리전략(separating strategy)이라 한다.<br>
+</p>
+<p>수신자의 전략은 발신자의 신호별로 행동방안을 정하는 네 가지이다.</p>
+<p>
+\[
+\begin{Bmatrix} A \rightarrow u \\ B \rightarrow u \end{Bmatrix}
+,\quad
+\begin{Bmatrix} A \rightarrow d \\ B \rightarrow d \end{Bmatrix}
+,\quad
+\begin{Bmatrix} A \rightarrow u \\ B \rightarrow d \end{Bmatrix}
+,\quad
+\begin{Bmatrix} A \rightarrow d \\ B \rightarrow u \end{Bmatrix}
+\]
+</p>
+<br>
+
+<h2>3. 믿음(확률)의 갱신</h2>
+<p>S의 유형에 대한 R의  확률(믿음) p는 S가 신호를 보냄에 따라 새롭게 갱신되어야 한다. 이때 확률 갱신의 방법은 베이즈원칙에 따른다.<sup><a href="#fn1" id="ref1">1</a></sup></p>
+
+<p> i) $\alpha$ : S가 A를 보냈을 때 S의 유형이 H라고 R이 믿을 확률<sup><a href="#fn2" id="ref2">2</a></sup>, 
+<p>이는 조건부확률 $P_{r}(H|A)$로 표현된다.<p>
+<p>
+$ \alpha = P_{r}(H|A) = \frac{P_r(H \cup A)}{P_r(A)} = \frac{P_r(H \cup A)}{P_r(H \cup A)+P_r(L \cup A)} = \frac{P_r(A|H)P_r(H)}{P_r(A|H)P_r(H)+P_r(A|L)P_r(L)}\ $ ........①
+</p>
+<p> ii) $\beta$ : S가 B를 보냈을 때 S의 유형이 H라고 R이 믿을 확률<sup><a href="#fn3" id="ref3">3</a></sup>, 이는 조건부확률 $P_{r}(H|B)$로 표현된다.
+<p>
+$ \beta = P_{r}(H|B) = \frac{P_r(H \cup B)}{P_r(B)} = \frac{P_r(H \cup B)}{P_r(H \cup B)+P_r(L \cup B)} = \frac{P_r(B|H)P_r(H)}{P_r(B|H)P_r(H)+P_r(B|L)P_r(L)}\ $........②
+
+</p>
+<p>이제 S의 각 전략별로 R의 확률이 어떻게 갱신되는가를 보면 다음과 같다.</p>
+<p>
+(a)\(\begin{Bmatrix} H \rightarrow A \\ L \rightarrow A \end{Bmatrix}\) 전략</p>
+<p>
+H 유형이든 L 유형이든 A를 선택하므로 $P_r(A|H) = P_r(A|L) = 1$</p>
+<p>이를 ①에 대입하면 </p>
+<p>
+\[
+\alpha = P_{r}(H|A) =  \frac{P_r(H)}{P_r(H)+P_r(L)} =
+\frac{p}{p+1-p} = p
+\]
+</p>
+<p>따라서 사전확률($p$)과 사후확률($\alpha$)이 같다.<br>
+<p>S가 통합전략을 쓸 경우 R은 S의 유형에 관해 더 향상된 정보를 얻지 못한다.
+<p>따라서 R의 보수는 p에 기초하여 기대값을 구한다.
+
+(a)전략시 S는 유형별로 보수를, R은 기대값으로 보수를 표현한다.</p>
+
+<p>(b)\(\begin{Bmatrix} H \rightarrow B \\ L \rightarrow B \end{Bmatrix}\)전략</p>
+
+<p>H 유형이든 L 유형이든 B를 선택하므로 $ P_r(B|H) = P_r(B|L) = 1 $</p>
+이를 ②에 대입하면 
+<p>
+\[
+\beta = P_{r}(H|B) =  \frac{P_r(H)}{P_r(H)+P_r(L)} =
+\frac{p}{p+1-p} = p
+\]
+</p>
+<p>
+따라서 사전확률(p)과 사후확률($\beta$)이 같다.
+S가 통합전략을 쓸 경우 R은 S의 유형에 관해 더 향상된 정보를 얻지 못한다.
+따라서 R의 보수는  p에 기초하여 기대값을 구한다.
+(b)전략시 S는 유형별로 보수를, R은 기대값으로 보수를 표현한다.<br><br>
+
+<p>(c) \(\begin{Bmatrix} H \rightarrow A \\ L \rightarrow B \end{Bmatrix}\)전략</p>
+
+<p>$P_r(A|H) = P_r(B|L) = 1$이므로 </p>
+<p>
+\[
+\beta = P_{r}(H|B) =  \frac{0 \times p}{0 \times p+1 \times (1-p)} = 0
+\]
+</p>
+
+<p> $\therefore P_r(L|B) = 1 - \beta = 1$</p>
+<p> B를 봤을 때 L일 확률 1. R은 B를 보면 확실히 L로 간주한다.</p>
+<p>
+\[
+\alpha = P_{r}(H|A) =  \frac{1 \times p}{1 \times p+0 \times (1-p)} = 1
+\]
+</p>
+<p> $P_r(H|A) = 1$</p>
+
+<p> A를 봤을 때 H일 확률 1. R은 A를 보면 확실히 H로 간주한다.</p>
+<p> 따라서 S가 (c)의 분리전략을 쓸 경우 R은 S의 유형을 100% 파악하므로 기대값을 구할 필요가 없다.</p>
+그러므로 (c)전략시 R, S 모두 유형별로 보수를 표현한다.</p>
+
+<p>(d) \(\begin{Bmatrix} H \rightarrow B \\ L \rightarrow A \end{Bmatrix}\)전략</p>
+
+<p> $P_r(B|H) = P_r(A|L) = 1$ 이므로 </p>
+<p>
+\[
+\beta = = P_{r}(H|B) = \frac{1 \times p}{1 \times p+0 \times (1-p)} = 1
+\]
+</p>
+
+<p>B를 봤을 때 H일 확률 1.  R은 B를 보면 확실히 H로 간주한다.</p>
+ <p>
+ \[
+\alpha = P_{r}(H|A) =  \frac{0 \times p}{0 \times p+1 \times (1-p)} = 0
+\]
+</p>
+<p>$\therefore P_r(L|A) = 1 - \alpha = 1$</p>
+<p> A를 봤을 때 L일 확률 1.  R은 A를 보면 확실히 L로 간주한다.
+따라서 S가 (d)의 분리전략을 쓸 경우 R은 S의 유형을 100% 파악하므로 기대값을 구할 필요가 없다.
+그러므로 (d)전략시 R, S 모두 유형별로 보수를 표현한다.</p>
+
+<h2>4. 신호게임 예 </h2>
+<p>
+(그림 2)는 신호게임의 한 예이다.</p>
+
+<svg id = "border" width="1600" height="1000">
+  <circle cx="400" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="800" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="1200" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="400" cy="700" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="800" cy="700" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="1200" cy="700" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="800" cy="450" r="40" stroke="green" stroke-width="4" fill="yellow" />
+
+  <polyline points="200,150 360,200" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,250 360,200" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,650 360,700" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,750 360,700" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1240,200 1400,150" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1240,200 1400,250" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1240,700 1400,650" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1240,700 1400,750" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="440,200 760,200" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="840,200 1160,200" fill="none" stroke="black" 
+    stroke-width="2" />   
+  <polyline points="440,700 760,700" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="840,700 1160,700" fill="none" stroke="black" 
+    stroke-width="2" /> 
+  <polyline points="800,240 800,410" fill="none" stroke="black" 
+    stroke-width="2" /> 
+  <polyline points="800,490 800,660" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="400,240 400,660" fill="none" stroke="black" 
+    stroke-width="2" stroke-dasharray="4"/>
+  <polyline points="1200,240 1200,660" fill="none" stroke="black" 
+    stroke-width="2" stroke-dasharray="4"/>
+
+  <text id = "sgv-text" x="385" y="215" > R </text>
+  <text id = "sgv-text" x="785" y="215" > S </text>
+  <text id = "sgv-text" x="1185" y="215" > R </text>
+  <text id = "sgv-text" x="385" y="715" > R </text>
+  <text id = "sgv-text" x="785" y="715" > S </text>
+  <text id = "sgv-text" x="1185" y="715" > R </text>
+  <text id = "sgv-text" x="785" y="465" > N </text>
+  <text id = "sgv-text" x="600" y="190" > A </text>
+  <text id = "sgv-text" x="1000" y="190" > B </text>
+  <text id = "sgv-text" x="600" y="690" > A </text>
+  <text id = "sgv-text" x="1000" y="690" > B </text>
+  <text id = "sgv-text" x="810" y="350" > H(p = 0.5)</text>
+  <text id = "sgv-text" x="810" y="600" > L(1-p = 0.5)</text>
+  <text id = "sgv-text" x="80" y="170" > (2,1) </text>
+  <text id = "sgv-text" x="80" y="270" > (2,0) </text>
+  <text id = "sgv-text" x="80" y="660" > (4,0) </text>
+  <text id = "sgv-text" x="80" y="770" > (2,1) </text>
+  <text id = "sgv-text" x="1410" y="170" > (5,4) </text>
+  <text id = "sgv-text" x="1410" y="270" > (3,1) </text>
+  <text id = "sgv-text" x="1410" y="660" > (2,0) </text>
+  <text id = "sgv-text" x="1410" y="770" > (3,1) </text>
+  <text id = "sgv-text" x="250" y="160" > u </text>
+  <text id = "sgv-text" x="250" y="270" > d </text>
+  <text id = "sgv-text" x="250" y="660" > u </text>
+  <text id = "sgv-text" x="250" y="770" > d </text>
+  <text id = "sgv-text" x="1320" y="160" > u </text>
+  <text id = "sgv-text" x="1320" y="270" > d </text>
+  <text id = "sgv-text" x="1320" y="660" > u </text>
+  <text id = "sgv-text" x="1320" y="770" > d </text>
+  <text x="700" y="950" style="font-size:30px"> (그림 2) 신호게임 </text>
+</svg>
+
+<p>
+임시로 보수표를 구하면 <표1 >과 같다. 이 표는 R이 S의 유형을 모두 안다는 가정하에 임시로 구한 표이다.</p>
+
+<svg id = "border" width="1300" height="800">
+  
+  <polyline points="200,100 1200,100" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,200 1200,200" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="200,300 1200,300" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,400 1200,400" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="200,500 1200,500" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,600 1200,600" fill="none" stroke="black" 
+    stroke-width="2" />
+
+  <polyline points="200,100 200,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="400,100 400,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="600,100 600,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="800,100 800,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1000,100 1000,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1200,100 1200,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,100 400,200" fill="none" stroke="black" 
+    stroke-width="2" />
+
+  <text id = "sgv-text" x="250" y="180" > S </text>
+  <text id = "sgv-text" x="330" y="150" > R </text>
+  <foreignObject id = "sgv-text2" x="440" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to u  \\
+      B \to u $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="640" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to d \\
+       B \to d $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="840" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to u \\
+       B \to d $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="1040" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to d \\
+       B \to u $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="215" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to A \\
+       L \to A $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="315" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to B \\
+         L \to B $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="415" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to A \\
+        L \to B $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="515" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to B \\
+         L \to A $
+    </div>
+  </foreignObject>
+
+
+  <foreignObject id = "sgv-text2" x="400" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 4 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="400" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       4 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="400" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="400" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 4 
+      \end{pmatrix},
+       \begin{pmatrix}
+       4 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       0 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 3 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 3 
+      \end{pmatrix},
+       \begin{pmatrix}
+       0 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="800" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 4 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="800" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 3 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="800" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 3 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="800" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 4 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="1000" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       0 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="1000" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       4 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="1000" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       0 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="1000" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       4 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <text x="400" y="700" style="font-size:40px"> <표 1> 신호게임보수 - 임시표 </text>
+</svg>
+
+<p>
+<표 1>의 열벡터는 유형별 보수를 쓰면 된다. </p>
+<p> 예를 들어 S의 셋째 전략, R
+의 첫째 전략의 보수값은 갑 H → A, L → B, 을 A → u, B → u 이므로 갑의 보
+수는 H → A → u에서 2, L → B → u에서 2. </p>
+<p> 이를 열벡터로 표현하여  $\begin{pmatrix} 2\\2 \end{pmatrix}$, 을의 보수는 H → A → u 에서 1, L → B → u에서 0. 이를 열벡터로 표현하여 $\begin{pmatrix} 1\\0 \end{pmatrix}$
+이다.</p>
+
+<p><표1 >에 기초하여 신호게임 보수표를 구하면 <표 2>와 같다.</p>
+
+<svg id = "border" width="1300" height="800">
+  
+  <polyline points="200,100 1200,100" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,200 1200,200" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="200,300 1200,300" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,400 1200,400" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="200,500 1200,500" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,600 1200,600" fill="none" stroke="black" 
+    stroke-width="2" />
+
+  <polyline points="200,100 200,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="400,100 400,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="600,100 600,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="800,100 800,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1000,100 1000,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1200,100 1200,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,100 400,200" fill="none" stroke="black" 
+    stroke-width="2" />
+
+  <text id = "sgv-text" x="250" y="180" > S </text>
+  <text id = "sgv-text" x="330" y="150" > R </text>
+  <foreignObject id = "sgv-text2" x="440" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to u  \\
+      B \to u $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="640" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to d \\
+       B \to d $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="840" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to u \\
+       B \to d $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="1040" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to d \\
+       B \to u $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="215" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to A \\
+       L \to A $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="315" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to B \\
+         L \to B $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="415" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to A \\
+        L \to B $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="515" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to B \\
+         L \to A $
+    </div>
+  </foreignObject>
+
+
+  <foreignObject id = "sgv-text2" x="400" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 4 
+      \end{pmatrix},
+       \frac{1}{2}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="400" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 2 
+      \end{pmatrix},
+       2
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="400" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="400" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 4 
+      \end{pmatrix},
+       \begin{pmatrix}
+       4 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+    \frac{1}{2}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 3 
+      \end{pmatrix},
+       1
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 3 
+      \end{pmatrix},
+       \begin{pmatrix}
+       0 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="800" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 4 
+      \end{pmatrix},
+         \frac{1}{2}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="800" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 3 
+      \end{pmatrix},
+       1
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="800" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 3 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="800" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 4 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="1000" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+         \frac{1}{2}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="1000" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 2 
+      \end{pmatrix},
+       2
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="1000" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       0 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="1000" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       4 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <ellipse cx="1100" cy="350" rx="80" ry="40"
+style="fill:none;stroke:purple;stroke-width:3"/>
+<ellipse cx="1100" cy="550" rx="80" ry="40"
+style="fill:none;stroke:purple;stroke-width:3"/>
+  <text x="400" y="700" style="font-size:40px"> <표 2> 신호게임보수 </text>
+
+</svg>
+
+
+<p>
+S의 보수는 자신의 유형을 앎으로 열벡터를 그대로 표기한다. R의 보수는 전략에 따라 다르다. 통합전략은 S의 유형에 대한 정보가 향상되지 못하므로 사전확률에 기초한 기대값을 표기하고, 분리전략은 S의 유형을 확신하므로 열벡터를 그대로 표기한다.</p>
+<p>
+내쉬균형은 정의상 모든 유형에 대해 이탈 유인이 없어야 한다. 즉 모든 유형에 대해 보수값이 다른 전략보다 크거나 같아야 한다. 내쉬균형을 구하기 위해서는 <표 2>보수표에서 벡터인 경우는 벡터의 모든 원소가 다른 벡터 원소보다 크거나 같아야 한다. 기대값인 경우 다른 기대값보다 크거나 같아야 한다. </p>
+<p> 내쉬균형은 두 개로, 보라색 원 부분이다. 두 균형 모두 경로별 전략상 불합리성이 없으므로 내쉬균형은 완전베이지안 균형이 된다.</p>
+<p>
+통합전략을 쓰는 완전베이지안균형을 통합균형(pooling equlibrium)이라 한다. 이는 두 유형 모두 같은 전략을 쓰므로 일종의 기만전술이라 할 수 있다. </p>
+<p>분리전략을 쓰는 완전베이지안균형을 분리균형(separating equlibrium)이라 한다. 이는 자기의 유형을 밝히므로 솔직전술이라 할 수 있다.</p>
+
+<p>
+통합균형 : S가 H 유형일 확률 $\frac{1}{2}$ 에서 
+\(\left \{ 
+\begin{array}{cc}
+S : \begin{pmatrix} H \rightarrow B \\ L \rightarrow B \end{pmatrix},\quad
+R : \begin{pmatrix} A \rightarrow d \\ B \rightarrow u \end{pmatrix}
+\end{array} \right \}\)<br><br>
+</p>
+<p>
+분리균형 : 
+\(\left \{ 
+\begin{array}{cc}
+	S : \begin{pmatrix} H \rightarrow B \\ L \rightarrow A \end{pmatrix},\quad
+	R : \begin{pmatrix} A \rightarrow d \\ B \rightarrow u \end{pmatrix}
+\end{array} \right \}\)<br><br></p>
+	
+<h2>5. 확률을 모르는 경우</h2>
+<p>
+H 유형일 확률 $p$,  L 유형일 확률 $(1-p)$라 하면 통합전략일 경우에만 기대값을 구하면 된다.
+통합전략일 경우 사전확률 = 사후확률이므로  $p$를 그대로 사용하면 된다.</p>
+
+<p><표 1>로 부터 기대값을 구하면 <표 3>과 같다.</p>
+
+<svg id = "border" width="1300" height="800">
+  
+  <polyline points="200,100 1200,100" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,200 1200,200" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="200,300 1200,300" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,400 1200,400" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="200,500 1200,500" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,600 1200,600" fill="none" stroke="black" 
+    stroke-width="2" />
+
+  <polyline points="200,100 200,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="400,100 400,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="600,100 600,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="800,100 800,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1000,100 1000,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1200,100 1200,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,100 400,200" fill="none" stroke="black" 
+    stroke-width="2" />
+
+  <text id = "sgv-text" x="250" y="180" > S </text>
+  <text id = "sgv-text" x="330" y="150" > R </text>
+  <foreignObject id = "sgv-text2" x="440" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to u  \\
+      B \to u $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="640" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to d \\
+       B \to d $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="840" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to u \\
+       B \to d $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="1040" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to d \\
+       B \to u $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="215" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to A \\
+       L \to A $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="315" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to B \\
+         L \to B $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="415" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to A \\
+        L \to B $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="515" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to B \\
+         L \to A $
+    </div>
+  </foreignObject>
+
+
+  <foreignObject id = "sgv-text2" x="400" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 4 
+      \end{pmatrix},
+       p
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="400" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 2 
+      \end{pmatrix},
+       4p
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="400" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="400" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 4 
+      \end{pmatrix},
+       \begin{pmatrix}
+       4 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+    1-p
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 3 
+      \end{pmatrix},
+       1
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 3 
+      \end{pmatrix},
+       \begin{pmatrix}
+       0 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="800" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 4 
+      \end{pmatrix},
+         p
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="800" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 3 
+      \end{pmatrix},
+       1
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="800" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 3 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="800" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 4 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="1000" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+         1-p
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="1000" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 2 
+      \end{pmatrix},
+       4p
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="1000" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       0 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="1000" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       4 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  
+  <text x="400" y="700" style="font-size:40px"> <표 3> 확률 p일 때 신호게임보수표 </text>
+
+</svg>
+
+
+<p>
+S의 첫째 전략은 R의 모든 전략에 대해 벡터의 보수가 S의 다른 전략의 보수보다 작거나 같으므로 내쉬균형이 될 수 없다. 따라서 고려할 필요가 없다.
+S의 둘째 전략만 비교하면 된다.</p>
+
+<p> $4p>1$에서 $p>\frac{1}{4}$. 이에 따라 완전베이지안균형은 다음과 같이 된다.</p>
+
+<p>(i) $p > \dfrac{1}{4}$ 이면</p>
+<p>
+통합균형 : 
+\(\left \{ 
+\begin{array}{cc}
+S : \begin{pmatrix} H \rightarrow B \\ L \rightarrow B \end{pmatrix},\quad
+R : \begin{pmatrix} A \rightarrow d \\ B \rightarrow u \end{pmatrix}
+\end{array} \right \}\)</p>
+<p>
+분리균형 : 
+\(\left \{ 
+\begin{array}{cc}
+	S : \begin{pmatrix} H \rightarrow B \\ L \rightarrow A \end{pmatrix},\quad
+	R : \begin{pmatrix} A \rightarrow d \\ B \rightarrow u \end{pmatrix}
+\end{array} \right \}\)</p>
+	
+
+<p>(ii) $p < \dfrac{1}{4}$ 이면</p>
+<p>
+통합균형 :  
+\(\left \{ 
+\begin{array}{cc}
+S : \begin{pmatrix} H \rightarrow B \\ L \rightarrow B \end{pmatrix},\quad
+R : \begin{pmatrix} A \rightarrow d \\ B \rightarrow d \end{pmatrix}
+\end{array} \right \}\)</p>
+
+<p>
+분리균형 : 
+\(\left \{ 
+\begin{array}{cc}
+	S : \begin{pmatrix} H \rightarrow B \\ L \rightarrow A \end{pmatrix},\quad
+	R : \begin{pmatrix} A \rightarrow d \\ B \rightarrow u \end{pmatrix}
+\end{array} \right \}\)</p>
+
+
+<hr> 
+<sup id="fn1"> 1.그래서 균형의 이름이 완전베이즈균형으로 명명된 것이다.</sup><br>
+<sup id="fn2"> 2. R이 좌측 정보집합의 위쪽에 있을 확률</sup><br>
+<sup id="fn3"> 3. R이 우측 정보집합의 위쪽에 있을 확률</sup><br>
+ </body> 
+</html>

@@ -1,0 +1,75 @@
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title> 멱급수 분포 </title>
+    <link rel="stylesheet" type="text/css" href="footnote.css">
+    <link rel="stylesheet" type="text/css" href="text1.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+MathJax.Hub.Config({
+extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+jax: ["input/TeX", "output/HTML-CSS"],
+tex2jax:
+{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
+"HTML-CSS": { availableFonts: ["TeX"] }
+});
+</script>
+ </head>
+
+<body> 
+	
+<h2 class = "inline"> 자기 유사성(scale free distribution) </h2><input type="checkbox" id="cb1" /><label for="cb1"><sup></sup></label>
+<span><br> https://exactitude.tistory.com/m/936, M.E.J. Newman, "Power Laws, Pareto Distributions and Zipf's Law" 참조.<br></span>
+
+<p> 확률분포 $p(x)$가 다음을 만족시키면 이 분포를 scale free distribution라 한다.  </p> 
+<p> $p(bx) = q(b)p(x)$, for any b, b 는 상수, x 는 변수......① </p>
+<p> 즉 x를 b배 하더라도 자기의 형태를 유지하는 분포를 말한다.</p>
+ <p>That is, if we increase the scale or units by which we measure x by a factor of b, the shape of the distribution p(x) is unchanged, except for an overall multiplicative constant.</p>
+<p> 이를 만족하는 함수는 거듭제곱분포(power law distribution)뿐이다.</p>
+<br>
+	
+<h3> 증명 </h3> 
+<p> $p(x) = Cx^{- \alpha} $</p>
+<p> ①에 x = 1을 대입하면</p>
+<p> $p(b) = q(b)p(1)$.........②</p>
+<p> ②를 ①에 대입하면</p>
+<p> $ \Rightarrow g(b) = \dfrac{p(b)}{p(1)}$</p>
+<p> $ p(bx) = \dfrac{p(b)}{p(1)}p(x)$ ....... ③ </p>
+
+<p> Since this equation is supposed to be true for any b, we can differentiate both sides with respect to b </p> 
+<p> ③의 좌변을 미분하면 미분의 연쇄법칙에 의해  </p> 
+<p> $ \dfrac{dp(bx)}{d(bx)} \dfrac{d(bx)}{db} = x \dfrac{dp(bx)}{d(bx)} $ , (by chain rule) </p>
+<p> 따라서 ③ 은 $ x \dfrac{dp(bx)}{d(bx)} = \dfrac{dp(b)/db}{p(1)}p(x)$  </p>
+<p> $ b = 1 $을 대입하면 </p> 
+<p> $ x \dfrac{dp(x)}{dx} =  \dfrac{dp(1)/db}{p(1)}p(x)$ </p>
+<p> $ = -\alpha p(x)$, where $\alpha = \dfrac{dp(1)/db}{p(1)} $ </p> 
+<p> 이제 $ xp'(x) = -\alpha p(x) $ 의 미분방정식을 푼다. 여기서 $ p'(x) = \dfrac{dp(x)}{dx} $</p> 
+<p> $ \dfrac{p'(x)}{p(x)} = - \dfrac{\alpha}{x} $ </p> 
+<p> 양변 적분하면 </p> 
+<p> $ \ln p(x) = - \alpha \ln x + C $, C 는 적분상수 .......④</p> 
+<p> 식 ④ 에 $ x = 1 $ 을 대입하면 $ \ln p(1) = C $ </p> 
+
+<p> 따라서 식 ④는 $ \ln p(x) = - \alpha \ln x + \ln p(1) $ </p> 
+<p> $ \therefore p(x) = p(1)x^{- \alpha} $, where $\alpha = \dfrac{p'(1)}{p(1)} $ </p> 
+<p> Thus, as advertised, the power-law distribution is the only function satisfying the scale-free   criterion</p> 
+<br>
+
+<h2 class = "inline"> 멱급수 분포(power law distribution) </h2>
+
+<p> 확률밀도함수(probability distribution function:pdf)는 </p> 
+<p>     $ p(x) = cx^{-\alpha} $, $ (x_{min} < x < \infty) $ </p> 
+<p> 모든 확률의 합은 1 이므로</p> 
+<p> $ 1 = \displaystyle \int_{x_{min}}^{\infty} p(x)dx  = c \displaystyle \int_{x_{min}}^{\infty} x^{-\alpha}dx $</p> 
+<p> $ = \dfrac{c}{-\alpha+1} \biggl [x^{-\alpha+1} \biggr ]_{x_{min}}^{\infty} $ </p> 
+<p> $ \alpha < 1 $ 이면 적분이 $ \infty $로 발산하므로 확률합이 1이 될 수 없다.<input type="checkbox" id="cb2" /><label for="cb2"><sup></sup></label>
+<span><br> 실제로 자연에서도 멱급수 분포의 지수가 α < 1  로 측정되는 경우는 거의 없다.<br></span></p>
+ 
+<p> 따라서 $ \alpha > 1 $에서</p> 
+<p> $ 1 = \dfrac{c}{\alpha - 1} x^{-\alpha+1}_{min} $ </p> 
+<p> $  $ </p> 
+<p> $  $ </p> 
+<p> $  $ </p> 
+
+ </body> 
+</html>

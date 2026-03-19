@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Min's Blog - 게임이론, 경제수학, 인문수학, 경제물리, 프로그래밍에 대한 학술 블로그">
+	<link rel="stylesheet" href="blog.css">
+	<title>Min's Modern Blog</title>
+</head>
+
+<body class="dark-theme">
+	<!-- Mobile Menu Toggle -->
+	<button class="mobile-toggle" id="mobileToggle" aria-label="메뉴 열기">
+		<span></span>
+	</button>
+
+	<!-- Mobile Overlay -->
+	<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+	<div class="container">
+		<!-- Sidebar Navigation -->
+		<aside class="sidebar" id="sidebar">
+			<h1 class="logo">Min's Blog</h1>
+			<p class="logo-subtitle">Academic Notes</p>
+
+			<div class="sidebar-divider"></div>
+
+			<span class="nav-label">카테고리</span>
+			<nav>
+				<ul class="nav-list">
+					<li class="nav-item">
+						<a href="game.html" target="content_frame" class="nav-link">
+							<span class="nav-icon">🎲</span>
+							<span class="nav-text">게임이론</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="eco-math2.html" target="content_frame" class="nav-link">
+							<span class="nav-icon">📐</span>
+							<span class="nav-text">경제수학 II</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="hum-math.html" target="content_frame" class="nav-link">
+							<span class="nav-icon">📚</span>
+							<span class="nav-text">인문수학</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="eco-physic.html" target="content_frame" class="nav-link">
+							<span class="nav-icon">⚛️</span>
+							<span class="nav-text">경제물리</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="program.html" target="content_frame" class="nav-link">
+							<span class="nav-icon">💻</span>
+							<span class="nav-text">프로그래밍</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+
+			<div class="sidebar-footer">
+				<p>&copy; 2026 kkmin</p>
+				<p>All rights reserved.</p>
+			</div>
+		</aside>
+
+		<!-- Main Content Area -->
+		<main class="content">
+			<iframe name="content_frame" class="content-frame" src="game.html"></iframe>
+		</main>
+	</div>
+
+	<script>
+		// Active state management
+		const navLinks = document.querySelectorAll('.nav-link');
+		const sidebar = document.getElementById('sidebar');
+		const mobileToggle = document.getElementById('mobileToggle');
+		const overlay = document.getElementById('sidebarOverlay');
+
+		navLinks.forEach(link => {
+			link.addEventListener('click', () => {
+				navLinks.forEach(l => l.classList.remove('active'));
+				link.classList.add('active');
+				// Close sidebar on mobile after selection
+				if (window.innerWidth <= 768) {
+					closeSidebar();
+				}
+			});
+		});
+
+		// Set initial active
+		if (navLinks.length > 0) navLinks[0].classList.add('active');
+
+		// Mobile menu toggle
+		function openSidebar() {
+			sidebar.classList.add('open');
+			overlay.classList.add('active');
+			overlay.style.display = 'block';
+			document.body.style.overflow = 'hidden';
+		}
+
+		function closeSidebar() {
+			sidebar.classList.remove('open');
+			overlay.classList.remove('active');
+			setTimeout(() => { overlay.style.display = 'none'; }, 300);
+			document.body.style.overflow = '';
+		}
+
+		mobileToggle.addEventListener('click', () => {
+			if (sidebar.classList.contains('open')) {
+				closeSidebar();
+			} else {
+				openSidebar();
+			}
+		});
+
+		overlay.addEventListener('click', closeSidebar);
+
+		// Handle resize
+		window.addEventListener('resize', () => {
+			if (window.innerWidth > 768) {
+				closeSidebar();
+			}
+		});
+	</script>
+</body>
+
+</html>
