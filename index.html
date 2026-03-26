@@ -95,14 +95,13 @@
 		// Mobile menu toggle
 		function openSidebar() {
 			sidebar.classList.add('open');
-			overlay.classList.add('active');
-			overlay.style.display = 'block';
+		
 			document.body.style.overflow = 'hidden';
 		}
 
 		function closeSidebar() {
 			sidebar.classList.remove('open');
-			overlay.classList.remove('active');
+	
 			setTimeout(() => { overlay.style.display = 'none'; }, 300);
 			document.body.style.overflow = '';
 		}
@@ -115,7 +114,7 @@
 			}
 		});
 
-		overlay.addEventListener('click', closeSidebar);
+
 
 		// Handle resize
 		window.addEventListener('resize', () => {
