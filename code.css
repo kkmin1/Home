@@ -347,3 +347,39 @@ code[class*="language-"] {
     display: flex;
   }
 }
+
+/* GitHub Pages compatibility.
+   The page can be served inside the main site's iframe, whose viewport-sized
+   frame clips nested 100vh/overflow containers after dynamic code is loaded. */
+html,
+body.sub-page-body {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+}
+
+body.sub-page-body {
+  padding: 0;
+}
+
+.code-page-wrapper {
+  min-height: 100vh;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.code-main,
+.content-view,
+.code-container {
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+.code-container pre,
+.code-container pre[class*="language-"] {
+  max-height: none !important;
+  overflow-y: visible !important;
+}
