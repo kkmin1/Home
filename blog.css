@@ -11,4 +11,16 @@
     h3{ color: green; font-size: 24px;}
     li{ color: blue; font-size: 32px;}
 
-    
+/* Added to prevent Jekyll theme from clipping page content */
+body {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 100%;
+}
+
+#min2 {
+  width: 400px;
+  text-align: left;
+  height: auto;
+  overflow: visible;
+}
