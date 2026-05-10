@@ -116,3 +116,41 @@ a:visited {
   background-color: transparent;
   text-decoration: none;
 }
+
+
+/* GitHub Pages + Jekyll theme compatibility fix.
+   Keeps the Midnight theme while preventing long dynamically loaded code blocks
+   from being clipped in code.html. */
+html,
+body {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: auto !important;
+}
+
+.container,
+.content,
+main,
+#center {
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+main {
+  box-sizing: border-box;
+}
+
+#center pre,
+main pre,
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+  overflow-y: visible;
+  max-height: none !important;
+  height: auto !important;
+  box-sizing: border-box;
+}
