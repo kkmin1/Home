@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nash Bargaining Solution</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Serif+KR:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0c10;
+  --surface: #111318;
+  --surface2: #161a22;
+  --border: #1e2330;
+  --border2: #2a3040;
+  --accent: #00e5a0;
+  --accent2: #ff6b35;
+  --accent3: #7b8cff;
+  --accent4: #ffd166;
+  --text: #c8d0e0;
+  --text-dim: #5a6580;
+  --text-mid: #8090b0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Serif KR', serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 20px 60px;
+  line-height: 1.7;
+}
+.section { width: 100%; max-width: 960px; margin-bottom: 44px; }
+.section-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.05rem; font-weight: 700; color: #fff;
+  border-left: 3px solid var(--accent);
+  padding-left: 12px; margin-bottom: 18px;
+}
+header {
+  text-align: center; margin-bottom: 48px;
+  width: 100%; max-width: 960px;
+}
+.header-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem; color: var(--accent);
+  letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px;
+}
+h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700; font-size: 1.9rem; color: #fff;
+  margin-bottom: 6px; letter-spacing: -0.02em;
+}
+.header-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.06em;
+}
+.header-divider {
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 16px auto 0;
+}
+/* concept */
+.concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+@media(max-width:600px){.concept-grid{grid-template-columns:1fr;}}
+.concept-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 4px; padding: 16px;
+}
+.concept-card .cc-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px;
+}
+.concept-card p { font-size: 0.82rem; color: var(--text-mid); line-height: 1.78; }
+.concept-card p b { color: var(--text); font-weight: 600; }
+.axiom-list {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 4px; padding: 16px 20px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px;
+}
+.axiom-item { display: flex; gap: 10px; align-items: flex-start; }
+.axiom-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem; color: var(--accent);
+  background: rgba(0,229,160,0.08); border: 1px solid rgba(0,229,160,0.2);
+  border-radius: 2px; padding: 1px 6px; flex-shrink: 0; margin-top: 2px;
+}
+.axiom-text { font-size: 0.8rem; color: var(--text-mid); line-height: 1.65; }
+.axiom-text b { color: var(--text); }
+.formula-highlight {
+  background: rgba(0,229,160,0.06); border: 1px solid rgba(0,229,160,0.2);
+  border-radius: 4px; padding: 14px 20px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem;
+  color: #a0b8c0; text-align: center; line-height: 2.1; margin-top: 14px;
+}
+.formula-highlight .feq { color: var(--accent); font-size: 1rem; font-weight: 600; }
+.formula-highlight .fdesc { font-size: 0.68rem; color: var(--text-dim); margin-top: 4px; }
+/* viz */
+.viz-layout { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
+.canvas-wrap {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 4px; overflow: hidden; flex-shrink: 0;
+}
+canvas { display: block; }
+.panel { width: 272px; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 14px 16px; }
+.card-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 11px;
+  border-bottom: 1px solid var(--border); padding-bottom: 7px;
+}
+.slider-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+.slider-label {
+  display: flex; justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.67rem;
+}
+.slkey { color: var(--text-dim); }
+.slval { color: var(--accent); font-weight: 600; }
+input[type=range] {
+  -webkit-appearance: none; width: 100%; height: 3px;
+  background: var(--border2); border-radius: 2px; outline: none; cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 12px; height: 12px;
+  border-radius: 50%; background: var(--accent);
+  border: 2px solid var(--bg); cursor: pointer; transition: transform .1s;
+}
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.35); }
+.slider-desc {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.59rem; color: var(--text-dim); line-height: 1.5; margin-top: 1px;
+}
+.result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.result-item {
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  border-radius: 3px; padding: 9px 8px; text-align: center;
+}
+.rlabel {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.57rem; color: var(--text-dim); text-transform: uppercase;
+  letter-spacing: 0.09em; margin-bottom: 4px;
+}
+.rval { font-family: 'IBM Plex Mono', monospace; font-size: 1.05rem; font-weight: 600; color: var(--accent); }
+.btn-group { display: flex; gap: 6px; flex-wrap: wrap; }
+.mode-btn {
+  background: var(--border); border: 1px solid var(--border2);
+  color: var(--text-dim); font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.64rem; padding: 5px 10px; border-radius: 3px;
+  cursor: pointer; transition: all .15s; letter-spacing: 0.04em;
+}
+.mode-btn.active,.mode-btn:hover {
+  background: rgba(0,229,160,0.1); border-color: rgba(0,229,160,0.35); color: var(--accent);
+}
+.term-table { width: 100%; border-collapse: collapse; }
+.term-table tr { border-bottom: 1px solid var(--border); }
+.term-table tr:last-child { border-bottom: none; }
+.term-table td { font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; padding: 6px 4px; vertical-align: top; }
+.term-sym { color: var(--accent4); width: 58px; font-weight: 600; white-space: nowrap; }
+.term-desc { color: var(--text-mid); line-height: 1.6; }
+.legend { display: flex; flex-direction: column; gap: 7px; }
+/* prose (blog) */
+.prose { max-width: 760px; }
+.prose p {
+  font-size: 0.9rem; color: var(--text-mid);
+  line-height: 1.95; margin-bottom: 1.1em;
+}
+.prose p b { color: var(--text); font-weight: 600; }
+.prose-axioms {
+  list-style: none; padding: 0;
+  margin: 0 0 1.2em 0;
+  border-left: 2px solid rgba(0,229,160,0.25);
+  padding-left: 18px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.prose-axioms li {
+  font-size: 0.85rem; color: var(--text-mid); line-height: 1.75;
+}
+.prose-axioms li b { color: var(--accent4); }
+.prose-h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.95rem; font-weight: 700;
+  color: #e8eaf0; margin: 1.6em 0 0.5em;
+  padding-left: 10px;
+  border-left: 2px solid var(--accent3);
+}
+/* prose blog style */
+.prose { max-width: 780px; }
+.prose p {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.9rem; color: var(--text-mid);
+  line-height: 2.0; margin-bottom: 1.1em;
+}
+.prose p b { color: var(--text); font-weight: 600; }
+.prose-axioms {
+  list-style: none; padding: 0 0 0 18px; margin: 0 0 1.3em;
+  border-left: 2px solid rgba(0,229,160,0.22);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.prose-axioms li { font-family: 'Noto Serif KR', serif; font-size: 0.86rem; color: var(--text-mid); line-height: 1.8; }
+.prose-axioms li b { color: var(--accent4); font-weight: 600; }
+.prose-h3 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.98rem; font-weight: 700;
+  color: #e8eaf0; margin: 1.8em 0 0.55em;
+  padding-left: 10px;
+  border-left: 2px solid var(--accent3);
+}
+.legend-item { display: flex; align-items: center; gap: 9px; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; color: var(--text-mid); }
+.leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.leg-line { width: 22px; flex-shrink: 0; }
+/* cases */
+.case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 14px; }
+.case-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 4px; padding: 18px;
+}
+.case-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent3); margin-bottom: 7px;
+}
+.case-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 0.95rem; font-weight: 700; color: #e8eaf0; margin-bottom: 8px;
+}
+.case-body { font-size: 0.78rem; color: var(--text-mid); line-height: 1.78; }
+.case-body b { color: var(--text); font-weight: 600; }
+.case-eq {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem; color: rgba(0,229,160,0.8);
+  background: rgba(0,229,160,0.05); border: 1px solid rgba(0,229,160,0.12);
+  border-radius: 3px; padding: 7px 10px; margin-top: 10px; line-height: 1.7;
+}
+footer {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem; color: var(--text-dim); text-align: center; margin-top: 10px; letter-spacing: 0.06em;
+}
+sub, sup {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sub { bottom: -0.25em; }
+sup { top: -0.55em; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">Cooperative Game Theory</div>
+  <h1>&#45236;&#49772; &#48148;&#44172;&#45789; &#54644;</h1>
+  <div class="header-sub">Nash Bargaining Solution &nbsp;&middot;&nbsp; Nash (1950)</div>
+  <div class="header-divider"></div>
+</header>
+
+<!-- 1. &#44060;&#45392; &#49444;&#47749; -->
+<section class="section">
+  <div class="section-title">&#44060;&#45392; &#48143; &#44277;&#47532;&#51201; &#44592;&#52488;</div>
+  <div class="prose">
+    <p>&#45236;&#49772; &#48148;&#44172;&#45789; &#54644;(Nash Bargaining Solution)&#45716; &#46160; &#45817;&#49324;&#51088;&#44032; &#54801;&#49345;&#51012; &#53685;&#54644; &#51060;&#46301;&#51012; &#45208;&#45572;&#45716; &#49345;&#54889;&#51012; &#49688;&#54617;&#51201;&#51004;&#47196; &#48516;&#49437;&#54616;&#45716; &#54801;&#51312;&#51201; &#44172;&#51076;&#51060;&#47200;&#51032; &#54645;&#49900; &#44060;&#45392;&#51060;&#45796;. &#44592;&#48376; &#49444;&#51221;&#51008; &#45800;&#49692;&#54616;&#45796;. &#46160; &#49324;&#46988;&#51060; &#54801;&#47141;&#54616;&#47732; &#54844;&#51088;&#49436;&#45716; &#50619;&#51012; &#49688; &#50630;&#45716; <b>&#51081;&#50668;(surplus)</b>&#44032; &#48156;&#49373;&#54616;&#51648;&#47564;, &#54633;&#51032;&#50640; &#49892;&#54056;&#54616;&#47732; &#44033;&#51088; &#48120;&#47532; &#51221;&#54644;&#51652; <b>&#48520;&#51068;&#52824; &#48372;&#49688; d</b>&#47564; &#48155;&#44256; &#54801;&#49345; &#53580;&#51060;&#48660;&#51012; &#46496;&#45212;&#45796;. &#51060; &#48520;&#51068;&#52824;&#51216;&#51008; &#54801;&#49345; &#44208;&#47148; &#49884; &#44033;&#51088;&#44032; &#54869;&#48372;&#54624; &#49688; &#51080;&#45716; &#45824;&#50504;&#51201; &#48372;&#49688;&#47196;, &#54788;&#49892;&#50640;&#49436;&#45716; &#54028;&#50629;&#183;&#51649;&#51109;&#54224;&#49604;, &#45796;&#47480; &#44144;&#47000;&#52376;&#47196;&#51032; &#51060;&#46041;, &#49548;&#49569; &#46321;&#51060; &#54644;&#45817;&#46108;&#45796;. &#54801;&#49345; &#47928;&#51228;&#45716; &#44032;&#45733;&#54620; &#54952;&#50857; &#48176;&#48516;&#51032; &#51665;&#54633; <b>S</b>&#50752; &#48520;&#51068;&#52824;&#51216; <b>d</b>&#51032; &#49933; (S, d)&#47196; &#54805;&#49885;&#54868;&#46108;&#45796;. &#51665;&#54633; S&#51032; &#54805;&#53468;&#45716; &#54801;&#50629;&#51032; &#51060;&#46301; &#44396;&#51312;&#47484; &#45208;&#53440;&#45240;&#45796;. S&#44032; &#48380;&#47197;&#51665;&#54633;&#51060;&#47732; &#46160; &#49324;&#46988;&#51032; &#54801;&#50629; &#51060;&#46301;&#51060; &#52404;&#44048;&#54616;&#44256;(&#50724;&#47785;&#54620; &#54532;&#47200;&#54000;&#50612;), S&#44032; &#50724;&#47785;&#51665;&#54633;&#51060;&#47732; &#52404;&#51613;&#54620;&#45796;(&#48380;&#47197;&#54620; &#54532;&#47200;&#54000;&#50612;). &#48708;&#45824;&#52845;&#51201; S&#45716; &#46160; &#45817;&#49324;&#51088;&#51032; &#44592;&#49696;&#51060;&#45208; &#49373;&#49328;&#49457;&#51060; &#49436;&#47196; &#45796;&#47484; &#46412; &#45208;&#53440;&#45212;&#45796;.</p>
+    <p>&#45236;&#49772;(1950)&#51032; &#46021;&#52285;&#51201;&#51064; &#51217;&#44540;&#51008; "&#50612;&#46500; &#54644;&#44032; &#51339;&#51008;&#44032;"&#47484; &#51649;&#51217; &#44396;&#54616;&#45716; &#45824;&#49888;, <b>"&#54633;&#47532;&#51201;&#51060;&#44256; &#44277;&#51221;&#54620; &#54801;&#49345; &#44208;&#44284;&#46972;&#47732; &#48152;&#46300;&#49884; &#47564;&#51313;&#54644;&#50556; &#54624; &#51312;&#44148;"</b>&#51012; &#44277;&#47532;&#47196; &#47676;&#51200; &#50676;&#44144;&#54620; &#46244;, &#44536; &#44277;&#47532;&#46308;&#51012; &#46041;&#49884;&#50640; &#47564;&#51313;&#54616;&#45716; &#50976;&#51068;&#54620; &#54644;&#47484; &#46020;&#52636;&#54616;&#45716; &#48169;&#49885;&#51060;&#45796;. &#44536;&#44032; &#51228;&#49884;&#54620; &#45796;&#49455; &#44032;&#51648; &#44277;&#47532;&#45716; &#45796;&#51020;&#44284; &#44057;&#45796;.</p>
+    <ul class="prose-axioms">
+      <li><b>&#54028;&#47112;&#53664; &#54952;&#50984;&#49457;(A1)</b> &mdash; &#54644;&#51216;&#48372;&#45796; &#46160; &#49324;&#46988; &#47784;&#46160;&#50640;&#44172; &#45908; &#45208;&#51008; &#48176;&#48516;&#51060; &#54801;&#49345; &#51665;&#54633; S &#50504;&#50640; &#51316;&#51116;&#54644;&#49436;&#45716; &#50504; &#46108;&#45796;. &#54801;&#49345;&#51032; &#44208;&#44284;&#45716; &#54637;&#49345; &#54028;&#47112;&#53664; &#52572;&#51201;&#51060;&#50612;&#50556; &#54620;&#45796;.</li>
+      <li><b>&#44060;&#51064; &#54633;&#47532;&#49457;(A2)</b> &mdash; &#54801;&#49345; &#44208;&#44284;&#44032; &#48520;&#51068;&#52824; &#48372;&#49688; d&#48372;&#45796; &#45208;&#48736;&#49436;&#45716; &#50504; &#46108;&#45796;. &#54633;&#51032;&#54616;&#45716; &#44163;&#51060; &#44208;&#47148;&#48372;&#45796; &#45208;&#49240;&#45796;&#47732; &#50500;&#47924;&#46020; &#54801;&#49345;&#50640; &#52280;&#50668;&#54616;&#51648; &#50506;&#45716;&#45796;.</li>
+      <li><b>&#45824;&#52845;&#49457;(A3)</b> &mdash; &#46160; &#45817;&#49324;&#51088;&#51032; &#54801;&#49345; &#49345;&#54889;&#51060; &#50756;&#51204;&#55176; &#45824;&#52845;&#51201;&#51060;&#46972;&#47732; &#44208;&#44284;&#46020; &#46041;&#46321;&#54616;&#44172; &#48176;&#48516;&#46104;&#50612;&#50556; &#54620;&#45796;.</li>
+      <li><b>IIA(A4)</b> &mdash; &#49892;&#54788; &#44032;&#45733;&#54620; &#45824;&#50504;&#51060; &#51460;&#50612;&#46308;&#45908;&#46972;&#46020;, &#50896;&#47000;&#51032; &#54644;&#44032; &#50668;&#51204;&#55176; &#49892;&#54788; &#44032;&#45733;&#54616;&#45796;&#47732; &#54644;&#45716; &#48148;&#45068;&#51648; &#50506;&#50500;&#50556; &#54620;&#45796;.</li>
+      <li><b>&#49440;&#54805; &#48520;&#48320;&#49457;(A5)</b> &mdash; &#54952;&#50857; &#54632;&#49688;&#51032; &#45800;&#50948;&#45208; &#50896;&#51216;&#51012; &#49440;&#54805; &#48320;&#54872;&#54644;&#46020; &#54644;&#51032; &#48376;&#51656;&#51008; &#45804;&#46972;&#51648;&#51648; &#50506;&#50500;&#50556; &#54620;&#45796;.</li>
+    </ul>
+    <p>&#45236;&#49772;&#45716; &#51060; &#45796;&#49455; &#44277;&#47532;&#47484; &#46041;&#49884;&#50640; &#47564;&#51313;&#54616;&#45716; &#54644;&#44032; &#50976;&#51068;&#54616;&#44172; &#51316;&#51116;&#54616;&#47728;, &#44536;&#44163;&#51060; &#48148;&#47196; <b>&#45236;&#49772; &#44273;&#51012; &#52572;&#45824;&#54868;</b>&#54616;&#45716; &#51216;&#51076;&#51012; &#51613;&#47749;&#54664;&#45796;. &#45824;&#52845;&#51201; &#44221;&#50864;(&#945; = 0.5)&#50640;&#45716; &#46160; &#45817;&#49324;&#51088;&#51032; &#51060;&#46301; &#51613;&#44032;&#48516;&#51032; &#44273; <span style="font-family:'IBM Plex Mono',monospace;font-size:0.88em">(u<sub>1</sub>&minus;d<sub>1</sub>)(u<sub>2</sub>&minus;d<sub>2</sub>)</span>&#51012; &#52572;&#45824;&#54868;&#54616;&#45716; &#54028;&#47112;&#53664; &#54952;&#50984;&#51201; &#48176;&#48516;&#51060; &#54644;&#44032; &#46108;&#45796;. &#48708;&#45824;&#52845;&#51201; &#44221;&#50864;&#50640;&#45716; &#54801;&#49345;&#47141; &#945;&#44032; &#51648;&#49688;&#50640; &#48152;&#50689;&#46104;&#50612; &#44053;&#54620; &#51901;&#51060; &#45908; &#47566;&#51008; &#47787;&#51012; &#44032;&#51256;&#44036;&#45796;.</p>
+  </div>
+  <div class="formula-highlight">
+    <div class="feq">f<sup>*</sup>(S,&thinsp;d) &nbsp;=&nbsp; arg&thinsp;max&ensp;(u<sub>1</sub>&minus;d<sub>1</sub>)<sup>&alpha;</sup> &middot; (u<sub>2</sub>&minus;d<sub>2</sub>)<sup>1&minus;&alpha;</sup></div>
+    <div>subject to &ensp;(u<sub>1</sub>,&thinsp;u<sub>2</sub>) &isin; S,&ensp; u<sub>1</sub> &ge; d<sub>1</sub>,&ensp; u<sub>2</sub> &ge; d<sub>2</sub></div>
+    <div class="fdesc">&alpha; = 0.5 : &#45824;&#52845; &#45236;&#49772; &#54644; &ensp;|&ensp; &alpha; &ne; 0.5 : &#48708;&#45824;&#52845; &#45236;&#49772; &#54644; (&#54801;&#49345;&#47141; &#52264;&#51060; &#48152;&#50689;)</div>
+  </div>
+</section>
+
+<!-- 2. &#49884;&#44033;&#54868; -->
+<section class="section">
+  <div class="section-title">&#51064;&#53552;&#47001;&#54000;&#48652; &#49884;&#44033;&#54868;</div>
+  <div class="viz-layout">
+    <div class="canvas-wrap">
+      <canvas id="c" width="510" height="510"></canvas>
+    </div>
+    <div class="panel">
+
+      <!-- &#44592;&#54840; &#49444;&#47749; -->
+      <div class="card">
+        <div class="card-title">&#44592;&#54840; &#49444;&#47749;</div>
+        <table class="term-table">
+          <tr>
+            <td class="term-sym">S</td>
+            <td class="term-desc">&#54801;&#49345; &#51665;&#54633;(Feasible Set). &#46160; &#45817;&#49324;&#51088;&#44032; &#54633;&#51032; &#44032;&#45733;&#54620; (u<sub>1</sub>,u<sub>2</sub>) &#48176;&#48516;&#51032; &#51204;&#52404; &#50689;&#50669;. S&#51032; &#47784;&#50577;&#51060; &#54801;&#50629;&#51032; &#51060;&#46301; &#44396;&#51312;(&#52404;&#44048;&#183;&#52404;&#51613;&#183;&#48708;&#45824;&#52845;)&#47484; &#48152;&#50689;&#54620;&#45796;.</td>
+          </tr>
+          <tr>
+            <td class="term-sym">u<sub>1</sub>, u<sub>2</sub></td>
+            <td class="term-desc">&#44033; &#45817;&#49324;&#51088;&#51032; &#54952;&#50857;(&#48372;&#49688;). &#50668;&#44592;&#49436;&#45716; [0,1]&#47196; &#51221;&#44508;&#54868;. 1&#51008; &#54644;&#45817; &#45817;&#49324;&#51088;&#44032; &#50619;&#51012; &#49688; &#51080;&#45716; &#52572;&#45824; &#54952;&#50857;.</td>
+          </tr>
+          <tr>
+            <td class="term-sym">d<sub>1</sub>, d<sub>2</sub></td>
+            <td class="term-desc">&#48520;&#51068;&#52824;&#51216;. &#54801;&#49345; &#44208;&#47148; &#49884; &#44033;&#51088; &#54869;&#48372;&#54616;&#45716; &#44592;&#48376; &#54952;&#50857;(&#54801;&#49345;&#47141;&#51032; &#54616;&#54620;, BATNA).</td>
+          </tr>
+          <tr>
+            <td class="term-sym">&alpha;</td>
+            <td class="term-desc">&#45817;&#49324;&#51088; 1&#51032; &#54801;&#49345;&#47141;. &alpha;=0.5 &#45824;&#46321;, &alpha;&gt;0.5 &#45817;&#49324;&#51088; 1&#51060; &#50976;&#47532;.</td>
+          </tr>
+          <tr>
+            <td class="term-sym">f<sup>*</sup>(S,d)</td>
+            <td class="term-desc">&#45236;&#49772; &#48148;&#44172;&#45789; &#54644;. &#45236;&#49772; &#44273; &#52572;&#45824;&#54868; &#51216;(&#54028;&#47112;&#53664; &#54532;&#47200;&#54000;&#50612; &#50948;).</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- &#48520;&#51068;&#52824;&#51216; -->
+      <div class="card">
+        <div class="card-title">&#48520;&#51068;&#52824;&#51216; d (Disagreement Point)</div>
+        <div class="slider-row">
+          <div class="slider-label">
+            <span class="slkey">d<sub>1</sub> (&#45817;&#49324;&#51088; 1 &#44592;&#48376; &#54952;&#50857;)</span>
+            <span class="slval" id="vd1">0.20</span>
+          </div>
+          <input type="range" id="sd1" min="0" max="65" value="20">
+          <div class="slider-desc">&#45458;&#51012;&#49688;&#47197; &#45817;&#49324;&#51088; 1&#51032; &#54801;&#49345; &#54616;&#54620; &#49345;&#49849; &rarr; &#54644;&#51216;&#51060; u<sub>1</sub> &#48169;&#54693;&#51004;&#47196; &#51060;&#46041;</div>
+        </div>
+        <div class="slider-row">
+          <div class="slider-label">
+            <span class="slkey">d<sub>2</sub> (&#45817;&#49324;&#51088; 2 &#44592;&#48376; &#54952;&#50857;)</span>
+            <span class="slval" id="vd2">0.20</span>
+          </div>
+          <input type="range" id="sd2" min="0" max="65" value="20">
+          <div class="slider-desc">&#45458;&#51012;&#49688;&#47197; &#45817;&#49324;&#51088; 2&#51032; &#54801;&#49345; &#54616;&#54620; &#49345;&#49849; &rarr; &#54644;&#51216;&#51060; u<sub>2</sub> &#48169;&#54693;&#51004;&#47196; &#51060;&#46041;</div>
+        </div>
+      </div>
+
+      <!-- &#54801;&#49345;&#47141; -->
+      <div class="card">
+        <div class="card-title">&#54801;&#49345;&#47141; (Bargaining Power) &alpha;</div>
+        <div class="slider-row">
+          <div class="slider-label">
+            <span class="slkey">&alpha; (&#45817;&#49324;&#51088; 1 &#54801;&#49345;&#47141;)</span>
+            <span class="slval" id="valpha">0.50</span>
+          </div>
+          <input type="range" id="salpha" min="5" max="95" value="50">
+          <div class="slider-desc">&alpha;=0.5 : &#45824;&#52845; &#54644; &ensp;|&ensp; &alpha;&gt;0.5 : &#45817;&#49324;&#51088; 1 &#50976;&#47532;</div>
+        </div>
+      </div>
+
+      <!-- &#51665;&#54633; &#54805;&#53468; -->
+      <div class="card">
+        <div class="card-title">&#54801;&#49345; &#51665;&#54633; &#54805;&#53468;</div>
+        <div class="btn-group">
+        <button class="mode-btn active" data-mode="linear">&#49440;&#54805;</button>
+        <button class="mode-btn" data-mode="convex_S">&#48380;&#47197;&#51665;&#54633;(S)</button>
+        <button class="mode-btn" data-mode="concave_S">&#50724;&#47785;&#51665;&#54633;(S)</button>
+        <button class="mode-btn" data-mode="asymm">&#48708;&#45824;&#52845;</button>
+      </div>
+        <div class="slider-desc" style="margin-top:8px;line-height:1.7">
+          <b style="color:var(--text-dim);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;">&#51665;&#54633; S&#51032; &#44221;&#51228;&#51201; &#51032;&#48120;</b><br>
+          <b style="color:var(--text)">&#49440;&#54805;</b>: u<sub>1</sub>+u<sub>2</sub>=1 &mdash; &#54801;&#50629; &#51060;&#46301;&#51060; &#51068;&#51221;. &#54620; &#49324;&#46988;&#51032; &#51060;&#46301; 1&#45800;&#50948; = &#49345;&#45824;&#48169;&#51032; &#49552;&#49892; 1&#45800;&#50948;<br>
+          <b style="color:var(--text)">&#48380;&#47197;&#51665;&#54633;(S)</b>: u<sub>1</sub><sup>2</sup>+u<sub>2</sub><sup>2</sup>=1 &mdash; S&#44032; &#48380;&#47197;&#51665;&#54633;. &#54801;&#50629; &#51060;&#46301; &#52404;&#44048;(&#44508;&#47784;&#49688;&#51061; &#44048;&#49548;). &#54532;&#47200;&#54000;&#50612;&#44032; &#48148;&#44645;&#51004;&#47196; &#44413;&#51020;<br>
+          <b style="color:var(--text)">&#50724;&#47785;&#51665;&#54633;(S)</b>: u<sub>1</sub><sup>&frac12;</sup>+u<sub>2</sub><sup>&frac12;</sup>=1 &mdash; S&#44032; &#50724;&#47785;&#51665;&#54633;. &#54801;&#50629; &#51060;&#46301; &#52404;&#51613;(&#44508;&#47784;&#49688;&#51061; &#51613;&#44032;). &#54532;&#47200;&#54000;&#50612;&#44032; &#50504;&#51901;&#51004;&#47196; &#44413;&#51020;<br>
+          <b style="color:var(--text)">&#48708;&#45824;&#52845;</b>: u<sub>1</sub><sup>0.6</sup>+u<sub>2</sub><sup>1.8</sup>=1 &mdash; &#45817;&#49324;&#51088; &#44036; &#44592;&#49696;&#183;&#49373;&#49328;&#49457; &#52264;&#51060;. &#46160; &#49324;&#46988;&#51032; &#54952;&#50857; &#44368;&#54872;&#48708;&#50984;&#51060; &#48708;&#45824;&#52845;
+        </div>
+      </div>
+
+      <!-- &#44208;&#44284; -->
+      <div class="card">
+        <div class="card-title">&#45236;&#49772; &#48148;&#44172;&#45789; &#54644; f<sup>*</sup>(S,&thinsp;d)</div>
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="rlabel">u<sub>1</sub><sup>*</sup></div>
+            <div class="rval" id="rf1">-</div>
+          </div>
+          <div class="result-item">
+            <div class="rlabel">u<sub>2</sub><sup>*</sup></div>
+            <div class="rval" style="color:var(--accent2)" id="rf2">-</div>
+          </div>
+          <div class="result-item">
+            <div class="rlabel">&#45236;&#49772; &#44273;</div>
+            <div class="rval" style="color:var(--accent3)" id="rnp">-</div>
+          </div>
+          <div class="result-item">
+            <div class="rlabel">&#52509; &#51081;&#50668;</div>
+            <div class="rval" id="rsum">-</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- &#48276;&#47168; -->
+      <div class="card">
+        <div class="card-title">&#48276;&#47168;</div>
+        <div class="legend">
+          <div class="legend-item">
+            <div class="leg-line" style="height:2.5px;background:#00e5a0;"></div>&#54028;&#47112;&#53664; &#54532;&#47200;&#54000;&#50612;
+          </div>
+          <div class="legend-item">
+            <div class="leg-line" style="height:8px;background:rgba(0,229,160,0.14);border-radius:2px;"></div>&#54801;&#49345; &#51665;&#54633; S
+          </div>
+          <div class="legend-item">
+            <div class="leg-dot" style="background:#ff6b35;"></div>&#48520;&#51068;&#52824;&#51216; d
+          </div>
+          <div class="legend-item">
+            <div class="leg-dot" style="background:#fff;border:2px solid #00e5a0;"></div>&#45236;&#49772; &#48148;&#44172;&#45789; &#54644; f*
+          </div>
+          <div class="legend-item">
+            <div class="leg-line" style="height:0;border-top:2px dashed rgba(123,140,255,0.7);"></div>&#46321;&#45236;&#49772;&#44273; &#44257;&#49440; (&#49933;&#44257;&#49440;)
+          </div>
+          <div class="legend-item">
+            <div class="leg-line" style="height:0;border-top:2px dashed rgba(255,107,53,0.45);"></div>d &rarr; f* &#50672;&#44208;
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 3. &#51025;&#50857; &#49324;&#47168; -->
+<section class="section">
+  <div class="section-title">&#44221;&#51228; &#51060;&#47200; &#51201;&#50857; &#49324;&#47168;</div>
+  <div class="prose">
+    <p>&#45236;&#49772; &#48148;&#44172;&#45789; &#54644;&#45716; &#45800;&#49692;&#54620; &#51060;&#47200;&#51201; &#44396;&#49457;&#47932;&#51060; &#50500;&#45768;&#46972; &#45796;&#50577;&#54620; &#44221;&#51228;&#183;&#49324;&#54924; &#54788;&#49345;&#51012; &#49444;&#47749;&#54616;&#45716; &#49892;&#50857;&#51201; &#46020;&#44396;&#45796;. &#54645;&#49900;&#51008; &#54637;&#49345; &#46041;&#51068;&#54616;&#45796;. &#54801;&#47141;&#51032; &#51060;&#46301;(&#52509; &#51081;&#50668;)&#51060; &#50612;&#46523;&#44172; &#48176;&#48516;&#46104;&#45716;&#44032;&#45716; &#44033; &#45817;&#49324;&#51088;&#51032; <b>&#54801;&#49345;&#47141; &#945;</b>&#50752; <b>&#48520;&#51068;&#52824;&#51216; d</b>&#50640; &#51032;&#54644; &#44208;&#51221;&#46108;&#45796;.</p>
+
+    <h3 class="prose-h3">&#49933;&#48169;&#46021;&#51216;&#44284; &#45432;&#49324; &#54801;&#49345;</h3>
+    <p>&#49328;&#50629;&#51312;&#51649;&#47200;&#50640;&#49436; &#44032;&#51109; &#51088;&#51452; &#51064;&#50857;&#46104;&#45716; &#51201;&#50857; &#49324;&#47168;&#45716; <b>&#49933;&#48169;&#46021;&#51216;(bilateral monopoly)</b>&#51060;&#45796;. &#46021;&#51216; &#44277;&#44553;&#51088;&#50752; &#46021;&#51216; &#44396;&#47588;&#51088;&#44032; &#47560;&#51452; &#50505;&#51008; &#44396;&#51312;&#47196;, &#45432;&#46041;&#49884;&#51109;&#51032; &#45432;&#49324; &#54801;&#49345;&#51060;&#45208; &#53945;&#54728; &#46972;&#51060;&#49468;&#49905; &#44228;&#50557;&#51060; &#51204;&#54805;&#51201;&#51064; &#50696;&#45796;. &#54801;&#49345;&#51060; &#44208;&#47148;&#46112; &#44221;&#50864; &#44277;&#44553;&#51088;&#45716; &#54032;&#47588;&#52376;&#47484; &#51075;&#44256; &#44396;&#47588;&#51088;&#45716; &#49373;&#49328;&#51012; &#47688;&#52656;&#50556; &#54620;&#45796;&#45716; &#49324;&#49892;&#51060; &#44033;&#51088;&#51032; &#48520;&#51068;&#52824;&#51216; d&#47484; &#54805;&#49457;&#54620;&#45796;. &#45236;&#49772; &#54644;&#50640; &#46384;&#47476;&#47732; &#44512;&#54805; &#44032;&#44201;&#51008; P* = &#945;V + (1&#8722;&#945;)c&#47196; &#44208;&#51221;&#46104;&#47728;, &#54801;&#49345;&#47141; &#945;&#44032; &#53364;&#49688;&#47197; &#44277;&#44553;&#51088;&#50640;&#44172; &#50976;&#47532;&#54620; &#44032;&#44201;&#51060; &#49892;&#54788;&#46108;&#45796;.</p>
+    <p>&#51076;&#44552; &#54801;&#49345; &#47784;&#54805;(McDonald-Solow)&#46020; &#44057;&#51008; &#44396;&#51312;&#45796;. &#45432;&#51312;&#51032; &#48520;&#51068;&#52824;&#51216;&#51008; &#49892;&#50629;&#44553;&#50668;&#45208; &#53440; &#51649;&#51333; &#51076;&#44552;&#51060;&#44256;, &#44592;&#50629;&#51032; &#48520;&#51068;&#52824;&#51216;&#51008; &#54028;&#50629; &#44592;&#44036;&#51032; &#49552;&#49892;&#51060;&#45796;. Rubinstein(1982)&#51032; &#44368;&#45824;&#51228;&#50504; &#54801;&#49345; &#47784;&#54805;&#51008; &#49884;&#44036; &#54624;&#51064;&#50984;&#51060; 0&#51004;&#47196; &#49688;&#47156;&#54624; &#46412; &#51060; &#44208;&#44284;&#44032; &#51221;&#54869;&#55176; &#45236;&#49772; &#48148;&#44172;&#45789; &#54644;&#47196; &#49688;&#47156;&#54632;&#51012; &#51613;&#47749;&#54664;&#45796;.</p>
+
+    <h3 class="prose-h3">&#44160;&#49353;-&#47588;&#52845; &#47784;&#54805;&#44284; &#49892;&#50629;&#47456;</h3>
+    <p>&#45432;&#48296;&#44221;&#51228;&#54617;&#49345;(2010)&#51012; &#48155;&#51008; <b>Mortensen-Pissarides &#44160;&#49353;-&#47588;&#52845; &#47784;&#54805;</b>&#51008; &#45236;&#49772; &#48148;&#44172;&#45789; &#54644;&#47484; &#51060;&#47200;&#51032; &#54645;&#49900; &#44592;&#51228;&#47196; &#52292;&#53469;&#54620;&#45796;. &#44396;&#51649;&#51088;&#50752; &#44592;&#50629;&#51060; &#47564;&#45208;&#47732; &#51076;&#44552;&#51012; &#54801;&#49345;&#54616;&#45716;&#45936;, &#44536; &#44208;&#44284;&#45716; &#44592;&#50629; &#51081;&#50668; J(w)&#50752; &#45432;&#46041;&#51088; &#51081;&#50668; W(w)&#47484; &#945; : (1&#8722;&#945;)&#47196; &#48176;&#48516;&#54616;&#45716; &#48169;&#51221;&#49885; &#945;&#183;J(w) = (1&#8722;&#945;)&#183;W(w)&#47196; &#54364;&#54788;&#46108;&#45796;. &#55141;&#48120;&#47196;&#50868; &#51216;&#51008; &#945;&#44032; &#45458;&#51012;&#49688;&#47197; &#45432;&#46041;&#51088; &#51076;&#44552;&#51008; &#50724;&#47476;&#51648;&#47564;, &#46041;&#49884;&#50640; &#44592;&#50629;&#51032; &#44396;&#51064; &#50976;&#51064;&#51060; &#45230;&#50500;&#51256; &#49892;&#50629;&#47456;&#51060; &#45458;&#50500;&#51648;&#45716; <b>&#54952;&#50984; &#51076;&#44552; &#46364;&#47112;&#47560;</b>&#44032; &#48156;&#49373;&#54620;&#45796;&#45716; &#44163;&#51060;&#45796;.</p>
+
+    <h3 class="prose-h3">&#47924;&#50669; &#54801;&#49345;&#44284; M&A</h3>
+    <p>&#44397;&#51228;&#47924;&#50669; &#54801;&#49345;&#50640;&#49436; &#46160; &#44397;&#44032;&#44032; &#44288;&#49464;&#50752; &#49884;&#51109; &#44060;&#48169; &#54253;&#51012; &#54801;&#49345;&#54624; &#46412;, &#48520;&#51068;&#52824;&#51216;&#51008; &#54801;&#49345; &#44208;&#47148; &#49884; &#51201;&#50857;&#46104;&#45716; WTO &#52572;&#54812;&#44397;(MFN) &#44288;&#49464; &#49688;&#51456; &#46608;&#45716; &#47924;&#50669; &#51204;&#51137; &#44512;&#54805;&#51060;&#45796;. &#45236;&#49772; &#54644;&#45716; &#50577;&#44397;&#51060; &#49345;&#54840; &#51060;&#46301;&#51012; &#45572;&#47540; &#49688; &#51080;&#45716; &#51088;&#50976;&#54868;&#51032; &#48276;&#50948;&#47484; &#44208;&#51221;&#54616;&#47728;, EU&#183;&#48120;&#44397; &#44036; &#47924;&#50669; &#54801;&#51221;(TTIP) &#46321;&#51032; &#48516;&#49437;&#50640; &#49892;&#51228;&#47196; &#54876;&#50857;&#46108;&#45796;.</p>
+    <p>&#44592;&#50629; M&A &#54801;&#49345;&#46020; &#44057;&#51008; &#53952;&#47196; &#48516;&#49437;&#46108;&#45796;. &#51064;&#49688;&#51088;&#51032; &#48520;&#51068;&#52824;&#51216;&#51008; &#52264;&#49440;&#51032; &#53804;&#51088; &#45824;&#50504;(BATNA)&#51060;&#44256;, &#54588;&#51064;&#49688; &#44592;&#50629;&#51032; &#48520;&#51068;&#52824;&#51216;&#51008; &#46021;&#47549; &#51316;&#49549; &#44032;&#52824;&#45796;. &#54633;&#48337; &#49884;&#45320;&#51648;&#44032; &#53364;&#49688;&#47197; &#54801;&#49345; &#44032;&#45733; &#48276;&#50948;(ZOPA)&#44032; &#45331;&#50612;&#51648;&#47728;, &#45236;&#49772; &#54644;&#45716; &#44536; &#49884;&#45320;&#51648;&#47484; &#44033;&#51088;&#51032; &#54801;&#49345;&#47141; &#48708;&#50984;&#47196; &#45208;&#45572;&#45716; &#44032;&#44201;&#51012; &#50696;&#52769;&#54620;&#45796;.</p>
+
+    <h3 class="prose-h3">&#50672;&#47549;&#51221;&#48512; &#44396;&#49457;</h3>
+    <p>&#44221;&#51228; &#50808; &#48516;&#50556;&#47196;&#46020; &#54869;&#51109;&#46108;&#45796;. &#45796;&#49688;&#45817;&#51060; &#50630;&#45716; &#51032;&#54924;&#50640;&#49436; &#51221;&#45817;&#46308;&#51060; &#50672;&#47549;&#51221;&#48512;&#47484; &#54801;&#49345;&#54624; &#46412;, &#48520;&#51068;&#52824;&#51216;&#51008; &#54801;&#49345; &#44208;&#47148; &#49884;&#51032; &#49548;&#49688; &#51221;&#48512; &#46608;&#45716; &#51116;&#49440;&#44144; &#48708;&#50857;&#51060;&#45796;. &#44033; &#51221;&#45817;&#51032; &#51032;&#49437;&#49688;&#50752; &#51060;&#45392;&#51201; &#44144;&#47532;&#44032; &#54801;&#49345;&#47141;&#51012; &#44208;&#51221;&#54616;&#47728;, &#45236;&#49772; &#48148;&#44172;&#45789; &#54644;&#45716; &#44033; &#51221;&#45817;&#51060; &#54869;&#48372;&#54624; &#51109;&#44288; &#54252;&#49828;&#53944;&#50752; &#51221;&#52293; &#51032;&#51228;&#47484; &#50696;&#52769;&#54616;&#45716; &#45936; &#49324;&#50857;&#46108;&#45796;.</p>
+  </div>
+</section>
+
+<footer>Nash (1950) &middot; "The Bargaining Problem" &middot; Econometrica 18(2)</footer>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const PAD = 56, AREA = W - PAD * 2;
+
+function tx(x){ return PAD + x * AREA; }
+function ty(y){ return H - PAD - y * AREA; }
+
+let state = { d1:.20, d2:.20, alpha:.50, mode:'linear' };
+
+function frontier(u1){
+  if(u1<0||u1>1) return null;
+  const m = state.mode;
+  if(m==='linear') return 1-u1;
+  // \ubcfc\ub85d\uc9d1\ud569(S\uac00 \ubcfc\ub85d): u1^2+u2^2=1 \uc6d0\ud638
+  // \ud504\ub860\ud2f0\uc5b4\ub294 \uc6d0\uc810\uc5d0\uc11c \uba40\ub9ac(\ubc14\uae65\ucabd)\uc73c\ub85c \uad74\uc74c \u2192 \uc624\ubaa9 \uace1\uc120
+  if(m==='convex_S') return Math.sqrt(Math.max(0, 1-u1*u1));
+  // \uc624\ubaa9\uc9d1\ud569(S\uac00 \uc624\ubaa9): u1^0.5+u2^0.5=1
+  // \ud504\ub860\ud2f0\uc5b4\ub294 \uc6d0\uc810 \ucabd(\uc548\ucabd)\uc73c\ub85c \uad74\uc74c \u2192 \ubcfc\ub85d \uace1\uc120
+  if(m==='concave_S'){const sq=1-Math.sqrt(Math.max(0,u1));return sq*sq;}
+  // \ube44\ub300\uce58: u1^0.6 + u2^1.8 = 1  (\uba85\ubc31\ud55c \ube44\ub300\uce58)
+  if(m==='asymm'){
+    const v=1-Math.pow(Math.max(0,u1),0.6);
+    return v<0?0:Math.pow(v,1/1.8);
+  }
+  return 1-u1;
+}
+
+function solveNash(){
+  const {d1,d2,alpha} = state;
+  let best={u1:d1,u2:d2,prod:-1};
+  for(let i=0;i<=3000;i++){
+    const u1=d1+(1-d1)*(i/3000);
+    const u2f=frontier(u1);
+    if(u2f===null||u2f<d2) continue;
+    const a=u1-d1, b=u2f-d2;
+    if(a<=0||b<=0) continue;
+    const prod=Math.pow(a,alpha)*Math.pow(b,1-alpha);
+    if(prod>best.prod) best={u1,u2:u2f,prod};
+  }
+  return best;
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#111318'; ctx.fillRect(0,0,W,H);
+
+  // \uaca9\uc790
+  ctx.strokeStyle='rgba(255,255,255,0.035)'; ctx.lineWidth=1;
+  for(let i=0;i<=10;i++){
+    const v=i/10;
+    ctx.beginPath(); ctx.moveTo(tx(v),ty(0)); ctx.lineTo(tx(v),ty(1)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(tx(0),ty(v)); ctx.lineTo(tx(1),ty(v)); ctx.stroke();
+  }
+
+  // S \ucc44\uc6b0\uae30
+  ctx.beginPath(); ctx.moveTo(tx(0),ty(0));
+  for(let i=0;i<=500;i++){const u1=i/500,u2=frontier(u1); if(u2!=null&&u2>=0) ctx.lineTo(tx(u1),ty(u2));}
+  ctx.lineTo(tx(1),ty(0)); ctx.closePath();
+  ctx.fillStyle='rgba(0,229,160,0.055)'; ctx.fill();
+
+  // \ub4f1\ub0b4\uc26c\uacf1 \uace1\uc120
+  const sol=solveNash();
+  const {d1,d2,alpha}=state;
+  const levels=[0.12,0.28,0.46,0.64,0.80,1.0];
+  for(const lv of levels){
+    const tgt=sol.prod*lv; if(tgt<=0) continue;
+    ctx.beginPath(); let started=false;
+    for(let i=1;i<=800;i++){
+      const u1=d1+(1-d1)*(i/800);
+      const a=u1-d1; if(a<=0) continue;
+      let b;
+      if(Math.abs(1-alpha)<0.001) b=tgt;
+      else b=Math.pow(tgt/Math.pow(a,alpha),1/(1-alpha));
+      const u2=d2+b;
+      if(u2>1.08||u2<d2-0.01){started=false;continue;}
+      if(!started){ctx.moveTo(tx(u1),ty(u2));started=true;}
+      else ctx.lineTo(tx(u1),ty(u2));
+    }
+    const op=lv===1.0?0.85:0.12+lv*0.38;
+    ctx.strokeStyle=`rgba(123,140,255,${op})`;
+    ctx.lineWidth=lv===1.0?1.8:0.9;
+    ctx.setLineDash(lv===1.0?[]:[4,5]); ctx.stroke(); ctx.setLineDash([]);
+  }
+
+  // \ud30c\ub808\ud1a0 \ud504\ub860\ud2f0\uc5b4
+  ctx.beginPath(); let ff=true;
+  for(let i=0;i<=600;i++){const u1=i/600,u2=frontier(u1); if(u2===null||u2<0) continue; if(ff){ctx.moveTo(tx(u1),ty(u2));ff=false;}else ctx.lineTo(tx(u1),ty(u2));}
+  ctx.strokeStyle='#00e5a0'; ctx.lineWidth=2.5; ctx.stroke();
+
+  // \ucd95
+  ctx.strokeStyle='rgba(200,210,228,0.5)'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(tx(0),ty(0)); ctx.lineTo(tx(1.06),ty(0)); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(tx(0),ty(0)); ctx.lineTo(tx(0),ty(1.06)); ctx.stroke();
+  ctx.fillStyle='rgba(200,210,228,0.5)';
+  ctx.beginPath(); ctx.moveTo(tx(1.06),ty(0)); ctx.lineTo(tx(1.05),ty(-0.013)); ctx.lineTo(tx(1.05),ty(0.013)); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(tx(0),ty(1.06)); ctx.lineTo(tx(-0.013),ty(1.05)); ctx.lineTo(tx(0.013),ty(1.05)); ctx.fill();
+
+  ctx.fillStyle='#c8d0e0'; ctx.font='13px "IBM Plex Mono",monospace';
+  ctx.fillText('u\u2081', tx(1.04), ty(-0.05));
+  ctx.fillText('u\u2082', tx(-0.055), ty(1.04));
+
+  ctx.fillStyle='rgba(90,101,128,0.85)'; ctx.font='10px "IBM Plex Mono",monospace';
+  for(let v=0.2;v<=1.0;v+=0.2){
+    ctx.fillText(v.toFixed(1), tx(v)-10, ty(0)+16);
+    ctx.fillText(v.toFixed(1), tx(0)-30, ty(v)+4);
+  }
+
+  // d->f* \uc120
+  ctx.setLineDash([5,5]); ctx.strokeStyle='rgba(255,107,53,0.45)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(tx(d1),ty(d2)); ctx.lineTo(tx(sol.u1),ty(sol.u2)); ctx.stroke(); ctx.setLineDash([]);
+
+  // d \uc810\uc120
+  ctx.setLineDash([3,5]); ctx.strokeStyle='rgba(255,107,53,0.22)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(tx(d1),ty(d2)); ctx.lineTo(tx(d1),ty(0)); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(tx(d1),ty(d2)); ctx.lineTo(tx(0),ty(d2)); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // f* \uc810\uc120
+  ctx.setLineDash([3,5]); ctx.strokeStyle='rgba(0,229,160,0.28)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(tx(sol.u1),ty(sol.u2)); ctx.lineTo(tx(sol.u1),ty(0)); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(tx(sol.u1),ty(sol.u2)); ctx.lineTo(tx(0),ty(sol.u2)); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // \ubd88\uc77c\uce58\uc810
+  ctx.beginPath(); ctx.arc(tx(d1),ty(d2),7,0,Math.PI*2);
+  ctx.fillStyle='#ff6b35'; ctx.fill();
+  ctx.strokeStyle='#0a0c10'; ctx.lineWidth=2; ctx.stroke();
+  ctx.fillStyle='#ff6b35'; ctx.font='bold 11px "IBM Plex Mono",monospace';
+  ctx.fillText('d', tx(d1)+10, ty(d2)-6);
+
+  // \ub0b4\uc26c \ud574
+  ctx.beginPath(); ctx.arc(tx(sol.u1),ty(sol.u2),9,0,Math.PI*2);
+  ctx.fillStyle='#fff'; ctx.fill();
+  ctx.strokeStyle='#00e5a0'; ctx.lineWidth=2.5; ctx.stroke();
+  ctx.beginPath(); ctx.arc(tx(sol.u1),ty(sol.u2),3,0,Math.PI*2);
+  ctx.fillStyle='#00e5a0'; ctx.fill();
+  ctx.fillStyle='#00e5a0'; ctx.font='bold 10px "IBM Plex Mono",monospace';
+  ctx.fillText('f<sup>*</sup>(S,d)', tx(sol.u1)+12, ty(sol.u2)-8);
+
+  ctx.fillStyle='rgba(0,229,160,0.55)'; ctx.font='10px "IBM Plex Mono",monospace';
+  ctx.fillText(sol.u1.toFixed(2), tx(sol.u1)-10, ty(0)+28);
+  ctx.fillText(sol.u2.toFixed(2), tx(0)-38, ty(sol.u2)+4);
+
+  document.getElementById('rf1').textContent=sol.u1.toFixed(3);
+  document.getElementById('rf2').textContent=sol.u2.toFixed(3);
+  document.getElementById('rnp').textContent=sol.prod.toFixed(4);
+  document.getElementById('rsum').textContent=((sol.u1-d1)+(sol.u2-d2)).toFixed(3);
+}
+
+function bind(id,valId,key,scale){
+  const el=document.getElementById(id), vEl=document.getElementById(valId);
+  el.addEventListener('input',()=>{ state[key]=el.value/scale; vEl.textContent=state[key].toFixed(2); draw(); });
+}
+bind('sd1','vd1','d1',100);
+bind('sd2','vd2','d2',100);
+bind('salpha','valpha','alpha',100);
+
+document.querySelectorAll('.mode-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    state.mode=btn.dataset.mode;
+    draw();
+  });
+});
+
+draw();
+</script>
+</body>
+</html>
