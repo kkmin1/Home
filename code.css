@@ -366,6 +366,8 @@ body.sub-page-body {
 .code-page-wrapper {
   min-height: 100vh;
   height: auto !important;
+  min-width: 0 !important;
+  width: 100%;
   overflow: visible !important;
 }
 
@@ -374,25 +376,33 @@ body.sub-page-body {
 .code-container {
   height: auto !important;
   max-height: none !important;
+  min-width: 0 !important;
   min-height: 0 !important;
   max-width: 100%;
+  box-sizing: border-box;
   overflow: visible !important;
 }
 
 .code-container pre,
 .code-container pre[class*="language-"] {
+  display: block;
+  width: 100%;
   max-height: none !important;
   max-width: 100%;
+  box-sizing: border-box;
   white-space: pre-wrap !important;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-  overflow-x: auto !important;
+  word-break: break-all !important;
+  overflow-wrap: anywhere !important;
+  overflow-x: hidden !important;
   overflow-y: visible !important;
 }
 
 .code-container code,
-.code-container code[class*="language-"] {
+.code-container code[class*="language-"],
+.code-container pre[class*="language-"] code,
+.code-container pre[class*="language-"] code *,
+.code-container .token {
   white-space: pre-wrap !important;
-  word-break: break-word;
-  overflow-wrap: anywhere;
+  word-break: break-all !important;
+  overflow-wrap: anywhere !important;
 }
