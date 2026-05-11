@@ -375,11 +375,24 @@ body.sub-page-body {
   height: auto !important;
   max-height: none !important;
   min-height: 0 !important;
+  max-width: 100%;
   overflow: visible !important;
 }
 
 .code-container pre,
 .code-container pre[class*="language-"] {
   max-height: none !important;
+  max-width: 100%;
+  white-space: pre-wrap !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  overflow-x: auto !important;
   overflow-y: visible !important;
+}
+
+.code-container code,
+.code-container code[class*="language-"] {
+  white-space: pre-wrap !important;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
