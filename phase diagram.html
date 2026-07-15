@@ -31,6 +31,20 @@
       background: #ffffff;
       overflow: hidden;
   }
+
+  .correction {
+      background-color: #ffffcc;
+      padding: 10px;
+      border-left: 4px solid #ff9900;
+      margin: 10px 0;
+  }
+  .note {
+      background-color: #e6f3ff;
+      padding: 10px;
+      border-left: 4px solid #0066cc;
+      margin: 10px 0;
+      font-size: 0.95em;
+  }
   </style>
 
   <script type="text/javascript" async
@@ -47,7 +61,6 @@
       sagecell.makeSagecell({
         inputLocation: 'div.compute',
         template: sagecell.templates.minimal,
-        //               evalButtonText: 'Launch the Interactive Applet Now',
         autoeval: true
       });
     });
@@ -68,10 +81,12 @@
 
   <p> 위상도 분석은 미분방정식의 해를 구하기 어려울 때 기하학적으로 해의 의미를 해석하는데 유용하게 사용된다. 특히 경제학에서 그림의 형태를 보고 해의 수렴 또는 발산을 판정하는 데 사용된다. </p>
 
-  <p> 위상도는 수평축을 $ y(t) $, 수직축을 $ \dfrac{dy(t)}{dt} $로 놓고 $ y $와 $ \dfrac{dy}{dt} $의 관계를 표현한 것이다. </p>
+  <div class="note">
+    <strong>※ 위상도(Phase Diagram)의 정의:</strong> 수평축을 $ y(t) $, 수직축을 $ \dfrac{dy(t)}{dt} $로 놓고 $ y $와 $ \dfrac{dy}{dt} $의 관계를 표현한 그래프이다.
+  </div>
   <br>
 
-  <h3> 위상선(phase line)</h3>
+  <h3> 위상선(Phase Line)</h3>
   <p>위상선은 위상도에 $y$와 $ \dfrac{dy}{dt} $의 관계를 나타내는 선이다.</p>
 
   <p>값이 수평축 위에 있을 때, 즉 $ \dfrac{dy}{dt} > 0 $ 일 때 $ y $는 시간이 흐름에 따라 증가함을 의미. 그래프에서는 $ y $ 선상에 왼쪽에서 오른쪽으로 화살표를 표시한다. </p>
@@ -79,98 +94,102 @@
       <p>$ \dfrac{dy}{dt}= 0 $ 인 점을 임계점(critical point) 또는 균형점(equilibrium point)이라 한다. </p>
       <p> 특히 경제학에서는 이 점을 정상상태 균형(steady-state equilibrium)이라 한다. <input type="checkbox" id="cb4" /><label
           for="cb4"><sup></sup>
-        </label> <span><br><br>1.물리, 화학 등 다른 학문에서는 정상상태(steady-state)는 안정상태를 의미하는 것으로 쓰임. 경제학에서의 일정상태(steady-state)는 소득,
+        </label> <span><br><br>1. 물리, 화학 등 다른 학문에서는 정상상태(steady-state)는 안정상태를 의미하는 것으로 쓰임. 경제학에서의 일정상태(steady-state)는 소득,
           소비, 자본 등이 모두 일정한 속도로 성장하는 것을 의미한다. <br><br></span> </p>
 
-      <p> $ \dfrac{dy}{dt}= 0 $ 인 점에서 화살표가 모이면, 즉 $f(y^∗) < 0 $이면 해의 수렴을 의미하므로 안정상태 균형(stable equilibrium)이라 한다.</p>
-          <p>$ \dfrac{dy}{dt}= 0 $ 인 점에서 화살표가 모이지 않는다면, 즉 $f(y^∗) > 0 $이면 해의 발산을 의미하므로 해는 불안정 상태에 있음을 알 수 있다. </p>
-          <p>즉, 교차점에서 위상선의 기울기가 음(-)일 때 교차점은 안정적이고, 교차점에서 위상선의 기울기가 양(+)일 때 교차점은 불안정함을 알 수 있다. </p>
+      <div class="correction">
+        <strong>※ 수정된 안정성 판정 조건:</strong>
+        <p>$ \dfrac{dy}{dt}= 0 $ 인 점(균형점 $y^*$)에서 <strong>$f'(y^*) < 0$</strong>이면 해의 수렴을 의미하므로 <strong>안정상태 균형(stable equilibrium)</strong>이라 한다.</p>
+        <p>$ \dfrac{dy}{dt}= 0 $ 인 점에서 <strong>$f'(y^*) > 0$</strong>이면 해의 발산을 의미하므로 해는 <strong>불안정 상태</strong>에 있음을 알 수 있다. </p>
+        <p>즉, 교차점에서 위상선의 기울기가 음(-)일 때 교차점은 안정적이고, 교차점에서 위상선의 기울기가 양(+)일 때 교차점은 불안정함을 알 수 있다. </p>
+        <p><em>(참고: $f(y^*)$는 균형점에서 함수값으로 항상 0이므로, 안정성 판정에는 <strong>도함수 $f'(y^*)$</strong>를 사용해야 함)</em></p>
+      </div>
+      <br>
+
+
+      <h3> 위상도 예1 </h3>
+
+      <div style="text-align : center;">
+        <figure>
+          <p>$$
+            \begin{tikzpicture}[scale=2]
+            % draw the axis
+            \draw [thick, ->] (-1,0) -- (5,0);
+            \draw [thick, ->] (0,-1) -- (0,2);
+            % draw the curve
+            \draw [blue, thick, domain=0.5:3.5] plot (\x, {-(\x-1)*(\x-3)});
+            % draw the arrows
+            \draw [->, very thick, red] (0.9,-0.21) -- (0.8,-0.44);
+            \draw [->, very thick, red] (1.1,0.19) -- (1.2,0.36);
+            \draw [->, very thick, red] (1.5,0.75) -- (1.6,0.84);
+            \draw [->, very thick, red] (2.4,0.84) -- (2.5,0.75);
+            \draw [->, very thick, red] (2.8,0.36) -- (2.9,0.19);
+            \draw [->, very thick, red] (3.2,-0.44) -- (3.1,-0.21);
+            % draw the labels
+            \node at (-0.2,-0.2) {$0$};
+            \node at (0,2.3){$\dfrac{dy(t)}{dt}$};
+            \node at (5.2,0){$y(t)$};
+            \filldraw [gray] (1,0) circle (2pt);
+            \filldraw [gray] (3,0) circle (2pt);
+            \node at (1.2,-0.5){$y_{1}(t)^*$};
+            \node at (2.8,-0.5){$y_{2}(t)^*$};
+            \end{tikzpicture}
+            $$</p>
           <br>
+          <figcaption> (그림 1) 해의 수렴, 발산 </figcaption>
+        </figure>
+      </div>
+      <br>
 
+      <p>(그림 1)에서 보듯이 $y$의 증감을 화살표로 표시한다. 화살표의 방향은 위상선의 기울기와는 무관하다.</p>
 
-          <h3> 위상도 예1 </h3>
+      <p> (그림 1)에는 $y_{1}(t)^*$, $y_{2}(t)^*$, 2개의 균형점이 존재한다. </p>
 
-          <div style="text-align : center;">
-            <figure>
-              <p>$$
-                \begin{tikzpicture}[scale=2]
-                % draw the axis
-                \draw [thick, ->] (-1,0) -- (5,0);
-                \draw [thick, ->] (0,-1) -- (0,2);
-                % draw the curve
-                \draw [blue, thick, domain=0.5:3.5] plot (\x, {-(\x-1)*(\x-3)});
-                % draw the arrows
-                \draw [->, very thick, red] (0.9,-0.21) -- (0.8,-0.44);
-                \draw [->, very thick, red] (1.1,0.19) -- (1.2,0.36);
-                \draw [->, very thick, red] (1.5,0.75) -- (1.6,0.84);
-                \draw [->, very thick, red] (2.4,0.84) -- (2.5,0.75);
-                \draw [->, very thick, red] (2.8,0.36) -- (2.9,0.19);
-                \draw [->, very thick, red] (3.2,-0.44) -- (3.1,-0.21);
-                % draw the labels
-                \node at (-0.2,-0.2) {$0$};
-                \node at (0,2.3){$\dfrac{dy(t)}{dt}$};
-                \node at (5.2,0){$y(t)$};
-                \filldraw [gray] (1,0) circle (2pt);
-                \filldraw [gray] (3,0) circle (2pt);
-                \node at (1.2,-0.5){$y_{1}(t)^*$};
-                \node at (2.8,-0.5){$y_{2}(t)^*$};
-                \end{tikzpicture}
-                $$</p>
-              <br>
-              <figcaption> (그림 1) 해의 수렴, 발산 </figcaption>
-            </figure>
-          </div>
+      <p>(그림 1)에서 보듯이 교차점에서 위상선의 기울기가 음일 때 교차점은 안정적임을 알 수 있다. $y_{2}(t)^*$는 시간이 흘러도 변하지 않고 안정적이므로 안정상태 균형(stable
+        equilibrium)임을 알 수 있다. $y_{1}(t)^*$는 시간이 흐름에 따라 안정적이지 않고 미세한 왼쪽의 움직임은 왼쪽, 미세한 오른쪽의 움직임은 오른쪽으로 이동한다. 교차점에서
+        위상선의 기울기가 양일 때 교차점은 불안정하다. </p>
+      <br>
+
+      <h3> 위상도 예2 </h3>
+
+      <div style="text-align : center;">
+
+        <figure>
+          <p>$$
+            \begin{tikzpicture}[scale=2]
+            % draw the axis
+            \draw [thick, ->] (-1,0) -- (4,0);
+            \draw [thick, ->] (0,-1) -- (0,2.5);
+            % draw the curve
+            \draw [blue, thick, domain=0.7:3.3] plot (\x, {(\x-2)*(\x-2)});
+            % draw the arrows
+            \draw [->, very thick, red] (0.9,1.21) -- (1,1);
+            \draw [->, very thick, red] (1.5,0.25) -- (1.6,0.16);
+            \draw [->, very thick, red] (2.5,0.25) -- (2.6,0.36);
+            \draw [->, very thick, red] (3,1) -- (3.1,1.21);
+
+            % draw the labels
+            \node at (-0.2,-0.2) {$0$};
+            \node at (0,2.8){$\dfrac{dy(t)}{dt}$};
+            \node at (4.2,0){$y(t)$};
+            \filldraw [gray] (2,0) circle (2pt);
+            \node at (2,-0.3){$y(t)^*$};
+
+            \end{tikzpicture}
+            $$</p>
           <br>
+          <figcaption> (그림 2) 해가 안장점인 경우 </figcaption>
+        </figure>
+      </div>
+      <br>
 
-          <p>(그림 1)에서 보듯이 $y$의 증감을 화살표로 표시한다. 화살표의 방향은 위상선의 기울기와는 무관하다.</p>
+      <p> $ y(t) < y^∗ $ 일 때 $ \dfrac{dy}{dt}> 0 $, $ y(t) > y^∗ $ 일 때 $ \dfrac{dy}{dt} > 0 $
+          따라서 $ y^∗ $는 불안정함을 알 수 있다. 이와 같이 접하는 경우의 해를 안장점(saddle point)라고 한다. 안장점도 불안정한 균형이다. </p>
+      <br>
 
-          <p> (그림 1)에는 $y_{1}(t)^*$, $y_{2}(t)^*$, 2개의 균형점이 존재한다. </p>
-
-          <p>(그림 1)에서 보듯이 교차점에서 위상선의 기울기가 음일 때 교차점은 안정적임을 알 수 있다. $y_{2}(t)^*$는 시간이 흘러도 변하지 않고 안정적이므로 안정상태 균형(stable
-            equilibrium)임을 알 수 있다. $y_{1}(t)^*$는 시간이 흐름에 따라 안정적이지 않고 미세한 왼쪽의 움직임은 왼쪽, 미세한 오른쪽의 움직임은 오른쪽으로 이동한다. 교차점에서
-            위상선의 기울기가 양일 때 교차점은 안정적이지 않다. </p>
-          <br>
-
-          <h3> 위상도 예2 </h3>
-
-          <div style="text-align : center;">
-
-            <figure>
-              <p>$$
-                \begin{tikzpicture}[scale=2]
-                % draw the axis
-                \draw [thick, ->] (-1,0) -- (4,0);
-                \draw [thick, ->] (0,-1) -- (0,2.5);
-                % draw the curve
-                \draw [blue, thick, domain=0.7:3.3] plot (\x, {(\x-2)*(\x-2)});
-                % draw the arrows
-                \draw [->, very thick, red] (0.9,1.21) -- (1,1);
-                \draw [->, very thick, red] (1.5,0.25) -- (1.6,0.16);
-                \draw [->, very thick, red] (2.5,0.25) -- (2.6,0.36);
-                \draw [->, very thick, red] (3,1) -- (3.1,1.21);
-
-                % draw the labels
-                \node at (-0.2,-0.2) {$0$};
-                \node at (0,2.8){$\dfrac{dy(t)}{dt}$};
-                \node at (4.2,0){$y(t)$};
-                \filldraw [gray] (2,0) circle (2pt);
-                \node at (2,-0.3){$y(t)^*$};
-
-                \end{tikzpicture}
-                $$</p>
-              <br>
-              <figcaption> (그림 2) 해가 안장점인 경우 </figcaption>
-            </figure>
-          </div>
-          <br>
-
-          <p> $ y(t) < y^∗ $ 일 때 $ \dfrac{dy}{dt}> 0 $, $ y(t) > y^∗ $ 일 때 $ \dfrac{dy}{dt} > 0 $
-              따라서 $ y^∗ $는 불안정함을 알 수 있다. 이와 같이 접하는 경우의 해를 안장점(saddle point)라고 한다. 안장점도 불안정한 균형이다. </p>
-          <br>
-
-          <h3 class="inline"> 솔로우 성장모형 </h3><input type="checkbox" id="cb1" /><label for="cb1"><sup></sup>
-          </label><span><br><br> '솔로우 성장모형(Solow growth model)'에 대한 자세한 생략하고 여기서는 결론부분만 간단히
-            설명한다.<br><br></span></p>
+      <h3 class="inline"> 솔로우 성장모형 </h3><input type="checkbox" id="cb1" /><label for="cb1"><sup></sup>
+      </label><span><br><br> '솔로우 성장모형(Solow growth model)'에 대한 자세한 내용은 생략하고 여기서는 결론부분만 간단히
+        설명한다.<br><br></span></p>
       <p> 솔로우 성장모형은 다음과 같다.
 
       <p> 총생산함수 $ Y = F(K,L) $, $ K $는 자본, $ L $은 노동 </p>
@@ -179,7 +198,13 @@
         sy(k)-\lambda k $이다.</p>
       <p> 이는 비선형 미분방정식이므로 해를 도출하기가 쉽지않다. 해를 구하지 않고도 솔로우 모형의 해가 수렴 또는 발산하는지 알기위해
         이를 그림으로 표현하면 (그림 3)과 같다.</p>
-      <p>(그림 3)에서 알 수 있듯이 최적 자본량 $k^*$는 안정해(stable equilibrium)임을 알 수 있다.</p>
+      
+      <div class="note">
+        <strong>※ 그래프 해석:</strong> (그림 3)에서 $sy(k)$는 저축에 의한 자본 증가분, $\lambda k$는 노동증가에 따른 자본 희석분을 나타낸다.<br>
+        $sy(k) - \lambda k$가 양수인 구간에서는 $k$가 증가하고, 음수인 구간에서는 $k$가 감소한다.<br>
+        두 곡선의 교차점 $k^*$에서 $\dfrac{dk}{dt}=0$이 되며, 이 점이 정상상태 균형점이다.<br>
+        <strong>$k^*$ 좌측에서는 $\dfrac{dk}{dt} > 0$, 우측에서는 $\dfrac{dk}{dt} < 0$이므로 $k^*$는 안정적이다.</strong>
+      </div>
 
       <div style="text-align : center;">
         <figure>
@@ -191,6 +216,7 @@
             \draw [blue, thick] (-1,0.5) -- (4,4);
             \draw [dashed] (3.2,0.5) -- (3.2,4);
             \draw [orange,thick] (-1,0.5) .. controls (1,3) and (3,3.5) .. (4,3.6);
+            \draw [green, thick, domain=-0.8:4.2] plot (\x, {-0.7*(\x-3.2)^2+1.8});
             \filldraw [gray] (3.2,0.5) circle (2pt);
 
             \begin{scope}[smooth,postaction={decorate},decoration={ markings, mark=at position 0.2 with {\arrow{>}},
@@ -200,7 +226,7 @@
               (5.5,0.5){$k(t)$}; \node at (3.2,0){$k(t)^*$}; \node at (1.7,1.3){$sy(k)-\lambda k$}; \node at
               (4.2,4.2){$\lambda k$}; \node at (4.5,3.6){$sy(k)$}; \end{tikzpicture} $$</p>
               <br>
-              <figcaption> (그림 3) 솔로우 성장모형 </figcaption>
+              <figcaption> (그림 3) 솔로우 성장모형 - $sy(k)$와 $\lambda k$의 교차점 $k^*$에서 안정적 균형 </figcaption>
         </figure>
       </div>
       <br>
@@ -215,21 +241,39 @@
 
       <h2> 연립미분방정식인 경우 (상태변수가 2 이상)</h2>
       <br>
+      
+      <div class="note">
+        <strong>※ 위상도와 상변화도의 구분:</strong><br>
+        - <strong>위상도(Phase Diagram)</strong>: $y$와 $\dfrac{dy}{dt}$의 관계를 보여주는 2차원 그래프 (단일 변수)<br>
+        - <strong>상변화도(Phase Portrait)</strong>: 상태공간($x$-$y$ 평면)에서 벡터장과 궤적을 보여주는 그래프 (다변수 시스템)<br>
+        이 문서에서는 두 개념을 모두 다루며, 문맥에 따라 구분하여 사용한다.
+      </div>
+
       <p> 다음의 연립미분방정식을 고려한다. </p>
-      <p> $ \mathbf y'(t) = \mathbf A(t) \mathbf y(t) + \mathbf v(t)$ </p>
-      <p> 위상도 분석은 $ \mathbf A $가 2×2 행렬인 경우에 대해서만 가능하다. 그 이상인 경우는 그림으로
+      
+      <div class="correction">
+        <strong>※ 수정:</strong> 선형 시불변 시스템의 경우 $\mathbf{A}$는 상수 행렬이다.
+        <p> $ \mathbf{y}'(t) = \mathbf{A} \mathbf{y}(t) + \mathbf{v} $ </p>
+      </div>
+      
+      <p> 위상도 분석은 $ \mathbf{A} $가 2×2 행렬인 경우에 대해서만 가능하다. 그 이상인 경우는 그림으로
         분석하기 곤란하기 때문이다. </p>
-      <p> $ \mathbf y'(t) = 0 $인 곡선을 등고선(等高線, zero-growth isoclines)이라 한다.
+      <p> $ \mathbf{y}'(t) = 0 $인 곡선을 등고선(等高線, zero-growth isoclines)이라 한다.
         등고선은 함수의 기울기가 항상 같은 점을 모은 선을 의미한다. 이 경우는 예를 들어 설명하는 것이 편리하다.</p>
       <br>
 
       <h3> 예1 </h3>
 
-      <p> $x$, $y$는 시간 t의 함수, $x(t), y(t)$ </p>
+      <p> $x$, $y$는 시간 t의 함수, $x(t), y(t) $</p>
 
       <p> $ \dfrac{dx}{dt} = -2x $</p>
       <p> $ \dfrac{dy}{dt} = 2x - 4y +32 $</p>
       <br>
+
+      <div class="note">
+        <strong>※ 경제학적 비음조건(Non-negativity):</strong> 이 예제는 수학적 예제이므로 $x$와 $y$가 음수일 수도 있지만,<br>
+        경제학 모형에서는 $x$와 $y$가 자본, 생산량 등과 같은 실물 변수일 경우 <strong>$x \ge 0, y \ge 0$</strong>의 조건이 추가되어야 한다.
+      </div>
 
       <p id="min1">[풀이]</p>
 
@@ -239,21 +283,21 @@
       <p> 이 두 연립방정식의 해는 ①, ②를 동시에 만족시켜야 한다.</p>
       <p>따라서 균형점은 $(0, 8)$ 이 된다.</p>
       <p>이제 이 해의 수렴, 발산 여부를 판정해 보자.</p>
-      <p> 이 연립미분방정식의 $\textrm{A}$ 행렬은 </p>
+      <p> 이 연립미분방정식의 $\mathbf{A}$ 행렬은 </p>
       <p>
         $
         \mathbf{A} =
-        \left( \begin{array}{ccc}
+        \left( \begin{array}{cc}
         -2 & 0 \\
         2 & -4 \\
         \end{array} \right)
         $
       </p>
 
-      <p> 고유근의 특성방정식이 $ \Pi(\lambda) = \lambda^2 - \textrm{tr(A)}\lambda + \textrm{det(A)} $ 일 때 </p>
-      <p> $ \textrm{tr(A)} = -6, \textrm{det(A)} = 8 $ 에서 </p>
-      <p> 근의 판정은 $ \textrm{tr(A)}^2 - 4\textrm{det(A)} = 36-32 > 0 $, 따라서 두 개의 실근이다. </p>
-      <p> $ \textrm{det(A)} = 8 > 0$ 이므로 근은 부호가 같고 $ \textrm{tr(A)} = -6 < 0 $ 이므로 두 근은 모두 음수이다. </p>
+      <p> 고유근의 특성방정식이 $ \Pi(\lambda) = \lambda^2 - \text{tr(A)}\lambda + \text{det(A)} $ 일 때 </p>
+      <p> $ \text{tr(A)} = -6, \text{det(A)} = 8 $ 에서 </p>
+      <p> 근의 판정은 $ \text{tr(A)}^2 - 4\text{det(A)} = 36-32 > 0 $, 따라서 두 개의 실근이다. </p>
+      <p> $ \text{det(A)} = 8 > 0$ 이므로 근은 부호가 같고 $ \text{tr(A)} = -6 < 0 $ 이므로 두 근은 모두 음수이다. </p>
           <p>따라서 해의 경로는 균형점 $(0, 8)$ 을 향해 수렴함을 알 수 있다.</p>
 
           <div style="display: flex; justify-content: center; gap: 20px;">
@@ -512,7 +556,7 @@
                     $$</p>
                   <br>
                   <figcaption>
-                    (그림 7) 위상도
+                    (그림 7) 위상도 (상변화도)
                   </figcaption>
                 </figure>
               </div>
@@ -521,12 +565,12 @@
               <p>기준선에서 화살표의 방향이 바뀌는 점에 유의하면서 해의 경로를 그리면 (그림 7)의 굵은 초록색 화살표의 모양이 된다. 초록색 화살표는 여러 가지 초기값에 대응하는 해의 경로를 표시한
                 것이다. </p>
 
-              <p> 임의의 점에서 시작하는 벡터들의 모음인 상변화도(phase portraiy)를 그려보면 (그림 8)과 같다. 상변화도란 각각의 점에서 변화를 의미하는 벡터필드(vector
+              <p> 임의의 점에서 시작하는 벡터들의 모음인 <strong>상변화도(phase portrait)</strong>를 그려보면 (그림 8)과 같다. 상변화도란 각각의 점에서 변화를 의미하는 벡터필드(vector
                 field)들의 모음이다.</p>
 
               <div style="text-align : center;">
                 <img src="phase-diagram2.bmp"><br>
-                (그림 8) 상변화도
+                (그림 8) 상변화도 (Phase Portrait)
               </div>
 
               <div class="compute">
@@ -580,10 +624,10 @@ def add_arrow_to_line2D(
     return arrows
 
 
-# Define a function for the system of ODEs
+# Define the system of ODEs
 def f(y, t):
-    y1, y2 = y # unpack variables
-    dydt = [-2*y1, 2*y1-4*y2+32] # define derivatives
+    y1, y2 = y  # unpack variables
+    dydt = [-2*y1, 2*y1-4*y2+32]  # define the system of ODEs
     return dydt
 
 # Define a grid of points for plotting
@@ -634,7 +678,7 @@ plt.show()
           </script>
               </div>
 
-              <h3> 예2: local stock polution model </h3>
+              <h3> 예2: local stock pollution model </h3>
 
               <p> $ \dfrac{dx}{dt} = 0.5x + 0.5y - 15 $</p>
               <p> $ \dfrac{dy}{dt} = x - 0.5y $</p>
@@ -642,9 +686,14 @@ plt.show()
               <p> $ y(t) $ : 대기오염의 규모</p>
               <p> $ x(t) $ : 배출가스의 양</p>
 
+              <div class="note">
+                <strong>※ 경제학적 비음조건(Non-negativity):</strong> 배출가스 $x(t)$와 대기오염 $y(t)$는 모두 <strong>$x \ge 0, y \ge 0$</strong>이어야 한다.<br>
+                따라서 (그림 9)~(그림 12)에서 음의 영역은 경제학적으로 의미가 없으며, 양의 영역만 고려해야 한다.
+              </div>
+
               <p id="min1">[풀이]</p>
               <p>정상상태(steady state)에서 상태변수들은 시간에 따라 변하지 않으므로</p>
-              <p> $ \dfrac{dy}{dt} = 0 $, $ \dfrac{dx}{dt} = 0 $ 인 선들을 그리면 (그림 6a), (그림 6b)와 같다.</p>
+              <p> $ \dfrac{dy}{dt} = 0 $, $ \dfrac{dx}{dt} = 0 $ 인 선들을 그리면 (그림 9), (그림 10)과 같다.</p>
               <p> $ \dfrac{dy}{dt} = x - 0.5y \Longrightarrow y = 2x $ .................... ①</p>
               <p> $ \dfrac{dx}{dt} = 0.5x + 0.5y - 15 \Longrightarrow y = -x + 30 $ ................② </p>
 
@@ -652,21 +701,25 @@ plt.show()
               <p> 이 두 연립방정식의 해는 ①, ②를 동시에 만족시켜야 한다.</p>
               <p>따라서 균형점은 $(10, 20)$ 이 된다.</p>
 
-              <p> 이 연립미분방정식의 $\textrm{A}$ 행렬은 </p>
-              <p>
-                $
-                \mathbf{A} =
-                \left( \begin{array}{ccc}
-                \dfrac{1}{2} & \dfrac{1}{2} \\
-                1 & -\dfrac{1}{2} \\
-                \end{array} \right)
-                $
-              </p>
+              <p> 이 연립미분방정식의 $\mathbf{A}$ 행렬은 </p>
+              
+              <div class="correction">
+                <strong>※ 수정:</strong> 행렬을 2×2 형식으로 수정
+                <p>
+                  $
+                  \mathbf{A} =
+                  \left( \begin{array}{cc}
+                  \dfrac{1}{2} & \dfrac{1}{2} \\
+                  1 & -\dfrac{1}{2} \\
+                  \end{array} \right)
+                  $
+                </p>
+              </div>
 
-              <p> $ \textrm{tr(A)} = 0, \textrm{det(A)} = -\dfrac{3}{4} $ 에서 </p>
-              <p> 근의 판정은 $ \textrm{tr(A)}^2 - 4\textrm{det(A)} = 3 > 0 $, 따라서 두 개의 실근이다. </p>
-              <p> $ \textrm{det(A)} = -\dfrac{3}{4} < 0 $ 이므로 근은 부호가 다르고 $ \textrm{tr(A)}=0 $ 이므로 두 근은 절대값이 같다. </p>
-                  <p>따라서 해의 경로는 균형점 $(10, 20)$ 에서 한쪽은 수렴, 한 쪽은 발산하는데 이런 점을 안장점이라고 한다. </p>
+              <p> $ \text{tr(A)} = 0, \text{det(A)} = -\dfrac{3}{4} $ 에서 </p>
+              <p> 근의 판정은 $ \text{tr(A)}^2 - 4\text{det(A)} = 3 > 0 $, 따라서 두 개의 실근이다. </p>
+              <p> $ \text{det(A)} = -\dfrac{3}{4} < 0 $ 이므로 근은 부호가 다르고 $ \text{tr(A)}=0 $ 이므로 두 근은 절대값이 같다. </p>
+                  <p>따라서 해의 경로는 균형점 $(10, 20)$ 에서 <strong>안정 다양체(stable manifold)</strong>와 <strong>불안정 다양체(unstable manifold)</strong>를 가지며, 이러한 점을 <strong>안장점(saddle point)</strong>이라고 한다. </p>
                   <p>이제 좀 더 자세한 해의 경로를 그리면 다음과 같다.</p>
 
                   <div style="display: flex; justify-content: center; gap: 20px;">
@@ -760,7 +813,7 @@ plt.show()
                           for="cb6"><sup></sup>
                         </label><span><br><br>예를 들어 (30, 30) 은 y = -x + 30의 우상쪽에 있는 점이다. x = 30, y = 30을 y = -x + 30에
                           대입하면 30 > 0, 따라서 y > -x + 30<br><br></span>, </p>
-                      <p> $ y > -x + 30 $ 이므로 ② 에서 $ \dfrac{dy}{dt} > 0 $, 즉 시간이 지남에 따라 x는 증가한다.</p>
+                      <p> $ y > -x + 30 $ 이므로 ② 에서 $ \dfrac{dx}{dt} > 0 $, 즉 시간이 지남에 따라 x는 증가한다.</p>
 
                       <p> $ y = -x + 30 $ 의 좌하쪽에 있는 점들은 y
                         < -x + 30<input type="checkbox" id="cb17" /><label for="cb17"><sup></sup>
@@ -768,11 +821,11 @@ plt.show()
                           < 30, 따라서 y < -x + 30<br><br></span>,
                       </p>
 
-                      <p> $ y < -x + 30 $ 이므로 ②에서 $ \dfrac{dy}{dt} < 0 $, 즉 시간이 지남에 따라 x는 감소한다.</p>
+                      <p> $ y < -x + 30 $ 이므로 ②에서 $ \dfrac{dx}{dt} < 0 $, 즉 시간이 지남에 따라 x는 감소한다.</p>
                           <p> $ \dfrac{dx}{dt} = 0 \Longrightarrow y = -x + 30 $ 이므로 $y = -x + 30 $ 선상에서는 x 변화는 없고 y 변화만
                             있으므로 수직으로 변동 </p>
 
-                          <p> 두 그림을 결합하여 그리면 다음과 같다. 두 개의 직선이 이루는 부분을 4 구역으로 구분한 다음 앞에서 구한 화살표의 방향을 합치면 (그림 7) 과 같다.
+                          <p> 두 그림을 결합하여 그리면 다음과 같다. 두 개의 직선이 이루는 부분을 4 구역으로 구분한 다음 앞에서 구한 화살표의 방향을 합치면 (그림 11) 과 같다.
                           </p>
 
                           <div style="text-align : center;">
@@ -780,10 +833,15 @@ plt.show()
                             (그림 11) $ \dfrac{dy}{dt} = x - 0.5y $ , $ \dfrac{dx}{dt} = 0.5x + 0.5y - 15 $ 위상도
                           </div>
                           <br>
+                          
+                          <div class="correction">
+                            <strong>※ 수정된 그림 참조:</strong> 아래 문단에서 "(그림 11)의 상하 분면에서는..."으로 수정
+                          </div>
+                          
                           <p>(그림 11)에서 녹색 화살표는 각 수직, 수평 화살표의 합인 벡터의 방향을 의미하며 (그림 11)에는 표시되지 않았지만 각 구간마다 수많은 녹색 벡터들이
                             존재한다. 고동색 화살표는 이러한 고동색 벡터들의 흐름을 나타낸다. </p>
                           <p>두 직선이 교차하는 점 (10, 20)이 정상상태(steady state)이다. 그러나 이 점은 안정적이지 않다.</p>
-                          <p> (그림 7)의 상하 분면에서는 (10, 20)으로 접근하지만 좌우 분면에서는 (10, 20)으로 발산함을 알 수 있다. 즉 임의의 점에서 (10, 20)로
+                          <p> <strong>(그림 11)</strong>의 상하 분면에서는 (10, 20)으로 접근하지만 좌우 분면에서는 (10, 20)으로부터 발산함을 알 수 있다. 즉 임의의 점에서 (10, 20)로
                             접근하려 하면 화살표의 방향에 따라 외부로 발산함을 알 수 있다. 따라서 (10, 20)은 안정상태(stable state)가 아님을 알 수 있다. 이러한 점을
                             안장점(鞍裝點, saddle point)이라 하고 안장점으로 이루어진 경로를 안장경로(saddle path)라 부른다. </p>
 
@@ -791,7 +849,7 @@ plt.show()
 
                           <div style="text-align : center;">
                             <img src="phase-diagram4.bmp"><br>
-                            (그림 12) $ \dfrac{dy}{dt} = x - 0.5y $ , $ \dfrac{dx}{dt} = 0.5x + 0.5y - 15 $ 상변화도
+                            (그림 12) $ \dfrac{dy}{dt} = x - 0.5y $ , $ \dfrac{dx}{dt} = 0.5x + 0.5y - 15 $ 상변화도 (Phase Portrait)
                           </div>
                           <br>
 
@@ -799,12 +857,22 @@ plt.show()
 
                           <h2>위상도 분석의 강점과 제약</h2>
                           <p>
-                            위상도는 시간축이 없으므로 균형에 이르기까지 얼마나 시간이 걸리는지를 알 수 없다.
-                            위상도는 변수들의 동시 움직임을 나타내므로, 토빈의 q 이론에서 보듯이 자본량(capital stock)이 높을 때 자본의 가격은 낮다. 또는 그 역도 성립.(사소한
-                            것이지만 기본 성장모형에서는 나타나지 않음)
-                            조정 속도는 균형경로의 모양에 따라 다를 수 있다. 가파른 경로는 빠른 수렴을, 완만한 곡선은 느린 조정속도를 의미한다.
+                            <strong>강점:</strong>
+                            <ul>
+                              <li>시간축이 없으므로 변수들 간의 동시적 움직임을 한눈에 파악할 수 있음</li>
+                              <li>토빈의 q 이론에서 보듯이, 자본량(capital stock)이 높을 때 자본의 가격은 낮다는 관계를 시각적으로 표현 가능</li>
+                              <li>해석적 해를 구하기 어려운 비선형 시스템의 동태적 특성을 파악하는 데 유용</li>
+                            </ul>
+                          </p>
+                          <p>
+                            <strong>제약점:</strong>
+                            <ul>
+                              <li>시간축이 없으므로 균형에 이르기까지 얼마나 시간이 걸리는지를 알 수 없음</li>
+                              <li>2차원(변수 2개)까지만 시각화 가능 (3변수 이상은 그림으로 표현 곤란)</li>
+                              <li>조정 속도는 균형경로의 모양에 따라 다를 수 있음. 가파른 경로는 빠른 수렴을, 완만한 곡선은 느린 조정속도를 의미하지만 정량적 측정은 어려움</li>
+                              <li>선형 시스템에 국한되지 않지만, 비선형 시스템에서는 국소적 분석(local analysis)에 그칠 수 있음</li>
+                            </ul>
                           </p>
 
 </body>
-
 </html>
