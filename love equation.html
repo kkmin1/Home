@@ -1,56 +1,216 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="blog.css">
   <title>사랑방정식 (Love Equation)</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
+  <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-      extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
-      jax: ["input/TeX", "output/HTML-CSS"],
-      tex2jax:
-      {
-        inlineMath: [['$', '$'], ["\\(", "\\)"]],
-        displayMath: [['$$', '$$'], ["\\[", "\\]"]],
+      tex2jax: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
       },
       "HTML-CSS": { availableFonts: ["TeX"] }
     });
   </script>
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <style>
+    .note, .warning, .insight { margin:1.2em 0; padding:1em 1.2em; border-radius:6px; }
+    .note { background:#eef6ff; border-left:5px solid #3977c3; }
+    .warning { background:#fff6e5; border-left:5px solid #d88916; }
+    .insight { background:#eef9f0; border-left:5px solid #3b8d4d; }
+    .equation-box { margin:1em 0; padding:.8em 1em; background:#f7f7f7; border:1px solid #ddd; }
+    table { border-collapse:collapse; width:100%; margin:1em 0; }
+    th, td { border:1px solid #bbb; padding:.65em; vertical-align:top; }
+    th { background:#f1f1f1; }
+    .references li { margin-bottom:.65em; }
+  </style>
 </head>
 
 <body class="sub-page-body">
-  <div id="min2">
-    <h1>사랑방정식 (Love Equation)</h1>
+<div id="min2">
+  <h1>사랑방정식 (Love Equation)</h1>
 
-    <h2>1. 개요</h2>
-    <p>사랑방정식은 수학자 스티븐 스트로가츠(Steven Strogatz)가 1988년에 발표한 "Love Affairs and Differential Equations" 논문에서 시작되었습니다. 이는 인간의
-      감정 역학을 미분방정식 시스템으로 모델링하여, 시간에 따른 사랑의 온도가 어떻게 변하는지를 분석합니다.</p>
+  <h2>1. 출발점: 스트로가츠의 교육용 사고실험</h2>
+  <p>스티븐 스트로가츠(Steven H. Strogatz)는 1988년 <em>Mathematics Magazine</em>에
+    「Love Affairs and Differential Equations」를 발표했다. 그러나 이 글은 사랑을 실제 자료로 검증한 심리학 연구가 아니라,
+    대학생에게 2차원 선형 미분방정식과 조화진동을 흥미롭게 가르치기 위한 <strong>한 쪽짜리 교육용 제안</strong>이었다.
+    당시 소속도 코넬대학교가 아니라 하버드대학교였다.</p>
+  <p>이 아이디어의 가치는 “사랑을 계산했다”는 데 있지 않다. 두 사람의 감정이 서로 원인이자 결과가 되는
+    <strong>피드백 시스템</strong>임을 가장 단순한 수학 언어로 표현했다는 데 있다. 따라서 이 모형은 인간관계의 사실적 복제라기보다
+    동적계의 안정·불안정·진동을 이해하기 위한 사고실험으로 읽어야 한다.</p>
 
-    <h2>2. 로미오와 줄리엣 모형</h2>
-    <p>가장 기본적인 선형 모형은 로미오($R$)와 줄리엣($J$)의 감정 변화를 다음과 같은 연립 미분방정식으로 표현합니다.</p>
-    <p>$$\frac{dR}{dt} = aR + bJ$$</p>
-    <p>$$\frac{dJ}{dt} = cR + dJ$$</p>
-    <p>여기서 $a, b, c, d$는 각 인물의 성격과 상대의 반응에 대한 민감도를 나타내는 파라미터입니다. $a$는 자신의 감정에 대한 반응, $b$는 상대방의 감정에 대한 반응을 의미합니다.</p>
-
-    <h2>3. 연애 스타일의 수학적 분류</h2>
-    <p>파라미터의 부호와 크기에 따라 다양한 연애 스타일이 정의됩니다.</p>
-    <ul>
-      <li><strong>Eager Beaver (열정파):</strong> $a>0, b>0$. 자신의 사랑이 깊어질수록 더 뜨거워지고, 상대가 사랑해줄수록 더 깊게 빠집니다.</li>
-      <li><strong>Narcissistic Nerd (자기도취형):</strong> $a>0, b<0$. 자신의 감정에는 충실하지만, 상대가 다가올수록 밀어내는 스타일입니다.</li>
-      <li><strong>Cautious Lover (신중파):</strong> $a<0, b>0$. 자신의 감정은 절제하려 하지만, 상대방의 따뜻한 반응에는 마음이 열립니다.</li>
-      <li><strong>Hermit (은둔자):</strong> $a<0, b<0$. 자신의 감정도 식히고 상대방이 다가오는 것도 부담스러워합니다.</li>
-    </ul>
-
-    <h2>4. 포식자-피식자 모형과의 유사성</h2>
-    <p>로트카-볼테라(Lotka-Volterra)의 포식자-피식자 모형은 생태계의 인구 변화를 묘사하지만, 이를 사랑에 적용하면 한쪽의 헌신(피식자)이 다른 쪽의 사랑(포식자)을 키우고, 너무 커진 사랑이
-      부담이 되어 다시 헌신이 줄어드는 순환 구조를 설명할 수 있습니다.</p>
-    <p>비선형 모형에서는 연애의 감정이 단순한 수렴을 넘어 '복잡한 주기성'이나 '카오스(Chaos)'적 거동을 보일 수 있음을 시사합니다. 이는 왜 연애가 때로는 예측 불가능하고 요동치는지에 대한 수학적
-      통찰을 제공합니다.</p>
-
-    <br>
-    <a href="hum-math.html">뒤로 가기</a>
+  <div class="warning">
+    <strong>해석상의 주의:</strong> 아래에서 $R$과 $J$는 관측 가능한 자연단위가 아니다. 양수는 애정, 음수는 반감이라는 식으로
+    부호와 상대적 크기를 부여한 추상적 상태변수이다. 따라서 “사랑이 2배” 같은 비율척도 해석은 정당화되지 않는다.
   </div>
-</body>
 
+  <h2>2. 로미오와 줄리엣 선형 모형</h2>
+  <p>로미오가 줄리엣에게 느끼는 감정을 $R(t)$, 줄리엣이 로미오에게 느끼는 감정을 $J(t)$라 하면 가장 일반적인 2변수 선형 동차모형은</p>
+  <div class="equation-box">
+    $$\frac{dR}{dt}=aR+bJ, \qquad \frac{dJ}{dt}=cR+dJ$$
+  </div>
+  <p>$a,d$는 자신의 현재 감정에 대한 자기 피드백, $b,c$는 상대방의 감정에 대한 교차 피드백이다.
+    예컨대 $b&gt;0$이면 로미오는 줄리엣의 호감에 호감으로 답하고, $b&lt;0$이면 상대가 다가올수록 물러난다.</p>
+
+  <h3>2.1 안정성 판정</h3>
+  <p>행렬 $A=\begin{pmatrix}a&amp;b\\c&amp;d\end{pmatrix}$라 하면 $\mathbf{x}'=A\mathbf{x}$이고,
+    특성방정식은 다음과 같다.</p>
+  <div class="equation-box">
+    $$\lambda^2-\operatorname{tr}(A)\lambda+\det(A)=0,$$
+    $$\operatorname{tr}(A)=a+d, \qquad \det(A)=ad-bc.$$
+  </div>
+  <table>
+    <thead><tr><th>조건</th><th>동학</th><th>관계의 은유적 해석</th></tr></thead>
+    <tbody>
+      <tr><td>$\det(A)&lt;0$</td><td>안장점</td><td>특수한 경로를 제외하면 한 방향으로 감정이 폭주</td></tr>
+      <tr><td>$\det(A)&gt;0$, $\operatorname{tr}(A)&lt;0$</td><td>안정 절점 또는 안정 나선</td><td>감정이 0으로 약화되며, 복소근이면 진동하면서 약화</td></tr>
+      <tr><td>$\det(A)&gt;0$, $\operatorname{tr}(A)&gt;0$</td><td>불안정 절점 또는 불안정 나선</td><td>감정의 진폭이 무한히 커지는 수학적 폭주</td></tr>
+      <tr><td>$\operatorname{tr}(A)=0$, $\det(A)&gt;0$</td><td>선형 중심 가능</td><td>사랑과 반감이 감쇠 없이 반복되는 이상적 순환</td></tr>
+    </tbody>
+  </table>
+  <p>여기서 안정하다는 말은 “행복한 관계”를 뜻하지 않는다. 이 동차모형의 유일한 일반적 균형은 $(R,J)=(0,0)$이므로,
+    점근안정은 두 사람의 감정이 모두 무관심으로 사라진다는 뜻이다. 반대로 수학적 불안정이 반드시 현실의 불행을 뜻하는 것도 아니다.
+    선형모형에서 발산은 대개 모형에 포화장치가 없다는 신호이다.</p>
+
+  <h3>2.2 특별한 로미오–줄리엣 예</h3>
+  <p>스트로가츠가 제시한 유명한 예는 로미오가 줄리엣의 사랑에 끌리지만($b&gt;0$), 줄리엣은 로미오의 사랑에 반발하는($c&lt;0$) 경우이다.
+    자기 피드백을 0으로 단순화하고 $bc&lt;0$이면</p>
+  <div class="equation-box">
+    $$R''=bcR$$
+  </div>
+  <p>가 되어 조화진동이 나타난다. 한 사람이 사랑할 때 다른 사람은 물러나고, 역할이 뒤바뀌면서 감정이 순환한다.
+    이것은 “실제 연애가 반드시 주기적”이라는 주장이 아니라 1계 연립방정식과 2계 진동방정식의 관계를 보여주는 교육적 비유이다.</p>
+
+  <h2>3. 연애 성향의 부호 분류</h2>
+  <p>각 개인의 반응식 $R'=aR+bJ$에서 $(a,b)$의 부호를 이용하면 다음과 같은 성향을 만들 수 있다.</p>
+  <ul>
+    <li><strong>Eager Beaver:</strong> $a&gt;0,b&gt;0$. 자신의 감정과 상대의 호감이 모두 감정을 증폭한다.</li>
+    <li><strong>Narcissistic Nerd:</strong> $a&gt;0,b&lt;0$. 자신의 감정은 강화하지만 상대의 호감에는 반발한다.</li>
+    <li><strong>Cautious Lover:</strong> $a&lt;0,b&gt;0$. 감정은 스스로 가라앉지만 상대의 호감에는 긍정적으로 반응한다.</li>
+    <li><strong>Hermit:</strong> $a&lt;0,b&lt;0$. 자신의 감정과 상대의 호감 모두를 억제하는 방향으로 반응한다.</li>
+  </ul>
+  <p>다만 네 유형은 심리학적으로 검증된 성격검사가 아니라 계수 부호에 붙인 기억용 별명이다. 두 사람의 관계는 네 계수
+    $(a,b,c,d)$의 결합으로 결정되므로 한 사람의 유형만으로 전체 동학을 예측할 수 없다.</p>
+
+  <h2>4. 기본모형의 구조적 결함과 비선형 확장</h2>
+  <p>동차 선형모형에는 두 가지 큰 결함이 있다. 첫째, 처음에 두 사람 모두 완전히 무관심하면 영원히 무관심하다.
+    둘째, 불안정한 경우 감정이 무한대로 커진다. 후속 연구는 주로 이 두 문제를 고쳤다.</p>
+
+  <h3>4.1 매력 또는 외생 입력</h3>
+  <p>상대가 나를 사랑하지 않더라도 외모·성품·지성·친밀한 접촉 등에 의해 감정이 생길 수 있다. 이를 상수항 $A_R,A_J$로 넣으면</p>
+  <div class="equation-box">
+    $$R'=aR+bJ+A_J, \qquad J'=cR+dJ+A_R.$$
+  </div>
+  <p>이제 균형점은 반드시 무관심 $(0,0)$일 필요가 없다. 세르조 리날디(Sergio Rinaldi)는 1998년 모형에서
+    망각(oblivion), 사랑받는 즐거움(return), 상대의 매력에 대한 반응(instinct)을 구분하여 이 방향을 체계화했다.</p>
+
+  <h3>4.2 포화와 비선형 반응</h3>
+  <p>실제 반응에는 상한·하한과 임계점이 있다. 따라서 교차반응을 $bJ$ 대신 증가하되 포화하는 함수 $f(J)$로 둘 수 있다.</p>
+  <div class="equation-box">
+    $$R'=-\alpha_R R+f_R(J)+A_J, \qquad J'=-\alpha_J J+f_J(R)+A_R.$$
+  </div>
+  <p>비선형성은 감정의 무한 발산을 막고, 여러 안정균형·히스테리시스·한계주기·분기를 가능하게 한다.
+    2015년 리날디·란디·델라로사는 영화 <em>미녀와 야수</em>를 매력의 점진적 변화가 안장–마디 분기를 넘어
+    감정의 급격한 전환을 일으키는 사례로 해석했다. 이는 실증적 증명이라기보다 서사를 동적계의 언어로 재구성한 사례연구이다.</p>
+
+  <h3>4.3 로트카–볼테라 비유의 한계</h3>
+  <p>사랑의 상호작용을 포식자–피식자 방정식에 비유할 수는 있지만, 고전적 2변수 로트카–볼테라 모형의 양의 내부해는
+    보존량을 따라 닫힌 궤도를 그리며 <strong>카오스를 만들지 않는다</strong>. 카오스에는 보통 3차원 이상의 상태공간,
+    시간지연, 외부강제, 비자율성 또는 더 복잡한 비선형성이 필요하다. 따라서 단순한 두 식만으로 연애의 예측불가능성을
+    카오스라고 설명해서는 안 된다.</p>
+
+  <h2>5. 스트로가츠 이후의 실제 연구 흐름</h2>
+  <div class="note">
+    <strong>귀속 관계:</strong> 아래 확장들은 대부분 스트로가츠 자신의 후속 연구가 아니라 그의 교육용 아이디어를 이어받은
+    리날디, 그라냐니, 바우어, 손우식·박영재 등 여러 연구자의 작업이다.
+  </div>
+
+  <h3>5.1 현실성을 높인 최소모형</h3>
+  <p>리날디의 1998년 선형 커플 모형은 망각, 상대의 사랑에 대한 보답, 상대의 매력을 분리했다.
+    리날디와 알레산드라 그라냐니는 안정애착형 개인들의 관계를 분석하여 취약한 커플과 견고한 커플,
+    개인의 반응계수와 매력이 균형에 미치는 영향을 논의했다. 같은 시기 페트라르카가 라우라에게 보인 감정을
+    약 20년간의 시 자료와 연결해 순환동학으로 해석하려는 연구도 나왔다.</p>
+
+  <h3>5.2 변동계수와 확률적 충격</h3>
+  <p>바우어 등은 2007년 성격과 외부 입력이 시간에 따라 변한다는 점을 반영하여 주기적·확률적 변동을 도입했다.
+    직장 스트레스, 생물학적 리듬, 생활사건처럼 관계 밖에서 들어오는 충격을 계수나 외생항의 변동으로 표현한 것이다.
+    후속 확률미분방정식 연구에서는 잡음이 진동과 상태전환을 유발하거나 억제할 수 있음을 수치적으로 조사했다.
+    그러나 잡음을 넣어 복잡한 궤적을 재현한다고 해서 그 잡음구조가 실제 감정자료에서 확인되었다는 뜻은 아니다.</p>
+
+  <h3>5.3 시간지연</h3>
+  <p>상대의 감정을 즉시 알거나 즉시 반응하지 않는다는 점을 반영하면 지연미분방정식이 된다.</p>
+  <div class="equation-box">
+    $$R'(t)=aR(t)+bJ(t-\tau), \qquad J'(t)=cR(t-\tau)+dJ(t).$$
+  </div>
+  <p>손우식과 박영재의 2011년 연구는 지연이 호프 분기와 주기동학을 만들 수 있음을 분석했다.
+    다른 연구에서는 적절한 크기의 지연이 오히려 불안정한 균형을 안정화할 수도 있음을 보였다.
+    따라서 “답장이 늦으면 관계가 나빠진다” 같은 단순한 결론은 나오지 않는다. 지연의 효과는 피드백 부호와 크기에 의존한다.</p>
+
+  <h3>5.4 삼각관계와 네트워크</h3>
+  <p>세 사람 이상으로 확장하면 각 사람의 감정이 여러 관계를 통해 동시에 되먹임된다. 상태변수와 계수의 수가 급증하고,
+    질투·경쟁·동맹 같은 구조를 표현할 수 있지만 식별 문제도 훨씬 심해진다. 최근에는 다자관계, 지연, 확률적 충격을 함께 다루는 연구도 이어졌으나,
+    이 분야의 많은 결과는 실제 연애 예측보다는 비선형 동학의 예제라는 성격이 강하다.</p>
+
+  <h3>5.5 부부 상호작용 연구와의 접점</h3>
+  <p>사랑방정식과 별개로 존 가트먼(John Gottman) 연구진은 관찰된 부부 대화의 정서점수를 이용해 상호작용 모형을 만들었다.
+    이는 추상적인 로미오–줄리엣 모형보다 자료와 가깝다는 장점이 있지만, 특정 대화환경에서 추정한 규칙을 장기적인 결혼 전체로 일반화하는 문제는 남는다.
+    두 계열을 동일한 이론으로 보아서는 안 되지만, 실제 자료로 계수를 추정하려면 이러한 관찰설계가 필요하다는 시사점을 준다.</p>
+
+  <h2>6. 이 모형이 주는 시사점</h2>
+  <ul>
+    <li><strong>관계는 속성이 아니라 과정이다.</strong> “얼마나 사랑하는가”뿐 아니라 감정이 어떤 피드백 규칙으로 변하는지가 중요하다.</li>
+    <li><strong>좋은 의도와 안정성은 별개다.</strong> 두 사람이 모두 호의적으로 반응해도 피드백이 지나치게 강하면 선형모형은 폭주한다.</li>
+    <li><strong>같은 행동도 상대에 따라 효과가 달라진다.</strong> 한 사람의 계수만이 아니라 결합행렬 전체의 고유값이 관계의 동학을 결정한다.</li>
+    <li><strong>지연과 잡음은 단순한 방해가 아니다.</strong> 조건에 따라 진동을 만들 수도, 불안정을 억제할 수도 있다.</li>
+    <li><strong>정책변수보다 구조가 중요하다.</strong> 일시적인 선물이나 사건은 외생충격이지만, 장기동학은 반응함수 자체가 좌우한다.</li>
+  </ul>
+
+  <div class="insight">
+    <strong>가장 중요한 통찰:</strong> 이 모형의 실용적 가치는 연인의 미래를 예언하는 데 있지 않고,
+    상호작용의 결과가 개인의 성격을 단순 합산한 것과 다를 수 있음을 보여주는 데 있다.
+    관계는 두 사람 사이에서 생성되는 하나의 동적 시스템이다.
+  </div>
+
+  <h2>7. 비판과 한계</h2>
+  <ol>
+    <li><strong>구성개념의 빈약함:</strong> 사랑·반감·애착·욕망·신뢰·헌신을 하나의 실수축에 놓으면 서로 다른 감정을 구분할 수 없다.</li>
+    <li><strong>측정과 식별의 문제:</strong> 짧은 감정 시계열로 $a,b,c,d$를 각각 추정하기 어렵고, 서로 다른 계수 조합이 비슷한 궤적을 만들 수 있다.</li>
+    <li><strong>내생성과 동시성:</strong> 두 사람의 감정은 동시에 영향을 주므로 단순 회귀로 인과방향을 분리하기 어렵다.</li>
+    <li><strong>계수의 불변성:</strong> 성격과 반응계수가 시간에 따라 일정하다는 가정은 학습, 적응, 권태, 생활사건을 배제한다.</li>
+    <li><strong>연속·결정론 가정:</strong> 이별, 고백, 배신처럼 불연속적인 사건은 연속 미분방정식만으로 표현하기 어렵다. 전환모형이나 사건모형이 필요하다.</li>
+    <li><strong>표본 외 예측의 부재:</strong> 복잡한 궤적을 사후적으로 맞추는 것과 새로운 커플의 미래를 예측하는 것은 전혀 다른 문제다.</li>
+    <li><strong>심리이론과의 연결 부족:</strong> 계수에 그럴듯한 이름을 붙이는 것만으로 애착이론이나 사회심리학적 기제가 검증되는 것은 아니다.</li>
+    <li><strong>규범적 오독:</strong> 안정한 균형이 바람직하고 불안정한 상태가 나쁘다고 단정할 수 없다. 안정한 무관심도 가능하기 때문이다.</li>
+    <li><strong>윤리와 프라이버시:</strong> 메시지·위치·생체자료로 감정을 추정할 경우 동의, 감시, 조작, 낙인 문제가 발생한다.</li>
+  </ol>
+
+  
+
+  <h2>8. 결론</h2>
+  <p>스트로가츠의 사랑방정식은 사랑의 법칙을 발견한 이론이 아니라, 상호 피드백과 동학을 가르치기 위한 재치 있는 최소모형이었다.
+    이후 연구는 매력, 망각, 포화, 시간변동, 잡음, 지연, 다자관계를 추가하면서 훨씬 풍부한 동학을 만들었다.
+    그러나 수학적 풍부함과 경험적 타당성은 별개의 문제이다.</p>
+  <p>따라서 이 모형을 가장 적절하게 평가하면 다음과 같다. <strong>설명도구와 사고실험으로는 뛰어나지만,
+    진단도구나 예측기술로 사용하기에는 아직 측정·식별·검증이 부족하다.</strong> 사랑을 숫자로 환원했다기보다,
+    관계가 정적인 감정의 합이 아니라 시간 속에서 서로를 변화시키는 피드백 과정임을 선명하게 보여준 것이 가장 큰 성과이다.</p>
+
+  <h2>9. 참고문헌</h2>
+  <ol class="references">
+    <li>Strogatz, S. H. (1988), <a href="https://doi.org/10.1080/0025570X.1988.11977342">“Love Affairs and Differential Equations,”</a> <em>Mathematics Magazine</em>, 61(1), 35.</li>
+    <li>Rinaldi, S. (1998), <a href="https://doi.org/10.1016/S0096-3003(97)10081-9">“Love Dynamics: The Case of Linear Couples,”</a> <em>Applied Mathematics and Computation</em>, 95, 181–192.</li>
+    <li>Rinaldi, S. &amp; Gragnani, A. (1998), <a href="https://doi.org/10.1023/A:1022935005126">“Love Dynamics Between Secure Individuals: A Modeling Approach,”</a> <em>Nonlinear Dynamics, Psychology, and Life Sciences</em>, 2, 283–301.</li>
+    <li>Rinaldi, S. (1998), <a href="https://userpages.umbc.edu/~rostamia/math481/love-dynamics/love-dynamics-1998-b.pdf">“Laura and Petrarch: An Intriguing Case of Cyclical Love Dynamics,”</a> <em>SIAM Journal on Applied Mathematics</em>, 58(4), 1205–1221.</li>
+    <li>Wauer, J., Schwarzer, D., Cai, G. Q. &amp; Lin, Y. K. (2007), <a href="https://doi.org/10.1016/j.amc.2006.11.026">“Dynamical Models of Love with Time-Varying Fluctuations,”</a> <em>Applied Mathematics and Computation</em>, 188, 1535–1548.</li>
+    <li>Son, W.-S. &amp; Park, Y.-J. (2011), <a href="https://arxiv.org/abs/1108.5786">“Time Delay Effect on the Love Dynamical Model.”</a></li>
+    <li>Rinaldi, S., Landi, P. &amp; Della Rossa, F. (2015), <a href="https://pure.iiasa.ac.at/id/eprint/11964/">“Small Discoveries Can Have Great Consequences in Love Affairs: The Case of Beauty and the Beast.”</a></li>
+    <li>Rinaldi, S., Della Rossa, F. &amp; Dercole, F. (2016), <a href="https://doi.org/10.1142/9712"><em>Modeling Love Dynamics</em></a>, World Scientific.</li>
+  </ol>
+
+  <br>
+  <a href="hum-math.html">뒤로 가기</a>
+</div>
+</body>
 </html>
