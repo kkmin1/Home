@@ -1,128 +1,148 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Min's Blog - 게임이론, 경제수학, 인문수학, 경제물리, 프로그래밍에 대한 학술 블로그">
-	<link rel="stylesheet" href="blog.css">
-	<title>Min's Blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Min's Economics Lab — 게임이론, 수리경제학, 동태경제학과 인터랙티브 모델을 정리한 개인 학술 노트">
+  <link rel="stylesheet" href="blog.css">
+  <link rel="stylesheet" href="shell.css">
+  <title>Min's Economics Lab</title>
 </head>
+<body class="site-shell">
+  <div class="shell-grid">
+    <aside class="site-sidebar" id="sidebar" aria-label="주요 탐색">
+      <div class="brand-block">
+        <a class="brand" href="index.html" aria-label="홈으로">
+          <span class="brand-mark">M</span>
+          <span>
+            <strong>Min's Economics Lab</strong>
+            <small>Economics · Math · Games</small>
+          </span>
+        </a>
+      </div>
 
-<body class="dark-theme">
-	<!-- Mobile Menu Toggle -->
-	<button class="mobile-toggle" id="mobileToggle" aria-label="메뉴 열기">
-		<span></span>
-	</button>
+      <nav class="primary-nav">
+        <p class="nav-kicker">LIBRARY</p>
+        <a class="shell-nav-link active" href="game.html" data-title="게임이론" data-desc="전략적 상호작용과 균형 개념">
+          <span class="nav-icon">G</span><span>게임이론</span>
+        </a>
+        <a class="shell-nav-link" href="eco-math2.html" data-title="동태경제학 · 경제수학" data-desc="미분·차분방정식, 위상도와 최적화">
+          <span class="nav-icon">D</span><span>동태경제학 · 경제수학</span>
+        </a>
+        <a class="shell-nav-link" href="hum-math.html" data-title="수학적 응용" data-desc="경제학과 사회과학의 수학적 모델">
+          <span class="nav-icon">A</span><span>수학적 응용</span>
+        </a>
+        <a class="shell-nav-link" href="eco-physic.html" data-title="인터랙티브 모델" data-desc="직접 실행하고 관찰하는 경제모형">
+          <span class="nav-icon">I</span><span>인터랙티브 모델</span>
+        </a>
+        <a class="shell-nav-link" href="program.html" data-title="프로그래밍 노트" data-desc="코드, 알고리즘, HTML·LaTeX">
+          <span class="nav-icon">C</span><span>프로그래밍 노트</span>
+        </a>
+      </nav>
 
+      <div class="featured-block">
+        <p class="nav-kicker">QUICK ACCESS</p>
+        <a href="cobweb.html" class="featured-link" data-title="Cobweb Simulator" data-desc="수요·공급함수와 초기값을 바꾸며 수렴과 발산을 관찰">
+          <span>↗</span><div><strong>Cobweb Simulator</strong><small>Interactive</small></div>
+        </a>
+        <a href="phase diagram.html" class="featured-link" data-title="위상도 분석" data-desc="동태시스템의 안정성과 궤적 분석">
+          <span>↗</span><div><strong>Phase Diagram</strong><small>Dynamics</small></div>
+        </a>
+        <a href="signaling.html" class="featured-link" data-title="신호게임" data-desc="불완전정보와 전략적 신호의 균형">
+          <span>↗</span><div><strong>Signaling Game</strong><small>Game Theory</small></div>
+        </a>
+      </div>
 
-	<div class="container">
-		<!-- Sidebar Navigation -->
-		<aside class="sidebar" id="sidebar">
-			<h1 class="logo">Min's Blog</h1>
-			<p class="logo-subtitle">Academic Notes</p>
+      <footer class="shell-footer">
+        <span>Personal academic notebook</span>
+        <span>© 2026 kkmin</span>
+      </footer>
+    </aside>
 
-			<div class="sidebar-divider"></div>
+    <button class="mobile-menu" id="mobileMenu" aria-label="메뉴 열기" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="sidebar-scrim" id="scrim"></div>
 
-			<span class="nav-label">카테고리</span>
-			<nav>
-				<ul class="nav-list">
-					<li class="nav-item">
-						<a href="game.html" target="content_frame" class="nav-link">
-							<span class="nav-icon">🎲</span>
-							<span class="nav-text">게임이론</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="eco-math2.html" target="content_frame" class="nav-link">
-							<span class="nav-icon">📐</span>
-							<span class="nav-text">경제수학 II</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="hum-math.html" target="content_frame" class="nav-link">
-							<span class="nav-icon">📚</span>
-							<span class="nav-text">인문수학</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="eco-physic.html" target="content_frame" class="nav-link">
-							<span class="nav-icon">⚛️</span>
-							<span class="nav-text">경제물리</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="program.html" target="content_frame" class="nav-link">
-							<span class="nav-icon">💻</span>
-							<span class="nav-text">프로그래밍</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
+    <main class="workspace">
+      <header class="workspace-header">
+        <div>
+          <p class="eyebrow">ACADEMIC NOTEBOOK</p>
+          <h1 id="sectionTitle">게임이론</h1>
+          <p id="sectionDesc">전략적 상호작용과 균형 개념</p>
+        </div>
+        <div class="header-actions">
+          <a id="directLink" class="secondary-button" href="game.html" target="_blank" rel="noopener">새 창에서 열기 ↗</a>
+        </div>
+      </header>
 
-			<div class="sidebar-footer">
-				<p>&copy; 2026 kkmin</p>
-				<p>All rights reserved.</p>
-			</div>
-		</aside>
-<main class="content">
-	<iframe name="content_frame" class="content-frame" src="game.html"></iframe>
-</main>
-	
-	</div>
+      <section class="intro-strip" aria-label="사이트 소개">
+        <div class="intro-copy">
+          <span class="status-dot"></span>
+          <strong>이론을 읽고, 수식을 따라가고, 모델을 직접 실행합니다.</strong>
+          <span>기존 노트와 계산 코드는 보존하면서 탐색 구조를 재정비하는 중입니다.</span>
+        </div>
+      </section>
 
-	<script>
-		// Active state management
-		const navLinks = document.querySelectorAll('.nav-link');
-		const sidebar = document.getElementById('sidebar');
-		const mobileToggle = document.getElementById('mobileToggle');
-	
+      <section class="document-stage">
+        <iframe id="contentFrame" name="content_frame" class="content-frame" src="game.html" title="학술 노트 본문"></iframe>
+      </section>
+    </main>
+  </div>
 
-		navLinks.forEach(link => {
-			link.addEventListener('click', () => {
-				navLinks.forEach(l => l.classList.remove('active'));
-				link.classList.add('active');
-				// Close sidebar on mobile after selection
-				if (window.innerWidth <= 768) {
-					closeSidebar();
-				}
-			});
-		});
+  <script>
+    const frame = document.getElementById('contentFrame');
+    const title = document.getElementById('sectionTitle');
+    const desc = document.getElementById('sectionDesc');
+    const directLink = document.getElementById('directLink');
+    const sidebar = document.getElementById('sidebar');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const scrim = document.getElementById('scrim');
+    const links = [...document.querySelectorAll('.shell-nav-link, .featured-link')];
 
-		// Set initial active
-		if (navLinks.length > 0) navLinks[0].classList.add('active');
+    function setActive(link, updateHash = true) {
+      document.querySelectorAll('.shell-nav-link').forEach(item => item.classList.remove('active'));
+      if (link.classList.contains('shell-nav-link')) link.classList.add('active');
+      const href = link.getAttribute('href');
+      title.textContent = link.dataset.title || link.textContent.trim();
+      desc.textContent = link.dataset.desc || '';
+      directLink.href = href;
+      frame.src = href;
+      if (updateHash) history.replaceState(null, '', '#' + encodeURIComponent(href));
+      closeMenu();
+    }
 
-		// Mobile menu toggle
-		function openSidebar() {
-			sidebar.classList.add('open');
-		
-			document.body.style.overflow = 'hidden';
-		}
+    links.forEach(link => {
+      link.addEventListener('click', event => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        setActive(link);
+      });
+    });
 
-		function closeSidebar() {
-			sidebar.classList.remove('open');
-	
-			setTimeout(() => { overlay.style.display = 'none'; }, 300);
-			document.body.style.overflow = '';
-		}
+    function openMenu() {
+      sidebar.classList.add('open');
+      scrim.classList.add('show');
+      mobileMenu.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('menu-open');
+    }
 
-		mobileToggle.addEventListener('click', () => {
-			if (sidebar.classList.contains('open')) {
-				closeSidebar();
-			} else {
-				openSidebar();
-			}
-		});
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      scrim.classList.remove('show');
+      mobileMenu.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+    }
 
+    mobileMenu.addEventListener('click', () => sidebar.classList.contains('open') ? closeMenu() : openMenu());
+    scrim.addEventListener('click', closeMenu);
+    window.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
 
-
-		// Handle resize
-		window.addEventListener('resize', () => {
-			if (window.innerWidth > 768) {
-				closeSidebar();
-			}
-		});
-	</script>
+    const initial = decodeURIComponent(location.hash.replace(/^#/, ''));
+    if (initial) {
+      const match = links.find(link => link.getAttribute('href') === initial);
+      if (match) setActive(match, false);
+    }
+  </script>
 </body>
-
 </html>
