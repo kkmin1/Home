@@ -1,10 +1,11 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>켈리기준(Kelly Criterion)</title>
 
 <style>
-	body{width:1600px;}
     h1{ color: blue; text-align: center;}
     h2{ color: red; }
     h3{ color: green; }
@@ -24,7 +25,43 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 
 </script>
 
- </head>
+ 
+<style id="deployment-responsive-patch">
+* { box-sizing: border-box; }
+body {
+  max-width: 980px !important;
+  width: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 1.2rem 1rem 3rem;
+  overflow-wrap: break-word;
+}
+img, svg, canvas {
+  max-width: 100% !important;
+  height: auto !important;
+}
+table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.MathJax_Display, .mjx-chtml, .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; line-height: 1.3; }
+  h2 { font-size: 1.35rem; line-height: 1.35; }
+  h3 { font-size: 1.15rem; line-height: 1.4; }
+}
+</style>
+
+</head>
 
 <body>
     
@@ -32,7 +69,7 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 <h1> 켈리기준(Kelly Criterion) </h1>
 <br>
 <h2>  개요 </h2>
-켈리공식은 여러번 반복되는 베팅에서 매번 최적 베팅액수를 결정하는 공식이다. 켈리공식은 몇가지 가정하에  몇몇 도박과 투자에서 장기적으로 다른 어떤 전략보다 우월한 성과를 낸다고 알려져 있다. 이름은 공식을 개발한 벨 연구소 연구원이었던 J. L. Kelly에서 명명되었다. 
+켈리공식은 여러번 반복되는 베팅에서 매번 최적 베팅액수를 결정하는 공식이다. 켈리공식은 승률과 배당이 안정적이고 반복 베팅이 가능하다는 등의 가정 아래 장기적인 로그 부(log wealth)의 평균 성장률을 최대화하는 베팅비율을 제시한다. 이는 모든 투자기간에서 기대재산을 최대화한다거나 위험을 고려한 모든 투자자에게 항상 우월하다는 뜻은 아니다. 이름은 공식을 개발한 벨 연구소 연구원이었던 J. L. Kelly에서 명명되었다. 
 <br>
 	
 <h2>  도박(갬블)에서 기대수익 </h2>
@@ -46,7 +83,7 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 <p> $q$ : 실패확률 ($= 1 - p$) </p>
 <p> $ y_k $ : k 번째 베팅시 베팅액(random variable) </p>
  <br>
-<p> 투자자는 n 번 베팅 후 $ \max \{ w_n \} $ 하는 것이 목표다.</p>
+<p>이 절에서는 먼저 n번 베팅 후 <strong>기대재산</strong> $E[w_n]$을 최대화하려 하면 어떤 문제가 생기는지 살펴본다.</p>
 <p>  투자자의 n 번 베팅 후 재산의 기대값은 다음과 같이 구할 수 있다.</p>
  	
 <p> let </p>
@@ -105,7 +142,7 @@ In fact, in the limit of infinite games, you will go broke with probability 1. S
 
 <p>즉 따라서 매번 전액을 베팅하는 투자전략은 
 게임을 계속할 수록 100% 파산으로 귀결된다. 
-이를 <font color="red">gambler's ruin</font>이라 한다. </p>
+매번 전 재산을 거는 전략에서는 한 번의 패배가 곧 파산이고, 무한히 반복하면 결국 한 번 이상 패할 확률이 1로 수렴한다. 이는 넓은 의미에서 도박자 파산(gambler's ruin) 문제와 연결되지만, 고전적인 gambler's ruin은 보통 유한한 자본을 가진 도박자가 상·하한 흡수경계 사이에서 반복 베팅하는 더 일반적인 모형을 가리킨다. </p>
 
 <br>
 
@@ -132,7 +169,7 @@ In fact, in the limit of infinite games, you will go broke with probability 1. S
 
 <p> $ w_n = w_0(1 + b x)^k (1 - x)^{n-k} $ </p>
 
-<p>부의 증가율의 평균은 기하평균으로 계산하는 것이 일반적이다.<sup><a href="#fn1" id="ref1">1</a></sup> </p>
+<p>켈리기준의 목적은 최종재산의 산술적 기대값이 아니라 반복 시행에서의 <strong>장기 복리성장률</strong>을 최대화하는 것이다. 이를 위해 기간당 로그 성장률을 사용한다.<sup><a href="#fn1" id="ref1">1</a></sup> </p>
 
 <p>n 개의 양의 수가 있을 때 이들 수의 곱의 n 제곱근의 값. </p>
 

@@ -1,6 +1,8 @@
 <html lang="ko"> 
 <head>
     <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>신호게임</title>
     <head>
       <style>
@@ -34,7 +36,32 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 "HTML-CSS": { availableFonts: ["TeX"] }
 });
 </script>
- </head> 
+ 
+<style id="deployment-responsive-patch">
+* { box-sizing: border-box; }
+body {
+  max-width: 980px !important;
+  width: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 1.2rem 1rem 3rem;
+  overflow-wrap: break-word;
+}
+img, svg, canvas { max-width: 100% !important; height: auto !important; }
+table { max-width: 100%; overflow-x: auto; }
+.MathJax_Display, .mjx-chtml, .katex-display {
+  max-width: 100%; overflow-x: auto; overflow-y: hidden;
+}
+pre, code { max-width:100%; overflow-x:auto; }
+@media (max-width: 640px) {
+  body { padding:.8rem .65rem 2rem; font-size:16px; }
+  h1 { font-size:1.65rem; line-height:1.3; }
+  h2 { font-size:1.35rem; line-height:1.35; }
+  h3 { font-size:1.15rem; line-height:1.4; }
+}
+</style>
+
+</head> 
 <body> 
 	
 <h2>1. 신호게임 모형 </h2> 
@@ -883,10 +910,10 @@ style="fill:none;stroke:purple;stroke-width:3"/>
 S의 보수는 자신의 유형을 앎으로 열벡터를 그대로 표기한다. R의 보수는 전략에 따라 다르다. 통합전략은 S의 유형에 대한 정보가 향상되지 못하므로 사전확률에 기초한 기대값을 표기하고, 분리전략은 S의 유형을 확신하므로 열벡터를 그대로 표기한다.</p>
 <p>
 내쉬균형은 정의상 모든 유형에 대해 이탈 유인이 없어야 한다. 즉 모든 유형에 대해 보수값이 다른 전략보다 크거나 같아야 한다. 내쉬균형을 구하기 위해서는 <표 2>보수표에서 벡터인 경우는 벡터의 모든 원소가 다른 벡터 원소보다 크거나 같아야 한다. 기대값인 경우 다른 기대값보다 크거나 같아야 한다. </p>
-<p> 내쉬균형은 두 개로, 보라색 원 부분이다. 두 균형 모두 경로별 전략상 불합리성이 없으므로 내쉬균형은 완전베이지안 균형이 된다.</p>
+<p> 내쉬균형은 두 개로, 보라색 원 부분이다. 완전베이지안균형이 되려면 전략의 최적성뿐 아니라 각 정보집합에서 수신자의 믿음이 순차적 합리성과, 균형경로에서는 가능한 경우 베이즈 규칙과 일치해야 한다. 아래 균형은 이 믿음 조건을 함께 만족하는 경우 완전베이지안균형으로 해석할 수 있다.</p>
 <p>
-통합전략을 쓰는 완전베이지안균형을 통합균형(pooling equlibrium)이라 한다. 이는 두 유형 모두 같은 전략을 쓰므로 일종의 기만전술이라 할 수 있다. </p>
-<p>분리전략을 쓰는 완전베이지안균형을 분리균형(separating equlibrium)이라 한다. 이는 자기의 유형을 밝히므로 솔직전술이라 할 수 있다.</p>
+통합전략을 쓰는 완전베이지안균형을 통합균형(pooling equilibrium)이라 한다. 두 유형이 같은 신호를 보내므로 수신자는 그 신호만으로 유형을 완전히 구별할 수 없다. 통합 자체가 반드시 기만을 의미하는 것은 아니다. </p>
+<p>분리전략을 쓰는 완전베이지안균형을 분리균형(separating equilibrium)이라 한다. 유형별로 서로 다른 신호를 보내므로 균형에서는 수신자가 신호를 통해 유형을 구별할 수 있다. 이것이 반드시 도덕적 의미의 '솔직함'을 뜻하는 것은 아니다.</p>
 
 <p>
 통합균형 : S가 H 유형일 확률 $\frac{1}{2}$ 에서 
@@ -1208,6 +1235,42 @@ R : \begin{pmatrix} A \rightarrow d \\ B \rightarrow d \end{pmatrix}
 	R : \begin{pmatrix} A \rightarrow d \\ B \rightarrow u \end{pmatrix}
 \end{array} \right \}\)</p>
 
+
+
+<h2>6. 신호발송(signaling)과 선별(screening)의 차이</h2>
+
+<p>연구노트에서는 정보비대칭을 줄이는 방법을 <strong>신호발송(signaling)</strong>과
+<strong>선별(screening)</strong>로 구분한다.</p>
+
+<ul>
+<li><b>신호발송</b>: 정보를 가진 쪽이 자신의 유형이나 품질을 상대방에게 알리기 위해 행동한다.</li>
+<li><b>선별</b>: 정보를 가지지 못한 쪽이 여러 계약이나 선택지를 제시하여, 정보를 가진 쪽이 스스로 자신의 유형을 드러내게 만든다.</li>
+</ul>
+
+<p>예를 들어 구직자가 학력·자격증을 제시하는 것은 전형적인 signaling의 구조이고,
+보험회사가 자기부담금이 다른 여러 계약을 제시하여 위험유형이 스스로 다른 상품을 고르게 하는 것은 screening의 구조다.
+중요한 차이는 <b>누가 먼저 정보추출 장치를 설계하느냐</b>에 있다.</p>
+
+<h3>예: 일반 와인과 고급 와인</h3>
+
+<p>연구노트에는 separating equilibrium을 설명하기 위한 간단한 시장 예가 있다.
+10명의 소비자가 모두 일반 와인에 10달러까지 지불할 의사가 있고,
+기업은 일반 와인을 10달러에 팔아 병당 2달러의 이윤을 얻는다고 하자.
+처음에는 10명 모두 일반 와인을 한 병씩 사므로 매출은 100달러, 이윤은 20달러다.</p>
+
+<p>이제 10명 중 한 명이 가격에 거의 구애받지 않고 “가장 좋은 와인”을 원하는 고소득 소비자가 되었다고 하자.
+기업은 그런 소비자가 한 명 있다는 사실은 알지만 누군지는 모른다.
+직접 “당신이 부자인가?”라고 물으면 높은 가격을 피하려고 거짓말할 수 있으므로 정보가 드러나지 않는다.</p>
+
+<p>기업이 30달러짜리 고급 와인을 새로 만들고 그 제품에서 10달러의 이윤을 얻는다고 하자.
+고소득 소비자는 고급 와인을, 나머지 9명은 일반 와인을 선택한다면
+기업은 소비자의 유형을 구매행동을 통해 구별할 수 있게 된다.
+연구노트의 수치에서는 총매출이 120달러, 총이윤이 28달러가 된다.</p>
+
+<p>이 예의 포인트는 고급 와인이 반드시 물리적으로 훨씬 더 맛있어야만 하는 것은 아니라는 데 있다.
+높은 가격, 포장, 희소성, 마케팅 등으로 구성된 상품 선택 자체가
+서로 다른 유형의 소비자를 분리하는 장치가 될 수 있다.
+서로 다른 유형이 서로 다른 행동을 선택하여 구별되는 상태가 <strong>분리균형(separating equilibrium)</strong>이다.</p>
 
 <hr> 
 <sup id="fn1"> 1.그래서 균형의 이름이 완전베이즈균형으로 명명된 것이다.</sup><br>

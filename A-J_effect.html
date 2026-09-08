@@ -3,6 +3,8 @@
 
 <head>
   <meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" type="text/css" href="eco-math.css">
   <link rel="stylesheet" type="text/css" href="footnote.css">
 
@@ -30,6 +32,42 @@ window.MathJax = {
 
 
 
+
+<style id="deployment-responsive-patch">
+* { box-sizing: border-box; }
+body {
+  max-width: 980px !important;
+  width: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 1.2rem 1rem 3rem;
+  overflow-wrap: break-word;
+}
+img, svg, canvas {
+  max-width: 100% !important;
+  height: auto !important;
+}
+table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.MathJax_Display, .mjx-chtml, .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; line-height: 1.3; }
+  h2 { font-size: 1.35rem; line-height: 1.35; }
+  h3 { font-size: 1.15rem; line-height: 1.4; }
+}
+</style>
+
 </head>
 
 <body>
@@ -40,7 +78,7 @@ window.MathJax = {
 <p> 애버치-존슨 효과란 보수율 규제(Rate of return regulation)를 받는 기업이 
   이윤극대화를 추구할 때 규제가 없을 경우와 비교하여 자본은 과다하게 투입하고 노동은 과소하게 사용하는 경향이 있는 것을 의미한다.</p>
 <p> 보수율 규제란 주로 독점 기업의 수익률이 정부에서 정한 기준치를 초과하지 않도록 하여 독점이윤을 추구할 수 없도록 하는 규제이다. 
-  보수율 규제하에서 기업은 이윤 대비 자본비율이 일정 이하가 되독록 요구받는다. 이 경우 규제받는 기업은 이윤의 절대량을 늘리기 위한 편법으로
+  보수율 규제하에서 기업은 규제상 허용되는 자본수익률이 일정 수준 이하가 되도록 요구받는다. 이 경우 규제받는 기업은 이윤의 절대량을 늘리기 위한 편법으로
 자본에 과대투자하려는 동기가 발생하게 된다. 이러한 과도한 자본투자를 '황금 도금(gold plating)'이라 부르기도 한다.</p>
 <p>
   규제자가 피규제기업(주로 독점기업)에게 자본의 일정 수익율 이상을 올릴 수 없도록 가격을 통제하는 경우 피규제기업은 조금이라도 절대적인 수익액을 올리기 위해 자본을 증가시키려는 유인을 갖는다. 
@@ -115,13 +153,13 @@ q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표�
 
 <p>따라서 피규제기업의 이윤극대화 문제는 다음과 같다.</p>
 \begin{eqnarray*}
-&max \quad \pi = pq - wL+rK \\
+&max \quad \pi = pq - wL-rK \\
 &subject \; to \quad pq-wL \leq sK
 \end{eqnarray*}
 
-<p>$p$가 증가할수록 이윤이 증가하므로 최적값에서 제약식은 등호일 때 설립한다.
+<p>$p$가 증가할수록 이윤이 증가하므로 최적값에서 제약식은 등호일 때 성립한다.
 <input type="checkbox" id="cb1" /><label for="cb1"><sup></sup>
-</label><span><br><br>즉 binding constraint이므로 굳이 Kuhn-Turker 조건을 적용할 필요가 없다.<br><br></span></p>
+</label><span><br><br>즉 binding constraint이므로 굳이 Kuhn-Tucker 조건을 적용할 필요가 없다.<br><br></span></p>
 
 <p>따라서 다음과 같이 라그란지안을 취하면</p>
 \begin{eqnarray*}
@@ -158,7 +196,17 @@ q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표�
 
 <p>여기서 $F_{K}^{'}$, $F_{L}^{'}$ 은 각각 보수율 규제하 자본과 노동의 최적 한계생산물 의미한다.</p>
 
-<p>(1)=(3)이므로 $F_{L}^{'}={F_{L}^{*}}$,  따라서 $F_{K}^{'} < F_K^{*}$.</p>
+<p>여기서 중요한 결론은 규제하의 한계대체율이 비규제하의 비용최소화 조건보다 작아진다는 점이다.</p>
+\[
+\frac{F_K'}{F_L'} < \frac{r}{w}.
+\]
+<p>표준적인 신고전학파 생산함수에서 등량곡선이 볼록하다고 하면, 이는 규제기업이 같은 산출량을 생산할 때
+비용최소화 투입조합보다 <strong>자본집약적인 투입비율</strong>, 즉 더 높은 $K/L$을 선택한다는 뜻이다.
+이것이 애버치-존슨 효과의 핵심이다.</p>
+<p>다만 위의 비율조건만으로 규제기업의 절대 자본량 $K'$가 비규제 독점기업의 $K^*$보다 언제나 크다고
+곧바로 결론내릴 수 있는 것은 아니다. 두 기업의 산출량 자체가 달라질 수 있기 때문이다.
+엄밀한 의미의 '과잉자본화(overcapitalization)'는 우선 <em>해당 산출량을 생산하는 데 필요한 비용최소 자본량보다
+자본을 더 많이 사용하는 현상</em>으로 이해하는 것이 정확하다.</p>
 <br>
 
 <figure>
@@ -188,10 +236,7 @@ q=F(L, K), \quad L : \text{노동}, K: \text{자본} % 수식내 한글을 표�
     <br> 
    
 
-<p>또한 앞의 신고전학파 생산함수 가정에서 $\frac{ \partial^2 F}{ \partial K^2}<0$ 이므로 (그림 1)에서 보듯이
- $K^{'}>K^{*}$, 따라서 보수율 규제하 기업은 비규제시보다 자본투자를 늘린다.<br>
-이는 보수율 규제의 기저가 되는 자본이 늘면 규제보수율($s$)하에 있는 기업은 더 많은 이윤을 얻는 것이 허용되기 때문이다.<br>
-</p>
+<p>(그림 1)은 산출량 등 다른 조건을 고정하여 한계생산이 체감하는 경우의 직관을 나타낸다. 핵심은 규제보수율의 기저가 되는 자본을 늘릴수록 허용되는 총수익의 범위도 커질 수 있기 때문에, 기업이 비용최소화 수준보다 자본을 과다하게 사용하는 유인을 갖는다는 점이다.</p>
 <br>
 
 <h2> 시사점 </h2>

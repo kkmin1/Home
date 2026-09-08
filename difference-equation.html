@@ -1,45 +1,58 @@
 <!DOCTYPE html>
+
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="blog.css">
-    <title>차분방정식과 응용</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
-        MathJax.Hub.Config({
-            extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-            tex2jax:
-            {
-                inlineMath: [['$', '$'], ["\\(", "\\)"]],
-                displayMath: [['$$', '$$'], ["\\[", "\\]"]],
-            },
-            "HTML-CSS": { availableFonts: ["TeX"] }
-        });
-    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="blog.css" rel="stylesheet"/>
+<title>차분방정식과 응용</title>
+<style>
+.toc-shell{max-width:900px;margin:0 auto;padding:32px 24px 60px;line-height:1.75}
+.toc-card{display:block;border:1px solid #d7d7d7;border-radius:12px;padding:18px 20px;margin:14px 0;text-decoration:none}
+.toc-card strong{display:block;font-size:1.12rem;margin-bottom:5px}
+.toc-card span{color:#555}
+</style>
+
+<style id="econ-math-cleanup-patch">
+html{scroll-behavior:smooth}
+body{max-width:980px;margin:0 auto;padding:1.5rem 1rem 3rem;line-height:1.72;overflow-wrap:break-word}
+table{display:block;width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-collapse:collapse}
+img,svg{max-width:100%!important;height:auto!important}
+.katex-display,.math-display,div.math,p.math{max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+pre,code{max-width:100%;overflow-x:auto}
+.footnotes{margin-top:3rem;padding-top:1rem;border-top:1px solid #bbb;font-size:.92em;line-height:1.6}
+@media(max-width:640px){body{padding:.8rem .65rem 2rem;font-size:16px}h1{font-size:1.65rem}h2{font-size:1.35rem}h3{font-size:1.18rem}h4{font-size:1.05rem}}
+</style>
 </head>
-
 <body class="sub-page-body">
-    <div id="min2">
-        <h1>차분방정식과 응용 (Difference Equations)</h1>
-
-        <h2>1. 개요</h2>
-        <p>차분방정식은 이산적인 시간(Discrete Time) 단계에 따라 변화하는 변수들의 관계를 설명합니다. 연도별, 분기별 데이터 분석에 적합합니다.</p>
-
-        <h2>2. 1계 차분방정식</h2>
-        <p>$ y_{t+1} = ay_t + b $의 형태를 가지며, 점진적인 균형 수렴 여부는 계수 $ a $의 절댓값에 의해 결정됩니다. </p>
-        <p>$ |a| < 1 $ 이면 균형값 $ \bar{y}=\frac{b}{1-a} $로 수렴하며, $ a $가 음수이면 진동하며 수렴합니다.</p>
-
-                <h2>3. 고계 차분방정식</h2>
-                <p>특성방정식(Characteristic Equation)을 통해 해를 구하며, 복소수 근이 나올 경우 순환적인 변동(Oscillation)이 나타날 수 있습니다.</p>
-
-                <h2>4. 경제학적 응용</h2>
-                <p><strong>거미집 모형 (Cobweb Model):</strong> 공급 시차에 따른 가격과 수량의 이산적 변동 분석.</p>
-                <p><strong>사무엘슨 승수-가속도 모형:</strong> 소비와 투자의 시차를 고려한 경기 순환 모델입니다.</p>
-
-                <br>
-                <a href="eco-math2.html">뒤로 가기</a>
-    </div>
+<div class="toc-shell" id="min2">
+<h1>차분방정식과 응용 (Difference Equations)</h1>
+<p>차분방정식은 이산시간에서 변수의 동학을 분석하는 도구입니다. 이 파트는 연구노트 「차분방정식과 응용」의 전개를 바탕으로 여섯 장으로 나누었습니다.</p>
+<a class="toc-card" href="difference-equation-basic.html">
+<strong>1장. 차분방정식의 기초와 해법</strong>
+<span>정의, 동차·비동차, 중첩원리, 수렴·발산·진동, lag 연산자, 후방·전방대입법</span>
+</a>
+<a class="toc-card" href="difference-equation-system.html">
+<strong>2장. 연립차분방정식과 안정성</strong>
+<span>행렬형 시스템, 대각화, 고유값, 2변수 시스템의 수렴·발산, 비선형 연립차분방정식</span>
+</a>
+<a class="toc-card" href="difference-equation-phase.html">
+<strong>3장. 위상도 분석</strong>
+<span>균형, 자본축적, 해의 수렴·발산, 안장경로, 비선형 함수와 혼돈, 위상도 분석의 한계</span>
+</a>
+<a class="toc-card" href="difference-equation-stochastic.html">
+<strong>4장. 확률차분방정식</strong>
+<span>조건부 기대, 전방·후방해, 거품, 팽창형·폭락형 거품과 안정성</span>
+</a>
+<a class="toc-card" href="difference-equation-applications1.html">
+<strong>5장. 경제학 응용 I</strong>
+<span>맬더스 성장, 자율·비자율 성장, 케인즈 총수요, 대부상환, 배당할인, 기대형성, Cagan 초인플레이션</span>
+</a>
+<a class="toc-card" href="difference-equation-applications2.html">
+<strong>6장. 경제학 응용 II</strong>
+<span>승수-가속도, 거미집, 항상소득, Solow 성장, 빈곤함정·혼돈, Dornbusch overshooting, 실물경기변동</span>
+</a>
+<p><a href="eco-math2.html">경제수학 II 목차로 돌아가기</a></p>
+</div>
 </body>
-
 </html>

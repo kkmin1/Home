@@ -1,47 +1,74 @@
 <!DOCTYPE html>
+
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="blog.css">
-    <title>미분방정식과 응용</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
-        MathJax.Hub.Config({
-            extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-            tex2jax:
-            {
-                inlineMath: [['$', '$'], ["\\(", "\\)"]],
-                displayMath: [['$$', '$$'], ["\\[", "\\]"]],
-            },
-            "HTML-CSS": { availableFonts: ["TeX"] }
-        });
-    </script>
+<meta charset="utf-8"/>
+<link href="blog.css" rel="stylesheet"/>
+<title>미분방정식과 응용</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
+MathJax.Hub.Config({
+  extensions:["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+  jax:["input/TeX","output/HTML-CSS"],
+  tex2jax:{inlineMath:[['$','$'],["\\(","\\)"]],displayMath:[['$$','$$'],["\\[","\\]"]]},
+  "HTML-CSS":{availableFonts:["TeX"]}
+});
+</script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style id="hub-mobile-patch">
+body{max-width:980px;margin:0 auto;padding:1.5rem 1rem 3rem;line-height:1.7;overflow-wrap:break-word}
+h2{margin-top:2rem;border-bottom:1px solid #bbb;padding-bottom:.25rem}
+@media(max-width:640px){body{padding:.8rem .65rem 2rem;font-size:16px}h1{font-size:1.7rem}h2{font-size:1.35rem}}
+</style>
 </head>
-
 <body class="sub-page-body">
-    <div id="min2">
-        <h1>미분방정식과 응용 (Differential Equations)</h1>
-
-        <h2>1. 개요</h2>
-        <p>경제학에서 미분방정식은 시간에 따라 연속적으로 변화하는 변수들 간의 관계를 분석하는 데 사용됩니다. 지속적인 동태적 변화를 묘사하는 데 핵심적인 도구입니다.</p>
-
-        <h2>2. 1계 선형 미분방정식</h2>
-        <p>가장 기본적인 형태로, $\frac{dy}{dt} + ay = b$의 꼴을 가집니다. 일반해는 동차해(Complementary Function)와 특수해(Particular Integral)의
-            합으로 구성됩니다.</p>
-        <p>수렴 조건은 계수 $a > 0$일 때 시간이 흐름에 따라 균형값 $b/a$로 수렴하게 됩니다.</p>
-
-        <h2>3. 미분방정식계</h2>
-        <p>두 개 이상의 상호 의존적인 변수들의 변화를 다룹니다. 고유값(Eigenvalues)과 고유벡터(Eigenvectors)를 이용하여 시스템의 안정성을 분석합니다.</p>
-        <p>고유값의 실수 부분이 모두 음수이면 시스템은 안정적(Stable)입니다.</p>
-
-        <h2>4. 경제학적 응용</h2>
-        <p><strong>성장이론:</strong> 솔로우 모델(Solow Model)에서 자본 축적 경로 $ \dot{k} = sf(k) - (n+\delta)k $ 분석에 사용됩니다.</p>
-        <p><strong>가격 동학:</strong> 초과 수요에 따른 가격 변동 메커니즘을 묘사할 때 필수적입니다.</p>
-
-        <br>
-        <a href="eco-math2.html">뒤로 가기</a>
-    </div>
+<h1>미분방정식과 응용 (Differential Equations)</h1>
+<div class="note" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin:1em 0">
+<strong>원본 보존 기준</strong>
+<p>
+이 장들은 Drive의 「미분방정식과 응용.html」 변환본을 기준으로 다시 구성했다.
+원본은 약 470KB이며 수식·표·그래프·이미지·각주를 포함한다.
+요약을 새로 쓰는 대신 원문의 본문·수식·표·도해를 장별로 분리해 보존하고,
+별도 설명이 필요한 부분만 보충한다.
+</p>
+</div>
+<h2>1. 미분방정식의 기초와 1계 방정식</h2>
+<p><a href="differential-equation-basics.html"><strong>미분방정식의 기초와 1계 방정식</strong></a></p>
+<p>
+정의, 1계 1차 선형미분방정식, 완전미분방정식, 적분인자,
+동차·비동차 방정식, 변수분리, Bernoulli, Riccati,
+Clairaut 등 원본의 1계·비선형 기초를 다룬다.
+</p>
+<h2>2. 2계·고계 미분방정식</h2>
+<p><a href="differential-equation-second-order.html"><strong>2계·고계 미분방정식</strong></a></p>
+<p>
+중첩의 원리, 독립해, 상수계수 2계 선형동차방정식, Euler 방정식,
+비동차 특수해, 근의 안정성, 고계선형미분방정식을 다룬다.
+</p>
+<h2>3. 연립미분방정식과 안정성</h2>
+<p><a href="differential-equation-systems.html"><strong>연립미분방정식과 안정성</strong></a></p>
+<p>
+고계방정식의 1계 연립계 변환, 행렬식 표현, y′=Ay,
+x′=Ax+v, 대각화, 고유값·고유벡터, 임계점과 안정성을 다룬다.
+</p>
+<h2>4. 위상도 분석</h2>
+<p><a href="phase diagram.html"><strong>위상도 (Phase Diagram)</strong></a></p>
+<p>
+단일방정식과 연립계의 위상도, 정상상태, nullcline,
+고유값별 위상형, Jacobian 선형화, saddle point / saddle path를 다룬다.
+기존 보강 설명에 더해 원본 변환본의 위상도 수식·그래프·이미지 구간도 함께 보존한다.
+</p>
+<h2>5. 미분방정식의 경제·사회과학 응용</h2>
+<p><a href="differential-equation-applications.html"><strong>미분방정식의 응용</strong></a></p>
+<p>
+Malthus, logistic, Gompertz, Bass diffusion, 종족경쟁,
+Predator–Prey, Goodwin, 초과수요, Domar, Solow,
+동태적 Phillips curve 등 원본의 응용모형을 수식·표·그래프와 함께 수록한다.
+</p>
+<h2>관련 장</h2>
+<ul>
+<li><a href="difference-equation.html">차분방정식과 응용</a></li>
+<li><a href="dynamic optimization.html">동적최적화이론과 응용</a></li>
+<li><a href="eco-math2.html">경제수학 II</a></li>
+</ul>
 </body>
-
 </html>

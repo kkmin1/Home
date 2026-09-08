@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>미분방정식</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<style id="blog-readability-patch">
+body{max-width:980px;margin:0 auto;padding:1.5rem 1rem 3rem;line-height:1.72;overflow-wrap:break-word}
+h1{line-height:1.3} h2{margin-top:2.2rem;border-bottom:1px solid #bbb;padding-bottom:.25rem}
+h3{margin-top:1.6rem} h4{margin-top:1.3rem}
+.chapter-nav{position:sticky;top:0;z-index:20;padding:.8rem;border:1px solid #ccc;background:#fafafa;overflow-x:auto;white-space:nowrap;border-radius:6px}
+table{display:block;width:100%;max-width:100%;overflow-x:auto;border-collapse:collapse}
+th,td{padding:.45rem .6rem;vertical-align:top}
+img,svg{max-width:100%!important;height:auto!important;display:block;margin:1rem auto}
+.katex-display,.math-display,div.math,p.math{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.footnotes{margin-top:3rem;padding-top:1rem;border-top:1px solid #bbb;font-size:.92em}
+@media(max-width:640px){body{padding:.8rem .65rem 2rem;font-size:16px}h1{font-size:1.65rem}h2{font-size:1.35rem}h3{font-size:1.18rem}.chapter-nav{font-size:.9rem}}
+</style>
+<title>2계·고계 미분방정식</title>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head>
+<body><nav class="chapter-nav">
+<a href="system-of-differential equation.html">미분방정식 목차</a> ·
+<a href="differential-equation-basics.html">기초·1계</a> ·
+<a href="differential-equation-second-order.html">2계·고계</a> ·
+<a href="differential-equation-systems.html">연립계·안정성</a> ·
+<a href="phase diagram.html">위상도</a> ·
+<a href="differential-equation-applications.html">응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>2계·고계 미분방정식</h1><h4 style="text-align:justify">중첩의 원리(superposition principle)</h4>
+<p style="text-align:justify">선형 방정식은 해의 선형결합(linear combination) 또한 해가 된다.<sup><a href="#fn7" id="fnref7">[7]</a></sup></p>
+<p style="text-align:justify">선형미분방정식은 차수에 무관하게 각 도함수를 별개의 변수로 보면 선형방정식이다. 따라서 해의 선형결합 또한 해가 된다. 즉 중첩의 원리가 성립한다.</p>
+<table aria-label="중첩의 원리(superposition principle) 관련 표 1" style="border-collapse:collapse;table-layout:fixed;height:109.827px;width:559.413px"><colgroup><col style="width:559.413px"/></colgroup><tbody><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:justify">(정리) </p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify"><span class="math">u_{0} (t)y(t)+\,u_{1} (t)y ' (t)+u_{2} (t)y '' (t)+\, \cdots \,+u_{n} (t)y^{(n)} (t)=0</span></p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify">위 미분방정식의 해를 <span class="math">y_{1} ,\,y_{2} ,\,...,\,y_{n}</span>이라 할 때 이들의 선형결합도 해가 된다.</p>
+</td></tr></tbody></table>
+<p style="text-align:justify">(증명)</p>
+<p style="text-align:justify">ⅰ) n=1일 경우</p>
+<p style="text-align:justify"><span class="math">u_{1} (t)y'(t)+u_{0} (t)y(t)=0</span></p>
+<p style="text-align:justify"><span class="math">y_{1} \,,\,y_{2}</span> 가 위 미분방정식의 해이면 이의 선형 결합 <span class="math">ay_{1} +by_{2}</span> 도 해가 됨, a b는 임의 상수</p>
+<p style="text-align:justify"><span class="math">u_{1} (ay_{1} ' +by_{2} ' )+u_{0} (ay_{1} +by_{2} )=au_{1} y_{1} ' +bu_{1} y_{2} ' +u_{0} ay_{1} +bu_{0} y_{2}</span></p>
+<p style="text-align:justify"><span class="math">=a(u_{1} y_{1} ' +u_{0} y_{1} )+b(u_{1} y_{2} '+u_{0} y_{2} )=0</span>, (∵<span class="math">u_{1} y_{1} ' +u_{0} y_{1} =0</span> , <span class="math">u_{1} y_{2} ' +u_{0} y_{2} =0</span>)</p>
+<p style="text-align:justify">따라서 중첩의 원리는 1계 선형미분방정식의 경우에도 성립한다.</p>
+<p style="text-align:justify">ⅱ) n=2일 경우</p>
+<p style="text-align:justify"><span class="math">u_{2} (t)y''(t)+u_{1} (t)y ' (t)+u_{0} (t)y(t)=0</span></p>
+<p style="text-align:justify"><span class="math">y_{1} \,,\,y_{2}</span> 가 위 미분방정식의 해이면 <span class="math">ay_{1} +by_{2}</span> 도 해가 됨</p>
+<p style="text-align:justify"><span class="math">u_{2} (ay_{1} '' +by_{2} '' )+u_{1} (ay_{1} ' +by_{2} ' )+u_{0} (ay_{1} +by_{2} )</span></p>
+<p style="text-align:justify"><span class="math">=au_{2} y_{1} '' +bu_{2} y_{2} '' +au_{1} y_{1} ' +bu_{1} y_{2} ' +u_{0} ay_{1} +bu_{0} y_{2}</span></p>
+<p style="text-align:justify"><span class="math">=a(u_{2} y_{1} '' +u_{1} y_{1} ' +u_{0} y_{1} ' )+b(u_{2} y_{2} '' +u_{1} y_{1} ' +u_{0} y_{2} )=0</span></p>
+<p style="text-align:justify"> (∵<span class="math">u_{2} y_{1} '' +u_{1} y_{1} ' +u_{0} y_{1} ' =0</span> , <span class="math">u_{2} y_{2} '' +u_{1} y_{1} ' +u_{0} y_{2} =0</span>)</p>
+<p style="text-align:right">Q.E.D.</p>
+<p style="text-align:justify">이상의 이유로 선형미분방정식의 경우 임의의 a, b 값에 따라 무수히 많은 해가 존재한다.<sup><a href="#fn8" id="fnref8">[8]</a></sup></p>
+<table aria-label="중첩의 원리(superposition principle) 관련 표 2" style="border-collapse:collapse;table-layout:fixed;height:128.480px;width:559.413px"><colgroup><col style="width:559.413px"/></colgroup><tbody><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:justify">(정리) 해의 유일성, 존재성</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify"><span class="math">u_{2} (t)</span>, <span class="math">u_{1} (t)</span>, <span class="math">v(t)</span>가 점 <span class="math">t_{0}</span>를 포함하는 開區間 I(⊂ R)에서 연속일 때, 다음 미분방정식과 초기조건을 만족하는 해는 유일하다.</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify"><span class="math">u_{2} (t)y '' (t)+u_{1} (t)y ' (t)+u_{0} (t)y(t)=v(t)</span>, <span class="math">y(t_{0} )=y_{0}</span>, <span class="math">y ' (t_{0} )=y ' _{0}</span></p>
+</td></tr></tbody></table>
+<table aria-label="중첩의 원리(superposition principle) 관련 표 3" style="border-collapse:collapse;table-layout:fixed;height:219.053px;width:559.413px"><colgroup><col style="width:559.413px"/></colgroup><tbody><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:justify">(정리)</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify"><span class="math">u_{2} (t)</span>, <span class="math">u_{1} (t)</span>가 開區間 <span class="math">I=( \alpha ,\, \beta )</span>에서 연속이고, <span class="math">y_{1} \,,\,y_{2}</span> 가 모든 <span class="math">t \in I</span>에서 다음 미분방정식①과 조건 ②를 만족하면</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify"><span class="math">u_{2} (t)y '' (t)+u_{1} (t)y ' (t)+u_{0} (t)y(t)=0</span> .............①</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:left"><span class="math">W(y_{1} ,\,y_{2} )=y_{1} ' y_{2} -y_{1} y_{2} ' != 0</span> ...............②</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:left">구간 I의 다른 해들은 <span class="math">y_{1} \,,\,y_{2}</span>의 선형결합으로 유일하게 표시될 수 있다.</p>
+</td></tr></tbody></table>
+<p style="text-align:justify">(증명)</p>
+<p style="text-align:justify"><span class="math">Y(t)</span>를 ①의 해라고 하면 유일성, 존재성 정리에 의해 초기조건 <span class="math">y(t_{0} )=Y(t_{0} )</span>, <span class="math">y ' (t_{0} )=Y ' (t_{0} )</span>를 만족시키는 <span class="math">y(t)=Y(t)</span>인 유일해가 존재한다.</p>
+<p style="text-align:left">따라서 ①의 해가 <span class="math">y(t)=c_{1} y_{1} +c_{2} y_{2}</span> (<span class="math">c_{1} ,\,c_{2} != 0</span>)의 형태를 띠고 있다면</p>
+<p style="text-align:left"><span class="math">Y(t)=c_{1} y_{1} +c_{2} y_{2}</span> , Y가 <span class="math">y_{1} \,,\,y_{2}</span>의 선형결합으로 표시될 수 있음이 증명된다.</p>
+<p style="text-align:left">이제 초기조건을 만족시키는 <span class="math">y(t)=c_{1} y_{1} +c_{2} y_{2}</span>를 구한다.</p>
+<p style="text-align:left"><span class="math">y_{0} =c_{1} y_{1} (t_{0} )+c_{2} y_{2} (t_{0} )</span></p>
+<p style="text-align:left"><span class="math">y_{0} '=c_{1} y_{1} '(t_{0} )+c_{2} y_{2} '(t_{0} )</span></p>
+<p style="text-align:justify">⇒ <span class="math">{\begin{pmatrix}y_{1} &amp; \,y_{2} \\ y ' _{1} &amp; \,y ' _{2}\end{pmatrix}} {\begin{pmatrix}c_{1} \\ c_{2}\end{pmatrix}} \,=\, {\begin{pmatrix}y_{0} \\ y ' _{0}\end{pmatrix}}</span></p>
+<p style="text-align:justify">⇒ <span class="math">{\begin{pmatrix}c_{1} \\ c_{2}\end{pmatrix}} \,=\, {\begin{pmatrix}y_{1} &amp; \,y_{2} \\ y ' _{1} &amp; \,y ' _{2}\end{pmatrix}}^{-1} {\begin{pmatrix}y_{0} \\ y ' _{0}\end{pmatrix}}</span> <span class="math">= \frac{1}{y_{1} y_{2} '-y_{1} 'y_{2}} {\begin{pmatrix}y_{2} ' &amp; \,-y_{2} \\ -y ' _{1} &amp; \,y_{1}\end{pmatrix}} {\begin{pmatrix}y_{0} \\ y ' _{0}\end{pmatrix}}</span></p>
+<p style="text-align:justify">조건 ②에 의해 <span class="math">det {\begin{pmatrix}y_{1} &amp; \,y_{2} \\ y ' _{1} &amp; \,y ' _{2}\end{pmatrix}} =y_{1} y_{2} ' -y_{1} ' y_{2} \, != 0</span> 이므로 0이 아닌 <span class="math">c_{1} ,\,c_{2}</span>가 존재</p>
+<p style="text-align:justify">따라서 <span class="math">y_{1} \,,\,y_{2}</span>가 ①을 만족하는 해이면 Y가 <span class="math">y_{1} \,,\,y_{2}</span>의 선형결합으로 표시될 수 있음이 증명</p>
+<p style="text-align:justify"><span class="math">det {\begin{pmatrix}y_{1} &amp; \,y_{2} \\ y ' _{1} &amp; \,y ' _{2}\end{pmatrix}} \, != 0</span> 이므로 <span class="math">y_{1} \,,\,y_{2}</span>는 선형독립임을 의미. 이 조건을 <span class="math">y_{1} \,,\,y_{2}</span>의 Wronskian이라 함<sup><a href="#fn9" id="fnref9">[9]</a></sup></p>
+<p style="text-align:right">Q.E.D.</p>
+<h4 style="text-align:justify">한 근에 독립인 근의 도출</h4>
+<p style="text-align:justify"><span class="math">y '' (t)+u_{1} (t)y ' (t)+u_{0} (t)y(t)=0</span> ............①</p>
+<p style="text-align:justify"><span class="math">y_{1}</span>을 ①의 한 근이라 할 때</p>
+<p style="text-align:justify">이와 독립인 다른 한 근은 <span class="math">y_{2}</span>라 하자.</p>
+<p style="text-align:justify"><span class="math">y_{2} (t)=g(t)y_{1} (t)</span>, (<span class="math">g(t) != 0</span>).............②</p>
+<p style="text-align:justify"><span class="math">y_{2}</span>가 독립이려면 Wronskian이 0이 아니어야 한다. 즉</p>
+<p style="text-align:justify"><span class="math">det {\begin{pmatrix}y_{1} &amp; \,y_{2} \\ y ' _{1} &amp; \,y ' _{2}\end{pmatrix}} \,=\,det {\begin{pmatrix}y_{1} &amp; \;gy_{1} \\ y_{1} ' &amp; \;g'y_{1} +gy_{1} '\end{pmatrix}} \,=g'y_{1}^{2} +gy_{1} y_{1} '-gy_{1} y_{1} '\,=\,g'y_{1}^{2} \, != 0</span></p>
+<p style="text-align:justify">따라서 <span class="math">y_{2} (t)=g(t)y_{1} (t)</span>는 <span class="math">y_{1} (t)</span>에 독립인 근</p>
+<p style="text-align:justify">②를 1차, 2차 미분하면</p>
+<p style="text-align:justify"><span class="math">y_{2} ' =g ' y_{1} +gy_{1} '</span> .....................③</p>
+<p style="text-align:justify"><span class="math">y_{2} '' =g '' y_{1} +g ' y_{1} ' +g ' y_{1} ' +gy_{1} ''</span> .......................④</p>
+<p style="text-align:justify">②가 ①의 근이므로 ②, ③, ④를 ①에 대입하면</p>
+<p style="text-align:justify"><span class="math">(g '' y_{1} +g ' y_{1} ' +g ' y_{1} ' +gy_{1} '' )+u_{1} (g ' y_{1} +gy_{1} ' )+u_{0} gy_{1}</span></p>
+<p style="text-align:justify"><span class="math">=\,g(y '' +u_{1} y_{1} ' +u_{0} y)+g '' y_{1} +(2y_{1} ' +u_{1} y_{1} )g ' \,</span></p>
+<p style="text-align:justify"><span class="math">=\,g '' y_{1} +(2y_{1} ' +u_{1} y_{1} )g ' \,=0</span> , (∵<span class="math">y '' +u_{1} y_{1} ' +u_{0} y=0\,</span>)</p>
+<p style="text-align:justify">⇒ <span class="math">\,g '' +( \frac{2y_{1} '}{y_{1}} +u_{1} )g ' \,=0</span>..........⑤</p>
+<p style="text-align:justify">즉, ⑤를 만족하는 g(t)를 구하면 ②가 ①의 근이 된다.</p>
+<p style="text-align:justify"><span class="math">h=g '</span>라 하면 ⑤는 </p>
+<p style="text-align:justify"><span class="math">\,h'+( \frac{2y_{1} ' }{y_{1}} +u_{1} )h\,=0</span></p>
+<p style="text-align:justify">⇒ <span class="math">\, \frac{h'}{h} \,=\,-( \frac{2y_{1} ' }{y_{1}} +u_{1} )</span></p>
+<p style="text-align:justify">양변 적분하면</p>
+<p style="text-align:justify"><span class="math">\,\ln h\,= \int \,-( \frac{2y_{1} ' }{y_{1}} +u_{1} )dt\,+\,C_{1}</span></p>
+<p style="text-align:justify">⇒ <span class="math">h(t)=C\,\exp \left\{ - \int {\left( \frac{2y_{1} ' }{y_{1}} +u_{1} \right) dx} \right\}</span>, where C는 상수</p>
+<p style="text-align:justify"><span class="math">=C\,\exp \left{ -2 \int {\left( \frac{y_{1} ' }{y_{1}} \right) dt- \int {u_{1} dt}} \right\}</span></p>
+<p style="text-align:justify"><span class="math">=C\,\exp \left[ -2\ln y_{1} - \int {u_{1} (t)dt} \right]</span></p>
+<p style="text-align:justify"><span class="math">=\, \frac{Ce^{- \int {u_{1} dt}}}{y_{1}^{2}}</span></p>
+<p style="text-align:justify"><span class="math">h=g '</span> 이므로</p>
+<p style="text-align:justify"> <span class="math">g=\, \int \frac{Ce^{- \int {u_{1} dt}}}{y_{1}^{2}} dt\,+\,D</span>, where D는 상수</p>
+<p style="text-align:justify">임의의 근이므로 일반적으로 C=1, D=0를 사용한다. 따라서</p>
+<p style="text-align:justify">∴ <span class="math">g(t)\,=\, \int \frac{e^{- \int {u_{1} dt}}}{y_{1}^{2}} dt\,</span></p>
+<p style="text-align:justify">이 방법을 계수축소법(reduction of order)라 하고, 이 공식을 Abel의 공식이라 한다. </p>
+<p style="text-align:justify">일반해는</p>
+<p style="text-align:justify"><span class="math">y(t)=c_{1} y_{1} (t)+c_{2} g(t)y_{1} (t)</span></p>
+<p style="text-align:justify">예) <span class="math">y''+2y'+y=0</span> 의 한 근은 <span class="math">y(t)=e^{-t}</span> 일 때 이와 독립인 다른 한 근은?</p>
+<p style="text-align:justify">(풀이)</p>
+<p style="text-align:justify"><span class="math">y_{1} =e^{-t}</span>, <span class="math">u_{1} \,=\,2</span> 이므로</p>
+<p style="text-align:justify"><span class="math">g(t)= \int {\frac{1}{e_{}^{-2t}} \,e^{- \int {2dt}} dt\,}</span></p>
+<p style="text-align:justify"><span class="math">= \int {\left. e_{}^{2t} \,e^{-2t} dt\, \right.}</span></p>
+<p style="text-align:justify"><span class="math">=t\,</span></p>
+<p style="text-align:justify">∴ <span class="math">y_{2} (t)\,=ty_{1} (t)\,=\,te^{-t}</span> 는 독립인 다른 한 근.</p>
+<p style="text-align:right">(풀이끝)</p>
+<p style="text-align:justify">예) <span class="math">t^{2} y''+2ty'-2y\,=\,0</span> 의 한 근이 <span class="math">y_{1} (t)=t</span> 일 때 다른 한 근은?</p>
+<p style="text-align:justify">(풀이)</p>
+<p style="text-align:justify"><span class="math">t != 0</span> 이므로 일반형으로 고치면 </p>
+<p style="text-align:justify"><span class="math">y '' + \frac{2}{t} y ' - \frac{2}{t^{2}} y\,=\,0</span></p>
+<p style="text-align:justify"><span class="math">y_{1} =t</span>, <span class="math">u_{1} \,=\, \frac{2}{t}</span> 이므로</p>
+<p style="text-align:justify"><span class="math">g(t)= \int {\frac{1}{t_{}^{2}} \,e^{- \int {\frac{2}{t} dt}} dt\,}</span></p>
+<p style="text-align:justify"><span class="math">= \int {\frac{1}{t_{}^{2}} \,t^{-2} dt\,} = \int {\,t^{-4} dt\,=\,- \frac{1}{3} t^{-3} \,}</span></p>
+<p style="text-align:justify">∴ <span class="math">y_{2} (t)\,=- \frac{1}{3t^{3}} t\,=\,- \frac{1}{3t^{2}}</span> 는 독립인 다른 한 근</p>
+<p style="text-align:justify">따라서 일반해는</p>
+<p style="text-align:justify"><span class="math">y(t)=c_{1} t+c_{2} \frac{1}{3t^{2}}</span> , (∵<span class="math">c_{2}</span>를 조정하면 부호는 의미 없다.)</p>
+<p style="text-align:right">(풀이끝)</p>
+<h4 style="text-align:justify">상수 계수를 갖는 2계 선형동차미분방정식</h4>
+<p style="text-align:justify"><span class="math">y '' (t)+a_{1} y ' (t)+a_{2} y(t)=0</span>, where <span class="math">a_{1} ,\,a_{2}</span>는 상수</p>
+<p style="text-align:justify">위 미분방정식의 해는 <span class="math">y(t)=e^{\lambda t}</span>, 이를 대입하면</p>
+<p style="text-align:justify"><span class="math">\lambda^{2} e^{\lambda t} + \lambda a_{1} e^{\lambda t} +a_{2} e^{\lambda t} =0</span></p>
+<p style="text-align:justify">⇒ <span class="math">(\lambda^{2} + \lambda a_{1} +a_{2} )e^{\lambda t} =0</span></p>
+<p style="text-align:justify">∴ <span class="math">\lambda^{2} + \lambda a_{1} +a_{2} =0</span></p>
+<p style="text-align:justify">이를 특성방정식(characteristic equation)이라 한다.</p>
+<p style="text-align:justify">따라서 <span class="math">\lambda *</span>를 특성방정식을 만족하는 해라 하면 <span class="math">e^{\lambda *t}</span>는 미분방정식의 해가 된다.</p>
+<p style="text-align:justify">근의 공식을 적용하면</p>
+<p style="text-align:justify"><span class="math">\lambda_{1}^{*} = \frac{-a_{1} + \sqrt {a_{1}^{2} -4a_{2}}}{2}</span> , <span class="math">\lambda_{2}^{*} = \frac{-a_{1} - \sqrt {a_{1}^{2} -4a_{2}}}{2}</span></p>
+<p style="text-align:justify">∴ <span class="math">y_{1} (t)\,=\,e^{\lambda_{1}^{*} t}</span> , <span class="math">y_{2} (t)\,=\,e^{\lambda_{2}^{*} t}</span></p>
+<p style="text-align:justify">ⅰ) 두 개의 실근이 존재하는 경우(<span class="math">\sqrt {a_{1}^{2} -4a_{2}} \,&gt;0</span>)</p>
+<p style="text-align:justify">Wronskian은 </p>
+<p style="text-align:justify"><span class="math">det {\begin{pmatrix}y_{1} &amp; \,y_{2} \\ y ' _{1} &amp; \,y ' _{2}\end{pmatrix}} \,=\,det {\begin{pmatrix}e^{\lambda_{1}^{*} t}&amp;\;e^{\lambda_{2}^{*} t} \\ \lambda_{1} e^{\lambda_{1}^{*} t}&amp;\; \lambda_{2} e^{\lambda_{2}^{*} t}\end{pmatrix}} \,= \lambda_{2} e^{\lambda_{1}^{*} t} e^{\lambda_{2}^{*} t} \,- \lambda_{1} e^{\lambda_{1}^{*} t} e^{\lambda_{2}^{*} t}</span></p>
+<p style="text-align:justify"><span class="math">=( \lambda_{2} - \lambda_{1} )e^{\lambda_{1}^{*} t} e^{\lambda_{2}^{*} t} \,=\,- \sqrt {a_{1}^{2} -4a_{2}} e^{\lambda_{1}^{*} t} e^{\lambda_{2}^{*} t} != 0</span>, (∵중근이 아니므로 <span class="math">\sqrt {a_{1}^{2} -4a_{2}} \, != 0</span>)</p>
+<p style="text-align:justify">따라서 <span class="math">y_{1} (t)\,=\,e^{\lambda_{1}^{*} t}</span> , <span class="math">y_{2} (t)\,=\,e^{\lambda_{2}^{*} t}</span> 은 <span class="math">\lambda</span>에 관계없이 항상 선형독립이다. </p>
+<p style="text-align:justify">따라서 임의의 근을 <span class="math">y_{1} (t)\,</span> , <span class="math">y_{2} (t)\,</span>의 선형결합으로 표시할 수 있다.</p>
+<p style="text-align:justify"><span class="math">y(t)\,=c_{1} y_{1} (t)+c_{2} y_{2} (t)\,=\,c_{1} e^{\lambda_{1}^{*} t} +c_{2} e^{\lambda_{2}^{*} t}</span></p>
+<p style="text-align:justify">이를 HLDE의 일반해라고 한다.</p>
+<p style="text-align:justify">ⅱ) 중근일 경우(<span class="math">\sqrt {a_{1}^{2} -4a_{2}} \,=0</span>)</p>
+<p style="text-align:justify"><span class="math">\lambda_{}^{*} =- \frac{a_{1}}{2}</span> </p>
+<p style="text-align:justify">따라서 한 근은 <span class="math">y_{1} (t)=e^{- \frac{a_{1}}{2} t}</span> </p>
+<p style="text-align:justify">독립인 다른 해는 앞에서 구한 Abel의 공식을 적용하면</p>
+<p style="text-align:justify"><span class="math">g(t)= \int {\frac{1}{e^{a_{1} t}} \,e^{- \int {a_{1} dt}} dt\,}</span></p>
+<p style="text-align:justify"><span class="math">= \int {e^{a_{1} t} \,e^{-a_{1} t} dt\,=\,t\,}</span></p>
+<p style="text-align:justify"><span class="math">THEREFORE \,y_{2} (t)\,=\,ty_{1} (t)</span></p>
+<p style="text-align:justify">즉 중근일 경우 두 번째 근은 계수에 상관없이 항상 <span class="math">\,y_{2} (t)\,=\,ty_{1} (t)</span>이 된다.</p>
+<p style="text-align:justify">따라서 일반해는</p>
+<p style="text-align:justify"><span class="math">y(t)=c_{1} e^{\lambda *t} \,+\,c_{2} te^{\lambda *t}</span> </p>
+<p style="text-align:justify">ⅲ) 허근일 경우(<span class="math">\sqrt {a_{1}^{2} -4a_{2}} \,&lt;0</span>)</p>
+<p style="text-align:justify"><span class="math">\sqrt {a_{1}^{2} -4a_{2}} \,=\,i \sqrt {4a_{2} -a_{1}^{2}}</span> 이므로</p>
+<p style="text-align:justify"><span class="math">\lambda_{1}^{*} = \frac{-a_{1} +i \sqrt {4a_{2} -a_{1}^{2}}}{2}</span> , <span class="math">\lambda_{2}^{*} = \frac{-a_{1} -\,i \sqrt {4a_{2} -a_{1}^{2}}}{2}</span></p>
+<p style="text-align:justify">따라서 일반해는</p>
+<p style="text-align:justify"><span class="math">y(t)=c_{1} e^{\alpha t+i \beta t} +c_{2} e^{\alpha t-i \beta t}</span> , where <span class="math">\alpha \,=\,- \frac{a_{1}}{2} \,,\; \beta \,=\, \frac{\, \sqrt {4a_{2} -a_{1}^{2}}}{2}</span></p>
+<p style="text-align:justify">이 근은 복소수를 포함하고 있는데 오일러공식을 통해 실수형태로 유도할 수 있다.</p>
+<p style="text-align:justify">두 근을 <span class="math">e^{\alpha t+i \beta t} ,\,e^{\alpha t-i \beta t}</span>라 할 때 두 근의 선형결합도 근이므로 다음 <span class="math">y_{3} ,\,y_{4}</span>도 근이다.</p>
+<p style="text-align:justify"><span class="math">y_{3} = \frac{1}{2} e^{\alpha t+i \beta t} + \frac{1}{2} e^{\alpha t-i \beta t}</span></p>
+<p style="text-align:justify"><span class="math">=e^{\alpha t} \frac{1}{2} (e^{i \beta t} +e^{-i \beta t} )</span></p>
+<p style="text-align:justify"><span class="math">=e^{\alpha t} \,\cos \beta t</span>.........<sup><a href="#fn10" id="fnref10">[10]</a></sup> </p>
+<p style="text-align:justify"><span class="math">y_{4} \,= \frac{1}{2i} e^{\alpha t+i \beta t} - \frac{1}{2i} e^{\alpha t-i \beta t}</span></p>
+<p style="text-align:justify"><span class="math">=e^{\alpha t} \frac{1}{2i} (e^{i \beta t} -e^{-i \beta t} )</span></p>
+<p style="text-align:justify"><span class="math">=e^{\alpha t} \,\sin \beta t</span> , (∵ 오일러공식)</p>
+<p style="text-align:justify">중첩의 원리에 따라 이 두 근의 합도 근이 되므로 따라서 일반해는</p>
+<p style="text-align:justify"><span class="math">y(t)=c_{1} e^{\alpha t} \,\cos \beta t+c_{2} e^{\alpha t} \,\sin \beta t</span> </p>
+<p style="text-align:justify">예) 다음 미분방정식을 푸시오</p>
+<p style="text-align:justify">(a) <span class="math">y '' +2y ' -3y=0</span></p>
+<p style="text-align:justify">(b) <span class="math">y '' +2y ' +y=0</span></p>
+<p style="text-align:justify">(c) <span class="math">y '' +2y ' +2y=0</span></p>
+<p style="text-align:justify">(풀이)</p>
+<p style="text-align:justify">(a) <span class="math">\lambda^{2} +2 \lambda -3=0</span> ⇒ <span class="math">\lambda =1,\,-3</span>(서로 다른 실근)</p>
+<p style="text-align:justify">∴ <span class="math">y(t)=c_{1} e^{t} \,+c_{2} e^{-3t}</span></p>
+<p style="text-align:justify">(b) <span class="math">\lambda^{2} +2 \lambda +1=0</span> ⇒ <span class="math">\lambda =\,-1</span>(중근)</p>
+<p style="text-align:justify">∴ <span class="math">y(t)=c_{1} e^{-t} \,+c_{2} te^{-t}</span></p>
+<p style="text-align:justify">(c) <span class="math">\lambda^{2} +2 \lambda +2=0</span> ⇒ <span class="math">\lambda =\,-1\pm i</span>(허근)</p>
+<p style="text-align:justify">∴ <span class="math">y(t)=c_{1} e^{-t} \,cost+c_{2} e^{-t} \,sint</span>, (∵<span class="math">\alpha \,=\,-1\,,\; \beta \,=1)\,</span>)</p>
+<p style="text-align:right">(풀이끝)</p>
+<h4 style="text-align:justify">Euler 방정식(Euler equation)</h4>
+<p style="text-align:justify"><span class="math">t^{2} y '' (t)+a_{1} ty ' (t)+a_{2} y(t)=0</span>, where <span class="math">a_{1} ,\,a_{2}</span>는 상수, <span class="math">t != 0</span></p>
+<p style="text-align:justify">이런 형태의 미분방정식을 오일러 방정식이라 한다. 이의 풀이는 다음과 같다.</p>
+<p style="text-align:justify"><span class="math">y=t^{r}</span> 을 대입하면</p>
+<p style="text-align:justify"><span class="math">t^{2} r(r-1)t^{r-2} +a_{1} trt^{r-1} +a_{2} t^{r} =0</span></p>
+<p style="text-align:justify">⇒ <span class="math">t^{r} [r(r-1)+a_{1} r+a_{2} ]=0</span></p>
+<p style="text-align:justify">∴ <span class="math">r(r-1)+a_{1} r+a_{2} =0</span></p>
+<p style="text-align:justify">⇒ <span class="math">r^{2} +(a_{1} -1)r+a_{2} =0</span></p>
+<p style="text-align:justify">ⅰ) 두 개의 실근이 존재하는 경우(<span class="math">\sqrt {(a_{1} -1) ^{2} -4a_{2}} \,&gt;0</span>)</p>
+<p style="text-align:justify"><span class="math">r_{1}^{*} \,= \frac{1-a_{1} + \sqrt {(a_{1} -1) ^{2} -4a_{2}}}{2}</span>, <span class="math">\,r_{2}^{*} \,= \frac{1-a_{1} - \sqrt {(a_{1} -1) ^{2} -4a_{2}}}{2}</span></p>
+<p style="text-align:justify"><span class="math">y(t)\,=\,c_{1} t^{r_{1}^{*}} +c_{2} t^{r_{2}^{*}}</span></p>
+<p style="text-align:justify">ⅱ) 중근일 경우(<span class="math">\sqrt {(a_{1} -1) ^{2} -4a_{2}} \,=0</span>)</p>
+<p style="text-align:justify"><span class="math">r^{*} \,=\, \frac{1-a_{1}}{2}</span> ⇒ <span class="math">y_{1} (t)\,=\,t^{r*} \,=\,t^{\frac{1-a_{1}}{2}}</span></p>
+<p style="text-align:justify">다른 한 근은</p>
+<p style="text-align:justify"><span class="math">g(t)= \int {\frac{1}{\left( t^{\frac{1-a_{1}}{2}} \right) ^{2}} \,\exp \left[ - \int {\frac{a_{1}}{t} dt} \right] dt\,}</span>.............<sup><a href="#fn11" id="fnref11">[11]</a></sup> </p>
+<p style="text-align:justify"><span class="math">= \int {t^{a_{1} -1} \,e^{\ln t^{-a_{1}}} dt\,}</span></p>
+<p style="text-align:justify"><span class="math">= \int {t^{-1} \,dt\,}</span></p>
+<p style="text-align:justify"><span class="math">=\,\ln t</span></p>
+<p style="text-align:justify"><span class="math">THEREFORE \,y_{2} (t)\,=\,\ln t \left( \,t^{\frac{1-a_{1}}{2}} \right)</span></p>
+<p style="text-align:justify">일반해는</p>
+<p style="text-align:justify"><span class="math">THEREFORE \,y(t)\,=c_{1} \,t^{\frac{1-a_{1}}{2}} \,+c_{2} \,\ln t \left( \,t^{\frac{1-a_{1}}{2}} \right)</span></p>
+<p style="text-align:justify">ⅲ) 허근일 경우(<span class="math">\sqrt {(a_{1} -1) ^{2} -4a_{2}} \,&lt;0</span>)</p>
+<p style="text-align:justify"><span class="math">r_{1}^{*} \,= \frac{1-a_{1} +i \sqrt {4a_{2} -(a_{1} -1) ^{2}}}{2}</span>  , <span class="math">r_{2}^{*} \,= \frac{1-a_{1} -i \sqrt {4a_{2} -(a_{1} -1) ^{2}}}{2}</span></p>
+<p style="text-align:justify">일반해는</p>
+<p style="text-align:justify"><span class="math">y(t)=c_{1} t^{\alpha +i \beta } +c_{2} t^{\alpha -i \beta }</span> , where <span class="math">\alpha \,=\, \frac{1-a_{1}}{2} \,,\; \beta \,=\, \frac{\, \sqrt {4a_{2} -(a_{1} -1) ^{2}}}{2}</span></p>
+<p style="text-align:justify">그런데</p>
+<p style="text-align:justify"><span class="math">t^{\alpha +i \beta } \,=\,e^{\ln t^{\alpha +i \beta }}</span></p>
+<p style="text-align:justify"><span class="math">=\,e^{\ln t^{\alpha }} e^{\ln t^{i \beta }}</span></p>
+<p style="text-align:justify"><span class="math">=\,t^{\alpha } e^{i \beta \ln t}</span></p>
+<p style="text-align:justify"><span class="math">=t^{\alpha } [\cos ( \beta \ln t)+i\,\sin ( \beta \ln t)]</span></p>
+<p style="text-align:justify"><span class="math">t^{\alpha -i \beta } \,</span> 도 위와 같은 논리로 전개하고 이 두 근의 선형 결합도 근이므로 앞 절에서 적용한 방식처럼 전개하면 일반해는 다음과 같다.</p>
+<p style="text-align:justify">∴ <span class="math">y(t)=c_{1} t^{\alpha } \cos ( \beta \ln t)+c_{2} t^{\alpha } \,\sin ( \beta \ln t)</span> </p>
+<p style="text-align:justify">예) <span class="math">t^{2} y''+2ty'+2y=0</span></p>
+<p style="text-align:justify">(풀이) </p>
+<p style="text-align:justify"><span class="math">y=t^{r}</span> 을 대입하면</p>
+<p style="text-align:justify"><span class="math">t^{2} r(r-1)t^{r-2} +2trt^{r-1} +2t^{r} =0</span></p>
+<p style="text-align:justify">⇒ <span class="math">t^{r} [r(r-1)+2r+2]=0</span></p>
+<p style="text-align:justify">∴ <span class="math">r^{2} +r+2=0</span></p>
+<p style="text-align:justify"><span class="math">r_{1} \,,\;r_{2} \,= \frac{-1\pm i \sqrt {7}}{2}</span></p>
+<p style="text-align:justify"><span class="math">THEREFORE \alpha \,=\,- \frac{1}{2} \,,\; \beta \,=\, \frac{\sqrt {7}}{2}</span></p>
+<p style="text-align:justify">일반해는 <span class="math">y(t)=c_{1} t^{- \frac{1}{2}} \cos ( \frac{\sqrt {7}}{2} \,\ln t)+c_{2} t^{- \frac{1}{2}} \,\sin ( \frac{\sqrt {7}}{2} \,\ln t)</span></p>
+<p style="text-align:right">(풀이끝)</p>
+<p style="text-align:justify">비동차 선형미분방정식(non-homogeneous linear differential equations)</p>
+<p style="text-align:justify">다음과 같은 형태를 비동차 선형미분방정식이라 한다.</p>
+<p style="text-align:justify"><span class="math">u_{0} (t)y(t)+\,u_{1} (t)y'(t)+u_{2} (t)y''(t)+\, \cdots \,+u_{n} (t)y^{(n)} (t)=v(t)</span></p>
+<p style="text-align:justify">동차 선형미분방정식을 HLDE, 비동차 선형미분방정식을 N-HLDE라 하자.</p>
+<table aria-label="Euler 방정식(Euler equation) 관련 표 4" style="border-collapse:collapse;table-layout:fixed;height:154.707px;width:559.413px"><colgroup><col style="width:559.413px"/></colgroup><tbody><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:justify">(정리)</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify">N-HLDE의 해는 <span class="math">y_{g} \,=\,y_{c} +y_{p}</span> 로 구성된다.</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify"><span class="math">y_{g}</span>는 N-HLDE의 일반해(general solution)</p>
+<p style="text-align:justify"><span class="math">y_{p}</span>는 N-HLDE의 특수해(particular solution or particular integral)</p>
+<p style="text-align:justify"><span class="math">y_{c}</span>는 N-HLDE에 대응하는 HLDE의 해, 여함수(complementary function) 또는 동차해</p>
+</td></tr></tbody></table>
+<p style="text-align:justify">(증명)</p>
+<p style="text-align:justify">n=2일 경우 N-HLDE은</p>
+<p style="text-align:justify"><span class="math">u_{2} (t)y '' (t)+u_{1} (t)y ' (t)+u_{0} (t)y(t)=v(t)</span>..........①</p>
+<p style="text-align:justify"><span class="math">y_{g}</span>, <span class="math">y_{p}</span>를 ①의 두 해라고 하면</p>
+<p style="text-align:justify">이들의 선형결합인 <span class="math">c_{1} y_{g} +c_{2} y_{p}</span>는 ①의 해가 아니다.<sup><a href="#fn12" id="fnref12">[12]</a></sup></p>
+<p style="text-align:justify">①의 HLDE 부분은</p>
+<p style="text-align:justify"><span class="math">u_{2} (t)y '' (t)+u_{1} (t)y ' (t)+u_{0} (t)y(t)=0</span> ............②</p>
+<p style="text-align:justify"><span class="math">y_{g} -y_{p}</span>는 ②의 해가 된다.</p>
+<p style="text-align:justify">∵ <span class="math">u_{2} (y_{g} '' -y_{p} '' )+u_{1} (y_{g} ' -y_{p} ' )+u_{0} (y_{g} -y_{p} )</span></p>
+<p style="text-align:justify"><span class="math">=(u_{2} y_{g} '' +u_{1} y_{g} ' +u_{0} y_{g} )-(u_{2} y_{p} '' +u_{1} y_{p} ' +u_{0} y_{p} )=v-v=0</span></p>
+<p style="text-align:left">즉 비동차 방정식 ①의 두 근의 차는 해당되는 동차 방정식의 근이 된다.</p>
+<p style="text-align:left">한편 <span class="math">y_{1} \,,\;y_{2}</span>를 해당되는 동차 방정식 ②의 두 근이라 할 때 중첩의 원리에 의해 <span class="math">c_{1} y_{1} +c_{2} y_{2}</span>도 근이 된다.</p>
+<p style="text-align:left">앞에서 <span class="math">y_{g} -y_{p}</span>는 ②의 근이라 했으므로 앞의 정리에 의해 서로 독립인 두 해들의 선형결합으로 표시 가능</p>
+<p style="text-align:left"><span class="math">y_{g} -y_{p} =c_{1} y_{1} +c_{2} y_{2}</span> </p>
+<p style="text-align:left">⇒ <span class="math">y_{g} =y_{p} +\,c_{1} y_{1} +c_{2} y_{2}</span></p>
+<p style="text-align:left"><span class="math">c_{1} y_{1} +c_{2} y_{2} \,=\,y_{c}</span>는 ②의 해이므로</p>
+<p style="text-align:left">∴ <span class="math">y_{g} =y_{p} +\,y_{c}</span></p>
+<p style="text-align:right">Q.E.D.</p>
+<p style="text-align:justify">따라서  N-HLDE의 해를 구하는 절차는 다음과 같다.<sup><a href="#fn13" id="fnref13">[13]</a></sup></p>
+<p style="text-align:justify">ⅰ) N-HLDE에 대응하는 HLDE의 해를 구함</p>
+<p style="text-align:justify">ⅱ) N-HLDE의 한 특수해를 구함</p>
+<p style="text-align:justify">ⅲ) <span class="math">y_{g} =y_{p} +\,y_{c}</span> 를 이용해서 일반해를 구함</p>
+<h4 style="text-align:justify">N-HLDE의 특수해를 구하는 방법</h4>
+<p style="text-align:justify">2차 N-HLDE은 다음과 같다.</p>
+<p style="text-align:justify"><span class="math">y '' (t)+u_{1} (t)y ' (t)+u_{0} (t)y(t)=v(t)</span>............①</p>
+<p style="text-align:justify">N-HLDE에 대응하는 HLDE의 근이면서, 또한 <span class="math">W(y_{1} ,\,y_{2} ) != 0</span> 만족하는 두 근을 <span class="math">y_{1} ,\,y_{2}</span> 라 하면 </p>
+<p style="text-align:justify"><span class="math">y_{p} =g_{1} y_{1} +g_{2} y_{2}</span> ...........②</p>
+<p style="text-align:justify">②가 ①을 만족하도록 <span class="math">g_{1} ,\;g_{2}</span>를 구함</p>
+<p style="text-align:justify">②를 미분하면</p>
+<p style="text-align:justify"><span class="math">y ' _{p} =g ' _{1} y_{1} +g ' _{2} y_{2} +g_{1} y ' _{1} +g_{2} y ' _{2}</span></p>
+<p style="text-align:justify"><span class="math">g ' _{1} y_{1} +g ' _{2} y_{2} =0</span> 이라 가정하면</p>
+<p style="text-align:justify"><span class="math">y ' _{p} =g_{1} y ' _{1} +g_{2} y ' _{2}</span>..........③</p>
+<p style="text-align:justify">이를 미분하면</p>
+<p style="text-align:justify"><span class="math">y '' _{p} =g ' _{1} y ' _{1} +g ' _{2} y ' _{2} +g_{1} y '' _{1} +g_{2} y '' _{2}</span>.................④</p>
+<p style="text-align:justify">②, ③, ④를 ①에 대입하면</p>
+<p style="text-align:justify"><span class="math">(g ' _{1} y ' _{1} +g ' _{2} y ' _{2} +g_{1} y '' _{1} +g_{2} y '' _{2} )+u_{1} (g_{1} y ' _{1} +g_{2} y ' _{2} )+u_{0} (g_{1} y_{1} +g_{2} y_{2} )=v(t)</span></p>
+<p style="text-align:justify">⇒ <span class="math">(g ' _{1} y ' _{1} +g ' _{2} y ' _{2} )+[(g_{1} y '' _{1} +g_{2} y '' _{2} )+u_{1} (g_{1} y ' _{1} +g_{2} y ' _{2} )+u_{0} (g_{1} y_{1} +g_{2} y_{2} )]=v(t)</span></p>
+<p style="text-align:justify">⇒ <span class="math">g ' _{1} y ' _{1} +g ' _{2} y ' _{2} =v(t)</span> ...........⑤<sup><a href="#fn14" id="fnref14">[14]</a></sup> </p>
+<p style="text-align:justify">한편 앞에서 <span class="math">g ' _{1} y_{1} +g ' _{2} y_{2} =0</span> 이라 가정했으므로 ⑤와 함께 두 개의 연립방정식이 도출된다.</p>
+<p style="text-align:justify"><span class="math">g ' _{1} y_{1} +g ' _{2} y_{2} =0</span></p>
+<p style="text-align:justify"><span class="math">g ' _{1} y ' _{1} +g ' _{2} y ' _{2} =v(t)</span></p>
+<p style="text-align:justify">∴ <span class="math">{\begin{pmatrix}g' _{1} \\ g' _{2}\end{pmatrix}} = {\begin{pmatrix}y_{1} &amp; y_{2} \\ y ' _{1} &amp; \;y ' _{2}\end{pmatrix}}^{-1} {\begin{pmatrix}0 \\ v\end{pmatrix}}</span></p>
+<p style="text-align:justify"><span class="math">= \frac{1}{W(y_{1} ,\,y_{2} )} {\begin{pmatrix}y' _{2} &amp; -y_{2} \\ -y ' _{1} &amp; \;y_{1}\end{pmatrix}} {\begin{pmatrix}0 \\ v\end{pmatrix}}</span></p>
+<p style="text-align:justify"><span class="math">= \frac{1}{W(y_{1} ,\,y_{2} )} {\begin{pmatrix}-vy_{2} \\ \;vy_{1}\end{pmatrix}}</span></p>
+<p style="text-align:justify">∴ <span class="math">g_{1} (t)\,=\, \int {\frac{-vy_{2}}{W(y_{1} ,\,y_{2} )} dt}</span>,  <span class="math">g_{2} (t)\,=\, \int {\frac{vy_{1}}{W(y_{1} ,\,y_{2} )} dt}</span></p>
+<p style="text-align:justify">따라서 특수해는</p>
+<p style="text-align:justify"><span class="math">y_{p} =g_{1} y_{1} +g_{2} y_{2}</span> , where <span class="math">g_{1} (t)\,=\, \int {\frac{-vy_{2}}{W(y_{1} ,\,y_{2} )} dt}</span> ,  <span class="math">g_{2} (t)\,=\, \int {\frac{vy_{1}}{W(y_{1} ,\,y_{2} )} dt}</span></p>
+<p style="text-align:justify">예) <span class="math">y''+3y'+2y=e^{-t}</span> 의 특수해는?</p>
+<p style="text-align:justify">(풀이)</p>
+<p style="text-align:justify">이의 HLDE은 <span class="math">y '' +3y ' +2y=0</span></p>
+<p style="text-align:justify"><span class="math">\lambda^{2} +3 \lambda +2=0</span> 에서 <span class="math">\lambda_{1} \,=\,-1\,,\; \lambda_{2} \,=\,-2</span></p>
+<p style="text-align:justify">따라서 HLDE 의 서로 독립인 두 근은 <span class="math">y_{1} =e^{-2t}</span> , <span class="math">y_{2} =e^{-t}</span></p>
+<p style="text-align:justify"><span class="math">y' _{1} =-2e^{-2t}</span> , <span class="math">y' _{2} =-e^{-t}</span></p>
+<p style="text-align:justify"><span class="math">W(y_{1} ,\,y_{2} )\,=\,y_{1} y ' _{2} -y ' _{1} y_{2} \,=e^{-2t} (-e^{-t} )-(-2e^{-2t} )e^{-t} \,=\,e^{-3t} \,+e^{-3t} \,=\,2e^{-3t}</span></p>
+<p style="text-align:justify">이제 N-HLDE 의 한 근은, <span class="math">v\,=\,e^{-t}</span> 를 대입하면</p>
+<p style="text-align:justify"><span class="math">g_{1} (t)\,=\, \int {\frac{-vy_{2}}{W(y_{1} ,\,y_{2} )} dt}</span></p>
+<p style="text-align:justify"><span class="math">\,=\, \int {\frac{-e^{-2t}}{2e^{-3t}} dt} \,=\,- \frac{1}{2} e^{t}</span></p>
+<p style="text-align:justify"><span class="math">g_{2} (t)\,=\, \int {\frac{vy_{1}}{W(y_{1} ,\,y_{2} )} dt}</span></p>
+<p style="text-align:justify"><span class="math">\,=\, \int {\frac{e^{-3t}}{2e^{-3t}} dt} \,=\, \frac{1}{2} t</span></p>
+<p style="text-align:justify">따라서 특수해는</p>
+<p style="text-align:justify"><span class="math">y_{p} =- \frac{1}{2} e^{t} e^{-2t} + \frac{1}{2} te^{-t}</span></p>
+<p style="text-align:justify"><span class="math">=- \frac{1}{2} e^{-t} + \frac{1}{2} te^{-t}</span></p>
+<p style="text-align:right">(풀이끝)</p>
+<h4 style="text-align:justify">(1) 비동차부분이 상수</h4>
+<p style="text-align:justify"> <span class="math">y '' (t)+ay ' (t)+by(t)=c</span>..................① , (a, b, c는 상수)</p>
+<p style="text-align:justify">①의 해는 다음의 형태를 띤다. 따라서 ①을 만족하는 상수 k를 구한다.</p>
+<p style="text-align:justify"><span class="math">y(t)=k</span> ..........②</p>
+<p style="text-align:justify"><span class="math">y'\,=\,y''\,=0</span> ..............③</p>
+<p style="text-align:justify">②, ③을 ①에 대입하면</p>
+<p style="text-align:justify"><span class="math">bk=c</span></p>
+<p style="text-align:justify">∴ <span class="math">k\,=\, \frac{c}{b}</span></p>
+<p style="text-align:justify">따라서 한 특수해는 <span class="math">y_{p} (t)= \frac{c}{b}</span></p>
+<p style="text-align:justify">상응하는 HLDE은</p>
+<p style="text-align:justify"><span class="math">y '' (t)+ay ' (t)+by(t)=0</span></p>
+<p style="text-align:justify">HLDE의 해, 여함수는 </p>
+<p style="text-align:justify"><span class="math">y_{1} =e^{r_{1} t}</span> , <span class="math">y_{2} =e^{r_{2} t}</span> , where <span class="math">r_{1} ,\,r_{2}</span>는 <span class="math">r^{2} +ar+b=0</span> 의 근</p>
+<p style="text-align:justify">일반해는 특수해 + 여함수이므로</p>
+<p style="text-align:justify"><span class="math">y(t)= \frac{c}{b} +c_{1} e^{r_{1} t} +c_{2} e^{r_{2} t}</span></p>
+<p style="text-align:justify">예) <span class="math">\frac{dz(t)}{dt} +(1- \alpha )nz(t)\,=(1- \alpha )s\,</span>, where <span class="math">\alpha ,\;n,\;s</span>는 상수</p>
+<p style="text-align:justify">이는 z에 관한 1차 선형미분방정식이고 일반해는 여함수와 특수해의 합으로 구성된다.</p>
+<p style="text-align:justify">여함수는 동차 선형미분방정식(HLDE)의 해이므로</p>
+<p style="text-align:justify"><span class="math">\frac{dz}{dt} +(1- \alpha )nz\,=0\,</span> 의 해</p>
+<p style="text-align:justify">⇒ <span class="math">\frac{1}{z} \frac{dz}{dt} \,=\,-(1- \alpha )n\,</span></p>
+<p style="text-align:justify">양변적분하면</p>
+<p style="text-align:justify">⇒ <span class="math">\ln z\,=\,-(1- \alpha )nt\,+A_{0}</span></p>
+<p style="text-align:justify">⇒ <span class="math">z_{c} (t)\,=\,A_{1} \,e^{-(1- \alpha )nt}</span> </p>
+<p style="text-align:justify">한 특수해는</p>
+<p style="text-align:justify">상수 z(t) = C 를 대입하면</p>
+<p style="text-align:justify"><span class="math">0+(1- \alpha )nC\,=(1- \alpha )s\,</span></p>
+<p style="text-align:justify">∴ <span class="math">C\,=\, \frac{s}{n} \,=\,z_{p} (t)</span></p>
+<p style="text-align:justify">따라서 일반해는</p>
+<p style="text-align:justify"><span class="math">z(t)\,=\,z_{p}(t) \,+\,z_{c}(t)</span></p>
+<p style="text-align:justify"><span class="math">=\, \frac{s}{n} +\,A_{1} \,e^{-(1- \alpha )nt}</span></p>
+<p style="text-align:right">(풀이끝)</p>
+<h4 style="text-align:justify">(2) 비동차부분이 t의 일차함수</h4>
+<p style="text-align:justify"> <span class="math">y '' (t)+ay ' (t)+by(t)=ct</span>..................① , (a, b, c는 상수)</p>
+<p style="text-align:justify">①의 해는 다음의 형태를 띤다. 따라서 ①을 만족하는 상수 <span class="math">\alpha ,\, \beta</span>를 구한다.</p>
+<p style="text-align:justify"><span class="math">y(t)= \alpha t+ \beta</span> ..........②</p>
+<p style="text-align:justify"><span class="math">y ' \,=\, \alpha</span> ..............③</p>
+<p style="text-align:justify"><span class="math">\,y '' \,=0</span> .................④</p>
+<p style="text-align:justify">②, ③, ④를 ①에 대입하면</p>
+<p style="text-align:justify"><span class="math">a \alpha +b( \alpha t+ \beta )=ct</span></p>
+<p style="text-align:justify">⇒ <span class="math">b \alpha t+(a \alpha +b \beta )=ct</span></p>
+<p style="text-align:justify">위 식이 항등식이 되려면 (t만 변수이고 나머지는 다 상수임에 주목)</p>
+<p style="text-align:justify"><span class="math">b \alpha =c</span> , <span class="math">a \alpha +b \beta =\,0</span></p>
+<p style="text-align:justify">우리가 구하려는 것은 y(t)의 상수인 <span class="math">\alpha ,\, \beta</span>임을 상기하면</p>
+<p style="text-align:justify">∴ <span class="math">\alpha \,=\, \frac{c}{b}</span> , <span class="math">\beta \,=\,- \frac{ac}{b^{2}}</span></p>
+<p style="text-align:justify">따라서 특수해는 <span class="math">y_{p} (t)= \frac{c}{b} t- \frac{ac}{b^{2}}</span></p>
+<p style="text-align:justify">따라서 일반해는</p>
+<p style="text-align:justify"><span class="math">y(t)= \frac{c}{b} t- \frac{ac}{b^{2}} +c_{1} e^{r_{1} t} +c_{2} e^{r_{2} t}</span></p>
+<p style="text-align:justify">예) <span class="math">y''+3y'+2y\,=\,3t</span></p>
+<p style="text-align:justify">(풀이) </p>
+<p style="text-align:justify">위 공식에 대입하면</p>
+<p style="text-align:justify"><span class="math">y_{p} (t)= \frac{c}{b} t- \frac{ac}{b^{2}} \,=\, \frac{3}{2} t- \frac{9}{4}</span></p>
+<p style="text-align:justify">이것이 문제의 근인지 검증하기 위해 이를 미분하면</p>
+<p style="text-align:justify"><span class="math">y ' _{p} (t)= \frac{3}{2} \,</span> , <span class="math">y '' _{p} (t)=0\,</span></p>
+<p style="text-align:justify">이들을 문제에 대입하면 </p>
+<p style="text-align:justify"><span class="math">3( \frac{3}{2} \,)+2( \frac{3}{2} t- \frac{9}{4} \,)\,=\,3t</span></p>
+<p style="text-align:justify">등식이 성립하므로 <span class="math">y_{p} (t)= \frac{3}{2} t\,- \frac{9}{4} \,</span>는 특수해이다.</p>
+<p style="text-align:justify">일반해는 생략</p>
+<p style="text-align:right">(풀이끝)</p>
+<p style="text-align:justify">이의 일반형은 다음과 같다.</p>
+<p style="text-align:justify"><span class="math">y '' (t)+ay ' (t)+by(t)=ct^{n}</span>..................① , (a, b, c, n 은 상수)</p>
+<p style="text-align:justify">①의 특수해는 다음의 형태를 띤다. </p>
+<p style="text-align:justify"><span class="math">y_{p} (t)\,=\, \sum\limits_{i=0}^{n} \alpha_{i} t^{i} \,</span>................②</p>
+<p style="text-align:justify">②를 미분해서 ①에 대입한 후 항등식의 조건을 만족하는 상수 <span class="math">\alpha_{0} \,,\, \alpha_{1} ,\,...\,, \alpha_{n}</span> 을 구한다.</p>
+<p style="text-align:justify">예) <span class="math">y '' +3y ' +2y\,=\,3t^{2}</span></p>
+<p style="text-align:justify">(풀이) </p>
+<p style="text-align:justify"><span class="math">y(t)\,=\, \alpha_{0} \,+ \alpha_{1} t\,+ \alpha_{2} t^{2} \,</span>라 놓는다.</p>
+<p style="text-align:justify"><span class="math">y'(t)\,=\, \alpha_{1} \,+2 \alpha_{2} t\,</span></p>
+<p style="text-align:justify"><span class="math">y '' (t)\,=\,2 \alpha_{2} \,</span></p>
+<p style="text-align:justify">위를 문제의 식에 대입하면</p>
+<p style="text-align:justify"><span class="math">2 \alpha_{2} \,+3( \alpha_{1} \,+2 \alpha_{2} t\,)+2(\alpha_{0} \,+ \alpha_{1} t\,+ \alpha_{2} t^{2} \,)\,=\,3t^{2}</span></p>
+<p style="text-align:justify">⇒ <span class="math">2 \alpha_{2} \,+3 \alpha_{1} \,+2 \alpha_{0} \,+\,(2 \alpha_{1} +6 \alpha_{2} )t\,+2 \alpha_{2} t^{2} \;=\,3t^{2}</span></p>
+<p style="text-align:justify">위 식이 항상 성립해야 하므로</p>
+<p style="text-align:justify"><span class="math">2 \alpha_{2} \,=3</span>, <span class="math">2 \alpha_{2} \,+3 \alpha_{1} \,+2 \alpha_{0} =0</span>, <span class="math">2 \alpha_{1} +6 \alpha_{2} \,=\,0</span></p>
+<p style="text-align:justify">∴ <span class="math">\alpha_{2} \,= \frac{3}{2}</span> , <span class="math">\alpha_{1} \,=- \frac{9}{2}</span> , <span class="math">\alpha_{0} \,= \frac{21}{4}</span></p>
+<p style="text-align:justify">∴ <span class="math">y_{p} (t)= \frac{3}{2} t^{2} \,- \frac{9}{2} t+ \frac{21}{4} \,</span></p>
+<p style="text-align:justify">이것이 문제의 근인지 검증해 보자.</p>
+<p style="text-align:justify"><span class="math">y ' _{p} (t)=3t\,- \frac{9}{2} \,</span> , <span class="math">y'' _{p} (t)=3\,</span></p>
+<p style="text-align:justify">이들을 문제에 대입하면 </p>
+<p style="text-align:justify"><span class="math">3+3(3t\,- \frac{9}{2} \,)+2(\frac{3}{2} t^{2} \,- \frac{9}{2} t+ \frac{21}{4} \,)\,=\,3t^{2}</span></p>
+<p style="text-align:justify">등식이 성립하므로 <span class="math">y_{p} (t)= \frac{3}{2} t^{2} \,- \frac{9}{2} t+ \frac{21}{4} \,</span>는 문제의 특수해이다.</p>
+<p style="text-align:justify">일반해는 생략</p>
+<p style="text-align:right">(풀이끝)</p>
+<h4 style="text-align:justify">(3) 비동차부분이 t의 지수함수</h4>
+<p style="text-align:justify"><span class="math">y '' (t)+ay ' (t)+by(t)=ce^{kt}</span> ..............① , (a, b, c, k는 상수)</p>
+<p style="text-align:justify">해는 <span class="math">y(t)\,=\, \alpha e^{kt}</span> 또는 <span class="math">y(t)\,=\, \alpha te^{kt}</span> 의 형태이다. 둘 중의 선택은 동차해와의 독립성 여부에 따라 결정한다. 이를 만족하는 상수 <span class="math">\alpha</span>를 구한다.</p>
+<p style="text-align:justify">예) 다음의 해를 구하라</p>
+<p style="text-align:justify">(a) <span class="math">y''+3y'+2y=e^{-t}</span> </p>
+<p style="text-align:justify">(b) <span class="math">y '' +3y ' +2y\,=10e^{3t} \,</span> </p>
+<p style="text-align:justify">(풀이)</p>
+<p style="text-align:justify">(a)</p>
+<p style="text-align:justify">ⅰ) 동차해를 구함</p>
+<p style="text-align:justify">특성방정식은</p>
+<p style="text-align:justify"><span class="math">\lambda^{2} +3 \lambda +2=0</span></p>
+<p style="text-align:justify">∴ <span class="math">\lambda \,=\,-1,\,-2</span></p>
+<p style="text-align:justify">따라서 동차해는 <span class="math">y_{c} \,=</span><span class="math">\,e^{-t}</span>, <span class="math">\,e^{-2t}</span> </p>
+<p style="text-align:justify">ⅱ) 특수해를 구함</p>
+<p style="text-align:justify"><span class="math">y_{p} (t)\,=\, \alpha te^{-t}</span> 를 근이라 하면<sup><a href="#fn15" id="fnref15">[15]</a></sup></p>
+<p style="text-align:justify"><span class="math">y ' \,=\, \alpha (e^{-t} -te^{-t} )</span></p>
+<p style="text-align:justify"><span class="math">y '' \,=\, \alpha (-e^{-t} -e^{-t} +te^{-t} )\,=\, \alpha (-2e^{-t} +te^{-t} )</span></p>
+<p style="text-align:justify">문제에 대입하면</p>
+<p style="text-align:justify"><span class="math">\, \alpha (-2e^{-t} +te^{-t} )+3 \alpha (e^{-t} -te^{-t} )+2 \alpha te^{-t} =e^{-t}</span></p>
+<p style="text-align:justify">⇒ <span class="math">\, \alpha (-2+t)+3 \alpha (1-t)+2 \alpha t=1</span></p>
+<p style="text-align:justify">⇒ <span class="math">\, \alpha \,=\, \frac{1}{(-2+t)+3(1-t)+2t} \,=\,1</span></p>
+<p style="text-align:justify">∴ <span class="math">y_{p} (t)\,=\,te^{-t}</span> </p>
+<p style="text-align:justify">따라서 일반해는</p>
+<p style="text-align:justify"><span class="math">y(t)=te^{-t} +\,c_{1} e^{-t} +c_{2} e^{-2t}</span></p>
+<p style="text-align:justify">(b) </p>
+<p style="text-align:justify">ⅰ) 동차해를 구함</p>
+<p style="text-align:justify">특성방정식은</p>
+<p style="text-align:justify"><span class="math">\lambda^{2} +3 \lambda +2=0</span></p>
+<p style="text-align:justify"><span class="math">\lambda \,=\,-1,\,-2</span></p>
+<p style="text-align:justify">따라서 동채해는 <span class="math">y_{c} \,=</span><span class="math">\,e^{-t}</span>, <span class="math">\,e^{-2t}</span> </p>
+<p style="text-align:justify">ⅱ) 특수해를 구함</p>
+<p style="text-align:justify"><span class="math">y_{p} (t)\,=\, \alpha e^{3t}</span> 라 하면</p>
+<p style="text-align:justify"><span class="math">y ' _{p} (t)\,=\,3 \alpha e^{3t}</span> , <span class="math">y '' _{p} (t)\,=\,9 \alpha e^{3t}</span></p>
+<p style="text-align:justify">문제에 대입하면</p>
+<p style="text-align:justify"><span class="math">9 \alpha e^{3t} +9 \alpha e^{3t} +2 \alpha e^{3t} \,=10e^{3t} \,</span></p>
+<p style="text-align:justify">∴ <span class="math">\alpha \,= \frac{1}{2}</span></p>
+<p style="text-align:justify"><span class="math">y_{p} (t)\,=\, \frac{1}{2} e^{3t}</span></p>
+<p style="text-align:justify">따라서 일반해는</p>
+<p style="text-align:justify"><span class="math">y(t)= \frac{1}{2} e^{3t} +\,c_{1} e^{-t} +c_{2} e^{-2t}</span></p>
+<p style="text-align:right">(풀이끝)</p>
+<h4 style="text-align:justify">(4) 비동차부분이 t의 삼각함수</h4>
+<p style="text-align:justify"><span class="math">y '' (t)+ay ' (t)+by(t)=c\,sint+d\,cost</span> , (a, b, c, d는 상수)</p>
+<p style="text-align:justify"><span class="math">y(t)\,=\, \alpha sint+ \beta cost</span> 형태가 근이다. 따라서 이를 만족하는 상수 <span class="math">\alpha \,,\; \beta</span> 를 구한다.</p>
+<p style="text-align:justify">예) <span class="math">y '' +3y ' +2y=sint\,+\,2cost</span></p>
+<p style="text-align:justify">(풀이)</p>
+<p style="text-align:justify"><span class="math">y(t)\,=\, \alpha sint+ \beta cost</span> 라 하면</p>
+<p style="text-align:justify"><span class="math">y ' \,=\, \alpha cost- \beta sint</span> </p>
+<p style="text-align:justify"><span class="math">y '' \,=\,- \alpha sint- \beta cost</span> </p>
+<p style="text-align:justify">세 식을 문제에 대입하면</p>
+<p style="text-align:justify"><span class="math">(- \alpha sint- \beta cost)+3( \alpha cost- \beta sint)+2( \alpha sint+ \beta cost)=\,sint+2\,cost</span></p>
+<p style="text-align:justify">⇒ <span class="math">(2 \alpha - \alpha -3 \beta )sint+(2 \beta - \beta +3 \alpha )cost=\,sint+2\,cost</span></p>
+<p style="text-align:justify">⇒ <span class="math">( \alpha -3 \beta )sint+( \beta +3 \alpha )cost=\,sint+2\,cost</span></p>
+<p style="text-align:justify">등식이 항상 성립하려면</p>
+<p style="text-align:justify"><span class="math">\alpha -3 \beta =1</span></p>
+<p style="text-align:justify"><span class="math">3 \alpha + \beta =2\,</span></p>
+<p style="text-align:justify"><span class="math">{\begin{pmatrix}\alpha \\ \beta \end{pmatrix}} \,=\, {\begin{pmatrix}1 &amp; -3 \\ 3 &amp; \;1\end{pmatrix}}^{-1} {\begin{pmatrix}1 \\ 2\end{pmatrix}}</span><span class="math">\,=\, \frac{1}{10} {\begin{pmatrix}1 &amp; \;3 \\ -3 &amp; \;1\end{pmatrix}} {\begin{pmatrix}1 \\ 2\end{pmatrix}}</span><span class="math">\,=\, {\begin{pmatrix}\; \frac{7}{10} \\ - \frac{1}{10}\end{pmatrix}}</span></p>
+<p style="text-align:justify">∴ <span class="math">y(t)\,=\, \frac{7}{10} \,sint- \frac{1}{10} \,cost</span></p>
+<p style="text-align:justify">이를 문제에 대입하면 등식이 성립함을 알 수 있음.</p>
+<p style="text-align:right">(풀이끝)</p>
+<h4 style="text-align:justify">(5) 비동차부분이 t의 복합함수</h4>
+<p style="text-align:justify"><span class="math">y '' (t)+ay ' (t)+by(t)=ct^{n} e^{\alpha t}</span> , (a, b, c, n은 상수)</p>
+<p style="text-align:justify">특수해는 <span class="math">y(t)=( \sum\limits_{i=0}^{n} \alpha_{i} t^{i} )e^{\alpha t}</span> 의 형태를 갖는다.</p>
+<p style="text-align:justify">(예) <span class="math">y''+4y=5t^{2} e^{t}</span></p>
+<p style="text-align:justify">(풀이) </p>
+<p style="text-align:justify"><span class="math">y(t)=(At^{2} +Bt+C)e^{t}</span></p>
+<p style="text-align:justify"><span class="math">y ' =(2At+B)e^{t} \,+\,(At^{2} +Bt+C)e^{t} \,=\,[At^{2} +(2A+B)t+B+C]e^{t}</span></p>
+<p style="text-align:justify"><span class="math">y '' =\,(2At+2A+B)e^{t} +\,[At^{2} +(2A+B)t+B+C]e^{t}</span></p>
+<p style="text-align:justify"><span class="math">=\,[At^{2} +(4A+B)t+2A+2B+C]e^{t}</span></p>
+<p style="text-align:justify">이를 문제에 대입하면</p>
+<p style="text-align:justify"><span class="math">[At^{2} +(4A+B)t+2A+2B+C]e^{t} +4(At^{2} +Bt+C)e^{t} =5t^{2} e^{t}</span></p>
+<p style="text-align:justify">⇒ <span class="math">[5At^{2} +(4A+5B)t+2A+2B+5C]e^{t} =5t^{2} e^{t}</span></p>
+<p style="text-align:justify">위 등식이 성립하려면 계수가 같아야 함</p>
+<p style="text-align:justify"><span class="math">A=1\,</span>, <span class="math">4A+5B=0,\;2A+2B+5C=0</span></p>
+<p style="text-align:justify">∴ <span class="math">A=1\,</span> , <span class="math">B\,=\,- \frac{4}{5}</span> , <span class="math">C\,=\,- \frac{2}{25}</span></p>
+<p style="text-align:justify">따라서 특수해는</p>
+<p style="text-align:justify"><span class="math">y_{p} (t)=(t^{2} - \frac{4}{5} t- \frac{2}{25} )e^{t}</span></p>
+<p style="text-align:right">(풀이끝)</p>
+<h4 style="text-align:justify">(6) 비동차부분이 t의 복합함수2</h4>
+<p style="text-align:justify"><span class="math">y '' (t)+ay ' (t)+by(t)=ct\,+\,de^{kt}</span> ..............① , (a, b, c, d, <span class="math">\alpha</span>는 상수)</p>
+<p style="text-align:justify">중첩의 원리를 적용한다.</p>
+<p style="text-align:justify"><span class="math">y '' (t)+ay ' (t)+by(t)=ct\,</span>...............②</p>
+<p style="text-align:justify"><span class="math">y '' (t)+ay ' (t)+by(t)=\,e^{kt}</span>................③</p>
+<p style="text-align:justify">②의 해와 ③의 해를 합한 것이 중첩의 원리에 의해 ①의 해가 된다.</p>
+<p style="text-align:justify">②의 해는 <span class="math">y_{1} (t)= \alpha t+ \beta</span> 형태</p>
+<p style="text-align:justify">③의 해는 <span class="math">y_{2} (t)\,=\, \gamma te^{kt}</span> 형태</p>
+<p style="text-align:justify">따라서 특수해는 <span class="math">y_{p} (t)=y_{1} (t)+y_{2} (t)</span></p>
+<p style="text-align:justify">예) <span class="math">y '' +3y ' +2y\,=3t+10e^{3t} \,</span></p>
+<p style="text-align:justify">(풀이) </p>
+<p style="text-align:justify"><span class="math">y '' +3y ' +2y\,=3t\,</span> 의 해는 앞의 예에서</p>
+<p style="text-align:justify"><span class="math">y_{1} (t)= \frac{3}{2} t\,- \frac{9}{4} \,</span></p>
+<p style="text-align:justify"><span class="math">y '' +3y ' +2y\,=10e^{3t} \,</span> 의 해는 앞의 예에서</p>
+<p style="text-align:justify"><span class="math">y_{2} (t)\,=\, \frac{1}{2} e^{3t}</span></p>
+<p style="text-align:justify">∴ <span class="math">y_{p} (t)= \frac{3}{2} t\,- \frac{9}{4} \,+ \frac{1}{2} e^{3t}</span></p>
+<p style="text-align:justify">따라서 일반해는</p>
+<p style="text-align:justify"><span class="math">y(t)= \frac{3}{2} t\,- \frac{9}{4} \,+ \frac{1}{2} e^{3t} +\,c_{1} e^{-t} +c_{2} e^{-2t}</span></p>
+<p style="text-align:right">(풀이끝)</p>
+<h4 style="text-align:justify">근의 안정성(stability of solution)</h4>
+<p style="text-align:justify"><span class="math">y '' (t)+ay ' (t)+by(t)=c</span> , (a, b, c는 상수) 인 경우를 고려</p>
+<p style="text-align:justify"><span class="math">r_{1} ,\,r_{2}</span>를 근이라 하자.</p>
+<p style="text-align:justify">i) 두 근이 실근인 경우(<span class="math">a_{1}^{2} -4a_{2} &gt;0</span>)</p>
+<p style="text-align:justify">앞에서 일반해는 <span class="math">y(t)= \frac{c}{b} +c_{1} e^{r_{1} t} +c_{2} e^{r_{2} t}</span> 이었므로</p>
+<p style="text-align:justify">if <span class="math">r_{1} &lt;0\;and\;r_{2} &lt;0</span>  ⇒  <span class="math">\lim\limits_{t \to \infty } {y(t)=}</span><span class="math">\lim\limits_{t \to \infty } ( \frac{c}{b} +c_{1} e^{r_{1} t} +c_{2} e^{r_{2} t} )\,=\, \frac{c}{b}</span></p>
+<p style="text-align:justify">따라서 특성방정식의 두 근이 0보다 작으면 미분방정식의 해는 수렴한다.(안정적) </p>
+<p style="text-align:justify">이때 <span class="math">\frac{c}{b}</span>는 시간의 변동에 따라 불변이므로 이를 균형(equlibrium), 또는 정상상태(steady state)라 한다.</p>
+<p style="text-align:justify"><span class="math">r_{1} &lt;0\,,\;r_{2} &lt;0</span> 이면 2차 방정식의 근과 계수와의 관계에 의해 </p>
+<p style="text-align:justify"><span class="math">r_{1} +r_{2} =\,-a_{1} \,&lt;0\,,\;r_{1} r_{2} =a_{2} \,&gt;0</span></p>
+<p style="text-align:justify">즉 <span class="math">a_{1} \,&gt;0\,,\;a_{2} \,&gt;0</span> 이면 미분방정식의 해는 수렴한다.</p>
+<p style="text-align:justify">if <span class="math">r_{1} &gt;0\;and\;r_{2} &gt;0</span>  ⇒  <span class="math">\lim\limits_{t \to \infty } {y(t)=}</span><span class="math">\lim\limits_{t \to \infty } ( \frac{c}{b} +c_{1} e^{r_{1} t} +c_{2} e^{r_{2} t} )\,=\, \infty</span></p>
+<p style="text-align:justify">따라서 두 근이 모두 양수이면 미분방정식의 해는 발산한다.</p>
+<p style="text-align:justify">if <span class="math">r_{1} &gt;0\;and\;r_{2} &lt;0</span>  ⇒  <span class="math">\lim\limits_{t \to \infty } {y(t)=}</span><span class="math">\lim\limits_{t \to \infty } ( \frac{c}{b} +c_{1} e^{r_{1} t} +c_{2} e^{r_{2} t} )\,=\, \infty</span></p>
+<p style="text-align:justify">따라서 미분방정식의 해는 발산한다. 단 처음에 <span class="math">c_{2}</span>가 <span class="math">c_{1}</span>보다 큰 경우 해가 수렴하다가 발산한다. 따라서 이런 해를 안장경로(saddle path)라 한다. 특성방정식의 한 근이 양수이고 다른 한 근이 음수라서 미분방정식의 해가 안장경로를 갖는 경우는 경제적 모형에서 자주 발생한다.</p>
+<p style="text-align:justify">ⅱ) 두 근이 중근인 경우(<span class="math">a_{1}^{2} -4a_{2} =0</span>)</p>
+<p style="text-align:justify">if <span class="math">r&lt;0\;</span>  ⇒  <span class="math">\lim\limits_{t \to \infty } {y(t)=}</span><span class="math">\lim\limits_{t \to \infty } ( \frac{c}{b} +c_{1} e^{rt} +c_{2} te^{rt} )\,=\, \frac{c}{b}</span>.............<sup><a href="#fn16" id="fnref16">[16]</a></sup></p>
+<p style="text-align:justify">따라서 중근이 음수일 경우 미분방정식의 해는 수렴한다.</p>
+<p style="text-align:justify">if <span class="math">r&gt;0\;</span>  ⇒  <span class="math">\lim\limits_{t \to \infty } {y(t)=}</span><span class="math">\lim\limits_{t \to \infty } ( \frac{c}{b} +c_{1} e^{rt} +c_{2} te^{rt} )\,=\, \infty</span></p>
+<p style="text-align:justify">따라서 중근이 양수일 경우 미분방정식의 해는 발산한다.</p>
+<p style="text-align:justify">ⅲ) 두 근이 허근인 경우(<span class="math">a_{1}^{2} -4a_{2} &lt;0</span>)</p>
+<p style="text-align:justify">동차부분의 해는 다음과 같았다.<sup><a href="#fn17" id="fnref17">[17]</a></sup></p>
+<p style="text-align:justify"><span class="math">y_{c} (t)=c_{1} e^{\alpha t} \,\cos \beta t+c_{2} e^{\alpha t} \,\sin \beta t</span>, where <span class="math">\alpha \,=\,- \frac{a_{1}}{2} \,,\; \beta \,=\, \frac{\, \sqrt {4a_{2} -a_{1}^{2}}}{2}</span></p>
+<p style="text-align:justify">특수해는 <span class="math">y_{p} \,=\, \frac{c}{b}</span>이므로</p>
+<p style="text-align:justify">일반해는 <span class="math">y(t)= \frac{c}{b} \,+\,c_{1} e^{\alpha t} \,\cos \beta t+c_{2} e^{\alpha t} \,\sin \beta t</span></p>
+<p style="text-align:justify">if <span class="math">\alpha &lt;0</span>  ⇔  <span class="math">\lim\limits_{t \to \infty } {y(t)=}</span> <span class="math">\lim\limits_{t \to \infty } ( \frac{c}{b} \,+\,c_{1} e^{\alpha t} \,\cos \beta t+c_{2} e^{\alpha t} \,\sin \beta t)\,=\, \frac{c}{b}</span></p>
+<p style="text-align:justify">즉 복소수의 실수부분이 0보다 작으면 미분방정식의 해는 발산한다.</p>
+<p style="text-align:justify"><span class="math">\alpha =\,- \frac{a_{1}}{2} &lt;0</span> ⇒ <span class="math">a_{1} &gt;0</span> </p>
+<p style="text-align:justify">따라서 <span class="math">a_{1} &gt;0</span>이면 해는 수렴. </p>
+<p style="text-align:justify">즉, 허근일 경우 2차 미분방정식에서 1차 도함수의 계수가 0보다 크면 안정적이다.</p>
+<p style="text-align:justify">예) <span class="math">y '' (t)+3y ' (t)+2y(t)=4</span>, <span class="math">y(0)=0,\;y'(0)=1</span></p>
+<p style="text-align:justify">(풀이)</p>
+<p style="text-align:justify">y를 상수로 보면 균형값은</p>
+<p style="text-align:justify"><span class="math">2y*=4</span> ⇒ <span class="math">\,y*=2</span></p>
+<p style="text-align:justify">특성방정식은</p>
+<p style="text-align:justify"><span class="math">r^{2} +3r+2=0</span></p>
+<p style="text-align:justify"><span class="math">(r+1)(r+2)=0</span></p>
+<p style="text-align:justify">∴ r= -1 or  –2 &lt; 0</p>
+<p style="text-align:justify">실수이면서 두 근 모두 0보다 작으므로 해는 수렴하고 안정적</p>
+<p style="text-align:justify">일반해는</p>
+<p style="text-align:justify"><span class="math">y(t)=2+\,A_{1} e^{-t} +A_{2} e^{-2t}</span></p>
+<p style="text-align:justify">초기조건 <span class="math">y(0)=0,\;y'(0)=1</span> 를 대입하면</p>
+<p style="text-align:justify"><span class="math">{\begin{pmatrix}1 &amp; 1 \\ -1 &amp; \;-2\end{pmatrix}} {\begin{pmatrix}A_{1} \\ A_{2}\end{pmatrix}} = {\begin{pmatrix}-2 \\ 1\end{pmatrix}}</span></p>
+<p style="text-align:justify">∴ <span class="math">A_{1} \,=\,-3,\;A_{2} \,=\,1</span></p>
+<p style="text-align:justify">따라서 <span class="math">y(t)=2-3e^{-t} +e^{-2t}</span></p>
+<p style="text-align:right">(풀이끝)</p>
+<h4 style="text-align:justify">고계선형미분방정식</h4>
+<h4 style="text-align:justify">상수 계수를 갖는 고차 HLDE</h4>
+<p style="text-align:justify"><span class="math">a_{n} y^{(n)} (t)+a_{n-1} y^{(n-1)} (t)+...+a_{1} y ' (t)+a_{0} y(t)=0</span> ..............①</p>
+<p style="text-align:justify">①에 <span class="math">y(t)\,=\,e^{\lambda t}</span> 를 대입하면</p>
+<p style="text-align:justify"><span class="math">(a_{n} \lambda^{n} +a_{n-1} \lambda^{n-1} +...+a_{1} \lambda +a_{0} )e^{\lambda n} =0</span></p>
+<p style="text-align:justify">위식이 항상 성립하기 위해서는 <span class="math">a_{n} \lambda^{n} +a_{n-1} \lambda^{n-1} +...+a_{1} \lambda +a_{0} =0</span> 인 <span class="math">\lambda</span>를 구함</p>
+<p style="text-align:justify">미분방정식의 해는 </p>
+<p style="text-align:justify"><span class="math">y(t)\,=\, \sum\limits_{i=0}^{n} c_{i} e^{\lambda_{i} t}</span></p>
+<p style="text-align:justify">모든 <span class="math">\lambda_{i}</span>가 0보다 작으면 시간이 지남에 따라 해는 수렴. 그 중 하나라도 0보다 크면 해는 무한대로 발산</p>
+<p style="text-align:justify">연립미분방정식(systems of differential equations)</p>
+<p style="text-align:justify">(일반형) <span class="math">y_{i} (x),\;u_{ij} (x)\,,\,v_{i} (x)</span>는 x의 함수 , i=1,...,n</p>
+<p style="text-align:justify"><span class="math">y' _{1} \,+u_{11} y_{1} +u_{12} y_{2} +...+u_{1n} y_{n} \,=v_{1} \,</span></p>
+<p style="text-align:justify"><span class="math">y ' _{2} \,+u_{21} y_{1} +u_{22} y_{2} +...+u_{1n} y_{n} \,=v_{2} \,</span></p>
+<p style="text-align:justify"> <span class="math">\vdots</span></p>
+<p style="text-align:justify"><span class="math">y ' _{1} \,+u_{n1} y_{1} +u_{n2} y_{2} +...+u_{nn} y_{n} \,=v_{n} \,</span></p><div class="footnotes"><h2>각주</h2><li id="fn7"><p style="text-align:justify"> 함수 f가 f(a+b) = f(a) + f(b)라는 성질을 갖으면 함수 f는 선형함수라 한다.</p>
+<a href="#fnref7">↩</a></li>
+<li id="fn8"><p style="text-align:justify"> a, b는 임의의 값에 대해 성립, a, b 둘 중 하나가 0이면 당연히 성립, a, b가 복소수이어도 성립</p>
+<a href="#fnref8">↩</a></li>
+<li id="fn9"><p style="text-align:justify"> 수학기초 ‘함수의 선형 독립’ 참조</p>
+<a href="#fnref9">↩</a></li>
+<li id="fn10"><p style="text-align:justify"> 오일러 공식 <span class="math">e^{\theta i} \,=\,\cos \theta \,+\,i\,\sin \theta</span>, <span class="math">e^{- \theta i} \,=\,\cos \theta -\,i\,\sin \theta</span> 적용</p>
+<a href="#fnref10">↩</a></li>
+<li id="fn11"><p style="text-align:justify"> <span class="math">t^{2} y '' (t)+a_{1} ty ' (t)+a_{2} y(t)=0\; \rightarrow \;y '' (t)+ \frac{a_{1}}{t} y ' (t)+ \frac{a_{2}}{t^{2}} y(t)=0\,</span> </p>
+<a href="#fnref11">↩</a></li>
+<li id="fn12"><p style="text-align:justify"> ∵ <span class="math">u_{2} (c_{1} y_{g} '' +c_{2} y_{p} '' )+u_{1} (c_{1} y_{g} ' +c_{2} y_{p} ' )+u_{0} (c_{1} y_{g} +c_{2} y_{p} )</span></p>
+<p style="text-align:justify"> <span class="math">=c_{1} (u_{2} y_{g} '' +u_{1} y_{g} ' +u_{0} y_{g} )+c_{2} (u_{2} y_{p} '' +u_{1} y_{p} ' +u_{0} y_{p} )=c_{1} v+c_{2} v != v</span></p>
+<a href="#fnref12">↩</a></li>
+<li id="fn13"><p style="text-align:justify"> 중첩의 원리는 정리에서 보았듯이 1차 비동차 미분방정식에도 적용되는 원리임. 즉 1차 비동차 미분방정식의 일반해도 특수해와 보완해의 합으로 구성할 수 있음 </p>
+<a href="#fnref13">↩</a></li>
+<li id="fn14"><p style="text-align:justify"> ∵<span class="math">y_{1} \,,\,y_{2}</span>는 ①의 해이므로 <span class="math">(g_{1} y '' _{1} +g_{2} y '' _{2} )+u_{1} (g_{1} y ' _{1} +g_{2} y ' _{2} )+u_{0} (g_{1} y_{1} +g_{2} y_{2} )=0</span></p>
+<a href="#fnref14">↩</a></li>
+<li id="fn15"><p style="text-align:justify"> <span class="math">y_{p} (t)\,=\, \alpha e^{-t}</span>은 동차해와 독립이 아니다.</p>
+<a href="#fnref15">↩</a></li>
+<li id="fn16"><p style="text-align:justify"> r이 음수이므로 로피탈의 정리를 적용하면 <span class="math">\lim\limits_{t \to \infty } te^{rt} \,=\, \lim\limits_{t \to \infty } {\frac{t}{e^{-rt}}} \,=\, \lim\limits_{t \to \infty } {\frac{1}{-re^{-rt}}} \,=0\,</span></p>
+<a href="#fnref16">↩</a></li>
+<li id="fn17"><p style="text-align:justify"> 동차미분방정식 허근의 경우 참조</p>
+<a href="#fnref17">↩</a></li></div><section class="related-documents" id="related-documents"><h2>관련 문서</h2><ul><li><a href="differential-equation-basics.html">미분방정식의 기초와 1계 방정식</a></li><li><a href="differential-equation-systems.html">연립미분방정식과 안정성</a></li></ul></section><hr/><p><a href="system-of-differential equation.html">← 미분방정식과 응용 목차</a></p></body></html>

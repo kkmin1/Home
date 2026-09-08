@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>최적제어이론</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>최적제어이론 (Optimal Control Theory)</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head>
+<body>
+<nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav>
+<h1>최적제어이론 (Optimal Control Theory)</h1>
+<p>Hamiltonian, maximum principle, costate variable, 각종 제약과 transversality condition, 충분조건을 다루는 원본 최적제어 부분입니다.</p>
+<h2 id="최적제어이론-optimal-control-theory">최적제어이론(optimal control theory)</h2>
+<h4 id="최적제어이론-optimal-control-theory-2" style="text-align:justify">최적제어이론(optimal control theory)</h4>
+<p style="text-align:justify">최적제어이론은 통제변수가 상태변수의 도함수가 아닌 좀 더 일반적인 형태로 주어지는 경우에 문제를 푸는 것이다.</p>
+<h4 id="표준형" style="text-align:justify">표준형</h4>
+<p style="text-align:justify"><span class="math">\max\; \int_{t_{0}}^{t_{1}} {f(y(t),\,u(t),\,t)dt}</span></p>
+<p style="text-align:justify"><span class="math">s.t\; y ' \, \,=\,g(y(t),\,u(t),\,t)</span> </p>
+<p style="text-align:justify"> <span class="math">y(t_{0} )=y_{0} ,\;y(t_{1} )=y_{1}</span></p>
+<p style="text-align:justify">y(t) : 상태변수(state variable)</p>
+<p style="text-align:justify">u(t) : 통제변수(control variable), 부분연속함수 </p>
+<p style="text-align:justify">f, g는 세 변수(y, u, t)에 대해 미분가능한 연속함수</p>
+<p style="text-align:left">※ 변분학 문제는 최적제어문제의 특별한 경우로서 통제변수가 상태변수의 도함수이다.</p>
+<p style="text-align:left">위의 문제는 정태적 최적화 문제와 같이 라그랑지함수를 도입하여 푼다.<sup><a href="#fn127" id="fnref127">[127]</a></sup></p>
+<p style="text-align:left"><span class="math">\max\;L= \int_{t_{0}}^{t_{1}} {[f+ \lambda (t)(g-y ' )]dt}</span>...............①</p>
+<p style="text-align:left">이 문제는 y, u, λ의 함수이므로 세 변수에 대해 미세 변동을 고려하여 문제를 푼다.<sup><a href="#fn128" id="fnref128">[128]</a></sup></p>
+<h4 id="1-단계-변분학에서와-같이-t-의-변동을-고려" style="text-align:left">1 단계) 변분학에서와 같이 λ(t)의 변동을 고려</h4>
+<p style="text-align:left">①을 만족하는 최적경로를 <span class="math">\lambda *(t)</span>라 하면</p>
+<p style="text-align:left"><span class="math">\lambda (t)= \lambda *(t)+ \epsilon h(t)</span></p>
+<p style="text-align:left">이를 ①에 대입하면</p>
+<p style="text-align:left"><span class="math">L( \epsilon )= \int_{t_{0}}^{t_{1}} {[f+( \lambda *+ \epsilon h)(g-y ' )]dt}</span></p>
+<p style="text-align:left">ε=0 일 때 극대화조건을 만족해야 하므로</p>
+<p style="text-align:left"><span class="math">\frac{dL}{d \epsilon } = \int_{t_{0}}^{t_{1}} {h(g-y ' )dt=0}</span></p>
+<p style="text-align:left">h에 관계없이 만족하려면</p>
+<table aria-label="1 단계) 변분학에서와 같이 λ(t)의 변동을 고려 관련 표 1" style="border-collapse:collapse;table-layout:fixed;height:32.187px;width:125.480px"><colgroup><col style="width:125.48px"/></colgroup><tbody><tr style="height:32.187px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:justify"><span class="math">y'(t)=g(y,y',t)</span></p>
+</td></tr></tbody></table>
+<p style="text-align:left">이는 바로 제약조건이다. 즉, 제약조건인 운동방정식을 만족시켜야 한다.<sup><a href="#fn129" id="fnref129">[129]</a></sup></p>
+<h4 id="hamiltonian-함수" style="text-align:left">Hamiltonian 함수</h4>
+<p style="text-align:left">①의 두 번째 항에서</p>
+<p style="text-align:left"><span class="math">\int_{t_{0}}^{t_{1}} {\left. - \lambda y ' dt\,=- \left[ \lambda y \begin{matrix} \\ \end{matrix} \right] _{t_{0}}^{t_{1}} + \lambda ' y\, \right.}</span> , (∵부분적분)</p>
+<p style="text-align:left">이를 ①에 대입하면</p>
+<p style="text-align:left"><span class="math">\max\;L= \int_{t_{0}}^{t_{1}} {(f+ \lambda g- \left[ \lambda y \begin{matrix} \\ \end{matrix} \right] _{t_{0}}^{t_{1}} + \lambda ' y\,)dt}</span></p>
+<p style="text-align:left"><span class="math">= \int_{t_{0}}^{t_{1}} {(f+ \lambda g+ \lambda ' y\,)dt} -[ \lambda (t_{1} )y(t_{1} )- \lambda (t_{0} )y(t_{0} )]</span></p>
+<p style="text-align:left">위 식에서 <span class="math">f+ \lambda g</span>를 Hamiltonian 함수라 함</p>
+<p style="text-align:left"><span class="math">L= \int_{t_{0}}^{t_{1}} {(H+ \lambda ' y\,)dt} -[ \lambda (t_{1} )y(t_{1} )- \lambda (t_{0} )y(t_{0} )]</span>..........②</p>
+<h4 id="2-단계-y-t-의-변동을-고려" style="text-align:left">2 단계) y(t)의 변동을 고려</h4>
+<p style="text-align:left"><span class="math">y*(t)</span>를 최적경로라 할 때 </p>
+<p style="text-align:left"><span class="math">y(t)=y*(t)+ \epsilon p(t)</span></p>
+<p style="text-align:left">이를 ②에 대입하면</p>
+<p style="text-align:left"><span class="math">L( \epsilon )= \int_{t_{0}}^{t_{1}} {(H(y*+ \epsilon p,\,u,\,t)+ \lambda ' (y*+ \epsilon p\,)dt} -[ \lambda (t_{1} )y(t_{1} )- \lambda (t_{0} )y(t_{0} )]</span></p>
+<p style="text-align:left"><span class="math">\frac{dL}{d \epsilon } = \int_{t_{0}}^{t_{1}} {( \frac{\partial H}{\partial y} p+ \lambda ' p)dt= \int_{t_{0}}^{t_{1}} {( \frac{\partial H}{\partial y} + \lambda ' )p\,dt\,=0}}</span></p>
+<p style="text-align:left">p(t)에 상관없이 성립해야 하므로</p>
+<table aria-label="2 단계) y(t)의 변동을 고려 관련 표 2" style="border-collapse:collapse;table-layout:fixed;height:48.853px;width:234.907px"><colgroup><col style="width:234.907px"/></colgroup><tbody><tr style="height:48.853px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:justify"><span class="math">\frac{\partial H}{\partial y} =- \lambda ' (t)</span> , where <span class="math">H\,=\,f+ \lambda g</span></p>
+</td></tr></tbody></table>
+<h4 id="3-단계-u-t-의-변동을-고려" style="text-align:left">3 단계) u(t)의 변동을 고려</h4>
+<p style="text-align:left"><span class="math">u*(t)</span>를 최적경로라 할 때 </p>
+<p style="text-align:left"><span class="math">u(t)=u*(t)+ \epsilon q(t)</span></p>
+<p style="text-align:left">이를 ②에 대입하면 </p>
+<p style="text-align:left"><span class="math">L( \epsilon )= \int_{t_{0}}^{t_{1}} {(H(y,u*+ \epsilon q,\,t)+ \lambda ' y\,)dt} -[ \lambda (t_{1} )y(t_{1} )- \lambda (t_{0} )y(t_{0} )]</span>..............③</p>
+<p style="text-align:left"><span class="math">\frac{dL}{d \epsilon } = \int_{t_{0}}^{t_{1}} {\frac{\partial H}{\partial u} q\,dt=0}</span></p>
+<p style="text-align:left">q(t)에 상관없이 성립해야 하므로</p>
+<table aria-label="3 단계) u(t)의 변동을 고려 관련 표 3" style="border-collapse:collapse;table-layout:fixed;height:48.853px;width:102.840px"><colgroup><col style="width:102.84px"/></colgroup><tbody><tr style="height:48.853px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:justify"><span class="math">\frac{\partial H}{\partial u} =0</span></p>
+</td></tr></tbody></table>
+<p style="text-align:left">이는 해밀토니안함수를 최대화하는 1차조건이므로 통제변수 최대화조건이라 한다.</p>
+<p style="text-align:left">transversality 조건(transversality condition)</p>
+<p style="text-align:left">③에서 ε에 대해 미분하면</p>
+<p style="text-align:left"><span class="math">\frac{dL}{d \epsilon } = \int_{t_{0}}^{t_{1}} {\frac{\partial H}{\partial u} q\,dt-[ \lambda (t_{1} ) \frac{\partial y(t_{1} )}{\partial \epsilon } - \lambda (t_{0} ) \frac{\partial y(t_{0} )}{\partial \epsilon }]=0}</span></p>
+<p style="text-align:left"><span class="math">y(t_{0} )=y_{0}</span>, <span class="math">\,y(t_{1} )=y_{1}</span> 로 상수라면</p>
+<p style="text-align:left"><span class="math">\frac{\partial y(t_{1} )}{\partial \epsilon } =0</span> , <span class="math">\frac{\partial y(t_{2} )}{\partial \epsilon } =0</span> ⇒ <span class="math">\frac{\partial H}{\partial u} =0</span></p>
+<p style="text-align:left">이는 최초값, 최종값이 정해져 있을 때의 결과이다.</p>
+<p style="text-align:left">ⅰ) 최종값이 정해져 있지 않다면</p>
+<p style="text-align:left"><span class="math">\frac{\partial y(t_{1} )}{\partial \epsilon } != 0</span></p>
+<table aria-label="3 단계) u(t)의 변동을 고려 관련 표 4" style="border-collapse:collapse;table-layout:fixed;height:34.547px;width:95.293px"><colgroup><col style="width:95.293px"/></colgroup><tbody><tr style="height:34.547px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:justify">∴ <span class="math">\lambda (t_{1} )=0</span></p>
+</td></tr></tbody></table>
+<p style="text-align:left">ⅱ) 최초값이 정해져 있지 않다면</p>
+<p style="text-align:left"><span class="math">\frac{\partial y(t_{0} )}{\partial \epsilon } != 0</span></p>
+<table aria-label="3 단계) u(t)의 변동을 고려 관련 표 5" style="border-collapse:collapse;table-layout:fixed;height:34.547px;width:95.293px"><colgroup><col style="width:95.293px"/></colgroup><tbody><tr style="height:34.547px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:justify">∴ <span class="math">\lambda (t_{0} )=0</span></p>
+</td></tr></tbody></table>
+<p style="text-align:left">이를 최적제어문제의 transversality 조건이라 한다.</p>
+<h4 id="maximum-principle-최적제어문제의-필요조건-130" style="text-align:left">maximum principle : 최적제어문제의 필요조건<sup><a href="#fn130" id="fnref130">[130]</a></sup></h4>
+<table aria-label="maximum principle : 최적제어문제의 필요조건 [130] 관련 표 6" style="border-collapse:collapse;table-layout:fixed;height:242.480px;width:382.067px"><colgroup><col style="width:382.067px"/></colgroup><tbody><tr style="height:180.680px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:left"><span class="math">y ' (t)= \frac{\partial H}{\partial \lambda } =g(y,\,y ' ,\,t)</span> ; 제약조건, , where <span class="math">H\,=\,f+ \lambda g</span></p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:left"><span class="math">\frac{\partial H}{\partial y} =- \lambda '(t)</span> ; 승수방정식(multiplier equation)</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:left"><span class="math">\frac{\partial H}{\partial u} =0</span> ; 통제변수 최대화 조건</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:left"><span class="math">\lambda (t_{0} )=0</span> ; 최초값 미정시 TVC</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:left"><span class="math">\lambda (t_{1} )=0</span> ; 최종값 미정시 TVC</p>
+</td></tr></tbody></table>
+<p style="text-align:left">예)</p>
+<p style="text-align:left"><span class="math">\max\; \int_{0}^{4} {(-3t^{2} -2u^{2} )dt}</span></p>
+<p style="text-align:left"><span class="math">s.t\;y ' =4u</span></p>
+<p style="text-align:left"> <span class="math">y(0)=8,\;y(4)=28</span></p>
+<p style="text-align:left">(풀이)</p>
+<p style="text-align:left">Hamiltonian 함수는 <span class="math">H=f+ \lambda g</span>에서</p>
+<p style="text-align:left"><span class="math">H=-3t^{2} -2u^{2} + \lambda 4u</span></p>
+<p style="text-align:left"><span class="math">H_{y} =0=- \lambda '</span> ⇒ <span class="math">\lambda =c_{1}</span></p>
+<p style="text-align:left"><span class="math">H_{u} =-4u+4 \lambda =0</span> ⇒ <span class="math">u= \lambda</span></p>
+<p style="text-align:left"><span class="math">\;y ' =4u=4c_{1}</span> ⇒ <span class="math">y=4c_{1} t+c_{2}</span></p>
+<p style="text-align:left">최초값과 최종값을 대입하면</p>
+<p style="text-align:left"><span class="math">c_{1} = \frac{5}{4} ,\;c_{2} =8</span></p>
+<p style="text-align:left">∴ 최적경로 <span class="math">y(t)=5t+8</span></p>
+<p style="text-align:right">(풀이끝)</p>
+<p style="text-align:left">예)</p>
+<p style="text-align:left"><span class="math">\max\; \int_{0}^{3} {(3y+2u)dt}</span></p>
+<p style="text-align:left"><span class="math">s.t\;y'=4-u^{2}</span> , <span class="math">y(0)=1,\;y(3)=</span>미정</p>
+<p style="text-align:left">(풀이)</p>
+<p style="text-align:left">Hamiltonian 함수는</p>
+<p style="text-align:left"><span class="math">H=3y+2u+ \lambda (4-u^{2} )</span></p>
+<p style="text-align:left"><span class="math">H_{y} \,=\,3=- \lambda '</span> ⇒ <span class="math">\lambda (t)=-3t+c_{1}</span></p>
+<p style="text-align:left">transversality 조건에 의해</p>
+<p style="text-align:left"><span class="math">\lambda (3)=-9+c_{1} =0</span> ⇒ <span class="math">c_{1} =9</span></p>
+<p style="text-align:left"><span class="math">\lambda (t)=-3t+9</span></p>
+<p style="text-align:left"><span class="math">H_{u} =2-2 \lambda u=0</span> ⇒ <span class="math">\lambda u=1</span></p>
+<p style="text-align:left"><span class="math">u= \frac{1}{\lambda } = \frac{1}{-3t+9} = \frac{1}{3(3-t)}</span></p>
+<p style="text-align:left"><span class="math">\,y ' =4-u^{2} =4- \frac{1}{9(3-t) ^{2}}</span></p>
+<p style="text-align:left"><span class="math">y(t)=4t- \frac{1}{9(t-3)} +c_{2}</span></p>
+<p style="text-align:left"><span class="math">y(0)=- \frac{1}{9(-3)} +c_{2} =1</span> ⇒ <span class="math">c_{2} = \frac{26}{27}</span></p>
+<p style="text-align:left">∴ <span class="math">y(t)=4t- \frac{1}{9(t-3)} + \frac{26}{27}</span></p>
+<p style="text-align:right">(풀이끝)</p>
+<p style="text-align:left">예) 가구(household)의 장기적 효용극대화 문제</p>
+<p style="text-align:left">maximize    <span class="math">\int_{0}^{\top} {e^{- \rho t} u(c(t))dt}</span></p>
+<p style="text-align:justify">subject to   <span class="math">a ' \,=ra(t)-c(t)\,</span> ; Household budget equation</p>
+<p style="text-align:left"> <span class="math">a(0)=a_{0}</span></p>
+<p style="text-align:left"> <span class="math">a(T) \geq a_{\scriptscriptstyle {T}}</span> , <span class="math">0 \leq t \leq T</span></p>
+<p style="text-align:left">             r, <span class="math">\rho</span>, <span class="math">a_{0}</span>, <span class="math">a_{\scriptscriptstyle {T}}</span>는 상수</p>
+<p style="text-align:left">ρ : 가구의 시간선호(time preference), subjective discount rate</p>
+<p style="text-align:left">r : 시장이자율</p>
+<p style="text-align:left">a(t) : t기의 자산</p>
+<p style="text-align:left">c(t) : t기의 소비</p>
+<p style="text-align:left">u(c) : 두당 효용(per capita instataneous utility)</p>
+<p style="text-align:justify">(풀이) </p>
+<p style="text-align:justify">ⅰ) 현재가치 해밀토니안(present value Hamiltonian) :</p>
+<p style="text-align:justify"><span class="math">H=e^{- \rho t} u(c)+ \lambda (ra-c)</span> ....................①</p>
+<p style="text-align:justify">1차조건 :</p>
+<p style="text-align:justify"><span class="math">\frac{\partial H}{\partial c} \,=\,0\,</span> ⇒ <span class="math">e^{- \rho t} u ' (c)- \lambda \,=0</span> ....................②</p>
+<p style="text-align:justify"><span class="math">\frac{\partial H}{\partial a} \,=\,- \lambda ' \,</span> ⇒ <span class="math">r\, \lambda =- \lambda '</span> .......................③</p>
+<p style="text-align:justify"><span class="math">\frac{\partial H}{\partial \lambda } \,=\,0\, \rightarrow \,a ' \,=ra(t)-c(t)\,=0\,</span>.....................④</p>
+<p style="text-align:left"><span class="math">\lambda(T) \geq0</span> , <span class="math">\lambda (T)a(T)=0</span>........................⑤</p>
+<p style="text-align:left">②, ③으로 부터 </p>
+<p style="text-align:left"><span class="math">\lambda ' =-r\, \lambda (t)\,=\,-re^{- \rho t} u ' (c)</span> ..............⑥</p>
+<p style="text-align:left">②를 t에 대해 미분하면</p>
+<p style="text-align:left"><span class="math">- \rho e^{- \rho t} u ' (c)+e^{- \rho t} u '' (c)c ' (t)- \lambda ' \,=0</span> ..................⑦</p>
+<p style="text-align:left">⑥을 ⑦에 대입하면</p>
+<p style="text-align:left"><span class="math">- \rho e^{- \rho t} u ' (c)+e^{- \rho t} u '' (c)c ' =\,-re^{- \rho t} u ' (c)</span></p>
+<p style="text-align:left">⇒ <span class="math">- \rho u ' (c)+u '' (c)c ' =\,-ru ' (c)</span></p>
+<p style="text-align:left">⇒ <span class="math">u '' (c)c ' =\,( \rho -r)u ' (c)</span></p>
+<p style="text-align:left">⇒ <span class="math">c ' =\, \frac{1}{u '' } ( \rho -r)u ' (c)</span></p>
+<p style="text-align:left">양변을 c로 나누면</p>
+<p style="text-align:left">⇒  <span class="math">\frac{c ' }{c} =\, \frac{u ' (c)}{cu '' (c)} ( \rho -r)</span></p>
+<p style="text-align:left">상대적 위험회피(ralative risk aversion:RRA) 계수를 <span class="math">\frac{cu '' (c)}{u ' (c)}</span> 라 정의하면</p>
+<p style="text-align:left">⇒  <span class="math">\frac{c ' }{c} =\,- \frac{u ' (c)}{cu '' (c)} (r- \rho )</span> = <span class="math">\frac{1}{RRA} (r- \rho )</span></p>
+<p style="text-align:left"><span class="math">\frac{c ' }{c}</span>은 소비의 증가율을 의미 , <span class="math">\,- \frac{u ' (c)}{cu '' (c)} &gt;0</span> 은 기간간 대체탄력성(EIS)</p>
+<p style="text-align:justify">consumption grows whenever the market discount rate(r) is larger than the subjective discount rate(ρ). In that case, the consumer is less impatient than the market.</p>
+<p style="text-align:justify">ⅱ) 당기가치 해밀토니안(current value Hamiltonian)<sup><a href="#fn131" id="fnref131">[131]</a></sup> :</p>
+<p style="text-align:left">Any discounted optimal control problem can be solved using both a present value Hamiltonian or a current value Hamiltonian. We sometime prefer the current value Hamiltonian for its simplicity</p>
+<p style="text-align:left">당기가치 해밀토니안을 다음과 같이 정의하면</p>
+<p style="text-align:justify"><span class="math">\hat{H} =u(c)+ \mu (ra-c)</span> ....................①</p>
+<p style="text-align:justify"><span class="math">H=e^{- \rho t} u(c)+ \lambda (ra-c)</span> = <span class="math">e^{- \rho t} [u(c)+ \mu (ra-c)]</span><span class="math">=e^{- \rho t} \hat{H}</span> , where <span class="math">\lambda =e^{- \rho t} \mu</span></p>
+<p style="text-align:justify">1차조건 :</p>
+<p style="text-align:justify"><span class="math">\frac{\partial {H}}{\partial c} \,=\,0\,</span> ⇒ <span class="math">\frac{\partial e^{- \rho t} \hat{H}}{\partial c} \,=\,0\,</span></p>
+<p style="text-align:justify">⇒ <span class="math">\frac{\partial \hat{H}}{\partial c} \,=\,0\,</span> </p>
+<p style="text-align:justify">⇒ <span class="math">u ' (c)- \mu \,=0</span> ....................②</p>
+<p style="text-align:justify"><span class="math">\frac{\partial {H}}{\partial a} \,=\,- \lambda ' \,</span> </p>
+<p style="text-align:justify">⇒ <span class="math">\frac{\partial e^{- \rho t} \hat{H}}{\partial a} \,=\,-(- \rho e^{- \rho t} \mu +e^{- \rho t} \mu ')\,</span></p>
+<p style="text-align:justify">⇒ <span class="math">\frac{\partial \hat{H}}{\partial a} \,=\, \rho \mu - \mu ' \,</span></p>
+<p style="text-align:justify">⇒ <span class="math">\mu r\,=\, \rho \mu - \mu ' \,</span>......................③</p>
+<p style="text-align:justify"><span class="math">\frac{\partial H}{\partial \mu } \,=\,0\,</span> ⇒ <span class="math">\frac{\partial e^{- \rho t} \hat{H}}{\partial \mu } \,=\,0\,</span></p>
+<p style="text-align:justify">⇒ <span class="math">\frac{\partial \hat{H}}{\partial \mu } \,=\,0\;</span></p>
+<p style="text-align:justify"><span class="math">\, \rightarrow \,a ' \,=ra(t)-c(t)\,=0\,</span>.....................④</p>
+<p style="text-align:left"><span class="math">\lambda(T) \geq0</span> , <span class="math">\lambda (T)a(T)=0</span>........................⑤</p>
+<p style="text-align:left">②를 t에 대해 미분하면</p>
+<p style="text-align:left"><span class="math">u '' (c)c'- \mu ' \,=0</span> ................⑥</p>
+<p style="text-align:left">③을 정리하면</p>
+<p style="text-align:left"><span class="math">\mu r\,=\, \rho \mu - \mu ' \,</span></p>
+<p style="text-align:left">⇒ <span class="math">\mu '\,=\,( \rho -r) \mu \,</span></p>
+<p style="text-align:left">②, ⑥을 대입하면</p>
+<p style="text-align:left"><span class="math">u '' c'\,=\,( \rho -r)u ' \,</span> </p>
+<p style="text-align:left">양변을 c로 나누고 u“을 이항하면</p>
+<p style="text-align:left"><span class="math">\frac{c'}{c} \,=\,-(r- \rho ) \frac{u'}{cu''} \,</span></p>
+<p style="text-align:left">앞과 같은 결과이다. </p>
+<p style="text-align:left">즉, 현재가치 해밀토니안과 당기가치 해밀토니안은 같은 결과를 낳는다.</p>
+<p style="text-align:right">(풀이끝)</p>
+<h4 id="라그랑지승수-costate-variable-의-의미" style="text-align:left">라그랑지승수(costate variable)의 의미</h4>
+<p style="text-align:justify">최대화원칙은 정태적 최대화 문제의 해결에서 사용했던 라그란지안 기법의 동태적 일반화이다. 따라서 해의 민감도에 관해 같은 의미를 갖는다. 단 라그랑지승수가 단일 수치가 아니라 t의 함수이므로 t의 값에 따라 변한다는 점이다. 따라서 라그랑지승수의 의미도 기간과 관련되서 해석되어야 한다.</p>
+<p style="text-align:left">최적값 <span class="math">\lambda *,\,y*,\,u*</span>을 적용한 범함수의 최대값이 다음과 같다고 하면</p>
+<p style="text-align:left"><span class="math">L*= \int_{t_{0}}^{t_{1}} {(H(y*,\,u*,\,t,\, \lambda *)+ \lambda * ' y\,)dt} -[ \lambda *(t_{1} )y*(t_{1} )- \lambda *(t_{0} )y*(t_{0} )]</span></p>
+<p style="text-align:left"><span class="math">\frac{\partial L*}{\partial y(t_{1} )} =- \lambda (t_{1} )</span> , <span class="math">\frac{\partial L*}{\partial y(t_{0} )} = \lambda (t_{0} )</span></p>
+<p style="text-align:left">초기 라그랑지승수는 초기 상태변수의 변화에 따른 목적함수의 최적값의 변화를 의미</p>
+<p style="text-align:left">최종 라그랑지승수는 최종 상태변수의 변화에 따른 목적함수의 최적값의 변화를 의미</p>
+<p style="text-align:left">목적함수가 비용, 가격 등 경제적 가치와 관련되어 있다면 라그랑지승수는 기회비용(shadow price)의 의미를 가진다.</p>
+<p style="text-align:left">최적제어문제(optimal control problem)와 변분학(calculus of variation)과의 관계</p>
+<p style="text-align:left">변분학의 문제</p>
+<p style="text-align:justify"><span class="math">\max\; \int_{t_{0}}^{t_{1}} {f(y,\,y ' ,\,t)dt}</span></p>
+<p style="text-align:justify"><span class="math">s.t\;y(t_{0} )=y_{0}</span> , <span class="math">y(t_{1} )=y_{1}</span></p>
+<p style="text-align:left">변분학에서 <span class="math">y '</span> 을 <span class="math">u</span> 로 대체하면 위 문제는 최적제어문제로 변환</p>
+<p style="text-align:justify"><span class="math">\max\; \int_{t_{0}}^{t_{1}} {f(y,\,u,\,t)dt}</span></p>
+<p style="text-align:justify"><span class="math">s.t\;y ' =u,\;y(t_{0} )=y_{0}</span> , <span class="math">y(t_{1} )=y_{1}</span></p>
+<p style="text-align:left">Hamiltonian 함수는 <span class="math">H=f+ \lambda u</span>에서</p>
+<p style="text-align:left"><span class="math">H_{u} =f_{u} + \lambda =0</span> </p>
+<p style="text-align:left">양변을 t로 미분하면</p>
+<p style="text-align:left"><span class="math">\frac{df_{u}}{dt} + \lambda '=0</span></p>
+<p style="text-align:left">한편 <span class="math">H_{y} \,=\,f_{y} \,=\,- \lambda '</span> 이므로 이를 위식에 대입하면</p>
+<p style="text-align:left"><span class="math">\frac{df_{u}}{dt} =f_{y}</span></p>
+<p style="text-align:left"><span class="math">u=y'</span> 이므로</p>
+<p style="text-align:left"><span class="math">\frac{df_{y'}}{dt} =f_{y}</span> ; 오일러방정식</p>
+<p style="text-align:left">최종값이 정해지지 않은 경우라면</p>
+<p style="text-align:left">최적제어문제의 transversality 조건은 <span class="math">\lambda (t_{1} )=0</span></p>
+<p style="text-align:left"><span class="math">H_{y} \,=\,f_{y} \,=\,- \lambda ' =0</span></p>
+<p style="text-align:left">따라서 이는 변분학의 transversality 조건과 같다.</p>
+<h4 id="경제학적-문제의-해결에-요구되는-추가제약들" style="text-align:left">경제학적 문제의 해결에 요구되는 추가제약들</h4>
+<h4 id="1-상태변수에-비음제약이-있을-경우" style="text-align:left">(1) 상태변수에 비음제약이 있을 경우</h4>
+<p style="text-align:left">경제학 문제의 경우 상태변수가 (+)인 경우가 많다. </p>
+<p style="text-align:left">이 경우 정태적 비선형계획법 문제(nonlinear programming problem)에서 사용했던 KKT 조건을 동태적으로 확장한 개념으로 조건이 변경된다.</p>
+<p style="text-align:justify"><span class="math">\max\; \int_{t_{0}}^{t_{1}} {f(y(t),\,u(t),\,t)dt}</span></p>
+<p style="text-align:justify"><span class="math">s.t\; y ' \, \,=\,g(y(t),\,u(t),\,t)</span> ; 운동방정식(equation of motion) </p>
+<p style="text-align:justify"> <span class="math">y(t_{0} )=y_{0} ,\;y(t_{1} ) \geq 0</span></p>
+<table aria-label="(1) 상태변수에 비음제약이 있을 경우 관련 표 7" style="border-collapse:collapse;table-layout:fixed;height:197.453px;width:382.067px"><colgroup><col style="width:382.067px"/></colgroup><tbody><tr style="height:180.680px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:left"><span class="math">\frac{\partial H}{\partial y} =- \lambda '(t)</span></p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:left"><span class="math">\frac{\partial H}{\partial u} =0</span></p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:left"><span class="math">y ' (t)= \frac{\partial H}{\partial \lambda } =g(y,\,y ' ,\,t)</span></p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:left"><span class="math">\lambda (t_{1} ) \geq 0</span> , <span class="math">\lambda (t_{1} )y*(t_{1} )=0</span> , where <span class="math">y*</span> 는 최적해</p>
+</td></tr></tbody></table>
+<h4 id="2-통제변수에-비음제약이-있을-경우" style="text-align:left">(2) 통제변수에 비음제약이 있을 경우</h4>
+<p style="text-align:left"><span class="math">u(t) \geq 0</span> 조건이 추가된다면</p>
+<p style="text-align:left"><span class="math">L=H+ \nu (t)u(t)</span> , <span class="math">\nu (t)</span>는 라그랑지승수</p>
+<table aria-label="(2) 통제변수에 비음제약이 있을 경우 관련 표 8" style="border-collapse:collapse;table-layout:fixed;height:119.507px;width:125.480px"><colgroup><col style="width:125.48px"/></colgroup><tbody><tr style="height:119.507px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:left"><span class="math">\frac{\partial L}{\partial u} \leq 0</span> </p>
+<p style="text-align:left"><span class="math">\frac{\partial L}{\partial u} u=0</span></p>
+<p style="text-align:left"><span class="math">u(t) \geq 0</span></p>
+</td></tr></tbody></table>
+<h4 id="3-통제변수에-제약이-있을-경우" style="text-align:left">(3) 통제변수에 제약이 있을 경우</h4>
+<p style="text-align:left">통제변수 <span class="math">u \in OMEGA</span> 일 경우</p>
+<p style="text-align:left">통제변수 최대화조건 <span class="math">H_{u} =0</span> 는 다음으로 대체된다.</p>
+<table aria-label="(3) 통제변수에 제약이 있을 경우 관련 표 9" style="border-collapse:collapse;table-layout:fixed;height:54.400px;width:110.387px"><colgroup><col style="width:110.387px"/></colgroup><tbody><tr style="height:54.400px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:justify"><span class="math">\max\;H \\ s.t\;u \in OMEGA</span></p>
+</td></tr></tbody></table>
+<h4 id="4-부등식-제약이-있을-경우" style="text-align:left">(4) 부등식 제약이 있을 경우</h4>
+<p style="text-align:justify"><span class="math">\max\; \int_{t_{0}}^{t_{1}} {f(y,\,u,\,t)dt}</span></p>
+<p style="text-align:justify"><span class="math">s.t\;y ' \,=\,g(y,\,u,\,t)</span></p>
+<p style="text-align:justify"> <span class="math">h(y,\,u,\,t) \geq 0</span></p>
+<p style="text-align:justify"> <span class="math">y(t_{0} )=y_{0} ,\;y(t_{1} )=y_{1}</span></p>
+<p style="text-align:left">최대화의 필요조건은 KKT 조건의 동태적 확장과 같다.</p>
+<p style="text-align:left">일반화된 Hessian 함수를 <span class="math">G=H+ \phi h=f+ \lambda g+ \phi h</span> 라 하면 최적화원칙은</p>
+<p style="text-align:left">(<span class="math">\lambda (t)</span>는 g 제약식에 대응하는 라그랑지승수, <span class="math">\phi (t)</span>는 h 제약식에 대응하는 라그랑지승수)</p>
+<table aria-label="(4) 부등식 제약이 있을 경우 관련 표 10" style="border-collapse:collapse;table-layout:fixed;height:125.120px;width:178.307px"><colgroup><col style="width:178.307px"/></colgroup><tbody><tr style="height:125.120px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:left"><span class="math">G_{y} =- \lambda '</span></p>
+<p style="text-align:left"><span class="math">G_{\lambda } =y'</span></p>
+<p style="text-align:left"><span class="math">\frac{\partial G}{\partial u} =0</span> </p>
+<p style="text-align:left"><span class="math">\phi h=0</span> , <span class="math">\phi (t) \geq 0</span></p>
+</td></tr></tbody></table>
+<h4 id="5-분석기간이-무한대일-경우-transversality-조건" style="text-align:left">(5) 분석기간이 무한대일 경우 transversality 조건</h4>
+<p style="text-align:left">분석기간이 <span class="math">t_{0} \leq t \leq t_{1}</span> 이고 최종값이 정해져 있지 않다면 transversality 조건은</p>
+<p style="text-align:left"><span class="math">\lambda (t_{1} )=0</span></p>
+<p style="text-align:left">자연적인 추론으로서 <span class="math">t_{1} \to \infty</span>이면 <span class="math">\lim\limits_{t_{1} \to \infty } {\lambda (t_{1} )=0}</span> 이 transversality 조건이라 생각할 수 있지만 일반적인 경우 이는 사실이 아님. 일반적으로 기간이 무한대일 경우에 적용되는</p>
+<p style="text-align:left"> transversality 조건은 알려지지 않았음.</p>
+<p style="text-align:left">목적범함수가  <span class="math">\int_{0}^{\infty } {e^{-rt} f(t)dt}</span> 의 형태인 경우 transversality 조건은<sup><a href="#fn132" id="fnref132">[132]</a></sup></p>
+<p style="text-align:left"><span class="math">\lim\limits_{t_{1} \to \infty } {\lambda (t_{1} )=0}</span> , r &gt; 0</p>
+<h4 id="충분조건" style="text-align:left">충분조건</h4>
+<p style="text-align:left">최적제어문제에서는 앞의 필요조건 외에 추가적인 필요조건이 필요하다.</p>
+<p style="text-align:left">극대화의 필요조건 ; <span class="math">H_{uu} \leq 0</span></p>
+<p style="text-align:left">극소화의 필요조건 ; <span class="math">H_{uu} \geq 0</span></p>
+<p style="text-align:left">정태적인 경우와 달리 Hamiltonian 함수의 2차 미분은 충분조건이 아니라 필요조건이다.</p>
+<p style="text-align:left">The sufficient conditions for a maximum are that the Hamiltonian function be concave in y and u.</p>
+<p style="text-align:left">(정리) <span class="math">u*</span> 만 최적해인 Hamiltonian 함수 <span class="math">arch{H}</span>.</p>
+<p style="text-align:left"><span class="math">arch{H} =f(y,\,u*,\,t)+ \lambda g(y,\,u*,\,t)</span></p>
+<p style="text-align:left"><span class="math">arch{H}</span> 가 [<span class="math">t_{0} ,\,t_{1}</span>]에서 모든 y, t에 대해 오목함수이면 최대화원칙의 필요조건들은 충분조건이 된다.</p>
+<p style="text-align:left">(증명생략)</p>
+<p style="text-align:left">예) 자동차를 가장 멀리 가장 빨리 정차시키려는 문제</p>
+<p style="text-align:left">초기시간 <span class="math">t_{ 0}</span>, 도착시간 <span class="math">t_{ 1}</span> , 힘 u, 자동차 질량 1, 가속도 <span class="math">\frac{d^{2} x}{dt^{2}}</span></p>
+<p style="text-align:left"><span class="math">\,u=1 \times \frac{d^{2} x}{dt^{2}}</span></p>
+<p style="text-align:left">예)</p>
+<p style="text-align:left"><span class="math">\min\;t_{1} -t_{0}</span></p>
+<p style="text-align:left"><span class="math">s.t\;u=x ' ' = \frac{d^{2} x}{dt^{2}}</span> </p>
+<p style="text-align:left"> <span class="math">x(t_{0} )=x_{0} ,\,x(t_{1} )=x_{1}</span></p>
+<p style="text-align:left"> <span class="math">-1 \leq u(t) \leq 1</span>, u(t)는 구간연속</p>
+<p style="text-align:left">(풀이)</p>
+<p style="text-align:left">위 문제는 다음과 같이 고칠 수 있다.</p>
+<p style="text-align:left"><span class="math">\max\;- \int_{t_{0}}^{t_{1}} {dt}</span></p>
+<p style="text-align:left"><span class="math">s.t\;x_{1} ' =x_{2} \\ \;x_{2} ' =u</span></p>
+<p style="text-align:left"> <span class="math">x(t_{0} )=x_{0} ,\,x(t_{1} )=x_{1}</span></p>
+<p style="text-align:left"> <span class="math">-1 \leq u \leq 1</span>,</p>
+<p style="text-align:left">제약조건이 여러 개 있을 경우 각각의 경우에 라그랑지승수를 적용한다.</p>
+<p style="text-align:left">이 문제의 해밀토니안은</p>
+<p style="text-align:left"><span class="math">H=-1+ \lambda_{1} x_{2} + \lambda_{2} u</span></p>
+<p style="text-align:left">ⅰ) 통제변수의 극대화조건</p>
+<p style="text-align:left">u가 제약이 있는 경우이므로 <span class="math">-1 \leq u \leq 1</span> 에서 H를 극대화시키는 u를 구한다.</p>
+<p style="text-align:left">H는 u의 선형함수이므로 </p>
+<p style="text-align:left"><span class="math">\lambda_{2} \,&gt;\,0</span>  이면 u = 1 일 때 최대값</p>
+<p style="text-align:left"><span class="math">\lambda_{2} \,&lt;\,0</span>  이면 u = -1 일 때 최대값</p>
+<p style="text-align:left">부호함수는 다음과 같이 정의된다.</p>
+<p style="text-align:left">z &gt; 0 이면 sgn(z) =1</p>
+<p style="text-align:left">z &lt; 0 이면 sgn(z) =-1</p>
+<p style="text-align:left">따라서 최적통제변수값 <span class="math">u*</span>는</p>
+<p style="text-align:left"><span class="math">u*=sgn( \lambda_{2} )</span></p>
+<p style="text-align:left">이와같이 통제변수가 시간의 이 끝점에서 저 끝점으로 변환되는 것을 빵빵원칙(bang-bang principle)이라 하고 그 해를 빵빵제어(bang-bang control)라 한다.<sup><a href="#fn133" id="fnref133">[133]</a></sup> <span class="math">\lambda_{2}</span>를 스위치함수라 한다.</p>
+<p style="text-align:left">ⅱ) 승수방정식</p>
+<p style="text-align:left"><span class="math">\lambda ' _{1} = \frac{\partial H}{\partial x_{1}} =0</span></p>
+<p style="text-align:left"> ⇒ <span class="math">\lambda_{1} =c_{1}</span> , <span class="math">c_{1}</span>은 상수</p>
+<p style="text-align:left"><span class="math">\lambda ' _{2} = \frac{\partial H}{\partial x_{2}} =- \lambda_{1}</span> </p>
+<p style="text-align:left">⇒<span class="math">\lambda ' _{2} =-c_{1}</span> </p>
+<p style="text-align:left">⇒ <span class="math">\lambda_{2} \,=\,-c_{1} t+c_{2}</span> , <span class="math">c_{2}</span>은 상수</p>
+<p style="text-align:left">bang-bang 원칙에 의해 u=1 or –1 만이 고려된다.</p>
+<p style="text-align:left">u = 1 이면 </p>
+<p style="text-align:left"><span class="math">x' _{1} =x_{2}</span> ⇒ <span class="math">x_{1} = \frac{1}{2} x_{2}^{2} +c</span> , <span class="math">c</span>는 상수</p>
+<p style="text-align:left">u = -1 이면 </p>
+<p style="text-align:left"><span class="math">x_{1} =- \frac{1}{2} x_{2}^{2} +c</span></p>
+<hr/>
+<p><a href="dynamic optimization.html">← 동적최적화이론과 응용 목차</a></p>
+<div class="footnotes"><section class="related-documents" id="related-documents"><h2>관련 문서</h2><ul><li><a href="calculus-of-variations.html">변분학</a></li><li><a href="dynamic-optimization-applications-continuous.html">연속형 동적최적화 응용</a></li><li><a href="phase diagram.html">위상도 분석</a></li></ul></section><hr/><h2 id="각주">각주</h2><li id="fn127"><p style="text-align:justify"> 제약조건이 시간 <span class="math">t_{0} \leq t \leq t_{1}</span>의 범위에 있으므로 라그랑지승수가 아닌 t의 함수인 라그랑지함수를 도입한다. 다른 말로 ‘costate variable’ 이라 한다.</p>
+<a href="#fnref127">↩</a></li><li id="fn128"><p style="text-align:justify"> 정태적인 경우 세 변수에 관해 미분함으로써 필요조건을 도출할 수 있지만 최적제어문제의 경우 변수가 t의 함수이므로 바로 미분할 수 없고 변수의 변동을 고려한다.</p>
+<a href="#fnref128">↩</a></li><li id="fn129"><p style="text-align:justify"> 이는 정태적인 경우 라그랑지함수를 미분했을 때 나오는 결과와 비슷</p>
+<a href="#fnref129">↩</a></li><li id="fn130"><p style="text-align:justify"> 특히 이상의 필요조건들을 발견자인 러시아 수학자의 이름을 따서 Pontryagin의 최대화원칙들(maximum principle)이라 한다.</p>
+<a href="#fnref130">↩</a></li><li id="fn131"><p style="text-align:justify"> 해당년도의 최대화. it represented the impact of making a decision in terms of utility at time t.</p>
+<a href="#fnref131">↩</a></li><li id="fn132"><p style="text-align:justify"> Takayama, mathmatical economics. ch? 참조</p>
+<a href="#fnref132">↩</a></li><li id="fn133"><p style="text-align:justify"> 전기스위치의 켜기(on), 끄기(off)를 제어하는 전기공학에서 많이 적용됨.</p>
+<a href="#fnref133">↩</a></li></div></body>
+</html>

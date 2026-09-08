@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메커니즘 디자인(Mechanism Design)</title>
+<link rel="stylesheet" href="blog.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<main style="max-width:980px;margin:0 auto;padding:28px 22px;line-height:1.75;">
+<h1>메커니즘 디자인(Mechanism Design)</h1>
+
+<p><strong>메커니즘 디자인(Mechanism Design)</strong>은 주어진 게임의 균형을 찾는 것과 반대로,
+원하는 결과가 균형으로 나오도록 규칙과 보수구조를 설계하는 접근이다.</p>
+
+<h2>1. 게임이론을 거꾸로 사용한다</h2>
+<p>보통 게임이론은 “이 규칙 아래에서 합리적인 경기자는 무엇을 선택할까?”를 묻는다.
+메커니즘 디자인은 반대로 “사람들이 원하는 행동을 하게 만들려면 규칙을 어떻게 설계해야 할까?”를 묻는다.</p>
+
+<h2>2. 솔로몬의 재판 예</h2>
+<p>vault 메모는 솔로몬의 재판을 직관적 예로 든다.
+두 여인이 모두 한 아이의 어머니라고 주장할 때,
+단순히 “누가 진짜 어머니인가?”라고 물어서는 거짓말을 막기 어렵다.</p>
+
+<p>따라서 진짜 어머니와 가짜 어머니가 서로 다른 행동을 선택하도록
+선택의 결과와 보수를 설계한다는 것이 핵심이다.
+즉 진실을 말하는 유형과 거짓말하는 유형의 이해관계를 갈라
+자기선택(self-selection)이 일어나도록 게임을 만든다.</p>
+
+<h2>3. 중요한 개념</h2>
+<ul>
+<li><strong>유인적합성(incentive compatibility)</strong>: 참가자가 자신의 진짜 정보를 드러내는 것이 스스로에게 이익이 되는가?</li>
+<li><strong>참여제약(participation constraint)</strong>: 참가자가 메커니즘에 참여할 유인이 있는가?</li>
+<li><strong>구현(implementation)</strong>: 설계자가 원하는 결과를 균형으로 만들 수 있는가?</li>
+</ul>
+
+<h2>4. 예: 경매</h2>
+<p>판매자가 물건의 가치를 모르는 여러 구매자에게 물건을 판다고 하자.
+판매자가 원하는 것은 구매자들이 자신의 가치를 가능한 솔직하게 드러내게 하는 것이다.</p>
+
+<p>예를 들어 2등가격 경매(Vickrey auction)에서는 가장 높은 가격을 쓴 사람이 이기지만
+실제로는 두 번째로 높은 가격을 지불한다.
+이 구조에서는 각 참가자가 자신의 진짜 가치보다 높거나 낮게 써서 얻는 이점이 없어
+진실한 가치 제출이 우월전략이 된다.</p>
+
+<h2>5. 왜 경제학에서 중요한가?</h2>
+<p>경매, 조세, 규제, 공공재, 보험, 계약, 플랫폼 규칙처럼
+“사람들이 규칙에 반응한다”는 문제가 있는 곳에서는
+좋은 규칙을 만드는 것이 좋은 행동을 기대하는 것보다 중요하다.</p>
+
+<p><small>출처: vault의 「솔로몬의 재판(메카니즘 디자인).md」를 중심으로 정리.
+경매 예는 메커니즘 디자인의 표준적 예를 보충함.</small></p>
+
+<p><a href="game.html">게임이론 목차로 돌아가기</a></p>
+</main>
+</body>
+</html>

@@ -1,24 +1,104 @@
 <!DOCTYPE html>
+
 <html lang="ko">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="blog.css">
-  <title>경제수학 II</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="blog.css" rel="stylesheet" type="text/css"/>
+<title>경제수학 II</title>
+<style>
+    .part {
+      margin: 1.4em 0;
+      padding: 1em 1.1em;
+      border: 1px solid #d0d7de;
+      border-radius: 10px;
+      background: #fff;
+    }
+    .part h2 { margin-top: 0; }
+    .part ul { margin-bottom: 0; }
+    .part p { margin: .45em 0; }
+    .flow {
+      margin: 1.2em 0;
+      padding: .9em 1em;
+      border-left: 4px solid #5b7083;
+      background: #f6f8fa;
+    }
+  </style>
+
+<style id="eco-math2-mobile-patch">
+body{max-width:980px;margin:0 auto;padding:1.5rem 1rem 3rem;line-height:1.7;overflow-wrap:break-word}
+.part{max-width:100%;box-sizing:border-box}
+a{overflow-wrap:anywhere}
+@media(max-width:640px){
+ body{padding:.8rem .65rem 2rem;font-size:16px}
+ h1{font-size:1.7rem}
+ h2{font-size:1.35rem}
+}
+</style>
 </head>
-
 <body>
-  <div id="min2">
-    <h1>경제수학 II</h1>
-
-    <ol>
-      <li><a href="system-of-differential equation.html" target="_self">미분방정식과 응용</a></li>
-      <li><a href="phase diagram.html" target="_self">위상도 분석</a></li>
-      <li><a href="difference-equation.html" target="_self">차분방정식과 응용</a></li>
-      <li><a href="dynamic optimization.html" target="_self">동적최적화이론과 응용</a></li>
-    </ol>
-  </div>
+<div id="min2">
+<h1>경제수학 II</h1>
+<div class="flow">
+<strong>학습 흐름</strong><br/>
+      연속시간 동학(미분방정식) → 질적 분석(위상도) → 이산시간 동학(차분방정식) → 최적경로 선택(동적최적화)
+    </div>
+<div class="part">
+<h2>1. 미분방정식과 응용</h2>
+<p><a href="system-of-differential equation.html" target="_self"><strong>미분방정식 전체 목차</strong></a></p>
+<ul>
+<li><a href="differential-equation-basics.html" target="_self">미분방정식의 기초</a></li>
+<li><a href="differential-equation-second-order.html" target="_self">2계·고계 미분방정식</a></li>
+<li><a href="differential-equation-systems.html" target="_self">연립미분방정식과 안정성</a></li>
+<li><a href="differential-equation-applications.html" target="_self">미분방정식의 경제학 응용</a></li>
+</ul>
+</div>
+<div class="part">
+<h2>2. 위상도 분석 (Phase Diagram)</h2>
+<p><a href="phase diagram.html" target="_self"><strong>위상도 분석</strong></a></p>
+<ul>
+<li>단일 자율미분방정식의 위상선과 정상상태</li>
+<li>2변수 연립계의 nullcline과 방향장</li>
+<li>고유값에 따른 node · saddle · spiral · center 분류</li>
+<li>비선형 시스템의 Jacobian 선형화</li>
+<li>saddle path와 경제동학</li>
+</ul>
+<p>
+        관련 예제:
+        <a href="predator-prey model.html" target="_self">Predator–Prey</a> ·
+        <a href="goodwin model.html" target="_self">Goodwin</a> ·
+        <a href="overshooting model.html" target="_self">Dornbusch Overshooting</a>
+</p>
+</div>
+<div class="part">
+<h2>3. 차분방정식과 응용</h2>
+<p><a href="difference-equation.html" target="_self"><strong>차분방정식 전체 목차</strong></a></p>
+<ul>
+<li><a href="difference-equation-basic.html" target="_self">차분방정식의 기초</a></li>
+<li><a href="difference-equation-system.html" target="_self">연립차분방정식</a></li>
+<li><a href="difference-equation-phase.html" target="_self">차분방정식의 위상도와 안정성</a></li>
+<li><a href="difference-equation-stochastic.html" target="_self">확률적 차분방정식</a></li>
+<li><a href="difference-equation-applications1.html" target="_self">경제학 응용 I</a></li>
+<li><a href="difference-equation-applications2.html" target="_self">경제학 응용 II</a></li>
+</ul>
+</div>
+<div class="part">
+<h2>4. 동적최적화이론과 응용</h2>
+<p><a href="dynamic optimization.html" target="_self"><strong>동적최적화 전체 목차</strong></a></p>
+<p>
+        미분방정식·위상도에서 배운 상태변수의 동학을 바탕으로,
+        시간에 걸친 목적함수를 최적화하는 문제로 연결한다.
+        원본 「동적 최대화이론과 응용」의 수식·표·그래프·이미지·각주를 장별로 분리해 보존했다.
+      </p>
+<ul>
+<li><a href="dynamic-optimization-discrete.html" target="_self">이산형 동적최적화</a> — 동적 라그랑지, 상태·통제·costate 변수, 유한·무한기간</li>
+<li><a href="dynamic-programming.html" target="_self">동적계획법 (Dynamic Programming)</a> — Bellman 원리, 가치함수, 정책함수, 확률·LQ 문제</li>
+<li><a href="calculus-of-variations.html" target="_self">변분학 (Calculus of Variations)</a> — Euler 방정식, Beltrami identity, Legendre 조건</li>
+<li><a href="optimal-control.html" target="_self">최적제어이론 (Optimal Control Theory)</a> — Hamiltonian, maximum principle, costate, TVC</li>
+<li><a href="dynamic-optimization-applications-discrete.html" target="_self">이산형 경제학 응용</a> — 동적 기업·소비·자본·자산가격 문제</li>
+<li><a href="dynamic-optimization-applications-continuous.html" target="_self">연속형 경제학 응용</a> — Ramsey/RCK, 동태적 가구·기업, Tobin q, turnpike</li>
+</ul>
+</div>
+</div>
 </body>
-
 </html>

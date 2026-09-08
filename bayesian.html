@@ -1,6 +1,8 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" type="text/css" href="eco-math.css">
     <link rel="stylesheet" type="text/css" href="footnote.css">
   <title>베이지안 내쉬균형</title>
@@ -9,15 +11,40 @@
   <script src="./latex.js"></script>
 
   
+
+<style id="deployment-responsive-patch">
+* { box-sizing: border-box; }
+body {
+  max-width: 980px !important;
+  width: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 1.2rem 1rem 3rem;
+  overflow-wrap: break-word;
+}
+img, svg, canvas { max-width: 100% !important; height: auto !important; }
+table { max-width: 100%; overflow-x: auto; }
+.MathJax_Display, .mjx-chtml, .katex-display {
+  max-width: 100%; overflow-x: auto; overflow-y: hidden;
+}
+pre, code { max-width:100%; overflow-x:auto; }
+@media (max-width: 640px) {
+  body { padding:.8rem .65rem 2rem; font-size:16px; }
+  h1 { font-size:1.65rem; line-height:1.3; }
+  h2 { font-size:1.35rem; line-height:1.35; }
+  h3 { font-size:1.15rem; line-height:1.4; }
+}
+</style>
+
 </head>
 
 <body>
 
 <h2> 베이지안 게임 </h2>
 
-<p>베이지안 게임은 상대방의 정보를 모르는 경우를 다루는 게임이다. 나에게 다른 플레이어에게 알려지지 않은 정보가 있다면 이런 경우를 정보의 비대칭성이라 한다. 
-  베이지안 게임은 이런 경우를 다룬다. 이 경우 최선의 전략은 베이지안 내쉬균형이라 부른다. </p>
-<p>양자 모두, 또는 플레이어 모두가 서로의 유형을 모르는 경우라면 정보의 비대칭성이 없으므로 베이지안 게임이라 하지 않는다.
+<p>베이지안 게임은 상대방의 유형(type)이나 보수 등 게임의 일부 정보가 불완전한 경우를 다루는 게임이다. 자신만 알고 다른 플레이어에게는 알려지지 않은 정보가 있다면 정보의 비대칭성이 존재한다.
+  각 플레이어가 자신의 유형별 최적전략을 선택하고, 상대방의 유형에 대한 믿음과 기대보수를 고려했을 때 누구도 일방적으로 전략을 바꿀 유인이 없는 상태를 베이지안 내쉬균형이라 한다. </p>
+<p>여러 플레이어가 서로 상대방의 유형을 모르는 경우에도 각자가 자신의 유형에 관한 사적정보를 가지고 있다면 베이지안 게임으로 표현할 수 있다.
   <input type="checkbox" id="cb1" /><label for="cb1"><sup></sup>
   </label><span><br><br>플레이어 모두의 불확실성(유형)이 각자 확률로 주어진 경우 플레이어 각자의 보수에 확률을 곱하고 더하여 기대보수를 구한다. 이렇게 구해진 기대보수표를 이용해서 최선의 전략을 찾는다. 
     이렇게 구해진 최선의 전략이 존재한다면 이것은 내쉬균형이 된다.<br></span> </p>
@@ -32,7 +59,7 @@
 <div class="flex-container">
 <div style="width:13%;float:left;">
 
-  <table id="tbl1", border="1">
+  <table id="tbl1" border="1">
     <caption><표 1> 을 매파</caption>
   <tr >
     <th id = "diag"> <pre>갑    을</pre> </th>
@@ -55,7 +82,7 @@
 
   <div style="width:85%;float:right;">
 
-    <table id="tbl2", border="1">
+    <table id="tbl2" border="1">
       <caption><표 2> 을 비둘기파</caption>
   <tr >
     <th id = "diag"> <pre>갑    을</pre> </th>
@@ -78,7 +105,7 @@
 <br>
 
 <p>을이 매파일 경우 갑 A, 을 A가 내쉬균형이다. A안은 을이 선호하는 안이므로 이때 갑은 1, 을은 2의 보수를 얻는다. 갑과 을의 제안하는 안이 불일치 하면 협상은 깨지고 양자 모두 교역 중단으로 -1의 피해를 본다. 갑 B, 을 B의 경우 B 안은 갑이 선호하는 안이므로 갑 2, 을 -2의 보수를 얻는다.<br>
-을이 비둘기파일 경우 갑 B, 을 B가 내쉬균형이다. B안은 을이 선호하는 안이므로 이때 갑은 2, 을은 1의 보수를 얻는다. 갑과 을의 제안하는 안이 불일치 하면 협상은 깨지고 양자 모두 교역 중단으로 -1의 피해를 본다. 갑 A, 을 A의 경우 A 안은 을이 선호하는 안이므로 갑 -2, 을 2의 보수를 얻는다.<br>
+을이 비둘기파일 경우 갑 B, 을 B가 내쉬균형이다. B안은 갑에게 유리한 안이며 이때 갑은 2, 을은 1의 보수를 얻는다. 갑과 을의 제안하는 안이 불일치 하면 협상은 깨지고 양자 모두 교역 중단으로 -1의 피해를 본다. 갑 A, 을 A의 경우 A 안은 을이 선호하는 안이므로 갑 -2, 을 2의 보수를 얻는다.<br>
 갑은 을의 유형이 전자일지 후자일지를 모른다. 단지 을이 전자일 확률이  $\frac{2}{3}$, 을이 후자일 확률이  $\frac{1}{3}$임을 알고 있다. 이상을 게임트리로 그리면 (그림 1)과 같다.
 갑이 을의 유형을 모르므로 첫 노드를 N(Nature:자연)으로 표현한다.</p>
 
@@ -148,7 +175,7 @@
   <line x1 = "390" y1 = "70" x2 = "220" y2 = "270" style = "stroke: black; stroke-width:1"/>
 </svg>
 <figcaption>
-  (그림1) 자본과 자본의 한계생산물간의 관계
+  (그림1) 불확실성하 재협상 게임의 유형 분기
 </figcaption>
 </figure> 
 <br> 
@@ -165,7 +192,7 @@
 
 <p>우선 임시로 유형별 보수표를 구하면 <표 3>과 같다. <표 3>은 베이지안 게임표가 아니라 베이지안 게임표를 계산하기 쉽게 하기 위해 임시로 구한 표이다.</p>
 
-<table id="tbl3", border="1">
+<table id="tbl3" border="1">
   <caption><표 3> 재협상 게임 - 임시표 </caption>
 <tr >
   <th id = "diag" style="width:100px"> <pre>갑   을</pre> </th>
@@ -184,7 +211,7 @@
 <tr >
   <th > B </th>
   <td > $\begin{pmatrix} -1 \\ -1 \end{pmatrix}$, $\begin{pmatrix} -1 \\ -1 \end{pmatrix}$ </td>
-  <td > $\begin{pmatrix} -1 \\ 1 \end{pmatrix}$, $\begin{pmatrix} -1 \\ 2 \end{pmatrix}$ </td>
+  <td > $\begin{pmatrix} -1 \\ 2 \end{pmatrix}$, $\begin{pmatrix} -1 \\ 1 \end{pmatrix}$ </td>
   <td > $\begin{pmatrix} 2 \\ -1 \end{pmatrix}$, $\begin{pmatrix} -2 \\ -1 \end{pmatrix}$ </td>
   <td > $\begin{pmatrix} 2 \\ 2 \end{pmatrix}$, $\begin{pmatrix} -2 \\ 1 \end{pmatrix}$ </td>
 </tr>
@@ -203,7 +230,7 @@
 
 <p>이상을 구하면 <표 4>와 같다.</p>
 
-<table id="tbl3", border="1">
+<table id="tbl4" border="1">
   <caption><표 4> 베이지안 게임표 </caption>
 <tr >
   <th id = "diag" style="width:100px"> <pre>갑   을</pre> </th>
@@ -222,16 +249,16 @@
 <tr >
   <th > B </th>
   <td > $-1$, $\begin{pmatrix} -1 \\ -1 \end{pmatrix}$ </td>
-  <td > $-\dfrac{1}{3}$, $\begin{pmatrix} -1 \\ 2 \end{pmatrix}$ </td>
-  <td > $\dfrac{1}{3}$, $\begin{pmatrix} -2 \\ -1 \end{pmatrix}$ </td>
+  <td > $0$, $\begin{pmatrix} -1 \\ 1 \end{pmatrix}$ </td>
+  <td > $1$, $\begin{pmatrix} -2 \\ -1 \end{pmatrix}$ </td>
   <td > $2$, $\begin{pmatrix} -2 \\ 1 \end{pmatrix}$ </td>
 </tr>
 </table>
 <br>
 
-<p><표 4>의 갑 A, 을 A의 보수는 다음과 같이 구한다.</p>
-<p><표 3> 으로부터 갑의 보수는 을이 H 유형일 확률  $\dfrac{2}{3}$ , 보수 -1, D 유형일 확률  $\dfrac{1}{3}$ , 
-보수 2 이므로 갑의 기대 보수는 $ -1 \times \dfrac{2}{3} + 2 \times \dfrac{1}{3} = 0$, 
+<p><표 4>의 갑 A, 을 H→A, D→A의 보수는 다음과 같이 구한다.</p>
+<p><표 3> 으로부터 갑의 보수는 을이 H 유형일 확률 $\dfrac{2}{3}$에서 1, D 유형일 확률 $\dfrac{1}{3}$에서 -2이므로 
+갑의 기대 보수는 $ 1 \times \dfrac{2}{3} + (-2) \times \dfrac{1}{3} = 0$, 
 을의 보수는 유형별로 표기한다. <표 3>의 값 $\begin{pmatrix} 2 \\ 2 \end{pmatrix}$을 그대로 쓰면 된다.</p>
 <p>다른 셀도 같은 방법으로 구한다.</p>
 <p>베이지안 내쉬균형은 정의상 모든 유형에 대해 이탈 유인이 없어야 한다. 즉 모든 유형에 대해 보수값이 크거나 같아야 한다. </p>
@@ -251,19 +278,18 @@
 <p>$3p−2>−1 $ 에서  $p>\dfrac{1}{3}$  이면 을이 {A, A}일 때 갑은 A를 선택한다. $p<\dfrac{1}{3}$ 이면 을이 {A, A}일 때 갑은 B를 선택한다. 
   그런데 갑이 B를선택하는 경우 을은 {A, B}가 최선이다.</p>
 <p>을이 {A, B}일 때 갑의 A선택시 기대보수는 <표3>으로부터 $1×p+−1×(1−p)=2p−1$</p>
-<p>을이 {A, B}일 때 갑의 B선택시 기대보수는 <표3>으로부터 $−1×p+1×(1−p)=1−2p$</p>
-<p>$2p−1>1−2p$ 에서  $p>\dfrac{1}{2}$ 이면 을이 {A, B}일 때 갑은 A를 선택한다. $p<\dfrac{1}{2}$ 이면 을이 {A, B}일 때 갑은 B를 선택한다.</p>
+<p>을이 {A, B}일 때 갑의 B선택시 기대보수는 <표3>으로부터 $−1×p+2×(1−p)=2−3p$</p>
+<p>$2p−1>2−3p$ 에서 $p>\dfrac{3}{5}$이면 을이 {A, B}일 때 갑은 A를 선택한다. $p<\dfrac{3}{5}$이면 을이 {A, B}일 때 갑은 B를 선택한다.</p>
 
-<p>이상으로부터 $p>\dfrac{1}{2}$ 이면 {갑:A, 을:H->A, D->A}가 베이지안 내쉬균형이다.</p>
-<p>$ \dfrac{1}{3}< p<\dfrac{1}{2}$ 이면 {갑:A, 을:H->A, D->A}, {갑:B, 을:H->A, D->B} 가 베이지안 내쉬균형이다.</p>
-<p> $p<\dfrac{1}{3}$ 이면 {갑:B, 을:H->A, D->B} 가 베이지안 내쉬균형이다.
+<p>이상으로부터 $p>\dfrac{3}{5}$이면 {갑:A, 을:H->A, D->A}가 베이지안 내쉬균형이다.</p>
+<p>$\dfrac{1}{3}<p<\dfrac{3}{5}$이면 {갑:A, 을:H->A, D->A}, {갑:B, 을:H->A, D->B}가 모두 베이지안 내쉬균형이다.</p>
+<p>$p<\dfrac{1}{3}$이면 {갑:B, 을:H->A, D->B}가 베이지안 내쉬균형이다.
   <input type="checkbox" id="cb2" /><label for="cb2"><sup></sup>
   </label><span><br><br>다른 셀의 갑의 기대보수는 내쉬균형에 영향을 미치지 못하므로 굳이 계산할 필요가 없다.<br><br></span> </p>
 
-<p>결론적으로 갑이 을이 매파일 가능성을 어느 정도로 확신하는가의 여부가 최선의 행동에 영향을 미침을 알 수 있다.
-갑은 을이 매파일 가능성이 높다면 A안을 제시하는 것이 최선이다. 반면 을이 비둘기파일 가능성이 높다면 B안을 제시하는 것이 최선이다.
-을은 갑이 자신을 매파로 판단한다면($p>\frac{1}{2}$) H->A, D->A의 통합전략(기만전술)으로 나간다. 
-을은 갑이 자신을 비둘기파로 판단한다면($p<\frac{1}{3}$) H->A, D->B의 분리전략(솔직전술)으로 나간다.</p>
+<p>결론적으로 갑이 을이 매파일 가능성을 어느 정도로 평가하는가가 최선의 행동에 영향을 미침을 알 수 있다.
+$p>\frac{3}{5}$이면 {갑:A, 을:H→A, D→A}만이 균형이고, $p<\frac{1}{3}$이면 {갑:B, 을:H→A, D→B}만이 균형이다.
+$\frac{1}{3}<p<\frac{3}{5}$에서는 두 균형이 함께 존재한다.</p>
 <br>
 
 <h2> 사례 및 시사점</h2>

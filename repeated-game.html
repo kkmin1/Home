@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="blog.css">
     <title>반복게임 (Repeated Game) - 상세 분석</title>
     <style>
@@ -63,6 +65,31 @@
             "HTML-CSS": { availableFonts: ["TeX"] }
         });
     </script>
+
+<style id="deployment-responsive-patch">
+* { box-sizing: border-box; }
+body {
+  max-width: 980px !important;
+  width: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 1.2rem 1rem 3rem;
+  overflow-wrap: break-word;
+}
+img, svg, canvas { max-width: 100% !important; height: auto !important; }
+table { max-width: 100%; overflow-x: auto; }
+.MathJax_Display, .mjx-chtml, .katex-display {
+  max-width: 100%; overflow-x: auto; overflow-y: hidden;
+}
+pre, code { max-width:100%; overflow-x:auto; }
+@media (max-width: 640px) {
+  body { padding:.8rem .65rem 2rem; font-size:16px; }
+  h1 { font-size:1.65rem; line-height:1.3; }
+  h2 { font-size:1.35rem; line-height:1.35; }
+  h3 { font-size:1.15rem; line-height:1.4; }
+}
+</style>
+
 </head>
 
 <body class="sub-page-body">
@@ -81,7 +108,7 @@
                 <li><strong>스테이지 게임(Stage Game):</strong> 매 기수($t$)마다 반복되는 기초적인 게임 $G$입니다.</li>
                 <li><strong>보수(Payoff):</strong> 경기자 $i$가 시점 $t$에서 얻는 보수를 $\pi_i(t)$라 합니다.</li>
                 <li><strong>할인 인자(Discount Factor, $\delta$):</strong> 미래의 보수를 현재 가치로 환산하는 비율입니다 ($0 \le \delta < 1$).
-                        이는 미래에 대한 인내심이나 게임이 계속될 확률을 의미합니다.</li>
+                        이는 미래에 대한 인내심을 나타냅니다. 불확실한 반복게임에서는 계속 만날 확률까지 결합한 유효 할인인자로 해석하기도 합니다.</li>
                 <li><strong>전체 보수(Total Payoff):</strong> 시점 $t=0$부터 무한히 반복될 때의 총 보수 $V_i$는 다음과 같이 정의됩니다.
                     <p>$$ V_i = \sum_{t=0}^{\infty} \delta^t \pi_i(t) = \pi_i(0) + \delta \pi_i(1) + \delta^2 \pi_i(2) +
                         \cdots $$</p>
@@ -116,7 +143,7 @@
         <p style="text-align: center; font-size: 0.9rem; color: #64748b;">[표 1] 표준 용의자의 딜레마 보수 행렬</p>
 
         <h2>4. 협력의 유인 조건 분석</h2>
-        <p>경기자 A가 '함정 전략(Grim Trigger)'을 사용한다고 가정합시다. 이 전략이 내쉬균형이 되려면, <strong>협력을 유지할 때의 총 보수($V_{coop}$)</strong>가
+        <p>두 경기자가 모두 '함정 전략(Grim Trigger)'을 사용하는 전략조합을 생각합시다. 이 협력 경로가 일탈 유인을 억제하려면, <strong>협력을 유지할 때의 총 보수($V_{coop}$)</strong>가
             <strong>배신했을 때의 총 보수($V_{defect}$)</strong>보다 크거나 같아야 합니다.</p>
 
         <div class="strategy-box">
@@ -130,13 +157,91 @@
             <p>이 부등식을 풀면 <strong>$\delta \ge \frac{1}{2}$</strong> 일 때 협력이 가능함을 알 수 있습니다.</p>
         </div>
 
-        <h2>5. 결론: 상호 신뢰의 수학적 토대</h2>
-        <p>반복게임 모델은 '미래'라는 변수가 이기적인 개인들을 어떻게 협력으로 이끄는지 증명합니다. 할인 인자 $\delta$가 높다는 것은 경기자들이 서로를 다시 볼 가능성이 높거나 미래를 소중히
-            여긴다는 뜻이며, 이것이 바로 건강한 사회를 유지하는 수학적 토대가 됩니다.</p>
+
+        <h2>5. 유한 반복게임에서는 왜 협력이 무너지는가?</h2>
+        <p>연구노트는 먼저 죄수의 딜레마가 <strong>유한한 횟수 T번</strong> 반복되는 경우를 다룬다.
+        일회성 죄수의 딜레마에서 (배신, 배신)이 유일한 내쉬균형이라면 마지막 T기에는 두 경기자 모두 배신한다.
+        그러면 T-1기의 행동은 마지막기의 결과를 바꿀 수 없으므로 T-1기에도 배신이 최선이다.
+        같은 논리를 계속 거꾸로 적용하면 첫 기까지 모두 배신으로 풀려 내려간다(unraveling).</p>
+
+        <div class="note">
+            <strong>유한 반복 죄수의 딜레마:</strong><br>
+            마지막 기 배신 → 그 사실을 아는 직전 기도 배신 → … → 첫 기도 배신.<br>
+            따라서 단계게임(stage game)의 유일한 균형이 (D,D)라면
+            유한 반복게임의 부분게임 완전균형도 모든 역사(history) 뒤에서 (D,D)를 선택하는 전략이 된다.
+        </div>
+
+        <p>이 결과는 앞에서 설명한 무한 반복게임의 Grim Trigger와 대비된다.
+        무한 반복에서는 “오늘 배신하면 미래의 협력 이익을 계속 잃는다”는 위협이 현재 행동에 영향을 줄 수 있지만,
+        끝이 확정되어 있는 유한 반복 죄수의 딜레마에서는 마지막 기부터 그 위협이 무너질 수 있다.</p>
+
+        <h2>6. 그런데 단계게임에 균형이 여러 개라면?</h2>
+        <p>연구노트에는 유한 반복게임에서도 <strong>여러 개의 단계게임 내쉬균형</strong>이 있으면
+        신뢰할 수 있는 위협(credible threat)을 이용해 첫 기에 단계게임의 내쉬균형이 아닌 행동까지 지지할 수 있다는 예가 있다.</p>
+
+        <table class="payoff-table">
+            <tr><th></th><th>A</th><th>B</th><th>C</th></tr>
+            <tr><th>A</th><td>(4,4)</td><td>(0,0)</td><td>(0,5)</td></tr>
+            <tr><th>B</th><td>(0,0)</td><td>(1,1)</td><td>(0,0)</td></tr>
+            <tr><th>C</th><td>(5,0)</td><td>(0,0)</td><td>(3,3)</td></tr>
+        </table>
+
+        <p>이 단계게임에는 (B,B)와 (C,C)의 순수전략 내쉬균형이 있다.
+        게임을 두 번 반복한다고 하자. 다음과 같은 전략을 생각할 수 있다.</p>
+
+        <div class="note">
+            <strong>전략 S</strong><br>
+            • 1기에는 (A,A)를 선택한다.<br>
+            • 1기에 (A,A)가 지켜졌으면 2기에 좋은 균형 (C,C)를 선택한다.<br>
+            • 누군가 1기에 이탈했으면 2기에 나쁜 균형 (B,B)를 선택한다.
+        </div>
+
+        <p>1기에 약속을 지키면 한 경기자의 총보수는</p>
+        <p>$$4+3\delta$$</p>
+        <p>이고, 1기에 상대가 A를 선택할 때 자신만 C로 이탈하면 1기에는 5를 얻지만
+        다음 기에 (B,B)로 전환되므로</p>
+        <p>$$5+\delta$$</p>
+        <p>를 얻는다. 따라서 약속을 지키는 것이 유리하려면</p>
+        <p>$$4+3\delta \ge 5+\delta$$</p>
+        <p>즉</p>
+        <p>$$\delta \ge \frac{1}{2}$$</p>
+        <p>이면 된다.</p>
+
+        <p>여기서 중요한 점은 처벌로 사용되는 (B,B)가 그 자체로 단계게임의 내쉬균형이라는 것이다.
+        따라서 처벌 시점이 실제로 와도 경기자들이 처벌을 실행할 유인이 있어 <strong>credible</strong>하다.
+        “미래에 나쁜 균형으로 이동하겠다”는 위협이 현재의 협조를 지탱할 수 있는 것이다.</p>
+
+        <h2>7. 결론: 상호 신뢰의 수학적 토대</h2>
+        <p>반복게임 모델은 충분히 큰 미래가치가 일회적 배신의 유인을 억제하여 협력을 지속 가능하게 만들 수 있음을 보여줍니다. 할인 인자 $\delta$가 높다는 것은 경기자들이 서로를 다시 볼 가능성이 높거나 미래를 소중히
+            여긴다는 뜻이며, 이는 장기적 관계에서 평판과 미래 보복 가능성이 협력의 중요한 기반이 될 수 있음을 수학적으로 보여줍니다.</p>
 
         <br>
         <a href="game.html">뒤로 가기</a>
     </div>
+
+<h2>Tit-for-Tat: 협력·보복·용서</h2>
+<p>vault의 「팃포탯(Tit-for-Tat)」 메모는 반복 죄수의 딜레마에서 가장 유명한 전략 중 하나를 설명한다.
+Tit-for-Tat은 다음 네 가지 성질로 요약할 수 있다.</p>
+<ol>
+<li><strong>처음에는 협력</strong>한다.</li>
+<li>상대가 직전에 협력하면 <strong>협력</strong>한다.</li>
+<li>상대가 직전에 배반하면 <strong>즉시 배반으로 보복</strong>한다.</li>
+<li>상대가 다시 협력하면 <strong>즉시 용서하고 협력으로 복귀</strong>한다.</li>
+</ol>
+
+<p>Robert Axelrod의 반복 죄수의 딜레마 컴퓨터 토너먼트에서
+Anatol Rapoport가 제출한 Tit-for-Tat은 매우 단순한 규칙임에도 높은 성과를 보였다.
+핵심은 착하기만 한 전략이 아니라, 배신을 방치하지 않으면서도 영원히 보복하지 않는다는 점이다.</p>
+
+<p>다만 Tit-for-Tat이 모든 환경에서 항상 최선이라는 뜻은 아니다.
+오류가 있는 환경에서는 한 번의 오작동이 상호 보복을 반복시키는 문제가 생길 수 있고,
+Generous Tit-for-Tat이나 Win-Stay, Lose-Shift 같은 다른 전략이 더 나을 수 있다.</p>
+
+<p>Grim Trigger와 비교하면 차이가 더 잘 보인다.
+Grim Trigger는 한 번 배신하면 영원히 배신하지만,
+Tit-for-Tat은 한 번 보복한 뒤 상대가 협력하면 바로 협력으로 돌아간다.
+따라서 Tit-for-Tat은 <strong>응징과 용서의 균형</strong>을 갖는 전략이다.</p>
+
 </body>
 
 </html>

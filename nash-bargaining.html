@@ -281,6 +281,162 @@ sup { top: -0.55em; }
   </div>
 </section>
 
+
+<!-- 1-B. Worked examples -->
+<section class="section">
+  <div class="section-title">계산으로 이해하는 내쉬 바게닝 해</div>
+
+  <div class="prose">
+    <p>내쉬 바게닝 해를 가장 쉽게 이해하는 방법은 <b>불일치점(disagreement point)</b>에서 얼마나 더 얻는지를 보는 것이다.
+    대칭적 내쉬 해는 다음의 내쉬 곱(Nash product)을 최대화한다.</p>
+    <p><b>주의:</b> 표준 내쉬 협상문제에서 협상가능집합 S의 볼록성(convexity)은 가능한 효용조합의 혼합도 실현 가능하다는 뜻이다.
+    이것을 곧바로 생산의 규모수익 체감·체증과 동일시해서는 안 된다.</p>
+  </div>
+
+  <div class="formula-highlight">
+    <div class="feq">max&nbsp; (u<sub>1</sub>−d<sub>1</sub>)(u<sub>2</sub>−d<sub>2</sub>)</div>
+    <div class="fdesc">최종 효용 그 자체보다 협상 결렬 때보다 얼마나 더 좋아지는가가 중요하다.</div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-title">예 1 · 100만원을 둘이 나누기</div>
+    <div class="case-body">
+      <p>갑과 을이 협력해서 100만원의 잉여를 만들었고 합의가 깨지면 둘 다 0원을 받는다고 하자.
+      갑의 몫을 x, 을의 몫을 100−x라 하면 d=(0,0)이다.</p>
+      <div class="case-eq">N(x)=x(100−x)</div>
+      <p>N′(x)=100−2x=0이므로 x=50이다. 따라서 내쉬 해는 <b>(50,50)</b>이다.
+      단순히 "공평하니까 반반"이 아니라 불일치점 대비 이득의 곱을 최대화한 결과가 반반이 된다.</p>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-title">예 2 · 갑에게 강한 외부대안이 있을 때</div>
+    <div class="case-body">
+      <p>같은 100만원을 나누지만 갑은 협상이 깨져도 다른 거래처와 계약해서 20만원을 벌 수 있고 을은 0원이라고 하자.
+      불일치점은 d=(20,0)이다.</p>
+      <div class="case-eq">N(x)=(x−20)(100−x)</div>
+      <p>N′(x)=120−2x=0이므로 x=60이다. 해는 <b>(60,40)</b>이다.</p>
+      <p>협상으로 새로 만들어지는 추가 잉여는 80만원이다. 대칭 내쉬 해는 이 80을 40씩 나누고,
+      갑은 원래 확보할 수 있던 20을 더 갖는다. 그래서 최종 결과가 60:40이 된다.</p>
+      <p>이 예는 BATNA(Best Alternative To a Negotiated Agreement), 즉 협상 결렬 시 대안이 협상력을 어떻게 바꾸는지 보여준다.</p>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-title">예 3 · 협상력이 서로 다를 때 — 가중 내쉬 해</div>
+    <div class="case-body">
+      <p>현실에서는 노조와 회사, 대기업과 하청업체처럼 협상력이 다를 수 있다.
+      이를 단순화해 갑의 가중치를 α=0.7, 을을 0.3으로 두면 다음을 최대화한다.</p>
+      <div class="case-eq">N(x)=x<sup>0.7</sup>(100−x)<sup>0.3</sup></div>
+      <p>d=(0,0), 총잉여 100이라면 해는 <b>(70,30)</b>이다.
+      일반적으로 총잉여가 T라면 (αT,(1−α)T)가 된다.</p>
+      <p>다만 이 α-가중 형태는 Nash(1950)의 원래 대칭적 해 자체라기보다 널리 쓰이는 비대칭 일반화이다.</p>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-title">예 4 · 임금협상</div>
+    <div class="case-body">
+      <p>노동자와 기업이 고용관계를 유지하면 총 120의 효용잉여를 만들 수 있다고 하자.
+      협상이 결렬되면 노동자는 다른 일자리에서 30, 기업은 다른 노동자를 고용해 10의 보수를 얻는다.
+      그러면 d=(30,10)이고 추가 협상잉여는 120−30−10=80이다.</p>
+      <p>대칭 내쉬 해에서는 추가 잉여를 40씩 나누므로 결과는 노동자 70, 기업 50이다.</p>
+      <div class="case-eq">(70−30)(50−10)=40×40=1600</div>
+      <p>실업급여, 대체 일자리, 숙련인력 부족처럼 불일치점에 영향을 주는 요인이 임금협상 결과를 바꿀 수 있다는 뜻이다.</p>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p><b>핵심:</b> 내쉬 해는 "총액을 무조건 반반 나누는 공식"이 아니다.
+    <b>협상 결렬보다 추가로 얻는 잉여</b>의 배분이 핵심이며, 불일치점이 달라지면 같은 협상가능집합에서도 결과가 달라진다.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">기하학적으로 보는 내쉬 해</div>
+  <div class="prose">
+    <p>파레토 프론티어를 u<sub>2</sub>=g(u<sub>1</sub>)라고 쓰자. 대칭 내쉬 해는 프론티어 위에서
+    (u<sub>1</sub>−d<sub>1</sub>)(u<sub>2</sub>−d<sub>2</sub>)가 가장 큰 점을 고른다.</p>
+    <p>내부해에서 1계 조건은 다음처럼 쓸 수 있다.</p>
+    <p style="text-align:center;font-family:'IBM Plex Mono',monospace;">
+      g′(u<sub>1</sub>) = −(u<sub>2</sub>−d<sub>2</sub>)/(u<sub>1</sub>−d<sub>1</sub>)
+    </p>
+    <p>즉 해점에서는 파레토 프론티어의 기울기와 두 사람의 <b>불일치점 대비 효용 증가분의 비율</b>이 맞아떨어진다.
+    그림으로 보면 불일치점 d를 왼쪽 아래 꼭짓점으로 하는 직사각형의 넓이가 가장 커지는 파레토 경계점이 내쉬 해다.</p>
+  </div>
+
+  <div class="case-card">
+    <div class="case-title">IIA(무관한 대안으로부터의 독립성) 예</div>
+    <div class="case-body">
+      <p>협상 후보가 A, B, C이고 원래 내쉬 해가 A라고 하자. 그런데 실제 선택되지 않았던 C가 나중에 불가능해졌지만
+      A는 여전히 실현 가능하다면, IIA는 해가 갑자기 B로 바뀌어서는 안 된다고 요구한다.</p>
+      <p>이 공리는 내쉬 해의 핵심 특성이지만, 현실의 협상에서는 선택지의 구성 자체가 심리적·전략적으로 영향을 미칠 수 있어
+      강한 가정으로 비판받기도 한다.</p>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>내쉬의 중요한 통찰은 "공정한 결과"를 직접 정하는 대신, 파레토 효율성·대칭성·효용척도의 불변성·IIA 같은
+    바람직한 성질을 공리로 제시하고, 이 공리들을 만족하는 해를 역으로 찾아냈다는 데 있다.</p>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="section-title">동적 협상게임: 번갈아 제안하기</div>
+
+  <div class="prose">
+    <p>내쉬 바게닝 해는 협상의 결과를 공리적으로 결정하는 접근이다. 연구노트에는 이와 대비되는
+    <b>비협조적 동적 협상게임</b>도 들어 있다. 두 경기자가 크기 1인 파이를 놓고 번갈아 제안하고,
+    상대방이 수락하면 게임이 끝나며 거절하면 다음 기로 넘어간다고 하자.</p>
+
+    <p>두 사람 모두 기다리는 것을 싫어하고 매기 할인인자를 \(\delta\in(0,1)\)라 두자.
+    한 기간 뒤에 받을 1의 현재가치는 \(\delta\)이다. 이 게임은 마지막 기에서부터 거꾸로 계산하면 된다.</p>
+  </div>
+
+  <div class="case-card">
+    <div class="case-title">T=1 · 제안 기회가 한 번뿐일 때</div>
+    <div class="case-body">
+      <p>1기에 P1이 마지막 제안을 한다. P2가 거절하면 0을 받으므로 P1이 P2에게 0 이상을 주는 제안은 수락 가능하다.
+      따라서 연속적인 파이분할을 가정하면 P1은 사실상 <b>(1,0)</b>을 제안한다.</p>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-title">T=2 · 다음 기에는 P2가 제안권을 가질 때</div>
+    <div class="case-body">
+      <p>2기까지 가면 P2가 마지막 제안자가 되어 자신이 1을 가져갈 수 있다.
+      그 1의 1기 현재가치는 \(\delta\)다. 따라서 P2는 1기에 최소 \(\delta\)만큼 받아야 즉시 수락한다.</p>
+      <p>P1은 자신의 몫을 최대화하면서 P2를 수락시키므로</p>
+      <div class="case-eq">P1 : 1−δ &nbsp;&nbsp; / &nbsp;&nbsp; P2 : δ</div>
+      <p>를 제안하고 P2가 받아들이는 것이 부분게임 완전균형(SPNE)이다.</p>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-title">T=3 · 제안권이 다시 P1에게 돌아오는 경우</div>
+    <div class="case-body">
+      <p>3기에는 P1이 마지막 제안자이므로 1을 가져간다.
+      이를 예상하면 2기에 P2는 P1에게 최소 \(\delta\)를 주어야 수락시킬 수 있고 자신은 \(1-\delta\)를 얻는다.</p>
+      <p>1기에서 P2가 기다렸을 때 얻는 2기 보수 \(1-\delta\)의 현재가치는 \(\delta(1-\delta)\)이므로
+      P1은 P2에게 그만큼만 주면 된다. 따라서 P1의 몫은</p>
+      <div class="case-eq">1−δ+δ²</div>
+      <p>가 된다.</p>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>연구노트는 T=4에서도 같은 역방향 추론을 적용하여 P1의 첫 제안 몫이
+    \(1-\delta+\delta^2-\delta^3\)가 됨을 보인다. 따라서 이 구조에서는 제안 기회가 늘어날수록
+    교대부호의 기하급수 패턴이 나타난다.</p>
+
+    <p>이 예의 핵심은 <b>협상력은 단지 총파이의 크기만으로 결정되지 않는다</b>는 점이다.
+    누가 먼저 제안하는지, 몇 번의 기회가 남았는지, 그리고 기다림의 비용 \(\delta\)가 얼마인지가
+    협상결과를 바꾼다. 공리적 Nash bargaining solution과 비협조적 alternating-offer bargaining은
+    같은 “협상”을 서로 다른 방법으로 설명한다.</p>
+  </div>
+</section>
+
 <!-- 2. &#49884;&#44033;&#54868; -->
 <section class="section">
   <div class="section-title">&#51064;&#53552;&#47001;&#54000;&#48652; &#49884;&#44033;&#54868;</div>
@@ -443,6 +599,34 @@ sup { top: -0.55em; }
   </div>
 </section>
 
+
+<section class="section">
+  <div class="section-title">참고 자료</div>
+  <div class="prose">
+    <p>John F. Nash Jr. (1950), <em>The Bargaining Problem</em>, Econometrica 18(2), 155–162.</p>
+    <p>MIT OpenCourseWare, <em>Game Theory with Engineering Applications</em>, Lecture 14: Nash Bargaining Solution.</p>
+    <p>Stanford Encyclopedia of Philosophy, <em>Game Theory</em>; Alvin E. Roth, <em>Economic Theories of Bargaining</em>.</p>
+    <p>Wikipedia, <em>Cooperative bargaining</em> — Nash bargaining solution.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">협상 카드 늘리기: outside option의 힘</div>
+  <div class="prose">
+    <p>vault의 「협상 카드 늘리기」 메모는 협상력을 아주 직관적으로 설명한다.
+    부부가 극장과 야구장 중 어디를 갈지 협상한다고 하자.
+    남편에게 집에서 쉬기라는 제3의 선택지가 새로 생기면,
+    기존 합의를 거절했을 때의 대안이 좋아져 남편의 협상력이 높아질 수 있다.</p>
+
+    <p>내쉬 바게닝 언어로 말하면 이것은 <strong>불일치점(disagreement point)</strong>이 이동하는 것이다.
+    상대와 합의하지 못했을 때 내가 얻는 효용이 커지면,
+    협상으로부터 반드시 받아야 하는 최소 몫도 커진다.</p>
+
+    <p>다만 선택지가 많다고 항상 유리한 것은 아니다.
+    다른 대안이 실제로 실행 가능하고 신뢰할 수 있어야 협상카드가 된다.
+    실행할 생각도 능력도 없는 위협은 outside option이 아니라 단순한 bluff에 가깝다.</p>
+  </div>
+</section>
 <footer>Nash (1950) &middot; "The Bargaining Problem" &middot; Econometrica 18(2)</footer>
 
 <script>

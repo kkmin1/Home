@@ -1,12 +1,10 @@
 <html>
-
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="eco-math2.css">
-  <link rel="stylesheet" type="text/css" href="footnote.css">
-
-  <title>위상도(Phase Diagram)</title>
-  <style>
+<meta charset="utf-8"/>
+<link href="eco-math2.css" rel="stylesheet" type="text/css"/>
+<link href="footnote.css" rel="stylesheet" type="text/css"/>
+<title>위상도(Phase Diagram)</title>
+<style>
   .embed-box {
       max-width: 960px;
       margin: 0 auto 24px;
@@ -46,16 +44,12 @@
       font-size: 0.95em;
   }
   </style>
-
-  <script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
-  <script
-    type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
-  <script src="./latex.js"></script>
-
-  <script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
-  <script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
-  <script>
+<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"> </script>
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
+<script src="./latex.js"></script>
+<script src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
+<script src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
+<script>
     $(function () {
       // Make *any* div with class 'compute' a Sage cell
       sagecell.makeSagecell({
@@ -65,66 +59,83 @@
       });
     });
   </script>
+<style id="phase-mobile-patch">
+body{max-width:980px;margin:0 auto;padding:1.5rem 1rem 3rem;line-height:1.72;overflow-wrap:break-word}
+table{display:block;max-width:100%;overflow-x:auto}
+img,svg{max-width:100%!important;height:auto!important}
+.katex-display,.math-display,div.math,p.math{max-width:100%;overflow-x:auto;overflow-y:hidden}
+@media(max-width:640px){body{padding:.8rem .65rem 2rem;font-size:16px}h1{font-size:1.65rem}h2{font-size:1.35rem}}
+</style>
 
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
 </head>
-
 <body>
-  <h1>位相圖(Phase Diagram) 분석</h1>
-  <br>
-  <h2> 단일방정식인 경우 </h2>
-  <br>
-  <h3> 위상도</h3>
-
-  <p> 다음과 같은 미분방정식을 생각해 보자.</p>
-
-  <p> $ \dfrac{dy(t)}{dt}=f(y) $ </p>
-
-  <p> 위상도 분석은 미분방정식의 해를 구하기 어려울 때 기하학적으로 해의 의미를 해석하는데 유용하게 사용된다. 특히 경제학에서 그림의 형태를 보고 해의 수렴 또는 발산을 판정하는 데 사용된다. </p>
-
-  <div class="note">
-    <strong>※ 위상도(Phase Diagram)의 정의:</strong> 수평축을 $ y(t) $, 수직축을 $ \dfrac{dy(t)}{dt} $로 놓고 $ y $와 $ \dfrac{dy}{dt} $의 관계를 표현한 그래프이다.
+<h1>位相圖(Phase Diagram) 분석</h1>
+<div class="note">
+<strong>이 장의 분석 순서</strong>
+<p>
+      ① 단일 자율미분방정식의 위상선 →
+      ② 정상상태와 안정성 →
+      ③ 2변수 연립미분방정식과 nullcline →
+      ④ 고유값에 따른 국소 위상형 →
+      ⑤ 비선형 시스템의 Jacobian 선형화 →
+      ⑥ 경제학 동학모형의 saddle path 분석
+    </p>
+<p>
+      관련 기초는 <a href="differential-equation-systems.html">연립미분방정식과 안정성</a>,
+      전체 목차는 <a href="system-of-differential equation.html">미분방정식과 응용</a>을 참고한다.
+    </p>
+</div>
+<br/>
+<h2> 단일방정식인 경우 </h2>
+<br/>
+<h3> 위상도</h3>
+<p> 다음과 같은 미분방정식을 생각해 보자.</p>
+<p> $ \dfrac{dy(t)}{dt}=f(y) $ </p>
+<p> 위상도 분석은 미분방정식의 해를 구하기 어려울 때 기하학적으로 해의 의미를 해석하는데 유용하게 사용된다. 특히 경제학에서 그림의 형태를 보고 해의 수렴 또는 발산을 판정하는 데 사용된다. </p>
+<div class="note">
+<strong>※ 위상도(Phase Diagram)의 정의:</strong> 수평축을 $ y(t) $, 수직축을 $ \dfrac{dy(t)}{dt} $로 놓고 $ y $와 $ \dfrac{dy}{dt} $의 관계를 표현한 그래프이다.
   </div>
-  <br>
-
-  <h3> 위상선(Phase Line)</h3>
-  <p>위상선은 위상도에 $y$와 $ \dfrac{dy}{dt} $의 관계를 나타내는 선이다.</p>
-
-  <p>값이 수평축 위에 있을 때, 즉 $ \dfrac{dy}{dt} > 0 $ 일 때 $ y $는 시간이 흐름에 따라 증가함을 의미. 그래프에서는 $ y $ 선상에 왼쪽에서 오른쪽으로 화살표를 표시한다. </p>
-  <p>값이 수평축 아래에 있을 때, 즉 $\dfrac{dy}{dt} < 0 $ 일 때 $ y $는 시간이 흐름에 따라 감소함을 의미. 그래프에서는 $ y $ 선상에 오른쪽에서 왼쪽으로 화살표를 표시한다. </p>
-      <p>$ \dfrac{dy}{dt}= 0 $ 인 점을 임계점(critical point) 또는 균형점(equilibrium point)이라 한다. </p>
-      <p> 특히 경제학에서는 이 점을 정상상태 균형(steady-state equilibrium)이라 한다. <input type="checkbox" id="cb4" /><label
-          for="cb4"><sup></sup>
-        </label> <span><br><br>1. 물리, 화학 등 다른 학문에서는 정상상태(steady-state)는 안정상태를 의미하는 것으로 쓰임. 경제학에서의 일정상태(steady-state)는 소득,
-          소비, 자본 등이 모두 일정한 속도로 성장하는 것을 의미한다. <br><br></span> </p>
-
-      <div class="correction">
-        <strong>※ 수정된 안정성 판정 조건:</strong>
-        <p>$ \dfrac{dy}{dt}= 0 $ 인 점(균형점 $y^*$)에서 <strong>$f'(y^*) < 0$</strong>이면 해의 수렴을 의미하므로 <strong>안정상태 균형(stable equilibrium)</strong>이라 한다.</p>
-        <p>$ \dfrac{dy}{dt}= 0 $ 인 점에서 <strong>$f'(y^*) > 0$</strong>이면 해의 발산을 의미하므로 해는 <strong>불안정 상태</strong>에 있음을 알 수 있다. </p>
-        <p>즉, 교차점에서 위상선의 기울기가 음(-)일 때 교차점은 안정적이고, 교차점에서 위상선의 기울기가 양(+)일 때 교차점은 불안정함을 알 수 있다. </p>
-        <p><em>(참고: $f(y^*)$는 균형점에서 함수값으로 항상 0이므로, 안정성 판정에는 <strong>도함수 $f'(y^*)$</strong>를 사용해야 함)</em></p>
-      </div>
-      <br>
-
-
-      <h3> 위상도 예1 </h3>
-
-      <div style="text-align : center;">
-        <figure>
-          <p>$$
+<br/>
+<h3> 위상선(Phase Line)</h3>
+<p>위상선은 위상도에 $y$와 $ \dfrac{dy}{dt} $의 관계를 나타내는 선이다.</p>
+<p>값이 수평축 위에 있을 때, 즉 $ \dfrac{dy}{dt} &gt; 0 $ 일 때 $ y $는 시간이 흐름에 따라 증가함을 의미. 그래프에서는 $ y $ 선상에 왼쪽에서 오른쪽으로 화살표를 표시한다. </p>
+<p>값이 수평축 아래에 있을 때, 즉 $\dfrac{dy}{dt} &lt; 0 $ 일 때 $ y $는 시간이 흐름에 따라 감소함을 의미. 그래프에서는 $ y $ 선상에 오른쪽에서 왼쪽으로 화살표를 표시한다. </p>
+<p>$ \dfrac{dy}{dt}= 0 $ 인 점을 임계점(critical point) 또는 균형점(equilibrium point)이라 한다. </p>
+<p> 특히 경제학에서는 이 점을 정상상태 균형(steady-state equilibrium)이라 한다. <input id="cb4" type="checkbox"/><label for="cb4"><sup></sup>
+</label> <span><br/><br/>1. 물리, 화학 등 다른 학문에서는 정상상태(steady-state)는 안정상태를 의미하는 것으로 쓰임. 경제학에서의 일정상태(steady-state)는 소득,
+          소비, 자본 등이 모두 일정한 속도로 성장하는 것을 의미한다. <br/><br/></span> </p>
+<div class="correction">
+<strong>※ 수정된 안정성 판정 조건:</strong>
+<p>$ \dfrac{dy}{dt}= 0 $ 인 점(균형점 $y^*$)에서 <strong>$f'(y^*) &lt; 0$</strong>이면 해의 수렴을 의미하므로 <strong>안정상태 균형(stable equilibrium)</strong>이라 한다.</p>
+<p>$ \dfrac{dy}{dt}= 0 $ 인 점에서 <strong>$f'(y^*) &gt; 0$</strong>이면 해의 발산을 의미하므로 해는 <strong>불안정 상태</strong>에 있음을 알 수 있다. </p>
+<p>즉, 교차점에서 위상선의 기울기가 음(-)일 때 교차점은 안정적이고, 교차점에서 위상선의 기울기가 양(+)일 때 교차점은 불안정함을 알 수 있다. </p>
+<p><em>(참고: $f(y^*)$는 균형점에서 함수값으로 항상 0이므로, 안정성 판정에는 <strong>도함수 $f'(y^*)$</strong>를 사용해야 함)</em></p>
+</div>
+<br/>
+<h3> 위상도 예1 </h3>
+<div style="text-align : center;">
+<figure>
+<p>$$
             \begin{tikzpicture}[scale=2]
             % draw the axis
-            \draw [thick, ->] (-1,0) -- (5,0);
-            \draw [thick, ->] (0,-1) -- (0,2);
+            \draw [thick, -&gt;] (-1,0) -- (5,0);
+            \draw [thick, -&gt;] (0,-1) -- (0,2);
             % draw the curve
             \draw [blue, thick, domain=0.5:3.5] plot (\x, {-(\x-1)*(\x-3)});
             % draw the arrows
-            \draw [->, very thick, red] (0.9,-0.21) -- (0.8,-0.44);
-            \draw [->, very thick, red] (1.1,0.19) -- (1.2,0.36);
-            \draw [->, very thick, red] (1.5,0.75) -- (1.6,0.84);
-            \draw [->, very thick, red] (2.4,0.84) -- (2.5,0.75);
-            \draw [->, very thick, red] (2.8,0.36) -- (2.9,0.19);
-            \draw [->, very thick, red] (3.2,-0.44) -- (3.1,-0.21);
+            \draw [-&gt;, very thick, red] (0.9,-0.21) -- (0.8,-0.44);
+            \draw [-&gt;, very thick, red] (1.1,0.19) -- (1.2,0.36);
+            \draw [-&gt;, very thick, red] (1.5,0.75) -- (1.6,0.84);
+            \draw [-&gt;, very thick, red] (2.4,0.84) -- (2.5,0.75);
+            \draw [-&gt;, very thick, red] (2.8,0.36) -- (2.9,0.19);
+            \draw [-&gt;, very thick, red] (3.2,-0.44) -- (3.1,-0.21);
             % draw the labels
             \node at (-0.2,-0.2) {$0$};
             \node at (0,2.3){$\dfrac{dy(t)}{dt}$};
@@ -135,38 +146,32 @@
             \node at (2.8,-0.5){$y_{2}(t)^*$};
             \end{tikzpicture}
             $$</p>
-          <br>
-          <figcaption> (그림 1) 해의 수렴, 발산 </figcaption>
-        </figure>
-      </div>
-      <br>
-
-      <p>(그림 1)에서 보듯이 $y$의 증감을 화살표로 표시한다. 화살표의 방향은 위상선의 기울기와는 무관하다.</p>
-
-      <p> (그림 1)에는 $y_{1}(t)^*$, $y_{2}(t)^*$, 2개의 균형점이 존재한다. </p>
-
-      <p>(그림 1)에서 보듯이 교차점에서 위상선의 기울기가 음일 때 교차점은 안정적임을 알 수 있다. $y_{2}(t)^*$는 시간이 흘러도 변하지 않고 안정적이므로 안정상태 균형(stable
+<br/>
+<figcaption> (그림 1) 해의 수렴, 발산 </figcaption>
+</figure>
+</div>
+<br/>
+<p>(그림 1)에서 보듯이 $y$의 증감을 화살표로 표시한다. 화살표의 방향은 위상선의 기울기와는 무관하다.</p>
+<p> (그림 1)에는 $y_{1}(t)^*$, $y_{2}(t)^*$, 2개의 균형점이 존재한다. </p>
+<p>(그림 1)에서 보듯이 교차점에서 위상선의 기울기가 음일 때 교차점은 안정적임을 알 수 있다. $y_{2}(t)^*$는 시간이 흘러도 변하지 않고 안정적이므로 안정상태 균형(stable
         equilibrium)임을 알 수 있다. $y_{1}(t)^*$는 시간이 흐름에 따라 안정적이지 않고 미세한 왼쪽의 움직임은 왼쪽, 미세한 오른쪽의 움직임은 오른쪽으로 이동한다. 교차점에서
         위상선의 기울기가 양일 때 교차점은 불안정하다. </p>
-      <br>
-
-      <h3> 위상도 예2 </h3>
-
-      <div style="text-align : center;">
-
-        <figure>
-          <p>$$
+<br/>
+<h3> 위상도 예2 </h3>
+<div style="text-align : center;">
+<figure>
+<p>$$
             \begin{tikzpicture}[scale=2]
             % draw the axis
-            \draw [thick, ->] (-1,0) -- (4,0);
-            \draw [thick, ->] (0,-1) -- (0,2.5);
+            \draw [thick, -&gt;] (-1,0) -- (4,0);
+            \draw [thick, -&gt;] (0,-1) -- (0,2.5);
             % draw the curve
             \draw [blue, thick, domain=0.7:3.3] plot (\x, {(\x-2)*(\x-2)});
             % draw the arrows
-            \draw [->, very thick, red] (0.9,1.21) -- (1,1);
-            \draw [->, very thick, red] (1.5,0.25) -- (1.6,0.16);
-            \draw [->, very thick, red] (2.5,0.25) -- (2.6,0.36);
-            \draw [->, very thick, red] (3,1) -- (3.1,1.21);
+            \draw [-&gt;, very thick, red] (0.9,1.21) -- (1,1);
+            \draw [-&gt;, very thick, red] (1.5,0.25) -- (1.6,0.16);
+            \draw [-&gt;, very thick, red] (2.5,0.25) -- (2.6,0.36);
+            \draw [-&gt;, very thick, red] (3,1) -- (3.1,1.21);
 
             % draw the labels
             \node at (-0.2,-0.2) {$0$};
@@ -177,370 +182,303 @@
 
             \end{tikzpicture}
             $$</p>
-          <br>
-          <figcaption> (그림 2) 해가 안장점인 경우 </figcaption>
-        </figure>
-      </div>
-      <br>
-
-      <p> $ y(t) < y^∗ $ 일 때 $ \dfrac{dy}{dt}> 0 $, $ y(t) > y^∗ $ 일 때 $ \dfrac{dy}{dt} > 0 $
+<br/>
+<figcaption> (그림 2) 해가 안장점인 경우 </figcaption>
+</figure>
+</div>
+<br/>
+<p> $ y(t) &lt; y^∗ $ 일 때 $ \dfrac{dy}{dt}&gt; 0 $, $ y(t) &gt; y^∗ $ 일 때 $ \dfrac{dy}{dt} &gt; 0 $
           따라서 $ y^∗ $는 불안정함을 알 수 있다. 이와 같이 접하는 경우의 해를 안장점(saddle point)라고 한다. 안장점도 불안정한 균형이다. </p>
-      <br>
-
-      <h3 class="inline"> 솔로우 성장모형 </h3><input type="checkbox" id="cb1" /><label for="cb1"><sup></sup>
-      </label><span><br><br> '솔로우 성장모형(Solow growth model)'에 대한 자세한 내용은 생략하고 여기서는 결론부분만 간단히
-        설명한다.<br><br></span></p>
-      <p> 솔로우 성장모형은 다음과 같다.
+<br/>
+<div class="correction">
+<strong>※ 1차원과 2차원에서의 saddle 용어 구분</strong>
+<p>
+          위의 (그림 2)처럼 1차원 자율미분방정식에서 균형점의 한쪽에서는 접근하고 다른 쪽에서는 이탈하는 경우는
+          보통 <strong>반안정 균형(semistable equilibrium)</strong>이라고 부르는 것이 더 정확하다.
+        </p>
+<p>
+<strong>안장점(saddle point)</strong>과 <strong>안장경로(saddle path)</strong>는 아래의 2차원 이상 연립시스템에서,
+          서로 다른 방향의 고유값 부호가 반대일 때 나타나는 위상구조를 가리키는 것이 일반적이다.
+        </p>
+</div>
+<h3 class="inline"> 솔로우 성장모형 </h3><input id="cb1" type="checkbox"/><label for="cb1"><sup></sup>
+</label><span><br/><br/> '솔로우 성장모형(Solow growth model)'에 대한 자세한 내용은 생략하고 여기서는 결론부분만 간단히
+        설명한다.<br/><br/></span>
+<p> 솔로우 성장모형은 다음과 같다.
 
       <p> 총생산함수 $ Y = F(K,L) $, $ K $는 자본, $ L $은 노동 </p>
-      <p> (가정) 생산함수 $ Y $는 증가함수면서 강오목함수이다. $ s $는 저축률로 일정하며, 노동증가율은 $ \lambda $ 로 일정하다.</p>
-      <p> (풀이) $ y = \dfrac{\partial F}{\partial L}$, $k = \dfrac{K}{L} $ 이라 하면 솔로우 기본방정식은 $ \dfrac{dk}{dt} =
+<p> (가정) 생산함수 $ Y $는 증가함수면서 강오목함수이다. $ s $는 저축률로 일정하며, 노동증가율은 $ \lambda $ 로 일정하다.</p>
+<p> (풀이) $ y = \dfrac{\partial F}{\partial L}$, $k = \dfrac{K}{L} $ 이라 하면 솔로우 기본방정식은 $ \dfrac{dk}{dt} =
         sy(k)-\lambda k $이다.</p>
-      <p> 이는 비선형 미분방정식이므로 해를 도출하기가 쉽지않다. 해를 구하지 않고도 솔로우 모형의 해가 수렴 또는 발산하는지 알기위해
+<p> 이는 비선형 미분방정식이므로 해를 도출하기가 쉽지않다. 해를 구하지 않고도 솔로우 모형의 해가 수렴 또는 발산하는지 알기위해
         이를 그림으로 표현하면 (그림 3)과 같다.</p>
-      
-      <div class="note">
-        <strong>※ 그래프 해석:</strong> (그림 3)에서 $sy(k)$는 저축에 의한 자본 증가분, $\lambda k$는 노동증가에 따른 자본 희석분을 나타낸다.<br>
-        $sy(k) - \lambda k$가 양수인 구간에서는 $k$가 증가하고, 음수인 구간에서는 $k$가 감소한다.<br>
-        두 곡선의 교차점 $k^*$에서 $\dfrac{dk}{dt}=0$이 되며, 이 점이 정상상태 균형점이다.<br>
-        <strong>$k^*$ 좌측에서는 $\dfrac{dk}{dt} > 0$, 우측에서는 $\dfrac{dk}{dt} < 0$이므로 $k^*$는 안정적이다.</strong>
-      </div>
-
-      <div style="text-align : center;">
-        <figure>
-          <p>$$
+<div class="note">
+<strong>※ 그래프 해석:</strong> (그림 3)에서 $sy(k)$는 저축에 의한 자본 증가분, $\lambda k$는 노동증가에 따른 자본 희석분을 나타낸다.<br/>
+        $sy(k) - \lambda k$가 양수인 구간에서는 $k$가 증가하고, 음수인 구간에서는 $k$가 감소한다.<br/>
+        두 곡선의 교차점 $k^*$에서 $\dfrac{dk}{dt}=0$이 되며, 이 점이 정상상태 균형점이다.<br/>
+<strong>$k^*$ 좌측에서는 $\dfrac{dk}{dt} &gt; 0$, 우측에서는 $\dfrac{dk}{dt} &lt; 0$이므로 $k^*$는 안정적이다.</strong>
+</div>
+<div style="text-align : center;">
+<figure>
+<p>$$
             \usetikzlibrary{decorations.markings}
             \begin{tikzpicture}[scale=2]
-            \draw [thick, ->] (-2,0.5) -- (5,0.5);
-            \draw [thick, ->] (-1,-1) -- (-1,4);
+            \draw [thick, -&gt;] (-2,0.5) -- (5,0.5);
+            \draw [thick, -&gt;] (-1,-1) -- (-1,4);
             \draw [blue, thick] (-1,0.5) -- (4,4);
             \draw [dashed] (3.2,0.5) -- (3.2,4);
             \draw [orange,thick] (-1,0.5) .. controls (1,3) and (3,3.5) .. (4,3.6);
             \draw [green, thick, domain=-0.8:4.2] plot (\x, {-0.7*(\x-3.2)^2+1.8});
             \filldraw [gray] (3.2,0.5) circle (2pt);
 
-            \begin{scope}[smooth,postaction={decorate},decoration={ markings, mark=at position 0.2 with {\arrow{>}},
-            mark=at position 0.4 with {\arrow{>}}, mark=at position 0.6 with {\arrow{>}}, mark=at position 0.8 with
-            {\arrow{<}}, mark=at position 0.9 with {\arrow{<}} }] \draw[red, thick,postaction={decorate}] (-1,0.5) ..
+            \begin{scope}[smooth,postaction={decorate},decoration={ markings, mark=at position 0.2 with {\arrow{&gt;}},
+            mark=at position 0.4 with {\arrow{&gt;}}, mark=at position 0.6 with {\arrow{&gt;}}, mark=at position 0.8 with
+            {\arrow{&lt;}}, mark=at position 0.9 with {\arrow{&lt;}} }] \draw[red, thick,postaction={decorate}] (-1,0.5) ..
               controls (1,1.5) and (3,1.5) .. (4.5,-1); \end{scope} \node at (-1.3,0.2) {$0$}; \node at
               (5.5,0.5){$k(t)$}; \node at (3.2,0){$k(t)^*$}; \node at (1.7,1.3){$sy(k)-\lambda k$}; \node at
               (4.2,4.2){$\lambda k$}; \node at (4.5,3.6){$sy(k)$}; \end{tikzpicture} $$</p>
-              <br>
-              <figcaption> (그림 3) 솔로우 성장모형 - $sy(k)$와 $\lambda k$의 교차점 $k^*$에서 안정적 균형 </figcaption>
-        </figure>
-      </div>
-      <br>
-
-      <div class="embed-box">
-          <iframe
-              class="demo-frame"
-              src="./phase_diagram_demo.html"
-              title="Phase Diagram Demo"
-          ></iframe>
-      </div>
-
-      <h2> 연립미분방정식인 경우 (상태변수가 2 이상)</h2>
-      <br>
-      
-      <div class="note">
-        <strong>※ 위상도와 상변화도의 구분:</strong><br>
-        - <strong>위상도(Phase Diagram)</strong>: $y$와 $\dfrac{dy}{dt}$의 관계를 보여주는 2차원 그래프 (단일 변수)<br>
-        - <strong>상변화도(Phase Portrait)</strong>: 상태공간($x$-$y$ 평면)에서 벡터장과 궤적을 보여주는 그래프 (다변수 시스템)<br>
+<br/>
+<figcaption> (그림 3) 솔로우 성장모형 - $sy(k)$와 $\lambda k$의 교차점 $k^*$에서 안정적 균형 </figcaption>
+</figure>
+</div>
+<br/>
+<div class="embed-box">
+<iframe class="demo-frame" src="./phase_diagram_demo.html" title="Phase Diagram Demo"></iframe>
+</div>
+<h2> 연립미분방정식인 경우 (상태변수가 2 이상)</h2>
+<div class="note">
+<strong>※ 2변수 위상도 분석의 기본 절차</strong>
+<p>다음의 자율시스템을 생각한다.</p>
+<p>$$\dot{x}=f(x,y), \qquad \dot{y}=g(x,y)$$</p>
+<p>
+          (1) $\dot{x}=0$인 곡선과 $\dot{y}=0$인 곡선, 즉 <strong>nullcline</strong>을 구한다.<br/>
+          (2) 두 nullcline의 교점에서 정상상태 $(x^*,y^*)$를 찾는다.<br/>
+          (3) 각 영역에서 $\dot{x}$와 $\dot{y}$의 부호를 조사하여 화살표 방향을 정한다.<br/>
+          (4) 선형시스템이면 계수행렬의 고유값을, 비선형시스템이면 정상상태에서의 Jacobian 고유값을 이용하여 국소 안정성을 판정한다.
+        </p>
+</div>
+<br/>
+<div class="note">
+<strong>※ 위상도와 상변화도의 구분:</strong><br/>
+        - <strong>위상도(Phase Diagram)</strong>: $y$와 $\dfrac{dy}{dt}$의 관계를 보여주는 2차원 그래프 (단일 변수)<br/>
+        - <strong>상변화도(Phase Portrait)</strong>: 상태공간($x$-$y$ 평면)에서 벡터장과 궤적을 보여주는 그래프 (다변수 시스템)<br/>
         이 문서에서는 두 개념을 모두 다루며, 문맥에 따라 구분하여 사용한다.
       </div>
-
-      <p> 다음의 연립미분방정식을 고려한다. </p>
-      
-      <div class="correction">
-        <strong>※ 수정:</strong> 선형 시불변 시스템의 경우 $\mathbf{A}$는 상수 행렬이다.
+<p> 다음의 연립미분방정식을 고려한다. </p>
+<div class="correction">
+<strong>※ 수정:</strong> 선형 시불변 시스템의 경우 $\mathbf{A}$는 상수 행렬이다.
         <p> $ \mathbf{y}'(t) = \mathbf{A} \mathbf{y}(t) + \mathbf{v} $ </p>
-      </div>
-      
-      <p> 위상도 분석은 $ \mathbf{A} $가 2×2 행렬인 경우에 대해서만 가능하다. 그 이상인 경우는 그림으로
+</div>
+<p> 위상도 분석은 $ \mathbf{A} $가 2×2 행렬인 경우에 대해서만 가능하다. 그 이상인 경우는 그림으로
         분석하기 곤란하기 때문이다. </p>
-      <p> $ \mathbf{y}'(t) = 0 $인 곡선을 등고선(等高線, zero-growth isoclines)이라 한다.
+<p> $ \mathbf{y}'(t) = 0 $인 곡선을 등고선(等高線, zero-growth isoclines)이라 한다.
         등고선은 함수의 기울기가 항상 같은 점을 모은 선을 의미한다. 이 경우는 예를 들어 설명하는 것이 편리하다.</p>
-      <br>
-
-      <h3> 예1 </h3>
-
-      <p> $x$, $y$는 시간 t의 함수, $x(t), y(t) $</p>
-
-      <p> $ \dfrac{dx}{dt} = -2x $</p>
-      <p> $ \dfrac{dy}{dt} = 2x - 4y +32 $</p>
-      <br>
-
-      <div class="note">
-        <strong>※ 경제학적 비음조건(Non-negativity):</strong> 이 예제는 수학적 예제이므로 $x$와 $y$가 음수일 수도 있지만,<br>
+<br/>
+<h3> 예1 </h3>
+<p> $x$, $y$는 시간 t의 함수, $x(t), y(t) $</p>
+<p> $ \dfrac{dx}{dt} = -2x $</p>
+<p> $ \dfrac{dy}{dt} = 2x - 4y +32 $</p>
+<br/>
+<div class="note">
+<strong>※ 경제학적 비음조건(Non-negativity):</strong> 이 예제는 수학적 예제이므로 $x$와 $y$가 음수일 수도 있지만,<br/>
         경제학 모형에서는 $x$와 $y$가 자본, 생산량 등과 같은 실물 변수일 경우 <strong>$x \ge 0, y \ge 0$</strong>의 조건이 추가되어야 한다.
       </div>
-
-      <p id="min1">[풀이]</p>
-
-      <p>균형점은 $ \dfrac{dx}{dt} = \dfrac{dy}{dt} = 0 $ 에서 결정되므로 </p>
-      <p> $ \dfrac{dx}{dt} = -2x = 0 \Longrightarrow x = 0 $........... ① </p>
-      <p> $ \dfrac{dy}{dt} = 2x - 4y +32 = 0 \Longrightarrow y = \dfrac{1}{2}x + 8 $........... ② </p>
-      <p> 이 두 연립방정식의 해는 ①, ②를 동시에 만족시켜야 한다.</p>
-      <p>따라서 균형점은 $(0, 8)$ 이 된다.</p>
-      <p>이제 이 해의 수렴, 발산 여부를 판정해 보자.</p>
-      <p> 이 연립미분방정식의 $\mathbf{A}$ 행렬은 </p>
-      <p>
+<p id="min1">[풀이]</p>
+<p>균형점은 $ \dfrac{dx}{dt} = \dfrac{dy}{dt} = 0 $ 에서 결정되므로 </p>
+<p> $ \dfrac{dx}{dt} = -2x = 0 \Longrightarrow x = 0 $........... ① </p>
+<p> $ \dfrac{dy}{dt} = 2x - 4y +32 = 0 \Longrightarrow y = \dfrac{1}{2}x + 8 $........... ② </p>
+<p> 이 두 연립방정식의 해는 ①, ②를 동시에 만족시켜야 한다.</p>
+<p>따라서 균형점은 $(0, 8)$ 이 된다.</p>
+<p>이제 이 해의 수렴, 발산 여부를 판정해 보자.</p>
+<p> 이 연립미분방정식의 $\mathbf{A}$ 행렬은 </p>
+<p>
         $
         \mathbf{A} =
         \left( \begin{array}{cc}
-        -2 & 0 \\
-        2 & -4 \\
+        -2 &amp; 0 \\
+        2 &amp; -4 \\
         \end{array} \right)
         $
       </p>
-
-      <p> 고유근의 특성방정식이 $ \Pi(\lambda) = \lambda^2 - \text{tr(A)}\lambda + \text{det(A)} $ 일 때 </p>
-      <p> $ \text{tr(A)} = -6, \text{det(A)} = 8 $ 에서 </p>
-      <p> 근의 판정은 $ \text{tr(A)}^2 - 4\text{det(A)} = 36-32 > 0 $, 따라서 두 개의 실근이다. </p>
-      <p> $ \text{det(A)} = 8 > 0$ 이므로 근은 부호가 같고 $ \text{tr(A)} = -6 < 0 $ 이므로 두 근은 모두 음수이다. </p>
-          <p>따라서 해의 경로는 균형점 $(0, 8)$ 을 향해 수렴함을 알 수 있다.</p>
-
-          <div style="display: flex; justify-content: center; gap: 20px;">
-          <div class="digitDiv" style="text-align: center;">
-            <svg width="500px" height="600px" viewBox="-10 40 660 790">
-              <defs>
-                <marker id="dark-arrow" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6"
-                  orient="auto">
-                  <path d="M 0 0 L 10 5 L 0 10 z" />
-                </marker>
-                <marker id="blue-arrow" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6"
-                  orient="auto">
-                  <path d="M 0 0 L 10 5 L 0 10 z" />
-                </marker>
-                <marker id="red-arrow" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6"
-                  orient="auto">
-                  <path d="M 0 0 L 10 5 L 0 10 z" />
-                </marker>
-                <marker id="green-arrow" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6"
-                  orient="auto">
-                  <path d="M 0 0 L 10 5 L 0 10 z" />
-                </marker>
-
-              </defs>
-              <polyline points="10,400 600,400" fill="none" stroke="black" stroke-width="2"
-                marker-end="url(#dark-arrow)" />
-              <polyline points="300,600 300,100" fill="none" stroke="blue" stroke-width="2"
-                marker-end="url(#blue-arrow)" />
-              <text id="sgv-text" x="300" y="50"> y </text>
-              <text id="sgv-text" x="610" y="390"> x </text>
-              <text id="sgv-text" x="250" y="450"> 0 </text>
-
-              <foreignObject x="320" y="100" width="100" height="100">
-                <div class="fig">
+<p> 고유근의 특성방정식이 $ \Pi(\lambda) = \lambda^2 - \text{tr(A)}\lambda + \text{det(A)} $ 일 때 </p>
+<p> $ \text{tr(A)} = -6, \text{det(A)} = 8 $ 에서 </p>
+<p> 근의 판정은 $ \text{tr(A)}^2 - 4\text{det(A)} = 36-32 &gt; 0 $, 따라서 두 개의 실근이다. </p>
+<p> $ \text{det(A)} = 8 &gt; 0$ 이므로 근은 부호가 같고 $ \text{tr(A)} = -6 &lt; 0 $ 이므로 두 근은 모두 음수이다. </p>
+<p>따라서 해의 경로는 균형점 $(0, 8)$ 을 향해 수렴함을 알 수 있다.</p>
+<div style="display: flex; justify-content: center; gap: 20px;">
+<div class="digitDiv" style="text-align: center;">
+<svg height="600px" viewbox="-10 40 660 790" width="500px">
+<defs>
+<marker id="svg1-dark-arrow" markerheight="6" markerwidth="6" orient="auto" refx="1" refy="5" viewbox="0 0 10 10">
+<path d="M 0 0 L 10 5 L 0 10 z"></path>
+</marker>
+<marker id="svg1-blue-arrow" markerheight="6" markerwidth="6" orient="auto" refx="1" refy="5" viewbox="0 0 10 10">
+<path d="M 0 0 L 10 5 L 0 10 z"></path>
+</marker>
+<marker id="svg1-red-arrow" markerheight="6" markerwidth="6" orient="auto" refx="1" refy="5" viewbox="0 0 10 10">
+<path d="M 0 0 L 10 5 L 0 10 z"></path>
+</marker>
+<marker id="svg1-green-arrow" markerheight="6" markerwidth="6" orient="auto" refx="1" refy="5" viewbox="0 0 10 10">
+<path d="M 0 0 L 10 5 L 0 10 z"></path>
+</marker>
+</defs>
+<polyline fill="none" marker-end="url(#svg1-dark-arrow)" points="10,400 600,400" stroke="black" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#svg1-blue-arrow)" points="300,600 300,100" stroke="blue" stroke-width="2"></polyline>
+<text id="svg1-sgv-text" x="300" y="50"> y </text>
+<text id="svg1-sgv-text-2" x="610" y="390"> x </text>
+<text id="svg1-sgv-text-3" x="250" y="450"> 0 </text>
+<foreignobject height="100" width="100" x="320" y="100">
+<div class="fig">
                   $ x = 0 $
                 </div>
-              </foreignObject>
-              <foreignObject x="50" y="700" width="600" height="100" style="text-align:center;">
-                <div class="fig" style="text-align:center;">
+</foreignobject>
+<foreignobject height="100" style="text-align:center;" width="600" x="50" y="700">
+<div class="fig" style="text-align:center;">
                   (그림 4) $ \dfrac{dx}{dt} = 0 $ 의 위상도
                 </div>
-              </foreignObject>
-
-              <polyline points="150,200 250,200" fill="none" stroke="red" stroke-width="2"
-                marker-end="url(#red-arrow)" />
-              <polyline points="150,300 250,300" fill="none" stroke="red" stroke-width="2"
-                marker-end="url(#red-arrow)" />
-              <polyline points="150,500 250,500" fill="none" stroke="red" stroke-width="2"
-                marker-end="url(#red-arrow)" />
-              <polyline points="500,250 400,250" fill="none" stroke="red" stroke-width="2"
-                marker-end="url(#red-arrow)" />
-              <polyline points="500,550 400,550" fill="none" stroke="red" stroke-width="2"
-                marker-end="url(#red-arrow)" />
-              <polyline points="500,350 400,350" fill="none" stroke="red" stroke-width="2"
-                marker-end="url(#red-arrow)" />
-            </svg>
-          </div>
-
-          <div class="digitDiv" style="text-align: center;">
-            <svg width="500px" height="600px" viewBox="265 40 660 790">
-
-              <polyline points="290,400 800,400" fill="none" stroke="black" stroke-width="2"
-                marker-end="url(#dark-arrow)" />
-              <polyline points="550,600 550,100" fill="none" stroke="black" stroke-width="2"
-                marker-end="url(#dark-arrow)" />
-              <polyline points="300,450 700,200" fill="none" stroke="blue" stroke-width="2" />
-              <text id="sgv-text" x="550" y="50"> y </text>
-              <text id="sgv-text" x="850" y="400"> x </text>
-              <text id="sgv-text" x="500" y="450"> 0 </text>
-              <foreignObject x="700" y="210" width="200" height="100">
-                <div class="fig">
+</foreignobject>
+<polyline fill="none" marker-end="url(#svg1-red-arrow)" points="150,200 250,200" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#svg1-red-arrow)" points="150,300 250,300" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#svg1-red-arrow)" points="150,500 250,500" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#svg1-red-arrow)" points="500,250 400,250" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#svg1-red-arrow)" points="500,550 400,550" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#svg1-red-arrow)" points="500,350 400,350" stroke="red" stroke-width="2"></polyline>
+</svg>
+</div>
+<div class="digitDiv" style="text-align: center;">
+<svg height="600px" viewbox="265 40 660 790" width="500px">
+<polyline fill="none" marker-end="url(#dark-arrow)" points="290,400 800,400" stroke="black" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#dark-arrow)" points="550,600 550,100" stroke="black" stroke-width="2"></polyline>
+<polyline fill="none" points="300,450 700,200" stroke="blue" stroke-width="2"></polyline>
+<text id="svg2-sgv-text" x="550" y="50"> y </text>
+<text id="svg2-sgv-text-2" x="850" y="400"> x </text>
+<text id="svg2-sgv-text-3" x="500" y="450"> 0 </text>
+<foreignobject height="100" width="200" x="700" y="210">
+<div class="fig">
                   $ y = \dfrac{1}{2}x + 8 $
                 </div>
-              </foreignObject>
-              <foreignObject x="200" y="700" width="600" height="100" style="text-align:center;">
-                <div class="fig" style="text-align:center;">
+</foreignobject>
+<foreignobject height="100" style="text-align:center;" width="600" x="200" y="700">
+<div class="fig" style="text-align:center;">
                   (그림 5) $ \dfrac{dy}{dt} = 0 $ 의 위상도
                 </div>
-              </foreignObject>
-
-              <polyline points="300,350 300,420" fill="none" stroke="red" stroke-width="2"
-                marker-end="url(#red-arrow)" />
-              <polyline points="400,300 400,370" fill="none" stroke="red" stroke-width="2"
-                marker-end="url(#red-arrow)" />
-              <polyline points="600,150 600,240" fill="none" stroke="red" stroke-width="2"
-                marker-end="url(#red-arrow)" />
-              <polyline points="350,550 350,450" fill="none" stroke="red" stroke-width="2"
-                marker-end="url(#red-arrow)" />
-              <polyline points="430,500 430,400" fill="none" stroke="red" stroke-width="2"
-                marker-end="url(#red-arrow)" />
-              <polyline points="630,380 630,280" fill="none" stroke="red" stroke-width="2"
-                marker-end="url(#red-arrow)" />
-
-            </svg>
-          </div>
-          </div><!-- end flex wrapper -->
-
-          <p> 그런데 미분방정식의 해를 구하지 않고도 위상도 분석만으로 해의 수렴, 발산 여부를 판정할 수 있다.</p>
-          <p>정상상태(steady state)에서 상태변수들은 시간에 따라 변하지 않으므로 $ \dfrac{dy}{dt} = 0, \dfrac{dx}{dt} = 0 $</p>
-
-          <p>(i) $\dfrac{dx}{dt} = -2x = 0 $</p>
-
-          <p> $ x = 0 $ 이므로 (그림 4)에서 y 축으로 표시. y 축을 중심으로 좌우에서 벡터의 방향을 추정.</p>
-
-          <p> $ \dfrac{dx}{dt} > 0 \Longrightarrow \dfrac{dx}{dt} = -2x > 0 \Longrightarrow x < 0 $</p>
-
-              <p>즉 x가 0보다 작은 구간(y 축의 좌측)에서는 x는 시간의 증가에 따라 증가한다. 이는 (그림 4)의 y축 좌측의 화살표 방향으로 표시된다. x가 증가하는 것이므로 화살표의 방향은
+</foreignobject>
+<polyline fill="none" marker-end="url(#red-arrow)" points="300,350 300,420" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="400,300 400,370" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="600,150 600,240" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="350,550 350,450" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="430,500 430,400" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="630,380 630,280" stroke="red" stroke-width="2"></polyline>
+</svg>
+</div>
+</div><!-- end flex wrapper -->
+<p> 그런데 미분방정식의 해를 구하지 않고도 위상도 분석만으로 해의 수렴, 발산 여부를 판정할 수 있다.</p>
+<p>정상상태(steady state)에서 상태변수들은 시간에 따라 변하지 않으므로 $ \dfrac{dy}{dt} = 0, \dfrac{dx}{dt} = 0 $</p>
+<p>(i) $\dfrac{dx}{dt} = -2x = 0 $</p>
+<p> $ x = 0 $ 이므로 (그림 4)에서 y 축으로 표시. y 축을 중심으로 좌우에서 벡터의 방향을 추정.</p>
+<p> $ \dfrac{dx}{dt} &gt; 0 \Longrightarrow \dfrac{dx}{dt} = -2x &gt; 0 \Longrightarrow x &lt; 0 $</p>
+<p>즉 x가 0보다 작은 구간(y 축의 좌측)에서는 x는 시간의 증가에 따라 증가한다. 이는 (그림 4)의 y축 좌측의 화살표 방향으로 표시된다. x가 증가하는 것이므로 화살표의 방향은
                 x가 0보다 작은 구간(그림의 2, 3사분면)에서 좌에서 우로 흐르는 모양이 된다.
-                <input type="checkbox" id="cb11" /><label for="cb11"><sup></sup>
-                </label>
-                <span><br><br>물론 시간의 감소의 경우는 화살표가 반대방향이 되겠지만 시간은 항상 증가하므로 시간의 감소는 고려하지 않는다. <br><br></span>
-              </p>
-
-              <p> $ \dfrac{dx}{dt} < 0 \Longrightarrow x> 0 $</p>
-
-              <p>즉 x가 0보다 큰 구간(y 축의 우측)에서는 x는 시간의 증가에 따라 감소한다. 이는 (그림 4)의 y축 우측의 화살표 방향으로 표시된다. x가 감소하는 것이므로 화살표의 방향은 x가
+                <input id="cb11" type="checkbox"/><label for="cb11"><sup></sup>
+</label>
+<span><br/><br/>물론 시간의 감소의 경우는 화살표가 반대방향이 되겠지만 시간은 항상 증가하므로 시간의 감소는 고려하지 않는다. <br/><br/></span>
+</p>
+<p> $ \dfrac{dx}{dt} &lt; 0 \Longrightarrow x&gt; 0 $</p>
+<p>즉 x가 0보다 큰 구간(y 축의 우측)에서는 x는 시간의 증가에 따라 감소한다. 이는 (그림 4)의 y축 우측의 화살표 방향으로 표시된다. x가 감소하는 것이므로 화살표의 방향은 x가
                 0보다 큰 구간(그림의 1, 4사분면)에서 우에서 좌로 흐르는 모양이 된다.</p>
-
-
-              <p>(ii) $ \dfrac{dy}{dt} = 2x - 4y +32 $</p>
-
-              <p> $ \dfrac{dy}{dt} = 0 \Longrightarrow 2x - 4y +32 = 0 \Longrightarrow y = \dfrac{1}{2}x + 8 $ 이므로 (그림
+<p>(ii) $ \dfrac{dy}{dt} = 2x - 4y +32 $</p>
+<p> $ \dfrac{dy}{dt} = 0 \Longrightarrow 2x - 4y +32 = 0 \Longrightarrow y = \dfrac{1}{2}x + 8 $ 이므로 (그림
                 5)의 파란선이다.</p>
-
-              <p> $ \dfrac{dy}{dt} > 0 \Longrightarrow 2x - 4y +32 > 0 $ 을 만족시키는 부분은 (그림 5)의 파란선을 기준으로 우하 부분이다.<input
-                  type="checkbox" id="cb7" /><label for="cb7"><sup></sup>
-                </label><span><br><br>일례로 (0, 0)을 대입해 보면 알 수 있음.<br><br></span> </p>
-              <p>따라서 우하에서는 시간이 지남에 따라 y는 증가하고 이는 (그림 5)에서 y축을 따라 아래서 위로 증가하는 방향으로 화살표가 그려진다. </p>
-
-              <p> $ \dfrac{dy}{dt}
-                < 0 \Longrightarrow 2x - 4y +32 < 0 $ 을 만족시키는 부분은 (그림 5)의 파란선을 기준으로 좌상 부분이다<input type="checkbox"
-                  id="cb8" /><label for="cb8"><sup></sup>
-                </label><span><br><br>일례로 (0, 10)을 대입해 보면 알 수 있음.<br><br></span>. 따라서 좌상에서는 시간이 지남에 따라 y는 감소하고 이는 (그림
+<p> $ \dfrac{dy}{dt} &gt; 0 \Longrightarrow 2x - 4y +32 &gt; 0 $ 을 만족시키는 부분은 (그림 5)의 파란선을 기준으로 우하 부분이다.<input id="cb7" type="checkbox"/><label for="cb7"><sup></sup>
+</label><span><br/><br/>일례로 (0, 0)을 대입해 보면 알 수 있음.<br/><br/></span> </p>
+<p>따라서 우하에서는 시간이 지남에 따라 y는 증가하고 이는 (그림 5)에서 y축을 따라 아래서 위로 증가하는 방향으로 화살표가 그려진다. </p>
+<p> $ \dfrac{dy}{dt}
+                &lt; 0 \Longrightarrow 2x - 4y +32 &lt; 0 $ 을 만족시키는 부분은 (그림 5)의 파란선을 기준으로 좌상 부분이다<input id="cb8" type="checkbox"/><label for="cb8"><sup></sup>
+</label><span><br/><br/>일례로 (0, 10)을 대입해 보면 알 수 있음.<br/><br/></span>. 따라서 좌상에서는 시간이 지남에 따라 y는 감소하고 이는 (그림
                 5)에서 y축을 따라 위에서 아래로 감소하는 방향으로 화살표가 그려진다.
               </p>
-
-              <svg width="800px" height="600px" viewBox="-200 100 1200 600">
-                <polyline points="290,400 800,400" fill="none" stroke="black" stroke-width="2"
-                  marker-end="url(#dark-arrow)" />
-                <polyline points="550,600 550,100" fill="none" stroke="blue" stroke-width="2"
-                  marker-end="url(#blue-arrow)" />
-                <polyline points="300,450 750,200" fill="none" stroke="blue" stroke-width="2" />
-                <text id="sgv-text" x="550" y="70"> y </text>
-                <text id="sgv-text" x="820" y="400"> x </text>
-                <text id="sgv-text" x="520" y="430"> 0 </text>
-                <text id="sgv-text" x="520" y="310"> 8 </text>
-                <text id="sgv-text" x="360" y="430"> -16 </text>
-                <foreignObject x="760" y="190" width="200" height="100">
-                  <div class="fig">
+<svg height="600px" viewbox="-200 100 1200 600" width="800px">
+<polyline fill="none" marker-end="url(#dark-arrow)" points="290,400 800,400" stroke="black" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#blue-arrow)" points="550,600 550,100" stroke="blue" stroke-width="2"></polyline>
+<polyline fill="none" points="300,450 750,200" stroke="blue" stroke-width="2"></polyline>
+<text id="svg3-sgv-text" x="550" y="70"> y </text>
+<text id="svg3-sgv-text-2" x="820" y="400"> x </text>
+<text id="svg3-sgv-text-3" x="520" y="430"> 0 </text>
+<text id="svg3-sgv-text-4" x="520" y="310"> 8 </text>
+<text id="svg3-sgv-text-5" x="360" y="430"> -16 </text>
+<foreignobject height="100" width="200" x="760" y="190">
+<div class="fig">
                     $ y = \dfrac{1}{2}x + 8 $
                   </div>
-                </foreignObject>
-                <foreignObject x="470" y="120" width="200" height="100">
-                  <div class="fig">
+</foreignobject>
+<foreignobject height="100" width="200" x="470" y="120">
+<div class="fig">
                     $ x = 0 $
                   </div>
-                </foreignObject>
-                <foreignObject x="400" y="700" width="500" height="100">
-                  <div class="fig">
+</foreignobject>
+<foreignobject height="100" width="500" x="400" y="700">
+<div class="fig">
                     (그림 6) $ \dfrac{dy}{dt} = 0 $, $ \dfrac{dx}{dt} = 0 $ 의 위상도
                   </div>
-                </foreignObject>
-
-
-                <polyline points="400,200 400,300" fill="none" stroke="red" stroke-width="2"
-                  marker-end="url(#red-arrow)" />
-                <polyline points="400,200 500,200" fill="none" stroke="red" stroke-width="2"
-                  marker-end="url(#red-arrow)" />
-                <polyline points="400,200 500,300" fill="none" stroke="green" stroke-width="2"
-                  marker-end="url(#green-arrow)" />
-                <polyline points="700,80 700,180" fill="none" stroke="red" stroke-width="2"
-                  marker-end="url(#red-arrow)" />
-                <polyline points="700,80 600,80" fill="none" stroke="red" stroke-width="2"
-                  marker-end="url(#red-arrow)" />
-                <polyline points="700,80 600,180" fill="none" stroke="green" stroke-width="2"
-                  marker-end="url(#green-arrow)" />
-                <polyline points="400,550 400,450" fill="none" stroke="red" stroke-width="2"
-                  marker-end="url(#red-arrow)" />
-                <polyline points="400,550 500,550" fill="none" stroke="red" stroke-width="2"
-                  marker-end="url(#red-arrow)" />
-                <polyline points="400,550 500,450" fill="none" stroke="green" stroke-width="2"
-                  marker-end="url(#green-arrow)" />
-                <polyline points="700,450 700,350" fill="none" stroke="red" stroke-width="2"
-                  marker-end="url(#red-arrow)" />
-                <polyline points="700,450 600,450" fill="none" stroke="red" stroke-width="2"
-                  marker-end="url(#red-arrow)" />
-                <polyline points="700,450 600,350" fill="none" stroke="green" stroke-width="2"
-                  marker-end="url(#green-arrow)" />
-                <polyline points="551,150 551,250" fill="none" stroke="red" stroke-width="2"
-                  marker-end="url(#red-arrow)" />
-                <polyline points="551,450 551,350" fill="none" stroke="red" stroke-width="2"
-                  marker-end="url(#red-arrow)" />
-                <polyline points="700,250 600,250" fill="none" stroke="red" stroke-width="2"
-                  marker-end="url(#red-arrow)" />
-                <polyline points="420,350 520,350" fill="none" stroke="red" stroke-width="2"
-                  marker-end="url(#red-arrow)" />
-
-              </svg>
-
-              <p>(i), (ii) 두 가지 경우를 모두 고려하여 화살표를 그리면 (그림 6)과 같다. 두 개의 빨간색 화살표의 합이 벡터의 방향을 나타내는 초록색 화살표이다. </p>
-
-              <p> $ x=0, y = \dfrac{1}{2}x + 8 $, 두 개의 선이 구간을 네 부분으로 구분한다.</p>
-              <p>각 구간에 따른 화살표의 방향은 앞의 결과를 합쳐서 그리면 된다. </p>
-              <p>초록색 화살표는 빨간색 화살표들의 벡터합을 의미한다. 시간의 경과에 따라 초록색 화살표의 방향으로 상태변화가 이루어진다는 것을 의미한다. </p>
-              <p> $ \dfrac{dx}{dt} = 0 $ 에서 $ x = 0$ 함수는 x의 변화율이 0을 의미하므로 이 선상에서는 상하로만 변화가 있음을 의미한다.</p>
-              <p> $ \dfrac{dy}{dt} = 0 $ 에서 $ y = \dfrac{1}{2}x + 8 $ 함수는 y의 변화율이 0을 의미하므로 이 선상에서는 좌우로만 변화가 있음을 의미한다.
+</foreignobject>
+<polyline fill="none" marker-end="url(#red-arrow)" points="400,200 400,300" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="400,200 500,200" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#green-arrow)" points="400,200 500,300" stroke="green" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="700,80 700,180" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="700,80 600,80" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#green-arrow)" points="700,80 600,180" stroke="green" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="400,550 400,450" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="400,550 500,550" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#green-arrow)" points="400,550 500,450" stroke="green" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="700,450 700,350" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="700,450 600,450" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#green-arrow)" points="700,450 600,350" stroke="green" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="551,150 551,250" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="551,450 551,350" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="700,250 600,250" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="420,350 520,350" stroke="red" stroke-width="2"></polyline>
+</svg>
+<p>(i), (ii) 두 가지 경우를 모두 고려하여 화살표를 그리면 (그림 6)과 같다. 두 개의 빨간색 화살표의 합이 벡터의 방향을 나타내는 초록색 화살표이다. </p>
+<p> $ x=0, y = \dfrac{1}{2}x + 8 $, 두 개의 선이 구간을 네 부분으로 구분한다.</p>
+<p>각 구간에 따른 화살표의 방향은 앞의 결과를 합쳐서 그리면 된다. </p>
+<p>초록색 화살표는 빨간색 화살표들의 벡터합을 의미한다. 시간의 경과에 따라 초록색 화살표의 방향으로 상태변화가 이루어진다는 것을 의미한다. </p>
+<p> $ \dfrac{dx}{dt} = 0 $ 에서 $ x = 0$ 함수는 x의 변화율이 0을 의미하므로 이 선상에서는 상하로만 변화가 있음을 의미한다.</p>
+<p> $ \dfrac{dy}{dt} = 0 $ 에서 $ y = \dfrac{1}{2}x + 8 $ 함수는 y의 변화율이 0을 의미하므로 이 선상에서는 좌우로만 변화가 있음을 의미한다.
               </p>
-              <p> 상태 $ x(t), y(t) $는 임의의 점에서 시작해도 (0, 8) 점을 향해 흐름을 알 수 있고, 이 점은 안정점이 된다.</p>
-
-              <div style="text-align : center;">
-
-                <figure>
-                  <p>$$
+<p> 상태 $ x(t), y(t) $는 임의의 점에서 시작해도 (0, 8) 점을 향해 흐름을 알 수 있고, 이 점은 안정점이 된다.</p>
+<div style="text-align : center;">
+<figure>
+<p>$$
                     \begin{tikzpicture}[scale=0.2]
                     % draw the axis
-                    \draw [thick, ->] (-24,0) -- (24,0);
-                    \draw [thick, ->] (0,-20) -- (0,24);
+                    \draw [thick, -&gt;] (-24,0) -- (24,0);
+                    \draw [thick, -&gt;] (0,-20) -- (0,24);
 
                     % 위상 화살표 그리기
-                    \draw [red,->] (-16,16) -- (-8,16);
-                    \draw [red,->] (-16,16) -- (-16,8);
-                    \draw [red,->] (-16,16) -- (-8,8);
+                    \draw [red,-&gt;] (-16,16) -- (-8,16);
+                    \draw [red,-&gt;] (-16,16) -- (-16,8);
+                    \draw [red,-&gt;] (-16,16) -- (-8,8);
 
-                    \draw [red,->] (10,22) -- (2,22);
-                    \draw [red,->] (10,22) -- (10,14);
-                    \draw [red,->] (10,22) -- (2,14);
+                    \draw [red,-&gt;] (10,22) -- (2,22);
+                    \draw [red,-&gt;] (10,22) -- (10,14);
+                    \draw [red,-&gt;] (10,22) -- (2,14);
 
-                    \draw [red,->] (-12,-10) -- (-12,-2);
-                    \draw [red,->] (-12,-10) -- (-4,-10);
-                    \draw [red,->] (-12,-10) -- (-4,-2);
+                    \draw [red,-&gt;] (-12,-10) -- (-12,-2);
+                    \draw [red,-&gt;] (-12,-10) -- (-4,-10);
+                    \draw [red,-&gt;] (-12,-10) -- (-4,-2);
 
-                    \draw [red,->] (10,-2) -- (10,6);
-                    \draw [red,->] (10,-2) -- (2,-2);
-                    \draw [red,->] (10,-2) -- (2,6);
+                    \draw [red,-&gt;] (10,-2) -- (10,6);
+                    \draw [red,-&gt;] (10,-2) -- (2,-2);
+                    \draw [red,-&gt;] (10,-2) -- (2,6);
 
-                    \draw [green,ultra thick,->] (-22,8) .. controls (-16,2) and (-10,2) .. (-4,4);
-                    \draw [green,ultra thick,->] (-4,-20) .. controls (-8,-10) and (-8,-2) .. (-4,2);
-                    \draw [green,ultra thick,->] (4,24) .. controls (6,20) and (6,16) .. (2,12);
-                    \draw [green,ultra thick,->] (22,6) .. controls (16,16) and (12,16) .. (2,10);
+                    \draw [green,ultra thick,-&gt;] (-22,8) .. controls (-16,2) and (-10,2) .. (-4,4);
+                    \draw [green,ultra thick,-&gt;] (-4,-20) .. controls (-8,-10) and (-8,-2) .. (-4,2);
+                    \draw [green,ultra thick,-&gt;] (4,24) .. controls (6,20) and (6,16) .. (2,12);
+                    \draw [green,ultra thick,-&gt;] (22,6) .. controls (16,16) and (12,16) .. (2,10);
 
                     % 기준선 그리기
                     % \draw [blue, thick, domain=-1:2.5] plot (\x, \x-0.5);
-                    \draw [blue, ultra thick, ->] (0,-20) -- (0,24);
+                    \draw [blue, ultra thick, -&gt;] (0,-20) -- (0,24);
                     \draw [blue, ultra thick, domain=-22:22] plot (\x, 0.5*\x+8);
 
                     % draw the labels
@@ -554,27 +492,23 @@
 
                     \end{tikzpicture}
                     $$</p>
-                  <br>
-                  <figcaption>
+<br/>
+<figcaption>
                     (그림 7) 위상도 (상변화도)
                   </figcaption>
-                </figure>
-              </div>
-              <br>
-
-              <p>기준선에서 화살표의 방향이 바뀌는 점에 유의하면서 해의 경로를 그리면 (그림 7)의 굵은 초록색 화살표의 모양이 된다. 초록색 화살표는 여러 가지 초기값에 대응하는 해의 경로를 표시한
+</figure>
+</div>
+<br/>
+<p>기준선에서 화살표의 방향이 바뀌는 점에 유의하면서 해의 경로를 그리면 (그림 7)의 굵은 초록색 화살표의 모양이 된다. 초록색 화살표는 여러 가지 초기값에 대응하는 해의 경로를 표시한
                 것이다. </p>
-
-              <p> 임의의 점에서 시작하는 벡터들의 모음인 <strong>상변화도(phase portrait)</strong>를 그려보면 (그림 8)과 같다. 상변화도란 각각의 점에서 변화를 의미하는 벡터필드(vector
+<p> 임의의 점에서 시작하는 벡터들의 모음인 <strong>상변화도(phase portrait)</strong>를 그려보면 (그림 8)과 같다. 상변화도란 각각의 점에서 변화를 의미하는 벡터필드(vector
                 field)들의 모음이다.</p>
-
-              <div style="text-align : center;">
-                <img src="phase-diagram2.bmp"><br>
+<div style="text-align : center;">
+<img alt="예1 관련 도해 1" src="phase-diagram2.bmp"/><br/>
                 (그림 8) 상변화도 (Phase Portrait)
               </div>
-
-              <div class="compute">
-                <script type="text/x-sage">
+<div class="compute">
+<script type="text/x-sage">
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.lines as mlines
@@ -676,203 +610,392 @@ plt.legend()
 plt.grid(True)
 plt.show()
           </script>
-              </div>
-
-              <h3> 예2: local stock pollution model </h3>
-
-              <p> $ \dfrac{dx}{dt} = 0.5x + 0.5y - 15 $</p>
-              <p> $ \dfrac{dy}{dt} = x - 0.5y $</p>
-              <br>
-              <p> $ y(t) $ : 대기오염의 규모</p>
-              <p> $ x(t) $ : 배출가스의 양</p>
-
-              <div class="note">
-                <strong>※ 경제학적 비음조건(Non-negativity):</strong> 배출가스 $x(t)$와 대기오염 $y(t)$는 모두 <strong>$x \ge 0, y \ge 0$</strong>이어야 한다.<br>
+</div>
+<h3> 예2: local stock pollution model </h3>
+<p> $ \dfrac{dx}{dt} = 0.5x + 0.5y - 15 $</p>
+<p> $ \dfrac{dy}{dt} = x - 0.5y $</p>
+<br/>
+<p> $ y(t) $ : 대기오염의 규모</p>
+<p> $ x(t) $ : 배출가스의 양</p>
+<div class="note">
+<strong>※ 경제학적 비음조건(Non-negativity):</strong> 배출가스 $x(t)$와 대기오염 $y(t)$는 모두 <strong>$x \ge 0, y \ge 0$</strong>이어야 한다.<br/>
                 따라서 (그림 9)~(그림 12)에서 음의 영역은 경제학적으로 의미가 없으며, 양의 영역만 고려해야 한다.
               </div>
-
-              <p id="min1">[풀이]</p>
-              <p>정상상태(steady state)에서 상태변수들은 시간에 따라 변하지 않으므로</p>
-              <p> $ \dfrac{dy}{dt} = 0 $, $ \dfrac{dx}{dt} = 0 $ 인 선들을 그리면 (그림 9), (그림 10)과 같다.</p>
-              <p> $ \dfrac{dy}{dt} = x - 0.5y \Longrightarrow y = 2x $ .................... ①</p>
-              <p> $ \dfrac{dx}{dt} = 0.5x + 0.5y - 15 \Longrightarrow y = -x + 30 $ ................② </p>
-
-              <p>균형점은 $ \dfrac{dx}{dt} = \dfrac{dy}{dt} = 0 $ 에서 결정되므로 </p>
-              <p> 이 두 연립방정식의 해는 ①, ②를 동시에 만족시켜야 한다.</p>
-              <p>따라서 균형점은 $(10, 20)$ 이 된다.</p>
-
-              <p> 이 연립미분방정식의 $\mathbf{A}$ 행렬은 </p>
-              
-              <div class="correction">
-                <strong>※ 수정:</strong> 행렬을 2×2 형식으로 수정
+<p id="min1-2">[풀이]</p>
+<p>정상상태(steady state)에서 상태변수들은 시간에 따라 변하지 않으므로</p>
+<p> $ \dfrac{dy}{dt} = 0 $, $ \dfrac{dx}{dt} = 0 $ 인 선들을 그리면 (그림 9), (그림 10)과 같다.</p>
+<p> $ \dfrac{dy}{dt} = x - 0.5y \Longrightarrow y = 2x $ .................... ①</p>
+<p> $ \dfrac{dx}{dt} = 0.5x + 0.5y - 15 \Longrightarrow y = -x + 30 $ ................② </p>
+<p>균형점은 $ \dfrac{dx}{dt} = \dfrac{dy}{dt} = 0 $ 에서 결정되므로 </p>
+<p> 이 두 연립방정식의 해는 ①, ②를 동시에 만족시켜야 한다.</p>
+<p>따라서 균형점은 $(10, 20)$ 이 된다.</p>
+<p> 이 연립미분방정식의 $\mathbf{A}$ 행렬은 </p>
+<div class="correction">
+<strong>※ 수정:</strong> 행렬을 2×2 형식으로 수정
                 <p>
                   $
                   \mathbf{A} =
                   \left( \begin{array}{cc}
-                  \dfrac{1}{2} & \dfrac{1}{2} \\
-                  1 & -\dfrac{1}{2} \\
+                  \dfrac{1}{2} &amp; \dfrac{1}{2} \\
+                  1 &amp; -\dfrac{1}{2} \\
                   \end{array} \right)
                   $
                 </p>
-              </div>
-
-              <p> $ \text{tr(A)} = 0, \text{det(A)} = -\dfrac{3}{4} $ 에서 </p>
-              <p> 근의 판정은 $ \text{tr(A)}^2 - 4\text{det(A)} = 3 > 0 $, 따라서 두 개의 실근이다. </p>
-              <p> $ \text{det(A)} = -\dfrac{3}{4} < 0 $ 이므로 근은 부호가 다르고 $ \text{tr(A)}=0 $ 이므로 두 근은 절대값이 같다. </p>
-                  <p>따라서 해의 경로는 균형점 $(10, 20)$ 에서 <strong>안정 다양체(stable manifold)</strong>와 <strong>불안정 다양체(unstable manifold)</strong>를 가지며, 이러한 점을 <strong>안장점(saddle point)</strong>이라고 한다. </p>
-                  <p>이제 좀 더 자세한 해의 경로를 그리면 다음과 같다.</p>
-
-                  <div style="display: flex; justify-content: center; gap: 20px;">
-                  <div class="digitDiv">
-                    <svg width="500px" height="600px" viewBox="30 40 640 790">
-
-                      <polyline points="10,500 600,500" fill="none" stroke="black" stroke-width="2"
-                        marker-end="url(#dark-arrow)" />
-                      <polyline points="100,600 100,100" fill="none" stroke="black" stroke-width="2"
-                        marker-end="url(#dark-arrow)" />
-                      <polyline points="40,600 350,100" fill="none" stroke="blue" stroke-width="2" />
-                      <text id="sgv-text" x="100" y="50"> y </text>
-                      <text id="sgv-text" x="630" y="500"> x </text>
-                      <text id="sgv-text" x="40" y="550"> 0 </text>
-
-                      <foreignObject x="350" y="100" width="100" height="100">
-                        <div class="fig">
+</div>
+<p> $ \text{tr(A)} = 0, \text{det(A)} = -\dfrac{3}{4} $ 에서 </p>
+<p> 근의 판정은 $ \text{tr(A)}^2 - 4\text{det(A)} = 3 &gt; 0 $, 따라서 두 개의 실근이다. </p>
+<p> $ \text{det(A)} = -\dfrac{3}{4} &lt; 0 $ 이므로 근은 부호가 다르고 $ \text{tr(A)}=0 $ 이므로 두 근은 절대값이 같다. </p>
+<p>따라서 해의 경로는 균형점 $(10, 20)$ 에서 <strong>안정 다양체(stable manifold)</strong>와 <strong>불안정 다양체(unstable manifold)</strong>를 가지며, 이러한 점을 <strong>안장점(saddle point)</strong>이라고 한다. </p>
+<p>이제 좀 더 자세한 해의 경로를 그리면 다음과 같다.</p>
+<div style="display: flex; justify-content: center; gap: 20px;">
+<div class="digitDiv">
+<svg height="600px" viewbox="30 40 640 790" width="500px">
+<polyline fill="none" marker-end="url(#dark-arrow)" points="10,500 600,500" stroke="black" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#dark-arrow)" points="100,600 100,100" stroke="black" stroke-width="2"></polyline>
+<polyline fill="none" points="40,600 350,100" stroke="blue" stroke-width="2"></polyline>
+<text id="svg4-sgv-text" x="100" y="50"> y </text>
+<text id="svg4-sgv-text-2" x="630" y="500"> x </text>
+<text id="svg4-sgv-text-3" x="40" y="550"> 0 </text>
+<foreignobject height="100" width="100" x="350" y="100">
+<div class="fig">
                           $ y = 2x $
                         </div>
-                      </foreignObject>
-                      <foreignObject x="50" y="700" width="600" height="100" style="text-align:center;">
-                        <div class="fig" style="text-align:center;">
+</foreignobject>
+<foreignobject height="100" style="text-align:center;" width="600" x="50" y="700">
+<div class="fig" style="text-align:center;">
                           (그림 9) $ \dfrac{dy}{dt} = 0 $ 의 위상도
                         </div>
-                      </foreignObject>
-
-                      <polyline points="150,300 150,400" fill="none" stroke="red" stroke-width="2"
-                        marker-end="url(#red-arrow)" />
-                      <polyline points="300,50 300,150" fill="none" stroke="red" stroke-width="2"
-                        marker-end="url(#red-arrow)" />
-                      <polyline points="150,550 150,450" fill="none" stroke="red" stroke-width="2"
-                        marker-end="url(#red-arrow)" />
-                      <polyline points="300,300 300,200" fill="none" stroke="red" stroke-width="2"
-                        marker-end="url(#red-arrow)" />
-                    </svg>
-                  </div>
-
-                  <div class="digitDiv">
-                    <svg width="500px" height="600px" viewBox="265 40 780 790">
-
-                      <polyline points="290,500 800,500" fill="none" stroke="black" stroke-width="2"
-                        marker-end="url(#dark-arrow)" />
-                      <polyline points="350,600 350,100" fill="none" stroke="black" stroke-width="2"
-                        marker-end="url(#dark-arrow)" />
-                      <polyline points="290,150 800,600" fill="none" stroke="blue" stroke-width="2" />
-                      <text id="sgv-text" x="350" y="50"> y </text>
-                      <text id="sgv-text" x="820" y="500"> x </text>
-                      <text id="sgv-text" x="320" y="540"> 0 </text>
-                      <foreignObject x="800" y="600" width="200" height="100">
-                        <div class="fig">
+</foreignobject>
+<polyline fill="none" marker-end="url(#red-arrow)" points="150,300 150,400" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="300,50 300,150" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="150,550 150,450" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="300,300 300,200" stroke="red" stroke-width="2"></polyline>
+</svg>
+</div>
+<div class="digitDiv">
+<svg height="600px" viewbox="265 40 780 790" width="500px">
+<polyline fill="none" marker-end="url(#dark-arrow)" points="290,500 800,500" stroke="black" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#dark-arrow)" points="350,600 350,100" stroke="black" stroke-width="2"></polyline>
+<polyline fill="none" points="290,150 800,600" stroke="blue" stroke-width="2"></polyline>
+<text id="svg5-sgv-text" x="350" y="50"> y </text>
+<text id="svg5-sgv-text-2" x="820" y="500"> x </text>
+<text id="svg5-sgv-text-3" x="320" y="540"> 0 </text>
+<foreignobject height="100" width="200" x="800" y="600">
+<div class="fig">
                           $ y = -x + 30 $
                         </div>
-                      </foreignObject>
-                      <foreignObject x="300" y="700" width="600" height="100" style="text-align:center;">
-                        <div class="fig" style="text-align:center;">
+</foreignobject>
+<foreignobject height="100" style="text-align:center;" width="600" x="300" y="700">
+<div class="fig" style="text-align:center;">
                           (그림 10) $ \dfrac{dx}{dt} = 0 $ 의 위상도
                         </div>
-                      </foreignObject>
-
-
-                      <polyline points="400,200 500,200" fill="none" stroke="red" stroke-width="2"
-                        marker-end="url(#red-arrow)" />
-                      <polyline points="500,300 600,300" fill="none" stroke="red" stroke-width="2"
-                        marker-end="url(#red-arrow)" />
-                      <polyline points="550,450 450,450" fill="none" stroke="red" stroke-width="2"
-                        marker-end="url(#red-arrow)" />
-                      <polyline points="500,350 400,350" fill="none" stroke="red" stroke-width="2"
-                        marker-end="url(#red-arrow)" />
-
-                    </svg>
-                  </div>
-                  </div><!-- end flex wrapper -->
-
-                  <p> (그림 9)에서 </p>
-                  <p> $ y = 2x $의 좌상쪽에 있는 점들은 $ y > 2x $ <input type="checkbox" id="cb13" /><label
-                      for="cb13"><sup></sup>
-                    </label><span><br><br> 예를 들어 (0, 1) 은 y = 2x의 좌상쪽에 있는 점이다. x = 0, y = 1을 y = 2x에 대입하면 1 > 0. 따라서 y >
-                      2x <br><br></span>, $ y > 2x $이므로 ①에서 $ \dfrac{dy}{dt} < 0 $ 시간이 지남에 따라 y는 감소한다. </p>
-                      <p> $ y = 2x $의 우하쪽에 있는 점들은 $ y
-                        < 2x $ <input type="checkbox" id="cb15" /><label for="cb15"><sup></sup>
-                        </label><span><br><br>예를 들어 (1, 0) 은 y = 2x의 우하쪽에 있는 점이다. x = 1, y = 0을 y = 2x에 대입하면 0 > 2. 따라서
-                          y < 2x <br><br></span>, $ y < 2x $이므로 ①에서 $ \dfrac{dy}{dt}> 0 $
+</foreignobject>
+<polyline fill="none" marker-end="url(#red-arrow)" points="400,200 500,200" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="500,300 600,300" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="550,450 450,450" stroke="red" stroke-width="2"></polyline>
+<polyline fill="none" marker-end="url(#red-arrow)" points="500,350 400,350" stroke="red" stroke-width="2"></polyline>
+</svg>
+</div>
+</div><!-- end flex wrapper -->
+<p> (그림 9)에서 </p>
+<p> $ y = 2x $의 좌상쪽에 있는 점들은 $ y &gt; 2x $ <input id="cb13" type="checkbox"/><label for="cb13"><sup></sup>
+</label><span><br/><br/> 예를 들어 (0, 1) 은 y = 2x의 좌상쪽에 있는 점이다. x = 0, y = 1을 y = 2x에 대입하면 1 &gt; 0. 따라서 y &gt;
+                      2x <br/><br/></span>, $ y &gt; 2x $이므로 ①에서 $ \dfrac{dy}{dt} &lt; 0 $ 시간이 지남에 따라 y는 감소한다. </p>
+<p> $ y = 2x $의 우하쪽에 있는 점들은 $ y
+                        &lt; 2x $ <input id="cb15" type="checkbox"/><label for="cb15"><sup></sup>
+</label><span><br/><br/>예를 들어 (1, 0) 은 y = 2x의 우하쪽에 있는 점이다. x = 1, y = 0을 y = 2x에 대입하면 0 &gt; 2. 따라서
+                          y &lt; 2x <br/><br/></span>, $ y &lt; 2x $이므로 ①에서 $ \dfrac{dy}{dt}&gt; 0 $
                           시간이 지남에 따라 y는 증가한다.
                       </p>
-                      <p> $ \dfrac{dy}{dt} = 0 \Longrightarrow y = 2x $ 이므로 $ y = 2x $ 선상에서는 y 변화는 없고 x 변화만 있으므로 수평으로 변동
+<p> $ \dfrac{dy}{dt} = 0 \Longrightarrow y = 2x $ 이므로 $ y = 2x $ 선상에서는 y 변화는 없고 x 변화만 있으므로 수평으로 변동
                       </p>
-                      <p>화살표는 항상 시간이 지남에 따라 상태변수의 증감을 의미. 시간의 감소는 고려하지 않는다. </p>
-
-                      <p> (그림 10)에서 </p>
-                      <p> $ y = -x + 30 $의 우상쪽에 있는 점들은 $ y > -x + 30 $<input type="checkbox" id="cb6" /><label
-                          for="cb6"><sup></sup>
-                        </label><span><br><br>예를 들어 (30, 30) 은 y = -x + 30의 우상쪽에 있는 점이다. x = 30, y = 30을 y = -x + 30에
-                          대입하면 30 > 0, 따라서 y > -x + 30<br><br></span>, </p>
-                      <p> $ y > -x + 30 $ 이므로 ② 에서 $ \dfrac{dx}{dt} > 0 $, 즉 시간이 지남에 따라 x는 증가한다.</p>
-
-                      <p> $ y = -x + 30 $ 의 좌하쪽에 있는 점들은 y
-                        < -x + 30<input type="checkbox" id="cb17" /><label for="cb17"><sup></sup>
-                        </label><span><br><br>예를 들어 (0, 0) 은 y = -x + 30의 좌하쪽에 있는 점이다. x = 0, y = 0을 y = -x + 30에 대입하면 0
-                          < 30, 따라서 y < -x + 30<br><br></span>,
+<p>화살표는 항상 시간이 지남에 따라 상태변수의 증감을 의미. 시간의 감소는 고려하지 않는다. </p>
+<p> (그림 10)에서 </p>
+<p> $ y = -x + 30 $의 우상쪽에 있는 점들은 $ y &gt; -x + 30 $<input id="cb6" type="checkbox"/><label for="cb6"><sup></sup>
+</label><span><br/><br/>예를 들어 (30, 30) 은 y = -x + 30의 우상쪽에 있는 점이다. x = 30, y = 30을 y = -x + 30에
+                          대입하면 30 &gt; 0, 따라서 y &gt; -x + 30<br/><br/></span>, </p>
+<p> $ y &gt; -x + 30 $ 이므로 ② 에서 $ \dfrac{dx}{dt} &gt; 0 $, 즉 시간이 지남에 따라 x는 증가한다.</p>
+<p> $ y = -x + 30 $ 의 좌하쪽에 있는 점들은 y
+                        &lt; -x + 30<input id="cb17" type="checkbox"/><label for="cb17"><sup></sup>
+</label><span><br/><br/>예를 들어 (0, 0) 은 y = -x + 30의 좌하쪽에 있는 점이다. x = 0, y = 0을 y = -x + 30에 대입하면 0
+                          &lt; 30, 따라서 y &lt; -x + 30<br/><br/></span>,
                       </p>
-
-                      <p> $ y < -x + 30 $ 이므로 ②에서 $ \dfrac{dx}{dt} < 0 $, 즉 시간이 지남에 따라 x는 감소한다.</p>
-                          <p> $ \dfrac{dx}{dt} = 0 \Longrightarrow y = -x + 30 $ 이므로 $y = -x + 30 $ 선상에서는 x 변화는 없고 y 변화만
+<p> $ y &lt; -x + 30 $ 이므로 ②에서 $ \dfrac{dx}{dt} &lt; 0 $, 즉 시간이 지남에 따라 x는 감소한다.</p>
+<p> $ \dfrac{dx}{dt} = 0 \Longrightarrow y = -x + 30 $ 이므로 $y = -x + 30 $ 선상에서는 x 변화는 없고 y 변화만
                             있으므로 수직으로 변동 </p>
-
-                          <p> 두 그림을 결합하여 그리면 다음과 같다. 두 개의 직선이 이루는 부분을 4 구역으로 구분한 다음 앞에서 구한 화살표의 방향을 합치면 (그림 11) 과 같다.
+<p> 두 그림을 결합하여 그리면 다음과 같다. 두 개의 직선이 이루는 부분을 4 구역으로 구분한 다음 앞에서 구한 화살표의 방향을 합치면 (그림 11) 과 같다.
                           </p>
-
-                          <div style="text-align : center;">
-                            <img src="phase-diagram3.bmp"><br>
+<div style="text-align : center;">
+<img alt="예2: local stock pollution model 관련 도해 2" src="phase-diagram3.bmp"/><br/>
                             (그림 11) $ \dfrac{dy}{dt} = x - 0.5y $ , $ \dfrac{dx}{dt} = 0.5x + 0.5y - 15 $ 위상도
                           </div>
-                          <br>
-                          
-                          <div class="correction">
-                            <strong>※ 수정된 그림 참조:</strong> 아래 문단에서 "(그림 11)의 상하 분면에서는..."으로 수정
+<br/>
+<div class="correction">
+<strong>※ 수정된 그림 참조:</strong> 아래 문단에서 "(그림 11)의 상하 분면에서는..."으로 수정
                           </div>
-                          
-                          <p>(그림 11)에서 녹색 화살표는 각 수직, 수평 화살표의 합인 벡터의 방향을 의미하며 (그림 11)에는 표시되지 않았지만 각 구간마다 수많은 녹색 벡터들이
+<p>(그림 11)에서 녹색 화살표는 각 수직, 수평 화살표의 합인 벡터의 방향을 의미하며 (그림 11)에는 표시되지 않았지만 각 구간마다 수많은 녹색 벡터들이
                             존재한다. 고동색 화살표는 이러한 고동색 벡터들의 흐름을 나타낸다. </p>
-                          <p>두 직선이 교차하는 점 (10, 20)이 정상상태(steady state)이다. 그러나 이 점은 안정적이지 않다.</p>
-                          <p> <strong>(그림 11)</strong>의 상하 분면에서는 (10, 20)으로 접근하지만 좌우 분면에서는 (10, 20)으로부터 발산함을 알 수 있다. 즉 임의의 점에서 (10, 20)로
+<p>두 직선이 교차하는 점 (10, 20)이 정상상태(steady state)이다. 그러나 이 점은 안정적이지 않다.</p>
+<p> <strong>(그림 11)</strong>의 상하 분면에서는 (10, 20)으로 접근하지만 좌우 분면에서는 (10, 20)으로부터 발산함을 알 수 있다. 즉 임의의 점에서 (10, 20)로
                             접근하려 하면 화살표의 방향에 따라 외부로 발산함을 알 수 있다. 따라서 (10, 20)은 안정상태(stable state)가 아님을 알 수 있다. 이러한 점을
                             안장점(鞍裝點, saddle point)이라 하고 안장점으로 이루어진 경로를 안장경로(saddle path)라 부른다. </p>
-
-                          <p> 임의의 점에서 시작하는 벡터들의 모음인 상변화도를 그려보면 (그림 12)와 같다. </p>
-
-                          <div style="text-align : center;">
-                            <img src="phase-diagram4.bmp"><br>
+<p> 임의의 점에서 시작하는 벡터들의 모음인 상변화도를 그려보면 (그림 12)와 같다. </p>
+<div style="text-align : center;">
+<img alt="예2: local stock pollution model 관련 도해 3" src="phase-diagram4.bmp"/><br/>
                             (그림 12) $ \dfrac{dy}{dt} = x - 0.5y $ , $ \dfrac{dx}{dt} = 0.5x + 0.5y - 15 $ 상변화도 (Phase Portrait)
                           </div>
-                          <br>
-
-
-
-                          <h2>위상도 분석의 강점과 제약</h2>
-                          <p>
-                            <strong>강점:</strong>
-                            <ul>
-                              <li>시간축이 없으므로 변수들 간의 동시적 움직임을 한눈에 파악할 수 있음</li>
-                              <li>토빈의 q 이론에서 보듯이, 자본량(capital stock)이 높을 때 자본의 가격은 낮다는 관계를 시각적으로 표현 가능</li>
-                              <li>해석적 해를 구하기 어려운 비선형 시스템의 동태적 특성을 파악하는 데 유용</li>
-                            </ul>
-                          </p>
-                          <p>
-                            <strong>제약점:</strong>
-                            <ul>
-                              <li>시간축이 없으므로 균형에 이르기까지 얼마나 시간이 걸리는지를 알 수 없음</li>
-                              <li>2차원(변수 2개)까지만 시각화 가능 (3변수 이상은 그림으로 표현 곤란)</li>
-                              <li>조정 속도는 균형경로의 모양에 따라 다를 수 있음. 가파른 경로는 빠른 수렴을, 완만한 곡선은 느린 조정속도를 의미하지만 정량적 측정은 어려움</li>
-                              <li>선형 시스템에 국한되지 않지만, 비선형 시스템에서는 국소적 분석(local analysis)에 그칠 수 있음</li>
-                            </ul>
-                          </p>
-
-</body>
+<br/>
+<section id="source-phase-diagram-preservation">
+<hr/>
+<h2>원본 「미분방정식과 응용」의 위상도 자료</h2>
+<p><strong>보존 섹션:</strong> 아래 내용은 HWP→HTML 변환 정본의 위상도 부분을 수식·그래프·이미지와 함께 그대로 옮긴 것이다.
+기존의 보강 설명과 별도로 원본의 표현과 도해를 확인할 수 있도록 유지한다.</p>
+<h4 style="text-align:justify">位相圖(phase diagram)</h4>
+<h4 style="text-align:justify">단일방정식인 경우 위상도</h4>
+<p style="text-align:justify"><span class="math">\, \frac{dy(t)}{dt} \,=\,F(y)</span></p>
+<p style="text-align:justify">ㅇ 위상도</p>
+<p style="text-align:justify">- 수평축을 <span class="math">y(t)</span>, 수직축을 <span class="math">\, \frac{dy(t)}{dt}</span>로 놓고 <span class="math">y</span>와 <span class="math">\, \frac{dy}{dt}</span>의 관계를 표현한 것 </p>
+<p style="text-align:justify">- 수평축을 <span class="math">y(t)</span>, 수직축을 <span class="math">y</span>의 함수인 <span class="math">f(y(t))</span>로 표현한 것  </p>
+<p style="text-align:justify">ㅇ 위상선(phase line)</p>
+<p style="text-align:justify">- <span class="math">y</span>와 <span class="math">\, \frac{dy}{dt}</span> 또는 <span class="math">y</span>와 <span class="math">f(y(t))</span>의 관계를 나타내는 선</p>
+<p style="text-align:justify">위상도는 미분방정식의 해를 구하기 어려울 때 기하학적으로 해의 의미를 해석하는데 유용하게 사용된다.</p>
+<p style="text-align:justify">값이 수평축 위에 있을 때,  즉 <span class="math">\, \frac{dy}{dt} &gt;0</span> 일 때 <span class="math">y</span>는 시간이 흐름에 따라 증가함을 의미. <span class="math">y</span>는 왼쪽에서 오른쪽으로 흐른다. </p>
+<p style="text-align:justify">값이 수평축 아래에 있을 때,  즉 <span class="math">\, \frac{dy}{dt} &lt;0</span> 일 때 <span class="math">y</span>는 시간이 흐름에 따라 감소함을 의미. <span class="math">y</span>는 오른쪽에서 왼쪽으로 흐른다.</p>
+<p style="text-align:justify">이를 (그림)에서 보듯이 화살표로 표시. 즉, 화살표의 방향은 위상선의 기울기와는 무관하다.</p>
+<p style="text-align:justify;margin:0.1em 0"><span class="hml-figure editable-gtree"><svg height="680" style="display:block;max-width:100%;margin:0 auto" viewbox="0 0 1116 680" width="1116" xmlns="http://www.w3.org/2000/svg"><defs><marker id="svg6-arrow" markerheight="8" markerwidth="8" orient="auto" refx="7" refy="3"><path d="M0,0 L0,6 L7,3 z" fill="#000000"></path></marker></defs><rect fill="none" fill-opacity="1.0" height="99" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="188" x="113" y="20"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="207" y="69">{dy(t)} over {dt}</text><line marker-end="url(#svg6-arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="178" x2="175" y1="138" y2="660"></line><line marker-end="url(#svg6-arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="20" x2="998" y1="510" y2="503"></line><rect fill="none" fill-opacity="1.0" height="81" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="78" x="1019" y="447"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="1057" y="487">y(t)</text><rect fill="none" fill-opacity="1.0" height="92" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="74" x="130" y="494"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="167" y="541">0</text><rect fill="none" fill-opacity="1.0" height="80" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="130" x="629" y="528"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="694" y="568">y₂ ^{*} (t)</text><line opacity="1.0" stroke="#000000" stroke-width="2.77" x1="692" x2="692" y1="491" y2="526"></line><line opacity="1.0" stroke="#000000" stroke-width="2.77" x1="261" x2="261" y1="491" y2="526"></line><rect fill="none" fill-opacity="1.0" height="80" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="130" x="236" y="528"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="301" y="568">y₁ ^{*} (t)</text></svg></span>
+</p>
+<p style="text-align:justify"><span class="math">\, \frac{dy}{dt} \,=\,0</span> 인 점을 임계점(critical point) 또는 균형점(equilibrium point)이라 한다. </p>
+<p style="text-align:justify">특히 경제학에서는 이 점을 정상상태 균형(steady-state equilibrium)이라 한다.<sup><a href="#fn33" id="fnref33">[33]</a></sup> </p>
+<p style="text-align:justify">(그림)에는 <span class="math">y_{1}^{*}</span> , <span class="math">y_{2}^{*}</span>  2 개의 균형점이 존재한다.</p>
+<p style="text-align:justify"><span class="math">y_{2}^{*}</span> 는 시간이 흘러도 변하지 않고 안정적이므로 안정상태 균형(stable equilibrium)임을 알 수 있다. </p>
+<p style="text-align:left">미분방정식이 안정상태에 있다면  </p>
+<p style="text-align:left"><span class="math">y*</span>의 근방에서 <span class="math">y&lt;y*</span> 일 때 <span class="math">\, \frac{dy}{dt} &gt;0</span> , 그리고 <span class="math">y&gt;y*</span> 일 때 <span class="math">\, \frac{dy}{dt} &lt;0</span> .</p>
+<p style="text-align:justify">(그림)에서 보듯이 교차점에서 위상선의 기울기가 음일 때 교차점은 안정적임을 알 수 있다. </p>
+<p style="text-align:justify"><span class="math">y_{1}^{*}</span> 는 시간이 흐름에 따라 안정적이지 않고 미세한 왼쪽의 움직임은 왼쪽, 미세한 오른쪽의 움직임은 오른쪽으로 이동한다. 교차점에서 위상선의 기울기가 양일 때 교차점은 안정적이지 않다. </p>
+<p style="text-align:justify"><span class="math">x*</span>가 균형점이고 <span class="math">\frac{d}{dx} f(x*)&lt;0</span> ⇒ 국지적으로 안정적</p>
+<p style="text-align:justify"><span class="math">x*</span>가 균형점이고 <span class="math">\frac{d}{dx} f(x*)&gt;0</span> ⇒ 불안정</p>
+<h4 style="text-align:justify">연립미분방정식인 경우 위상도(상태변수가 2 이상)</h4>
+<p style="text-align:left">y’(<span class="math">t</span>) = A(<span class="math">t</span>)y(<span class="math">t</span>)+v(<span class="math">t</span>)</p>
+<p style="text-align:left">주로 A가 2×2 행렬인 경우에 대해서 분석. 그 이상인 경우는 그림으로 분석하기 곤란</p>
+<p style="text-align:left">y’(<span class="math">t</span>) = 0 인 곡선을 nullclines 이라 한다. sometimes called zero-growth isoclines.</p>
+<p style="text-align:left">An isocline(等高線) is a curve through points at which the parent function's slope will always be the same. y’(<span class="math">t</span>) = C</p>
+<p style="text-align:left">nullclines 은 여러 isocline 들 중에 C = 0 인 경우를 의미</p>
+<p style="text-align:left">예) </p>
+<p style="text-align:left"><span class="math">\frac{dx}{dt} \,=\,-2x</span></p>
+<p style="text-align:left"><span class="math">\frac{dy}{dt} \,=2x-4y+32\,</span></p>
+<p style="text-align:left">(풀이)</p>
+<p style="text-align:justify">정상상태(steady state)에서 상태변수들은 시간에 따라 변하지 않으므로</p>
+<p style="text-align:justify"><span class="math">\frac{dx}{dt} =0</span> , <span class="math">\frac{dy}{dt} =0</span> 선들을 그리면 (그림)과 같다.</p>
+<p style="text-align:justify;margin:0.1em 0"><span class="hml-figure editable-gtree"><svg height="629" style="display:block;max-width:100%;margin:0 auto" viewbox="0 0 679 629" width="679" xmlns="http://www.w3.org/2000/svg"><defs><marker id="svg7-arrow" markerheight="8" markerwidth="8" orient="auto" refx="7" refy="3"><path d="M0,0 L0,6 L7,3 z" fill="#000000"></path></marker></defs><line marker-end="url(#svg7-arrow)" marker-start="url(#svg7-arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="20" x2="611" y1="368" y2="367"></line><line marker-end="url(#svg7-arrow)" marker-start="url(#svg7-arrow)" opacity="1.0" stroke="#4c4cff" stroke-width="2.37" x1="326" x2="327" y1="73" y2="609"></line><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="47" x="306" y="20"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="329" y="47">y</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="47" x="611" y="341"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="635" y="368">x</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="47" x="292" y="368"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="316" y="396">0</text><line marker-end="url(#svg7-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="432" x2="346" y1="207" y2="207"></line><line marker-end="url(#svg7-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="432" x2="346" y1="499" y2="499"></line><line marker-end="url(#svg7-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="220" x2="306" y1="167" y2="167"></line><line marker-end="url(#svg7-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="219" x2="305" y1="465" y2="465"></line><line marker-end="url(#svg7-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="219" x2="305" y1="297" y2="297"></line><line marker-end="url(#svg7-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="431" x2="345" y1="319" y2="319"></line></svg></span>
+<span class="hml-figure editable-gtree"><svg height="629" style="display:block;max-width:100%;margin:0 auto" viewbox="0 0 704 629" width="704" xmlns="http://www.w3.org/2000/svg"><defs><marker id="svg8-arrow" markerheight="8" markerwidth="8" orient="auto" refx="7" refy="3"><path d="M0,0 L0,6 L7,3 z" fill="#000000"></path></marker></defs><line marker-end="url(#svg8-arrow)" marker-start="url(#svg8-arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="20" x2="635" y1="368" y2="367"></line><line marker-end="url(#svg8-arrow)" marker-start="url(#svg8-arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="339" x2="340" y1="73" y2="609"></line><line opacity="1.0" stroke="#4c4cff" stroke-width="2.37" x1="67" x2="445" y1="446" y2="176"></line><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="49" x="317" y="20"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="342" y="47">y</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="49" x="635" y="341"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="659" y="368">x</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="49" x="303" y="368"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="327" y="396">0</text><rect fill="none" fill-opacity="1.0" height="87" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="85" x="133" y="368"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="175" y="412">-16</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="49" x="293" y="194"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="317" y="222">8</text><line marker-end="url(#svg8-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="95" x2="95" y1="310" y2="412"></line><line marker-end="url(#svg8-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="218" x2="218" y1="194" y2="296"></line><line marker-end="url(#svg8-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="409" x2="409" y1="93" y2="194"></line><line marker-end="url(#svg8-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="133" x2="133" y1="513" y2="412"></line><line marker-end="url(#svg8-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="271" x2="271" y1="425" y2="323"></line><line marker-end="url(#svg8-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="427" x2="427" y1="323" y2="222"></line></svg></span>
+</p>
+<p style="text-align:justify">(i)  <span class="math">\frac{dx}{dt} \,=-2x\,=\,0</span> </p>
+<p style="text-align:justify"><span class="math">x\,=\,0</span> 이므로 (그림 a)에서 y 축으로 표시. y 축을 중심으로 좌우에서 벡터의 방향을 추정.</p>
+<p style="text-align:justify"><span class="math">\frac{dx}{dt} \,&gt;0</span> ⇒ <span class="math">\frac{dx}{dt} \,=-2x\,&gt;\,0</span> ⇒ <span class="math">x\,&lt;0</span></p>
+<p style="text-align:justify">즉 x가 0보다 작은 구간(y 축의 좌측)에서는 x는 시간의 증가에 따라 증가한다. 이는 (그림 a)의 y축 좌측의 화살표 방향으로 표시된다. x가 증가하는 것이므로 화살표의 방향은 x축을 따라 좌에서 우로 흐르는 모양이 된다.<sup><a href="#fn34" id="fnref34">[34]</a></sup> </p>
+<p style="text-align:justify"><span class="math">\frac{dx}{dt} \,&lt;0</span> ⇒ <span class="math">x\,&gt;0</span></p>
+<p style="text-align:justify">x가 0보다 큰 구간(y축의 우측)에서는 x는 시간의 증가에 따라 감소한다. 이는 (그림a)의 y축 우측의 화살표 방향으로 표시된다. x가 감소하는 것이므로 화살표의 방향은 x축을 따라 우에서 좌로 흐르는 모양이 된다.</p>
+<p style="text-align:justify">(ii) <span class="math">\frac{dy}{dt} \,=2x-4y+32\,=\,0</span></p>
+<p style="text-align:justify"><span class="math">2x-4y+32\,=\,0</span> 은 (그림 b)에서 파란선이다. </p>
+<p style="text-align:justify"><span class="math">\frac{dy}{dt} \,&gt;\,0</span> ⇒ <span class="math">2x-4y+32\,&gt;\,0</span></p>
+<p style="text-align:justify">이 부등식을 만족시키는 점들은 (그림 b)에서 우하 부분이다.<sup><a href="#fn35" id="fnref35">[35]</a></sup> 따라서 우하에서는 시간이 지남에 따라 y는 증가하고 이는 그림에서 y축을 따라 아래서 위로 증가하는 방향으로 화살표가 그려진다. </p>
+<p style="text-align:justify"><span class="math">\frac{dy}{dt} \,&lt;\,0</span> ⇒ <span class="math">2x-4y+32\,&lt;\,0</span></p>
+<p style="text-align:justify">좌상에서는 시간이 지남에 따라 y는 감소하고<sup><a href="#fn36" id="fnref36">[36]</a></sup> 이는 그림에서 y축을 따라 위에서 아래로 감소하는 방향으로 화살표가 그려진다.</p>
+<p style="text-align:justify">(i), (ii) 두 가지 경우를 모두 고려하여 화살표를 그리면 (그림 c)와 같다. 두 개의 빨간색 화살표의 합이 벡터의 방향을 나타내는 초록색 화살표이다. 기준선에서 화살표의 방향이 바뀌는 점에 유의하면서 해의 경로를 그리면 굵은 고동색 화살표의 모양이 된다. 고동색 화살표는 여러 가지 초기값에 대응하는 해의 경로를 표시한 것이다.</p>
+<p style="text-align:center;margin:0.1em 0"><span class="hml-figure editable-gtree"><svg height="671" style="display:block;max-width:100%;margin:0 auto" viewbox="0 0 796 671" width="796" xmlns="http://www.w3.org/2000/svg"><defs><marker id="svg9-arrow" markerheight="8" markerwidth="8" orient="auto" refx="7" refy="3"><path d="M0,0 L0,6 L7,3 z" fill="#000000"></path></marker></defs><line marker-end="url(#svg9-arrow)" marker-start="url(#svg9-arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="20" x2="720" y1="411" y2="410"></line><line marker-end="url(#svg9-arrow)" marker-start="url(#svg9-arrow)" opacity="1.0" stroke="#4c4cff" stroke-width="2.37" x1="382" x2="384" y1="75" y2="651"></line><line opacity="1.0" stroke="#4c4cff" stroke-width="2.37" x1="62" x2="634" y1="464" y2="191"></line><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="56" x="363" y="20"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="391" y="47">y</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="56" x="720" y="382"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="748" y="410">x</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="56" x="342" y="410"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="370" y="437">0</text><rect fill="none" fill-opacity="1.0" height="87" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="96" x="144" y="406"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="192" y="450">-16</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="56" x="335" y="266"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="363" y="294">8</text><line marker-end="url(#svg9-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="197" x2="197" y1="214" y2="312"></line><line marker-end="url(#svg9-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="489" x2="489" y1="102" y2="200"></line><line marker-end="url(#svg9-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="240" x2="240" y1="537" y2="439"></line><line marker-end="url(#svg9-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="540" x2="540" y1="427" y2="329"></line><line marker-end="url(#svg9-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="540" x2="442" y1="427" y2="427"></line><line marker-end="url(#svg9-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="241" x2="339" y1="537" y2="537"></line><line marker-end="url(#svg9-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="197" x2="295" y1="214" y2="214"></line><line marker-end="url(#svg9-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="489" x2="391" y1="102" y2="102"></line><line marker-end="url(#svg9-arrow)" opacity="1.0" stroke="#00cc00" stroke-width="0.5" x1="199" x2="282" y1="215" y2="302"></line><line marker-end="url(#svg9-arrow)" opacity="1.0" stroke="#00cc00" stroke-width="0.5" x1="488" x2="399" y1="104" y2="191"></line><line marker-end="url(#svg9-arrow)" opacity="1.0" stroke="#00cc00" stroke-width="0.5" x1="539" x2="460" y1="429" y2="345"></line><line marker-end="url(#svg9-arrow)" opacity="1.0" stroke="#00cc00" stroke-width="0.5" x1="241" x2="323" y1="534" y2="454"></line><path d="M 142.76 301.60 A 119.00 121.00 0 1 1 307.57 340.29" fill="none" opacity="1.0" stroke="#de9e17" stroke-width="11.9"></path><path d="M 463.50 55.41 A 126.00 128.00 0 0 1 405.75 225.79" fill="none" opacity="1.0" stroke="#de9e17" stroke-width="11.9"></path><path d="M 339.44 566.02 A 115.00 116.00 0 0 1 367.53 405.34" fill="none" opacity="1.0" stroke="#de9e17" stroke-width="11.9"></path><path d="M 640.90 343.82 A 133.00 134.00 0 1 1 471.26 260.45" fill="none" opacity="1.0" stroke="#de9e17" stroke-width="11.9"></path></svg></span>
+</p>
+<p style="text-align:justify"><span class="math">\frac{dx}{dt} \,=-2x\,=\,0</span>, <span class="math">\frac{dy}{dt} \,=2x-4y+32\,=\,0</span> 두 개의 선이 구간을 네 부분으로 구분한다.</p>
+<p style="text-align:justify">각 구간에 따른 화살표의 방향은 앞의 결과를 합쳐서 그리면 된다. 초록색 화살표는 빨간색 화살표들의 벡터합을 의미한다. 시간의 경과에 따라 초록색 화살표의 방향으로 상태변화가 이루어짐을 알 수 있다. </p>
+<p style="text-align:justify">상태 <span class="math">x(t),\,y(t)</span>는 임의의 점에서 시작해도 (0, 8) 점을 향해 흐름을 알 수 있고, 이 점은 안정점이 된다. 결국 (그림 c)의 고동색 화살표와 같은 방향으로 상태변화가 이루어진다.</p>
+<p style="text-align:justify">실제 상변화도를 그려보면 (그림 d)와 같다.</p>
+<p style="text-align:center"><img alt="연립미분방정식인 경우 위상도(상태변수가 2 이상) 관련 도해 4" src="media/미분방정식과_응용_007.png" style="max-width:100%;"/>
+</p>
+<p style="text-align:justify">예) local stock polution model<sup><a href="#fn37" id="fnref37">[37]</a></sup></p>
+<p style="text-align:justify"><span class="math">\frac{dy}{dt} =x(t)-0.5y(t)</span></p>
+<p style="text-align:justify"><span class="math">\frac{dx}{dt} =0.5x(t)+0.5y(t)\,-\,15</span></p>
+<p style="text-align:justify"><span class="math">y(t)</span> ; 대기오염의 규모</p>
+<p style="text-align:justify"><span class="math">x(t)</span> ; 배출가스의 양</p>
+<p style="text-align:justify">(풀이) 정상상태(steady state)에서 상태변수들은 시간에 따라 변하지 않으므로</p>
+<p style="text-align:justify"><span class="math">\frac{dy}{dt} =0</span> , <span class="math">\frac{dx}{dt} =0</span> 인 선들을 그리면 (그림 a), (그림 b)와 같다.</p>
+<p style="text-align:justify"><span class="math">\frac{dy}{dt} =x(t)-0.5y(t)\,=\,0</span>          ⇒ <span class="math">y\,=\,2x</span> ....................①</p>
+<p style="text-align:justify"><span class="math">\frac{dx}{dt} =0.5x(t)+0.5y(t)\,-\,15\,=\,0</span>  ⇒ <span class="math">y\,=\,-x+30</span> ............②</p>
+<p style="text-align:justify">(그림 a)에서</p>
+<p style="text-align:justify"><span class="math">y\,=\,2x</span> 의 좌상쪽에 있는 점들은 <span class="math">y\,&gt;\,2x</span><sup><a href="#fn38" id="fnref38">[38]</a></sup>, <span class="math">y\,&gt;\,2x</span> 이므로 ①에서 <span class="math">\frac{dy}{dt} &lt;0</span></p>
+<p style="text-align:justify">시간이 지남에 따라 y는 감소한다.</p>
+<p style="text-align:justify"><span class="math">y\,=\,2x</span> 의 우하쪽에 있는 점들은 <span class="math">y\,&lt;\,2x</span><sup><a href="#fn39" id="fnref39">[39]</a></sup>, <span class="math">y\,&lt;\,2x</span> 이므로 ①에서 <span class="math">\frac{dy}{dt} &gt;0</span></p>
+<p style="text-align:justify">시간이 지남에 따라 y는 증가한다.</p>
+<p style="text-align:justify">화살표는 항상 시간이 지남에 따라 상태변수의 증감을 의미. 시간의 감소는 고려하지 않는다.</p>
+<p style="text-align:justify">화살표의 방향이 y축을 따라 평행하게 그려짐에 유의</p>
+<p style="text-align:justify;margin:0.1em 0"> <span class="hml-figure editable-gtree"><svg height="652" style="display:block;max-width:100%;margin:0 auto" viewbox="0 0 624 652" width="624" xmlns="http://www.w3.org/2000/svg"><defs><marker id="svg10-arrow" markerheight="8" markerwidth="8" orient="auto" refx="7" refy="3"><path d="M0,0 L0,6 L7,3 z" fill="#000000"></path></marker></defs><line marker-end="url(#svg10-arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="20" x2="477" y1="568" y2="566"></line><line marker-start="url(#svg10-arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="87" x2="88" y1="75" y2="621"></line><line opacity="1.0" stroke="#0000ff" stroke-width="1.58" x1="331" x2="53" y1="115" y2="632"></line><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="127" x="98" y="566"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="161" y="593">0</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="127" x="53" y="20"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="116" y="48">y(t)</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="127" x="477" y="538"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="540" y="566">x(t)</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="176" x="343" y="75"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="431" y="103">y=2x</text><line marker-end="url(#svg10-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="325" x2="325" y1="183" y2="274"></line><line marker-end="url(#svg10-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="192" x2="192" y1="424" y2="515"></line><line marker-end="url(#svg10-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="262" x2="262" y1="104" y2="185"></line><line marker-end="url(#svg10-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="160" x2="160" y1="274" y2="355"></line></svg></span>
+<span class="hml-figure editable-gtree"><svg height="707" style="display:block;max-width:100%;margin:0 auto" viewbox="0 0 732 707" width="732" xmlns="http://www.w3.org/2000/svg"><defs><marker id="svg11-arrow" markerheight="8" markerwidth="8" orient="auto" refx="7" refy="3"><path d="M0,0 L0,6 L7,3 z" fill="#000000"></path></marker></defs><line marker-end="url(#svg11-arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="150" x2="594" y1="628" y2="629"></line><line marker-start="url(#svg11-arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="206" x2="207" y1="82" y2="687"></line><line opacity="1.0" stroke="#0000ff" stroke-width="1.58" x1="131" x2="565" y1="174" y2="687"></line><rect fill="none" fill-opacity="1.0" height="62" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="118" x="173" y="626"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="232" y="656">0</text><rect fill="none" fill-opacity="1.0" height="62" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="118" x="178" y="20"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="236" y="51">y(t)</text><rect fill="none" fill-opacity="1.0" height="62" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="118" x="594" y="595"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="653" y="626">x(t)</text><rect fill="none" fill-opacity="1.0" height="79" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="216" x="20" y="120"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="128" y="159">y=­x+30</text><line marker-end="url(#svg11-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="246" x2="324" y1="279" y2="279"></line><line marker-end="url(#svg11-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="424" x2="502" y1="495" y2="495"></line><line marker-end="url(#svg11-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="251" x2="173" y1="362" y2="362"></line><line marker-end="url(#svg11-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="402" x2="324" y1="537" y2="537"></line></svg></span>
+</p>
+<p style="text-align:justify">(그림 b)에서</p>
+<p style="text-align:justify"><span class="math">y\,=\,-x+30</span> 의 우상쪽에 있는 점들은 <span class="math">y\,&gt;\,-x+30</span><sup><a href="#fn40" id="fnref40">[40]</a></sup> </p>
+<p style="text-align:justify"><span class="math">y\,&gt;\,-x+30</span> 이므로 ②에서 <span class="math">\frac{dx}{dt} &gt;0</span></p>
+<p style="text-align:justify">시간이 지남에 따라 x는 증가한다.</p>
+<p style="text-align:justify"><span class="math">y\,=\,-x+30</span> 의 좌하쪽에 있는 점들은 <span class="math">y\,&lt;\,-x+30</span><sup><a href="#fn41" id="fnref41">[41]</a></sup> </p>
+<p style="text-align:justify"><span class="math">y\,&lt;\,-x+30</span> 이므로 ②에서 <span class="math">\frac{dx}{dt} &lt;0</span></p>
+<p style="text-align:justify">시간이 지남에 따라 x는 감소한다.</p>
+<p style="text-align:justify">Taking these results together we obtain the pairs of direction indicators for movements in ① and ② for each of the four quadrants when the system is not in steady state </p>
+<p style="text-align:justify">두 그림을 결합하여 그리면 다음과 같다. 두 개의 직선이 이루는 부분을 4 구역으로 구분한 다음 앞에서 구한 화살표의 방향을 합치면 다음 그림과 같다.</p>
+<p style="text-align:center;margin:0.1em 0"><span class="hml-figure editable-gtree"><svg height="932" style="display:block;max-width:100%;margin:0 auto" viewbox="0 0 1196 932" width="1196" xmlns="http://www.w3.org/2000/svg"><defs><marker id="svg12-arrow" markerheight="8" markerwidth="8" orient="auto" refx="7" refy="3"><path d="M0,0 L0,6 L7,3 z" fill="#000000"></path></marker></defs><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="208" x2="1076" y1="818" y2="815"></line><line marker-start="url(#svg12-arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="301" x2="303" y1="101" y2="895"></line><line opacity="1.0" stroke="#0000ff" stroke-width="1.58" x1="642" x2="254" y1="159" y2="912"></line><line opacity="1.0" stroke="#0000ff" stroke-width="1.58" x1="233" x2="944" y1="170" y2="844"></line><rect fill="none" fill-opacity="1.0" height="81" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="86" x="317" y="831"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="360" y="871">0</text><rect fill="none" fill-opacity="1.0" height="81" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="86" x="254" y="20"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="297" y="60">y(t)</text><rect fill="none" fill-opacity="1.0" height="81" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="86" x="1090" y="763"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="1133" y="803">x(t)</text><rect fill="none" fill-opacity="1.0" height="81" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="155" x="658" y="101"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="736" y="141">y=2x</text><rect fill="none" fill-opacity="1.0" height="103" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="247" x="20" y="118"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="144" y="170">y=-x+30</text><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="433" x2="433" y1="209" y2="324"></line><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="433" x2="433" y1="410" y2="525"></line><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="632" x2="632" y1="439" y2="324"></line><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="612" x2="612" y1="707" y2="593"></line><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="433" x2="547" y1="209" y2="209"></line><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="632" x2="746" y1="439" y2="439"></line><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="433" x2="318" y1="410" y2="410"></line><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#ff0000" stroke-width="0.5" x1="613" x2="498" y1="707" y2="707"></line><line opacity="1.0" stroke="#000000" stroke-dasharray="2 4" stroke-width="0.5" x1="506" x2="506" y1="431" y2="817"></line><line opacity="1.0" stroke="#000000" stroke-dasharray="2 4" stroke-width="0.5" x1="506" x2="303" y1="431" y2="431"></line><rect fill="none" fill-opacity="1.0" height="81" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="86" x="490" y="817"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="533" y="857">10</text><rect fill="none" fill-opacity="1.0" height="81" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="86" x="232" y="391"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="275" y="431">20</text><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#19ff19" stroke-width="0.78" x1="434" x2="532" y1="212" y2="312"></line><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#19ff19" stroke-width="0.78" x1="634" x2="724" y1="441" y2="331"></line><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#19ff19" stroke-width="0.78" x1="432" x2="337" y1="412" y2="506"></line><line marker-end="url(#svg12-arrow)" opacity="1.0" stroke="#19ff19" stroke-width="0.78" x1="614" x2="524" y1="708" y2="616"></line><path d="M 593.67 546.01 A 127.00 129.00 0 0 1 654.83 375.33" fill="none" opacity="1.0" stroke="#ff9d19" stroke-width="11.9"></path><path d="M 371.09 306.25 A 109.00 110.00 0 0 1 355.07 460.10" fill="none" opacity="1.0" stroke="#ff9d19" stroke-width="11.9"></path></svg></span>
+</p>
+<p style="text-align:justify">두 직선이 교차하는 점 (10, 20)이 정상상태(steady state)임을 알 수 있다. 그러나 이 점은 안정적이지 않다.</p>
+<p style="text-align:justify">아래 그림에서 고동색 화살표는 각 수직, 수평 화살표의 합인 벡터의 방향을 의미하며 (그림)에는 표시되지 않았지만 각 구간마다 수많은 고동색 벡터들이 존재한다. 노란색 화살표는 이러한 고동색 벡터들의 흐름을 나타낸다. 임의의 점에서 (10, 20)로 접근하려 하면 화살표의 방향에 따라 외부로 발산함을 알 수 있다. 따라서 (10, 20)은 안정상태(stable state)가 아님을 알 수 있다. 이러한 점을 鞍裝點(saddle point)이라 하고 안장점으로 이루어진 경로를 안장경로(saddle path)라 부른다. </p>
+<p style="text-align:justify">경제학에서 쓰는 위상도와 미분방정식에서 쓰는 상변화도와의 관계는 다음과 같다.</p>
+<p style="text-align:justify">미분방정식에서 배운 상변화도를 그려보자.</p>
+<p style="text-align:justify">앞의 미분방정식을 다시 쓰면</p>
+<p style="text-align:justify"><span class="math">\frac{dy}{dt} =x(t)-0.5y(t)\,</span> </p>
+<p style="text-align:justify"><span class="math">\frac{dx}{dt} =0.5x(t)+0.5y(t)\,-\,15\,</span></p>
+<p style="text-align:justify">행렬 형태로 표현하면</p>
+<p style="text-align:left"><span class="math">{\begin{pmatrix}\frac{dx}{dt} \\ \frac{dy}{dt}\end{pmatrix}}</span> = <span class="math">{\begin{pmatrix}\frac{1}{2} &amp; \; \frac{1}{2} \\ 1 &amp; \,- \frac{1}{2}\end{pmatrix}}</span><span class="math">{\begin{pmatrix}x(t) \\ y(t)\end{pmatrix}}</span> + <span class="math">{\begin{pmatrix}\;0 \\ -15\end{pmatrix}}</span></p>
+<p style="text-align:left">고유치는</p>
+<p style="text-align:left"><span class="math">\phi ( \lambda )= \lambda^{2} - \frac{3}{4} \,=\,0</span></p>
+<p style="text-align:left">∴ <span class="math">\lambda =\pm \frac{\sqrt {3}}{2} \,</span></p>
+<p style="text-align:left">고유치의 부호가 바뀌므로 해는 안장경로를 따라 발산한다.</p>
+<p style="text-align:left">고유벡터는</p>
+<p style="text-align:left">(i) <span class="math">\lambda = \frac{\sqrt {3}}{2} \,</span></p>
+<p style="text-align:left"><span class="math">{\begin{pmatrix}\frac{1}{2} - \frac{\sqrt {3}}{2}&amp;\, \frac{1}{2} \\ 1&amp;- \frac{1}{2} - \frac{\sqrt {3}}{2}\end{pmatrix}}</span><span class="math">{\begin{pmatrix}a \\ b\end{pmatrix}}</span> = <span class="math">{\begin{pmatrix}0 \\ 0\end{pmatrix}}</span></p>
+<p style="text-align:justify">p<sub>1 </sub>= <span class="math">{\begin{pmatrix}1 \\ 0.732\end{pmatrix}} a</span></p>
+<p style="text-align:justify">(ii) <span class="math">\lambda =- \frac{\sqrt {3}}{2} \,</span></p>
+<p style="text-align:left"><span class="math">{\begin{pmatrix}\frac{1}{2} + \frac{\sqrt {3}}{2}&amp;\, \frac{1}{2} \\ 1&amp;- \frac{1}{2} + \frac{\sqrt {3}}{2}\end{pmatrix}}</span><span class="math">{\begin{pmatrix}a \\ b\end{pmatrix}}</span> = <span class="math">{\begin{pmatrix}0 \\ 0\end{pmatrix}}</span></p>
+<p style="text-align:justify">p<sub>2 </sub>= <span class="math">{\begin{pmatrix}1 \\ -2.732\end{pmatrix}} a</span></p>
+<p style="text-align:justify">두 고유벡터를 점근선으로 하는 <span class="math">x(t),\;y(t)</span>의 상변화도는 다음 그림과 같다.</p>
+<p style="text-align:justify">미분방정식의 해는</p>
+<p style="text-align:left"><img alt="연립미분방정식인 경우 위상도(상태변수가 2 이상) 관련 도해 5" src="media/미분방정식과_응용_008.png" style="max-width:100%;"/>
+</p>
+<h4 style="text-align:justify">위상도 분석의 강점과 제약<sup><a href="#fn42" id="fnref42">[42]</a></sup></h4>
+<p style="text-align:justify">위상도는 시간축이 없으므로 균형에 이르기까지 얼마나 시간이 걸리는지를 알 수 없다.</p>
+<p style="text-align:justify">위상도는 변수들의 동시 움직임을 나타내므로, 토빈의 q 이론에서 보듯이 자본량(capital stock)이 높을 때 자본의 가격은 낮다. 또는 그 역도 성립.(사소한 것이지만 기본 성장모형에서는 나타나지 않음)</p>
+<p style="text-align:justify">조정속도는 균형경로의 모양에 따라 다를 수 있음. 가파른 경로는 빠른 수렴을, 완만한 곡선은 느린 조정속도를 의미한다.</p>
+<div class="footnotes source-phase-footnotes"><h2>원본 위상도 구간 각주</h2><ol><li id="fn33"><p style="text-align:justify"> 물리, 화학 등 다른 학문에서는 정상상태(steady-state)는 안정상태를 의미하는 것으로 쓰임. 경제학에서의 일정상태(steady-state)는 소득, 소비, 자본 등이 모두 일정한 속도로 성장하는 것을 의미. http://terms.naver.com/entry.nhn?docId=778739&amp;mobile&amp;categoryId=520 참조.</p>
+<a href="#fnref33">↩</a></li><li id="fn34"><p style="text-align:justify"> 물론 시간의 감소의 경우는 화살표가 반대방향이 되겠지만 시간은 항상 증가하므로 시간의 감소는 고려하지 않는다.</p>
+<a href="#fnref34">↩</a></li><li id="fn35"><p style="text-align:justify"> 일례로 (0, 0)을 대입해 보면 알 수 있음. </p>
+<a href="#fnref35">↩</a></li><li id="fn36"><p style="text-align:justify"> 일례로 (0, 10)을 대입해 보면 알 수 있음. </p>
+<a href="#fnref36">↩</a></li><li id="fn37"><p style="text-align:justify"> http://personal.strath.ac.uk/r.perman/Phase.pdf </p>
+<a href="#fnref37">↩</a></li><li id="fn38"><p style="text-align:justify"> 예를 들어 (0, 1) 은 <span class="math">y\,=\,2x</span>의 좌상쪽에 있는 점이다. x=0, y=1을 <span class="math">y\,=\,2x</span>에 대입하면 1 &gt; 0, 따라서 <span class="math">y\,&gt;\,2x</span></p>
+<a href="#fnref38">↩</a></li><li id="fn39"><p style="text-align:justify"> 예를 들어 (1, 0) 은 <span class="math">y\,=\,2x</span>의 우하쪽에 있는 점이다. x=1, y=0을 <span class="math">y\,=\,2x</span>에 대입하면 0 &lt; 2, 따라서 <span class="math">y\,&lt;\,2x</span></p>
+<a href="#fnref39">↩</a></li><li id="fn40"><p style="text-align:justify"> 예를 들어 (30, 30) 은 <span class="math">y\,=\,-x+30</span>의 우상쪽에 있는 점이다. x=30, y=30을 <span class="math">y\,=\,-x+30</span>에 대입하면 30 &gt; 0, 따라서 <span class="math">y\,&gt;\,-x+30</span></p>
+<a href="#fnref40">↩</a></li><li id="fn41"><p style="text-align:justify"> 예를 들어 (0, 0) 은 <span class="math">y\,=\,-x+30</span>의 좌하쪽에 있는 점이다. x=0, y=0을 <span class="math">y\,=\,-x+30</span>에 대입하면 0 &lt; 30, 따라서 <span class="math">y\,&lt;\,-x+30</span></p>
+<a href="#fnref41">↩</a></li><li id="fn42"><p style="text-align:justify"> http://astro.temple.edu/~swansonc/607picts.htm </p>
+<a href="#fnref42">↩</a></li></ol></div></section>
+<h2>고유값과 위상형(phase portrait)의 분류</h2>
+<p>선형 자율시스템</p>
+<p>$$\dot{\mathbf{x}}=A\mathbf{x}$$</p>
+<p>
+        에서 정상상태 주변의 움직임은 행렬 $A$의 고유값에 의해 결정된다.
+        2차원에서는 다음 분류가 위상도를 해석하는 기본 틀이다.
+      </p>
+<table aria-label="고유값과 위상형(phase portrait)의 분류 관련 표 1" style="border-collapse:collapse; width:100%; margin:1em 0;">
+<tr>
+<th style="border:1px solid #999; padding:8px;">고유값</th>
+<th style="border:1px solid #999; padding:8px;">위상형</th>
+<th style="border:1px solid #999; padding:8px;">안정성</th>
+</tr>
+<tr>
+<td style="border:1px solid #999; padding:8px;">두 실근 모두 음수</td>
+<td style="border:1px solid #999; padding:8px;">stable node</td>
+<td style="border:1px solid #999; padding:8px;">정상상태로 수렴</td>
+</tr>
+<tr>
+<td style="border:1px solid #999; padding:8px;">두 실근 모두 양수</td>
+<td style="border:1px solid #999; padding:8px;">unstable node</td>
+<td style="border:1px solid #999; padding:8px;">정상상태에서 발산</td>
+</tr>
+<tr>
+<td style="border:1px solid #999; padding:8px;">한 근은 음수, 한 근은 양수</td>
+<td style="border:1px solid #999; padding:8px;">saddle point</td>
+<td style="border:1px solid #999; padding:8px;">한 방향은 수렴, 다른 방향은 발산</td>
+</tr>
+<tr>
+<td style="border:1px solid #999; padding:8px;">복소근, 실수부 &lt; 0</td>
+<td style="border:1px solid #999; padding:8px;">stable spiral/focus</td>
+<td style="border:1px solid #999; padding:8px;">진동하며 수렴</td>
+</tr>
+<tr>
+<td style="border:1px solid #999; padding:8px;">복소근, 실수부 &gt; 0</td>
+<td style="border:1px solid #999; padding:8px;">unstable spiral/focus</td>
+<td style="border:1px solid #999; padding:8px;">진동하며 발산</td>
+</tr>
+<tr>
+<td style="border:1px solid #999; padding:8px;">순허수 고유값</td>
+<td style="border:1px solid #999; padding:8px;">center 가능</td>
+<td style="border:1px solid #999; padding:8px;">선형계에서는 폐곡선 궤도 가능</td>
+</tr>
+</table>
+<div class="note">
+<strong>※ trace–determinant를 이용한 빠른 판정</strong>
+<p>
+          $2\times2$ 행렬 $A$에서 특성방정식은
+          $$\lambda^2-\operatorname{tr}(A)\lambda+\det(A)=0$$
+          이다. 따라서 trace, determinant, 판별식
+          $$\Delta=[\operatorname{tr}(A)]^2-4\det(A)$$
+          의 부호만으로도 상당 부분 위상형을 분류할 수 있다.
+        </p>
+</div>
+<h2>비선형 시스템과 Jacobian 선형화</h2>
+<p>비선형 자율시스템</p>
+<p>$$\dot{x}=f(x,y), \qquad \dot{y}=g(x,y)$$</p>
+<p>
+        은 일반적으로 해를 직접 구하기 어렵다. 정상상태 $(x^*,y^*)$ 근방에서는 다음 Jacobian을 이용하여
+        선형시스템으로 근사한다.
+      </p>
+<p>$$
+      J(x^*,y^*)=
+      \begin{pmatrix}
+      f_x &amp; f_y\\
+      g_x &amp; g_y
+      \end{pmatrix}_{(x^*,y^*)}
+      $$</p>
+<p>
+        Jacobian의 고유값 실수부분이 모두 음수이면 정상상태는 국소적으로 안정적이며,
+        양의 실수부분을 갖는 고유값이 존재하면 불안정하다.
+        부호가 서로 반대인 실수 고유값이 나오면 정상상태는 안장점이 된다.
+      </p>
+<div class="note">
+<strong>※ saddle path의 경제학적 의미</strong>
+<p>
+          경제학의 동태모형에서는 자본처럼 과거에 의해 결정되는 상태변수(state variable)와
+          가격·소비·환율처럼 즉시 조정될 수 있는 점프변수(jump variable)가 함께 등장하는 경우가 많다.
+          정상상태가 saddle point라면 모든 초기값이 정상상태로 가는 것이 아니라,
+          특정한 안정고유벡터 방향의 경로에서 출발해야만 장기균형으로 수렴한다.
+          이 경로가 <strong>saddle path</strong>이다.
+        </p>
+<p>
+          저장소의 <a href="overshooting model.html">Dornbusch overshooting model</a>,
+          <a href="predator-prey model.html">Predator–Prey model</a>,
+          <a href="goodwin model.html">Goodwin model</a>은 이러한 2변수 동학과 위상도 해석을 연결해서 볼 수 있는 예이다.
+        </p>
+</div>
+<h2>관련 미분방정식 장</h2>
+<ul>
+<li><a href="differential-equation-basics.html">미분방정식의 기초</a></li>
+<li><a href="differential-equation-second-order.html">2계·고계 미분방정식</a></li>
+<li><a href="differential-equation-systems.html">연립미분방정식과 안정성</a></li>
+<li><a href="differential-equation-applications.html">미분방정식의 경제학 응용</a></li>
+</ul>
+<h2>위상도 분석의 강점과 제약</h2>
+<p>
+<strong>강점:</strong>
+<ul>
+<li>시간축이 없으므로 변수들 간의 동시적 움직임을 한눈에 파악할 수 있음</li>
+<li>토빈의 q 이론에서 보듯이, 자본량(capital stock)이 높을 때 자본의 가격은 낮다는 관계를 시각적으로 표현 가능</li>
+<li>해석적 해를 구하기 어려운 비선형 시스템의 동태적 특성을 파악하는 데 유용</li>
+</ul>
+</p>
+<p>
+<strong>제약점:</strong>
+<ul>
+<li>시간축이 없으므로 균형에 이르기까지 얼마나 시간이 걸리는지를 알 수 없음</li>
+<li>2차원(변수 2개)까지만 시각화 가능 (3변수 이상은 그림으로 표현 곤란)</li>
+<li>조정 속도는 균형경로의 모양에 따라 다를 수 있음. 가파른 경로는 빠른 수렴을, 완만한 곡선은 느린 조정속도를 의미하지만 정량적 측정은 어려움</li>
+<li>선형 시스템에 국한되지 않지만, 비선형 시스템에서는 국소적 분석(local analysis)에 그칠 수 있음</li>
+</ul>
+</p>
+<section class="related-documents" id="related-documents"><h2>관련 문서</h2><ul><li><a href="system-of-differential equation.html">미분방정식과 응용</a></li><li><a href="differential-equation-systems.html">연립미분방정식과 안정성</a></li><li><a href="difference-equation-phase.html">차분방정식의 위상·안정성</a></li><li><a href="dynamic optimization.html">동적최적화이론과 응용</a></li></ul></section><hr/>
+<p>
+<a href="system-of-differential equation.html">미분방정식과 응용 목차</a> ·
+    <a href="eco-math2.html">경제수학 II</a>
+</p>
+</p></body>
 </html>

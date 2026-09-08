@@ -1,6 +1,8 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title> 란체스터 모형</title>
     <style>
       body { 
@@ -24,7 +26,43 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 "HTML-CSS": { availableFonts: ["TeX"] }
 });
 </script>
- </head>
+ 
+<style id="deployment-responsive-patch">
+* { box-sizing: border-box; }
+body {
+  max-width: 980px !important;
+  width: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 1.2rem 1rem 3rem;
+  overflow-wrap: break-word;
+}
+img, svg, canvas {
+  max-width: 100% !important;
+  height: auto !important;
+}
+table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.MathJax_Display, .mjx-chtml, .katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; line-height: 1.3; }
+  h2 { font-size: 1.35rem; line-height: 1.35; }
+  h3 { font-size: 1.15rem; line-height: 1.4; }
+}
+</style>
+
+</head>
 
 <body> 
 	
@@ -56,9 +94,9 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 	
 <h3> 3. 풀이 </h3> 
 <p> 두 식을 결합하면 </p> 
-<p> $ dt = -\dfrac{dy}{x} =   -\dfrac{dy}{y} $ </p>
+<p> $ dt = -\dfrac{dy}{x} = -\dfrac{dx}{y} $ </p>
 
-<p> $ \Rightarrow  ydy =  xdy $ </p>
+<p> $ \Rightarrow y\,dy = x\,dx $ </p>
  
 <p> 전투 개시부터 종료된 상태까지 양변 적분하면  </p>
 <!--  \displaystyle은 적분기호 크게 -->
@@ -75,7 +113,7 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 
 <p>$m=13, n=12 $ 이면 $ \sqrt{169 - 144} = 5 $</p>
 <p> 전투전 병력 차이는 1이었지만  전투후 차이는 5</p>
-<p> 시간이 지날수록 병력차이가 기하급수적으로 커지는 것을 알 수 있다.</p>
+<p> 같은 초기 병력 차이라도 병력 규모가 클수록 승자에게 남는 병력의 차이가 더 크게 나타난다. 이는 란체스터의 제곱법칙(square law)이 병력의 효과를 단순한 1차 차이가 아니라 병력수의 제곱으로 비교하기 때문이다.</p>
 <p> 또 시초 병력의 절대적 크기가 클 수록 전투 후의 차이가 커지는 것을 알 수 있다.</p>
 
 <p> 앞의 예에서 얼핏 보면 1 회 교전에서 5 - 4 = 1 명 남는 것이 타당할 것 같지만 이는 다음과 같이 해석 할 수 있다.</p>
@@ -86,7 +124,7 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 <p> $ x(t), y(t)$ 는 t 기의 A, B 국 병력수 </p>
 <p> 이런 식으로 100번 싸운다면 A, B 국 병력수는 3, 0에 근접해진다. <sup><a href="#fn2">2</a></sup></p>
 <p>이를 그림으로 표현하면 (그림 1)과 같다.</p>
-<img src="https://dl.dropbox.com/s/h8d12xgbzpdbvwk/lanchester.png" width=500 height=350 hspace= 100><br> 
+<img src="https://dl.dropbox.com/s/h8d12xgbzpdbvwk/lanchester.png" alt="란체스터 모형의 병력수 감소 그래프" loading="lazy" style="max-width:100%;height:auto;display:block;margin:1rem auto;"><br> 
 <p> &nbsp &nbsp &nbsp &nbsp &nbsp(그림 1) 병력수 감소</p> 
 <br>
 
@@ -128,7 +166,7 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 <h3> 6. 란체스터 모형의 의미 </h3> 
 	
 <p> 란체스터의 법칙은 군사학에서 아주 중요한 점을 시사해 준다.   </p>
-<p> 양국의 병력 차이는 지수적으로 영향을 미친다는 것이다.</p> 
+<p> 집중사격이 가능한 조건에서는 전투력 비교에 병력수의 제곱이 들어간다는 것이다. 따라서 수적 우세의 효과는 단순한 병력비보다 훨씬 크게 나타날 수 있다.</p> 
 
 <p> 그러면 수적 열세를 극복하여 전투에서 승리하려면 어떻게 해야할까? </p>
 <p> 란체스터 모형에서 소수의 B국이 다수의 A국을 이기는 방법은 전투시 A국의 병력이 모두 전투에 참여하지 못하게 하고 B국은 상대적으로 다수의 병력이 전투에 참여하는 것이다.  </p>
