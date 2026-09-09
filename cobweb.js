@@ -1,316 +1,463 @@
-
 function Graph(canvas){
-    var margin=70;
-    var xmin=glob.xmin;
-    var ymin=glob.ymin;
-    var xmax=glob.xmax;
-    var ymax=glob.ymax;
-    var canvas=canvas;
-    var ctx=canvas.getContext('2d');
-    var h=canvas.height;
-    var w=canvas.width;
-    var h1=canvas.height-margin;
-    var w1=canvas.width-margin;
-    var borderSize=2; // a differently-colored area at the outermost part of the canvas to visually indicate the graph's border
-    if(2*borderSize>h || 2*borderSize>w){ // disable border if it's going to be too big
-        borderSize=0;
-    }
-    var edgeSize=borderSize+0.5; // This small buffer zone close to the border keeps the graph from going half a pixel too far, at least in firefox.
+    const margin=70;
+    const xmin=glob.xmin;
+    const ymin=glob.ymin;
+    const xmax=glob.xmax;
+    const ymax=glob.ymax;
+    const ctx=canvas.getContext('2d');
+    const h=canvas.height;
+    const w=canvas.width;
+    const h1=canvas.height-margin;
+    const w1=canvas.width-margin;
+    let borderSize=2;
+    if(2*borderSize>h || 2*borderSize>w){ borderSize=0; }
+    const edgeSize=borderSize+0.5;
 
-    // Blank out the canvas to a pristine state.
+
     this.resetCanvas=function(){
-        // make border
-
-        ctx.fillStyle="white";
+        ctx.fillStyle='white';
         ctx.fillRect(0,0,w,h);
-        ctx.fillStyle="black";
-    }
+        ctx.fillStyle='black';
+    };
 
-    // 그래프의 x,y 값을 캔버스값으로 편경. 화면 입력값이 그래프값임을 상기.
+
     function mathToCanvasX(x){
-        max=w-edgeSize*2;
-        portion=(x-xmin)/(xmax-xmin);
+        const max=w-edgeSize*2-margin;
+        const portion=(x-xmin)/(xmax-xmin);
         return portion*max+edgeSize+margin;
     }
-    
+
+
     function mathToCanvasY(y){
-        max=h-edgeSize*2;
-        portion=(y-ymin)/(ymax-ymin);
+        const max=h-edgeSize*2-margin;
+        const portion=(y-ymin)/(ymax-ymin);
         return h-(portion*max+edgeSize+margin);
     }
 
-    // Plot a line segment, using math function x and y coordinates (not canvas coordinates).
-    this.plotLine=function(x1,y1,x2,y2){
-        // convert coordinates
-        var cx1=mathToCanvasX(x1);
-        var cy1=mathToCanvasY(y1);
-        var cx2=mathToCanvasX(x2);
-        var cy2=mathToCanvasY(y2);
 
-        // plot the line segment
+    this.plotLine=function(x1,y1,x2,y2,color='black'){
+        if (![x1,y1,x2,y2].every(Number.isFinite)) return;
+        const cx1=mathToCanvasX(x1), cy1=mathToCanvasY(y1);
+        const cx2=mathToCanvasX(x2), cy2=mathToCanvasY(y2);
         ctx.beginPath();
         ctx.moveTo(cx1,cy1);
         ctx.lineTo(cx2,cy2);
-    // ctx.strokeStyle="green";
+        ctx.strokeStyle=color;
         ctx.stroke();
         ctx.closePath();
+        ctx.strokeStyle='black';
+    };
 
-        // change color for next draw action
-        // this.nextColor();
-    }
 
- 
-    // 축을 그린다.
-     this.plotLine2=function(x1,y1,x2,y2){
-     var deg=30;
-     var scale=0.98; // 내분 비율
-
-     var sx1=x1+(x2-x1)*scale; // 내분점
-     var sy1=y1+(y2-y1)*scale; // 내분점
-        // plot the line segment
+    this.plotLine2=function(x1,y1,x2,y2){
+        const deg=30;
+        const scale=0.98;
+        const sx1=x1+(x2-x1)*scale;
+        const sy1=y1+(y2-y1)*scale;
         ctx.beginPath();
         ctx.moveTo(x1,y1);
         ctx.lineTo(x2,y2);
-        ctx.strokeStyle="black"; // 축 색깔 지정.
+        ctx.strokeStyle='black';
         ctx.stroke();
         ctx.closePath();
-
-    // 화살표 모양 윗부분 그림
-       ctx.save(); // saves the coordinate system
-       ctx.translate(x2,y2);
-       ctx.rotate(deg * Math.PI / 180); // (x2,y2)을 중심으로 시계방향으로 deg도 회전
-       ctx.beginPath();
-       ctx.moveTo(0,0);
-       ctx.lineTo(sx1-x2,sy1-y2);
-       ctx.stroke();
-
-   // 화살표 모양 아랫부분 그림
-       ctx.rotate(10*deg * Math.PI / 180); // (x2,y2)을 중심으로 시계방향으로 10*deg도 회전
-       ctx.beginPath();
-       ctx.moveTo(0,0);
-       ctx.lineTo(sx1-x2,sy1-y2);
-       ctx.stroke();
-       ctx.restore(); // restore canvas. 원래 캔버스로 돌아온다.
-    }
-
-    // Plot red cobweb line segment
-    this.plotLine3=function(x1,y1,x2,y2){
-        // convert coordinates
-        var cx1=mathToCanvasX(x1);
-        var cy1=mathToCanvasY(y1);
-        var cx2=mathToCanvasX(x2);
-        var cy2=mathToCanvasY(y2);
-
+        ctx.save();
+        ctx.translate(x2,y2);
+        ctx.rotate(deg*Math.PI/180);
         ctx.beginPath();
-        ctx.moveTo(cx1,cy1);
-        ctx.lineTo(cx2,cy2);
-        ctx.strokeStyle="green"; // cobweb 곡선 색깔
-        ctx.closePath();
+        ctx.moveTo(0,0);
+        ctx.lineTo(sx1-x2,sy1-y2);
         ctx.stroke();
-
-        ctx.strokeStyle="green"; // cobweb 곡선 색깔
-        ctx.stroke();
-        ctx.closePath();
-        ctx.strokeStyle="black";
-   
-    }
-
-    this.plotLine4=function(x1,y1,x2,y2){
-        // convert coordinates
-        var cx1=mathToCanvasX(x1);
-        var cy1=mathToCanvasY(y1);
-        var cx2=mathToCanvasX(x2);
-        var cy2=mathToCanvasY(y2);
-
-        // plot the line segment
+        ctx.rotate(10*deg*Math.PI/180);
         ctx.beginPath();
-        ctx.moveTo(cx1,cy1);
-        ctx.lineTo(cx2,cy2);
-        ctx.strokeStyle="red"; // 수요곡선 색깔
+        ctx.moveTo(0,0);
+        ctx.lineTo(sx1-x2,sy1-y2);
         ctx.stroke();
-        ctx.closePath();
-        // change color for next draw action
-        // this.nextColor();
-        }
+        ctx.restore();
+    };
 
-        this.plotLine5=function(x1,y1,x2,y2){
-            // convert coordinates
-            var cx1=mathToCanvasX(x1);
-            var cy1=mathToCanvasY(y1);
-            var cx2=mathToCanvasX(x2);
-            var cy2=mathToCanvasY(y2);
 
-            // plot the line segment
-            ctx.beginPath();
-            ctx.moveTo(cx1,cy1);
-            ctx.lineTo(cx2,cy2);
-            ctx.strokeStyle="blue"; // 공급곡선 색깔
-            ctx.stroke();
-            ctx.closePath();
-            // change color for next draw action
-            // this.nextColor();
-            }
+    this.plotLine3=(x1,y1,x2,y2)=>this.plotLine(x1,y1,x2,y2,'green');
+    this.plotLine4=(x1,y1,x2,y2)=>this.plotLine(x1,y1,x2,y2,'red');
+    this.plotLine5=(x1,y1,x2,y2)=>this.plotLine(x1,y1,x2,y2,'blue');
 
-// 축 그리는 함수
-      this.axes=function(){
-    	var x1=glob.x1;
-      var cx1=mathToCanvasX(x1); // 그래프의 x 값을 캔버스값으로 편경
-    	ctx.font = "20px Arial";
-    	ctx.fillText("0",margin-30,h1+30);
-    	ctx.fillText("수량", w1+30, h1+40);
-    	ctx.fillText("가격", margin-20, margin-10);
-      ctx.font = "12px Arial";
-      ctx.fillStyle = 'red';
-      ctx.fillText("수요곡선 : 빨간색",500,220);
-      ctx.fillStyle = 'blue';
-      ctx.fillText("공급곡선 : 파란색",500,250);
-      ctx.font = "20px Arial";
-      ctx.fillText(x1, cx1-10, h1+30); // x축에 초기값을 표시
-      this.plotLine2(0,h1,w1+60,h1); // x 축 그림
-      this.plotLine2(margin,h,margin,margin); // y 축 그림
-    }
 
-    // 임의의 함수식에 대해 그래프를 그리는 함수
-    // 수요 곡선
-    this.plotFunction=function(f){
-        // get initial point and distance between points
-        x1=xmin;
-        y1=f(x1);
-        delta=(xmax-xmin)/(w-2*borderSize);
-        // Go thru all point values, with 'delta/2' to avoid rounding error preventing the last point from being drawn.
-        // Note: Altho "<" vs "<=" is irrelevant with probability 1, only "<" avoids an infinite loop when xmin==xmax, like when their both zero from nothing being entered.
-        // x의 조그만 증가에 대한 y의 조그만 증가를 이용하여 두 점을 조금씩 연결하여 감으로써 그래프를 그림
-       for(var x2=xmin+delta; x2<xmax+delta/2; x2+=delta){
-            y2=f(x2);
-            this.plotLine4(x1,y1,x2,y2);
+    this.axes=function(){
+        const x1=glob.x1;
+        const cx1=mathToCanvasX(x1);
+        ctx.font='20px Arial';
+        ctx.fillStyle='black';
+        ctx.fillText('0',margin-30,h1+30);
+        ctx.fillText('수량',w1+30,h1+40);
+        ctx.fillText('가격',margin-20,margin-10);
+        ctx.font='12px Arial';
+        ctx.fillStyle='red';
+        ctx.fillText('수요곡선 : 빨간색',500,220);
+        ctx.fillStyle='blue';
+        ctx.fillText('공급곡선 : 파란색',500,250);
+        ctx.font='20px Arial';
+        ctx.fillStyle='black';
+        ctx.fillText(String(x1),cx1-10,h1+30);
+        this.plotLine2(0,h1,w1+60,h1);
+        this.plotLine2(margin,h,margin,margin);
+    };
+
+
+    function plotFunction(f, plotter){
+        let x1=xmin;
+        let y1=f(x1);
+        const delta=(xmax-xmin)/Math.max(100,w-2*borderSize);
+        for(let x2=xmin+delta; x2<xmax+delta/2; x2+=delta){
+            const y2=f(x2);
+            if(Number.isFinite(y1) && Number.isFinite(y2)) plotter(x1,y1,x2,y2);
             x1=x2;
             y1=y2;
         }
     }
 
-// 공급곡선
-    this.plotFunction2=function(f){
-        // get initial point and distance between points
-        x1=xmin;
-        y1=f(x1);
-        delta=(xmax-xmin)/(w-2*borderSize);
-        // Go thru all point values, with 'delta/2' to avoid rounding error preventing the last point from being drawn.
-        // Note: Altho "<" vs "<=" is irrelevant with probability 1, only "<" avoids an infinite loop when xmin==xmax, like when their both zero from nothing being entered.
-        // x의 조그만 증가에 대한 y의 조그만 증가를 이용하여 두 점을 조금씩 연결하여 감으로써 그래프를 그림
-       for(var x2=xmin+delta; x2<xmax+delta/2; x2+=delta){
-            y2=f(x2);
-            this.plotLine5(x1,y1,x2,y2);
-            x1=x2;
-            y1=y2;
-        }
-    }
-}
-/////////////////////////////////////////////////////////////////////////////////////////
 
-// helper function for debugging
-function log(message) {
-    // Note: Getting the line number like this is very browser-specific. This is only tested in Firefox 53 on Linux.
-    line=new Error().stack.split('\n')[1].split(':').reverse().splice(0,2).reverse().join(':');
-    console.log(line+": "+message);
+    this.plotFunction=f=>plotFunction(f,this.plotLine4);
+    this.plotFunction2=f=>plotFunction(f,this.plotLine5);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// 문자열인 식 표현을 함수값으로 변환하는 함수
+
+function log(message){
+    console.log(message);
+}
+
+
 function parseFunction(func){
-    // It's tempting to use "return function(x){return eval(func);};", but that takes about 30% longer.
-    eval("var f=function(x){return "+func+";};");
-    return f;
+    return new Function('x','"use strict"; return ('+func+');');
 }
-/////////////////////////////////////////////////////////////////////////////////////////
 
-// GLobal OBjects
-var glob={};
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// cobweb 선분을 그린다.
+const glob={};
+
+
+function bisectRoot(f,a,b,fa,fb,tol=1e-10,maxIter=80){
+    if(Math.abs(fa)<tol) return a;
+    if(Math.abs(fb)<tol) return b;
+    let lo=a, hi=b, flo=fa;
+    for(let i=0;i<maxIter;i++){
+        const mid=(lo+hi)/2;
+        const fm=f(mid);
+        if(!Number.isFinite(fm)) return NaN;
+        if(Math.abs(fm)<tol || Math.abs(hi-lo)<tol) return mid;
+        if(flo*fm<=0){
+            hi=mid;
+        }else{
+            lo=mid;
+            flo=fm;
+        }
+    }
+    return (lo+hi)/2;
+}
+
+
+function inverseSupplyRoots(price){
+    const supply=glob.execFunc2;
+    const xmin=glob.xmin, xmax=glob.xmax;
+    const samples=Math.max(400,Math.min(4000,Number(glob.rootSamples)||1200));
+    const dx=(xmax-xmin)/samples;
+    const residual=q=>supply(q)-price;
+    const roots=[];
+    const rootTol=Math.max(1e-8,(xmax-xmin)*1e-8);
+
+
+    function addRoot(r){
+        if(!Number.isFinite(r) || r<xmin-rootTol || r>xmax+rootTol) return;
+        const rr=Math.min(xmax,Math.max(xmin,r));
+        if(!roots.some(v=>Math.abs(v-rr)<Math.max(1e-6,(xmax-xmin)*1e-5))) roots.push(rr);
+    }
+
+
+    let x0=xmin;
+    let f0=residual(x0);
+    if(Number.isFinite(f0) && Math.abs(f0)<rootTol) addRoot(x0);
+    let prevAbs=Number.isFinite(f0)?Math.abs(f0):Infinity;
+    let prevX=x0;
+    let prevF=f0;
+
+
+    for(let i=1;i<=samples;i++){
+        const x1=(i===samples)?xmax:xmin+i*dx;
+        const f1=residual(x1);
+        if(Number.isFinite(f1)){
+            if(Math.abs(f1)<rootTol) addRoot(x1);
+            if(Number.isFinite(prevF) && prevF*f1<0){
+                addRoot(bisectRoot(residual,prevX,x1,prevF,f1));
+            }
+            if(i<samples){
+                const x2=Math.min(xmax,x1+dx);
+                const f2=residual(x2);
+                if(Number.isFinite(f2) && Math.abs(f1)<=prevAbs && Math.abs(f1)<=Math.abs(f2) && Math.abs(f1)<Math.max(1e-5,dx*dx)) addRoot(x1);
+            }
+            prevAbs=Math.abs(f1);
+        }
+        prevX=x1;
+        prevF=f1;
+    }
+    roots.sort((a,b)=>a-b);
+    return roots;
+}
+
+
+function chooseBranch(roots,currentQ){
+    if(!roots.length) return NaN;
+    const mode=glob.branch||'nearest';
+    if(mode==='lower') return roots[0];
+    if(mode==='upper') return roots[roots.length-1];
+    return roots.reduce((best,q)=>Math.abs(q-currentQ)<Math.abs(best-currentQ)?q:best,roots[0]);
+}
+
+
+function nextQuantity(currentQ){
+    const price=glob.execFunc(currentQ);
+    if(!Number.isFinite(price)) return {q:NaN,p:price,roots:[]};
+    const roots=inverseSupplyRoots(price);
+    return {q:chooseBranch(roots,currentQ),p:price,roots};
+}
+
+
+function estimateLyapunov(x0,steps=350,burn=60){
+    const span=Math.max(1e-9,glob.xmax-glob.xmin);
+    const eps=span*1e-6;
+    let x=x0;
+    let sum=0, count=0;
+    for(let i=0;i<steps;i++){
+        const n=nextQuantity(x);
+        if(!Number.isFinite(n.q)) return NaN;
+        if(i>=burn){
+            const np=nextQuantity(x+eps).q;
+            const nm=nextQuantity(x-eps).q;
+            if(Number.isFinite(np) && Number.isFinite(nm)){
+                const deriv=(np-nm)/(2*eps);
+                if(Number.isFinite(deriv) && Math.abs(deriv)>1e-12){
+                    sum+=Math.log(Math.abs(deriv));
+                    count++;
+                }
+            }
+        }
+        x=n.q;
+    }
+    return count?sum/count:NaN;
+}
+
+
+function updateChaosStatus(initialQ,iterations,branchSwitches){
+    const box=document.getElementById('chaosStatus');
+    if(!box) return;
+    const lambda=estimateLyapunov(initialQ);
+    let label='판정 불가';
+    if(Number.isFinite(lambda)){
+        if(lambda>0.02) label='카오스 가능성이 높음';
+        else if(lambda<-0.02) label='안정/주기 궤도 가능성이 높음';
+        else label='카오스 경계 부근';
+    }
+    box.innerHTML='결정론적 동학 진단: <strong>'+label+'</strong>'+ 
+        (Number.isFinite(lambda)?' (수치 Lyapunov 지수 ≈ '+lambda.toFixed(3)+')':'')+
+        ' · 유효 반복 '+iterations+'회 · branch 전환 '+branchSwitches+'회';
+}
+
+
+
+function plotTimeSeries(series){
+    const canvas=document.getElementById('timeSeriesCanvas');
+    if(!canvas) return;
+    const ctx=canvas.getContext('2d');
+    const w=canvas.width, h=canvas.height;
+    const marginLeft=60, marginRight=25, marginTop=35, marginBottom=50;
+    const plotW=w-marginLeft-marginRight;
+    const plotH=h-marginTop-marginBottom;
+
+    ctx.fillStyle='white';
+    ctx.fillRect(0,0,w,h);
+
+    if(!series || !series.length){
+        ctx.fillStyle='black';
+        ctx.font='14px Arial';
+        ctx.fillText('표시할 시계열 데이터가 없습니다.',marginLeft,marginTop+20);
+        return;
+    }
+
+    const values=[];
+    for(const point of series){
+        if(Number.isFinite(point.q)) values.push(point.q);
+        if(Number.isFinite(point.p)) values.push(point.p);
+    }
+    if(!values.length) return;
+
+    let vmin=Math.min(...values), vmax=Math.max(...values);
+    if(vmin===vmax){
+        const pad=Math.max(1,Math.abs(vmin)*0.1);
+        vmin-=pad;
+        vmax+=pad;
+    }else{
+        const pad=(vmax-vmin)*0.08;
+        vmin-=pad;
+        vmax+=pad;
+    }
+
+    const tmax=Math.max(1,series.length-1);
+    const tx=t=>marginLeft+(t/tmax)*plotW;
+    const vy=v=>marginTop+(vmax-v)/(vmax-vmin)*plotH;
+
+    ctx.strokeStyle='black';
+    ctx.lineWidth=1;
+    ctx.beginPath();
+    ctx.moveTo(marginLeft,marginTop);
+    ctx.lineTo(marginLeft,marginTop+plotH);
+    ctx.lineTo(marginLeft+plotW,marginTop+plotH);
+    ctx.stroke();
+
+    ctx.font='12px Arial';
+    ctx.fillStyle='black';
+    ctx.textAlign='right';
+    ctx.textBaseline='middle';
+    for(let i=0;i<=5;i++){
+        const value=vmin+(vmax-vmin)*i/5;
+        const y=vy(value);
+        ctx.strokeStyle='#dddddd';
+        ctx.beginPath();
+        ctx.moveTo(marginLeft,y);
+        ctx.lineTo(marginLeft+plotW,y);
+        ctx.stroke();
+        ctx.fillStyle='black';
+        ctx.fillText(value.toFixed(2),marginLeft-8,y);
+    }
+
+    ctx.textAlign='center';
+    ctx.textBaseline='top';
+    const tickCount=Math.min(10,tmax);
+    for(let i=0;i<=tickCount;i++){
+        const t=Math.round(tmax*i/tickCount);
+        const x=tx(t);
+        ctx.strokeStyle='#eeeeee';
+        ctx.beginPath();
+        ctx.moveTo(x,marginTop);
+        ctx.lineTo(x,marginTop+plotH);
+        ctx.stroke();
+        ctx.fillStyle='black';
+        ctx.fillText(String(t),x,marginTop+plotH+8);
+    }
+
+    ctx.font='14px Arial';
+    ctx.fillStyle='black';
+    ctx.fillText('시간 t',marginLeft+plotW/2,h-24);
+    ctx.save();
+    ctx.translate(18,marginTop+plotH/2);
+    ctx.rotate(-Math.PI/2);
+    ctx.fillText('값',0,0);
+    ctx.restore();
+
+    function drawSeries(key,color){
+        ctx.strokeStyle=color;
+        ctx.lineWidth=1.7;
+        ctx.beginPath();
+        let started=false;
+        for(let i=0;i<series.length;i++){
+            const v=series[i][key];
+            if(!Number.isFinite(v)) continue;
+            const x=tx(i), y=vy(v);
+            if(!started){
+                ctx.moveTo(x,y);
+                started=true;
+            }else{
+                ctx.lineTo(x,y);
+            }
+        }
+        ctx.stroke();
+    }
+
+    drawSeries('q','green');
+    drawSeries('p','purple');
+
+    ctx.textAlign='left';
+    ctx.textBaseline='alphabetic';
+    ctx.font='14px Arial';
+    ctx.fillStyle='black';
+    ctx.fillText('시간별 수량·가격 변화',marginLeft,20);
+    ctx.fillStyle='green';
+    ctx.fillText('Q(t) 수량',marginLeft+190,20);
+    ctx.fillStyle='purple';
+    ctx.fillText('P(t) 가격',marginLeft+280,20);
+    ctx.fillStyle='black';
+}
+
 function cobweb(){
-    var xmin=glob.xmin;
-    var ymin=glob.ymin;
-    var xmax=glob.xmax;
-    var ymax=glob.ymax;
-    var iters=glob.iters;
-    var graph=glob.graph;
-    var func=glob.execFunc;
-    var func3=glob.execFunc3;
-    var x1=glob.x1;
-    var y1=func(x1);
-    graph.plotLine3(x1,0,x1,y1);
+    const xmin=glob.xmin, ymin=glob.ymin, xmax=glob.xmax, ymax=glob.ymax;
+    const iters=Math.max(0,Math.floor(glob.iters));
+    const graph=glob.graph;
+    const demand=glob.execFunc;
+    const initialQ=glob.x1;
+    let x1=initialQ;
+    let y1=demand(x1);
+    const series=[];
 
-    for (var i=0;i<iters;i++){
-        var x2=func3(y1);
-        var y2=func(x2);
-        if (x2>=xmin && x2<=xmax) {
-        setTimeout(graph.plotLine3(x1,y1,x2,y1),3000);
-        setTimeout(graph.plotLine3(x2,y1,x2,y2),3000);
+    if(Number.isFinite(x1) && Number.isFinite(y1)){
+        series.push({q:x1,p:y1});
+    }
+    if(!Number.isFinite(y1)){
+        plotTimeSeries(series);
+        return;
+    }
+
+    graph.plotLine3(x1,Math.max(0,ymin),x1,y1);
+
+    let branchSwitches=0;
+    let validIterations=0;
+    let previousRootIndex=null;
+
+    for(let i=0;i<iters;i++){
+        const roots=inverseSupplyRoots(y1);
+        const x2=chooseBranch(roots,x1);
+        if(!Number.isFinite(x2)) break;
+        const rootIndex=roots.findIndex(r=>Math.abs(r-x2)<1e-6);
+        if(previousRootIndex!==null && rootIndex!==previousRootIndex) branchSwitches++;
+        previousRootIndex=rootIndex;
+
+        const y2=demand(x2);
+        if(!Number.isFinite(y2)) break;
+        if(x2<xmin || x2>xmax || y1<ymin || y1>ymax || y2<ymin || y2>ymax) break;
+
+        graph.plotLine3(x1,y1,x2,y1);
+        graph.plotLine3(x2,y1,x2,y2);
+
         x1=x2;
         y1=y2;
-        }
+        series.push({q:x1,p:y1});
+        validIterations++;
     }
+
     glob.x1=x1;
-}
-/////////////////////////////////////////////////////////////////////////////////////////
-
-function cont(){
-	cobweb();
+    plotTimeSeries(series);
+    updateChaosStatus(initialQ,validIterations,branchSwitches);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// cobweb 도형을 지우는 함수, 수요, 공급 곡선만 그림
-function clearCont(){
-	plotFn(); // 수요, 공급 곡선만 그림
-     // cobweb(testTheme);
-}
+function clearCont(){ plotFn(); }
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// 수요, 공급 곡선을 그리는 함수
+
 function plotFn(){
-    glob.graph.plotFunction(glob.execFunc);  // 수요곡선을 그린다.
-    glob.graph.plotFunction2(glob.execFunc2);  // 공급곡선을 그린다.
-    glob.graph.axes(); // 축을 그린다.
+    glob.graph.plotFunction(glob.execFunc);
+    glob.graph.plotFunction2(glob.execFunc2);
+    glob.graph.axes();
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// 모든 그림을 그리는 함수
-function generate() {
-    startTime=Date.now();
+
+function prepareGraph(drawCobweb){
+    const startTime=Date.now();
     formToGlob();
     globToHash();
     glob.execFunc=parseFunction(glob.func);
     glob.execFunc2=parseFunction(glob.func2);
-    glob.execFunc3=parseFunction(glob.func3);
-    var canvas=get('canvas');
-    var graph=new Graph(canvas);
+    const canvas=get('canvas');
+    const graph=new Graph(canvas);
     graph.resetCanvas();
     glob.graph=graph;
-    plotFn(); // 수요, 공급곡선을 그려라.
-    // plot cobweb
-    // cobweb(testTheme); // cobweb 도형을 그려라.
-
-    endTime=Date.now();
-    log("Diagram generated in "+(endTime-startTime)+" milliseconds.");
+    plotFn();
+    if(drawCobweb) cobweb();
+    log('Diagram generated in '+(Date.now()-startTime)+' milliseconds.');
 }
-/////////////////////////////////////////////////////////////////////////////////////////
-function generate2() {
-    startTime=Date.now();
-    formToGlob();
-    globToHash();
-    glob.execFunc=parseFunction(glob.func);
-    glob.execFunc2=parseFunction(glob.func2);
-    glob.execFunc3=parseFunction(glob.func3);
-   var canvas=get('canvas');
-   var graph=new Graph(canvas);
-   graph.resetCanvas();
-    glob.graph=graph;
-    plotFn(); // 수요, 공급곡선을 그려라.
 
-    // plot cobweb
-    cobweb(); // cobweb 도형을 그려라.
 
-    endTime=Date.now();
-    log("Diagram generated in "+(endTime-startTime)+" milliseconds.");
-}
+function generate(){ prepareGraph(false); plotTimeSeries([]); }
+function generate2(){ prepareGraph(true); }
