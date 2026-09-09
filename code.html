@@ -2,69 +2,65 @@
 <html lang="ko">
 
 <head>
-	<meta charset="utf8">
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>프로그래밍 코드 요약 요약집</title>
+	<title>프로그래밍 코드 요약집</title>
 
-	<!-- Font & Syntax Highlighting -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 	<link rel="stylesheet" type="text/css" href="blog.css">
-	<link rel="stylesheet" type="text/css" href="code.css?v=20260511-wrap2">
+	<link rel="stylesheet" type="text/css" href="code.css?v=20260909-reference">
 
-	<!-- Scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+	<script>
+		Prism.plugins.autoloader.languages_path =
+			'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/';
+	</script>
 	<script src="data.js"></script>
+	<script src="code-extra.js"></script>
 </head>
 
 <body class="sub-page-body">
 	<div class="code-page-wrapper">
-		<aside class="code-sidebar">
+		<aside class="code-sidebar" aria-label="프로그래밍 언어 및 주제">
 			<div class="sidebar-header">
 				<h1>코드 요약집</h1>
-				<p>Language Snippets</p>
+				<p>Programming Reference</p>
 			</div>
 
 			<div class="search-box">
-				<input type="text" id="lang-search" placeholder="Search language...">
+				<label class="sr-only" for="lang-search">언어 또는 주제 검색</label>
+				<input type="search" id="lang-search" placeholder="언어·주제 검색..." autocomplete="off">
 			</div>
 
-			<nav id="dynamic-nav" class="nav-list">
-				<!-- Menu items will be generated here by code.js -->
-			</nav>
+			<nav id="dynamic-nav" class="nav-list"></nav>
 
 			<div class="sidebar-links">
 				<p>온라인 실습</p>
 				<div class="links-row">
-					<a href="http://ideone.com" target="_blank">ideone</a>
-					<a href="http://replit.com" target="_blank">replit</a>
+					<a href="https://ideone.com" target="_blank" rel="noopener noreferrer">ideone</a>
+					<a href="https://replit.com" target="_blank" rel="noopener noreferrer">replit</a>
 				</div>
 			</div>
 		</aside>
 
 		<main class="code-main">
-			<div id="content-display" class="content-view">
+			<div id="content-display" class="content-view" aria-live="polite">
 				<div class="welcome-message">
 					<div class="welcome-icon">⚡</div>
-					<h2>프로그래밍 언어별 문법</h2>
-					<p>좌측 사이드바에서 언어와 주제를 선택하여<br>핵심 코드 스니펫을 확인하세요.</p>
+					<h2>프로그래밍 실전 레퍼런스</h2>
+					<p>좌측에서 언어와 주제를 선택하거나 검색하여<br>자주 쓰는 문법과 실전 코드 스니펫을 확인하세요.</p>
 				</div>
 			</div>
 		</main>
 	</div>
 
-	<!-- Mobile Toggle -->
-	<button class="menu-toggle" id="mobile-toggle">
+	<button class="menu-toggle" id="mobile-toggle" type="button"
+		aria-label="코드 메뉴 열기" aria-expanded="false">
 		<span></span>
 	</button>
 
-	<!-- Core Logic -->
 	<script src="code.js"></script>
 </body>
 
