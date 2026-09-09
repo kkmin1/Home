@@ -1,118 +1,87 @@
 <!-- Created by kkmin -->
 
+
 <html>
 <head>
-
-	<meta charset="utf8">
+  <meta charset="utf8">
   <link rel="stylesheet" type="text/css" href="eco-math.css">
   <link rel="stylesheet" type="text/css" href="cobweb.css">
   <link rel="stylesheet" type="text/css" href="footnote.css">
-
-	<title> Economic Cobweb Diagram </title>
-
-	<script src=https://code.jquery.com/jquery-3.1.1.js></script>
-
-	
-
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+  <title> Economic Cobweb Diagram </title>
+  <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
   <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
   <script src="./latex.js"></script>
-
 </head>
 
 
 <body>
-  <div class = "container">
-	
-	<h1> 거미집 모형(Cobweb Diagram) </h1>
-        <br>
+<div class="container">
+  <h1>거미집 모형(Cobweb Diagram)</h1>
+  <br>
+
 
   <h2>개요</h2>
-<p id = "content"> 일반균형이론에 따를 때 경제시스템의 모든 가격은 조정과정(tatonnement process)을 거쳐 균형가격을 도출한다고 주장한다.
+  <p id="content">일반균형이론에 따를 때 경제시스템의 모든 가격은 조정과정(tatonnement process)을 거쳐 균형가격을 도출한다고 주장한다.
   그러나 경제시스템의 연립방정식을 풀어 해(균형가격)가 존재하는 경우와 해로 수렴하는 지의 여부는 별개의 문제이다. 거미집 모형에 따를 때 가격이 균형에 수렴하지 않는 경우도 있다.
-  이런 경우를 해가 발산한다고 하고 경제 현상에서 흔히 말하는 거품(bubble)을 의미한다.
-  거미집 모형(cobweb model)이란 수요함수, 공급함수가 있을 때 균형 가격을 향해 가는 과정을 묘사한다. 수요함수, 공급함수는 p = p(x)의 형태로 x는 수량, p는 가격을 의미.</p>
-<br>
+  거미집 모형(cobweb model)은 수요함수와 공급함수가 주어졌을 때 가격과 수량이 시간에 따라 조정되는 과정을 묘사한다. 수요함수와 공급함수는 $p=p(x)$ 형태이며 $x$는 수량, $p$는 가격을 의미한다.</p>
+  <p>이 시뮬레이터는 선형함수뿐 아니라 포물선 등 <strong>비선형·비단조 수요/공급함수</strong>를 허용한다. 동일한 가격에서 공급량이 여러 개 존재하면 프로그램이 모든 역해를 수치적으로 찾고, 선택한 branch 규칙에 따라 다음 기의 수량을 결정한다. 따라서 주기변동, branch switching, 경로의존성 및 결정론적 카오스를 실험할 수 있다.</p>
+  <br>
+
 
   <h2>입력방법</h2>
-<p>수식은 자바스크립트 문법으로 입력.</p>
-  <p> 예) $\sin{x}$ => Math.sin(x), $x^2$ => Math.pow(x,2) 등. 자세한 사항은
-  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math"  target="_blank">여기</a> 참조. 공급함수 역함수는 공급함수의 역함수를 자바스크립트 문법으로 기입한다. </p>
-<p style="color: red"> 공급함수를 변화시켰을 때는 그 역함수도 함께 바꿔줘야 한다.</p>
-		
-<br>
+  <p>수식은 자바스크립트 문법으로 입력한다. 예) $\sin{x}$ → Math.sin(x), $x^2$ → x**2. 자세한 사항은
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math" target="_blank">여기</a> 참조.</p>
+  <p style="color:red"><strong>역공급함수는 따로 입력하지 않는다.</strong> 공급함수 $S(Q)=P_t$의 모든 해를 지정된 X 범위에서 자동으로 계산한다.</p>
+  <p>Branch 선택: <strong>nearest</strong>는 직전 생산량에 가장 가까운 해, <strong>lower</strong>는 가장 작은 해, <strong>upper</strong>는 가장 큰 해를 선택한다. 카오스 실험에서는 무작위 선택이 아니라 이와 같은 결정론적 규칙을 사용한다.</p>
+  <br>
 
-<h2>입력 테이블</h2>
-		<section class = "content">
-			
-                    <table>
-                            <tr >
-                              <th id = "col1"> 수요함수 </th>
-                              <td id = "col2" colspan="3" > <input type="text" id="func" autofocus="true"/> </td>
-                            </tr>
-                            <tr >
-                              <th id = "col1"> 공급함수 </th>
-                              <td id = "col2" colspan="3" > <input type="text" id="func2" autofocus="true" /> </td>
-                            </tr>
-                            <tr >
-                              <th id = "col1"> 역공급함수 </th>
-                              <td id = "col2" colspan="3" > <input type="text" id="func3" autofocus="true" /> </td>
-                            </tr>
-                            <tr >
-                              <th id = "col1"> XMin </th>
-                              <td id = "col2" >  <input type="text" id="xmin" /> </td>
-                              <th id = "col1"> XMax </th>
-                              <td id = "col2" > <input type="text" id="xmax" /> </td>
-                            </tr>
-                            <tr >
-                              <th id = "col1"> YMin </th>
-                              <td id = "col2"> <input type="text" id="ymin" /> </td>
-                              <th id = "col1"> YMax </th>
-                              <td id = "col2"> <input type="text" id="ymax" /> </td>
-                            </tr>
-                            <tr >
-                              <th id = "col1"> 초기값 </th>
-                              <td id = "col2"> <input type="text" id="x1" /> </td>
-                              <th id = "col1"> 반복횟수 </th>
-                              <td id = "col2"> <input type="text" id="iters" /> </td>
-                            </tr>
-                          </table>
-                          <br><br>
-                          <!-- button to activate script that generates canvas content -->
 
-                          <br>
+  <h2>입력 테이블</h2>
+  <section class="content">
+    <table>
+      <tr><th id="col1">수요함수</th><td id="col2" colspan="3"><input type="text" id="func" autofocus="true"/></td></tr>
+      <tr><th id="col1">공급함수</th><td id="col2" colspan="3"><input type="text" id="func2"/></td></tr>
+      <tr>
+        <th id="col1">Branch 선택</th>
+        <td id="col2"><select id="branch"><option value="nearest">nearest (현재 수량에 가장 가까운 해)</option><option value="lower">lower (작은 해)</option><option value="upper">upper (큰 해)</option></select></td>
+        <th id="col1">역해 탐색 정밀도</th><td id="col2"><input type="text" id="rootSamples"/></td>
+      </tr>
+      <tr><th id="col1">XMin</th><td id="col2"><input type="text" id="xmin"/></td><th id="col1">XMax</th><td id="col2"><input type="text" id="xmax"/></td></tr>
+      <tr><th id="col1">YMin</th><td id="col2"><input type="text" id="ymin"/></td><th id="col1">YMax</th><td id="col2"><input type="text" id="ymax"/></td></tr>
+      <tr><th id="col1">초기값</th><td id="col2"><input type="text" id="x1"/></td><th id="col1">반복횟수</th><td id="col2"><input type="text" id="iters"/></td></tr>
+    </table>
+    <br><br>
 
-                          <table id="mytable2">
-                            <tr id="mytable2">
-                              <td id="mytable2"> <button class="button" id="generate" onclick="generate2()">그리기</button> </td>
-                              <td id="mytable2"> <button class="button" id="clearCont" onclick="generate()">지우기</button> </td>
-                            </tr>
-                          </table>
-         
-        <br>
-			
-<br>
-			
-        <h2>그래프 그리기</h2>
 
-        <div style="text-align:center;">
-        <canvas id="canvas" width="600" height="600"> </canvas>
-      
-        <script src="cobweb.js"></script>
-        <script src="params.js"></script>
-      </div>
-    </section>
-			
+    <table id="mytable2"><tr id="mytable2"><td id="mytable2"><button class="button" id="generate" onclick="generate2()">그리기</button></td><td id="mytable2"><button class="button" id="clearCont" onclick="generate()">지우기</button></td></tr></table>
+
+
     <br>
-       <h2> 다양한 유형 </h2>
-        <ul>
-          <li><a href="#{%22xmin%22:0,%22xmax%22:10,%22ymin%22:0,%22ymax%22:10,%22x1%22:0.2,%22iters%22:100,%22func%22:%225-0.8*x%22,%22func2%22:%22x%22,%22func3%22:%22x%22}"> <p>수렴</p> </a></li>
-          <li><a href="#{%22xmin%22:0,%22xmax%22:5,%22ymin%22:0,%22ymax%22:5,%22x1%22:0.9,%22iters%22:100,%22func%22:%223-1.2*x%22,%22func2%22:%22x+1%22,%22func3%22:%22x-1%22}"> <p>발산</p> </a></li>
-          <li><a href="#{%22xmin%22:0,%22xmax%22:2,%22ymin%22:0,%22ymax%22:2,%22x1%22:0.1,%22iters%22:100,%22func%22:%223.5*x*(1-x)%22,%22func2%22:%22x%22,%22func3%22:%22x%22}"> <p>진동</p> </a></li>
-          
-          
-          </ul>
+    <div id="chaosStatus" style="padding:10px; border:1px solid #bbb; margin:10px 0; text-align:left;">결정론적 동학 진단 결과가 여기에 표시된다.</div>
 
-  </body>
 
+    <h2>그래프 그리기</h2>
+    <div style="text-align:center;">
+      <canvas id="canvas" width="600" height="600"></canvas>
+      <h2 style="margin-top:30px;">시간별 값 변화</h2>
+      <p>가로축은 시간(반복 단계) \(t\), 세로축은 값이다. 녹색은 수량 \(Q_t\), 보라색은 가격 \(P_t=D(Q_t)\)의 시간경로를 나타낸다. 수렴, 주기변동, 카오스를 시간축에서 직접 비교할 수 있다.</p>
+      <canvas id="timeSeriesCanvas" width="600" height="360"></canvas>
+      <script src="cobweb.js"></script>
+      <script src="params.js"></script>
+    </div>
+  </section>
+
+
+  <br>
+  <h2>다양한 유형</h2>
+  <ul>
+    <li><a href='#{"xmin":0,"xmax":10,"ymin":0,"ymax":10,"x1":0.2,"iters":100,"func":"5-0.8*x","func2":"x","branch":"nearest","rootSamples":1200}'><p>수렴</p></a></li>
+    <li><a href='#{"xmin":0,"xmax":5,"ymin":0,"ymax":5,"x1":0.9,"iters":100,"func":"3-1.2*x","func2":"x+1","branch":"nearest","rootSamples":1200}'><p>발산</p></a></li>
+    <li><a href='#{"xmin":0,"xmax":2,"ymin":0,"ymax":2,"x1":0.1,"iters":100,"func":"3.5*x*(1-x)","func2":"x","branch":"nearest","rootSamples":1200}'><p>주기변동</p></a></li>
+    <li><a href='#{"xmin":0,"xmax":1,"ymin":0,"ymax":1,"x1":0.2,"iters":150,"func":"3.9*x*(1-x)","func2":"x","branch":"nearest","rootSamples":1200}'><p>카오스 — logistic benchmark</p></a></li>
+    <li><a href='#{"xmin":0,"xmax":5,"ymin":0,"ymax":5,"x1":0.7,"iters":150,"func":"0.5+4*x-2*x**2","func2":"0.5*(x-2)**2+0.5","branch":"nearest","rootSamples":1600}'><p>카오스 — 역포물선 수요 + 포물선 공급(다중 branch)</p></a></li>
+  </ul>
+</div>
+</body>
 </html>
