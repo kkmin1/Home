@@ -406,3 +406,71 @@ body.sub-page-body {
   word-break: break-all !important;
   overflow-wrap: anywhere !important;
 }
+
+/* 2026-09-09 programming reference refinements */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.empty-message {
+  padding: 4rem 1rem;
+  text-align: center;
+  color: #64748b;
+}
+
+.copy-btn.copied {
+  color: #059669;
+  border-color: #10b981;
+}
+
+.code-container {
+  overflow-x: auto !important;
+  overscroll-behavior-x: contain;
+}
+
+.code-container pre,
+.code-container pre[class*="language-"],
+.code-container code,
+.code-container code[class*="language-"],
+.code-container pre[class*="language-"] code,
+.code-container pre[class*="language-"] code *,
+.code-container .token {
+  white-space: pre !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+.code-container pre,
+.code-container pre[class*="language-"] {
+  overflow-x: auto !important;
+}
+
+@media (max-width: 900px) {
+  .code-main {
+    padding: 1.25rem 1rem 5.5rem;
+  }
+
+  .code-sidebar {
+    width: min(86vw, 320px);
+  }
+
+  .code-container pre,
+  .code-container pre[class*="language-"],
+  .code-container code,
+  .code-container code[class*="language-"],
+  .code-container pre[class*="language-"] code,
+  .code-container pre[class*="language-"] code *,
+  .code-container .token {
+    white-space: pre-wrap !important;
+    word-break: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+}
