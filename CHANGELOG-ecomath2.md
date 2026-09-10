@@ -49,3 +49,11 @@
 - 저장소: `kkmin1/Home`
 - 대상 브랜치: `main`
 - Drive의 최종본을 기준으로 신규 절 파일과 수정된 허브/목차/관련 페이지를 한 번의 구조개편 커밋으로 동기화한다.
+
+## 2026-09-10 — 각주 구조 정리
+- 절별 분할 과정에서 남은 장 전체 legacy footnote 블록을 제거했다.
+- 11개 영향 파일의 중복 HTML `id`를 제거했다.
+- 각주 `fn`/`fnref` fragment backlink를 파일 내부에서 다시 검증했다.
+- 본문, 수식, 목차 및 일반 내비게이션 링크는 변경하지 않았다.
+- 검증 기준: 대상 파일에서 duplicate id = 0, broken internal fragment = 0.
+
