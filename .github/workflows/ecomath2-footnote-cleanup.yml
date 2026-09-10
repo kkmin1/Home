@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Remove legacy footnote blocks and validate anchors
+      - name: Clean legacy footnotes, validate, and record history
         shell: bash
         run: |
           python - <<'PY'
@@ -47,38 +47,35 @@ jobs:
           for name in files:
               text = Path(name).read_text(encoding='utf-8')
               ids = re.findall(r'\bid="([^"]+)"', text)
-              dup = sorted({x for x in ids if ids.count(x) > 1})
-              broken = []
-              for target in re.findall(r'href="#([^"]+)"', text):
-                  if target not in ids:
-                      broken.append(target)
+              counts = {x: ids.count(x) for x in set(ids)}
+              dup = sorted(x for x, n in counts.items() if n > 1)
+              broken = sorted({target for target in re.findall(r'href="#([^"]+)"', text) if target not in ids})
               if dup or broken:
                   failed = True
-                  print(f'{name}: duplicate_ids={dup} broken_fragments={sorted(set(broken))}')
+                  print(f'{name}: duplicate_ids={dup} broken_fragments={broken}')
               else:
                   print(f'{name}: OK')
           if failed:
               sys.exit(1)
+
+          log = Path('CHANGELOG-ecomath2.md')
+          entry = """
+
+          ## 2026-09-10 — 각주 구조 정리
+          - 절별 분할 과정에서 남은 장 전체 legacy footnote 블록을 제거했다.
+          - 11개 영향 파일의 중복 HTML `id`를 제거했다.
+          - 각주 `fn`/`fnref` fragment backlink를 파일 내부에서 다시 검증했다.
+          - 본문, 수식, 목차 및 일반 내비게이션 링크는 변경하지 않았다.
+          - 검증 기준: 대상 파일에서 duplicate id = 0, broken internal fragment = 0.
+          """
+          log.write_text(log.read_text(encoding='utf-8').rstrip() + entry + '\n', encoding='utf-8')
           PY
-      - name: Record history and remove this workflow
+      - name: Commit cleanup and remove one-time workflow
         shell: bash
         run: |
-          cat >> CHANGELOG-ecomath2.md <<'EOF'
-
-## 2026-09-10 — 각주 구조 정리
-- 절별 분할 과정에서 남은 장 전체 legacy footnote 블록을 제거했다.
-- 11개 영향 파일의 중복 HTML `id`를 제거했다.
-- 각주 `fn`/`fnref` fragment backlink를 파일 내부에서 다시 검증했다.
-- 본문, 수식, 목차 및 일반 내비게이션 링크는 변경하지 않았다.
-- 검증 기준: 대상 파일에서 duplicate id = 0, broken internal fragment = 0.
-EOF
           rm -f .github/workflows/ecomath2-footnote-cleanup.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- '*.html' CHANGELOG-ecomath2.md .github/workflows/ecomath2-footnote-cleanup.yml
-          if git diff --cached --quiet; then
-            echo 'No changes to commit.'
-            exit 0
-          fi
           git commit -m 'ecomath2: repair footnote anchors after section split'
           git push origin HEAD:main
