@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>동적 Lagrangian: 유한기간</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>이산형 동적최적화</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>동적 Lagrangian: 유한기간</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-optimization-discrete.html">이산형 동적최적화</a></p><h4 id="동적-라그랑지-방법-dynamic-lagrangian-method" style="text-align:justify">동적 라그랑지 방법(Dynamic Lagrangian method)</h4><h4 id="기간이-유한인-경우" style="text-align:justify">기간이 유한인 경우</h4><p style="text-align:justify">단순히 KKT 조건을 다기간 제약식에 적용하는 것이다.</p><p style="text-align:justify">다음의 다기간 최대화 문제를 고려하자.</p><p style="text-align:justify">max <span class="math">\sum\limits_{t=0}^{\top} f(u_{t} ,\,y_{t} )</span></p><p style="text-align:justify">s.t <span class="math">y_{t+1} \,=\,y_{t} \,+\,g(u_{t} ,\,y_{t} )</span>, for <span class="math">t\,=\,0,\,1,\,...,\,T</span></p><p style="text-align:justify"><span class="math">y_{0} \,=\, {\overline{y}}</span>, <span class="math">y_{\scriptscriptstyle {T+1}} \, \geq \,0</span>.........<sup><a href="#fn1" id="fnref1">[1]</a></sup></p><p style="text-align:justify">동태문제의 경우 제약식을 특히 운동방정식(equation of motion)이라 부른다.<sup><a href="#fn2" id="fnref2">[2]</a></sup> 여기서 <span class="math">u_{t}</span>는 의사결정자가 결정하므로 통제변수(control variable)라 부른다. <span class="math">y_{t}</span>는 통제변수의 결정에 따라 운동방정식에서 결정되므로 상태변수(state variable)라 부른다.<sup><a href="#fn3" id="fnref3">[3]</a></sup> </p><p style="text-align:justify">동태적 문제는 제약식이 상태변수의 차분방정식으로 표현되기 때문에 최적화 문제는 통제변수와 상태변수의 최적 시간경로를 구하는 것이 된다.</p><p style="text-align:justify">각 기의 변수를 다른 변수로 보면 문제는 (T+2)개의 등식 제약식과 1개의 비음조건 제약식으로 구성되어 있으므로 KKT 조건을 이용해서 풀 수 있다.</p><p style="text-align:justify">이 문제의 라그란지안을 만들면</p><p style="text-align:justify"><span class="math">L\,=\, \sum\limits_{t=0}^{\top} [f(u_{t} ,\,y_{t} )\,+\, \lambda_{t} [g(u_{t} ,\,y_{t} )\,+\,y_{t} \,-\,y_{t+1} ]]\,+ \mu ( {\overline{y}} \,-\,y_{0} )\,+\, \eta y_{\scriptscriptstyle {T+1}} \,</span></p><p style="text-align:justify"><span class="math">\lambda_{t}</span>,(<span class="math">t=0,\,...,\,T</span>), <span class="math">\mu</span>, <span class="math">\eta</span>는 라그랑지 승수로 동태적 문제의 경우 costate 변수, 또는 adjoint 변수라고도 부른다.</p><p style="text-align:justify">이 문제의 KKT 조건은 다음과 같다.<sup><a href="#fn4" id="fnref4">[4]</a></sup></p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial u_{t}} \,=\, \frac{\partial f}{\partial u_{t}} \,+\, \lambda_{t} \frac{\partial g}{\partial u_{t}} \,=\,0</span>, for <span class="math">t\,=\,0,\,1,\,...,\,T</span></p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial y_{t}} \,=\, \frac{\partial f}{\partial y_{t}} \,+\, \lambda_{t} ( \frac{\partial g}{\partial y_{t}} \,+\,1)\,-\, \lambda_{t-1} \,=\,0</span>,  for <span class="math">t\,=\,0,\,1,\,...,\,T</span> ................<sup><a href="#fn5" id="fnref5">[5]</a></sup></p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \lambda_{t}} \,=\,g(u_{t} ,\,y_{t} )\,+\,y_{t} \,-\,y_{t+1} \,=\,0</span></p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \mu } \,=\, {\overline{y}} \,-\,y_{0} \,=\,0</span></p><p style="text-align:justify"><span class="math">y_{\scriptscriptstyle {T+1}} \, \geq \,0</span>, <span class="math">\eta \, \geq \,0</span>, <span class="math">\eta y_{\scriptscriptstyle {T+1}} \,=\,0</span> .................(complementry slackness 조건)<sup><a href="#fn6" id="fnref6">[6]</a></sup></p><p style="text-align:justify">시간을 다루는 동태적 문제의 경우 말기의 complementry slackness 조건을 특히 transver sality 조건이라고도 한다.</p><p style="text-align:justify">예) 다음의 최소화문제를 풀어라.</p><p style="text-align:justify">minimize <span class="math">\sum\limits_{t=0}^{2} \frac{1}{2} (y_{t}^{2} \,+\,u_{t}^{2} )</span></p><p style="text-align:justify">s.t  <span class="math">y_{t+1} \,=\,y_{t} \,+\,u_{t}</span>, <span class="math">t=0,\,1,\,2</span></p><p style="text-align:justify"> <span class="math">y_{0} \,=\,5\,</span> </p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">라그란지안은</p><p style="text-align:justify"><span class="math">L\,=\, \sum\limits_{t=0}^{2} [ \frac{1}{2} (y_{t}^{2} \,+\,u_{t}^{2} )\,+\, \lambda_{t} (y_{t} \,+u_{t} \,-\,y_{t+1} )]\,+\, \mu (5-y_{0} )</span></p><p style="text-align:justify"> i) 1차조건 :</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial u_{t}} \,=\,u_{t} \,+\, \lambda_{t} \,=\,0</span>, <span class="math">t=0,\,1,\,2</span> ..................①</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial y_{0}} \,=\,y_{0} \,+\, \lambda_{0} \,-\, \mu =\,0</span> ...............②</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial y_{1}} \,=\,y_{1} \,+\, \lambda_{1} \,-\, \lambda_{0} =\,0</span> ................③</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial y_{2}} \,=\,y_{2} \,+\, \lambda_{2} \,-\, \lambda_{1} =\,0</span> .................④</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial y_{3}} \,=\,-\, \lambda_{2} \,=\,0</span> ..............⑤</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \lambda_{t}} \,=\,y_{t} \,+\,u_{t} \,-\,y_{t+1} =\,0</span>, for <span class="math">t=0,\,1,\,2</span> .......................⑥</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \mu } \,=\,5\,-\,y_{0} \,=\,0</span> ..................⑦</p><p style="text-align:justify">①, ⑥에서</p><p style="text-align:justify"><span class="math">y_{t+1} \,=\,y_{t} \,-\, \lambda_{t}</span>, for <span class="math">t=0,\,1,\,2</span></p><p style="text-align:justify">이 식에 <span class="math">t=0,\,1,\,2</span> 를 차례로 대입하면</p><p style="text-align:justify"><span class="math">y_{1} \,=\,5\,-\, \lambda_{0} \,</span> ..........㉠</p><p style="text-align:justify"><span class="math">y_{2} \,=\,y_{1} \,-\, \lambda_{1} \,</span> .............㉡</p><p style="text-align:justify"><span class="math">y_{3} \,=\,y_{2} \,-\, \lambda_{2}</span> ............㉢</p><p style="text-align:justify">㉢에서 <span class="math">y_{3} \,=\,y_{2} \,</span>, (∵ ⑤에서 <span class="math">\, \lambda_{2} \,=\,0</span>)</p><p style="text-align:justify">④에서 <span class="math">\,y_{2} \,=\, \lambda_{1}</span></p><p style="text-align:justify">㉡에서 <span class="math">\,y_{2} \,=\, \frac{1}{2} y_{1}</span></p><p style="text-align:justify">③에서 <span class="math">\,y_{1} \,+\, \lambda_{1} \,=\, \lambda_{0}</span> ⇒ <span class="math">\,y_{1} \,+\,y_{2} \,=\, \lambda_{0}</span> ⇒ <span class="math">\,y_{1} \,+\, \frac{1}{2} y_{1} \,=\, \lambda_{0}</span> ⇒ <span class="math">\, \frac{3}{2} y_{1} \,=\, \lambda_{0}</span></p><p style="text-align:justify">㉠에서 <span class="math">y_{1} \,=\,5\,-\, \lambda_{0} \,</span> ⇒ <span class="math">y_{1} \,=\,5\,- \frac{3}{2} y_{1} \,</span> ⇒ <span class="math">y_{1} \,=\,2</span></p><p style="text-align:justify"><span class="math">\,y_{2} \,=\,y_{3} \,=\,1</span></p><p style="text-align:justify">따라서 상태변수의 최적값은 <span class="math">y_{1} \,=\,2</span>, <span class="math">\,y_{2} \,=\,1</span>, <span class="math">\,y_{3} \,=\,1</span></p><p style="text-align:justify">⑥에 <span class="math">t=0,\,1,\,2</span> 를 차례로 대입하면 통제변수의 최적값은 </p><p style="text-align:justify"><span class="math">y_{1} \,=\,5\,+\,u_{0}</span> ⇒ <span class="math">u_{0} \,=\,-3</span></p><p style="text-align:justify"><span class="math">y_{2} \,=\,y_{1} \,+\,u_{1}</span> ⇒ <span class="math">u_{1} \,=\,-1</span></p><p style="text-align:justify"><span class="math">y_{3} \,=\,y_{2} \,+\,u_{2}</span> ⇒ <span class="math">u_{2} \,=\,0</span></p><p style="text-align:justify">이때의 목적함수값은</p><p style="text-align:justify"><span class="math">\sum\limits_{t=0}^{2} \frac{1}{2} (y_{t}^{2} \,+\,u_{t}^{2} )\,=\, \frac{1}{2} [(5^{2} +(-3) ^{2} )+(2^{2} +(-1) ^{2} )+(1^{2} +0^{2} )]\,=\,20</span></p><p style="text-align:justify">ii) 2차조건 :</p><p style="text-align:justify">목적식이 볼록함수이고 제약식이 오목함수이므로 최소화의 2차 조건 만족. 따라서 구한 값이 최소값이다.</p><p style="text-align:right">(풀이끝)</p><h4 id="다기간-효용극대화-7" style="text-align:justify">다기간 효용극대화<sup><a href="#fn7" id="fnref7">[7]</a></sup></h4><p style="text-align:justify">다음의 효용극대화 문제를 고려하자. 소비자는 처음 재산 A를 갖고 있고 남은 기간 동안 이 재산 및 이자소득으로 생활한다. 소비자는 T기 동안만 생존한다.</p><p style="text-align:justify">max <span class="math">\sum\limits_{t=0}^{\top} \beta^{t} u(c_{t} )</span></p><p style="text-align:justify">s.t  <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span>, <span class="math">t=0,\,...,\,T</span></p><p style="text-align:justify"> <span class="math">a_{0} \,=\,A\,</span>, <span class="math">a_{\scriptscriptstyle {T+1}} \, \geq \,0\,</span>........<sup><a href="#fn8" id="fnref8">[8]</a></sup></p><p style="text-align:justify"><span class="math">u(c_{t} )</span> : t기의 개인의 효용으로 시간 가법적이며<sup><a href="#fn9" id="fnref9">[9]</a></sup> 단조증가 강오목함수이며<sup><a href="#fn10" id="fnref10">[10]</a></sup>, 이나다 조건을 만족한다.<sup><a href="#fn11" id="fnref11">[11]</a></sup></p><p style="text-align:justify"><span class="math">\beta</span> : 개인의 주관적 시간선호 할인율, <span class="math">0\,&lt; \beta \,&lt;\,1</span>.......<sup><a href="#fn12" id="fnref12">[12]</a></sup></p><p style="text-align:justify"><span class="math">r</span> : 시장 이자율</p><p style="text-align:justify"><span class="math">c_{t}</span> : t기의 소비</p><p style="text-align:justify"><span class="math">a_{t}</span> : t기의 재산</p><p style="text-align:justify">당기가치 라그랑지 함수를 만들면<sup><a href="#fn13" id="fnref13">[13]</a></sup></p><p style="text-align:justify"><span class="math">L\,=\, \sum\limits_{t=0}^{\top} \beta^{t} \left[ u(c_{t} )\,+\, \lambda_{t} \left( \,(1+r)a_{t} \,-\,c_{t} \,-a_{t+1} \right) \right] + \mu (\mathbf{A}-a_{0} )\,+\, \beta^{T+1} \eta a_{\scriptscriptstyle {T+1}}</span></p><p style="text-align:justify"><span class="math">\lambda_{t}</span>,(<span class="math">t=0,\,...,\,T</span>), <span class="math">\mu</span>, <span class="math">\eta</span>는 라그랑지 승수</p><p style="text-align:justify">일차 조건(KKT 조건) :</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial c_{t}} \,=\,u ' (c_{t} )\,-\, \lambda_{t} \,=\,0</span>, for <span class="math">t=0,\,...,\,T</span> .............①</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial a_{0}} \,=\,- \beta^{t} \lambda_{0} (1+r)\,-\, \mu =\,0</span></p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial a_{t}} \,=\,- \beta^{t-1} \lambda_{t-1} \,+\, \beta^{t} \lambda_{t} (1+r)\,=\,0</span>, for <span class="math">t=1,\,...,\,T</span> ................②<sup><a href="#fn14" id="fnref14">[14]</a></sup></p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial a_{\scriptscriptstyle {T+1}}} \,=\,- \beta^{\top} \lambda_{\scriptscriptstyle {T}} \;+\, \beta^{T+1} \eta \,=\,0</span>............③<sup><a href="#fn15" id="fnref15">[15]</a></sup></p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \lambda_{t}} \,=\,(1+r)a_{t} \,-\,c_{t} \,-\,a_{t+1} \,=\,0</span> ..............④</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \mu } \,=\,A-a_{0} =\,0</span> .............⑤</p><p style="text-align:justify"><span class="math">a_{\scriptscriptstyle {T+1}} \, \geq \,0</span>, <span class="math">\eta \, \geq \,0</span>, <span class="math">\eta a_{\scriptscriptstyle {T+1}} \,=\,0</span> ............⑥</p><p style="text-align:justify">③에서 <span class="math">\lambda_{\scriptscriptstyle {T}} \,=\, \beta \eta</span></p><p style="text-align:justify">효용함수는 단조증가 강오목함수이므로 <span class="math">\,u ' (c_{\scriptscriptstyle {T}} )\,&gt;\,0</span>, 따라서 ①로 부터 <span class="math">\lambda_{\scriptscriptstyle {T}} \,=\, \beta \eta \,&gt;\,0</span></p><p style="text-align:justify"><span class="math">0\,&lt; \beta \,&lt;\,1</span> 이므로 <span class="math">\eta \,&gt;\,0</span></p><p style="text-align:justify">따라서 ⑥으로부터 <span class="math">a_{\scriptscriptstyle {T+1}} \,=\,0</span></p><p style="text-align:justify">즉 최적해에서 말기에 남는 자원이 있어서는 안 된다. 죽기 전에 다 쓰고 죽는 것이 효용을 최대화시키는 길이다.</p><p style="text-align:justify">①, ②를 결합하면 <span class="math">\,u ' (c_{t-1} )\,=\,(1+r) \beta u ' (c_{t} )</span></p><p style="text-align:justify">경제학에서 보통 다음으로 표현한다.</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,=\,(1+r) \beta u ' (c_{t+1} )</span></p><p style="text-align:justify">이를 오일러 방정식(Euler equation)이라 부른다.</p><p style="text-align:justify">이차조건 :</p><p style="text-align:justify">효용함수가 오목함수이고 제약식이 선형함수이므로 충분조건 만족<sup><a href="#fn16" id="fnref16">[16]</a></sup>. 따라서 최적해는 최대값이다.</p><p style="text-align:justify">오일러 방정식과 제약식은 두 변수 <span class="math">a_{t}</span>, <span class="math">c_{t}</span>로 이루어진 연립차분방정식이다.</p><p style="text-align:justify">제약식 두 개, 변수 두 개이므로 차분방정식의 해가 존재한다. 여기에 초기조건과 말기조건</p><p style="text-align:justify"><span class="math">a_{0} \,=\,A\,</span>, <span class="math">a_{\scriptscriptstyle {T+1}} \,=\,0\,</span>을 대입하면 해가 결정된다. transversality 조건이 해의 결정에 중요한 역할을 하는 것을 알 수 있다.</p><h4 id="경제학적-의미" style="text-align:justify">경제학적 의미</h4><p style="text-align:justify">라그랑지승수 <span class="math">\lambda_{t}</span>는 t기의 재산의 기회비용을 의미한다. ①에서 <span class="math">\lambda_{t} \,=\,u'(c_{t} )</span></p><p style="text-align:justify">즉 t기의 재산의 기회비용은 한계효용과 같아야 함을 의미</p><p style="text-align:justify">오일러등식의 경제학적 의미는 t기 소비의 한계편익(<span class="math">\,u ' (c_{t} )\,</span>)이 t+1기 소비의 한계비용(t+1기 소비의 한계효용의 미래가치=<span class="math">\,(1+r) \beta u ' (c_{t+1} )</span>)과 같아야 한다는 의미.</p><p style="text-align:justify">http://www.ignisratesviews.com/2009/05/26/consumption-euler-equations-explained/ </p><p style="text-align:justify">또는 <span class="math">\, \frac{u ' (c_{t} )\,}{\beta u ' (c_{t+1} )} =\,1+r</span> 이므로 즉 소비의 기간간 대체율은 이자수익률과 같다.</p><p style="text-align:justify"><span class="math">\,(1+r) \beta \,&lt;\,1</span> 이면 <span class="math">\,u ' (c_{t} )\,&gt;\,u ' (c_{t+1} )</span> </p><p style="text-align:justify">⇒ <span class="math">\,c_{t} \,&gt;\,c_{t+1}</span>, (∵ 효용함수는 단조증가 오목함수이므로)</p><p style="text-align:justify">시장이자율이 주관적 이자율보다 작을 때 현재시점에 소비를 늘리고 미래로 갈수록 소비를 줄인다.</p><p style="text-align:justify"><span class="math">\beta \,=\, \frac{1}{1+r}</span> 이라면 <span class="math">\,u ' (c_{t} )\,=\,u ' (c_{t+1} )</span> ⇒ <span class="math">\,c_{t} \,=\,c_{t+1}</span></p><p style="text-align:justify">즉 주관적 이자율이 시장이자율과 같다면 소비자는 매기의 소비를 균등하게 배분한다.</p><p style="text-align:justify"><span class="math">\,(1+r) \beta \,&gt;\,1</span> 이면 <span class="math">\,u ' (c_{t} )\,&lt;\,u ' (c_{t+1} )</span> ⇒ <span class="math">\,c_{t} \,&lt;\,c_{t+1}</span></p><p style="text-align:justify">시장이자율이 주관적 이자율보다 클 때 현재시점에 소비를 줄이고 미래로 갈수록 소비를 늘린다. 내가 생각하는 수익률보다 시장이자율이 높으므로 현재 소비를 줄여(저축을 늘려) 미래의 이자소득을 기대할 것이다.</p><p style="text-align:justify">예) 앞의 예에서 효용함수가 <span class="math">u(c_{t} )\,=\,\ln c_{t}</span> 라면 </p><p style="text-align:justify">a) 재산과 소비의 최적 경로를 구하라.</p><p style="text-align:justify">b) <span class="math">\beta \,=\, \frac{1}{1+r}</span>일 경우 자산과 소비의 최적 경로를 구하라.</p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">효용함수는 단조증가 오목함수이고 이나다 조건을 만족하므로 오일러 방정식이 최대화의 필요조건이다.</p><p style="text-align:justify">a)</p><p style="text-align:justify">최대화의 조건에서 오일러방정식이 도출된다. </p><p style="text-align:justify">오일러방정식에서</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,=\,(1+r) \beta u ' (c_{t+1} )</span> ⇒ <span class="math">\frac{1}{c_{t}} \,=\, \frac{\beta (1+r)}{c_{t+1}}</span></p><p style="text-align:justify">⇒ <span class="math">c_{t+1} \,=\, \beta (1+r)c_{t}</span></p><p style="text-align:justify">이 차분방정식의 해는</p><p style="text-align:justify"><span class="math">c_{t} \,=\, \beta^{t} (1+r) ^{t} c_{0}</span> ............①</p><p style="text-align:justify">제약식은</p><p style="text-align:justify"><span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span></p><p style="text-align:justify">이를 전개하면</p><p style="text-align:justify"><span class="math">a_{\scriptscriptstyle {T+1}} \,=\,(1+r)a_{\scriptscriptstyle {T}} \,-\,c_{\scriptscriptstyle {T}}</span> ⇒ <span class="math">\frac{a_{\scriptscriptstyle {T+1}}}{1+r} \,+\, \frac{c_{\scriptscriptstyle {T}}}{1+r} =\,a_{\scriptscriptstyle {T}} \,</span></p><p style="text-align:justify"><span class="math">a_{\scriptscriptstyle {T}} \,=\,(1+r)a_{\scriptscriptstyle {T-1}} \,-\,c_{\scriptscriptstyle {T-1}}</span> ⇒ <span class="math">\frac{a_{\scriptscriptstyle {T}}}{1+r} \,+\, \frac{c_{\scriptscriptstyle {T-1}}}{1+r} \,=\,a_{\scriptscriptstyle {T-1}} \,</span> ⇒ <span class="math">\frac{a_{\scriptscriptstyle {T+1}}}{(1+r) ^{2}} +\, \frac{c_{\scriptscriptstyle {T}}}{(1+r) ^{2}} \,+\, \frac{c_{\scriptscriptstyle {T-1}}}{1+r} \,=\,a_{\scriptscriptstyle {T-1}} \,</span></p><p style="text-align:justify"><span class="math">a_{\scriptscriptstyle {T-1}} \,=\,(1+r)a_{\scriptscriptstyle {T-2}} \,-\,c_{\scriptscriptstyle {T-2}}</span> ⇒ <span class="math">\frac{a_{\scriptscriptstyle {T-1}}}{1+r} \,+\, \frac{c_{\scriptscriptstyle {T-2}}}{1+r} \,=\,a_{\scriptscriptstyle {T-2}} \,</span>⇒<span class="math">\frac{a_{\scriptscriptstyle {T+1}}}{(1+r) ^{3}} +\, \frac{c_{\scriptscriptstyle {T}}}{(1+r) ^{3}} \,+\, \frac{c_{\scriptscriptstyle {T-1}}}{(1+r) ^{2}} + \frac{c_{\scriptscriptstyle {T-2}}}{1+r} \,=\,a_{\scriptscriptstyle {T-2}} \,</span></p><p style="text-align:justify"> <span class="math">\vdots</span></p><p style="text-align:justify"><span class="math">\frac{a_{\scriptscriptstyle {T+1}}}{(1+r) ^{T+1}} +\, \frac{c_{\scriptscriptstyle {T}}}{(1+r) ^{T+1}} \,+\, \cdots \,+\, \frac{c_{1}}{(1+r) ^{2}} \,+\, \frac{c_{0}}{1+r} \,=\,a_{0} \,</span></p><p style="text-align:justify">⇒ <span class="math">a_{0} \,=\, \sum\limits_{i=0}^{\top} \frac{c_{i}}{(1+r) ^{i+1}}</span>, (∵ <span class="math">a_{\scriptscriptstyle {T+1}} \,=\,0</span>)............②<sup><a href="#fn17" id="fnref17">[17]</a></sup></p><p style="text-align:justify">①에서 <span class="math">c_{i} \,=\, \beta^{i} (1+r) ^{i} c_{0}</span> 이므로 이를 ②에 대입하면</p><p style="text-align:justify"><span class="math">a_{0} \,=\, \sum\limits_{i=0}^{\top} \frac{\beta^{i} (1+r) ^{i} c_{0}}{(1+r) ^{i+1}} \,=\,c_{0} \sum\limits_{i=0}^{\top} \frac{\beta^{i}}{1+r}</span></p><p style="text-align:justify">⇒ <span class="math">c_{0} \,=\, \frac{(1+r)}{\sum\limits_{i=0}^{\top} \beta^{i}} a_{0}</span><span class="math">\,=\, \frac{(1+r)}{\sum\limits_{i=0}^{\top} \beta^{i}} \mathbf{A}</span>, (∵ <span class="math">a_{0} \,=\,A</span>)</p><p style="text-align:justify">따라서 ①은</p><p style="text-align:justify"><span class="math">c_{t} \,=\, \beta^{t} (1+r) ^{t} c_{0}</span></p><p style="text-align:justify">⇒ <span class="math">c_{t} \,=\, \frac{\beta^{t} (1+r) ^{t+1}}{\sum\limits_{i=0}^{\top} \beta^{i}} \mathbf{A}</span>, for <span class="math">t=0,\,...,\,T</span></p><p style="text-align:justify"><span class="math">a_{t}</span>의 경로는</p><p style="text-align:justify"><span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\, \frac{\beta^{t} (1+r) ^{t+1}}{\sum\limits_{i=0}^{\top} \beta^{i}} \mathbf{A}</span></p><p style="text-align:justify">이 차분방정식을 풀면</p><p style="text-align:justify">제약식 <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span> 의 해는<sup><a href="#fn18" id="fnref18">[18]</a></sup></p><p style="text-align:justify"><span class="math">a_{t} \,=\,(1+r) ^{t} a_{0} \,- \sum\limits_{i=0}^{t-1} (1+r) ^{i} c_{t-i}</span> </p><p style="text-align:justify"><span class="math">=\,(1+r) ^{t} a_{0} \,- \sum\limits_{i=0}^{t-1} (1+r) ^{i} \beta^{t-i} (1+r) ^{t-i} c_{0}</span></p><p style="text-align:justify"><span class="math">=\,(1+r) ^{t} a_{0} \,- \sum\limits_{i=0}^{t-1} \beta^{t-i} (1+r) ^{t} c_{0}</span></p><p style="text-align:justify"><span class="math">=\,(1+r) ^{t} a_{0} \,- \frac{(1+r) ^{t+1}}{\sum\limits_{t=0}^{\top} \beta^{t}} a_{0} \sum\limits_{i=0}^{t-1} \beta^{t-i}</span></p><p style="text-align:justify">b)</p><p style="text-align:justify"><span class="math">\beta \,=\, \frac{1}{1+r}</span> 이라면, 즉 주관적 이자율이 시장이자율과 같다면</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,=\,u ' (c_{t+1} )</span></p><p style="text-align:justify">효용함수는 단조증가함수이므로 <span class="math">\,c_{t} \,=\,c_{t+1}</span></p><p style="text-align:justify">따라서 소비자는 매기의 소비를 균등하게 배분한다.</p><p style="text-align:justify"><span class="math">a_{0} \,=\, \sum\limits_{t=0}^{\top} \frac{\beta^{t} (1+r) ^{t} c_{0}}{(1+r) ^{t+1}} \,=\,c_{0} \sum\limits_{t=0}^{\top} \frac{1}{(1+r) ^{t+1}}</span></p><p style="text-align:justify"><span class="math">=\,c_{0} \frac{ 1- \frac{1}{(1+r) ^{T+1}} }{1- \frac{1}{1+r}}</span>, (∵ 초항 1, 공비 <span class="math">\frac{1}{1+r}</span>의 등비급수의 합)</p><p style="text-align:justify"><span class="math">=\,c_{0} \frac{ 1+r-(1+r) ^{-T} }{r}</span></p><p style="text-align:justify"><span class="math">c_{t} \,=\, \beta^{t} (1+r) ^{t} c_{0} \,=\,c_{0}</span> ⇒ 매기의 소비는 일정하다.</p><p style="text-align:justify"><span class="math">=\,a_{0} \frac{r}{1+r-(1+r) ^{-T}}</span></p><p style="text-align:justify"><span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span></p><p style="text-align:justify"><span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\, \frac{Ar}{1+r-(1+r) ^{-T}}</span></p><p style="text-align:justify">이는 비동차항이 상수인 차분방정식이므로 해는</p><p style="text-align:justify"><span class="math">a_{t} \,=\,(1+r) ^{t} \left( A\,+\, \frac{\alpha }{r} \right) \,- \frac{\alpha }{r}</span>, where <span class="math">\alpha \,=\,-\, \frac{Ar}{1+r-(1+r) ^{-T}}</span></p><p style="text-align:justify"><span class="math">1+r\,&gt;\,1</span> 이므로 재산은 점점 증가한다.</p><p style="text-align:right">(풀이끝)</p><h4 id="비음제약이-있는-경우" style="text-align:justify">비음제약이 있는 경우</h4><p style="text-align:justify">경제문제는 변수에 비음제약이 있는 것이 일반적이다. </p><p style="text-align:justify">앞의 예에서 소비에 비음조건이 있는 경우는 다음과 같이 문제를 설정할 수 있다.</p><p style="text-align:justify">maximize <span class="math">\sum\limits_{t=0}^{\top} \beta^{t} u(c_{t} )</span></p><p style="text-align:justify">s.t  <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span>, <span class="math">t=0,\,...,\,T</span></p><p style="text-align:justify"> <span class="math">a_{0} \,=\,A\,</span> </p><p style="text-align:justify"> <span class="math">\,c_{t} \, \geq \,0\,</span> for <span class="math">t=0,\,...,\,T</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">당기가치 라그랑지 함수를 만들면</p><p style="text-align:justify"><span class="math">L\,=\, \sum\limits_{t=0}^{\top} \beta^{t} \left[ u(c_{t} )\,+\, \lambda_{t} \left( \,(1+r)a_{t} \,-\,c_{t} \,-a_{t+1} \right) \,+\, \gamma_{t} c_{t} \right] + \mu (\mathbf{A}-a_{0} )\,+\, \beta^{T+1} \eta a_{\scriptscriptstyle {T+1}}</span></p><p style="text-align:justify"><span class="math">\lambda_{t}</span>, <span class="math">\alpha_{t}</span>, <span class="math">\gamma_{t}</span>, <span class="math">\mu</span>, <span class="math">\eta</span>는 라그랑지 승수</p><p style="text-align:justify">KKT 조건 :</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial c_{t}} \,=\,u ' (c_{t} )\,-\, \lambda_{t} \,+\, \gamma_{t} =\,0</span>, for <span class="math">t=0,\,...,\,T</span> .............①</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial a_{0}} \,=\, \lambda_{0} (1+r)\,-\, \mu =\,0</span> .................②</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial a_{t}} \,=\,- \beta^{t-1} \lambda_{t-1} \,+\, \beta^{t} \lambda_{t} (1+r)\,=\,0</span>, for <span class="math">t=1,\,...,\,T</span> ................③</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial a_{\scriptscriptstyle {T+1}}} \,=\,- \beta^{\top} \lambda_{\scriptscriptstyle {T}} \;+\, \beta^{T+1} \eta \,=\,0</span>............④</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \lambda_{t}} \,=\,(1+r)a_{t} \,-\,c_{t} \,-\,a_{t+1} \,=\,0</span>, for <span class="math">t=0,\,...,\,T</span>..............⑤</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \mu } \,=\,A-a_{0} =\,0</span> .............⑥</p><p style="text-align:justify"><span class="math">c_{t} \, \geq \,0</span>, <span class="math">\gamma_{t} \, \geq \,0</span>, <span class="math">\gamma_{t} c_{t} \,=\,0</span>, for <span class="math">t=0,\,...,\,T</span> ................⑦</p><p style="text-align:justify"><span class="math">a_{\scriptscriptstyle {T+1}} \, \geq \,0</span>, <span class="math">\eta \, \geq \,0</span>, <span class="math">\eta a_{\scriptscriptstyle {T+1}} \,=\,0</span> ............⑧</p><p style="text-align:justify">효용함수의 이나다 가정에 의해 소비가 작을 경우 한계효용이 무한대이므로 반드시 소비하는 것이 최적해이다. 따라서 <span class="math">c_{t} \,&gt;\,0</span> ⇒ ⑦의 조건에 의해 <span class="math">\gamma_{t} \,=\,0</span> </p><p style="text-align:justify">⇒ ①에서 <span class="math">\frac{\partial L}{\partial c_{t}} \,=\,u ' (c_{t} )\,-\, \lambda_{t} \,=\,0</span></p><p style="text-align:justify">따라서 효용함수의 이나다 조건을 가정했을 경우 해는 항상 양의 수(내부)에서 결정되고 KKT조건은 비음제약식이 없는 경우와 같다. 따라서 경제문제의 모형화에서 보통 목적함수의 이나다조건을 가정하고 비음조건을 생략하는 경우가 많다.</p><h2>각주</h2><ol class="footnotes"><li id="fn1"><p style="text-align:justify"> 최종 상태 후 음이 되지 말아야 한다는 의미로 경제학 모형에서 흔히 채택되는 조건</p>
+<a href="#fnref1">↩</a></li><li id="fn2"><p style="text-align:justify"> 이 용어의 기원은 역학에서 운동상태를 묘사하는데서 기인, 이를 또는 전환방정식(transition equation)이라 부름.</p>
+<a href="#fnref2">↩</a></li><li id="fn3"><p style="text-align:justify"> 지금은 통제변수, 상태변수의 의미가 불분명하다 할지라도 이들 변수들의 보다 명확한 의미는 이하의 여러 예를 통해서 구체적으로 이해될 수 있다.</p>
+<a href="#fnref3">↩</a></li><li id="fn4"><p style="text-align:justify"> 등식일 경우 라그란지안 함수 최대화조건, 부등식일 경우 complementary slackness 조건으로 표현한다. 극대화 문제 ‘KKT 조건’ 참조.</p>
+<a href="#fnref4">↩</a></li><li id="fn5"><p style="text-align:justify"> <span class="math">\, \sum\limits_{t=0}^{\top} \lambda_{t} [g(u_{t} ,\,y_{t} )\,+\,y_{t} \,-\,y_{t+1} ]\,=\, \lambda_{0} [g(u_{0} ,\,y_{0} )\,+\,y_{0} \,-\,y_{1} ]+\, \cdots + \lambda_{t-1} [g(u_{t-1} ,\,y_{t-1} )\,+\,y_{t-1} \,-\,y_{t} ]</span></p>
+<p style="text-align:justify"> <span class="math">\,+\, \lambda_{t} [g(u_{t} ,\,y_{t} )\,+\,y_{t} \,-\,y_{t+1} ]+ \lambda_{t+1} [g(u_{t+1} ,\,y_{t+1} )\,+\,y_{t+1} \,-\,y_{t+2} ]+ \cdots +\, \lambda_{\scriptscriptstyle {T}} [g(u_{\scriptscriptstyle {T}} ,\,y_{\scriptscriptstyle {T}} )\,+\,y_{\scriptscriptstyle {T}} \,-\,y_{\scriptscriptstyle {T+1}} ]</span></p>
+<a href="#fnref5">↩</a></li><li id="fn6"><p style="text-align:justify"> 등식의 제약식에 비음제약식이 있는 문제이므로 비음조건에만 complementary slackness조건이 붙는다.</p>
+<a href="#fnref6">↩</a></li><li id="fn7"><p style="text-align:justify"> 2 기간모형과 이의 다기간 확장은 미시경제 응용 ‘피셔 다기간모형’ 참조</p>
+<a href="#fnref7">↩</a></li><li id="fn8"><p style="text-align:justify"> 최종 상태 후 음이 되지 말아야 한다는 의미. 이 조건이 없다면 소비자는 효용극대화를 위해 말기에 <span class="math">a_{\scriptscriptstyle {T+1}} \,=\,- \infty</span>, 즉 대규모의 부채를 남겨두고 죽을 것이다. </p>
+<a href="#fnref8">↩</a></li><li id="fn9"><p style="text-align:justify"> 전체기간의 총효용은 매기 효용의 합과 같다는 의미. 즉 <span class="math">u(c_{0} ,\,c_{1} ,\,...,\,c_{\scriptscriptstyle {T}} )\,=\,u(c_{0} )\,+\,u(c_{1} )\,+\, \cdots ..\,+\,u(c_{\scriptscriptstyle {T}} )</span></p>
+<a href="#fnref9">↩</a></li><li id="fn10"><p style="text-align:justify"> <span class="math">u(c_{t} ) ' \,&gt;\,0,\;u(c_{t} ) '' &lt;0</span> for <span class="math">t=0,\,...,\,T</span></p>
+<a href="#fnref10">↩</a></li><li id="fn11"><p style="text-align:justify"> <span class="math">\, \lim\limits_{c_{t} \to 0} {\,u(c_{t} ) ' \,=\, \infty ,\; \lim\limits_{c_{t} \to \infty } {\,u(c_{t} ) ' \,=\,0}}</span>, 소비가 0에 근접할 때 한계효용이 무한대이므로 조금이라도 소비하는게 최적이다. 따라서 소비의 비음조건이 있을 경우 최적해는 항상 내부에서 결정된다. </p>
+<a href="#fnref11">↩</a></li><li id="fn12"><p style="text-align:justify"> 개인의 주관적 이자율(수익률)이 <span class="math">\rho</span>라면 <span class="math">\beta \,=\, \frac{1}{1+ \rho }</span></p>
+<a href="#fnref12">↩</a></li><li id="fn13"><p style="text-align:justify"> 제약식에 할인율을 곱해서 현재가치로 표현. 이를 당기가치 라그란지안(current value Lagrangian)이라 한다. 이에 반해 현재가치 라그란지안(present value Lagrangian)은</p>
+<p style="text-align:justify"> <span class="math">L\,=\, \sum\limits_{t=0}^{\top} [ \beta^{t} u(c_{t} )\,+\, \lambda_{t} \left( \,(1+r)a_{t} \,-\,c_{t} \,-a_{t+1} \right) ]+ \eta a_{\scriptscriptstyle {T+1}}</span> </p>
+<p style="text-align:justify">   어느 것이나 결과는 같다. 단지 라그랑지승수의 해석이 약간 달라진다.</p>
+<a href="#fnref13">↩</a></li><li id="fn14"><p style="text-align:justify"> <span class="math">\sum\limits_{t=0}^{\infty } \beta^{t} \lambda_{t} \left( \,(1+r)a_{t} \,-c_{t} \,-a_{t+1} \right) \,</span><span class="math">=\, \lambda_{0} \left( \,(1+r)a_{0} \,-c_{0} \,-a_{1} \right) \,+\, \cdots \,</span></p>
+<p style="text-align:justify"> <span class="math">+\, \beta^{t} \lambda_{t} \left( \,(1+r)a_{t} \,-c_{t} \,-a_{t+1} \right) \,+\, \beta^{t+1} \lambda_{t+1} \left( (1+r)a_{t+1} \,-c_{t+1} \,-a_{t+2} \right) \,+\, \cdots \,+ \beta^{\top} \lambda_{\scriptscriptstyle {T}} \left( (1+r)a_{\scriptscriptstyle {T}} \,-c_{\scriptscriptstyle {T}} \,-a_{\scriptscriptstyle {T+1}} \right)</span></p>
+<a href="#fnref14">↩</a></li><li id="fn15"><p style="text-align:justify"> 각주 6) 참조.</p>
+<a href="#fnref15">↩</a></li><li id="fn16"><p style="text-align:justify"> ‘KKT 정리’ 참조</p>
+<a href="#fnref16">↩</a></li><li id="fn17"><p style="text-align:justify"> 차분방정식 ‘전방대입법’에서 <span class="math">y_{t} \,=\, \phi y_{t-1} +a+bx_{t-1}</span>의 해는 <span class="math">y_{t} \,=\, \phi^{-N} y_{\scriptscriptstyle {t+N}} \,- \frac{a}{\phi } \left( \frac{1- \phi^{-N}}{1- \phi^{-1}} \right) \,-\, \frac{b}{\phi } \sum\limits_{i=0}^{N-1} \phi^{-i} x_{t+i} \,</span>이다. <span class="math">y_{t} \,=\,a_{t}</span>, <span class="math">x_{t} \,=\,c_{t}</span>라 놓고 a=0, b=-1, <span class="math">\phi \,=\,1\,+\,r</span>을 대입하면 <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span>의 해는 </p>
+<p style="text-align:justify"><span class="math">a_{t} \,=\, \frac{a_{\scriptscriptstyle {t+N}}}{(1+r) ^{N}} \,+\, \frac{1}{1+r} \sum\limits_{i=0}^{N-1} \frac{c_{t+i} \,}{(1+r) ^{i}}</span>. 따라서 <span class="math">a_{0} \,=\, \frac{a_{\scriptscriptstyle {N}}}{(1+r) ^{N}} \,+\, \frac{1}{1+r} \sum\limits_{i=0}^{N-1} \frac{c_{i} \,}{(1+r) ^{i}}</span> 이다. </p>
+<p style="text-align:justify">N=T+1이라 하면 <span class="math">a_{0} \,=\, \frac{a_{\scriptscriptstyle {T+1}}}{(1+r) ^{T+1}} \,+\, \frac{1}{1+r} \sum\limits_{i=0}^{\top} \frac{c_{i} \,}{(1+r) ^{i}}</span><span class="math">\,=\, \frac{1}{1+r} \sum\limits_{i=0}^{\top} \frac{c_{i} \,}{(1+r) ^{i}}</span>, (∵ <span class="math">a_{\scriptscriptstyle {T+1}} \,=\,0</span>)</p>
+<a href="#fnref17">↩</a></li><li id="fn18"><p style="text-align:justify"> 차분방정식 ‘비동차부분이 외생변수인 경우’ 참조</p>
+<a href="#fnref18">↩</a></li></ol><p class="section-nav">← <a href="dynamic-optimization-discrete-overview.html">정태문제와 다기간 이산시간 문제</a> · <a href="dynamic-optimization-discrete.html">절별 목차</a> · <a href="dynamic-optimization-discrete-lagrangian-infinite.html">동적 Lagrangian: 무한기간</a> →</p></body></html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>확률 동적계획</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>동적계획법 (Dynamic Programming)</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>확률 동적계획</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-programming.html">동적계획법 (Dynamic Programming)</a></p><h4 id="확률-동적계획-stochastic-dynamic-programming" style="text-align:justify">확률 동적계획(stochastic dynamic programming)</h4><p style="text-align:justify">모형의 재귀적 구조를 유지하기 위해 보통 시스템이 받는 확률적 충격이 동질적인 1계 마르코프 과정(homogeneous first-order Markov process)을 따른다고 가정한다. 쉽게 말하면 이번 기간의 충격값은 그보다 더 이전의 값이 아니라 바로 전 기간의 충격값에만 의존한다는 뜻이다. 백색잡음(white noise)은 더 특수한 경우로, 직전 기간의 충격에도 의존하지 않는다.</p><p style="text-align:justify">다음의 문제를 고려하자.</p><p style="text-align:justify">max <span class="math">\,E_{0} [ \sum\limits_{t=0}^{\infty } \beta^{t} f(y_{t} ,\,u_{t} )]</span></p><p style="text-align:justify">s.t   <span class="math">\,y_{t+1} =g_{t} (y_{t} ,\,u_{t} ,\, \epsilon_{t+1} )\,,\,t=\,0,\,1,\,...,\, \infty</span></p><p style="text-align:justify"> <span class="math">y_{0} \,=\,A</span></p><p style="text-align:justify"><span class="math">\epsilon_{t}</span>는 확률 p로 <span class="math">{\overline{\epsilon }}</span>, 확률 (1-p)로 <span class="math">{under{\epsilon }}</span>인 확률변수</p><p style="text-align:justify"><span class="math">E_{0}</span>는 시점 0에서 기댓값을 의미한다. <span class="math">\epsilon_{t}</span>가 확률변수이므로 <span class="math">y_{t}</span>도 확률변수이고 따라서 목적식은 기댓값을 최대화하는 것이다. 단 <span class="math">\epsilon_{0}</span>는 알려진 것이다. 따라서 <span class="math">\epsilon_{t+1}</span>가 확률변수라면 <span class="math">\epsilon_{t}</span>는 결정된 값이다.</p><p style="text-align:justify">이 문제의 Bellman 방정식은 다음과 같이 쓸 수 있다.</p><p style="text-align:justify"><span class="math">V(y_{t} )=\,\max_{u_{t}} \, \left\{ E_{t} [f_{t} (y_{t} ,\,u_{t} )]+ \beta E_{t} [V(y_{t+1} ,\, \epsilon_{t+1} )] \right\}</span></p><p style="text-align:justify"><span class="math">=\,\max_{u_{t}} \, \left\{ f_{t} (y_{t} ,\,u_{t} )+ \beta [pV[g_{t} (y_{t} ,\,u_{t} ,\, {\overline{\epsilon }} )]\,+\,(1-p)V[g_{t} (y_{t} ,\,u_{t} ,\, {under{\epsilon )}} ]] \right\}</span>, (∵ t기의 값은 결정된 값)</p><p style="text-align:justify"><span class="math">E_{t}</span>는 t기의 기댓값을 의미한다. 가치함수가 기댓값이므로 엄밀히 표현하면 Bellman 방정식은 다음과 같을 것이다.</p><p style="text-align:justify"><span class="math">V(y_{t} )=\,\max_{u_{t}} \, \left\{ f_{t} (y_{t} ,\,u_{t} )+ \beta E_{t} E_{t+1} E_{t+2} \cdots [V(y_{t+1} ,\, \epsilon_{t+1} )] \right\}</span></p><p style="text-align:justify">그러나 연쇄 기대값의 법칙(law of iterated expectations)에 따라<sup><a href="#fn75" id="fnref75">[75]</a></sup></p><p style="text-align:justify"><span class="math">E_{t} E_{t+1} (X_{t+j} )\,=\,E_{t} (X_{t+j} )</span> for j=0,1, 2, ...</p><p style="text-align:justify">따라서 Bellman 방정식은 위와 같이 표현된다.</p><p style="text-align:justify">일반적으로 <span class="math">\epsilon_{t}</span>가 구간[<span class="math">{under{\epsilon }} ,\, {\overline{\epsilon }}</span>]에서 값을 취하는 markov 특성을 갖는 확률변수라면<sup><a href="#fn76" id="fnref76">[76]</a></sup> Bellman 방정식은 다음과 같다.</p><p style="text-align:justify"><span class="math">V(y_{t} )=\,\max_{u_{t}} \, \left\{ f_{t} (y_{t} ,\,u_{t} )+ \beta E_{t} [V(y_{t+1} ,\, \epsilon_{t+1} )] \right\}</span> </p><p style="text-align:justify">예) 예산 제약하의 효용극대화 문제에서 동적계획법으로 오일러 방정식을 도출하라.</p><p style="text-align:justify">max <span class="math">\sum\limits_{t=0}^{\infty } \beta^{t} u(c_{t} )</span></p><p style="text-align:justify">s.t  <span class="math">a_{t+1} \,=\,(1+r_{t} )a_{t} \,-\,c_{t}</span>, <span class="math">t=0,\,1,\,2,\,...,\, \infty</span></p><p style="text-align:justify"> <span class="math">a_{0} \,=\,A\,</span> </p><p style="text-align:justify">이자율 <span class="math">r_{t}</span>는 확률변수로 Markov특성을 갖는다.</p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">이 문제의 Bellman 방정식은 다음과 같다.</p><p style="text-align:justify"><span class="math">V(a_{t} )=\,\max_{c_{t}} \, \left\{ \,u(c_{t} )+ \beta E_{t} [V(a_{t+1} )] \right\}</span><span class="math">=\,\max_{c_{t}} \, \left\{ \,u(c_{t} )+ \beta E_{t} [V((1+r_{t} )a_{t} -c_{t} )] \right\}</span></p><p style="text-align:justify">중괄호안을 <span class="math">c_{t}</span>에 대해 미분하면 최대화의 1차조건은 </p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,=\, \beta E_{t} \frac{\partial V(a_{t+1} )}{\partial a_{t+1}} \,</span> ...........①</p><p style="text-align:justify">⇒ <span class="math">\,u ' (c_{t+1} )\,= \beta E_{t+1} \frac{\partial V(a_{t+2} )}{\partial a_{t+2}}</span> .............②</p><p style="text-align:justify">(방법1)</p><p style="text-align:justify">가치함수를 다시 쓰면</p><p style="text-align:justify"><span class="math">V(a_{t} )</span><span class="math">=\,\max_{c_{t}} \, \left\{ \,u((1+r_{t} )a_{t} -a_{t+1} )+ \beta E_{t} [V(a_{t+1} )] \right\}</span></p><p style="text-align:justify">가치함수를 <span class="math">a_{t}</span>에 대해 미분하면, 포락선정리에 따라</p><p style="text-align:justify"><span class="math">\frac{\partial V_{t}}{\partial a_{t}} =\, \frac{\partial u(c_{t} )}{\partial c_{t}} \frac{\partial c_{t}}{\partial a_{t}} \,=\,u ' (c_{t} )(1+r_{t} )</span></p><p style="text-align:justify">⇒ <span class="math">\frac{\partial V(a_{t+1} )}{\partial a_{t+1}} =\,u ' (c_{t+1} )(1+r_{t+1} )</span> ...........③</p><p style="text-align:justify">③을 ①에 대입하면</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,= \beta E_{t} [(1+r_{t+1} )u ' (c_{t+1} )]</span></p><p style="text-align:justify">이는 기댓값을 반영한 오일러 방정식이다. </p><p style="text-align:justify">좌변은 확정된 값이고 우변은 확률변수가 포함된 기댓값임에 주의. 즉 t기의 한계효용은 (t+1)기의 기대한계효용이득 <span class="math">\,E_{t} [(1+r_{t+1} )u ' (c_{t+1} )]</span>을 주관적 할인율 <span class="math">\beta</span>로 할인한 것과 같아야 함을 의미. </p><p style="text-align:justify">(방법2)</p><p style="text-align:justify">가치함수를 다시 쓰면</p><p style="text-align:justify"><span class="math">V(a_{t} )</span><span class="math">=\,\max_{c_{t}} \, \left\{ \,u(c_{t} )+ \beta E_{t} [V((1+r_{t} )a_{t} -c_{t} )] \right\}</span></p><p style="text-align:justify">가치함수를 <span class="math">a_{t}</span>에 대해 미분하면, 포락선정리에 따라</p><p style="text-align:justify"><span class="math">\frac{\partial V(a_{t} )}{\partial a_{t}} =\; \beta E_{t} \frac{\partial V(a_{t+1} )}{\partial a_{t+1}} (1+r_{t} )\,</span></p><p style="text-align:justify">⇒ <span class="math">\frac{\partial V(a_{t+1} )}{\partial a_{t+1}} =\, \beta E_{t+1} \frac{\partial V(a_{t+2} )}{\partial a_{t+2}} (1+r_{t+1} )\,</span>.............④</p><p style="text-align:justify">②를 ④에 대입하면</p><p style="text-align:justify"> <span class="math">\frac{\partial V(a_{t+1} )}{\partial a_{t+1}} =\,u ' (c_{t+1} )(1+r_{t+1} )\,</span>.............⑤</p><p style="text-align:justify">⑤를 ①에 대입하면</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,= \beta E_{t} [(1+r_{t+1} )u ' (c_{t+1} )]</span></p><p style="text-align:justify">이는 오일러 방정식이다. </p><p style="text-align:right">(풀이끝)</p><p style="text-align:justify">예) 투자자의 효용극대화 문제</p><p style="text-align:justify">max <span class="math">\sum\limits_{t=0}^{\infty } \beta^{t} \,\ln c_{t}</span></p><p style="text-align:justify">s.t  <span class="math">a_{t+1} =(a_{t} -c_{t} )[(1+r) \omega \,+\,(1+z_{t} )(1- \omega )]</span></p><p style="text-align:justify"><span class="math">c_{t}</span>는 t기의 소비, <span class="math">a_{t}</span>는 t기의 재산, r은 무위험자산 수익률(일정), <span class="math">z_{t}</span>는 t기의 위험자산 수익률(Markov 특성을 갖는 iid 확률변수), <span class="math">\omega</span>는 t기의 총재산 중 무위험자산 투자비율, <span class="math">\ln c_{t}</span>는 투자자의 효용함수, <span class="math">\beta</span>는 주관적 할인율 </p><p style="text-align:justify">제약식은 당기의 재산에서 소비하고 남은 부분을 무위험자산과 위험자산에 나누어 투자하고 이의 수익률이 다음 기의 재산이 됨을 의미한다. 이 동적계획 문제의 정책함수를 구하라.</p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">Bellman 방정식은 다음과 같다.</p><p style="text-align:justify"><span class="math">V(a_{t} )=\,\max_{c_{t} , \omega } \, \left\{ \ln c_{t} + \beta E_{t} [V(a_{t+1} ,\,z_{t+1} )] \right\}</span> </p><p style="text-align:justify"><span class="math">=\,\max_{c_{t} , \omega } \, \left\{ \ln c_{t} + \beta E_{t} [V[(a_{t} -c_{t} )[(1+r) \omega \,+\,(1+z_{t} )(1- \omega )]]] \right\}</span></p><p style="text-align:justify">중괄호안을 통제변수 <span class="math">c_{t} ,\, \omega</span>에 대해 미분하면 1차조건은</p><p style="text-align:justify"><span class="math">\frac{1}{c_{t}} =\, \beta E_{t} \left[ \frac{\partial V(a_{t+1} )}{\partial a_{t+1}} \right]</span><span class="math">[(1+r) \omega \,+\,(1+z_{t} )(1- \omega )]</span>..............① </p><p style="text-align:justify"><span class="math">\,E_{t} \left[ \frac{\partial V(a_{t+1} )}{\partial a_{t+1}} \right] (a_{t} -c_{t} )(r-z_{t} )=0</span> ...............②</p><p style="text-align:justify">가치함수를 <span class="math">V(a_{t} )=\,B\,+D\,\ln a_{t}</span>의 형태로 추정하자.</p><p style="text-align:justify">가치함수를 ①에 대입하면</p><p style="text-align:justify"><span class="math">\frac{1}{c_{t}} =\, \beta E_{t} \left[ \frac{D}{a_{t+1}} \right]</span><span class="math">[(1+r) \omega \,+\,(1+z_{t} )(1- \omega )]</span></p><p style="text-align:justify"><span class="math">=\, \frac{\beta D}{a_{t} -c_{t}}</span>, (∵ <span class="math">a_{t+1} =(a_{t} -c_{t} )[(1+r) \omega \,+\,(1+z_{t} )(1- \omega )]</span>)</p><p style="text-align:justify">⇒ <span class="math">c_{t} \,=\, \frac{a_{t}}{1+ \beta D}</span> ...............③</p><p style="text-align:justify">가치함수를 ②에 대입하면</p><p style="text-align:justify"><span class="math">\,E_{t} \left[ \frac{D}{a_{t+1}} \right] (a_{t} -c_{t} )(r-z_{t} )=0</span></p><p style="text-align:justify">⇒ <span class="math">E_{t} \frac{D(r-z_{t} )}{(1+r) \omega \,+\,(1+z_{t} )(1- \omega )}</span> ...............④</p><p style="text-align:justify">추정된 가치함수를 Bellman 방정식에 대입하면</p><p style="text-align:justify"><span class="math">V(a_{t} )\,=\,\max_{c_{t} , \omega } \, \left\{ \ln c_{t} + \beta E_{t} [V[(a_{t+1} )]] \right\}</span></p><p style="text-align:justify">⇒ <span class="math">\,B\,+D\,\ln a_{t}</span><span class="math">\,=\,\max_{c_{t} , \omega } \, \left\{ \ln c_{t} + \beta E_{t} [B+D\,\ln a_{t+1} ] \right\}</span></p><p style="text-align:justify"><span class="math">\,=\,\max_{c_{t} , \omega } \, \left\{ \ln c_{t} + \beta B+ \beta DE_{t} (\,\ln a_{t+1} ) \right\}</span></p><p style="text-align:justify"><span class="math">\,=\,\max_{c_{t} , \omega } \, \left\{ \ln c_{t} + \beta B+ \beta DE_{t} [\,\ln[(a_{t} -c_{t} )[(1+r) \omega \,+\,(1+z_{t} )(1- \omega )]]] \right\}</span></p><p style="text-align:justify"><span class="math">\,=\,\max_{c_{t} , \omega } \, \left\{ \ln c_{t} + \beta B+ \beta DE_{t} [\,\ln[(a_{t} -c_{t} )]\,+\,\ln[(1+r) \omega \,+\,(1+z_{t} )(1- \omega )]] \right\}</span></p><p style="text-align:justify">③은 최대화시키는 값이므로 이를 Bellman 방정식에 대입하면</p><p style="text-align:justify">⇒ <span class="math">\,B\,+D\,\ln a_{t}</span><span class="math">=\,\ln \left( \frac{a_{t}}{1+ \beta D} \right) + \beta DE_{t} \left[ \ln \left( a_{t} - \frac{a_{t}}{1+ \beta D} \right) +\ln[(1+r) \omega \,+\,(1+z_{t} )(1- \omega )] \right]</span></p><p style="text-align:justify">⇒ <span class="math">\,B\,+D\,\ln a_{t}</span><span class="math">=\,\ln \left( \frac{a_{t}}{1+ \beta D} \right) + \beta DE_{t} \left[ \ln \left( \frac{\beta Da_{t}}{1+ \beta D} \right) +\ln[(1+r) \omega \,+\,(1+z_{t} )(1- \omega )] \right]</span></p><p style="text-align:justify">⇒ <span class="math">\,B\,+D\,\ln a_{t}</span><span class="math">=\,\ln a_{t} + \beta DE_{t} [\ln ( \beta Da_{t} ) +\ln[(1+r) \omega \,+\,(1+z_{t} )(1- \omega )]]</span> </p><p style="text-align:justify"> <span class="math">-\,\ln (1+ \beta D)- \beta D\,\ln (1+ \beta D)</span></p><p style="text-align:justify">⇒ <span class="math">\,B\,+D\,\ln a_{t}</span><span class="math">=\,(1+ \beta D)\,\ln a_{t} + \beta D\,\ln \beta D\,+ \beta DE_{t} [\,\ln[(1+r) \omega \,+\,(1+z_{t} )(1- \omega )]]</span> </p><p style="text-align:justify"> <span class="math">-\,\ln (1+ \beta D)- \beta D\,\ln (1+ \beta D)</span></p><p style="text-align:justify">좌우변을 비교하면</p><p style="text-align:justify"><span class="math">D\,=\,1+ \beta D</span> ⇒ <span class="math">D\,=\, \frac{1}{1- \beta }</span></p><p style="text-align:justify">∴ <span class="math">c_{t} \,=\, \frac{a_{t}}{1+ \beta D} \,=\,(1- \beta )a_{t}</span></p><p style="text-align:justify">따라서 매기 재산의 일정비율을 소비하는 것이 최적정책이다.</p><p style="text-align:right">(풀이끝)</p><p style="text-align:justify">예) inventory control<sup><a href="#fn77" id="fnref77">[77]</a></sup></p><p style="text-align:justify">예) 다기간 소비-저축 문제</p><p style="text-align:justify">한 소비자는 매기간 A, B 두 식품을 소비(t=0, 1, 2)</p><p style="text-align:justify">A의 가격은 매기 1원으로 일정하지만 B의 가격은 매기 전기의 가격에 따라 변한다.</p><table aria-label="확률 동적계획(stochastic dynamic programming) 관련 표 6" style="border-collapse:collapse;table-layout:fixed;height:123.427px;width:430.613px"><colgroup><col style="width:115.2px"/><col style="width:50.053px"/><col style="width:50.053px"/><col style="width:50.053px"/><col style="width:50.053px"/><col style="width:57.6px"/><col style="width:57.6px"/></colgroup><tbody><tr style="height:20.867px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:justify">식품       기간 </p>
+</td><td colspan="2" style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0</p>
+</td><td colspan="2" style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1</p>
+</td><td colspan="2" style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">2</p>
+</td></tr><tr style="height:17.093px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><div aria-hidden="true" class="hml-empty"></div>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">가격</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">확률</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">가격</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">확률</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">가격</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">확률</p>
+</td></tr><tr style="height:17.093px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">A</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1원</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1원</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1원</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1</p>
+</td></tr><tr style="height:17.093px"><td rowspan="4" style="height:64.613px;padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">B</p>
+</td><td rowspan="4" style="height:64.613px;padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1원</p>
+</td><td rowspan="4" style="height:64.613px;padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1</p>
+</td><td rowspan="2" style="height:30.427px;padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1.1원</p>
+</td><td rowspan="2" style="height:30.427px;padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.5</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1.2원</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.5</p>
+</td></tr><tr style="height:17.093px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.9원</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.5</p>
+</td></tr><tr style="height:17.093px"><td rowspan="2" style="height:30.427px;padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.9원</p>
+</td><td rowspan="2" style="height:30.427px;padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.5</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.98원</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.5</p>
+</td></tr><tr style="height:17.093px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.8원</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.5</p>
+</td></tr></tbody></table><p style="text-align:justify">소비자는 3기간 동안 총 300원의 예산을 갖고 있다.</p><p style="text-align:justify">이 소비자의 효용함수는 다음과 같다.</p><p style="text-align:justify"><span class="math">U(a_{0} ,\,b_{0} ,\,a_{1} ,\,b_{1} ,\,a_{2} ,\,b_{2} )=(a_{0} b_{0} ) ^{.25} +.9(a_{1} b_{1} ) ^{.25} +.7(a_{2} b_{2} ) ^{.25}</span></p><p style="text-align:justify"><span class="math">a_{t} \,,\,b_{t} \,(t=0,\,1,\,2)</span>는 A, B 두 식품의 기간별 소비량 </p><p style="text-align:justify">이 소비자의 효용극대화 문제를 동적계획법으로 풀어라. 기간간 이자수입은 고려안함(시장이자율 0이라 가정).</p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">이 문제를 모형화하면 다음과 같다.</p><p style="text-align:justify">max  <span class="math">U(a_{0} ,\,b_{0} ,\,a_{1} ,\,b_{1} ,\,a_{2} ,\,b_{2} )=(a_{0} b_{0} ) ^{.25} +.9(a_{1} b_{1} ) ^{.25} +.7(a_{2} b_{2} ) ^{.25}</span></p><p style="text-align:justify">s.t   <span class="math">I_{t+1} \,=\,I_{t} \,-\,c_{t}</span>, for t = 0, 1, 2</p><p style="text-align:justify"> <span class="math">c_{t} \,=\,p_{\scriptscriptstyle {A,t}} a_{t} +p_{t} b_{t}</span></p><p style="text-align:justify"> <span class="math">I_{0} \,=\,300</span></p><p style="text-align:justify"><span class="math">p_{\scriptscriptstyle {A,t}}</span> : 식품 A의 t기에서의 가격(=1)</p><p style="text-align:justify"><span class="math">p_{t}</span> : 식품 B의 t기에서의 가격(확률변수)</p><p style="text-align:justify"><span class="math">c_{t}</span> : t기에서의 총소비</p><p style="text-align:justify"><span class="math">I_{t}</span> : t기의 예산</p><p style="text-align:justify">i) 2기</p><p style="text-align:justify">2기에서 Bellman 방정식은 다음과 같다.</p><p style="text-align:justify"><span class="math">V_{2} =\;\max_{a_{2} +b_{2} +I_{3} =I_{2}} \left\{ 0.7(a_{2} b_{2} ) ^{0.25} \right\}</span><span class="math">=\max \left\{ 0.7((I_{2} -p_{2} b_{2} )b_{2} ) ^{0.25} \right\}</span> </p><p style="text-align:justify">(∵ <span class="math">I_{3} \,=\,0</span> 이므로 <span class="math">I_{2} \,=c_{2} \,=\,a_{2} +p_{2} b_{2}</span>)</p><p style="text-align:justify">1차 조건은</p><p style="text-align:justify"><span class="math">0.175 \frac{I_{2} \,-\,2p_{2} b_{2}}{((I_{2} -p_{2} b_{2} )b_{2} ) ^{0.75}} \,=\,0</span></p><p style="text-align:justify">∴ <span class="math">a_{2} = \frac{I_{2}}{2}</span>, <span class="math">b_{2} = \frac{I_{2}}{2p_{2} }</span></p><p style="text-align:justify">이를 가치함수에 대입하면</p><p style="text-align:justify"><span class="math">V_{2} =0.7 \left[ \left( \frac{I_{2}}{2} \right) \left( \frac{I_{2}}{2p_{2}} \right) \right] ^{0.25}</span><span class="math">=0.7 \left( \frac{I_{2}^{2}}{4p_{2}} \right) ^{0.25}</span></p><p style="text-align:justify">따라서 <span class="math">p_{2}</span> 값에 따른 <span class="math">V_{2}</span>는 다음과 같다.</p><table aria-label="확률 동적계획(stochastic dynamic programming) 관련 표 7" style="border-collapse:collapse;table-layout:fixed;height:41.413px;width:366.973px"><colgroup><col style="width:64.387px"/><col style="width:79.48px"/><col style="width:83.253px"/><col style="width:69.92px"/><col style="width:69.933px"/></colgroup><tbody><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">p_{2}</span></p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1.2</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.9</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.98</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.8</p>
+</td></tr><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">V_{2}</span></p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">.4729I_{2}^{0.5}</span></p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">.5082I_{2}^{0.5}</span></p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">.5I_{2}^{0.5}</span></p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">.5234I_{2}^{0.5}</span></p>
+</td></tr></tbody></table><p style="text-align:justify">ii) 1 기 </p><p style="text-align:justify">1기에서 Bellman 방정식은 다음과 같다.</p><p style="text-align:justify"><span class="math">V_{1} =\max_{a_{1} +\,p_{1} b_{1} +I_{2} =I_{1}} \left\{ .9(a_{1} b_{1} ) ^{0.25} +V_{2} \right\}</span><span class="math">=\max_{a_{1} +\,p_{1} b_{1} +I_{2} =I_{1}} \left\{ .9(a_{1} b_{1} ) ^{0.25} +0.7 \left( \frac{I_{2}^{2}}{4p_{2}} \right) ^{0.25} \right\}</span></p><p style="text-align:justify"><span class="math">=\max \left\{ .9(a_{1} b_{1} ) ^{0.25} +0.7 \left( \frac{(I_{1} -a_{1} -p_{1} b_{1} ) ^{2}}{4p_{2}} \right) ^{0.25} \right\}</span></p><p style="text-align:justify">이 문제를 <span class="math">a_{1} ,\,b_{1}</span>에 대해 푸는 것은 복잡하므로 동적계획법으로 푼다.</p><p style="text-align:justify">(1단계)</p><p style="text-align:justify"><span class="math">W_{1} =\max_{a_{1} +p_{1} b_{1} +I_{2} =I_{1}} \left\{ .9(a_{1} b_{1} ) ^{0.25} \right\}</span></p><p style="text-align:justify">이 문제의 최적해는 <span class="math">a_{1} = \frac{I_{1} -I_{2}}{2}</span>, <span class="math">b_{1} = \frac{I_{1} -I_{2}}{2p_{1} }</span></p><p style="text-align:justify">(2단계)</p><p style="text-align:justify">ⓐ <span class="math">p_{1}</span>=0.9원 일 때</p><p style="text-align:justify"><span class="math">p_2</span>는 0.5의 확률로 0.98, 이때의 <span class="math">V_2</span>는 <span class="math">0.5I_{2}^{0.5}</span>, 0.5의 확률로 0.8, 이때의 <span class="math">V_2</span>는 <span class="math">0.5234I_{2}^{0.5}</span></p><p style="text-align:justify">따라서 기대가치함수는</p><p style="text-align:justify"><span class="math">W_{2} =\max_{a_{1} +\,p_{1} b_{1} +I_{2} =I_{1}} \left\{ .9(a_{1} b_{1} ) ^{0.25} +E[V_{2} ] \right\}</span></p><p style="text-align:justify"><span class="math">=\max_{I_{2}} \left\{ \,0.9 \left[ \left( \frac{I_{1} -I_{2}}{2} \right) \left( \frac{I_{1} -I_{2}}{2(.9)} \right) \right] ^{.25} +0.5(0.5I_{2}^{0.5} )+0.5(0.5234I_{2}^{0.5} )] \right\} \,</span></p><p style="text-align:justify"><span class="math">=\max_{I_{2}} \, \left\{ \,0.9 \left( \frac{I_{1} -I_{2}}{2} \right) ^{0.5}\left( \frac{1}{0.9} \right) ^{.25} +.5117I_{2}^{0.5} \right\}</span></p><p style="text-align:justify"><span class="math">=\max_{I_{2}} \, \left\{ \,0.924 \left( \frac{I_{1} -I_{2}}{2} \right) ^{0.5} +.5117I_{2}^{0.5} \right\}</span></p><p style="text-align:justify">1차 조건을 위해 중괄호안을 미분하면</p><p style="text-align:justify"><span class="math">\,0.462 \left( \frac{I_{1} -I_{2}}{2} \right) ^{-0.5} =0.25585I_{2}^{-0.5}</span></p><p style="text-align:justify">∴ <span class="math">I_{2} =0.133I_{1}</span> ..............<sup><a href="#fn78" id="fnref78">[78]</a></sup></p><p style="text-align:justify"><span class="math">a_{1} = \frac{I_{1} -I_{2}}{2} =0.4335I_{1}</span>,  <span class="math">b_{1} = \frac{I_{1} -I_{2}}{2 \times 0.9} =0.4817I_{1}</span></p><p style="text-align:justify"><span class="math">V_{1} =W_{2} =\, \,0.924 \left( \frac{I_{1} -I_{2}}{2} \right) ^{0.5} +.5117I_{2}^{0.5}</span></p><p style="text-align:justify"><span class="math">=\,0.6084I_{1}^{0.5} +0.1866I_{1}^{0.5} =0.7956I_{1}^{0.5}</span></p><p style="text-align:justify">ⓑ <span class="math">p_{1}</span>=1.1원 일 때</p><p style="text-align:justify"><span class="math">p_2</span>는 0.5의 확률로 1.2, 이때의 <span class="math">V_2</span>는 <span class="math">.4729I_{2}^{0.5}</span>, 0.5의 확률로 0.9, 이때의 <span class="math">V_2</span>는 <span class="math">.5082I_{2}^{0.5}</span></p><p style="text-align:justify">따라서 기대가치함수는</p><p style="text-align:justify"><span class="math">W_{2} =\max_{a_{1} +\,p_{1} b_{1} +I_{2} =I_{1}} \left\{ .9(a_{1} b_{1} ) ^{0.25} +E[V_{2} ] \right\}</span></p><p style="text-align:justify"><span class="math">=\max_{I_{2}} \left\{ \,0.9 \left[ \left( \frac{I_{1} -I_{2}}{2} \right) \left( \frac{I_{1} -I_{2}}{2(1.1)} \right) \right] ^{0.25} +0.5(0.4729I_{2}^{0.5} )+0.5(0.5082I_{2}^{0.5} )] \right\} \,</span></p><p style="text-align:justify"><span class="math">=\max_{I_{2}} \, \left\{ \,0.9 \left( \frac{I_{1} -I_{2}}{2} \right) ^{0.5} \left( \frac{1}{1.1} \right) ^{0.25} +0.49055I_{2}^{0.5} \right\}</span></p><p style="text-align:justify"><span class="math">=\max_{I_{2}} \, \left\{ \,0.8788 \left( \frac{I_{1} -I_{2}}{2} \right) ^{0.5} +0.49055I_{2}^{0.5} \right\}</span></p><p style="text-align:justify">1차 조건을 위해 중괄호안을 미분하면</p><p style="text-align:justify"><span class="math">\,0.44 \left( \frac{I_{1} -I_{2}}{2} \right) ^{-0.5} =0.2453I_{2}^{-0.5}</span></p><p style="text-align:justify">∴ <span class="math">I_{2} =0.1348I_{1}</span> .................<sup><a href="#fn79" id="fnref79">[79]</a></sup></p><p style="text-align:justify"><span class="math">a_{1} = \frac{I_{1} -I_{2}}{2} =0.4326I_{1}</span>,  <span class="math">b_{1} = \frac{I_{1} -I_{2}}{2 \times 1.1} =0.3933I_{1}</span></p><p style="text-align:justify"><span class="math">V_{1} =W_{2} =\, \,0.8788 \left( \frac{I_{1} -I_{2}}{2} \right) ^{0.5} +0.49055I_{2}^{0.5}</span></p><p style="text-align:justify"><span class="math">=\,0.578I_{1}^{0.5} +.178I_{1}^{0.5} =0.7561I_{1}^{0.5}</span></p><p style="text-align:justify">ⓐ, ⓑ로부터 <span class="math">V_{1}</span>이 <span class="math">0.7956I_{1}^{0.5}</span>일 확률이 0.5, <span class="math">0.7561I_{1}^{0.5}</span>일 확률이 0.5</p><p style="text-align:justify">iii) 0 기 </p><p style="text-align:justify"><span class="math">V_{0} =\max_{a_{0} +b_{0} +I_{1} =300} \left\{ (a_{0} b_{0} ) ^{.25} +E[V_{1} ] \right\}</span></p><p style="text-align:justify"><span class="math">=\max_{a_{0} +b_{0} +I_{1} =300} \left\{ (a_{0} b_{0} ) ^{.25} +.5(0.7956I_{1}^{0.5} )+.5(0.7561I_{1}^{0.5} ) \right\}</span></p><p style="text-align:justify"><span class="math">=\max_{a_{0} +b_{0} +I_{1} =300} \left\{ (a_{0} b_{0} ) ^{.25} +0.77585I_{1}^{0.5} \right\}</span></p><p style="text-align:justify">동적계획법을 적용하면</p><p style="text-align:justify">(1단계)</p><p style="text-align:justify"><span class="math">U_{1} =\max_{a_{0} +b_{0} +I_{1} =300} \left\{ (a_{0} b_{0} ) ^{.25} \right\}</span><span class="math">=\max \left\{ [a_{0} (300-I_{1} -a_{0} )] ^{.25} \right\}</span></p><p style="text-align:justify"><span class="math">a_{0}</span>에 대해 풀면</p><p style="text-align:justify"><span class="math">a_{0} = \frac{300-I_{1}}{2}</span>, <span class="math">b_{0} = \frac{300-I_{1}}{2}</span></p><p style="text-align:justify">(2단계)</p><p style="text-align:justify"><span class="math">U_{2} =\max_{I_{1}} \left\{ \left( \frac{300-I_{1}}{2} \right) ^{0.5} +0.77585I_{1}^{0.5} \right\}</span></p><p style="text-align:justify">1차조건을 위해 중괄호안을 미분하면</p><p style="text-align:justify"><span class="math">0.5 \left( \frac{300-I_{1}}{2} \right) ^{-0.5} =0.388I_{1}^{-0.5}</span></p><p style="text-align:justify">∴ <span class="math">I_{1} =\,69.403</span> ..............<sup><a href="#fn80" id="fnref80">[80]</a></sup></p><p style="text-align:justify"><span class="math">a_{0} =b_{0} = \frac{300-I_{1}}{2} =115.3</span></p><p style="text-align:justify"><span class="math">V_{0} =U_{2} = \left( \frac{300-I_{1}}{2} \right) ^{0.5} +0.77585I_{1}^{0.5}</span><span class="math">=115.3^{0.5} +0.77585 \times 69.403_{}^{0.5} =17.2</span></p><p style="text-align:justify">따라서 17.2가 기대효용의 최대값이다.</p><p style="text-align:justify"><span class="math">p_{1}</span>=0.9원 일 때</p><p style="text-align:justify"><span class="math">a_{1} =0.4435I_{1} =30.78</span></p><p style="text-align:justify"><span class="math">b_{1} =0.4817I_{1} =33.431</span></p><p style="text-align:justify"><span class="math">I_{2} =0.133I_{1} =9.23</span></p><p style="text-align:justify"><span class="math">p_{1}</span>=1.1원 일 때</p><p style="text-align:justify"><span class="math">a_{1} =0.4326I_{1} =30</span></p><p style="text-align:justify"><span class="math">b_{1} =0.3933I_{1} =27.3</span></p><p style="text-align:justify"><span class="math">I_{2} =0.1348I_{1} =9.3555</span></p><p style="text-align:justify"><span class="math">E[a_{1} ]=0.5(30.78)+0.5(30)=30.39</span></p><p style="text-align:justify"><span class="math">E[b_{1} ]=0.5(33.431)+0.5(27.3)=30.3655</span></p><p style="text-align:justify"><span class="math">E[I_{2} ]=0.5(9.23)+0.5(9.3555)=9.293</span></p><table aria-label="확률 동적계획(stochastic dynamic programming) 관련 표 8" style="border-collapse:collapse;table-layout:fixed;height:114.507px;width:366.973px"><colgroup><col style="width:64.387px"/><col style="width:79.48px"/><col style="width:83.253px"/><col style="width:69.92px"/><col style="width:69.933px"/></colgroup><tbody><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">p_{1}</span></p>
+</td><td colspan="2" style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1.1</p>
+</td><td colspan="2" style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.9</p>
+</td></tr><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">p_{2}</span></p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">1.2</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.9</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.98</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">0.8</p>
+</td></tr><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">a_{2} = \frac{I_{2}}{2}</span></p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">4.6777</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">4.6777</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">4.615</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">4.615</p>
+</td></tr><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">b_{2} = \frac{I_{2}}{2p_{2} }</span></p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">3.898</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">5.1975</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">4.709</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">5.76875</p>
+</td></tr></tbody></table><p style="text-align:justify"><span class="math">E[a_{2} ]=0.5 \times (4.6777+4.615)=4.64635</span></p><p style="text-align:justify"><span class="math">E[b_{2} ]=0.25 \times (3.898+5.1975+4.709+5.76875)=4.8933</span></p><p style="text-align:justify">따라서 기대총효용은</p><p style="text-align:justify"><span class="math">E[U]=(a_{0} b_{0} ) ^{.25} +0.9(E[a_{1} ]E[b_{1} ]) ^{.25} +0.7(E[a_{2} ]E[b_{2} ]) ^{.25}</span></p><p style="text-align:justify"><span class="math">=(115.3) ^{0.5} +0.9(30.39 \times 30.3655) ^{0.25} +0.7(4.64635 \times 4.8933) ^{.25} =17.226</span></p><p style="text-align:justify">앞에서 구한 기대효용 <span class="math">V_{0} =17.2</span>와 비슷한 값이다.(오차는 반올림오차)</p><p style="text-align:right">(풀이끝)</p><h2>각주</h2><ol class="footnotes"><li id="fn75"><p style="text-align:justify"> 확률 ‘연쇄기대값의 법칙’ 참조</p>
+<a href="#fnref75">↩</a></li><li id="fn76"><p style="text-align:justify"> <span class="math">\epsilon_{t+1}</span>는 기간간 상관관계가 있을 수도 있지만 Markov 특성을 갖는다고 가정. Markov 특성이란 현재의 확률변수가 바로 전기의 확률에만 의존하는 것을 말한다. 즉 <span class="math">\epsilon_{t+1}</span>의 분포는 <span class="math">\epsilon_{t}</span>에 의존하지만 <span class="math">\epsilon_{t-1}</span>, <span class="math">\epsilon_{t-2}</span>, ...와는 상관이 없다.</p>
+<a href="#fnref76">↩</a></li><li id="fn77"><p style="text-align:justify"> Dynamic Programming4 (2), Dynamic Programming-or2 </p>
+<a href="#fnref77">↩</a></li><li id="fn78"><p style="text-align:justify"> <span class="math">\,0.462 \left( \frac{I_{1} -I_{2}}{2} \right) ^{-0.5} =0.25585I_{2}^{-0.5}</span> ⇒ <span class="math">\, \left( \frac{2I_{2}}{I_{1} -I_{2}} \right) ^{0.5} =0.554</span> ⇒ <span class="math">\frac{2I_{2}}{I_{1} -I_{2}} =0.3067</span>, ∴ <span class="math">I_{2} =0.133I_{1}</span> </p>
+<a href="#fnref78">↩</a></li><li id="fn79"><p style="text-align:justify"> <span class="math">\,0.44 \left( \frac{I_{1} -I_{2}}{2} \right) ^{-0.5} =0.2453I_{2}^{-0.5}</span> ⇒ <span class="math">\, \left( \frac{2I_{2}}{I_{1} -I_{2}} \right) ^{0.5} =0.5582</span> ⇒ <span class="math">\frac{2I_{2}}{I_{1} -I_{2}} =0.3116</span>, ∴ <span class="math">I_{2} =0.1348I_{1}</span></p>
+<a href="#fnref79">↩</a></li><li id="fn80"><p style="text-align:justify"> <span class="math">0.5 \left( \frac{300-I_{1}}{2} \right) ^{-0.5} =0.388I_{1}^{-0.5}</span> ⇒ <span class="math">\left( \frac{2I_{1}}{300-I_{1}} \right) ^{0.5} =0.77585</span> ⇒ <span class="math">\frac{2I_{1}}{300-I_{1}} =0.602</span>, ∴ <span class="math">I_{1} =\,69.403</span> </p>
+<a href="#fnref80">↩</a></li></ol><p class="section-nav">← <a href="dynamic-programming-infinite-policy.html">무한기간·TVC·정책함수</a> · <a href="dynamic-programming.html">절별 목차</a> · <a href="dynamic-programming-continuous.html">연속시간 동적계획</a> →</p></body></html>

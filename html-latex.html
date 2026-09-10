@@ -1,79 +1,65 @@
-﻿<html>
-
+<html>
 <head>
-	<meta charset="utf-8">
-
-	<title>LaTeX equations for web</title>
-	<script src="./latex.js"></script>
-	<script src="LatexTable.js"></script>
+<meta charset="utf-8"/>
+<title>LaTeX equations for web</title>
+<script src="./latex.js"></script>
+<script src="LatexTable.js"></script>
 </head>
-
 <body>
-	<h1>Upmath: Math Online Editor</h1>
-
-	<h2>LaTeX</h2>
-	<p>Upmath converts LaTeX equations in double-dollars &#36;&#36; ,,, &#36;<span></span>&#36;.</p>
-	<p> All equations are rendered as inline equations. $$ax^2+bx+c=0$$
-		like this.</p>
-	<p>수식기호 σ: $$\sigma$$</p>
-	<p>If you need block ones, just type the formula on separate line plus line break.</p>
-	<p>$$p={1\over q}$$</p>
-	<p> 그냥 &#x29F5;lim 만 쓰면 subscript가 밑으로 간다. </p>
-
-	<p> (예) \lim_{t \to \infty} P_t = \dfrac{a-c}{b+d}</p>
-
-	<p>$$\lim_{t \to \infty} P_t = \dfrac{a-c}{b+d}$$</p>
-
-	<p> &#x29F5;limits 는 &#x29F5;lim 밑으로 subscript가 가도록 하는 역할 </p>
-
-	<p> (예) \lim\limits_{t \to \infty} P_t = \dfrac{a-c}{b+d}</p>
-
-	<p>$$\lim\limits_{t \to \infty} P_t = \dfrac{a-c}{b+d}$$</p>
-
-	<p>Place big equations on separate lines:</p>
-	<p>$$x_{1,2} = {-b\pm\sqrt{b^2 - 4ac} \over 2a}$$</p>
-	<p>In this case the LaTeX syntax will be highlighted in the source code. You can even add equation numbers
-		(unfortunately there is no automatic numbering and refs support):</p>
-	<p>$$|\vec{A}|=\sqrt{A_x^2 + A_y^2 + A_z^2}$$(1)</p>
-	<p>It is possible to write Cyrillic symbols in <code>\text</code> command: $$Q_\text{плавления}&gt;0$$</p>
-	<p>One can use matrices:</p>
-	<p>$$T^{\mu\nu}=\begin{pmatrix}
+<h1>Upmath: Math Online Editor</h1>
+<h2>LaTeX</h2>
+<p>Upmath는 이중 달러 기호 <code>$$ ... $$</code> 안에 쓴 LaTeX 수식을 변환한다.</p>
+<p>모든 수식은 기본적으로 인라인 수식으로 렌더링된다. 예: <code>$$ax^2+bx+c=0$$</code></p>
+<p>수식기호 σ: $$\sigma$$</p>
+<p>블록 수식이 필요하면 수식을 별도의 줄에 입력하고 줄바꿈을 추가하면 된다.</p>
+<p>$$p={1\over q}$$</p>
+<p> 그냥 ⧵lim 만 쓰면 subscript가 밑으로 간다. </p>
+<p> (예) \lim_{t \to \infty} P_t = \dfrac{a-c}{b+d}</p>
+<p>$$\lim_{t \to \infty} P_t = \dfrac{a-c}{b+d}$$</p>
+<p> ⧵limits 는 ⧵lim 밑으로 subscript가 가도록 하는 역할 </p>
+<p> (예) \lim\limits_{t \to \infty} P_t = \dfrac{a-c}{b+d}</p>
+<p>$$\lim\limits_{t \to \infty} P_t = \dfrac{a-c}{b+d}$$</p>
+<p>큰 수식은 별도의 줄에 배치한다:</p>
+<p>$$x_{1,2} = {-b\pm\sqrt{b^2 - 4ac} \over 2a}$$</p>
+<p>이 경우 소스 코드에서 LaTeX 구문이 강조 표시된다. 수식 번호도 직접 추가할 수 있다. 다만 자동 번호 매기기와 참조(ref) 기능은 지원하지 않는다.</p>
+<p>$$|\vec{A}|=\sqrt{A_x^2 + A_y^2 + A_z^2}$$(1)</p>
+<p><code>\text</code> 명령 안에는 키릴 문자도 사용할 수 있다. 예: <code>$$Q_\text{плавления}&gt;0$$</code></p>
+<p>행렬도 사용할 수 있다:</p>
+<p>$$T^{\mu\nu}=\begin{pmatrix}
 		\varepsilon&amp;0&amp;0&amp;0\\\\
 		0&amp;\varepsilon/3&amp;0&amp;0\\\\
 		0&amp;0&amp;\varepsilon/3&amp;0\\\\
 		0&amp;0&amp;0&amp;\varepsilon/3
 		\end{pmatrix}$$</p>
-	<p>integrals:</p>
-	<p>$$P_\omega={n_\omega\over 2}\hbar\omega\,{1+R\over 1-v^2}\int\limits_{-1}^{1}dx\,(x-v)|x-v|$$</p>
-	<p>table: (한글 안됨)</p>
-	<p>$$
+<p>integrals:</p>
+<p>$$P_\omega={n_\omega\over 2}\hbar\omega\,{1+R\over 1-v^2}\int\limits_{-1}^{1}dx\,(x-v)|x-v|$$</p>
+<p>table: (한글 안됨)</p>
+<p>$$
 		\begin{tabular}{|c|c|c|c|}
 		\noalign{\smallskip}\noalign{\smallskip}\hline
-		& column1 & column2 & column3 \\
+		&amp; column1 &amp; column2 &amp; column3 \\
 		\hline
-		row1 & - & - & - \\
+		row1 &amp; - &amp; - &amp; - \\
 		\hline
-		row2 & - & - & - \\
+		row2 &amp; - &amp; - &amp; - \\
 		\hline
-		row3 & - & - & - \\
+		row3 &amp; - &amp; - &amp; - \\
 		\hline
 		\end{tabular}
 		$$</p>
-
-	<p>
+<p>
 		(단위 : 원)
 		\arrayrulecolor{blue}
 		\begin{tabular}{|c|c|c|c|}
 		\hline
-		\diagbox{가격}{구분} & \textbf{성인} & \textbf{아동(12세 미만)} & \textbf{유아(2세 미만)} \\ \hline \hline
-		기본 상품가 & 50,000 & 150,000 & 70,000 \\ \hline
-		유류 할증료 & 80,000 & 80,000 & 0 \\ \hline
-		\color{red}{총 가격} & 580,000 & 230,000 & 70,000 \\ \hline
+		\diagbox{가격}{구분} &amp; \textbf{성인} &amp; \textbf{아동(12세 미만)} &amp; \textbf{유아(2세 미만)} \\ \hline \hline
+		기본 상품가 &amp; 50,000 &amp; 150,000 &amp; 70,000 \\ \hline
+		유류 할증료 &amp; 80,000 &amp; 80,000 &amp; 0 \\ \hline
+		\color{red}{총 가격} &amp; 580,000 &amp; 230,000 &amp; 70,000 \\ \hline
 		\end{tabular}
 	</p>
-
-	<p>cool tikz-pictures:</p>
-	<p>$$\usetikzlibrary{decorations.pathmorphing}
+<p>cool tikz-pictures:</p>
+<p>$$\usetikzlibrary{decorations.pathmorphing}
 		\begin{tikzpicture}[line width=0.2mm,scale=1.0545]\small
 		\tikzset{&gt;=stealth}
 		\tikzset{snake it/.style={-&gt;,semithick,
@@ -100,9 +86,8 @@
 		\draw[thin](\r,0) arc (0:atan2(\p,\w):\r) node[midway,right,yshift=0.06cm] {$\theta$};
 		\draw[opacity=0](-0.40,-0.14)-- ++(0,5.06);
 		\end{tikzpicture}$$</p>
-	<p>plots:</p>
-
-	<p>$$
+<p>plots:</p>
+<p>$$
 		\begin{tikzpicture}[scale=1.0544]\small
 		\begin{axis}[axis line style=gray,
 		samples=120,
@@ -124,11 +109,11 @@
 		\end{axis}
 		\end{tikzpicture}
 		$$</p>
-	<br>
-	<p>$$
+<br/>
+<p>$$
 		\begin{tikzpicture}[scale=0.2]
-		\draw[->] (0,0) -- (0,50) node[left]{$F_{\text{\tiny K}}$};
-		\draw[->] (0,0) -- (50,0) node[below]{$K$};
+		\draw[-&gt;] (0,0) -- (0,50) node[left]{$F_{\text{\tiny K}}$};
+		\draw[-&gt;] (0,0) -- (50,0) node[below]{$K$};
 		\draw[thick] (2,48) .. controls (15,15) and (44,3) .. (48,2);
 		\node at (10,40) {$\frac{\partial F}{\partial K}$ 곡선};
 		\node at (18,-2) {$K^{*}$};
@@ -142,21 +127,21 @@
 		\draw[densely dotted] (0,13.5) -- (28,13.5);
 		\end{tikzpicture}
 		$$</p>
-	<br>
-	<p>$$
+<br/>
+<p>$$
 		\begin{tikzpicture}[scale=2]
 		% draw the axis
-		\draw [thick, ->] (-1,0) -- (5,0);
-		\draw [thick, ->] (0,-1) -- (0,2);
+		\draw [thick, -&gt;] (-1,0) -- (5,0);
+		\draw [thick, -&gt;] (0,-1) -- (0,2);
 		% draw the curve
 		\draw [blue, thick, domain=0.5:3.5] plot (\x, {-(\x-1)*(\x-3)});
 		% draw the arrows
-		\draw [->, very thick, red] (0.9,-0.21) -- (0.8,-0.44);
-		\draw [->, very thick, red] (1.1,0.19) -- (1.2,0.36);
-		\draw [->, very thick, red] (1.5,0.75) -- (1.6,0.84);
-		\draw [->, very thick, red] (2.4,0.84) -- (2.5,0.75);
-		\draw [->, very thick, red] (2.8,0.36) -- (2.9,0.19);
-		\draw [->, very thick, red] (3.2,-0.44) -- (3.1,-0.21);
+		\draw [-&gt;, very thick, red] (0.9,-0.21) -- (0.8,-0.44);
+		\draw [-&gt;, very thick, red] (1.1,0.19) -- (1.2,0.36);
+		\draw [-&gt;, very thick, red] (1.5,0.75) -- (1.6,0.84);
+		\draw [-&gt;, very thick, red] (2.4,0.84) -- (2.5,0.75);
+		\draw [-&gt;, very thick, red] (2.8,0.36) -- (2.9,0.19);
+		\draw [-&gt;, very thick, red] (3.2,-0.44) -- (3.1,-0.21);
 		% draw the labels
 		\node at (-0.2,-0.2) {$0$};
 		\node at (0,2.3){$\dfrac{dy(t)}{dt}$};
@@ -167,11 +152,11 @@
 		\node at (2.8,-0.5){$y_{2}(t)^*$};
 		\end{tikzpicture}
 		$$</p>
-	<br>
-	<p>$$
+<br/>
+<p>$$
 		\begin{tikzpicture}[scale=2]
-		\draw [thick, ->] (-2,0.5) -- (5,0.5);
-		\draw [thick, ->] (-1,-1) -- (-1,4);
+		\draw [thick, -&gt;] (-2,0.5) -- (5,0.5);
+		\draw [thick, -&gt;] (-1,-1) -- (-1,4);
 		\draw [blue, thick] (-1,0.5) -- (4,4);
 		\draw [dashed] (3.2,0.5) -- (3.2,4);
 		\draw [orange,thick] (-1,0.5) .. controls (1,3) and (3,3.5) .. (4,3.6);
@@ -186,12 +171,12 @@
 		\node at (4.5,3.6){$sy(k)$};
 		\end{tikzpicture}
 		$$</p>
-	<br>
-	<p>$$
+<br/>
+<p>$$
 		\begin{tikzpicture}[scale=2]
 		% draw the axis
-		\draw [thick, ->] (-1,0) -- (5,0);
-		\draw [thick, ->] (0,-1) -- (0,2);
+		\draw [thick, -&gt;] (-1,0) -- (5,0);
+		\draw [thick, -&gt;] (0,-1) -- (0,2);
 		% draw the curve
 		\draw [blue, thick, domain=0.5:3.5] plot (\x, {(\x-1)*(\x-3)});
 		% draw the labels
@@ -204,14 +189,9 @@
 		\node at (2.8,-0.5){$y_{2}(t)^*$};
 		\end{tikzpicture}
 		$$</p>
-	<br>
-
-	<p>I have designed and developed this lightweight editor and the service for converting LaTeX equations into
-		svg-pictures to make publishing math texts on the web easy. I consider client-side rendering, the rival
-		technique implemented in <a href="https://www.mathjax.org/">MathJax</a>, to be too limited and
-		resource-consuming, especially on mobile devices.</p>
-	<p>The source code is published on <a href="https://github.com/parpalak/upmath.me">Github</a> under MIT license.</p>
-	<p>추가된 source code는 <a href="https://github.com/kkmin1/web-latex"> 깃허브</a>에 MIT license 로 배포되었다.</p>
-	<p> 이 웹페이지의 소스코드를 보고 싶으면 cntr + U, 혹은 웹페이지 빈 화면에서 마우스 우클릭 -> 소스보기 </p>
-
-</body>
+<br/>
+<p>이 가벼운 편집기와 LaTeX 수식을 SVG 그림으로 변환하는 서비스를 만든 목적은 웹에서 수학 문서를 쉽게 게시하기 위해서다. MathJax처럼 브라우저에서 직접 렌더링하는 방식은 특히 모바일 환경에서 자원 소모가 크고 제약이 있다고 보았다.</p>
+<p>소스 코드는 GitHub에 MIT 라이선스로 공개되어 있다.</p>
+<p>추가된 source code는 <a href="https://github.com/kkmin1/web-latex"> 깃허브</a>에 MIT license 로 배포되었다.</p>
+<p> 이 웹페이지의 소스코드를 보고 싶으면 cntr + U, 혹은 웹페이지 빈 화면에서 마우스 우클릭 -&gt; 소스보기 </p>
+</body></html>

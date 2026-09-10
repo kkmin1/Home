@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="blog.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: {inlineMath: [['\\(','\\)'], ['$', '$']], displayMath: [['\\[','\\]'], ['$$','$$']]},
+  svg: {fontCache: 'global'}
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+.chapter-shell{max-width:980px;margin:0 auto;padding:28px 24px 56px;line-height:1.78}
+.chapter-shell table{border-collapse:collapse;max-width:100%;margin:1.2rem auto}
+.chapter-shell td,.chapter-shell th{border:1px solid #bbb;padding:.45rem .65rem;vertical-align:top}
+.chapter-shell h1{margin-bottom:1.2rem}
+.chapter-shell h2{margin-top:2.2rem}
+.chapter-shell h4{margin-top:1.55rem;font-size:1.12rem}
+.chapter-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:38px 0 8px;padding-top:18px;border-top:1px solid #ddd}
+.source-figure{display:block;max-width:100%;height:auto;margin:1.25rem auto}
+.source-graph{margin:1.4rem auto;text-align:center;overflow-x:auto}
+.math{overflow-x:auto}
+</style>
+<style id="econ-math-cleanup-patch">
+html{scroll-behavior:smooth}
+body{max-width:980px;margin:0 auto;padding:1.5rem 1rem 3rem;line-height:1.72;overflow-wrap:break-word}
+table{display:block;width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-collapse:collapse}
+img,svg{max-width:100%!important;height:auto!important}
+.katex-display,.math-display,div.math,p.math{max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+pre,code{max-width:100%;overflow-x:auto}
+.footnotes{margin-top:3rem;padding-top:1rem;border-top:1px solid #bbb;font-size:.92em;line-height:1.6}
+@media(max-width:640px){body{padding:.8rem .65rem 2rem;font-size:16px}h1{font-size:1.65rem}h2{font-size:1.35rem}h3{font-size:1.18rem}h4{font-size:1.05rem}}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><h1>Dornbusch Overshooting: 위상도와 정책효과</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="difference-equation.html">차분방정식</a> · <a href="difference-equation-applications2.html">6장. 경제학 응용 II</a></p><h4 style="text-align:justify">물가와 환율의 위상도</h4><p style="text-align:justify">이상을 위상도로 표현하면 다음과 같다.</p><p style="text-align:justify">기준선 <span class="math">\(\triangle e_{t} \,=\,e_{t+1} \,-\,e_{t} \,=\,0\)</span>를 고려하자. 앞의 식에서 </p><p style="text-align:justify"><span class="math">\(\,e_{t+1} \,-\,e_{t} \,=\, \frac{1}{b} [ay_{t}^{d} \,-m\,+\,p_{t} \,]-\,r_{t}^{f} \,=\,0\)</span> </p><p style="text-align:justify"><span class="math">\(\,ay_{t}^{d} \,-m\,+\,p_{t} \,=\,0\)</span></p><p style="text-align:justify"><span class="math">\(\, \rightarrow \,p_{t} \,=\,m\,-ay_{t}^{d} \,\)</span></p><p style="text-align:justify">기준선은 <span class="math">\(e_{t}\)</span>에 수평</p><p style="text-align:justify"><span class="math">\(\,e_{t+1} \,-\,e_{t} \,\)</span>는 <span class="math">\(p_{t}\)</span>의 증가함수이므로</p><p style="text-align:justify">따라서 기준선 위 쪽에서 환율은 증가한다. 아래 쪽은 감소한다. </p><p style="text-align:justify">기준선 <span class="math">\(\triangle p_{t} \,=\,p_{t+1} \,-\,p_{t} \,=\,0\)</span>를 고려하자.</p><p style="text-align:justify"><span class="math">\(p_{t+1} \,-\,p_{t} \,=\, \pi \delta e_{t} \,- \pi \delta \,p_{t} \,+\, \pi \delta p_{t}^{f} \,-\, \pi {\overline{y}} \,=\,0\)</span></p><p style="text-align:justify"><span class="math">\(\,p_{t+1} \,-\,p_{t} \,\)</span>는 <span class="math">\(p_{t}\)</span>의 감소 함수이므로</p><p style="text-align:justify">따라서 기준선 위 쪽에서 물가는 감소한다. 아래 쪽은 증가한다.</p><p style="text-align:justify">기준선의 기울기는 1이다.</p><p style="text-align:justify">이상을 고려하여 위상도를 그리면 다음과 같다.</p><figure class="source-graph"><img alt="차분방정식 그래프 38" class="source-figure" decoding="async" loading="lazy" src="media/차분방정식과_응용_graph_038.svg"/></figure><p style="text-align:justify">두 기준선의 교차점은 정상상태, 즉 균형점을 의미한다. 그림에서 해의 경로는 균형을 향해 가다가 발산하는 안장경로를 보임을 알 수 있다.<sup><a href="#fn94" id="fnref94">[94]</a></sup></p><h4 style="text-align:justify">수렴하는 안장경로의 도출</h4><p style="text-align:justify">환율과 물가가 무한대로 발산하는 경로는 버블을 포함하는 경로로서 경제적으로는 의미가 없는 해이다. 따라서 균형 상태로 수렴하는 경로를 구한다.</p><p style="text-align:justify">차분방정식의 일반해는 다음과 같이 표시되므로</p><p style="text-align:justify"><span class="math">\({\begin{pmatrix}e_{t} \\ p_{t}\end{pmatrix}}\)</span> = <span class="math">\(c_{1} \lambda_{1}^{t}\)</span><span class="math">\({\begin{pmatrix}q_{11} \\ q_{21}\end{pmatrix}}\)</span> + <span class="math">\(c_{2} \lambda_{2}^{t}\)</span><span class="math">\({\begin{pmatrix}q_{12} \\ q_{22}\end{pmatrix}}\)</span> + <span class="math">\({\begin{pmatrix}p* \\ e*\end{pmatrix}} \,\)</span>, </p><p style="text-align:justify">where <span class="math">\({\begin{pmatrix}q_{11} \\ q_{21}\end{pmatrix}}\)</span>, <span class="math">\({\begin{pmatrix}q_{12} \\ q_{22}\end{pmatrix}}\)</span>는 각각 <span class="math">\(\lambda_{1} ,\, \lambda_{2}\)</span>의 고유벡터(<span class="math">\(\lambda_{1} \,&gt;\,1\)</span>, <span class="math">\(0\,&lt; \lambda_{2} \,&lt;\,1\)</span>)</p><p style="text-align:justify"><span class="math">\(\lambda_{1} \,&gt;\,1\)</span> 이므로 발산하는 경로를 없애기 위해 <span class="math">\(c_{1} =0\)</span>라 하고 풀어쓰면</p><p style="text-align:justify"><span class="math">\(e_{t} \,=\,c_{2} \lambda_{2}^{t} q_{12} \,+\,e*\)</span> ............⑦</p><p style="text-align:justify"><span class="math">\(p_{t} \,=\,c_{2} \lambda_{2}^{t} q_{22} \,+\,p*\)</span> ............⑧</p><p style="text-align:justify">②에 초기조건 <span class="math">\(p_{0}\)</span>를 대입하면 <span class="math">\(c_{2}\)</span>를 구할 수 있다.</p><p style="text-align:justify"><span class="math">\(p_{0} \,=\,c_{2} q_{22} \,+\,p*\)</span></p><p style="text-align:justify">⇒ <span class="math">\(c_{2} \,=\, \frac{p_{0} -p*}{q_{22}}\)</span></p><p style="text-align:justify">①, ②를 <span class="math">\(\lambda_{2}^{t}\)</span>에 대해 정리하면</p><p style="text-align:justify"><span class="math">\(\lambda_{2}^{t} \,=\, \frac{e_{t} -e*}{c_{2} q_{12}} \,=\, \frac{p_{t} -p*}{c_{2} q_{22}}\)</span></p><p style="text-align:justify">⇒ <span class="math">\(\,p_{t} =\,p*\,+\, \frac{q_{22}}{q_{12}} (e_{t} -e*)\)</span></p><p style="text-align:justify">이는 균형에 수렴하는 경로이다. <span class="math">\(e_{t} ,\,p_{t}\)</span>가 이 경로상에 있을 때는 균형<span class="math">\((e*,\,p*)\)</span>에 수렴한다. 이는 유일한 수렴하는 안장경로이다. </p><p style="text-align:justify">수렴하는 안장경로의 경제적 의미는 다음과 같다. 물가와 환율이 비례적으로 움직여야 한다는 의미이다. 그렇지 않으면 arbitrage가 발생해서 환투자할 경우 이득을 볼 수 있을 것이다. 따라서 이는 no arbitrage 조건이라고도 한다. 또한 이는 해가 무한정으로 증가하는 비현실적인 버블해를 제외한다는 의미이다. </p><p style="text-align:justify">수렴하는 안장경로의 기울기는 다음과 같이 하여 파악할 수 있다.</p><p style="text-align:justify"><span class="math">\({\begin{pmatrix}q_{12} \\ q_{22}\end{pmatrix}}\)</span>는 고유벡터이므로 특성방정식 (A-<span class="math">\(\lambda\)</span>I)x = 0 에서</p><p style="text-align:justify"><span class="math">\({\begin{pmatrix}1- \lambda_{2} &amp; \frac{1}{b} \\ \pi \delta &amp; 1- \pi \delta \,- \lambda_{2}\end{pmatrix}}\)</span><span class="math">\({\begin{pmatrix}q_{12} \\ q_{22}\end{pmatrix}}\)</span> = 0</p><p style="text-align:justify">⇒ <span class="math">\(\left( 1- \lambda_{2} \right) q_{12} \,+\, \frac{1}{b} q_{22} \,=\,0\)</span></p><p style="text-align:justify"><span class="math">\(0\,&lt; \lambda_{2} \,&lt;\,1\)</span> 이므로 <span class="math">\(1- \lambda_{2} \,&gt;\,0\)</span>, <span class="math">\(\frac{1}{b} \,&gt;\,0\)</span></p><p style="text-align:justify">따라서 <span class="math">\(q_{12} ,\,q_{22}\)</span>는 부호가 반대이다.</p><p style="text-align:justify">따라서 <span class="math">\(\,p_{t} =\,p*\,+\, \frac{q_{22}}{q_{12}} (e_{t} -e*)\)</span>의 기울기는 음수임을 알 수 있다. 또한</p><p style="text-align:justify"><span class="math">\(\left( 1- \lambda_{2} \right) q_{12} \,+\, \frac{1}{b} q_{22} \,=\,0\)</span></p><p style="text-align:justify">⇒ <span class="math">\(\, \frac{1}{b} q_{22} \,=\,- \left( 1- \lambda_{2} \right) q_{12}\)</span></p><p style="text-align:justify">⇒ <span class="math">\(\, \left | \frac{q_{22}}{q_{12}} \right | =\,-b \left( 1- \lambda_{2} \right) \,&lt;\,0\)</span> </p><p style="text-align:justify">따라서 수렴하는 안장경로의 기울기는 음수, 이를 위상도 그림에 포함하면 (그림)과 같다.</p><figure class="source-graph"><img alt="차분방정식 그래프 39" class="source-figure" decoding="async" loading="lazy" src="media/차분방정식과_응용_graph_039.svg"/></figure><h4 style="text-align:justify">통화정책의 효과</h4><p style="text-align:justify">앞서 통화량의 증가는 균형 물가와 균형 환율을 증가시킴을 보았다. 이제 통화량의 변동이 어떤 과정을 거쳐 균형에 도달하는지 파악한다. </p><p style="text-align:justify">환율 기준선과 물가 기준선은 다음과 같았다.</p><p style="text-align:justify"><span class="math">\(\,p_{t} \,=\,-\, \frac{a \delta }{1-a \delta } e_{t} \,- \frac{1}{1-a \delta } (\,a \delta p_{t}^{f} \,-\,m-\,br_{t}^{f} \,)\)</span></p><p style="text-align:justify"><span class="math">\(\,p_{t} \,=\,e_{t} \,+\,p_{t}^{f} \,-\, \frac{1}{\delta } {\overline{y}} \,\)</span></p><p style="text-align:justify">정책당국이 통화공급을 예상치 못하게 증가했다면 m이 증가하면 환율 기준선이 위로 올라간다. 물가기준선은 영향이 없다.</p><p style="text-align:justify">환율 기준선이 이동하므로 새로운 균형은 <span class="math">\((e*',\,p*')\)</span>에서 발생한다. 수렴하는 안장경로도 새로운 균형점을 지나도록 형성된다. </p><figure class="source-graph"><img alt="차분방정식 그래프 40" class="source-figure" decoding="async" loading="lazy" src="media/차분방정식과_응용_graph_040.svg"/></figure><p style="text-align:justify">가격이 경직적이지 않다면 균형은 과거의 균형점<span class="math">\((e*,\,p*)\)</span>에서 즉시 새로운 균형점<span class="math">\((e*',\,p*')\)</span>으로 옮겨갈 것이다. 그러나 가격이 경직적이어서 <span class="math">\(p*\)</span>에서 변동이 없다면 <span class="math">\(p*\)</span>는 고정이고 <span class="math">\(e*\)</span>는 <span class="math">\(p*\)</span> 수평선을 따라 수평으로 이동한다. <span class="math">\(p*\)</span> 수평선상의 다른 모든 점은 발산하므로 수렴하는 유일한 점은 안장선과 만나는 <span class="math">\(e_{0}\)</span>점이다. 따라서 단기적으로 <span class="math">\((e_{0} ,\,p*)\)</span>에서 균형이 형성된다. 그림을 보면 <span class="math">\(e_{0}\)</span>는 새로운 균형인 <span class="math">\(e*'\)</span>보다 과도하게 환율이 증가했음을 보여준다. 이를 환율의 오버슈팅이라 한다. 이 모형을 overshooting 모형이라 부르는 이유이다. 환율은 가격 경직성 때문에 단기적으로 <span class="math">\(e_{0}\)</span>로 점프하지만 장기적으로는 가격이 점진적으로 변하면서 균형<span class="math">\((e*',\,p*')\)</span>에 수렴한다. 즉 통화 공급을 늘리면 환율은 큰 폭으로 증가하지만 점차 내려가서 새로운 균형인 <span class="math">\(e*'\)</span>에서 안정된다. </p><p style="text-align:justify">실물 경기변동이론(Real Business Cycle : RBC theory)</p><p style="text-align:justify">실물 경기변동이론은 경기변동이 화폐적 충격이 아니라 생산성의 실물의 충격(real shocks)에 의하여 야기된다고 보는 이론이다.</p><p style="text-align:justify">실물 경기변동론자들은 외생변수의 변화(random shocks)에 대한 반응이 생산으로 나타나고 이것이 경기의 침체/성장을 가져오는 것으로 본다. 따라서 실물 경기변동론자들은 국내의 생산수준이 어느 시점에서든 개인의 효용 극대화 윈칙을 따르고 있으므로 정부는 경기 침체를 감쇄시키거나 경기 과열을 진정시키기 위해 재정적/통화적 정책을 통한 시장개입을 삼가야 한다고 주장한다.</p><p style="text-align:justify">그러므로 실물 경기변동이론에 따르면 경기순환은 시장 청산의 실패를 나타내는 것이 아니라 경제 내에서 가능한 한 가장 효율적인 작용을 반영하고 있는 것이라는 점에서 “실물적” 현상<sup><a href="#fn95" id="fnref95">[95]</a></sup>인 것이다. 이러한 점에서 실물 경기변동이론은 경기후퇴를 일종의 시장청산의 실패로 이해하는 케인즈 경제학이나 통화주의와 구별된다.<sup><a href="#fn96" id="fnref96">[96]</a></sup></p><p style="text-align:justify">이 이론은 경기변동을 유발시키는 외부적 충격으로서 예상치 못한 통화량 변화와 같은 화폐적 요인이 아니라 생산성 혹은 기술변화와 같은 실물적 요인의 역할을 강조한다는 점에서 화폐 경기변동이론과 대비하여 실물경기 변동이론으로 불린다.</p><h4 style="text-align:justify">가정</h4><p style="text-align:justify">- Cobb-Douglas 생산함수를 가정한다.</p><p style="text-align:justify"><span class="math">\(Y_{t} \,=\,K_{t}^{\alpha } (T_{t} L_{t} ) ^{1- \alpha }\)</span> , <span class="math">\(0&lt;\alpha &lt;1\)</span></p><p style="text-align:justify"><span class="math">\(Y_{t}\)</span> : t기의 총생산, 국민소득</p><p style="text-align:justify"><span class="math">\(K_{t}\)</span> : t기의 자본</p><p style="text-align:justify"><span class="math">\(T_{t}\)</span> : t기의 기술, 노동 효율성<sup><a href="#fn97" id="fnref97">[97]</a></sup></p><p style="text-align:justify"><span class="math">\(L_{t}\)</span> : t기의 노동</p><p style="text-align:left">양변 로그를 취하면</p><p style="text-align:left"><span class="math">\(\ln Y_{t} \,=\, \alpha \ln K_{t} +(1- \alpha )\ln T_{t} +(1- \alpha )\ln L_{t}\)</span>..............①</p><p style="text-align:justify">노동은 총인구 중 일정비율이고 일정비율로 증가한다.</p><p style="text-align:left"><span class="math">\(L_{t} \,=\,lNe^{\eta t}\)</span></p><p style="text-align:left">N ; 초기 인구</p><p style="text-align:justify"><span class="math">\(\eta\)</span> : 인구증가율(일정)</p><p style="text-align:justify"><span class="math">\(l\)</span> : 노동참여율(일정)</p><p style="text-align:left">양변 로그를 취하면</p><p style="text-align:left"><span class="math">\(\ln\,L_{t} \,=\,\ln l\,+\,\ln N+ \eta t\)</span>.............②</p><p style="text-align:left">- 소비되고 남은 것은 저축한다.(케인즈 총수요 가정)</p><p style="text-align:left"><span class="math">\(Y_{t} -C_{t} \,=S_{t} \,=\,sY_{t}\)</span></p><p style="text-align:justify"><span class="math">\(C_{t}\)</span> : t기의 소비</p><p style="text-align:justify"><span class="math">\(S_{t}\)</span> : t기의 저축</p><p style="text-align:justify">s : 한계저축성향</p><p style="text-align:left">- 저축은 1년 후 전액 자본으로 전환된다. </p><p style="text-align:justify"><span class="math">\(K_{t+1} =\,S_{t} \,=\,sY_{t}\)</span></p><p style="text-align:left">- 자본은 축적되지 않고 1년 만에 다 소진된다.</p><p style="text-align:left">기술은 일정비율로 증가한다.</p><p style="text-align:left"><span class="math">\(T_{t} \,=Ae^{\gamma t} \,\)</span></p><p style="text-align:left"><span class="math">\(T_{t} \,\)</span> : t기의 기술수준</p><p style="text-align:left"><span class="math">\(\gamma\)</span> : 기술증가율</p><p style="text-align:left"><span class="math">\(\ln\,T_{t} \,=\,\ln A+ \gamma t\)</span>.................③</p><h4 style="text-align:left">풀이</h4><p style="text-align:left">①, ②, ③을 결합하면</p><p style="text-align:left"><span class="math">\(\ln Y_{t} \,=\, \alpha \ln K_{t} +(1- \alpha )\ln T_{t} +(1- \alpha )\ln L_{t}\)</span></p><p style="text-align:left"><span class="math">\(\,=\, \alpha \ln s+ \alpha \ln Y_{t-1} +(1- \alpha )(\ln A+ \gamma t)+(1- \alpha )(\,\ln l\,+\,\ln N+ \eta t)\)</span></p><p style="text-align:left"><span class="math">\(\,=\,B+ \alpha \ln Y_{t-1} +(1- \alpha )( \gamma + \eta )t\)</span> , where <span class="math">\(B\,=\, \alpha \ln s+(1- \alpha )(\ln A+\ln l+\ln N)\)</span></p><p style="text-align:left">이는 비동차항이 t의 함수인 일차 비동차 차분방정식이다.</p><p style="text-align:left">앞에서 차분방정식의 해의 공식은 다음과 같았다.</p><table aria-label="풀이 관련 표 2" style="border-collapse:collapse;table-layout:fixed;height:79.000px;width:385.813px"><colgroup><col style="width:385.813px"/></colgroup><tbody><tr style="height:79.000px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:left"><span class="math">\(y_{t} \,=\,a+bt+ \phi y_{t-1}\)</span> 의 해는 <span class="math">\(\phi \,=\,1\)</span>이 아니라면</p>
+<p style="text-align:left"><span class="math">\(y_{t} =(y_{0} - \frac{a}{1- \phi } + \frac{b \phi }{(1- \phi ) ^{2}} ) \phi^{t} \,+ \frac{a}{1- \phi } - \frac{b \phi }{(1- \phi ) ^{2}} + \frac{b}{1- \phi } t\)</span></p>
+</td></tr></tbody></table><p style="text-align:left"><span class="math">\(\alpha != 1\)</span> 이므로 이를 적용하면 </p><p style="text-align:left"><span class="math">\(\ln Y_{t} = \left( \ln Y_{0} - \frac{B}{1- \alpha } + \frac{(1- \alpha )( \gamma + \eta ) \alpha }{(1- \alpha ) ^{2}} \right) \alpha^{t} \,+ \frac{B}{1- \alpha } - \frac{(1- \alpha )( \gamma + \eta ) \alpha }{(1- \alpha ) ^{2}} + \frac{(1- \alpha )( \gamma + \eta )}{1- \alpha } t\)</span></p><p style="text-align:left"><span class="math">\(= \left( \ln Y_{0} - \frac{B}{1- \alpha } + \frac{( \gamma + \eta ) \alpha }{(1- \alpha )} \right) \alpha^{t} \,+ \frac{B}{1- \alpha } - \frac{( \gamma + \eta ) \alpha }{(1- \alpha )} +( \gamma + \eta )t\)</span></p><p style="text-align:left"><span class="math">\(0&lt; \alpha &lt;1\)</span> 이므로 해는 일정 비율로 증가하면서 안정적으로 직선 <span class="math">\(\frac{B}{1- \alpha } - \frac{( \gamma + \eta ) \alpha }{(1- \alpha )} +( \gamma + \eta )t\)</span> 에 수렴한다.</p><p style="text-align:left"><span class="math">\(\ln Y_{0} \,=\, \frac{B}{1- \alpha } - \frac{\alpha ( \eta + \gamma )}{1- \alpha }\)</span> 라 하면</p><p style="text-align:left"><span class="math">\({\ln Y_{t} \,=\, \frac{B}{1- \alpha } - \frac{( \gamma + \eta ) \alpha }{(1- \alpha )} +( \gamma + \eta )}\)</span></p><p style="text-align:left">∴ <span class="math">\(Y_{t} \,=\,\exp ( \frac{B}{1- \alpha } - \frac{( \gamma + \eta ) \alpha }{(1- \alpha )} +( \gamma + \eta )t)\)</span></p><p style="text-align:left"><span class="math">\(\frac{dY_{t}}{dt} =( \gamma + \eta )Ke^{( \gamma + \eta )t} \,\)</span>, where <span class="math">\(K=\exp ( \frac{B}{1- \alpha } - \frac{( \gamma + \eta ) \alpha }{(1- \alpha )} )\)</span></p><p style="text-align:left"><span class="math">\(\frac{dY_{t}}{dt} /Y_{t} = \gamma + \eta\)</span></p><p style="text-align:justify">따라서 국민소득 증가율은 <span class="math">\((\gamma + \eta )\)</span>이다. <span class="math">\((\gamma + \eta )\)</span>는 장기성장률로 인구증가율과 기술진보율의 합이다.<sup><a href="#fn98" id="fnref98">[98]</a></sup> 따라서 국민소득은 매년 인구증가율과 기술진보율 만큼 증가할 것이다. 인구 증가와 기술진보가 경제 성장에 중요한 역할을 함을 알 수 있다. 특히 인구 증가가 경제 성장에 중요한 역할을 함은 인구 정체 국가에 시사하는 점이 크다.</p><section class="related-documents" id="related-documents"><h2>관련 문서</h2><ul><li><a href="difference-equation-applications1.html">차분방정식 응용 I</a></li><li><a href="differential-equation-applications.html">미분방정식 응용</a></li><li><a href="dynamic-programming.html">동적계획법</a></li></ul></section><hr/><section class="footnotes">
+<ol>
+<li id="fn48"><p style="text-align:justify"> http://terms.naver.com/entry.nhn?docId=779232 </p>
+<a href="#fnref48">↩</a></li>
+<li id="fn49"><p style="text-align:justify"> 가속도 이론은 초기 케인즈 학파가 미국과 유럽을 대상으로 경험적 분석을 한 결과 고정투자를 변동시키는데 이자율이 별 역할을 하지 못했다는 사실에서 시작. 투자행위 분석에서 이자율에 상관없이 자본스톡의 조정에 초점을 맞춘다. 김준영, 거시경제학 강의노트. 21장 투자. 참조</p>
+<a href="#fnref49">↩</a></li>
+<li id="fn50"><p style="text-align:justify"> 투자의 가속도원리를 나타내며 소비의 증가분을 충족시키기 위해 신규투자가 이루어져야 함을 의미한다. 가속도조절계수(<span class="math">\(\gamma\)</span>)는 1 보다 클 수가 있다. 이는 자본의 불가분성으로 인해 소득이 10% 증가하더라도 자본은 자연수배 즉, 1, 2, 3배 증가해야 하기 때문</p>
+<a href="#fnref50">↩</a></li>
+<li id="fn51"><p style="text-align:justify"> ∵ 2차 방정식 두 근과 계수와의 관계에 의해 <span class="math">\(r_{1} +r_{2} = \alpha (1+ \gamma )\,,\;r_{1} r_{2} \,=\, \gamma \alpha\)</span></p>
+<a href="#fnref51">↩</a></li>
+<li id="fn52"><p style="text-align:justify"> 허수가 들어가므로 루트안의 부호가 바뀜에 주의</p>
+<a href="#fnref52">↩</a></li>
+<li id="fn53"><p style="text-align:justify"> http://blog.daum.net/economicstyle/13105240 </p>
+<a href="#fnref53">↩</a></li>
+<li id="fn54"><p style="text-align:justify"> http://www.oneroomclub.com/bebehouse/board/focus/view.asp?pg=4&amp;no=574&amp; </p>
+<a href="#fnref54">↩</a></li>
+<li id="fn55"><p style="text-align:justify"> N. kaldor 가 1938년 논문에서 최초로 명명</p>
+<a href="#fnref55">↩</a></li>
+<li id="fn56"><p style="text-align:justify"> 주택 가격이 거미집 모형으로 설명된다는 주장은 재고의 여지가 있다. 실제 주택 가격은 일관적으로 상승하거나 일관적으로 하락하거나 하는 경우가 대부분으로 주택가격이 균형가격(원가)을 중심으로 요동치는 경우는 현실적으로 찾아보기 어렵다.</p>
+<a href="#fnref56">↩</a></li>
+<li id="fn57"><p style="text-align:justify"> 옥수수, 돼지고기와 같은 非貯藏性財(non-storablee goods)에 적합</p>
+<a href="#fnref57">↩</a></li>
+<li id="fn58"><p style="text-align:justify"> If the supply curve is less steep than the demand curve near the point where the two curves cross, but more steep when we move sufficiently far away, then prices and quantities will spiral away from the equilibrium price but will not diverge indefinitely; instead, they may converge to a limit cycle. http://en.wikipedia.org/wiki/Cobweb_model </p>
+<a href="#fnref58">↩</a></li>
+<li id="fn59"><p style="text-align:justify"> 일반적인 수요, 공급곡선 그림과 P, Q 축이 반대로 되어있음에 유의. P가 x축이 되고 Q가 y축이 되면 기울기의 개념이 반대로 된다. 이 경우 수렴하기 위해서는 공급곡선의 기울기 절대값이 수요곡선의 기울기 절대값보다 커야 한다.</p>
+<a href="#fnref59">↩</a></li>
+<li id="fn60"><p style="text-align:justify"> ‘적응적 기대’ 참조</p>
+<a href="#fnref60">↩</a></li>
+<li id="fn61"><p style="text-align:justify"> 농가소득안정 직불제란 농가 단위로 기준소득을 정한 뒤 실제소득이 기준보다 낮을 때 부족분의 일부를 보전해 주는 직접지불제를 말한다. 농림수산식품부는 2013년 시행을 목표로 쌀·콩·고추·사과·포도·감귤·한우·돼지·산란계, 감자·쌀보리·배추·마늘·오이·대파·배·육우·번식우·인삼 등을 대상품목으로 선정했다. http://www.nongmin.com/article/ar_detail.htm?ar_id=193180&amp;subMenu=articletotal </p>
+<a href="#fnref61">↩</a></li>
+<li id="fn62"><p style="text-align:justify"> http://blog.naver.com/bluesky__1?Redirect=Log&amp;logNo=140148311770 </p>
+<a href="#fnref62">↩</a></li>
+<li id="fn63"><p style="text-align:justify"> http://en.wikipedia.org/wiki/Cobweb_model 참조</p>
+<a href="#fnref63">↩</a></li>
+<li id="fn64"><p style="text-align:justify"> http://terms.naver.com/entry.nhn?docId=50261 </p>
+<a href="#fnref64">↩</a></li>
+<li id="fn65"><p style="text-align:justify"> &lt;클릭 경제교육. &lt;KDI&gt; http://click.kdi.re.kr/customer/search_list.jsp?Top_keyword=%C7%D7%BB%F3%BC%D2%B5%E6%B0%A1%BC%B3&amp;x=0&amp;y=0 </p>
+<a href="#fnref65">↩</a></li>
+<li id="fn66"><p style="text-align:justify"> http://en.wikipedia.org/wiki/Permanent_income_hypothesis </p>
+<a href="#fnref66">↩</a></li>
+<li id="fn67"><p style="text-align:justify"> 그러나 실증적 연구결과는 이를 뒷받침하고 있지 않다.</p>
+<a href="#fnref67">↩</a></li>
+<li id="fn68"><p style="text-align:justify"> <span class="math">\(0\,&lt;\, \alpha \,&lt;\,1\)</span> 이므로</p>
+<a href="#fnref68">↩</a></li>
+<li id="fn69"><p style="text-align:justify"> 1국의 경제가 대표적인 한 기업에 의해 생산물이 산출된다는 가정이다.</p>
+<a href="#fnref69">↩</a></li>
+<li id="fn70"><p style="text-align:justify"> 장비와 구조물의 가치로 측정</p>
+<a href="#fnref70">↩</a></li>
+<li id="fn71"><p style="text-align:justify"> 노동시간 또는 노동인구로 측정</p>
+<a href="#fnref71">↩</a></li>
+<li id="fn72"><p style="text-align:justify"> 이나다 조건은 내부해의 존재를 위해 필요한 조건이다. 뒷 부분 해의 존재 증명에 필요</p>
+<a href="#fnref72">↩</a></li>
+<li id="fn73"><p style="text-align:justify"> 최종생산물의 일부는 투자로 사용된다는 단순화된 가정이다. 케인즈 총수요모형에 따라 정부지출이 포함될 수 있지만 솔로모형에서는 중요한 역할을 하지 않기 때문에 분석에서 제외한다.</p>
+<a href="#fnref73">↩</a></li>
+<li id="fn74"><p style="text-align:justify"> 대표적인 가계가 매년 일정 비율을 저축한다는 가정은 다소 비현실적이다.</p>
+<a href="#fnref74">↩</a></li>
+<li id="fn75"><p style="text-align:justify"> 인구가 증가하면 두당 자본량이 줄어든다. 따라서 이를 상쇄하기 위해 추가 투자가 필요하다.</p>
+<a href="#fnref75">↩</a></li>
+<li id="fn76"><p style="text-align:justify"> ‘볼록함수/오목함수’ 따름정리 참조. 강오목함수일 때 지지선 정리 <span class="math">\(f(k)\,&lt;\,f(0)\,+\,kf ' (0)\)</span>와 혼동 말 것.</p>
+<a href="#fnref76">↩</a></li>
+<li id="fn77"><p style="text-align:justify"> 다음으로 증명할 수도 있다. <span class="math">\(Y\,=\,Lf(k)\)</span>이고, 노동의 한계생산물은 양이므로 </p>
+<p style="text-align:justify"> <span class="math">\(\frac{\partial Y}{\partial L} \,=\,f(k)\,+Lf ' (k) \frac{\partial k}{\partial L} \,=\,f(k)\,+Lf ' (k) \left( - \frac{K}{L^{2}} \right) \,=f(k)\,-\,kf'(k)\,&gt;\,0\,\)</span></p>
+<a href="#fnref77">↩</a></li>
+<li id="fn78"><p style="text-align:justify"> ‘위상도 분석’ 참조</p>
+<a href="#fnref78">↩</a></li>
+<li id="fn79"><p style="text-align:justify">  뒤에 생산함수의 가정 완화 참조.</p>
+<a href="#fnref79">↩</a></li>
+<li id="fn80"><p style="text-align:justify"> 1차동차 생산함수가 아니라면 생산물은 노동, 자본과 같은 비율로 증가하지 않는다. 따라서 정상상태가 항상 균등성장경로를 의미하지는 않는다.</p>
+<a href="#fnref80">↩</a></li>
+<li id="fn81"><p style="text-align:justify"> 소비의 증가는 효용을 증가시킨다는 것이 전제되어 있다.</p>
+<a href="#fnref81">↩</a></li>
+<li id="fn82"><p style="text-align:justify"> 이런 유형의 생산성을 ‘힉스중립’이라 한다. 다른 유형으로 자본 또는 노동변수 앞에 생산성 요소를 붙이는 것도 있다.</p>
+<a href="#fnref82">↩</a></li>
+<li id="fn83"><p style="text-align:justify"> AK 모형이라고도 한다.</p>
+<a href="#fnref83">↩</a></li>
+<li id="fn84"><p style="text-align:justify"> ‘위상도 분석’ 혼돈이론 참조</p>
+<a href="#fnref84">↩</a></li>
+<li id="fn85"><p style="text-align:justify"> 이는 경기변동이 자본주의의 고유한 특성이라고 주장하는 마르크스 주의와 같은 견해이다. 경기변동의 혼돈이론은 유럽의 특히 좌파주의 경제학자 중에서 활발히 연구되고 있다. 반면 북미의 경제학자중에는 경기 변동이 외부 충격에 대한 반응에서 온다는 견해가 지배적이다.</p>
+<a href="#fnref85">↩</a></li>
+<li id="fn86"><p style="text-align:justify"> http://blog.naver.com/zwelf12?Redirect=Log&amp;logNo=10167894966 참조</p>
+<a href="#fnref86">↩</a></li>
+<li id="fn87"><p style="text-align:justify"> http://terms.naver.com/entry.nhn?cid=520&amp;docId=70554&amp;mobile&amp;categoryId=520 </p>
+<a href="#fnref87">↩</a></li>
+<li id="fn88"><p style="text-align:justify"> 이는 단순화된 가정이다. 화폐수요는 본래 잠재산출량 y가 아니라 총수요 <span class="math">\(y_{t}^{d}\)</span>에 의존해야 하지만, 설명을 간단히 하기 위해 여기서는 이와 같이 단순화한다.</p>
+<a href="#fnref88">↩</a></li>
+<li id="fn89"><p style="text-align:justify"> 환율이란 자국화폐로 표현한 외국화폐 1단위의 가격을 의미한다. 따라서 환율이 높다는 것은 자국의 화폐가치가 하락한다는 것을 의미한다.</p>
+<a href="#fnref89">↩</a></li>
+<li id="fn90"><p style="text-align:justify"> 실질환율이란 외환시장에서 매일 고시되는 이종통화간의 환율인 명목환율(nominal exchange rate)이 두 나라간의 물가변동을 반영하지 못하는 문제점이 있으므로 이를 감안하여 구매력 변동을 반영하도록 조정한 환율을 말한다. 실질환율은 자국의 환율을 물가차이로 나눈 것이다. <span class="math">\(E_{t}^{r} \,=\,E_{t} / \frac{P_{t} }{P_{t}^{f}}\)</span> 실질환율은 국가간에 있어서 동일 상품의 가격은 동일 통화로 표시할 때 같아야 한다는 일물일가의 법칙(the law of one price)을 말한다. 즉 <span class="math">\(E_{t} \,=\, \frac{P_{t} }{P_{t}^{f}}\)</span>. 앞의 식에서 구한 일정시점의 실질환율이 1과 같다면 양국통화간에 구매력이 평가를 이루어 일물일가의 법칙(PPP(purchasing power parity)이 성립함을, 1보다 크면 자국통화가 저평가되어 있음을, 1보다 작으면 자국통화가 고평가되어 있음을 의미한다고 볼 수 있다. 그러나 일물일가의 법칙이 성립하기 위해서는 실질환율의 산출을 위하여 물가에 포함되는 상품이 교역가능하고 동질적이며 거래비용이 없어야 한다는 등의 제약이 있다.</p>
+<p style="text-align:justify">http://terms.naver.com/entry.nhn?docId=779274&amp;cid=520&amp;categoryId=520 </p>
+<a href="#fnref90">↩</a></li>
+<li id="fn91"><p style="text-align:justify"> 국제금융거래에는 계약시점과 거래시점이 동시에 이루어지지 않을 수 있다. 이 때문에 거래에 있어 리스크가 발생하게 되는데, 거래시점 환율을 미리 결정하여 리스크를 없애는 것을 ‘Covered’라 하고, 거래시점 환율을 그 때의 시세에 맡기는 것을 ‘Uncovered’라 한다. </p>
+<p style="text-align:justify">   http://blog.naver.com/zwelf12?Redirect=Log&amp;logNo=10167894966 참조</p>
+<a href="#fnref91">↩</a></li>
+<li id="fn92"><p style="text-align:justify"> r이 0에 근접한 작은 값이면 성립. ‘테일러급수’ 참조</p>
+<a href="#fnref92">↩</a></li>
+<li id="fn93"><p style="text-align:justify"> 유동가격모형(Flexible Price Model)은 화폐수요나 총생산, 이자율이 변할 경우 가격이 즉시 신축적으로 반응하면서 환율을 결정한다는 이론이다. 가격이 즉시 변동한다는 점이 고정가격모형과의 차이이다. 유동가격모형의 전제는 PPP 유지, UIRP 유지이다. 고정가격모형의 전제는 PPP 비유지, UIRP 유지이다.</p>
+<a href="#fnref93">↩</a></li>
+<li id="fn94"><p style="text-align:justify"> 고유값이 모두 양수이어야 위상도 분석이 의미가 있다. 어느 한 고유값이 음수라면 위상도 분석은 실제 결과와 다를 수 있다. 이에 대해서는 앞의 ‘위상도 분석의 문제점’ 참조.</p>
+<a href="#fnref94">↩</a></li>
+<li id="fn95"><p style="text-align:justify"> 통화정책으로 인한 경기 변동과 대비되는 의미</p>
+<a href="#fnref95">↩</a></li>
+<li id="fn96"><p style="text-align:justify"> http://en.wikipedia.org/wiki/Real_business_cycle_theory </p>
+<a href="#fnref96">↩</a></li>
+<li id="fn97"><p style="text-align:justify"> 핀 키들랜드(Finn E. Kydland)와 에드워드 프레스콧(Edward C. Prescott)은 이러한 요인을 기술충격, 즉 생산성 수준의 무작위 변동으로 보았다. 기술혁신, 악천후, 수입 원유가격 상승, 환경·안전 규제 강화 등이 그 예다. 이런 충격은 자본이나 노동의 생산성을 직접 변화시키고, 그 결과 가계와 기업의 의사결정과 소비·생산이 달라져 최종적으로 산출량에 영향을 준다. 실물경기변동(RBC) 모형은 이러한 충격이 주어졌을 때 소비·투자 등의 시간에 따른 배분경로를 예측한다.</p>
+<a href="#fnref97">↩</a></li>
+<li id="fn98"><p style="text-align:justify"> 기간 t의 성장률은 <span class="math">\(\lim\limits_{\triangle t \to 0} {\frac{f(t+ \triangle t)-f(t)}{f(t) \triangle t} \,= \frac{f ' (t)}{f(t)} \,}\)</span></p>
+<p style="text-align:left">예) <span class="math">\(f(t)\,=A\,e^{\mu t}\)</span> 의 성장률은 <span class="math">\(f ' (t)= \mu Ae^{\mu t}\)</span>, <span class="math">\(\frac{f ' (t)}{f(t)} = \frac{\mu Ae^{\mu t}}{Ae^{\mu t}} = \mu\)</span></p>
+<a href="#fnref98">↩</a></li>
+</ol>
+</section><div class="chapter-nav"><a href="difference-equation-applications1.html">← 이전 장</a><a href="difference-equation.html">차분방정식 목차</a><span></span></div><h2>각주</h2><ol class="footnotes"><li id="fn94"><p style="text-align:justify"> 고유값이 모두 양수이어야 위상도 분석이 의미가 있다. 어느 한 고유값이 음수라면 위상도 분석은 실제 결과와 다를 수 있다. 이에 대해서는 앞의 ‘위상도 분석의 문제점’ 참조.</p>
+<a href="#fnref94">↩</a></li><li id="fn95"><p style="text-align:justify"> 통화정책으로 인한 경기 변동과 대비되는 의미</p>
+<a href="#fnref95">↩</a></li><li id="fn96"><p style="text-align:justify"> http://en.wikipedia.org/wiki/Real_business_cycle_theory </p>
+<a href="#fnref96">↩</a></li><li id="fn97"><p style="text-align:justify"> 핀 키들랜드(Finn E. Kydland)와 에드워드 프레스콧(Edward C. Prescott)은 이러한 요인을 기술충격, 즉 생산성 수준의 무작위 변동으로 보았다. 기술혁신, 악천후, 수입 원유가격 상승, 환경·안전 규제 강화 등이 그 예다. 이런 충격은 자본이나 노동의 생산성을 직접 변화시키고, 그 결과 가계와 기업의 의사결정과 소비·생산이 달라져 최종적으로 산출량에 영향을 준다. 실물경기변동(RBC) 모형은 이러한 충격이 주어졌을 때 소비·투자 등의 시간에 따른 배분경로를 예측한다.</p>
+<a href="#fnref97">↩</a></li><li id="fn98"><p style="text-align:justify"> 기간 t의 성장률은 <span class="math">\(\lim\limits_{\triangle t \to 0} {\frac{f(t+ \triangle t)-f(t)}{f(t) \triangle t} \,= \frac{f ' (t)}{f(t)} \,}\)</span></p>
+<p style="text-align:left">예) <span class="math">\(f(t)\,=A\,e^{\mu t}\)</span> 의 성장률은 <span class="math">\(f ' (t)= \mu Ae^{\mu t}\)</span>, <span class="math">\(\frac{f ' (t)}{f(t)} = \frac{\mu Ae^{\mu t}}{Ae^{\mu t}} = \mu\)</span></p>
+<a href="#fnref98">↩</a></li></ol><p class="section-nav">← <a href="difference-equation-applications2-dornbusch-model.html">Dornbusch Overshooting: 모형과 해</a> · <a href="difference-equation-applications2.html">절별 목차</a> · 끝 →</p></body></html>

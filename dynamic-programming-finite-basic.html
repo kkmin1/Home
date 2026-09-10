@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>이산시간 동적계획과 유한기간</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>동적계획법 (Dynamic Programming)</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>이산시간 동적계획과 유한기간</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-programming.html">동적계획법 (Dynamic Programming)</a></p><h4 id="이산시간-discrete-time-문제" style="text-align:justify">이산시간(discrete time) 문제 </h4><h4 id="기간이-유한인-경우" style="text-align:justify">기간이 유한인 경우</h4><p style="text-align:justify">대부분의 경제문제는 다기간에 걸친 동적 최적화문제가 많다. 다음의 문제를 문제 A라 하자.</p><p style="text-align:justify">max <span class="math">V_{t} \,=\, \sum\limits_{t=0}^{\top} f(y_{t} ,\,u_{t} )</span></p><p style="text-align:justify">s.t   <span class="math">\,y_{t+1} =g_{t} (y_{t} ,\,u_{t} )\,,\,t=\,0,\,1,\,...,\,T-1</span></p><p style="text-align:justify"> <span class="math">y_{0} \,=\,A</span></p><p style="text-align:justify"><span class="math">y_{t}</span>는 상태변수, <span class="math">u_{t}</span>는 통제변수, f는 오목함수이고 제약식은 볼록집합이고 compact 집합이다.<sup><a href="#fn33" id="fnref33">[33]</a></sup></p><p style="text-align:justify">동적계획에서 제약식을 전환 방정식(transition equation)이라고도 한다. 이때 목적식과 제약식의 시간 가법 분할성을 가정하는 것이 중요하다. 시간에 따른 가법적 분리(time-additive separability)는 서로 다른 상태변수와 통제변수의 상호작용을 허용하지만, 그 상호작용은 동일한 기간 안에서만 허용된다.</p><p style="text-align:justify">이제 시간 s(<span class="math">0 \leq s \leq T</span>)부터 시작하는 더 작은 문제 B를 고려하자. </p><p style="text-align:justify">max <span class="math">V_{t} \,=\, \sum\limits_{t=s}^{\top} f(y_{t} ,\,u_{t} )</span></p><p style="text-align:justify">s.t   <span class="math">\,y_{t+1} =g_{t} (y_{t} ,\,u_{t} )\,,\,t=\,s,\,s+1,\,...,\,T-1</span></p><p style="text-align:justify"> <span class="math">y_{s} \,=\,B</span></p><p style="text-align:justify">Bellman의 최적성의 원리를 따를 때 {<span class="math">y_{t}^{*}</span>}가 문제 A의 해라면 {<span class="math">y_{t}^{*}</span>}는 또한 문제 B의 해도 된다는 것이다. 이것이 성립하는 것은 목적함수의 시간 가법분할성 때문이다.</p><p style="text-align:justify">역추론방법(backward induction method)을 이용하여 문제를 풀면 다음과 같다.<sup><a href="#fn34" id="fnref34">[34]</a></sup></p><p style="text-align:justify">기간 T에서 최대값 : </p><p style="text-align:justify"><span class="math">V_{\scriptscriptstyle {T}} (y_{\scriptscriptstyle {T}} )= \,\max_{u_{\scriptscriptstyle {T}}} \, \left\{ \,f_{\scriptscriptstyle {T}} (y_{\scriptscriptstyle {T}} ,\,u_{\scriptscriptstyle {T}} ) \right\}</span></p><p style="text-align:justify">기간 (T-1)에서 최대값 : </p><p style="text-align:justify"><span class="math">V_{\scriptscriptstyle {T-1}} (y_{\scriptscriptstyle {T-1}} )= \max_{u_{\scriptscriptstyle {T-1}}} \left\{ f_{\scriptscriptstyle {T-1}} (y_{\scriptscriptstyle {T-1}} ,\,u_{\scriptscriptstyle {T-1}} )+V_{\scriptscriptstyle {T}} (y_{\scriptscriptstyle {T}} ) \right\}</span></p><p style="text-align:justify"><span class="math">= \,\max_{u_{\scriptscriptstyle {T-1}}} \left\{ f_{\scriptscriptstyle {T-1}} (y_{\scriptscriptstyle {T-1}} ,\,u_{\scriptscriptstyle {T-1}} )+V_{\scriptscriptstyle {T}} (g_{\scriptscriptstyle {T-1}} (y_{\scriptscriptstyle {T-1}} ,\,u_{\scriptscriptstyle {T-1}} )] \right\}</span>, (∵ <span class="math">\,y_{\scriptscriptstyle {T}} =g_{\scriptscriptstyle {T-1}} (y_{\scriptscriptstyle {T-1}} ,\,u_{\scriptscriptstyle {T-1}} )\,</span>)</p><p style="text-align:center">⦙</p><p style="text-align:justify">기간 (T-t)에서 최대값 : </p><p style="text-align:justify"><span class="math">V_{\scriptscriptstyle {T-t}} (y_{\scriptscriptstyle {T-t}} )=\, \max_{u_{\scriptscriptstyle {T-t}}} \, \left\{ f_{\scriptscriptstyle {T-t}} (y_{\scriptscriptstyle {T-t}} ,\,u_{\scriptscriptstyle {T-t}} )+V_{\scriptscriptstyle {T-t+1}} (y_{\scriptscriptstyle {T-t+1}} ) \right\}</span></p><p style="text-align:justify"><span class="math">=\,\max_{u_{\scriptscriptstyle {T-t}}} \, \left\{ f_{\scriptscriptstyle {T-t}} (y_{\scriptscriptstyle {T-t}} ,\,u_{\scriptscriptstyle {T-t}} )+V_{\scriptscriptstyle {T-t+1}} (g_{\scriptscriptstyle {T-t}} (y_{\scriptscriptstyle {T-t}} ,\,u_{\scriptscriptstyle {T-t}} )] \right\}</span></p><p style="text-align:center">⦙</p><p style="text-align:justify">기간 0에서 최대값 : </p><p style="text-align:justify"><span class="math">V_{0} (y_{0} )= \,\max_{u_{0}} \, \left\{ f_{0} (y_{0} ,\,u_{0} )+V_{1} (y_{1} ) \right\}</span><span class="math">= \,\max_{u_{0}} \, \left\{ f_{0} (y_{0} ,\,u_{0} )+V_{1} (g_{0} (y_{0} ,\,u_{0} ) \right\}</span></p><p style="text-align:justify"><span class="math">y_{0} \,=\,A</span>로 주어진 값이므로 <span class="math">V_{0}</span>는 <span class="math">u_{0}</span>의 함수로 표현된다. 이 문제에서 최적인 <span class="math">u_{0}^{*}</span>가 도출된다.</p><p style="text-align:justify">이후 제약식을 통해 {<span class="math">y_{t}</span>}, {<span class="math">u_{t}</span>}가 차례로 도출된다.</p><p style="text-align:justify">여기서 V를 가치함수(value function)이라 한다. 일반적으로 (T-t)기에서의 가치함수는 다음과 같은 순환식으로 표현된다. 이를 Bellman 방정식(Bellman‘s equation)이라고 한다.</p><table aria-label="기간이 유한인 경우 관련 표 5" style="border-collapse:collapse;table-layout:fixed;height:112.213px;width:400.933px"><colgroup><col style="width:400.933px"/></colgroup><tbody><tr style="height:62.053px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:justify"><span class="math">V_{\scriptscriptstyle {T-t}} (y_{\scriptscriptstyle {T-t}} )=\, \max_{u_{\scriptscriptstyle {T-t}}} \, \left\{ f_{\scriptscriptstyle {T-t}} (y_{\scriptscriptstyle {T-t}} ,\,u_{\scriptscriptstyle {T-t}} )+V_{\scriptscriptstyle {T-t+1}} (y_{\scriptscriptstyle {T-t+1}} ) \right\}</span></p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify">또는 T - t = s라 하면</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify"><span class="math">V_{s} (y_{s} )=\,\max_{u_{s}} \, \left\{ f_{s} (y_{s} ,\,u_{s} )+V_{s+1} (y_{s+1} ) \right\}</span></p>
+</td></tr></tbody></table><p style="text-align:justify">Bellman 방정식을 <span class="math">u_{s}</span>에 대해 풀면 통제변수는 상태변수의 함수로 표현된다. 즉, <span class="math">u_{s} \,=\,h(y_{s} )</span></p><p style="text-align:justify">통제변수를 상태변수의 함수로 표현한 것을 정책함수(policy function)이라 한다. 정책함수는 각 상태에 따라 최선의 의사결정방식을 묘사한다.</p><p style="text-align:justify">예) 다음의 문제를 동적계획법으로 풀어라.</p><p style="text-align:justify">(a)</p><p style="text-align:justify">min <span class="math">\sum\limits_{t=0}^{2} \frac{1}{2} (y_{t}^{2} \,+\,u_{t}^{2} )</span></p><p style="text-align:justify">s.t  <span class="math">y_{t+1} \,=\,y_{t} \,+\,u_{t}</span>, <span class="math">t=0,\,1,\,2</span></p><p style="text-align:justify"> <span class="math">y_{0} \,=\,5\,</span></p><p style="text-align:justify">(b)</p><p style="text-align:justify">min <span class="math">V= \sum\limits_{t=0}^{2} u_{t}^{2}</span></p><p style="text-align:justify">s.t  <span class="math">\sum\limits_{t=0}^{2} u_{t} \,=\,10</span></p><p style="text-align:justify"> <span class="math">\,u_{t} \geq 0,\;t=0,\,1,\,2</span></p><p style="text-align:justify">(c)</p><p style="text-align:justify">max <span class="math">(xy) ^{2} \,+\,z</span></p><p style="text-align:justify">s.t   <span class="math">x+y+z\,=\,3</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">(a)</p><p style="text-align:justify">이 문제는 앞의 라그란지안 방법, 해밀토니안 방법의 예와 동일한 문제이다. </p><p style="text-align:justify">이 문제의 Bellman 방정식은</p><p style="text-align:justify"><span class="math">V_{t} (y_{t} )\,=\min_{u_{t}} [ \frac{1}{2} (y_{t}^{2} \,+\,u_{t}^{2} )+V_{t+1} (y_{t+1} )]</span>, t = 0,1,2</p><p style="text-align:justify">2기 이후는 존재하지 않으므로 <span class="math">V_{3} (y_{3} )=0</span></p><p style="text-align:justify">i) 2기</p><p style="text-align:justify"><span class="math">V_{2} (y_{2} )\,=\,\min_{u_{2}} \, \left\{ \frac{1}{2} (y_{2}^{2} \,+\,u_{2}^{2} )\,+\,V_{3} (y_{3} ) \right\}</span><span class="math">=\,\min_{u_{2}} \, \left\{ \frac{1}{2} (y_{2}^{2} \,+\,u_{2}^{2} ) \right\}</span></p><p style="text-align:justify"><span class="math">h(u_{2} )\,=\, \frac{1}{2} (y_{2}^{2} \,+\,u_{2}^{2} )\,</span>는 <span class="math">u_{2} =0</span> 일 때 최소값</p><p style="text-align:justify">⇒ <span class="math">u_{2} \,=\,0</span>, <span class="math">V_{2} (y_{2} )\,=\, \frac{1}{2} y_{2}^{2}</span> </p><p style="text-align:justify">ii) 1기</p><p style="text-align:justify"><span class="math">V_{1} (y_{1} )\,=\,\min_{u_{1}} \, \left\{ \frac{1}{2} (y_{1}^{2} \,+\,u_{1}^{2} )\,+\,V_{2} (y_{2} ) \right\}</span><span class="math">=\,\min_{u_{1}} \, \left\{ \frac{1}{2} (y_{1}^{2} \,+\,u_{1}^{2} )\,+\, \frac{1}{2} y_{2}^{2} \right\}</span></p><p style="text-align:justify"><span class="math">=\,\min_{u_{1}} \, \left\{ \frac{1}{2} (y_{1}^{2} \,+\,u_{1}^{2} )\,+\, \frac{1}{2} (y_{1} \,+\,u_{1} ) ^{2} \right\}</span></p><p style="text-align:justify"><span class="math">f(u_{1} )=\, \frac{1}{2} (y_{1}^{2} \,+\,u_{1}^{2} )\,+\, \frac{1}{2} (y_{1} \,+\,u_{1} ) ^{2}</span> 이라 하면</p><p style="text-align:justify"><span class="math">\frac{\partial f}{\partial u_{1}} \,=u_{1} \,+\,(y_{1} +u_{1} )\,=\,0</span></p><p style="text-align:justify">⇒ <span class="math">u_{1} \,=\,- \frac{1}{2} y_{1}</span>, <span class="math">V_{1} (y_{1} )\,=\, \frac{3}{4} y_{1}^{2}</span> ...........<sup><a href="#fn35" id="fnref35">[35]</a></sup></p><p style="text-align:justify">iii) 0기</p><p style="text-align:justify"><span class="math">V_{0} (y_{0} )\,=\,\min_{u_{0}} \, \left\{ \frac{1}{2} (y_{0}^{2} \,+\,u_{0}^{2} )\,+\,V_{1} (y_{1} ) \right\}</span><span class="math">=\,\min_{u_{0}} \, \left\{ \frac{1}{2} (y_{0}^{2} \,+\,u_{0}^{2} )\,+\, \frac{3}{4} y_{1}^{2} \right\}</span></p><p style="text-align:justify"><span class="math">=\,\min_{u_{0}} \, \left\{ \frac{1}{2} (25\,+\,u_{0}^{2} )\,+\, \frac{3}{4} (5+u_{0} ) ^{2} \right\}</span></p><p style="text-align:justify"> <span class="math">g(u_{0} )\,= \frac{1}{2} (25\,+\,u_{0}^{2} )\,+\, \frac{3}{4} (5+u_{0} ) ^{2}</span> 이라 하면</p><p style="text-align:justify"><span class="math">\frac{\partial g}{\partial u_{0}} \,=u_{0} \,+\, \frac{3}{2} (5+u_{0} )\,=\,0</span></p><p style="text-align:justify">⇒ <span class="math">u_{0} \,=\,-3</span>, <span class="math">V_{0} (y_{0} )\,=\,20</span> ⇐ 이것이 문제의 최소값이다.</p><p style="text-align:justify">⇒ <span class="math">y_{1} \,=\,5+u_{0} \,=\,2</span></p><p style="text-align:justify">⇒ <span class="math">u_{1} \,=\,- \frac{1}{2} y_{1} =\,-1</span></p><p style="text-align:justify">⇒ <span class="math">y_{2} \,=\,y_{1} +u_{1} =1</span> </p><p style="text-align:justify">⇒ <span class="math">u_{2} \,=\,0</span></p><p style="text-align:justify">이 결과는 앞의 예)의 라그란지안 방법, 해밀토니안방법과 같은 결과이다.</p><p style="text-align:justify">(b)</p><p style="text-align:justify">동적계획법으로 문제를 풀기 위해서는 제약식을 차분방정식 형태로 바꾼다.</p><p style="text-align:justify"><span class="math">y_{t+1} \,=\,y_{t} -u_{t}</span> , t = 0, 1, 2</p><p style="text-align:justify"><span class="math">y_{3} \,=\,0\,</span>, <span class="math">y_{0} \,=\,10\,</span></p><p style="text-align:justify">따라서 동적계획법 문제는 다음과 같다.</p><p style="text-align:justify">min <span class="math">\sum\limits_{t=0}^{2} u_{t}^{2}</span></p><p style="text-align:justify">s.t  <span class="math">y_{t+1} \,=\,y_{t} -u_{t}</span>, for t = 0, 1, 2</p><p style="text-align:justify"> <span class="math">u_{t} \geq 0</span>, for t = 0, 1, 2</p><p style="text-align:justify"> <span class="math">y_{3} \,=\,0\,</span>, <span class="math">y_{0} \,=\,10\,</span></p><p style="text-align:justify">이 문제의 Bellman 방정식은</p><p style="text-align:justify"><span class="math">V_{t} (y_{t} )\,=\max_{u_{t}} [-\,u_{t}^{2} +V_{t+1} (y_{t+1} )]</span>, t = 0,1,2</p><p style="text-align:justify">2기 이후는 존재하지 않으므로 <span class="math">V_{3} (y_{3} )=0</span></p><p style="text-align:justify">i) 2기</p><p style="text-align:justify"><span class="math">V_{2} (y_{2} )\,=\,\min_{u_{2}} \, \left\{ u_{2}^{2} \,+\,V_{3} (y_{3} ) \right\} =\,y_{2}^{2}</span>, (∵<span class="math">V_{3} (y_{3} )=0</span>, <span class="math">u_{2} \,=\,y_{2}</span>)</p><p style="text-align:justify">ii) 1기</p><p style="text-align:justify"><span class="math">V_{1} (y_{1} )\,=\,\min_{u_{1}} \, \left\{ u_{1}^{2} \,+\,V_{2} (y_{2} ) \right\}</span><span class="math">=\,\min_{u_{1}} \, \left\{ u_{1}^{2} \,+\,y_{2}^{2} \right\}</span><span class="math">=\,\min_{u_{1}} \, \left\{ u_{1}^{2} \,+\,(y_{1} -u_{1} ) ^{2} \right\}</span></p><p style="text-align:justify"><span class="math">f(u_{1} )\,= u_{1}^{2} \,+\,(y_{1} -u_{1} ) ^{2}</span> 이라 하면</p><p style="text-align:justify"><span class="math">\frac{\partial f}{\partial u_{1}} \,=2u_{1} \,-\,2(y_{1} -u_{1} )\,=\,0</span></p><p style="text-align:justify">⇒ <span class="math">u_{1} \,=\, \frac{1}{2} y_{1}</span>.......<sup><a href="#fn36" id="fnref36">[36]</a></sup></p><p style="text-align:justify">⇒ <span class="math">V_{1} (y_{1} )\,=\, \frac{1}{2} y_{1}^{2}</span></p><p style="text-align:justify">iii) 0기</p><p style="text-align:justify"><span class="math">V_{0} (y_{0} )\,=\,\min_{u_{0}} \, \left\{ u_{0}^{2} \,+\,V_{1} (y_{1} ) \right\}</span><span class="math">=\,\min_{u_{0}} \, \left\{ u_{0}^{2} \,+\, \frac{1}{2} y_{1}^{2} \right\}</span><span class="math">=\,\min_{u_{0}} \, \left\{ u_{0}^{2} \,+\, \frac{1}{2} (y_{0} -u_{0} ) ^{2} \right\}</span></p><p style="text-align:justify"><span class="math">=\,\min_{u_{0}} \, \left\{ u_{0}^{2} \,+\, \frac{1}{2} (10-u_{0} ) ^{2} \right\}</span></p><p style="text-align:justify"> <span class="math">g(u_{0} )\,=\, u_{0}^{2} \,+\, \frac{1}{2} (10-u_{0} ) ^{2}</span> 이라 하면</p><p style="text-align:justify"><span class="math">\frac{\partial g}{\partial u_{0}} \,=2u_{0} \,-\,(10-u_{0} )\,=\,0</span></p><p style="text-align:justify">⇒ <span class="math">u_{0} \,=\, \frac{10}{3}</span>, 따라서 <span class="math">V_{0} (y_{0} )\,=\, \frac{100}{3}</span></p><p style="text-align:justify">⇒ <span class="math">y_{1} \,=\,10-u_{0} \,=\, \frac{20}{3}</span></p><p style="text-align:justify">⇒ <span class="math">u_{1} \,=\, \frac{1}{2} y_{1}</span> ⇒ <span class="math">u_{1} \,=\, \frac{10}{3}</span></p><p style="text-align:justify">⇒ <span class="math">y_{2} \,=\,y_{1} -u_{1}</span> ⇒ <span class="math">y_{2} \,=\, \frac{20}{3} - \frac{10}{3} \,=\, \frac{10}{3}</span></p><p style="text-align:justify">⇒ <span class="math">u_{2} \,=\,y_{2} \,=\, \frac{10}{3}</span></p><p style="text-align:justify"><span class="math">u_{0} \,=\,u_{1} \,=\,u_{2} \,=\, \frac{10}{3}</span> 이므로 매기 균등 분배하는 것이 최적이고 이때의 최소값은 <span class="math">\frac{100}{3}</span>이다.</p><p style="text-align:justify">(c)</p><p style="text-align:justify">i) 라그란지안 방법</p><p style="text-align:justify"><span class="math">L\,=\,(xy) ^{2} +z+ \lambda (3-x-y-z)</span></p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial x} =\,2xy^{2} - \lambda =0</span> ...........①</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial y} =\,2x^{2} y- \lambda =0</span> ...........②</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial z} =\,1- \lambda =0</span> ..............③</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \lambda } \,=\,3-x-y-z=0</span> ..........④</p><p style="text-align:justify">①, ②로부터 <span class="math">2xy(x-y)=0</span></p><p style="text-align:justify">최대화이므로 <span class="math">x\,or\,y != 0</span> </p><p style="text-align:justify">따라서 <span class="math">x=y</span></p><p style="text-align:justify">①, ③으로부터</p><p style="text-align:justify"><span class="math">2x^{3} =1</span> ⇒ <span class="math">x= \frac{1}{2^{1/3}} =y</span></p><p style="text-align:justify">④로부터</p><p style="text-align:justify"><span class="math">z=3- \frac{2}{2^{1/3}}</span></p><p style="text-align:justify">이 문제는 목적식과 제약식에서 z와 다른 변수간의 관계가 ‘+’로 표현되어 있으므로 동적계획법으로도 풀 수 있다.</p><p style="text-align:justify">ii) 역추론방법</p><p style="text-align:justify">(단계1)</p><p style="text-align:justify"><span class="math">\,V_{1} (z)\,=\,\max_{x+y+z=3} \left\{ z \right\}</span></p><p style="text-align:justify">이 문제의 해는 <span class="math">z=3-x-y</span></p><p style="text-align:justify">∴ <span class="math">V_{1} (z)=3-x-y</span></p><p style="text-align:justify">(단계2)</p><p style="text-align:justify"><span class="math">\,V_{2} \,=\,\max \left\{ (xy) ^{2} +V_{1} (z) \right\}</span><span class="math">\,=\,\max \left\{ (xy) ^{2} +3-x-y \right\}</span></p><p style="text-align:justify">1차조건:</p><p style="text-align:justify"><span class="math">2xy^{2} -1=0</span></p><p style="text-align:justify"><span class="math">2x^{2} y-1=0</span></p><p style="text-align:justify">따라서 <span class="math">x=y</span></p><p style="text-align:justify"><span class="math">2x^{3} =1</span> ⇒ <span class="math">x= \frac{1}{2^{1/3}} =y</span>, <span class="math">z=3- \frac{2}{2^{1/3}}</span></p><p style="text-align:justify">iii) 전진법(forward induction method)</p><p style="text-align:justify">(단계1)</p><p style="text-align:justify"><span class="math">\,V_{1} (z)\,=\,\max_{x+y+z=3} \left\{ (xy) ^{2} \right\}</span><span class="math">\,=\,\max \left\{ [(3-z-y)y] ^{2} \right\}</span></p><p style="text-align:justify">1차조건:</p><p style="text-align:justify"><span class="math">2[(3-z-y)y](3-z-2y)=0</span></p><p style="text-align:justify">최대화 문제이므로 <span class="math">y=0\,or\,y=3-z</span>는 해가 아니다.</p><p style="text-align:justify">이 문제의 해는 <span class="math">y= \frac{3-z}{2}</span></p><p style="text-align:justify"><span class="math">x=3-z-y= \frac{3-z}{2}</span></p><p style="text-align:justify">∴ <span class="math">\,V_{1} (z)= \frac{(3-z) ^{4}}{16}</span></p><p style="text-align:justify">(단계2)</p><p style="text-align:justify"><span class="math">\,V_{2} (z)\,=\,\max \left\{ z\,+V_{1} (z) \right\}</span><span class="math">\,=\,\max \left\{ z+ \frac{(3-z) ^{4}}{16} \right\}</span></p><p style="text-align:justify">1차조건:</p><p style="text-align:justify"><span class="math">1- \frac{(3-z) ^{3}}{4} =0</span></p><p style="text-align:justify">∴ <span class="math">z=\,3-4^{1/3}</span><span class="math">=3- \frac{2}{2^{1/3}}</span> ..........<sup><a href="#fn37" id="fnref37">[37]</a></sup></p><p style="text-align:justify"><span class="math">x=y</span> 이므로 <span class="math">x=y= \frac{1}{2^{1/3}}</span></p><p style="text-align:right">(풀이끝)</p><h2>각주</h2><ol class="footnotes"><li id="fn33"><p style="text-align:justify"> compact집합(옹골집합)이란 유계가 있는 폐집합을 말한다.</p>
+<a href="#fnref33">↩</a></li><li id="fn34"><p style="text-align:justify"> 동적계획법에는 전진추론법(forward induction method)과 역추론방법(backward induction method)이 있다. 어느 방법을 선택하는가의 문제는 문제의 상황에 따라 적합한 방법을 선택한다.</p>
+<a href="#fnref34">↩</a></li><li id="fn35"><p style="text-align:justify"> f는 볼록함수이므로 최소값.</p>
+<a href="#fnref35">↩</a></li><li id="fn36"><p style="text-align:justify"> f는 볼록함수이므로 2차조건 만족</p>
+<a href="#fnref36">↩</a></li><li id="fn37"><p style="text-align:justify"> <span class="math">4^{1/3} = \left( \frac{8}{2} \right) ^{1/3} = \frac{2}{2^{1/3}}</span></p>
+<a href="#fnref37">↩</a></li></ol><p class="section-nav">← <a href="dynamic-programming-principle.html">최적성 원칙과 기초</a> · <a href="dynamic-programming.html">절별 목차</a> · <a href="dynamic-programming-value-function.html">가치함수의 추정</a> →</p></body></html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Beltrami 항등식과 Legendre 조건</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>변분학 (Calculus of Variations)</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>Beltrami 항등식과 Legendre 조건</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="calculus-of-variations.html">변분학 (Calculus of Variations)</a></p><h4 id="벨트라미-항등식-beltrami-identity" style="text-align:justify">벨트라미 항등식(Beltrami Identity)</h4><p style="text-align:justify">목적함수가 <span class="math">f(y,\,y ' )</span> 인 경우, 즉 t를 포함하고 있지 않은 경우 </p><p style="text-align:justify">오일러공식은 <span class="math">f_{y} -f_{yy ' } y ' -f_{y ' y ' } y '' \,=0</span></p><p style="text-align:justify">한편 <span class="math">\frac{d}{dt} (f-y ' f_{y ' } )\,=\,f_{y} \frac{dy}{dt} +f_{y ' } \frac{dy ' }{dt} -( \frac{dy ' }{dt} f_{y ' } +y ' (f_{y'y} \frac{dy}{dt} +f_{y ' y ' } \frac{dy ' }{dt} ))</span></p><p style="text-align:justify"><span class="math">\,=\,f_{y} y ' -y ' (f_{y'y} y'+f_{y ' y ' } y '' )</span></p><p style="text-align:justify"><span class="math">\,=y ' (\,f_{y} -f_{y ' y} y ' -f_{y ' y ' } y '' )=0</span> , (∵<span class="math">f_{y} -f_{yy ' } y ' -f_{y ' y ' } y '' \,=0</span>)</p><p style="text-align:justify"><span class="math">\frac{d}{dt} (f-y ' f_{y ' } )\,=0</span> 이므로</p><p style="text-align:justify"><span class="math">f-y ' f_{y ' } \,=</span>상수</p><p style="text-align:justify">이를 벨트라미 항등식이라 한다. 이는 목적함수가 t를 포함하고 있지 않는 경우에 많이 쓰는 항등식이다.</p><h4 id="2차-필요조건-르장드르조건-legendre-condition-117" style="text-align:justify">2차 필요조건 : 르장드르조건(Legendre condition)<sup><a href="#fn117" id="fnref117">[117]</a></sup></h4><p style="text-align:justify"><span class="math">J(y)\,= \int_{t_{0}}^{t_{1}} {f(y,\,y ' )dt}</span> 라 하자.</p><p style="text-align:justify">범함수 J를 Taylor 전개하면</p><p style="text-align:justify"><span class="math">J(y+ \epsilon h)=J(y)+ \epsilon \frac{dJ}{d \epsilon } + \frac{\epsilon^{2}}{2} \frac{d^{2} J}{d \epsilon^{2}} +R( \epsilon^{3} )</span> ; <span class="math">R( \epsilon^{3} )</span>은 잔여항</p><p style="text-align:justify"><span class="math">J( \epsilon )= \int_{t_{0}}^{t_{1}} {f(y*+ \epsilon h,\,y ' *+ \epsilon h ' ,\,t)dt}</span> 에서</p><p style="text-align:justify"><span class="math">\frac{d}{d \epsilon } J( \epsilon )= \int_{t_{0}}^{t_{1}} {(f_{y} h+f_{y ' } h ' )dt}</span> </p><p style="text-align:justify">이 범함수의 2차 변동(second variation)은</p><p style="text-align:justify"><span class="math">\frac{d}{d \epsilon } ( \frac{d}{d \epsilon } J( \epsilon ))= \frac{d^{2}}{d \epsilon^{2}} J( \epsilon )= \int_{t_{0}}^{t_{1}} {(f_{yy} h^{2} +2f_{yy ' } hh ' +f_{y ' y ' } h^{'2} )dt}</span> </p><p style="text-align:justify"><span class="math">y*</span>가 극대값이라면</p><p style="text-align:justify"><span class="math">J(y*+ \epsilon h) \leq J(y*)</span></p><p style="text-align:justify">따라서</p><p style="text-align:justify"><span class="math">J(y*+ \epsilon h)-J(y*)\, \cong \, \epsilon \frac{dJ}{d \epsilon } + \frac{\epsilon^{2}}{2} \frac{d^{2} J}{d \epsilon^{2}} \, \leq \,0</span></p><p style="text-align:justify">극대값이므로 <span class="math">\frac{dJ(y*,y ' *)}{d \epsilon } =0</span></p><p style="text-align:justify">따라서 </p><p style="text-align:justify"><span class="math">\frac{d^{2}}{d \epsilon^{2}} J( \epsilon )= \int_{t_{0}}^{t_{1}} {(f_{yy} h^{2} +2f_{yy ' } hh ' +f_{y ' y ' } h^{'2} )dt\, \leq 0}</span></p><p style="text-align:justify">이는 <span class="math">f(y,\,y ' )</span>가 <span class="math">y,\,y'</span>에 대해 오목함수임을 의미. 또한 </p><p style="text-align:justify"><span class="math">\int_{t_{0}}^{t_{1}} {(f_{yy} h^{2} +2f_{yy ' } hh ' +f_{y ' y ' } h^{'2} )dt\, \leq 0\,}</span> 이면 <span class="math">f_{y ' y ' } \leq 0}</span>...........<sup><a href="#fn118" id="fnref118">[118]</a></sup></p><p style="text-align:justify">이를 2차조건 또는 르장드르 조건이라 한다. </p><p style="text-align:justify">르장드르조건은 오일러방정식에서 구한 극값(extremals)이 최대값인지 최소값인지를 구분하는 필요조건이다. </p><p style="text-align:justify">※ 주의할 점은 정태적 문제와 달리 르장드르조건은 충분조건이 아니라는 점이다. 따라서 극값이면 르장드르 조건을 충족하지만 르장드르 조건을 만족한다고 해서 극값인 것은 아니다.</p><table aria-label="2차 필요조건 : 르장드르조건(Legendre condition) [117] 관련 표 2" style="border-collapse:collapse;table-layout:fixed;height:127.880px;width:559.413px"><colgroup><col style="width:559.413px"/></colgroup><tbody><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:justify">(정리) Takayama 정리<sup><a href="#fn119" id="fnref119">[119]</a></sup></p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify"><span class="math">f(y,\,y',\,t)</span>가 <span class="math">y,\,y'</span>에 대해 미분가능이고, 또한 y(t)도 [<span class="math">t_{0} ,\,t_{1}</span>]에서 미분가능이다. </p>
+<p style="text-align:justify">f가 <span class="math">y,\,y'</span>에 대해 오목함수일 때 <span class="math">y*</span>가 오일러 방정식을 만족하면 </p>
+<p style="text-align:justify"><span class="math">J(y*)\,= \int_{t_{0}}^{t_{1}} {f(y*,\,y* ' ,\,t)dt}</span> 는 극대값이다. 역도 성립</p>
+</td></tr></tbody></table><p style="text-align:justify">즉 f가 <span class="math">y,\,y'</span>에 대해 오목함수일 때 오일러 방정식은 극대화의 필요충분조건이다. 최소화 문제의 경우는 f가 <span class="math">y,\,y'</span>에 대해 볼록함수여야 한다.</p><p style="text-align:justify">(증명)</p><p style="text-align:justify">극대값이면 오일러 방정식을 만족함은 앞의 유도에서 보였으므로 여기서는 반대의 경우만 증명한다.</p><p style="text-align:justify"><span class="math">y*,\,y*'</span>이 오일러 방정식을 만족한다고 하고, <span class="math">f(y*,\,y*',\,t)\,=\,f*</span>라 하자.</p><p style="text-align:justify"><span class="math">J(y)\,-\,J(y*)\,=\, \int_{t_{0}}^{t_{1}} {(f-f*)dt} \, \leq \, \int_{t_{0}}^{t_{1}} {[(y-y*)f_{y}^{*} \,+\,(y'-y*')f_{y'}^{*} ]dt}</span>, (∵ 오목함수 정리<sup><a href="#fn120" id="fnref120">[120]</a></sup>)</p><p style="text-align:justify"><span class="math">=\, \int_{t_{0}}^{t_{1}} {\left. [(y-y*)(f_{y}^{*} \,- \frac{d}{dt} f_{y ' }^{*} )]dt+\,\left[(y-y*)f_{y ' }^{*} \right] _{t_{0}}^{t_{1}}}</span> , (∵ 부분적분법<sup><a href="#fn121" id="fnref121">[121]</a></sup>)</p><p style="text-align:justify"><span class="math">=\, \left[ (y-y*)f_{y ' }^{*} \right] _{t_{0}}^{t_{1}}</span> , (∵ 오일러 방정식을 만족하므로 <span class="math">f_{y}^{*} \,- \frac{d}{dt} f_{y ' }^{*} \,=\,0</span>)</p><p style="text-align:justify">= 0, (∵ <span class="math">y(t_{0} )\,=\,y*(t_{0} ),\,y(t_{1} )\,=\,y*(t_{1} )</span>)</p><p style="text-align:justify">따라서 <span class="math">J(y)\,-\,J(y*)\, \leq \,0</span> 이므로 <span class="math">J(y*)</span>는 최대값</p><p style="text-align:right">Q.E.D.</p><p style="text-align:justify">오목함수이면 2차 미분값이 0보다 작거나 같아야 하므로, 따라서 충분조건은 다음과 같다.</p><table aria-label="2차 필요조건 : 르장드르조건(Legendre condition) [117] 관련 표 3" style="border-collapse:collapse;table-layout:fixed;height:77.107px;width:261.320px"><colgroup><col style="width:261.32px"/></colgroup><tbody><tr style="height:77.107px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:justify">최대화 문제라면  <span class="math">f_{yy} \leq 0</span>,  <span class="math">f_{y ' y ' } \leq 0}</span></p>
+<p style="text-align:justify">최소화 문제라면  <span class="math">f_{yy} \geq 0</span>,  <span class="math">f_{y ' y ' } \geq 0</span></p>
+</td></tr></tbody></table><p style="text-align:justify">예) 다음을 풀어라</p><p style="text-align:justify">a) min <span class="math">\int_{0}^{\top} {\,y^{'2} (t)dt}</span>, s.t <span class="math">y(0)=0</span>, <span class="math">y(T)=B</span></p><p style="text-align:justify">b) min<span class="math">\, \int_{0}^{1} {(y^{'2} +10ty)dt}</span>, s.t <span class="math">\,y(0)=1</span>, <span class="math">y(1)=2</span></p><p style="text-align:justify">(풀이) </p><p style="text-align:justify">a)</p><p style="text-align:justify"><span class="math">f(y,\,y')\,=\,y^{'2}</span></p><p style="text-align:justify"><span class="math">f_{y} =0</span>, <span class="math">f_{yy'} =0</span>,  <span class="math">f_{y'} =2y'</span> , <span class="math">f_{y'y ' } =2</span> </p><p style="text-align:justify">오일러 방정식에 대입하면 </p><p style="text-align:justify"><span class="math">f_{y} =f_{yy ' } y ' +f_{y ' y ' } y ''</span></p><p style="text-align:justify">⇒ <span class="math">0=0y ' +2y''+0</span></p><p style="text-align:justify">∴ <span class="math">y''=0</span></p><p style="text-align:justify">이를 적분하면   <span class="math">y ' =C_{1}</span></p><p style="text-align:justify">이를 적분하면   <span class="math">y=C_{1} t+C_{2}</span></p><p style="text-align:justify">경계조건을 대입하면 <span class="math">y(0)=C_{2} =0</span>, <span class="math">y(T)=C_{1} T\,=B</span></p><p style="text-align:justify">∴ <span class="math">C_{1} \,=\, \frac{B}{T} ,\,C_{2} =0</span></p><p style="text-align:justify">∴ <span class="math">y(t)= \frac{B}{T} t,\;0 \leq t \leq T</span></p><p style="text-align:justify"><span class="math">f_{yy} =0</span>, <span class="math">f_{y ' y ' } =2 \geq 0</span> 이므로 충분조건을 만족한다. 따라서 y(t)는 최소값</p><p style="text-align:justify">b)</p><p style="text-align:justify"><span class="math">f=y^{'2} +10ty</span> 에서</p><p style="text-align:justify"><span class="math">f_{y ' } =2y '</span> , <span class="math">f_{y} =10t</span> , <span class="math">f_{y ' y ' } =2</span> , <span class="math">f_{y ' y} =0</span>, <span class="math">f_{y ' t} =0</span></p><p style="text-align:justify">오일러 방정식에 대입하면 </p><p style="text-align:justify"><span class="math">10t=0y ' +2y '' +0</span></p><p style="text-align:justify">∴ <span class="math">y''(t)=5t</span></p><p style="text-align:justify">적분하면 <span class="math">y ' (t)=\, \frac{5}{2} t^{2} +C_{1}</span></p><p style="text-align:justify">적분하면 <span class="math">y(t)=\, \frac{5}{6} t^{3} +C_{1} t+C_{2}</span></p><p style="text-align:justify"><span class="math">y(0)=C_{2} =1</span></p><p style="text-align:justify"><span class="math">y(1)= \frac{5}{6} +C_{1} +1=2</span> ⇒ <span class="math">C_{1} = \frac{1}{6}</span></p><p style="text-align:justify">∴ <span class="math">y(t)= \frac{5}{6} t^{3} + \frac{1}{6} t+1</span></p><p style="text-align:justify"><span class="math">f_{yy} =0</span>, <span class="math">f_{y ' y ' } =2 \geq 0</span> 이므로 충분조건을 만족한다. 따라서 y(t)는 최소값</p><p style="text-align:right">(풀이끝)</p><p style="text-align:left">예) 가구의 효용극대화 문제(연속형)<sup><a href="#fn122" id="fnref122">[122]</a></sup></p><p style="text-align:left">max <span class="math">\int_{0}^{\top} {e^{- \rho t} u(c(t))dt}</span></p><p style="text-align:justify">s.t   <span class="math">a ' \,=ra(t)-c(t)\,</span>, where <span class="math">a'\,=\, \frac{da(t)}{dt}</span></p><p style="text-align:left"> <span class="math">a(0)=a_{0}</span>, <span class="math">a(T)=a_{\scriptscriptstyle {T}}</span> </p><p style="text-align:left">ρ : 주관적 이자율, r : 시장이자율, a(t) : t기의 재산, c(t) : t기의 소비, u(c) : 효용</p><p style="text-align:justify"><span class="math">\mathbf{u} ' (\mathbf{c})\,&gt;\,0</span>, <span class="math">u '' (c)\,&lt;\,0</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">제약식에서 <span class="math">c\,=ra-a ' \,</span></p><p style="text-align:justify">이를 목적식에 대입하면 문제는</p><p style="text-align:left">max <span class="math">\int_{0}^{\top} {e^{- \rho t} u(ra-a ' \,)dt}</span></p><p style="text-align:justify">상태변수가 재산(a(t))이므로</p><p style="text-align:justify"><span class="math">f(a,\,a ' ,\,t)\,=e^{- \rho t} u(ra-a')</span> 라 하면</p><p style="text-align:justify"><span class="math">f_{a} =e^{- \rho t} \frac{du}{dc} \frac{dc}{da} \,=\,e^{- \rho t} u ' r</span></p><p style="text-align:justify"><span class="math">f_{a ' } =\,e^{- \rho t} \frac{du}{dc} \frac{dc}{da'} \,=\,-u ' e^{- \rho t}</span></p><p style="text-align:justify"><span class="math">\frac{d}{dt} f_{a ' } \,=\,-u '' c ' e^{- \rho t} \,+u ' \rho e^{- \rho t}</span></p><p style="text-align:justify">오일러 방정식은</p><p style="text-align:justify"><span class="math">\,e^{- \rho t} u ' r</span> = <span class="math">\,-u '' c ' e^{- \rho t} \,+u ' \rho e^{- \rho t}</span></p><p style="text-align:justify"><span class="math">\,u ' (r- \rho )</span> = <span class="math">\,-u '' c ' \,</span></p><p style="text-align:justify"><span class="math">c ' \,=\,- \frac{u ' }{u '' } (r- \rho )</span>, where <span class="math">c'\,=\, \frac{dc}{dt}</span>, <span class="math">u'\,=\, \frac{du}{dc}</span>, <span class="math">u''\,=\, \frac{d^{2} u}{dc^{2}}</span></p><p style="text-align:justify">이는 연속형일 경우 효용극대화 모형의 오일러방정식이다.<sup><a href="#fn123" id="fnref123">[123]</a></sup> </p><p style="text-align:justify"><span class="math">c ' \,=\,- \frac{u ' }{u '' } (r- \rho )</span> ⇒ <span class="math">\frac{c'}{c} \,=\,- \frac{u ' }{cu '' } (r- \rho )</span></p><p style="text-align:left"><span class="math">\frac{c ' }{c}</span>은 소비의 증가율을 의미 , <span class="math">\,- \frac{u ' (c)}{cu '' (c)} &gt;0</span> 은 기간간 대체탄력성(EIS)</p><p style="text-align:left"><span class="math">\frac{c ' }{c} =\,- \frac{u ' (c)}{cu '' (c)} (r- \rho )</span> = <span class="math">\frac{1}{RRA} (r- \rho )</span>, RRA는 상대적 위험회피계수 =<span class="math">\frac{cu '' (c)}{u ' (c)}</span><sup><a href="#fn124" id="fnref124">[124]</a></sup></p><p style="text-align:justify">이를 케인즈-램지 규칙(Keynes - Ramsey rule)이라 한다.</p><p style="text-align:justify">충분조건 :</p><p style="text-align:justify"><span class="math">f_{aa} =\,e^{- \rho t} u''r^{2} \,&lt;\,0</span>, (∵ <span class="math">u''\,&lt;\,0</span>)</p><p style="text-align:justify"><span class="math">f_{a ' a ' } =\,u '' e^{- \rho t} \,&lt;\,0</span></p><p style="text-align:justify">따라서 최대화의 충분조건 만족.</p><p style="text-align:right">(풀이끝)</p><h2>각주</h2><ol class="footnotes"><li id="fn117"><p style="text-align:justify"> 또는 ‘Legendre–Clebsch condition’ 이라고도 함</p>
+<a href="#fnref117">↩</a></li><li id="fn118"><p style="text-align:justify"> 자세한 증명은 M. Kamien and N. Schwarz, Dynamic Optimization : the calculus of variations and optimal control in economics and management, vol.4. pp.15-19. 1981. 참조.</p>
+<a href="#fnref118">↩</a></li><li id="fn119"><p style="text-align:justify"> Takayama, mathematical economics, pp.429 참조.</p>
+<a href="#fnref119">↩</a></li><li id="fn120"><p style="text-align:justify"> <span class="math">f(y,\,y',\,t)</span>는 오목함수이므로 다변수의 지지선 정리에 따라 <span class="math">f\, \leq \,f*\,+\,(y-y*)f_{y}^{*} \,+\,(y ' -y* ' )f_{y ' }^{*}</span></p>
+<a href="#fnref120">↩</a></li><li id="fn121"><p style="text-align:justify"> 부분적분법에 의해 <span class="math">\, \int_{t_{0}}^{t_{1}} {(y ' -y* ' )f_{y ' }^{*} dt}</span> <span class="math">=\, \left[ (y-y*)f_{y ' }^{*} \right] _{t_{0}}^{t_{1}}</span><span class="math">-\, \int_{t_{0}}^{t_{1}} {\left. [(y-y*) \frac{d}{dt} f_{y ' }^{*} ]dt \right.}</span></p>
+<a href="#fnref121">↩</a></li><li id="fn122"><p style="text-align:justify"> 이산형의 경우 소비의 효용극대화 문제는 다음과 같았다.</p>
+<p style="text-align:justify">max <span class="math">\sum\limits_{t=0}^{\top} \beta^{t} u(c_{t} )</span>, s.t  <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span>, (<span class="math">t=0,\,...,\,T</span>), <span class="math">a_{0} \,=\,A\,</span>, <span class="math">a_{\scriptscriptstyle {T+1}} \,=\,0\,</span></p>
+<p style="text-align:justify">이제 이 문제를 연속형의 문제로 전환하자.</p>
+<p style="text-align:justify"><span class="math">\beta^{t} \,=\,(1+ \rho ) ^{-t}</span>이므로, 한 기간을 m으로 나누고 이를 무한대로 하면 <span class="math">\lim\limits_{m \to \infty } {[(1+ \frac{\rho }{m} ) ^{m} ] ^{-t} \,=\,e^{- \rho t}}</span> , (이에 관해서는 재무이론 ‘연속복리’ 참조). 따라서 목적식은 <span class="math">\lim\limits_{n \to \infty } {\sum\limits_{k=0}^{n} \beta^{t} u(c_{k} )} \,</span><span class="math">=\, \int_{0}^{\top} {e^{- \rho t} u(c(t))dt} \,</span>, where n=mT</p>
+<p style="text-align:justify">제약식은 <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span> ⇒ <span class="math">a_{t+1} \,-\,a_{t} \,=\,ra_{t} \,-\,c_{t}</span> ⇒ <span class="math">\frac{a(t+ \triangle t)\,-\,a(t)}{\triangle t} \,=\,ra(t)\,-\,c(t)</span>, (∵<span class="math">\triangle t\,=\,1</span>)</p>
+<p style="text-align:justify"><span class="math">\lim\limits_{\triangle t \to 0} {\frac{a(t+ \triangle t)\,-\,a(t)}{\triangle t}} \,=\, \lim\limits_{\triangle t \to 0} {(ra(t)-c(t))}</span> ⇒ <span class="math">a ' \,=ra(t)-c(t)\,</span></p>
+<a href="#fnref122">↩</a></li><li id="fn123"><p style="text-align:justify"> 이산형일 경우 오일러방정식은 <span class="math">\, \frac{u ' (c_{t} )\,}{\beta u ' (c_{t+1} )} =\,1+r</span>, 이산형 효용극대화 모형 참조.</p>
+<a href="#fnref123">↩</a></li><li id="fn124"><p style="text-align:justify"> 효용이론 ‘위험회피의 측정’ 참조</p>
+<a href="#fnref124">↩</a></li></ol><p class="section-nav">← <a href="calculus-of-variations-euler.html">변분학과 Euler 방정식</a> · <a href="calculus-of-variations.html">절별 목차</a> · <a href="calculus-of-variations-constraints.html">제약식·경계조건·승수의 의미</a> →</p></body></html>

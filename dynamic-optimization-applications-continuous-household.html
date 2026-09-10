@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>동태적 가구이론</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>연속형 동적최적화의 응용</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>동태적 가구이론</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-optimization-applications-continuous.html">연속형 동적최적화의 응용</a></p><h4 id="dynamic-household-theory" style="text-align:left">動態的 家口理論(Dynamic household theory)</h4><p style="text-align:justify">가계는 무한히 지속되는 가족, 즉 하나의 왕조(dynasty)로 간주한다. 현재 구성원은 자신의 소비효용뿐 아니라 같은 가족의 미래 세대가 누릴 효용도 고려한다.</p><p style="text-align:justify">각 가족은 L(t)명의 구성원을 가지며, L(t)는 일정한 증가율 n으로 변화한다.</p><p style="text-align:left"><span class="math">\mathbf{L}(\mathbf{t})\,=\,\mathbf{L}(0)\mathbf{e}^{\mathbf{n}\mathbf{t}}</span></p><h4 id="가구의-목적" style="text-align:left">가구의 목적</h4><p style="text-align:left">미래 총효용의 현재가치를 최대화하는 것</p><p style="text-align:left">maximize <span class="math">U= \int_{0}^{\infty } {e^{- \rho t} U(C(t)) {L(t)} dt}</span></p><p style="text-align:left"><span class="math">= \int_{0}^{\infty } {e^{-( \rho -n)t} U(C(t))L(0)dt}</span> ............ⓐ</p><p style="text-align:left"><span class="math">\rho</span> ; 할인율</p><p style="text-align:left">C(t) ; 한 명의 소비</p><p style="text-align:left"><span class="math">{L(t)}</span> ; 인구수</p><h4 id="가구의-예산제약" style="text-align:left">가구의 예산제약</h4><p style="text-align:left">소비(현재가치)는 초기소득과 노동소득(현재가치)의 합을 초과할 수 없다.</p><p style="text-align:left">이자율 r(t), 임금 w(t)를 시간 t의 함수라고 한다면</p><p style="text-align:left">t기의 소비 C(t)의 현재가치는 <span class="math">C(t)e^{- \int_{0}^{t} {r( \tau )d \tau }}</span>...............<sup><a href="#fn155" id="fnref155">[155]</a></sup></p><p style="text-align:left">t 시점에서 자본의 현재가치와 每時間 소비의 현재가치의 합은 초기자본과 每時間 임금 소득의 현재가치 합과 같다.</p><p style="text-align:left">가구의 초기 자본은 <span class="math">K(0)</span>, 시간 t 에서의 자본은 <span class="math">K(t)</span> 라 하면</p><p style="text-align:left"><span class="math">e^{- \int_{0}^{t} {r( \tau )d \tau }} K(t)\,+ \int_{0}^{t} {e^{- \int_{0}^{s} {r( \tau )d \tau }}} C(s)L(s)ds\,=\,K(0)+ \int_{0}^{t} {e^{- \int_{0}^{s} {r( \tau )d \tau }}} W(s)L(s)ds\,</span>............①</p><p style="text-align:left">양변을 t에 대해서 미분하면</p><p style="text-align:left"><span class="math">-r(t)e^{- \int_{0}^{t} {r( \tau )d \tau }} K(t)\,+e^{- \int_{0}^{t} {r( \tau )d \tau }} \frac{d}{dt} K(t)+e^{- \int_{0}^{t} {r( \tau )d \tau }} C(t)L(t)\,=\,e^{- \int_{0}^{t} {r( \tau )d \tau }} W(t)L(t)\,</span>......<sup><a href="#fn156" id="fnref156">[156]</a></sup></p><p style="text-align:left">양변을 <span class="math">e^{- \int_{0}^{t} {r( \tau )d \tau }} \,</span> 로 나누면</p><p style="text-align:left"><span class="math">-r(t)K(t)\,+ \frac{d}{dt} K(t)+C(t)L(t)\,=W(t)L(t)\,</span></p><p style="text-align:left">⇒ <span class="math">\frac{d}{dt} K(t)\,=W(t)L(t)\,+r(t)K(t)\,-C(t)L(t)</span>..............②</p><p style="text-align:justify">단위시간당 금융자산의 증가는 저축과 같고, 저축은 소득에서 소비를 뺀 값이다. 소득은 금융자산의 순수익과 노동소득의 합이다. 저축은 음(-)이 될 수도 있으며, 이 경우 자본재 일부를 매각하거나 차입하는 디세이빙(dissaving)을 한다.</p><p style="text-align:left"><span class="math">\frac{K}{L} \,=\,k</span> 라 하면</p><p style="text-align:left"><span class="math">\frac{dk}{dt}= \frac{1}{L} \frac{dK}{dt} - \frac{K}{L^{2}} \frac{dL}{dt}</span>.........<sup><a href="#fn157" id="fnref157">[157]</a></sup></p><p style="text-align:left"><span class="math">= \frac{1}{L} \frac{dK}{dt} -kn</span> , (∵ <span class="math">\frac{1}{L} \frac{dL}{dt} \,=\,n</span>)</p><p style="text-align:left">∴ <span class="math">\frac{1}{L} \frac{dK}{dt} \,=\, \frac{dk}{dt} \,+\,kn</span> ................③</p><p style="text-align:justify">한편 ②를 L로 나누면</p><p style="text-align:justify"><span class="math">\frac{1}{L} \frac{dK}{dt} \,=W\,+rk\,-C</span> ................④</p><p style="text-align:justify">④에 ③을 대입하고 정리하면</p><p style="text-align:justify"><span class="math">\, \frac{dk}{dt} \,=\,(r-n)k\,+W-C</span> ................ⓑ</p><p style="text-align:justify">여기서는 조정된 이자율 r−n이 나타난다. 소비를 연기하면 실질이자율 r의 수익을 얻지만 가족 구성원이 늘어나므로 1인당 수익은 희석되기 때문이다.</p><h4 id="no-ponzi-game-condition" style="text-align:justify">no-Ponzi-game condition</h4><p style="text-align:justify">한편 생애 전체 소비의 현재가치는 생애 전체 소득과 초기자산의 현재가치를 초과할 수 없다.</p><p style="text-align:left">소득과 초기자산의 합.</p><p style="text-align:justify"><span class="math">\int_{0}^{\infty } {e^{- \int_{0}^{x} {r( \tau )d \tau }} C(x)L(x)dx \leq K_{0} \,+\,} \int_{0}^{\infty } {e^{- \int_{0}^{x} {r( \tau )d \tau }} W(x)L(x)dx}</span></p><p style="text-align:justify">⇒ <span class="math">K_{0} \,+\, \lim\limits_{t \to \infty } \int_{0}^{t} {e^{- \int_{0}^{x} {r( \tau )d \tau }} [W(x)-C(x)]L(x)dx \geq 0}</span></p><p style="text-align:justify">⇒ <span class="math">\lim\limits_{t \to \infty } e^{- \int_{0}^{t} {r( \tau )d \tau }} K(t)\, \geq 0</span> ..............⑤, (∵ ①을 이항하고 시간 t의 극한을 취함)</p><p style="text-align:justify">가계 자산의 현재가치는 극한에서 음(-)이 될 수 없다. ⑤를 폰지게임 금지 조건(no-Ponzi-game condition)이라 한다.<sup><a href="#fn158" id="fnref158">[158]</a></sup></p><p style="text-align:justify">아주 먼 미래의 금융자산 현재가치는 음(-)이 될 수 없다. 장기적으로 부채가 증가하더라도 그 증가율은 실질이자율 r보다 낮아야 한다. 이것이 NPG(no-Ponzi-game) 조건이다.</p><p style="text-align:justify">⑤를 k로 정리하면</p><p style="text-align:justify"><span class="math">\lim\limits_{t \to \infty } e^{- \int_{0}^{t} {r( \tau )d \tau }} L(t)k(t)\, \geq 0</span></p><p style="text-align:justify">⇒ <span class="math">\lim\limits_{t \to \infty } e^{- \int_{0}^{t} {[r( \tau )-n]d \tau }} L(0)k(t)\, \geq 0</span> .............ⓒ</p><p style="text-align:justify">(문제)</p><p style="text-align:justify">ⓐ, ⓑ, ⓒ를 결합하면<sup><a href="#fn159" id="fnref159">[159]</a></sup></p><p style="text-align:justify">max U = <span class="math">\int_{0}^{\infty } {e^{-( \rho -n)t} U(C(t))dt}</span></p><p style="text-align:justify">s.t   <span class="math">\frac{dk}{dt} \,=\,[r(t)-n]k(t)+w(t)-c(t)</span></p><p style="text-align:justify"> <span class="math">\lim\limits_{t \to \infty } e^{- \int_{0}^{t} {[r( \tau )-n]d \tau }} k(t)\, \geq 0</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">해밀토니안 :</p><p style="text-align:justify"><span class="math">H\,=\,e^{-( \rho -n)t} U(C)+ \lambda [\,(r-n)k+w-c]</span></p><p style="text-align:justify">1차조건 :</p><p style="text-align:justify"><span class="math">\frac{\partial H}{\partial C} \,=\,0\,</span>⇒ <span class="math">\,e^{-( \rho -n)t} u'(c)= \lambda</span> ..............①</p><p style="text-align:justify"><span class="math">\frac{\partial H}{\partial k} \,=\,- \frac{d \lambda }{dt} \,</span>⇒ <span class="math">\lambda (r-n)=\,- \frac{d \lambda }{dt}</span> .................②</p><p style="text-align:left">TVC :</p><p style="text-align:left"><span class="math">\lim\limits_{t \to \infty } {\lambda (t)k(t)=0}</span></p><p style="text-align:left">이는 사실상 non-Ponzi game 조건과 같은 의미<sup><a href="#fn160" id="fnref160">[160]</a></sup></p><p style="text-align:left">2차조건 : ⓐ는 오목함수, ⓑ는 볼록함수</p><p style="text-align:left">가정에서 ⓐ는 오목함수, ⓑ는 선형결합이므로 볼록함수</p><p style="text-align:left">①을 t에 대해 미분하면</p><p style="text-align:left"><span class="math">-( \rho -n)e^{-( \rho -n)t} u ' (c)+e^{-( \rho -n)t} u '' (c)c ' (t)\,=\, \frac{d \lambda }{dt} \,</span>..........③</p><p style="text-align:left">①, ②, ③을 결합하여 정리하면</p><p style="text-align:left"><span class="math">-( \rho -n)e^{-( \rho -n)t} u ' +e^{-( \rho -n)t} u '' c ' \,=\,- \lambda (r-n)</span></p><p style="text-align:left">⇒ <span class="math">( \rho -n)e^{-( \rho -n)t} u ' -e^{-( \rho -n)t} u '' c ' \,=\,e^{-( \rho -n)t} u ' (r-n)</span></p><p style="text-align:left">⇒ <span class="math">( \rho -n)u ' -u '' c ' \,=\,u ' (r-n)</span></p><p style="text-align:left">⇒ <span class="math">( \rho -r)u ' \,=\,u '' c ' \;</span>...................④</p><p style="text-align:left">⇒ <span class="math">r\,=\, \rho \,-\, \frac{u''}{u'} c'</span> </p><p style="text-align:left">좌변은 저축의 시장이자율 수입</p><p style="text-align:left">우변은 요구수익률(required rate of return), 곧 저축의 비용</p><p style="text-align:left"><span class="math">\rho</span> : 오늘 소비하지 않는 비용, 요구효용비율(required utility rate of return)<sup><a href="#fn161" id="fnref161">[161]</a></sup></p><p style="text-align:left"><span class="math">\, \frac{u '' }{u ' } c '</span> : 오늘 소비로 인한 효용증가(한계효용은 체감한다.)</p><p style="text-align:justify">가계는 실제 수익률이 요구수익률과 같을 때에만 한계적인 한 단위를 저축하려 한다.</p><p style="text-align:justify">④를 정리하면</p><p style="text-align:justify"><span class="math">\frac{c ' (t)}{c(t)} =\, \frac{u ' (c)}{cu '' (c)} ( \rho -r)</span> ; 케인즈-램지 원칙</p><p style="text-align:left">상대적 위험회피(ralative risk aversion:RRA) 계수를 <span class="math">\frac{cu '' (c)}{u ' (c)}</span> 라 정의하면</p><p style="text-align:left">⇒  <span class="math">\frac{c ' }{c} =\,- \frac{u ' (c)}{cu '' (c)} (r- \rho )</span> = <span class="math">\frac{1}{RRA}</span></p><p style="text-align:left"><span class="math">\frac{c ' }{c}</span>은 소비의 증가율을 의미 , <span class="math">\,- \frac{u ' (c)}{cu '' (c)} &gt;0</span> 은 기간간 대체탄력성(EIS)</p><p style="text-align:justify">시장 할인율 r이 주관적 할인율 ρ보다 크면 소비가 증가한다. 이 경우 소비자는 시장보다 덜 조급한 상태이다.</p><p style="text-align:justify">곡률(curvature)의 역수는 기간간 대체탄력성(Elasticity of Intertemporal Substitution, EIS)이라 한다. 곡률이 작을수록 EIS가 크므로 소비를 기간 사이에서 옮기는 비용이 작다.</p><h2>각주</h2><ol class="footnotes"><li id="fn155"><p style="text-align:justify"> ‘화폐의 시간가치’ 참조</p>
+<a href="#fnref155">↩</a></li><li id="fn156"><p style="text-align:justify"> ‘적분의 미분’ 참조</p>
+<a href="#fnref156">↩</a></li><li id="fn157"><p style="text-align:justify"> ‘솔로 성장모형’ 참조</p>
+<a href="#fnref157">↩</a></li><li id="fn158"><p style="text-align:justify"> 폰지 게임이란 채무자가 끊임없이 빚을 굴려 원금과 이자를 갚아나가는 상황. '90일 만에 원금의 2배 수익 보장'을 내세우며 미국 전역에서 8개월 만에 4만여 명으로부터 1,500만 달러를 끌어모은 사기범 찰스 폰지(Charles K.Ponzi)의 범행수법에서 연유했다. 미국에 개발 붐이 한창이던 1925년, 폰지는 플로리다에서 막대한 투자배당을 약속하며 투자자를 끌어모았으나 실제로 그는 아무런 사업도 벌이지 않았다. 투자금 일부는 자신이 착복하고 투자자들에게 돌아갈 배당금은 다른 투자자들의 납입금으로 지불했다. 이렇게 허황된 꿈을 파는 사업을 폰지 게임이라 부른다. 우리나라의 다단계 사업과 비슷.</p>
+<p style="text-align:justify">http://terms.naver.com/entry.nhn?docId=11337&amp;mobile&amp;categoryId=1164 </p>
+<a href="#fnref158">↩</a></li><li id="fn159"><p style="text-align:justify"> L(0)는 상수이므로 제외해도 해에 영향이 없다.</p>
+<a href="#fnref159">↩</a></li><li id="fn160"><p style="text-align:justify"> http://www.econ.ku.dk/okocg/MAT-OEK/Mak%C3%98k2/Mak%C3%98k2-2011/Lectures%20and%20lecture%20notes/Ch10-2011-1.pdf </p>
+<a href="#fnref160">↩</a></li><li id="fn161"><p style="text-align:justify"> http://www.econ.ku.dk/okocg/MAT-OEK/Mak%C3%98k2/Mak%C3%98k2-2011/Lectures%20and%20lecture%20notes/Ch10-2011-1.pdf </p>
+<a href="#fnref161">↩</a></li></ol><p class="section-nav">← <a href="dynamic-optimization-applications-continuous-ramsey.html">Ramsey와 RCK 성장모형</a> · <a href="dynamic-optimization-applications-continuous.html">절별 목차</a> · <a href="dynamic-optimization-applications-continuous-firm-q.html">동태적 기업이론과 Tobin q</a> →</p></body></html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>연속시간 동적계획</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>동적계획법 (Dynamic Programming)</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>연속시간 동적계획</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-programming.html">동적계획법 (Dynamic Programming)</a></p><h4 id="연속시간모형-continuous-time-model" style="text-align:justify">연속시간모형(continuous time model)</h4><p style="text-align:justify">시간이 [0, T]에서 연속인 모형을 고려하자. </p><p style="text-align:justify">max <span class="math">\int_{0}^{\top} {f(y(t),\,u(t))dt\,} +\mathbf{F}(T)</span></p><p style="text-align:justify">s.t   <span class="math">\,y ' (t)=g(y(t),\,u(t))</span></p><p style="text-align:justify"> <span class="math">\,y(0)=y_{0}</span></p><p style="text-align:justify">y(t)는 상태변수, u(t)는 통제변수, <span class="math">y'(t)\,=\, \frac{dy(t)}{dt}</span>는 시간에 따른 순간변화율</p><p style="text-align:justify"><span class="math">V(y,\,t)</span>를 t 시점, y(t) 상태에서 시작하는 미분가능한 가치함수라 할 때</p><p style="text-align:justify"><span class="math">V(y,\,t)\,=\, \max_{u(t)} \int_{\text{t}}^{\top} {f(y( \tau ),\,u( \tau ))d \tau \,}</span> ..............①</p><p style="text-align:justify"><span class="math">t+ \triangle t</span> 시점, <span class="math">y+ \triangle y</span> 상태에서 시작하는 미분가능한 가치함수는</p><p style="text-align:justify"><span class="math">V(y+ \triangle y,\,t+ \triangle t)\,=\, \max_{u(t)} \int_{t+ \triangle t}^{\top} {f(y( \tau )+ \triangle y,\,u( \tau ))d \tau \,}</span> ...................②</p><p style="text-align:justify">①에서 ②를 빼면<sup><a href="#fn81" id="fnref81">[81]</a></sup></p><p style="text-align:justify"><span class="math">V(y,\,t)\,-V(y+ \triangle y,\,t+ \triangle t)\,= \max_{u(t)} \int_{\text{t}}^{t+ \triangle t} f(y,\,u)d \tau</span> <span class="math">\cong \,\max_{u(t)\,} \left\{ f(y,\,u) \triangle t \right\}</span>.............<sup><a href="#fn82" id="fnref82">[82]</a></sup></p><p style="text-align:justify">⇒ <span class="math">V(y,\,t)\,=\,\max_{u(t)\,} \left{f(y,\,u) \triangle t\,+\,V(y+ \triangle y,\,t+ \triangle t)\right}</span> .............①</p><p style="text-align:justify">한편, <span class="math">V(y+ \triangle y,\,t+ \triangle t)</span>를 y, t 에서 테일러전개를 하면</p><p style="text-align:justify"><span class="math">V(y+ \triangle y,\,t+ \triangle t) \cong V(y\,,\,t)+ \frac{\partial V}{\partial y} \triangle y+ \frac{\partial V}{\partial t} \triangle t</span> ..............②</p><p style="text-align:justify">②를 ①에 대입하면</p><p style="text-align:justify"><span class="math">0\,=\, \max_{u(t)\,} \left{f(y,\,u) \triangle t\,+\, \frac{\partial V}{\partial y} \triangle y+ \frac{\partial V}{\partial t} \triangle \right}</span></p><p style="text-align:justify">양변을 <span class="math">\triangle t</span>로 나누면</p><p style="text-align:justify"><span class="math">0\,=\, \max_{u(t)\,} \left{f(y,\,u)\,+\, \frac{\partial V}{\partial y} \frac{\triangle y}{\triangle t} + \frac{\partial V}{\partial t} \right}</span></p><p style="text-align:justify"><span class="math">\triangle t \to 0</span> 이면</p><p style="text-align:justify"><span class="math">- \frac{\partial V(y,\,t)}{\partial t} \,=\,\max_{u(t)\,}\left{[f(y,\,u)\,+\, \frac{\partial V}{\partial y} g(y,\,u)\right}</span>, (∵ <span class="math">\lim\limits_{\triangle t \to 0} {\frac{\triangle y}{\triangle t} =y ' (t)=g(y,\,u)}</span>)<sup><a href="#fn83" id="fnref83">[83]</a></sup></p><p style="text-align:justify">이는 시간이 연속일 때의 Bellman 방정식이다. </p><p style="text-align:justify">이를 특별히 Hamilton-Jacobi-Bellman(HJB) 방정식이라 한다.</p><p style="text-align:justify"><span class="math">- \frac{\partial V(y,\,t)}{\partial t} \,=\,\max_{u(t)\,}\left{[f(y,\,u)\,+\, \frac{\partial V}{\partial y} g(y,\,u)\right}</span>, <span class="math">V(T)\,=\,F(T)</span></p><p style="text-align:justify">HJB 방정식은 또한 최적화의 충분조건도 된다.<sup><a href="#fn84" id="fnref84">[84]</a></sup> 따라서 HJB 방정식은 최적화의 필요충분조건이다.</p><p style="text-align:justify">Bellman 방정식은 비선형의 1차 편미분방정식으로 대수적으로 해를 구할 수 있는 경우는 극히 제한적이다. 대부분의 문제는 수치해석의 기법을 적용하여 푼다.</p><h2>각주</h2><ol class="footnotes"><li id="fn81"><p style="text-align:justify"> <span class="math">V(y,\,t)</span>이 <span class="math">V(y+ \triangle y,\,t+ \triangle t)</span>보다 큰 값이다.</p>
+<a href="#fnref81">↩</a></li><li id="fn82"><p style="text-align:justify"> 적분의 정의에 의해 <span class="math">\triangle t \to 0</span> 이면 <span class="math">f(y,\,u) \triangle t\,</span>=<span class="math">\int_{0}^{\triangle t} {f(y,\,u)d \tau \,}</span></p>
+<a href="#fnref82">↩</a></li><li id="fn83"><p style="text-align:justify"> <span class="math">\frac{\partial V}{\partial t}</span>는 u와 관계없으므로 max 연산자 밖으로 나와도 된다.</p>
+<a href="#fnref83">↩</a></li><li id="fn84"><p style="text-align:justify"> 자세한 증명은 http://kurser.math.su.se/mod/resource/view.php?id=38 </p>
+<p style="text-align:justify">    “Dynamic Programming: Continuous-Time Case”, p.3. 참조.</p>
+<a href="#fnref84">↩</a></li></ol><p class="section-nav">← <a href="dynamic-programming-stochastic.html">확률 동적계획</a> · <a href="dynamic-programming.html">절별 목차</a> · <a href="dynamic-programming-lq.html">LQ(linear quadratic) 문제</a> →</p></body></html>

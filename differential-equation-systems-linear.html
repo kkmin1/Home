@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>연립미분방정식의 구성과 행렬표현</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<style id="blog-readability-patch">
+body{max-width:980px;margin:0 auto;padding:1.5rem 1rem 3rem;line-height:1.72;overflow-wrap:break-word}
+h1{line-height:1.3} h2{margin-top:2.2rem;border-bottom:1px solid #bbb;padding-bottom:.25rem}
+h3{margin-top:1.6rem} h4{margin-top:1.3rem}
+.chapter-nav{position:sticky;top:0;z-index:20;padding:.8rem;border:1px solid #ccc;background:#fafafa;overflow-x:auto;white-space:nowrap;border-radius:6px}
+table{display:block;width:100%;max-width:100%;overflow-x:auto;border-collapse:collapse}
+th,td{padding:.45rem .6rem;vertical-align:top}
+img,svg{max-width:100%!important;height:auto!important;display:block;margin:1rem auto}
+.katex-display,.math-display,div.math,p.math{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.footnotes{margin-top:3rem;padding-top:1rem;border-top:1px solid #bbb;font-size:.92em}
+@media(max-width:640px){body{padding:.8rem .65rem 2rem;font-size:16px}h1{font-size:1.65rem}h2{font-size:1.35rem}h3{font-size:1.18rem}.chapter-nav{font-size:.9rem}}
+</style>
+<title>연립미분방정식과 안정성</title>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav">
+<a href="system-of-differential equation.html">미분방정식 목차</a> ·
+<a href="differential-equation-basics.html">기초·1계</a> ·
+<a href="differential-equation-second-order.html">2계·고계</a> ·
+<a href="differential-equation-systems.html">연립계·안정성</a> ·
+<a href="phase diagram.html">위상도</a> ·
+<a href="differential-equation-applications.html">응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>연립미분방정식의 구성과 행렬표현</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="system-of-differential equation.html">미분방정식</a> · <a href="differential-equation-systems.html">연립미분방정식과 안정성</a></p><h4 style="text-align:justify">고차미분방정식의 연립미분방정식으로 변환</h4><p style="text-align:justify">n차 미분방정식은 변수변환으로 1차 연립미분방정식 문제로 변형될 수 있다.</p><p style="text-align:justify">예) <span class="math">y^{(4)} +3y '' -(sint)y ' +6y\,=\,t^{2}</span> , <span class="math">y(0)=1,\;y ' (0)=2,\;y '' (0)=3,\;y '' ' (0)=4\,</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify"><span class="math">x_{1} =y</span>, <span class="math">x_{2} =y'</span>, <span class="math">x_{3} =y''</span>, <span class="math">x_{4} =y'''</span> 라 하면</p><p style="text-align:justify"><span class="math">x' _{1} =y'\,=x_{2}</span></p><p style="text-align:justify"><span class="math">x ' _{2} =y''\,=x_{3}</span></p><p style="text-align:justify"><span class="math">x ' _{3} =y'''\,=x_{4}</span></p><p style="text-align:justify"><span class="math">x ' _{4} =y^{(4)} \,=t^{2} -3y '' \,+(sint)y ' -6y\,=\,t^{2} \,-\,3x_{3} +(sint)x_{2} -6x_{1}</span></p><p style="text-align:justify">1차 연립미분방정식 형태로 고치면</p><p style="text-align:justify"><span class="math">x ' _{1} =x_{2}</span></p><p style="text-align:justify"><span class="math">x ' _{2} =x_{3}</span></p><p style="text-align:justify"><span class="math">x ' _{3} =x_{4}</span></p><p style="text-align:justify"><span class="math">x ' _{4} =-6x_{1} +(sint)x_{2} -\,3x_{3} +\,t^{2} \,</span></p><p style="text-align:justify">초기조건 <span class="math">x_{1} (0)=1,\;x_{2} (0)=2,\;x_{3} (0)=3,\;x_{4} (0)=4\,</span></p><p style="text-align:right">(풀이끝)</p><h4 style="text-align:justify">계수가 상수인 경우</h4><p style="text-align:justify"><span class="math">a_{11} y_{1} +a_{12} y_{2} +...+a_{1n} y_{n} \,=y' _{1} \,</span></p><p style="text-align:justify"><span class="math">a_{21} y_{1} +a_{22} y_{2} +...+a_{2n} y_{n} \,=y ' _{2} \,</span></p><p style="text-align:justify"> <span class="math">\vdots</span></p><p style="text-align:justify"><span class="math">a_{n1} y_{1} +a_{n2} y_{2} +...+a_{nn} y_{n} \,=y ' _{n} \,</span></p><h4 style="text-align:justify">행렬식 표현</h4><h4 style="text-align:left">y’ = Ay</h4><p style="text-align:justify">where A = <span class="math">{\begin{pmatrix}a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn}\end{pmatrix}}</span> , y’ = <span class="math">{\begin{pmatrix}y' _{1} \\ y' _{2} \\ \vdots \\ y' _{n}\end{pmatrix}}</span> , y = <span class="math">{\begin{pmatrix}y_{1} \\ y_{2} \\ \vdots \\ y_{n}\end{pmatrix}}</span></p><p style="text-align:justify">예) 앞의 문제를 행렬로 표현하면</p><h4 style="text-align:left">x’ = Ax + v</h4><p style="text-align:justify">where A = <span class="math">{{\begin{pmatrix}\,0 &amp; 1 &amp; \,0 &amp; \;0 \\ \,0 &amp; 0 &amp; \,1 &amp; \;0 \\ \,0 &amp; 0 &amp; \;0 &amp; \;1 \\ -6 &amp; \,sint &amp; \,-3 &amp; \;0\end{pmatrix}}}</span> , x’ = <span class="math">{\begin{pmatrix}x ' _{1} \\ x ' _{2} \\ x' _{3} \\ x ' _{n}\end{pmatrix}}</span> , x = <span class="math">{\begin{pmatrix}x_{1} \\ x_{2} \\ x_{3} \\ x_{4}\end{pmatrix}}</span> , v = <span class="math">{{\begin{pmatrix}0 \\ 0 \\ 0 \\ t^{2}\end{pmatrix}}}</span></p><p style="text-align:right">(풀이끝)</p><p class="section-nav">← 처음 · <a href="differential-equation-systems.html">절별 목차</a> · <a href="differential-equation-systems-eigen.html">대각행렬화와 고유치</a> →</p></body></html>

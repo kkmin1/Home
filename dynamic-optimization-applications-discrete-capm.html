@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>소비 CAPM</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>이산형 동적최적화의 경제학 응용</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>소비 CAPM</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-optimization-applications-discrete.html">이산형 동적최적화의 경제학 응용</a></p><h4 id="소비-자본-자산-가격결정-모형-consumption-capm" style="text-align:justify">소비 자본-자산 가격결정 모형(consumption CAPM)</h4><p style="text-align:justify">투자자의 효용극대화를 위한 소비-저축 모형에서 저축의 방법이 여러 가지인 경우를 고려하자. 즉 투자자는 다양한 자산(증권)에 투자함으로서 재산을 증식시킬 수 있다.</p><p style="text-align:justify">(t+1)기의 재산은 t기의 재산에서 t기의 소비를 뺀 금액에 이자율을 곱한 것이다. </p><p style="text-align:justify"><span class="math">a_{t+1} \,=\,(1+r_{t} )(a_{t} \,-\,c_{t} )</span></p><p style="text-align:justify">재산에서 소비를 뺀 금액은 저축을 의미한다. </p><p style="text-align:justify">이 저축을 n개의 자산(증권)에 투자하는 경우를 고려하자.</p><p style="text-align:justify"><span class="math">\sum\limits_{i=1}^{n} s_{i,t} \,=\,a_{t} \,-\,c_{t}</span>, <span class="math">s_{i,t}</span>는 t기에 i 자산에 투자한 저축금액</p><p style="text-align:justify"><span class="math">r_{i,t}</span>를 t기에 i 자산의 투자수익률이라 하면</p><p style="text-align:justify"><span class="math">a_{t+1} \,=\, \sum\limits_{i=1}^{n} (1+r_{i,t+1} )s_{i,t}</span></p><h4 id="모형-2" style="text-align:justify">모형</h4><p style="text-align:justify">max <span class="math">\sum\limits_{t=0}^{\infty } \beta^{t} u(c_{t} )</span></p><p style="text-align:justify">s.t  <span class="math">a_{t+1} \,=\, \sum\limits_{i=1}^{n} (1+r_{i,t+1} )s_{i,t}</span>, <span class="math">t=0,\,1,\,2,\,...,\, \infty</span></p><p style="text-align:justify"> <span class="math">a_{0} \,=\,A\,</span> </p><p style="text-align:justify">투자수익률 <span class="math">r_{i,t}</span>는 확률변수로 Markov특성을 갖는다.</p><p style="text-align:justify">이 문제의 Bellman 방정식은</p><p style="text-align:justify"><span class="math">V(a_{t} )=\,\max_{s_{i,t}} \, \left\{ \,u(c_{t} )+ \beta E_{t} [V(a_{t+1} )] \right\}</span><span class="math">=\,\max_{s_{i,t}} \, \left\{ \,u(c_{t} )+ \beta E_{t} [V( \sum\limits_{i=1}^{n} (1+r_{i,t+1} )s_{i,t} )] \right\}</span></p><p style="text-align:justify">중괄호안을 <span class="math">s_{i,t}</span>에 대해 미분하면 최대화의 1차조건은 </p><p style="text-align:justify"><span class="math">\, \frac{\partial u(c_{t} )}{\partial c_{t}} \frac{\partial c_{t}}{\partial s_{i,t}} \,+\, \beta E_{t} \frac{\partial V(a_{t+1} )}{\partial a_{t+1}} \frac{\partial a_{t+1}}{\partial s_{i,t}} =0\,</span> </p><p style="text-align:justify">⇒ <span class="math">\, \frac{\partial u(c_{t} )}{\partial c_{t}} \,=\, \beta E_{t} \left[ (1+r_{i,t+1} ) \frac{\partial V(a_{t+1} )}{\partial a_{t+1}} \, \right]</span> for i=1, 2,..., n  ........... ①</p><p style="text-align:justify">가치함수를 다시 쓰면</p><p style="text-align:justify"><span class="math">V(a_{t} )</span><span class="math">=\,\max_{s_{i,t}} \, \left\{ \,u(a_{t} - \sum\limits_{i=1}^{n} s_{i,t} )+ \beta E_{t} [V(a_{t+1} )] \right\}</span></p><p style="text-align:justify">가치함수를 <span class="math">a_{t}</span>에 대해 미분하면, 포락선정리에 따라</p><p style="text-align:justify"><span class="math">\frac{\partial V_{t}}{\partial a_{t}} =\, \frac{\partial u(c_{t} )}{\partial c_{t}} \frac{\partial c_{t}}{\partial a_{t}} \,=\,u ' (c_{t} )</span></p><p style="text-align:justify">⇒ <span class="math">\frac{\partial V(a_{t+1} )}{\partial a_{t+1}} =\,u ' (c_{t+1} )</span> ...........②</p><p style="text-align:justify">②를 ①에 대입하면</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,= \beta E_{t} [(1+r_{i,t+1} )u ' (c_{t+1} )]</span> for i=1, 2,..., n .................③</p><p style="text-align:justify">이는 기댓값을 반영한 오일러 방정식이다. </p><p style="text-align:justify"><span class="math">m_{t+1} \,=\, \frac{\beta u'(c_{t+1} )}{u'(c_{t} )}</span> 라 하면 이는 투자자의 기간간 한계대체율을 의미한다.</p><p style="text-align:justify">③의 양변을 <span class="math">u'(c_{t} )</span>로 나누면</p><p style="text-align:justify"><span class="math">\,1\,=E_{t} [(1+r_{i,t+1} )m_{t+1} ]</span> for i=1, 2,..., n .................④</p><p style="text-align:justify"><span class="math">\,=E_{t} (1+r_{i,t+1} )E_{t} (m_{t+1} )\,+\,Cov(1+r_{i,t+1} ,\;m_{t+1} )</span>..........⑤<sup><a href="#fn96" id="fnref96">[96]</a></sup></p><p style="text-align:justify">⑤를 <span class="math">E_{t} (m_{t+1} )</span>로 나누면</p><p style="text-align:justify"><span class="math">\, \frac{1}{E_{t} (m_{t+1} )} \,=E_{t} (1+r_{i,t+1} )\,+\, \frac{Cov(1+r_{i,t+1} ,\;m_{t+1} )}{E_{t} (m_{t+1} )}</span>............⑥</p><p style="text-align:justify">④에서 자산 i 중에 수익률이 <span class="math">r_{t}^{f}</span>로 확정적인 무위험 자산이 포함되어 있다면, 무위험자산에 대하여 </p><p style="text-align:justify"><span class="math">\,1\,=(1+r_{t+1}^{f} )E_{t} (m_{t+1} )</span></p><p style="text-align:justify">⇒ <span class="math">\,1+r_{t+1}^{f} = \frac{1}{E_{t} (m_{t+1} )}</span> ................⑦</p><p style="text-align:justify">⑦을 ⑥에 대입하면</p><p style="text-align:justify">⇒ <span class="math">\,1+r_{t+1}^{f} \,=E_{t} (1+r_{i,t+1} )\,+\,(1+r_{t+1}^{f} )Cov(1+r_{i,t+1} ,\;m_{t+1} )</span> for i=1, 2,..., n ......⑧</p><p style="text-align:justify">⇒ <span class="math">E_{t} (1+r_{i,t+1} )\,-(\,1+r_{t+1}^{f} )\,=\,-\,(1+r_{t+1}^{f} )Cov(1+r_{i,t+1} ,\;m_{t+1} )</span> ..............⑨</p><p style="text-align:justify">소비와의 공분산이 큰 음(-)인 수익률을 가진 자산은 낮은 위험 프리미엄으로도 보유하려 한다. 반대로 소비와의 공분산이 큰 양(+)인 자산은 경기가 나쁠 때 효용이 낮으므로, 투자자가 이를 보유하도록 하려면 높은 위험 프리미엄이 필요하다.</p><p style="text-align:justify">따라서 이 모형은 자산의 체계적 위험(systematic risk)을 경제의 상태, 즉 소비와 연계하여 설명한다.</p><p style="text-align:justify">자산 중에는 수익률이 기간간 한계대체율과 같은 것도 있다. 이를 k라 하면</p><p style="text-align:justify"><span class="math">1+r_{k,t+1} \,=\,m_{t+1}</span></p><p style="text-align:justify">이 자산 k에 대하여 ⑧은</p><p style="text-align:justify"><span class="math">\,1+r_{t+1}^{f} \,=E_{t} (1+r_{k,t+1} )\,+\,(1+r_{t+1}^{f} )Cov(1+r_{k,t+1} ,\;m_{t+1} )</span></p><p style="text-align:justify">⇒ <span class="math">\,1+r_{t+1}^{f} \,=E_{t} (m_{t+1} )\,+\,(1+r_{t+1}^{f} )Var(m_{t+1} )</span></p><p style="text-align:justify">⇒ <span class="math">\,-(\,1+r_{t+1}^{f} )\,=\, \frac{E_{t} (m_{t+1} )-(\,1+r_{t+1}^{f} \,)}{Var(m_{t+1} )}</span>............⑩</p><p style="text-align:justify">⑩을 ⑨에 대입하면</p><p style="text-align:justify"><span class="math">E_{t} (1+r_{i,t+1} )\,-(\,1+r_{t+1}^{f} )\,=\,</span><span class="math">\, \frac{Cov(m_{t+1} ,\,1+r_{t+1}^{f} \,)}{Var(m_{t+1} )}</span><span class="math">\,[E_{t} (m_{t+1} )-(\,1+r_{t+1}^{f} \,)]</span></p><p style="text-align:justify">⇒ <span class="math">E_{t} (1+r_{i,t+1} )\,=\,</span><span class="math">\beta</span><span class="math">[E_{t} (m_{t+1} )-(\,1+r_{t+1}^{f} \,)]+(\,1+r_{t+1}^{f} )\,</span></p><p style="text-align:justify">where <span class="math">\, \beta \,=\, \frac{Cov(m_{t+1} ,\,1+r_{t+1}^{f} \,)}{Var(m_{t+1} )}</span></p><p style="text-align:justify">이 공식을 소비에 기초한 자본-자산 가격결정모형(consumption CAPM)이라 부른다.</p><p style="text-align:justify">자산 i의 기대수익률은 무위험자산의 수익률 + 한계대체율과 무위험자산 수익률의 차이에 일정 비율을 곱한 값과 같다. <span class="math">\; \frac{Cov(m_{t+1} ,\,1+r_{t+1}^{f} \,)}{Var(m_{t+1} )}</span>를 소비 <span class="math">\beta</span>라 한다.</p><p style="text-align:justify">표준적인 1기간 CAPM에서는 투자자가 기대효용을 극대화할 때</p><p style="text-align:justify">수익률의 평균과 분산만을 고려한다. 이에 비해 소비 CAPM(Consumption-CAPM)은 투자자가 생애 전체의 기대효용을 극대화하는 기간간(intertemporal) 모형이다.</p><h2>각주</h2><ol class="footnotes"><li id="fn96"><p style="text-align:justify"> <span class="math">Cov(x,y)\,=\,E(xy)-E(x)E(y)</span></p>
+<a href="#fnref96">↩</a></li></ol><p class="section-nav">← <a href="dynamic-optimization-applications-discrete-firm.html">기업의 동적 이윤극대화</a> · <a href="dynamic-optimization-applications-discrete.html">절별 목차</a> · <a href="dynamic-optimization-applications-discrete-growth.html">신고전학파 동적 성장모형</a> →</p></body></html>

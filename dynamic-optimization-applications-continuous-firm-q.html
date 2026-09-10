@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>동태적 기업이론과 Tobin q</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>연속형 동적최적화의 응용</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>동태적 기업이론과 Tobin q</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-optimization-applications-continuous.html">연속형 동적최적화의 응용</a></p><h4 id="기업-162" style="text-align:left">動態的 기업理論<sup><a href="#fn162" id="fnref162">[162]</a></sup></h4><p style="text-align:left">&lt;가정&gt;</p><p style="text-align:justify">K(t) ; t 시점에서 자본</p><p style="text-align:justify">L(t) ; t 시점에서 노동투입량 </p><p style="text-align:justify">I(t) ; t 시점에서 투자</p><p style="text-align:justify">w(t) ; t 시점에서 임금</p><p style="text-align:justify"><span class="math">\rho (t)</span> ; t 시점에서 자본의 가격</p><p style="text-align:justify">ⅰ) 생산함수의 기본가정들 만족</p><p style="text-align:left">㉠ 규모에 대한 수익불변(1차동차함수),</p><p style="text-align:left"><span class="math">f( \alpha L, \alpha K)= \alpha f(L,K)</span></p><p style="text-align:left">㉡ 오목함수, 2차미분 가능</p><p style="text-align:left"><span class="math">f_{\scriptscriptstyle {L}} (L,K) \geq 0</span> , <span class="math">f_{\scriptscriptstyle {LL}} \leq 0</span> </p><p style="text-align:left"><span class="math">f_{\scriptscriptstyle {K}} (L,K) \geq 0</span> , <span class="math">f_{\scriptscriptstyle {KK}} \leq 0</span></p><p style="text-align:left">㉢ Inada조건 </p><p style="text-align:left"><span class="math">\lim\limits_{\scriptscriptstyle {K \to \infty}} {f_{\scriptscriptstyle {K}} =0}</span>, <span class="math">\lim\limits_{\scriptscriptstyle {L \to \infty}} {f_{\scriptscriptstyle {L}} =0}</span> </p><p style="text-align:left"><span class="math">\lim\limits_{\scriptscriptstyle {K \to 0}} {f_{\scriptscriptstyle {K}} = \infty }</span>, <span class="math">\lim\limits_{\scriptscriptstyle {K \to 0}} {f_{\scriptscriptstyle {K}} = \infty }</span></p><p style="text-align:justify">ⅱ) 자본은 가역적(reversible)이다. 즉, 자본은 감소할 수 있다.<sup><a href="#fn163" id="fnref163">[163]</a></sup></p><p style="text-align:justify">K(t), I(t) ≶ 0  </p><p style="text-align:justify">ⅲ) 신규투자는 자본의 변동분과 상각되서 없어지는 분량을 합한 것</p><p style="text-align:left"><span class="math">I(t)= \frac{dK}{dt} + \delta K(t)</span> , <span class="math">\delta</span> ; 상각률(시간에 상관없이 일정)</p><p style="text-align:justify">ⅳ) 노동과 투자는 각각의 가격에 영향을 미치지 않는다. 요소시장이 완전경쟁적이므로 임금과 자본 가격은 주어진 것으로 가정</p><p style="text-align:justify"><span class="math">\frac{dL}{dw} =0</span> ,  <span class="math">\frac{dK}{d \rho } =0</span> </p><h4 id="모형" style="text-align:left">&lt;모형&gt;</h4><p style="text-align:left">기업은 총수입에서 투입요소비용을 뺀 순현금흐름(net cash flow)의 현재가치를 최대화하는 것이 목적이다.</p><p style="text-align:left"><span class="math">\max\; \int_{0}^{\infty } {e^{-rt}} [pf(L,K)-wL- \rho I]dt</span></p><p style="text-align:left"><span class="math">s.t\;K ' =I- \delta K</span> </p><p style="text-align:left">p(t) ; t 시점에서 생산물 가격</p><p style="text-align:left">r(t)=r ; 이자율 또는 투자수익률(시간에 상관없이 일정)</p><p style="text-align:left">(풀이)</p><p style="text-align:left">상태변수는 K(t), 통제변수는 L(t), I(t)<sup><a href="#fn164" id="fnref164">[164]</a></sup> </p><p style="text-align:left">Hamiltonian 함수는</p><p style="text-align:left"><span class="math">H=e^{-rt} [pf(L,K)-wL- \rho I]+ \lambda (I- \delta K)</span></p><p style="text-align:left">ⓐ 통제변수 L 최적화 조건</p><p style="text-align:left"><span class="math">H_{\scriptscriptstyle {L}} =e^{-rt} [pf_{\scriptscriptstyle {L}} -w]=0</span></p><p style="text-align:left">⇒ <span class="math">f_{\scriptscriptstyle {L}} = \frac{w(t)}{p(t)}</span></p><p style="text-align:left">⇒ <span class="math">p(t)f_{\scriptscriptstyle {L}} =w(t)</span></p><p style="text-align:left">각 시점의 노동의 한계생산물은 각 시점의 실질임금과 같아야 한다. 또는 각 시점의 노동의 한계생산물 가치는 각 시점의 명목임금과 같아야 한다. 정태적 최적화와 같은 결과로서 정태적 최적화의 동태적 연장이라 할 수 있다.</p><p style="text-align:left">ⓑ 통제변수 I 최적화조건</p><p style="text-align:left"><span class="math">H_{\scriptscriptstyle {I}} =-e^{-rt} \rho + \lambda =0</span></p><p style="text-align:left">⇒ <span class="math">e^{-rt} \rho (t)\,=\, \lambda (t)</span>....................①</p><p style="text-align:left"><span class="math">\rho ,\;r</span>가 I와 상관없는 외생변수이므로 최적투자 <span class="math">I*</span>은 미분이 아닌 다음을 이용해 푼다.</p><p style="text-align:left"><span class="math">H=e^{-rt} [pf(L,K)-wL- \rho I]+ \lambda (I- \delta K)</span></p><p style="text-align:left"><span class="math">=( \lambda - \rho e^{-rt} )I+pf(L,K)-wL- \lambda \delta K</span></p><p style="text-align:left">H가 I의 선형함수이므로 I의 계수에 따라 최적값 <span class="math">I*</span>은 (<span class="math">+\infty ,\,- \infty</span>)로 변한다.</p><p style="text-align:left">ⅰ) <span class="math">\lambda &gt; \rho e^{-rt}</span> ⇒ <span class="math">I*\,=\, \infty</span></p><p style="text-align:left">ⓑ <span class="math">\lambda &lt; \rho e^{-rt}</span> ⇒ <span class="math">I*\,=\,- \infty</span></p><p style="text-align:left">ⓒ <span class="math">\lambda = \rho e^{-rt}</span> ⇒ <span class="math">I*</span>는 임의의 값을 갖는다. </p><p style="text-align:left"><span class="math">\lambda = \rho e^{-rt}</span>는 달성하기가 매우 어렵고 <span class="math">\lambda = \rho e^{-rt}</span>이 달성되었다고 하더라도 <span class="math">\rho</span> 또는 r의 조그만 변화도 <span class="math">I*</span>는 <span class="math">+\infty ,\,- \infty</span>가 되므로 <span class="math">I*</span>는 일종의 면도날(knife’s edge) 균형이라 할 수 있다.</p><p style="text-align:left">위 세 가지 어떠한 경우도 경제학적으로 의미있는 설명을 제시할 수 없다.</p><p style="text-align:left">투자 I에 상하한의 제약이 있다면( <span class="math">rm0 \leq I \leq \overline{I}</span> ),  I의 계수에 따라 <span class="math">I*</span>의 값은 0 혹은 <span class="math">\overline{\mathbf{I}}</span>로 순식간에 전환되는  bang-bang 해가 될 것이다.</p><p style="text-align:left">ⓐ <span class="math">\lambda &gt; \rho e^{-rt}</span> ⇒ <span class="math">\mathbf{I}*\,=\, \overline{\mathbf{I}}</span></p><p style="text-align:left">ⓑ <span class="math">\lambda &lt; \rho e^{-rt}</span> ⇒ <span class="math">\mathbf{I}*\,=\,0</span></p><p style="text-align:justify">최적투자가 외생변수의 변동에 따라 순간적으로 전환하는 bang-bang 해라는 결론 역시 경제학적으로 무의미한 결론이다.</p><p style="text-align:justify">이상과 같은 비현실적인 결론이 도출되는 이유는 헤시안이 투자의 선형함수로 표현되었기 때문이다. 이는 요소시장이 완전경쟁시장이라서 투자수요와 무관하게 자본재 가격이 고정이라는 가정과 연관이 있다.<sup><a href="#fn165" id="fnref165">[165]</a></sup></p><p style="text-align:left">ⅲ) 상태변수의 승수방정식</p><p style="text-align:left"><span class="math">H_{\scriptscriptstyle {K}} \,=\,e^{-rt} pf_{\scriptscriptstyle {K}} - \lambda \delta =- \lambda '</span>...............②</p><p style="text-align:left">①의 양변을 t에 관해 미분하면</p><p style="text-align:left"><span class="math">\lambda ' =-r \rho e^{-rt} + \rho ' e^{-rt}</span>...............③</p><p style="text-align:left">②와 ③을 결합하면</p><p style="text-align:left"><span class="math">r \rho e^{-rt} - \rho ' e^{-rt} =e^{-rt} pf_{\scriptscriptstyle {K}} -e^{-rt} \rho \delta</span></p><p style="text-align:left">⇒ <span class="math">r \rho - \rho '=pf_{\scriptscriptstyle {K}} - \rho \delta</span></p><p style="text-align:left">⇒ <span class="math">pf_{\scriptscriptstyle {K}} = {\rho (r+ \delta )- \rho ' }</span> ....................④</p><p style="text-align:justify">자본 한 단위를 구매하면 그 돈으로 다른 곳에 투자했을 때 얻을 수 있는 소득이 감소하므로 이자수입 만큼의 기회비용이 발생한다(<span class="math">\rho r</span>). 또한 이 구매설비에 대한 감가상각비용이 추가적으로 발생한다(<span class="math">\rho \delta</span>). 따라서 자본 한 단위의 총기회비용은 이자소득 상실분 + 감가상각비용. 단 자본재의 가격은 항상 일정한 것이 아니라 시간에 따라 변하므로 이 부분을 고려해야 한다(<span class="math">\rho'</span>). 자본재의 가격이 구입시보다 증가한다면 자본재를 되파는 이익이 있을 것이므로 이 부분 만큼 기회비용에서 제하여 준다. 그러나 자본재의 가격이 구입시보다 하락한다면 이 부분 만큼의 추가적인 기회비용이 발생할 것이다.</p><p style="text-align:justify">따라서 자본 한 단위를 구매하는데 따르는 총기회비용(oppertunity cost)은 <span class="math">\rho (r+ \delta )- \rho '</span>, 이를 Jorgenson은 내재적 임대비용(implicit rental cost)라 불렀다. 즉 자본의 한계생산물 가치가 내재적 임대비용과 같아지는 점까지 투자가 이루어져야 한다는 것을 의미한다.</p><p style="text-align:left">④를 다시쓰면 </p><p style="text-align:left"><span class="math">\rho ' (t)-(r+ \delta ) \rho (t)=-p(t)f_{\scriptscriptstyle {K}}</span></p><p style="text-align:left">이는 비동차항이 t의 함수인 <span class="math">\rho</span>에 관한 1차 비동차미분방정식이다.</p><p style="text-align:left">미분방정식 <span class="math">y'+p(x)y=r(x)</span>의 해</p><table aria-label="&lt;모형&gt; 관련 표 2" style="border-collapse:collapse;table-layout:fixed;height:63.200px;width:257.547px"><colgroup><col style="width:257.547px"/></colgroup><tbody><tr style="height:63.200px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:left"><span class="math">y=e^{-h} \int {e^{h} rdx+Ce^{-h}}</span> , <span class="math">h= \int {pdx}</span></p>
+</td></tr></tbody></table><p style="text-align:left"><span class="math">\rho ' (t)-( \delta +r) \rho (t)=-p(t)f_{\scriptscriptstyle {K}}</span></p><p style="text-align:left"><span class="math">h= \int {-( \delta +r)dt} =-( \delta +r)t</span></p><p style="text-align:left"><span class="math">\rho (t)=e^{(r+ \delta )t} \int {[-e^{-(r+ \delta )x} pf_{\scriptscriptstyle {K}} ]dx} +Ce^{(r+ \delta )t}</span></p><p style="text-align:left"><span class="math">\rho (t)= \int_{\text{t}}^{\infty } {[e^{-(r+ \delta )(x-t)} pf_{\scriptscriptstyle {K}} ]dx} +e^{-(r+ \delta )(T-x)} \rho (T)</span>..........②</p><p style="text-align:left">ⅳ) 기간이 무한대일 때 transversality 조건</p><p style="text-align:left">상태변수의 최종값이 미정이고 기간이 무한대이므로 다음 transversality 조건을 적용한다.<sup><a href="#fn166" id="fnref166">[166]</a></sup></p><p style="text-align:left"><span class="math">\lim\limits_{t \to \infty } {\lambda (t)} = \lim\limits_{t \to \infty } {e^{-rt} \rho } (t)=0</span></p><p style="text-align:left">∴ <span class="math">\lim\limits_{\scriptscriptstyle {T \to \infty}} e^{-(r+ \delta )(T-x)} \rho (T)=0</span></p><p style="text-align:left">∴ <span class="math">\rho (t)= \int_{\text{t}}^{\infty } {[e^{-(r+ \delta )(x-t)} pf_{\scriptscriptstyle {K}} ]dx}</span></p><p style="text-align:left">자본재의 가격은 자본의 한계생산물가치의 현재가치의 합과 같다.</p><p style="text-align:left">ⅴ) 상태변수의 비음조건 (<span class="math">K(t) \geq 0\,,\;(t \geq 0)</span>)</p><p style="text-align:left">?</p><h4 id="신고전학파-투자모형의-적용과-한계" style="text-align:left">신고전학파 투자모형의 적용과 한계</h4><p style="text-align:justify">정태적 기업이론은 기업의 단기적 이윤 극대화 목적에 따라 자본이 신축적으로 즉시 결정되고 자본량이 결정되면 이는 변함없이 유지될 것이라고 주장한다. 또는 매기 이윤극대화 결정은 다른 기간의 결정에 영향을 미치지 않고 독립적이라고 가정하므로 해당기간의 정태적 이윤극대화 문제를 풀면된다. “자본재의 생산량은 매년 변하므로 이를 반영하지 못하고 있기 때문에 제대로된 분석을 하지 못하고 있다. 자본량과 투자의 함수는 매기 변하는데 이를 반영하지 못하고 있는 것이다. 이는 굉장히 비현실적인 가정이라 할 수 있다.” 전기의 투자가 다음기의 투자결정에 영향을 미치는 것이 일반적이므로 시간에 따른 투자의 변화를 전혀 고려하지 않으므로 비현실적이다.</p><p style="text-align:justify">반면 동태적 기업이론은 자본재의 가격이 시간에 따라 변한다는 전제하에(자본이 시간의 함수) 기업의 생존기간 동안(일반적으로 무한대로 가정) 기업이윤의 현재가치의 최대화를 목표로 한다. 이 문제는 최적제어문제의 최대화원칙을 써서 최적 투자경로를 도출한다.</p><p style="text-align:justify">그럼에도 불구하고 동태적모형 또한 정태적 모형과 같이 자본이 마찰 없이(frictionless), 순식간에(instantaneously) 결정된다고 가정하고 있다.</p><p style="text-align:justify">자본이 완전히 가역적(reversible)이라고 가정하는 것은 현실적이지 않을 수 있다. 현실의 많은 자본재는 설치 후 되팔거나 다른 용도로 전환할 때 손실이 발생하며, 경우에 따라서는 폐기비용까지 발생한다. 이러한 투자 비가역성(irreversibility)은 투자결정에 추가적인 마찰과 옵션가치를 만든다.</p><p style="text-align:justify">투자에 제약이 없다면 자본재가격의 변화는 투자의 (<span class="math">-\infty ,\,+ \infty</span>)의 bang-bang 해를 낳는다. 예를 들어 한 국가에서 자본이익률이 타국가보다 더 높아진다면 타국의 자본이 모두 이 국가로 유입될 것이고 투자율은 무한대가 될 것이다. 이 문제는 앞에서 본 바와 같이 통제변수인 투자함수에 비음조건을 둠으로써 해결될 수 있다. 그러나 이 경우 bang-bang 해라는 비현실적인 결과가 도출되었다. 최적 투자량이 시간에 따라서 0도 되었다가 최대값도 되는 현상은 비현실적인 결과이다.</p><p style="text-align:justify">현실적으로 투자 결정에는 투자비용과 수요에 대한 예측이 중요한 역할을 함에도 불구하고 기대예측이 투자 결정에 미치는 영향을 고려 않함. 기업은 매출의 신장 혹은 축소 가능성을 예상하여 투자결정을 내리는 것이 일반적이다.</p><p style="text-align:left">動態的 規制理論(Dynamic optimal regulation theory)</p><p style="text-align:left">(가정)</p><p style="text-align:left">⦁효용함수 </p><p style="text-align:left">- 단조증가 오목함수, Inada조건 만족,</p><p style="text-align:left">- 효용은 소비의 함수</p><p style="text-align:left">- 현재효용과 미래효용간의 한계대체율(r)은 양(+)이고 일정<sup><a href="#fn167" id="fnref167">[167]</a></sup></p><p style="text-align:left">⦁균제경제성장경로는 Solow 모형을 따른다.</p><p style="text-align:left"><span class="math">\, \frac{dk(t)}{dt} = \phi (k)-c(t)- \theta k</span>.........<sup><a href="#fn168" id="fnref168">[168]</a></sup> , <span class="math">\theta \,=\, \delta +n</span>(=감가상각률+인구증가율)</p><p style="text-align:left">규제자는 총효용의 현재가치를 최대화하는 정책을 선택한다.</p><p style="text-align:left">(모형)</p><p style="text-align:left"><span class="math">\max\; \int_{0}^{\top} {e^{-rt}} U(c)dt</span></p><p style="text-align:left"><span class="math">s.t\;k ' =f(k)- \theta k-c</span> , <span class="math">k(t_{0} )=k_{0}</span>, <span class="math">0 \leq c \leq f(k)</span>, c는 구간연속함수</p><p style="text-align:left">U(c(t)) : t 시점에서 사회구성원의 총효용</p><p style="text-align:left">(풀이)</p><p style="text-align:left">해밀토니안 함수는</p><p style="text-align:left"><span class="math">H=e^{-rt} U(c)+ \lambda [f(k)- \theta k-c]</span></p><p style="text-align:left">최대화원칙:</p><p style="text-align:left"><span class="math">\frac{\partial H}{\partial c} =e^{-rt} U ' (c)- \lambda =0</span></p><p style="text-align:left">⇒<span class="math">\lambda (t)=e^{-rt} U'(c(t))</span> ..............①</p><p style="text-align:left">최적성장경로를 따른 자본축적의 기회비용은 소비 한단위 감소로 인한 한계효용 감소분의 현재가치이다.</p><p style="text-align:left"><span class="math">\frac{\partial H}{\partial k} = \lambda f ' (k)- \lambda \theta =- \lambda '</span>............②</p><p style="text-align:left">⇒<span class="math">f ' - \theta + \frac{\lambda ' }{\lambda } =0</span></p><p style="text-align:justify"><span class="math">f'</span> 는 한계생산물, <span class="math">\frac{\lambda '}{\lambda }</span> 는 자본증가의 이득을 의미하므로<sup><a href="#fn169" id="fnref169">[169]</a></sup> <span class="math">f'+ \frac{\lambda '}{\lambda }</span>는 두당자본 1단위 증가에 따른 한계이득을 의미, <span class="math">\theta</span>는 <span class="math">\delta +n</span> (감가상각율+인구증가율)이므로 자본마모분에 대한 대체비용 + 인구증가에 의한 두당자본의 희석효과를 의미한다. n은 두당자본에 대한 효과이므로 순수 자본에 대한 비용은 감가상각에 의한 자본교체비용 뿐이다. 이는 곧 두당자본 1단위 증가에 따른 한계비용을 의미. </p><p style="text-align:justify">따라서 위 식은 두당자본 1단위 추가의 한계이득이 한계비용과 같아지는 점까지 자본 증가가 이루어져 함을 의미한다. </p><p style="text-align:left"><span class="math">\frac{\partial H}{\partial \lambda } =f(k)- \theta k-c=k'</span>..................③</p><p style="text-align:left">①을 t에 대해 미분하면</p><p style="text-align:left"><span class="math">\lambda ' =-re^{-rt} U ' +e^{-rt} U ' ' c '</span>...............④</p><p style="text-align:left">⇒ <span class="math">c ' = \frac{\lambda ' +re^{-rt} U ' }{e^{-rt} U '' } = \frac{\lambda ( \theta -f')+re^{-rt} U ' }{e^{-rt} U '' }</span></p><p style="text-align:left"><span class="math">= \frac{e^{-rt} U'( \theta -f ' )+re^{-rt} U ' }{e^{-rt} U '' }</span></p><p style="text-align:left"><span class="math">=- \frac{U ' (f ' -( \theta +r))}{U '' }</span></p><p style="text-align:left">충분조건:</p><p style="text-align:left">효용함수가 오목함수이고 효용함수의 가정에 의해 충분조건을 만족한다.<sup><a href="#fn170" id="fnref170">[170]</a></sup></p><p style="text-align:left">최적해의 필요조건</p><table aria-label="신고전학파 투자모형의 적용과 한계 관련 표 3" style="border-collapse:collapse;table-layout:fixed;height:91.520px;width:265.093px"><colgroup><col style="width:265.093px"/></colgroup><tbody><tr style="height:91.520px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:left"><span class="math">c'(t)=- \frac{U ' (f ' -( \theta +r))}{U '' }</span> ; 최적화조건</p>
+<p style="text-align:left"><span class="math">k'=f(k)- \theta k-c</span> ; 경제성장기본식</p>
+</td></tr></tbody></table><p style="text-align:left">위 두 미분방정식을 만족시키는 <span class="math">c*(t),\;k*(t)</span>가 최적경제성장경로이다.</p><p style="text-align:left">수정된 황금률성장경로(modified golden rule growth path)</p><p style="text-align:left">장기적으로 안정상태이기 위해서는 <span class="math">c'(t),\;k'(t)=0</span> 이어야 함</p><p style="text-align:left">최적화조건에서</p><p style="text-align:left"><span class="math">c'(t)= \frac{U ' (f ' -( \theta +r))}{U '' } =0</span> ⇒ <span class="math">f ' (k*)= \theta +r</span></p><p style="text-align:left">경제성장기본식에서</p><p style="text-align:left"><span class="math">k'(t)=f(k)- \theta k-c\,=0</span> ⇒ <span class="math">f(k*)- \theta k*=c\,*</span></p><p style="text-align:left">앞의 Solow-Swan 모형에서 황금률 경제성장경로는 <span class="math">f ' (k_{\scriptscriptstyle {S}}^{*} )= \theta</span> 를 만족시키는 <span class="math">k_{\scriptscriptstyle {S}}^{*} (t)</span> 이었다.</p><p style="text-align:left">본 Ramsey모형은 <span class="math">f ' (k*)= \theta +r</span> 를 만족시키는 <span class="math">k*(t)</span>가 최적경제성장경로가 된다. 이자율 r의 추가로 최적경제성장경로가 줄어드는데(<span class="math">k*(t)&lt;k_{\scriptscriptstyle {S}}^{*} (t)</span>) 이를 ‘수정된 황금률성장경로’라 한다.<sup><a href="#fn171" id="fnref171">[171]</a></sup></p><p style="text-align:left">(그림)</p><p style="text-align:left"><span class="math">c'(t)=- \frac{U ' (f ' -( \theta +r))}{U '' }</span> 에서 <span class="math">- \frac{U ' }{U '' } &gt;0</span> 이므로 (∵<span class="math">U'&gt;0,\,U''&lt;0</span>)</p><p style="text-align:left"><span class="math">c ' \, \left\{ {\begin{matrix}= \\ &gt; \\ &lt;\end{matrix}} \right\} 0\;if\;f ' (k) \left\{ {\begin{matrix}= \\ &gt; \\ &lt;\end{matrix}} \right\} \theta +r</span> ⇒ <span class="math">c ' \, \left\{ {\begin{matrix}= \\ &gt; \\ &lt;\end{matrix}} \right\} 0\;if\;k \left\{ {\begin{matrix}= \\ &lt; \\ &gt;\end{matrix}} \right\} k*</span></p><p style="text-align:left"><span class="math">k'=f(k)- \theta k-c</span> 에서</p><p style="text-align:left"><span class="math">k ' \, \left\{ {\begin{matrix}= \\ &gt; \\ &lt;\end{matrix}} \right\} 0\;if\;c \left\{ {\begin{matrix}= \\ &lt; \\ &gt;\end{matrix}} \right\} f(k)- \theta k</span></p><p style="text-align:left">예)</p><p style="text-align:left">http://www.ems.bbk.ac.uk/for_students/msc_econ/ETA2_classes/ps1ans.pdf </p><p style="text-align:left">http://www.eui.eu/Personal/Researchers/CristianaBenedetti/index_files/Page601.htm </p><p style="text-align:left">http://www.lhendricks.org/econ720/ih1/IH1_PSA.pdf </p><p style="text-align:left">http://www.econ.ku.dk/okoje/egps2.pdf </p><p style="text-align:left">http://web.mit.edu/14.451/www/451_Problem_Set_3_Solutions.pdf </p><p style="text-align:left">http://www.economics.soton.ac.uk/staff/alicesch/teaching/200708/econ3010/problemset03_sol.pdf </p><h4 id="투자의-q-이론-q-theory-of-investment" style="text-align:left">투자의 q 이론(q theory of investment)</h4><p style="text-align:justify">앞의 신고전학파 동태적 기업이론이 헤시안이 투자의 선형함수라는 가정 때문에 bang-bang 해라는 비현실적인 결론을 도출하였므로 이를 해결하기 위해 투자비용의 비선형성을 도입한다.</p><p style="text-align:left">(가정)</p><p style="text-align:left">① 생산함수의 기본가정들 충족</p><p style="text-align:left">② 신규투자는 자본의 증감분과 상각되는 부분을 대체하는 분량을 합한 것</p><p style="text-align:left"><span class="math">I(t)= \frac{dK(t)}{dt} + \delta K(t)</span> , <span class="math">\delta</span> ; 상각률</p><p style="text-align:left">③ 자본의 추가비용은 투자액에 조정비용(adjustment cost) α를 합한 것과 같다.<sup><a href="#fn172" id="fnref172">[172]</a></sup> 조정비용은 투자의 증가함수이다.</p><p style="text-align:left"><span class="math">C(I)= \rho I+ \alpha (I)</span> , <span class="math">\alpha '(I) \geq 0</span> ⇒ <span class="math">C\, ' (I) \geq 0</span></p><p style="text-align:left">④ 자본은 비가역적(irreversible)이다.</p><p style="text-align:left"><span class="math">I(t),\,K(t) \geq 0</span></p><p style="text-align:left">(모형)</p><p style="text-align:left"><span class="math">\max\; \int_{0}^{\infty } {[pf(L,K)-wL- \rho I- \alpha (I)]e^{-rt}} dt</span></p><p style="text-align:left"><span class="math">s.t\;K ' =I- \delta K</span> ,  <span class="math">I(t),\,K(t) \geq 0</span></p><p style="text-align:left">(풀이)</p><p style="text-align:left">상태변수 K(t), 통제변수 I(t)</p><p style="text-align:left">Hamiltonian 함수는</p><p style="text-align:left"><span class="math">H=(pf-wL- \rho I- \alpha )e^{-rt} + \lambda (I- \delta K)</span></p><p style="text-align:left">ⅰ) 통제변수 최적화조건</p><p style="text-align:left"><span class="math">H_{\scriptscriptstyle {L}} =(pf_{\scriptscriptstyle {L}} -w)e^{-rt} =0</span></p><p style="text-align:left">⇒ <span class="math">p(t)f_{\scriptscriptstyle {L}} =w(t)</span> ; 매순간 한계생산물가치는 명목임금과 같은 점에서 노동투입량을 결정하는 것이 최선이다.</p><p style="text-align:left"><span class="math">H_{\scriptscriptstyle {I}} =(- \rho - \alpha ' )e^{-rt} + \lambda =0</span></p><p style="text-align:left">⇒ <span class="math">\lambda (t)=( \rho (t)+ \alpha ' (I))e^{-rt}</span></p><p style="text-align:left">신고전학파 모형과 달리 <span class="math">\alpha (I)</span>의 존재로 인해 H가 I의 선형함수가 아니므로 최적투자 <span class="math">I*</span>가 무한대로 나오는 비현실적인 결과가 도출되지 않는다. 또한 투자에 상하한이 있는 경우에도 앞에서와 같은 bang-bang 해가 도출되지 않는다.</p><p style="text-align:left"><span class="math">I(t)</span>의 비음조건은 </p><p style="text-align:left"><span class="math">q= \rho + \alpha '</span> 라 하면</p><p style="text-align:left"><span class="math">\lambda =qe^{-rt}</span></p><p style="text-align:left"><span class="math">\alpha '(I) \geq 0</span> 이므로 <span class="math">q \geq 0</span></p><p style="text-align:justify"><span class="math">\rho (t)</span>는 자본재 1단위의 t 시점에서의 시장가격, <span class="math">\alpha ' (I)</span>는 자본재 추가에 따른 조정비용 증가를 의미하므로 <span class="math">q(= \rho + \alpha ' )</span>는 자본 한 단위의 암묵적 기회비용을 의미한다.(즉 q는 시장이 평가하는 자본의 가격을 의미한다.) </p><p style="text-align:left">ⅱ) 상태변수 최적화조건 </p><p style="text-align:left"><span class="math">H_{\scriptscriptstyle {K}} =pf_{\scriptscriptstyle {K}} e^{-rt} - \lambda \delta =- \lambda '</span>...........①</p><p style="text-align:left">이는 비동차항이 t의 함수형태인 λ에 관한 1차 비동차 선형미분방정식이다. </p><p style="text-align:left"><span class="math">\lambda =qe^{-rt}</span> 에서</p><p style="text-align:left"><span class="math">\lambda ' =-rqe^{-rt} +q ' e^{-rt}</span> </p><p style="text-align:left">① 에 대입하면</p><p style="text-align:left"><span class="math">pf_{\scriptscriptstyle {K}} e^{-rt} -qe^{-rt} \delta =rqe^{-rt} -q ' e^{-rt}</span></p><p style="text-align:left">양변을 <span class="math">e^{-rt}</span>로 나누면</p><p style="text-align:left"><span class="math">pf_{\scriptscriptstyle {K}} -q \delta =rq-q '</span> </p><p style="text-align:left">⇒ <span class="math">pf_{\scriptscriptstyle {K}} =q( \delta +r)-q'</span></p><p style="text-align:left">⇒ <span class="math">pf_{\scriptscriptstyle {K}} =( \rho + \alpha ' )( \delta +r)-( \rho + \alpha ' ) '</span></p><p style="text-align:justify">신고전학파 투자모형과 같은 결과이다. 즉, 자본의 한계생산물 가치는 자본 1단위 구매하는 데 따르는 내재적 기회비용이다. 신고전학파 모형과 차이점은 최적 자본량의 결정에 조정비용이 추가되었다는 점이다. </p><p style="text-align:justify">조정비용은 투자의 함수이므로 최적자본량의 결정은 투자에 영향을 받는다. 이는 또한 최적 투자량에 영향을 준다.</p><p style="text-align:left">이는 비동차항이 t의 함수형태인 q에 관한 1차 비동차 선형미분방정식이다.</p><p style="text-align:left"><span class="math">q ' (t)-( \delta +r)q(t)=-p(t)f_{\scriptscriptstyle {K}}</span></p><p style="text-align:left">신고전학파 투자모형에서 <span class="math">\rho</span>를 구할 때와 같다.</p><p style="text-align:left"><span class="math">q(t)= \int_{\text{t}}^{\infty } {e^{-(r+ \delta )(x-t)} pf_{\scriptscriptstyle {K}} dx} +e^{-(r+ \delta )(T-x)} q(T)</span>..........②</p><p style="text-align:left">ⅲ) 기간이 무한대일 때 transversality 조건</p><p style="text-align:left"><span class="math">\lim\limits_{t \to \infty } {\lambda (t)} = \lim\limits_{t \to \infty } {e^{-rt} q} (t)=0</span></p><p style="text-align:left">따라서 ②의 두 번째 항은</p><p style="text-align:left"><span class="math">\lim\limits_{\scriptscriptstyle {T \to \infty}} e^{-(r+ \delta )(T-x)} q(T)=0</span></p><p style="text-align:left">∴ <span class="math">q(t)= \int_{\text{t}}^{\infty } {e^{-(r+ \delta )(x-t)} pf_{\scriptscriptstyle {K}} dx}</span>..............③</p><p style="text-align:justify">자산의 가치는 소득흐름(income flow)의 현재가치의 합으로 나타낼 수 있으므로 q는 자본의 한계생산물가치의 현재가치의 합이다. </p><p style="text-align:justify">케인즈의 자본의 한계효율(marginal efficiency of capital) 가설은 자본의 가치를 미래현금흐름의 현재가치로 표현했으므로 이는 케인즈의 자본의 정의와 일치하는 결과이다.</p><p style="text-align:left">ⅴ) 상태변수의 비음조건 (<span class="math">K(t) \geq 0\,,\;(t \geq 0)</span>)</p><p style="text-align:left">?</p><h4 id="tobin의-q" style="text-align:justify">Tobin의 q</h4><p style="text-align:justify">토빈의 q는 주식시장에서 평가된 기업의 시장가치를 자산의 총대체비용(replacement cost)으로 나눈 것이다.  즉 q는 자본 한 단위에 대한 시장의 가치를 의미하는 것으로 평균비용 개념이다.</p><p style="text-align:justify"><span class="math">q= \frac{기업의\,시장가치(주가)}{자본비용}</span></p><p style="text-align:justify">일반적으로 토빈의 q는 평균개념으로 실제론 주식의 시가총액과 부채를 합한 금액을 자산을 시가평가한 금액으로 나누어 계산한다.</p><p style="text-align:left"><span class="math">q= \frac{자본의\,시장가격+부채장부가격}{자본의\,장부가격+부채장부가격}</span></p><p style="text-align:justify">이 비율은 설비투자의 동향을 설명하거나 기업의 가치평가에 이용된다. 주식시장에서 평가된 기업의 가치는 주식가격에 발행 주식수를 곱하여 산출한다. 즉, 기업의 시가총액을 의미한다. 기업의 실물자본 대체비용은 기업이 보유하고 있는 자산과 동등하거나 동일한 자산을 취득하는데 소요되는 금액을 의미한다.<sup><a href="#fn173" id="fnref173">[173]</a></sup> </p><p style="text-align:justify">여기서 평균 Tobin q와 앞의 최적제어문제에서 등장한 한계 q(marginal q)를 구분할 필요가 있다. 평균 q는 기업 전체의 시장가치를 보유 실물자본의 대체비용으로 나눈 비율이고, 한계 q는 자본 한 단위를 추가할 때 기업가치가 얼마나 늘어나는지를 나타내는 shadow value이다.</p><p style="text-align:justify"><span class="math">q^{A}(t)=\frac{V(t)}{p_{K}(t)K(t)}</span>   (average q)</p><p style="text-align:justify"><span class="math">q^{m}(t)=\frac{\partial V(t)/\partial K(t)}{p_{K}(t)}</span>   (marginal q)</p><p style="text-align:justify">앞 절의 현재가치 Hamiltonian에서 <span class="math">\lambda(t)=q(t)e^{-rt}</span>로 놓았으므로 그 <span class="math">q(t)</span>는 자본 한 단위의 현재가치 shadow price이다. 자본재 한 단위의 구입가격을 <span class="math">\rho(t)</span>라 하면 이를 무차원화한 한계 q는 <span class="math">q^{m}(t)=q(t)/\rho(t)</span>로 쓸 수 있다.</p><p style="text-align:justify">조정비용을 <span class="math">C(I)=\rho I+\alpha(I)</span>로 두면 투자에 대한 일계조건은</p><p style="text-align:justify"><span class="math">q(t)=\rho(t)+\alpha'(I(t))</span></p><p style="text-align:justify">이고, 따라서 조정비용이 볼록하여 <span class="math">\alpha''&gt;0</span>이면 최적투자는</p><p style="text-align:justify"><span class="math">I^{*}(t)=(\alpha')^{-1}[q(t)-\rho(t)]</span></p><p style="text-align:justify">로 표현된다. 즉 shadow value가 자본재의 구입가격보다 높을수록 투자가 증가한다. 조정비용이 없는 극단적 경우에는 이 관계가 <span class="math">q^{m}\gtrless1</span>에 따라 투자 확대·축소를 결정한다는 직관으로 단순화된다.</p><p style="text-align:justify">또한 앞에서 구한 costate 방정식은</p><p style="text-align:justify"><span class="math">\dot q(t)=(r+\delta)q(t)-p(t)f_{K}(t)</span></p><p style="text-align:justify">이므로 transversality 조건 아래</p><p style="text-align:justify"><span class="math">q(t)=\int_{t}^{\infty}e^{-(r+\delta)(x-t)}p(x)f_{K}(x)\,dx</span></p><p style="text-align:justify">가 된다. 따라서 한계 q는 미래의 자본 한계생산물가치 흐름을 현재가치로 평가한 shadow value라는 해석을 갖는다. 이는 케인즈의 자본의 한계효율과 직관적으로 연결되지만, 두 개념을 완전히 동일한 것으로 보는 것은 지나치게 강한 해석이다.<sup><a href="#fn174" id="fnref174">[174]</a></sup></p><p style="text-align:justify">완전경쟁, 규모수익불변, 동차적인 조정비용 등 일정 조건에서는 평균 q와 한계 q가 일치할 수 있다. 그러나 일반적으로는 두 q를 구분해야 한다.</p><h4 id="q-이론의-적용" style="text-align:justify">q 이론의 적용</h4><p style="text-align:justify">토빈의 q가 1보다 크다면 자본의 시장가치가 장부가치보다 큰 상태이므로(자본이 고평가되어 있다.) 이윤을 증가시키기 위해 추가적인 자본 투자가 이루어진다. 만약 토빈의 q가 1보다 작다면(자본이 저평가되어 있다.) 자본의 마모가 일어나더라도 신규투자는 유보될 것이다.  이와 같이 q가 1보다 큰 값을 갖는지 여부에 따라 투자를 결정하는 게 타당하다는 것이 토빈이 제창한 q이론이다. 토빈은 기업이 토빈q 비율에 따라 투자를 결정한다고 하였다. 토빈 q 비율이 1보다 크면 기업은 적은 비용을 들여 높은 가치(주식시장에서)를 만들 수 있기에 투자를 늘리게 되는 것이다. 하지만 q비율이 1보다 작으면 투자를 멈춘다.</p><p style="text-align:justify">다만 q는 본래 기업의 실물투자 유인을 설명하는 지표이지 개별 주식의 기대수익률을 직접 예측하는 매매지표는 아니다. 높은 q가 반드시 주가의 과대평가나 안정적 수익을 의미하지 않으며, 낮은 q가 향후 주가상승을 보장하지도 않는다. 무형자산, 독점력, 성장옵션, 측정오차 등에 따라 평균 q가 1과 크게 달라질 수 있다.</p><p style="text-align:justify">장기적으로 평균 q가 1 부근으로 회귀한다는 직관은 경쟁과 자본축적을 통해 설명될 수 있지만, 실제 자료에서는 무형자산·시장지배력·위험프리미엄·측정방식 등에 따라 상당한 편차와 지속성이 나타난다. 따라서 역사적 고q 구간을 주가폭락의 기계적인 예측신호로 해석하는 것은 주의해야 한다.<sup><a href="#fn175" id="fnref175">[175]</a></sup></p><p style="text-align:justify">q 비율은 이자율 변동이 실물자산의 시장평가에 미치는 영향을 반영하고 있을 뿐만 아니라 자본설비의 수익성에 대한 시장의 낙관 또는 비관의 전망을 반영한다. 따라서 q 값의 크기는 간접적으로 기업의 신규투자에 대한 유인의 정도를 나타내는 것으로 볼 수 있을 것이다.<sup><a href="#fn176" id="fnref176">[176]</a></sup> </p><p style="text-align:justify">금리 하락이나 수익전망 개선으로 기업의 시장가치가 상승하여 q가 높아지면, 기존 자본과 동일한 실물자본을 새로 설치하는 비용에 비해 추가 자본이 만들어내는 시장가치가 커진다. 따라서 신규투자의 유인이 강화된다. 이를 단순히 “주식을 1,200만원어치 발행해 1,000만원짜리 자본재를 사고 200만원을 남긴다”는 무위험 차익거래로 이해하기보다는, 자본 한 단위의 한계가치가 설치비용을 상회하여 투자확대가 기업가치를 높이는 상황으로 이해하는 것이 정확하다. 즉 금리 인하·수익전망 개선 → 시장가치 상승 → q 상승 → 투자유인 확대의 전달경로를 생각할 수 있다.<sup><a href="#fn177" id="fnref177">[177]</a></sup></p><p style="text-align:left">q 이론을 부동산에 적용할 수도 있다. 부동산의 q 비율이 다음과 같다면</p><p style="text-align:left"><span class="math">q= \frac{주택의\,시장가치}{주택의\,신축비}</span></p><p style="text-align:justify">q 비율이 1 보다 크면 주택가격이 건설비를 상회하므로 주택 공급이 늘어날 것이다. 공급이 증가함에 따라 수요 공급의 법칙에 따라 주택가격은 하락할 것이고 주택가격이 주택 건설비보다 하회하면 즉 q 비율이 1 보다 작으면 주택가격이 건설비를 보전할 수 없으므로 주택 공급은 멈출 것이다. </p><h4 id="q-이론의-한계" style="text-align:left">q 이론의 한계</h4><p style="text-align:justify">주가는 경기 상황이나 수익성, 건전성을 종합적으로 반영하는데 단순히 금리만 낮아졌다고 해서 주식의 수요가 늘어날 것이라고 할 수 없다. 또 우리나라와 같이 자본시장이 완전히 개방된 경우 주가는 국내 통화정책보다 선진국의 주가 변화와 외국인 투자에 따라 더 크게 반응한다. 또 주가가 단기적으로 큰 변동성을 갖는 반면 투자의 경우 의사결정에서 실행까지 상당한 시일이 소요된다는 점도 고려돼야 한다.<sup><a href="#fn178" id="fnref178">[178]</a></sup></p><p style="text-align:justify">일부의 실증분석연구 결과 토빈의 q보다 당기순이익이 투자를 더 잘 설명한다고 주장. 또한 과거의 자료를 볼 때 토빈의 q가 항상 투자와 같은 패턴으로 움직이는 것만은 아니라고 함.<sup><a href="#fn179" id="fnref179">[179]</a></sup></p><h4 id="q-투자모형의-적용과-한계" style="text-align:justify">q 투자모형의 적용과 한계</h4><p style="text-align:justify">토빈의 q를 한계적인 개념으로 정의한다면 케인즈의 자본의 정의와 개념적으로 일치</p><h2>각주</h2><ol class="footnotes"><li id="fn162"><p style="text-align:justify"> Jorgenson 1963. 투자이론을 설명하는 모형이지만 정태적 기업이론의 동태적 확장으로 볼 수도 있다.</p>
+<a href="#fnref162">↩</a></li><li id="fn163"><p style="text-align:justify"> 보조적인 가정으로서 자본은 항상 완전히 사용된다고 가정. 즉 한 시점에서 자본의 활용률은 1이다. 경기가 안 좋을 때 공장의 80%만 활용하는 것이 아니라 공장이 기존의 80%로 축소되서 활용은 100% 된다. 자본이 가분성을 갖고 있어 분수로 표시될 수 있다. </p>
+<a href="#fnref163">↩</a></li><li id="fn164"><p style="text-align:justify"> 목적범함수에는 표기의 편의상 각 변수가 시간 t의 함수임을 생략했다.</p>
+<a href="#fnref164">↩</a></li><li id="fn165"><p style="text-align:justify"> 다음의 q 투자모형은 이 문제를 해결하기 위해 투자의 함수인 조정비용을 도입한다.</p>
+<a href="#fnref165">↩</a></li><li id="fn166"><p style="text-align:justify"> 앞에서 언급했듯이 기간이 무한대일 경우 일반적인 transversality 조건은 알려지지 않음. 지금의 transversality 조건은 일반적으로 성립하는 것이 아니라 이런 형태의 함수에만 성립하는 조건임[Takayama, pp. 650-651] 참조.</p>
+<a href="#fnref166">↩</a></li><li id="fn167"><p style="text-align:justify"> 미래의 효용을 할인율 r로 현재가치화한다는 의미. 개인의 효용을 u(c), 노동의 증가율을 n이라 했을 때 총효용은<span class="math">\, \int_{0}^{\top} {e^{- \rho t}} L(t)u(c)dt\,= \int_{0}^{\top} {e^{- \rho t}} L(0)e^{nt} u(c)dt\,=\, \int_{0}^{\top} {e^{-( \rho -n)t}} L(0)u(c)dt\,=\, \int_{0}^{\top} {e^{-rt}} L(0)u(c)dt\,</span> </p>
+<p style="text-align:justify">이때 <span class="math">r\,= \rho \,-\,n</span> 을 실질이자율(effective rate of time preference)이라고도 한다.</p>
+<a href="#fnref167">↩</a></li><li id="fn168"><p style="text-align:justify"> <span class="math">Y\,=\,C\,+sY\,</span>에서 양변을 L로 나누면 <span class="math">y\,=\,c+sy</span>, ∴ <span class="math">sy\,=\,y-c</span>, <span class="math">y\,=\, \phi (k)</span> 임을 상기.</p>
+<a href="#fnref168">↩</a></li><li id="fn169"><p style="text-align:justify"> 라그랑지변수 <span class="math">\lambda</span>는 기회비용 개념으로써 자본증감에 따른 효용증감을 의미하므로 <span class="math">\frac{\lambda '}{\lambda }</span>는 자본의 효용이득률을 의미</p>
+<a href="#fnref169">↩</a></li><li id="fn170"><p style="text-align:justify"> 또한 내부해를 갖는다고 가정</p>
+<a href="#fnref170">↩</a></li><li id="fn171"><p style="text-align:justify"> 두당자본과 두당소비가 상수이므로 총소비, 총자본, 총생산이 모두 노동증가율 n으로 똑같이 증가하므로 ‘균형성장경로(balanced growth path)’라고도 함</p>
+<a href="#fnref171">↩</a></li><li id="fn172"><p style="text-align:justify"> 신고전학파모형에서는 자본재의 가격이 고정이었다고 가정했었다. 그러나 요소시장의 독점성 또는 자본재 설치에 드는 추가비용 등으로 인해 실제로 자본재의 가격은 투자량에 영향을 받을 것. 이를 반영하기 위해 모형에 조정비용의 개념을 도입. 조정비용은 신규설비의 설치 및 운용 준비를 위한 제반비용을 의미. 조정비용은 투자가 늘어남에 따라 증가한다고 가정.</p>
+<a href="#fnref172">↩</a></li><li id="fn173"><p style="text-align:justify"> http://terms.naver.com/entry.nhn?docId=73237 </p>
+<a href="#fnref173">↩</a></li><li id="fn174"><p style="text-align:justify"> Takayama, mathmatical economics, pp. 694-695. 1967. 참조</p>
+<a href="#fnref174">↩</a></li><li id="fn175"><p style="text-align:justify"> http://terms.naver.com/entry.nhn?docId=73237 </p>
+<a href="#fnref175">↩</a></li><li id="fn176"><p style="text-align:justify"> http://terms.naver.com/entry.nhn?docId=779734 </p>
+<a href="#fnref176">↩</a></li><li id="fn177"><p style="text-align:justify"> http://news.naver.com/main/read.nhn?mode=LSD&amp;mid=sec&amp;sid1=101&amp;oid=013&amp;aid=0000194059 </p>
+<a href="#fnref177">↩</a></li><li id="fn178"><p style="text-align:justify"> http://news.naver.com/main/read.nhn?mode=LSD&amp;mid=sec&amp;sid1=101&amp;oid=013&amp;aid=0000194059 </p>
+<a href="#fnref178">↩</a></li><li id="fn179"><p style="text-align:justify"> http://en.wikipedia.org/wiki/Tobin%27s_q </p>
+<a href="#fnref179">↩</a></li></ol><p class="section-nav">← <a href="dynamic-optimization-applications-continuous-household.html">동태적 가구이론</a> · <a href="dynamic-optimization-applications-continuous.html">절별 목차</a> · <a href="dynamic-optimization-applications-continuous-turnpike.html">Turnpike 정리</a> →</p></body></html>

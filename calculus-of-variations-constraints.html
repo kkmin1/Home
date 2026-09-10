@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>제약식·경계조건·승수의 의미</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>변분학 (Calculus of Variations)</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>제약식·경계조건·승수의 의미</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="calculus-of-variations.html">변분학 (Calculus of Variations)</a></p><h4 id="제약식이-존재하는-경우" style="text-align:justify">제약식이 존재하는 경우</h4><h4 id="1-등식-제약식" style="text-align:justify">(1) 등식 제약식</h4><p style="text-align:justify">max <span class="math">\int_{t_{0}}^{t_{1}} {f(x(t),\,x'(t),\,y(t),y(t) ' ,t)dt}</span></p><p style="text-align:justify">s.t  <span class="math">g(x,\,x ' ,\,y,\,y ' ,\,t)=B\,</span>, <span class="math">\,x(t_{0} )=x_{0} ,\;x(t_{1} )=x_{1}</span>,  <span class="math">\,y(t_{0} )=y_{0} ,\;y(t_{1} )=y_{1}</span></p><p style="text-align:justify">정태적 문제와 같이 라그란지안을 도입하여 푼다. </p><p style="text-align:justify">라그란지안을 다음과 같이 정의하면</p><p style="text-align:justify"><span class="math">L=f(x,\,x',\,y,\,y ' ,\,t)+ \lambda (B-g(x,\,x',\,y,\,y ' ,\,t))</span>, <span class="math">\lambda</span>는 라그란지 승수</p><p style="text-align:justify">1차조건은</p><p style="text-align:justify"><span class="math">L_{x} - \frac{dL_{x ' }}{dt} =0\,</span>, <span class="math">L_{y} - \frac{dL_{y ' }}{dt} =0\,</span>; 오일러방정식</p><p style="text-align:justify"><span class="math">g(x,\,x ' ,\,y,\,y ' ,\,t)=B</span> ; 제약식</p><p style="text-align:justify"><span class="math">\,x(t_{0} )=x_{0} ,\;x(t_{1} )=x_{1}</span>, <span class="math">\,y(t_{0} )=y_{0} ,\;y(t_{1} )=y_{1}</span>; 경계조건</p><p style="text-align:justify">예)</p><p style="text-align:justify">min <span class="math">\int_{0}^{1} {(1+x^{'2} \,+\,y^{'2} \,)dt}</span></p><p style="text-align:justify">s.t  <span class="math">x\,+\,y\,=\,10</span>, <span class="math">x(0)=0</span>, <span class="math">x(1)=5</span>, <span class="math">y(0)=0</span>, <span class="math">y(1)=10</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">라그란지안은</p><p style="text-align:justify"><span class="math">L=(1+x^{'2} \,+\,y^{'2} )+ \lambda (10-x-y)</span></p><p style="text-align:justify"><span class="math">L_{x} \,=\,- \lambda</span>, <span class="math">L_{x ' } \,=\,2x '</span>, <span class="math">L_{y} \,=\,- \lambda</span>, <span class="math">L_{y'} \,=\,2y'</span></p><p style="text-align:justify">오일러 방정식은</p><p style="text-align:justify"><span class="math">- \lambda - \frac{d}{dt} 2x ' =0\,</span>⇒ <span class="math">2x ' \,=\,- \lambda t\,+\,C_{1}</span> ⇒ <span class="math">x\,=\,- \frac{1}{4} \lambda t^{2} \,+\, \frac{1}{2} C_{1} t\,+\,C_{2}</span></p><p style="text-align:justify"><span class="math">x(0)=0</span>, <span class="math">x(1)=5</span> 을 대입하면 <span class="math">C_{2} \,=\,0</span>, <span class="math">C_{1} \,=\, \frac{\lambda +20}{2}</span></p><p style="text-align:justify">∴ <span class="math">\,x(t)\,=\,- \frac{1}{4} \lambda t^{2} \,+\,( \lambda +20)t\,</span></p><p style="text-align:justify"><span class="math">- \lambda - \frac{d}{dt} 2y'=0\,</span>⇒ <span class="math">2y ' \,=\,- \lambda t\,+\,C_{3}</span> ⇒ <span class="math">y\,=\,- \frac{1}{4} \lambda t^{2} \,+\, \frac{1}{2} C_{3} t\,+\,C_{4}</span></p><p style="text-align:justify"><span class="math">y(0)=0</span>, <span class="math">y(1)=10</span> 을 대입하면 <span class="math">C_{4} \,=\,0</span>, <span class="math">C_{3} \,=\, \frac{\lambda +40}{2}</span></p><p style="text-align:justify">∴ <span class="math">y(t)\,=\,- \frac{1}{4} \lambda t^{2} \,+\,( \lambda +40)t\,</span></p><p style="text-align:justify">x, y를 제약식에 대입하면</p><p style="text-align:justify"><span class="math">x\,+\,y\,=\,10</span> ⇒ <span class="math">\,- \frac{1}{4} \lambda t^{2} \,+\,( \lambda +20)t\,</span><span class="math">- \frac{1}{4} \lambda t^{2} \,+\,( \lambda +40)t\,=\,10</span></p><p style="text-align:justify">⇒ <span class="math">\,(2t- \frac{1}{2} t^{2} )\,+\,60t\,=\,10</span></p><p style="text-align:justify">∴ <span class="math">\lambda \,=\, \frac{20-120t}{4t-t^{2}}</span></p><p style="text-align:justify">∴ <span class="math">\,x(t)\,=\,- \frac{1}{4} \lambda t^{2} \,+\,( \lambda +20)t\,</span>, <span class="math">y(t)\,=\,- \frac{1}{4} \lambda t^{2} \,+\,( \lambda +40)t\,</span>, where <span class="math">\lambda \,=\, \frac{20-120t}{4t-t^{2}}</span></p><p style="text-align:right">(풀이끝)</p><h4 id="2-부등식-제약식" style="text-align:justify">(2) 부등식 제약식</h4><p style="text-align:justify">max <span class="math">\int_{t_{0}}^{t_{1}} {f(y(t),y(t) ' ,t)dt}</span></p><p style="text-align:justify">s.t  <span class="math">g(y(t),y(t) ' ,t) \leq B\,,\;y(t_{0} )=y_{0} ,\;y(t_{1} )=y_{1}</span> </p><p style="text-align:justify">정태적 문제와 같이 KKT 조건을 도입하여 푼다.</p><p style="text-align:justify">라그란지안을 다음과 같이 정의하면</p><p style="text-align:justify"><span class="math">L=f(y,\,y ' ,\,t)+ \lambda (B-g(y,\,y ' ,\,t))</span></p><p style="text-align:justify">1차조건은</p><p style="text-align:justify"><span class="math">L_{y} - \frac{dL_{y ' }}{dt} =0\,</span> ; 오일러방정식</p><p style="text-align:justify"><span class="math">\lambda \geq 0</span>, <span class="math">g(y,\,y ' ,\,t) \leq B\,</span>, <span class="math">\lambda [B-g(y,\,y ' ,\,t)]\,=\,0</span> ; complementary slackness 조건</p><p style="text-align:justify"><span class="math">\,y(t_{0} )=y_{0} ,\;y(t_{1} )=y_{1}</span> ; 경계조건</p><h4 id="3-경계선-문제" style="text-align:justify">(3) 경계선 문제 </h4><p style="text-align:justify">max <span class="math">\int_{t_{0}}^{t_{1}} {f(y(t),y(t) ' ,t)dt}</span></p><p style="text-align:justify">s.t  <span class="math">\int_{t_{0}}^{t_{1}} {g(y(t),y(t) ' ,t)dt} =B\,,\;y(t_{0} )=y_{0} ,\;y(t_{1} )=y_{1}</span> </p><p style="text-align:justify">제약식이 적분형태로 주어지는 경우를 경계선 문제(isoperimetric problem)라 한다.<sup><a href="#fn125" id="fnref125">[125]</a></sup></p><p style="text-align:justify">정태적인 경우와 마찬가지로 라그랑지 승수를 도입하여 문제를 푼다.<sup><a href="#fn126" id="fnref126">[126]</a></sup> </p><p style="text-align:justify">라그란지안을 다음과 같이 정의하면</p><p style="text-align:justify"><span class="math">L= \int_{t_{0}}^{t_{1}} {f(y,y ' ,t)dt+ \lambda (B- \int_{t_{0}}^{t_{1}} g(y,y ' ,t))dt}</span></p><p style="text-align:justify"><span class="math">= \int_{t_{0}}^{t_{1}} {[f(y,y ' ,t)- \lambda g(y,y ' ,t))]dt} + \lambda B</span></p><p style="text-align:justify">L을 최대화하는 것은 제약식이 없는 변분학의 문제를 푸는 것이다. </p><p style="text-align:justify">적분안의 함수를 <span class="math">\phi</span>라 하면</p><p style="text-align:justify"><span class="math">L\,= \int_{t_{0}}^{t_{1}} {\phi (y,y ' ,t)dt} + \lambda B</span>, where <span class="math">\phi (y,\,y',\,t)=f(y,y ' ,t)- \lambda g(y,y ' ,t)</span></p><p style="text-align:justify">이의 오일러 방정식은</p><p style="text-align:justify"><span class="math">\phi_{y} - \frac{d \phi_{y ' }}{dt} =0\,</span></p><p style="text-align:justify">오일러방정식에 <span class="math">\phi_{y} =f_{y} - \lambda g_{y}</span> , <span class="math">\phi_{y ' } =f_{y ' } - \lambda g_{y ' }</span> 를 대입하면</p><table aria-label="(3) 경계선 문제 관련 표 4" style="border-collapse:collapse;table-layout:fixed;height:52.627px;width:182.080px"><colgroup><col style="width:182.08px"/></colgroup><tbody><tr style="height:52.627px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.6mm solid #000;border-right:0.6mm solid #000;border-top:0.6mm solid #000;border-bottom:0.6mm solid #000"><p style="text-align:justify"><span class="math">f_{y} - \lambda g_{y} \,= \frac{d}{dt} (f_{y ' } \,- \lambda g_{y'} )</span></p>
+</td></tr></tbody></table><p style="text-align:justify">이는 경계선 문제의 오일러 방정식이다.</p><p style="text-align:justify">예) </p><p style="text-align:justify">min <span class="math">\, \int_{0}^{1} {y^{'2}} dt</span></p><p style="text-align:justify">s.t  <span class="math">\int_{0}^{1} {ydt=10}</span>, <span class="math">y(0)=0,\,y(1)=2</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">라그란지안은</p><p style="text-align:justify"><span class="math">L\,= \int_{t_{0}}^{t_{1}} {(y^{'2} - \lambda y)dt} +10 \lambda</span></p><p style="text-align:justify">따라서 적분안의 함수는</p><p style="text-align:justify"><span class="math">\phi =y^{'2} - \lambda y</span></p><p style="text-align:justify">오일러 방정식을 적용하면</p><p style="text-align:justify"><span class="math">\phi_{y} =- \lambda</span>, <span class="math">\phi_{y ' } =2y '</span></p><p style="text-align:justify"><span class="math">\phi_{y} - \frac{d \phi_{y ' }}{dt} =- \lambda -2y '' =0\,</span></p><p style="text-align:justify">∴ <span class="math">y(t)=- \frac{\lambda t^{2}}{4} +c_{1} t+c_{2}</span></p><p style="text-align:justify">제약식과 두 개의 경계조건을 이용해 <span class="math">\lambda ,\,c_{1} ,\,c_{2}</span>을 구한다.</p><p style="text-align:justify">y(t)를 제약식에 대입하면</p><p style="text-align:justify"><span class="math">\, \int_{0}^{1} {(- \frac{\lambda t^{2}}{4} +c_{1} t+c_{2} )dt=\,10}</span></p><p style="text-align:justify">⇒ <span class="math">\left ┃ - \frac{\lambda t^{3}}{12} + \frac{c_{1} t^{2}}{2} +c_{2} t \right ┃ _{0}^{1} =10</span></p><p style="text-align:justify">⇒ <span class="math">- \frac{\lambda }{12} + \frac{c_{1}}{2} +c_{2} =10</span> ............①</p><p style="text-align:justify"><span class="math">y(0)=- \frac{\lambda 0^{2}}{4} +c_{1} 0+c_{2} =0</span> ⇒ <span class="math">c_{2} \,=\,0</span></p><p style="text-align:justify"><span class="math">y(1)=- \frac{\lambda 1^{2}}{4} +c_{1} 1+c_{2} =2</span> ⇒ <span class="math">- \frac{\lambda }{4} +c_{1} =2</span></p><p style="text-align:justify">①에서 <span class="math">- \frac{\lambda }{12} + \frac{c_{1}}{2} =\,10</span></p><p style="text-align:justify">∴ <span class="math">c_{1} =56,\,c_{2} \,=0,\, \lambda \,=\,216</span></p><p style="text-align:justify">∴ <span class="math">y(t)=-54t^{2} +56t</span></p><p style="text-align:right">(풀이끝)</p><h4 id="라그랑지승수의-경제학적-의미" style="text-align:justify">라그랑지승수의 경제학적 의미</h4><p style="text-align:justify">최대화 문제에서 최적해를 <span class="math">y*(t)</span>라 하면 B가 변함에 따라 최대값은 변한다. 즉, <span class="math">y*(t)</span>는 또한 제약식의 우변상수인 B의 함수이다. 그러므로</p><p style="text-align:justify"><span class="math">y*(t)\,=\,y*(t,\,B)</span></p><p style="text-align:justify">최대값을 V(B)라 하면</p><p style="text-align:justify"><span class="math">V(B)= \int_{t_{0}}^{t_{1}} {l(y*,\,y ' *,\,t)dt}</span></p><p style="text-align:justify"><span class="math">= \int_{t_{0}}^{t_{1}} {[f(y*,\,y ' *,\,t)- \lambda g(y*,\,y'*,\,t)]dt\,+ \lambda B}</span></p><p style="text-align:justify">위 식을 B에 관해 미분하면</p><p style="text-align:justify"><span class="math">\frac{dV(B)}{dB}</span><span class="math">= \int_{t_{0}}^{t_{1}} {\left[ f_{y*} \frac{dy*}{dB} +f_{y ' *} \frac{dy ' *}{dB} +f_{t} \frac{dt}{dB} - \lambda (g_{y*} \frac{dy*}{dB} +g_{y ' *} \frac{dy ' *}{dB} +g_{t} \frac{dt}{dB} ) \right] dt\,+ \lambda }</span></p><p style="text-align:justify"><span class="math">= \int_{t_{0}}^{t_{1}} {[(f_{y*} - \lambda g_{y*} ) \frac{dy*}{dB} +(f_{y ' *} - \lambda g_{y ' *} ) \frac{dy ' *}{dB}]dt\,+ \lambda }</span>  , (∵<span class="math">\frac{dt}{dB} =0</span>)</p><p style="text-align:justify"><span class="math">y*</span>는 최적해이므로 <span class="math">\int_{t_{0}}^{t_{1}} {[f(y*,\,y ' *,\,t)- \lambda g(y*,\,y ' *,\,t)]dt\,=0}</span> </p><p style="text-align:justify"><span class="math">\frac{dV(B)}{dB} = \lambda</span></p><p style="text-align:justify">정태적 최대화 문제에서 라그랑지 승수는 제약식 우변 상수의 변동에 따른 목적값의 변화를 나타내는 기회비용의 의미를 갖고 있었다. 동태적 최대화 문제에 있어서도 라그랑지 승수는 같은 의미를 갖는다. 즉 제약식 우변 상수값의 변동에 따른 목적값의 변화율을 의미한다. </p><p style="text-align:justify">또한 정태적 최대화 문제에서 라그랑지 승수가 쌍대문제(dual problem)인 최소화 문제의 해가 되는 것처럼 동태적 최대화 문제에 있어서도 라그랑지 승수는 쌍대문제인 최소화 문제의 해가 된다. 즉 라그랑지 승수는 정태적인 경우나 동태적인 경우에 있어서 안장점의 역할을 하는 것이다.</p><p style="text-align:justify">■ 최종상태가 정해져 있지 않을 경우</p><p style="text-align:justify">max <span class="math">\, \int_{t_{0}}^{t_{1}} {f(y(t),y(t) ' ,t)dt}</span></p><p style="text-align:justify">s.t  <span class="math">\,y(t_{0} )=y_{0}</span>, <span class="math">y(t_{1} )</span>은 정해지지 않음</p><p style="text-align:justify">이 문제는 최적 경로를 찾는 것과 함께 최적의 최종상태를 찾는 것이다.</p><p style="text-align:justify"><span class="math">y*(t)</span>를 최적해라 하면 다른 경로 <span class="math">z(t)</span>는</p><p style="text-align:justify"><span class="math">z (t)=y*(t)+ \epsilon h(t)</span>, <span class="math">h(t_{0} )=0</span>, <span class="math">h(t_{1} )</span>은 정해지지 않음</p><p style="text-align:justify">다른 경로 <span class="math">z (t)</span>로 구성된 범함수는</p><p style="text-align:justify"><span class="math">J( \epsilon )= \int_{t_{0}}^{t_{1}} {f(z(t),\,z ' (t),\,t)dt}</span></p><p style="text-align:justify"><span class="math">= \int_{t_{0}}^{t_{1}} {f(y*+ \epsilon h,\,y ' *+ \epsilon h ' ,\,t)dt}</span></p><p style="text-align:justify"><span class="math">\epsilon =0</span> 일 때 최대값이므로</p><p style="text-align:justify"><span class="math">\frac{d}{d \epsilon } J( \epsilon ) \bigg| _{\epsilon =0} \,= \int_{t_{0}}^{t_{1}} {(f_{y} h+f_{y ' } h ' )dt} =0</span> ..........................①</p><p style="text-align:justify">적분의 두 번째 항은 부분적분법에 의해</p><p style="text-align:justify"><span class="math">\int_{t_{0}}^{t_{1}} {f_{y ' } h ' dt\,= \left ┃ f_{y ' } h \begin{matrix} \\ \end{matrix} \right ┃ _{t_{0}}^{t_{1}} \,- \int_{t_{0}}^{t_{1}} {h} \frac{df_{y ' }}{dt} dt\,}</span></p><p style="text-align:justify"><span class="math">=f_{y ' } (y(t_{1} ),\,y'(t_{1} ),\,t_{1} )h(t_{1} )- \int_{t_{0}}^{t_{1}} {h} \frac{df_{y ' }}{dt} dt\,</span> , (∵<span class="math">h(t_{0} )=0</span>)...................②</p><p style="text-align:justify">②를 ①에 대입하면</p><p style="text-align:justify"><span class="math">\int_{t_{0}}^{t_{1}} {h(f_{y} - \frac{d}{dt} f_{y ' } )dt} +f_{y ' } h(t_{1} )=0</span> .........................③</p><p style="text-align:justify">일반적인 오일러 방정식의 경우와 달리 두 번째 항이 존재하는 이유는 최종조건이 결정되지 않아서 <span class="math">h(t_{1} )\, != \,0</span> 이기 때문이다.</p><p style="text-align:justify">두 식의 합으로 구성된 ③이 임의의 h(t), <span class="math">h(t_{1} )</span>에 대해 항상 0이 되려면 </p><p style="text-align:justify"><span class="math">f_{y} - \frac{d}{dt} f_{y ' } =0</span> ..............④, <span class="math">f_{y'} \,=\,0</span>..............⑤</p><p style="text-align:justify">④는 오일러 방정식이다.</p><p style="text-align:justify">⑤는 <span class="math">f_{y ' } (y(t_{1} ),\,y ' (t_{1} ),\,t_{1} )=0</span></p><p style="text-align:justify">이 조건을 transversality 조건(TVC)이라 한다.</p><p style="text-align:justify">이의 의미는 최종 싯점에서 추가적인 증분으로 목적값의 증가(최대화 문제)를 기대하지 말아야 한다는 의미이다. </p><h4 id="초기조건도-정해지지-않는-경우" style="text-align:justify">초기조건도 정해지지 않는 경우</h4><p style="text-align:justify">max <span class="math">\int_{t_{0}}^{t_{1}} {f(y(t),y(t) ' ,t)dt}</span></p><p style="text-align:justify">s.t   <span class="math">y(t_{0} )</span>, <span class="math">y(t_{1} )</span>은 정해지지 않음</p><p style="text-align:justify">최대화의 필요조건은</p><table aria-label="초기조건도 정해지지 않는 경우 관련 표 5" style="border-collapse:collapse;table-layout:fixed;height:124.160px;width:480.173px"><colgroup><col style="width:480.173px"/></colgroup><tbody><tr style="height:96.587px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:justify"><span class="math">f_{y} - \frac{d}{dt} f_{y ' } =0</span> ............오일러방정식</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify"><span class="math">f_{y ' } (y(t_{0} ),\,y ' (t_{0} ),\,t_{0} )=0</span> ................초기치에 대한 TVC</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify"><span class="math">f_{y ' } (y(t_{1} ),\,y ' (t_{1} ),\,t_{1} )=0</span> ................최종값에 대한 TVC</p>
+</td></tr></tbody></table><p style="text-align:justify">예) 한 점과 x축에 수직인 한 직선 사이의 최단거리를 구하라.</p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">한 점 <span class="math">(x_{0} ,\,y_{0} )</span>과 x축에 수직인 직선(<span class="math">x=x_{1}</span>)간의 최단거리를 구하는 문제는 y가 임의의 값을 가져도 되므로 최종점이 정해지지 않은 문제가 된다. </p><p style="text-align:justify">min  <span class="math">\int_{x_{0}}^{x_{1}} {\sqrt {1+y^{'2}}} dx</span></p><p style="text-align:justify">s.t    <span class="math">\,y(x_{0} )=y_{0}</span> </p><p style="text-align:justify">1차조건 :</p><p style="text-align:justify"><span class="math">f=(1+y^{'2} ) ^{\frac{1}{2}}</span> 이므로</p><p style="text-align:justify"><span class="math">f_{y} =0\,</span> 이므로 <span class="math">\;f_{y ' } \,=y ' (1+y^{'2} ) ^{- \frac{1}{2}} \,</span></p><p style="text-align:justify">오일러방정식은</p><p style="text-align:justify"><span class="math">f_{y} - \frac{d}{dt} f_{y ' } =0</span> ⇒ <span class="math">\; \frac{d}{dt} y ' (1+y^{'2} ) ^{- \frac{1}{2}} \,=\,0</span></p><p style="text-align:justify">⇒ <span class="math">\;y ' (1+y^{'2} ) ^{- \frac{1}{2}} \,=\,c_{0}</span></p><p style="text-align:justify">⇒ <span class="math">y ' (x)= \sqrt {\frac{c_{0}^{2}}{1-c_{0}^{2}}} \,=\,c_{1}</span>, (∵ <span class="math">y\,&gt;\,0</span>)</p><p style="text-align:justify">따라서 <span class="math">y(x)=c_{1} x+c_{2}</span> </p><p style="text-align:justify"><span class="math">y(x_{0} )=c_{1} x_{0} +c_{2} =y_{0}</span></p><p style="text-align:justify">TVC은 </p><p style="text-align:justify"><span class="math">\;f_{y ' } \,=y ' (1+y^{'2} (x_{1} )) ^{- \frac{1}{2}} \,=0</span></p><p style="text-align:justify"><span class="math">\rightarrow \,y ' (x_{1} )=0</span></p><p style="text-align:justify">∴ <span class="math">c_{1} =0</span></p><p style="text-align:justify">∴ <span class="math">y(x)=c_{2} =y_{0}</span> , <span class="math">x_{0} \leq x \leq x_{1}</span></p><p style="text-align:justify">이는 x축에 수평, y축에 수직인 직선을 의미한다. </p><p style="text-align:justify">여기서 TVC은 <span class="math">(x_{0} ,\,y_{0} )</span>에서 <span class="math">x=x_{1}</span> 직선에 이르는 무수히 많은 선분들(<span class="math">y=c_{1} x+c_{2}</span>) 중 <span class="math">x=x_{1}</span>에 수직인 직선(<span class="math">y=y_{0}</span>)을 특화하는 역할을 한다.</p><p style="text-align:justify">2차조건 :</p><p style="text-align:justify"><span class="math">f_{y ' y ' } = \frac{1}{(1+y^{'2} ) ^{\frac{1}{2}} (1+y^{'2} )}</span> ≥ 0</p><p style="text-align:justify">따라서 르장드르조건을 만족</p><p style="text-align:right">(풀이끝)</p><hr/><p><a href="dynamic optimization.html">← 동적최적화이론과 응용 목차</a></p><div class="footnotes"><section class="related-documents" id="related-documents"><h2>관련 문서</h2><ul><li><a href="optimal-control.html">최적제어이론</a></li><li><a href="differential-equation-systems.html">연립미분방정식과 안정성</a></li></ul></section><hr/><h2 id="각주">각주</h2><li id="fn112"><p style="text-align:justify"> 수학기초 ‘범함수’ 참조</p>
+<a href="#fnref112">↩</a></li><li id="fn113"><p style="text-align:justify"> 라이프니쯔 법칙(Leibnitz’s rule) 적용. 수학기초 ‘적분의 미분’ 참조.</p>
+<a href="#fnref113">↩</a></li><li id="fn114"><p style="text-align:justify"> 수학기초 ‘내생변수가 상호 함수관계일 때 미분’ 참조. </p>
+<a href="#fnref114">↩</a></li><li id="fn115"><p style="text-align:justify"> 부분적분법 적용. <span class="math">\int_{t_{0}}^{t_{1}} {\frac{\partial f}{\partial y'} h'dt\,= \left[ \frac{\partial f}{\partial y ' } h\, \right] _{t_{0}}^{t_{1}} - \int_{t_{0}}^{t_{1}} \frac{d}{dt} ( \frac{\partial f}{\partial y ' } )hdt}</span></p>
+<a href="#fnref115">↩</a></li><li id="fn116"><p style="text-align:justify"> 또는 오일러-라그랑지 방정식(Euler-Lagrange equation), 라그랑지 방정식(Lagrange equation)이라함. 이산형, 또는 연속형 효용극대화 문제에서 오일러 방정식은 이 공식을 적용해도 도출된다.</p>
+<a href="#fnref116">↩</a></li><li id="fn117"><p style="text-align:justify"> 또는 ‘Legendre–Clebsch condition’ 이라고도 함</p>
+<a href="#fnref117">↩</a></li><li id="fn118"><p style="text-align:justify"> 자세한 증명은 M. Kamien and N. Schwarz, Dynamic Optimization : the calculus of variations and optimal control in economics and management, vol.4. pp.15-19. 1981. 참조.</p>
+<a href="#fnref118">↩</a></li><li id="fn119"><p style="text-align:justify"> Takayama, mathematical economics, pp.429 참조.</p>
+<a href="#fnref119">↩</a></li><li id="fn120"><p style="text-align:justify"> <span class="math">f(y,\,y',\,t)</span>는 오목함수이므로 다변수의 지지선 정리에 따라 <span class="math">f\, \leq \,f*\,+\,(y-y*)f_{y}^{*} \,+\,(y ' -y* ' )f_{y ' }^{*}</span></p>
+<a href="#fnref120">↩</a></li><li id="fn121"><p style="text-align:justify"> 부분적분법에 의해 <span class="math">\, \int_{t_{0}}^{t_{1}} {(y ' -y* ' )f_{y ' }^{*} dt}</span> <span class="math">=\, \left[ (y-y*)f_{y ' }^{*} \right] _{t_{0}}^{t_{1}}</span><span class="math">-\, \int_{t_{0}}^{t_{1}} {\left. [(y-y*) \frac{d}{dt} f_{y ' }^{*} ]dt \right.}</span></p>
+<a href="#fnref121">↩</a></li><li id="fn122"><p style="text-align:justify"> 이산형의 경우 소비의 효용극대화 문제는 다음과 같았다.</p>
+<p style="text-align:justify">max <span class="math">\sum\limits_{t=0}^{\top} \beta^{t} u(c_{t} )</span>, s.t  <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span>, (<span class="math">t=0,\,...,\,T</span>), <span class="math">a_{0} \,=\,A\,</span>, <span class="math">a_{\scriptscriptstyle {T+1}} \,=\,0\,</span></p>
+<p style="text-align:justify">이제 이 문제를 연속형의 문제로 전환하자.</p>
+<p style="text-align:justify"><span class="math">\beta^{t} \,=\,(1+ \rho ) ^{-t}</span>이므로, 한 기간을 m으로 나누고 이를 무한대로 하면 <span class="math">\lim\limits_{m \to \infty } {[(1+ \frac{\rho }{m} ) ^{m} ] ^{-t} \,=\,e^{- \rho t}}</span> , (이에 관해서는 재무이론 ‘연속복리’ 참조). 따라서 목적식은 <span class="math">\lim\limits_{n \to \infty } {\sum\limits_{k=0}^{n} \beta^{t} u(c_{k} )} \,</span><span class="math">=\, \int_{0}^{\top} {e^{- \rho t} u(c(t))dt} \,</span>, where n=mT</p>
+<p style="text-align:justify">제약식은 <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span> ⇒ <span class="math">a_{t+1} \,-\,a_{t} \,=\,ra_{t} \,-\,c_{t}</span> ⇒ <span class="math">\frac{a(t+ \triangle t)\,-\,a(t)}{\triangle t} \,=\,ra(t)\,-\,c(t)</span>, (∵<span class="math">\triangle t\,=\,1</span>)</p>
+<p style="text-align:justify"><span class="math">\lim\limits_{\triangle t \to 0} {\frac{a(t+ \triangle t)\,-\,a(t)}{\triangle t}} \,=\, \lim\limits_{\triangle t \to 0} {(ra(t)-c(t))}</span> ⇒ <span class="math">a ' \,=ra(t)-c(t)\,</span></p>
+<a href="#fnref122">↩</a></li><li id="fn123"><p style="text-align:justify"> 이산형일 경우 오일러방정식은 <span class="math">\, \frac{u ' (c_{t} )\,}{\beta u ' (c_{t+1} )} =\,1+r</span>, 이산형 효용극대화 모형 참조.</p>
+<a href="#fnref123">↩</a></li><li id="fn124"><p style="text-align:justify"> 효용이론 ‘위험회피의 측정’ 참조</p>
+<a href="#fnref124">↩</a></li><li id="fn125"><p style="text-align:justify"> 주어진 일정 길이의 선분으로 면적을 최대화하는 경계선을 만드는 문제에서 유래</p>
+<a href="#fnref125">↩</a></li><li id="fn126"><p style="text-align:justify"> 라그랑지함수로 유도하는 자세한 과정은 Intriligator, mathmatical optimization and economic theory,1981, ch12. calculus of variations. 참조.</p>
+<a href="#fnref126">↩</a></li></div><h2>각주</h2><ol class="footnotes"><li id="fn125"><p style="text-align:justify"> 주어진 일정 길이의 선분으로 면적을 최대화하는 경계선을 만드는 문제에서 유래</p>
+<a href="#fnref125">↩</a></li><li id="fn126"><p style="text-align:justify"> 라그랑지함수로 유도하는 자세한 과정은 Intriligator, mathmatical optimization and economic theory,1981, ch12. calculus of variations. 참조.</p>
+<a href="#fnref126">↩</a></li></ol><p class="section-nav">← <a href="calculus-of-variations-conditions.html">Beltrami 항등식과 Legendre 조건</a> · <a href="calculus-of-variations.html">절별 목차</a> · 끝 →</p></body></html>

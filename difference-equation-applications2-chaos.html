@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="blog.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: {inlineMath: [['\\(','\\)'], ['$', '$']], displayMath: [['\\[','\\]'], ['$$','$$']]},
+  svg: {fontCache: 'global'}
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+.chapter-shell{max-width:980px;margin:0 auto;padding:28px 24px 56px;line-height:1.78}
+.chapter-shell table{border-collapse:collapse;max-width:100%;margin:1.2rem auto}
+.chapter-shell td,.chapter-shell th{border:1px solid #bbb;padding:.45rem .65rem;vertical-align:top}
+.chapter-shell h1{margin-bottom:1.2rem}
+.chapter-shell h2{margin-top:2.2rem}
+.chapter-shell h4{margin-top:1.55rem;font-size:1.12rem}
+.chapter-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:38px 0 8px;padding-top:18px;border-top:1px solid #ddd}
+.source-figure{display:block;max-width:100%;height:auto;margin:1.25rem auto}
+.source-graph{margin:1.4rem auto;text-align:center;overflow-x:auto}
+.math{overflow-x:auto}
+</style>
+<style id="econ-math-cleanup-patch">
+html{scroll-behavior:smooth}
+body{max-width:980px;margin:0 auto;padding:1.5rem 1rem 3rem;line-height:1.72;overflow-wrap:break-word}
+table{display:block;width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-collapse:collapse}
+img,svg{max-width:100%!important;height:auto!important}
+.katex-display,.math-display,div.math,p.math{max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+pre,code{max-width:100%;overflow-x:auto}
+.footnotes{margin-top:3rem;padding-top:1rem;border-top:1px solid #bbb;font-size:.92em;line-height:1.6}
+@media(max-width:640px){body{padding:.8rem .65rem 2rem;font-size:16px}h1{font-size:1.65rem}h2{font-size:1.35rem}h3{font-size:1.18rem}h4{font-size:1.05rem}}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><h1>비선형 성장·빈곤함정·Chaos</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="difference-equation.html">차분방정식</a> · <a href="difference-equation-applications2.html">6장. 경제학 응용 II</a></p><h4 style="text-align:justify">무한성장, 빈곤함정(poverty trap), 혼돈(chaos)</h4><p style="text-align:justify">앞에서 생산함수는 단조함수이고 오목함수임을 가정하고 해는 유일하고 균형에 수렴한다고 결론지었다. 즉 경제성장이 일어나지 않고 정체상태이다. 그러나 기술 변수의 형태에 따라, 또는 저축률이 소득에 따라 다를 때 생산함수는  단조함수나 오목함수가 아닐 수 있다. 이 경우 여러 개의 해가 존재하거나 해가 균형에 수렴하지 않을 수 있다. </p><h4 style="text-align:justify">(a) 생산함수가 선형일 경우<sup><a href="#fn83" id="fnref83">[83]</a></sup></h4><p style="text-align:justify"><span class="math">\(Y_{t} \,=\,F(K_{t} \,,\,L_{t} )\,=\,AK_{t}\)</span>, A는 상수로 생산성 요소</p><p style="text-align:justify"><span class="math">\(f(k_{t} )\,=\,Ak_{t}\)</span>이므로</p><p style="text-align:justify">이 경우 솔로 기본방정식은</p><p style="text-align:justify"><span class="math">\(\,k_{t+1} \,=\, \frac{1- \delta }{1+ \mu } k_{t} \,+\, \frac{s}{1+ \mu } Ak_{t}\)</span></p><p style="text-align:justify"><span class="math">\(\,=\, \left( \frac{1- \delta }{1+ \mu } \,+\, \frac{As}{1+ \mu } \right) k_{t}\)</span></p><p style="text-align:justify">이는 일차 차분방정식이므로 해는</p><p style="text-align:justify"><span class="math">\(k_{t} \,=\, \left( \frac{1- \delta }{1+ \mu } \,+\, \frac{As}{1+ \mu } \right) k_{0}\)</span></p><p style="text-align:justify"><span class="math">\(\frac{1- \delta }{1+ \mu } \,+\, \frac{As}{1+ \mu } &gt;\,0\)</span> 이므로</p><p style="text-align:justify"><span class="math">\(\frac{1- \delta }{1+ \mu } \,+\, \frac{As}{1+ \mu } \,&lt;\,1\)</span> 이면 <span class="math">\(k_{t} \to 0\)</span>, 경제는 점진적으로 수축된다.</p><p style="text-align:justify"><span class="math">\(\frac{1- \delta }{1+ \mu } \,+\, \frac{As}{1+ \mu } \,&gt;\,1\)</span> 이면 경제는 장기적으로 지속적으로 성장한다.</p><p style="text-align:justify"><span class="math">\(\frac{1- \delta }{1+ \mu } \,+\, \frac{As}{1+ \mu } \,&gt;\,1\)</span></p><p style="text-align:justify">⇒ <span class="math">\(As\,&gt;\, \mu \,+\, \delta\)</span></p><p style="text-align:justify">따라서 경제가 지속적으로 성장하기 위해서는 생산성과 저축률이 인구증가율과 감가상각률을 합한 것을 초과할 만큼 충분히 커야한다.</p><h4 style="text-align:justify">(b) 생산함수가 규모의 수익 체증인 경우</h4><p style="text-align:justify">생산함수가 규모의 수익 체증이면 <span class="math">\(f(k)\,\)</span>가 볼록함수, <span class="math">\(f '' (k)\,&gt;\,0\)</span> </p><p style="text-align:justify"><span class="math">\(g'(0)\,&lt;\,1\)</span> 이면 0 이외의 유일한 해가 존재한다.</p><p style="text-align:justify"><span class="math">\(f(k)\,\)</span>가 볼록함수이므로</p><p style="text-align:justify"><span class="math">\(f(k)\,&lt;\,kf ' (k)\)</span></p><p style="text-align:justify">앞의 오목함수일 경우와 부등호가 반대이므로 같은 유도과정을 거쳐</p><p style="text-align:justify"><span class="math">\(\left. \, \frac{\partial g(k_{t} )}{\partial k_{t}} \right | _{k_{t} =k*} \,&gt;\,1\)</span></p><p style="text-align:justify">교차점에서 기울기가 1보다 크므로 해는 발산한다. 이 경우 경제는 초기 자본의 상태에 따라 0으로 수축되거나 폭발적으로 성장한다. 해의 경로는 초기상태가 <span class="math">\(k*\)</span>의 좌측에 있는가 우측에 있는가에 따라 크게 차이가 나므로 초기상태의 미세한 변화가 경제성장의 행태에 크게 영향을 미침을 알 수 있다.</p><figure class="source-graph"><img alt="차분방정식 그래프 34" class="source-figure" decoding="async" loading="lazy" src="media/차분방정식과_응용_graph_034.svg"/></figure><h4 style="text-align:justify">(c) 다수의 해가 존재하는 경우</h4><p style="text-align:justify">앞에서 생산성 요소 A가 상수임을 가정했다. 그러나 생산성 요소(기술 진보)는 시간에 따라 다를 수 있고 따라서 생산함수는 단조함수 오목함수가 아니라 다양한 형태를 취할 수 있다. 실제 1국의 생산함수의 형태는 신기술개발 등 요인에 따라 다음 그림과 같이 규모의 수익 체증과 규모의 수익 체감이 혼합될 수 있다.</p><figure class="source-graph"><img alt="차분방정식 그래프 35" class="source-figure" decoding="async" loading="lazy" src="media/차분방정식과_응용_graph_035.svg"/></figure><p style="text-align:justify"><span class="math">\(k_{1}\)</span>, <span class="math">\(k_{2}\)</span>는 수렴하는 균형점이고 <span class="math">\(k_{0}\)</span>, <span class="math">\(k_{3}\)</span>는 발산하는 균형점이다. 낮은 균형점 <span class="math">\(k_{1}\)</span>은 더 높은 소득의 균형점 <span class="math">\(k_{2}\)</span>이 존재함에도 불구하고 이곳에 계속 머무르게 되므로 이를 빈곤함정이라 한다. 빈곤국가의 경우 축적된 자본이 낮으므로 계속에서 낮은 수준의 국민소득에 머무르게 된다. 빈곤국가가 선진국의 대열로 합류하기 위해서는 <span class="math">\(k_{3}\)</span>를 뛰어넘는 외부적인 자본의 유입이 필요할 것이다.</p><p style="text-align:justify">기술발전에 따른 생산물 증가가 로지스틱 곡선의 형태를 취할 경우 <span class="math">\(g(k)\)</span>는 엎어진 포물선의 형태를 띨 수 있다. 이 경우 위상도 분석의 혼돈이론에서 본 것처럼 해의 경로는 순환하거나 수렴하거나 불규칙적 행태를 보일 것이다.<sup><a href="#fn84" id="fnref84">[84]</a></sup> 다음 그림은 불규칙적 행태를 보이는 한 예이다.</p><p style="text-align:justify">이 경우 경기는 불규칙적으로 순환하는 형태를 보이므로 경기변동을 설명하는 요인이 된다.<sup><a href="#fn85" id="fnref85">[85]</a></sup></p><figure class="source-graph"><img alt="차분방정식 그래프 36" class="source-figure" decoding="async" loading="lazy" src="media/차분방정식과_응용_graph_036.svg"/></figure><h2>각주</h2><ol class="footnotes"><li id="fn83"><p style="text-align:justify"> AK 모형이라고도 한다.</p>
+<a href="#fnref83">↩</a></li><li id="fn84"><p style="text-align:justify"> ‘위상도 분석’ 혼돈이론 참조</p>
+<a href="#fnref84">↩</a></li><li id="fn85"><p style="text-align:justify"> 이는 경기변동이 자본주의의 고유한 특성이라고 주장하는 마르크스 주의와 같은 견해이다. 경기변동의 혼돈이론은 유럽의 특히 좌파주의 경제학자 중에서 활발히 연구되고 있다. 반면 북미의 경제학자중에는 경기 변동이 외부 충격에 대한 반응에서 온다는 견해가 지배적이다.</p>
+<a href="#fnref85">↩</a></li></ol><p class="section-nav">← <a href="difference-equation-applications2-solow.html">이산형 Solow 성장모형</a> · <a href="difference-equation-applications2.html">절별 목차</a> · <a href="difference-equation-applications2-dornbusch-model.html">Dornbusch Overshooting: 모형과 해</a> →</p></body></html>

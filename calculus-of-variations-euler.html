@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>변분학과 Euler 방정식</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>변분학 (Calculus of Variations)</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>변분학과 Euler 방정식</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="calculus-of-variations.html">변분학 (Calculus of Variations)</a></p><h2 id="연속형-모형-continuous-time-model" style="text-align:justify">연속형 모형(continuous time model)</h2><h4 id="변분학-calculus-of-variations" style="text-align:justify">변분학(calculus of variations)</h4><h4 id="일반형" style="text-align:justify">일반형</h4><p style="text-align:justify">구간 [<span class="math">t_{0} ,\,t_{1}</span>]에 대해 최대값을 구하는 변분학의 문제의 일반형은 다음과 같다.</p><p style="text-align:justify">max <span class="math">\int_{t_{0}}^{t_{1}} {f(y(t),y ' (t),\,t)dt}</span><span class="math">y'(t)\,=\, \frac{dy}{dt}</span></p><p style="text-align:justify">s.t   <span class="math">y(t_{0} )=y_{0}</span> , <span class="math">y(t_{1} )=y_{1}</span> </p><p style="text-align:justify">이는 그림에서 점 A(<span class="math">t_{0} ,\,y_{0}</span>)에서 점 B(<span class="math">t_{1} ,\,y_{1}</span>)까지 가는 수 많은 경로 중 목적식을 최대화하는 경로(time path)를 구하는 것이다.</p><p style="text-align:justify;margin:0.1em 0"><span class="hml-figure editable-gtree"><svg height="770" style="display:block;max-width:100%;margin:0 auto" viewbox="0 0 969 770" width="969" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arrow" markerheight="8" markerwidth="8" orient="auto" refx="7" refy="3"><path d="M0,0 L0,6 L7,3 z" fill="#000000"></path></marker></defs><line marker-end="url(#arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="81" x2="81" y1="50" y2="693"></line><line marker-end="url(#arrow)" opacity="1.0" stroke="#000000" stroke-width="2.37" x1="81" x2="899" y1="693" y2="693"></line><rect fill="none" fill-opacity="1.0" height="57" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="56" x="20" y="20"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="48" y="48">y</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="61" x="888" y="693"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="918" y="721">t</text><line opacity="1.0" stroke="#000000" stroke-dasharray="2 4" stroke-width="0.5" x1="176" x2="176" y1="623" y2="693"></line><line opacity="1.0" stroke="#000000" stroke-dasharray="2 4" stroke-width="0.5" x1="634" x2="633" y1="130" y2="695"></line><line opacity="1.0" stroke="#000000" stroke-dasharray="2 4" stroke-width="0.5" x1="176" x2="80" y1="623" y2="623"></line><line opacity="1.0" stroke="#000000" stroke-dasharray="2 4" stroke-width="0.5" x1="631" x2="81" y1="133" y2="133"></line><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="61" x="146" y="695"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="176" y="723">t0</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="61" x="600" y="695"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="631" y="723">t1</text><rect fill="none" fill-opacity="1.0" height="75" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="84" x="20" y="586"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="62" y="623">y₀</text><rect fill="none" fill-opacity="1.0" height="111" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="61" x="20" y="106"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="51" y="161">y₁</text><rect fill="none" fill-opacity="1.0" height="70" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="146" x="376" y="211"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="449" y="246">hat{y} (t)</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="131" x="177" y="413"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="243" y="440">y*(t)</text><rect fill="none" fill-opacity="1.0" height="55" opacity="1.0" rx="3" stroke="none" stroke-width="0.5" width="61" x="20" y="688"></rect><text dominant-baseline="middle" fill="#000000" font-size="28" font-style="normal" font-weight="400" opacity="1.0" text-anchor="middle" x="51" y="715">0</text></svg></span>
+</p><p style="text-align:justify"><span class="math">y(t_{0} )=y_{0}</span> , <span class="math">y(t_{1} )=y_{1}</span>는 경계조건이라 한다.</p><p style="text-align:justify"><span class="math">f(y(t),\,y'(t))</span>는 함수 y(t)의 함수로서 함수의 함수를 범함수(functional)라고 한다.<sup><a href="#fn112" id="fnref112">[112]</a></sup></p><p style="text-align:justify">예) y(x)를  두 점 A(<span class="math">x_{0} ,\,y_{0}</span>), B(<span class="math">x_{1} ,\,y_{1}</span>)를 연결하는 길(path)이라 하면 이 경로의 길이는 범함수 f(y(t))로 표현된다. K(t)를 t기의 자본이라 한다면 국내총생산물 GDP는 범함수 f(K(t))로 표현된다. <span class="math">\int {f(y(t))dt}</span> 도 f(y(t))의 함수로 범함수이다.</p><p style="text-align:justify">예) 독점기업의 제품 수요가 가격과 가격변화율의 함수라면 <span class="math">Q_{d} \,=\,Q_{d} (P(t),\,P'(t))</span>,  독점기업의 총수입은 <span class="math">PQ_{s}</span>, 총비용은 <span class="math">C(Q_{s} )\,=\,C[Q(P,\,P ' )]</span>이다.</p><p style="text-align:justify">수요=공급의 법칙에 따라 <span class="math">Q_{d} \,=\,Q_{s} \,=\,Q(P,\,P')</span></p><p style="text-align:justify">따라서 t 시점에서 기업의 이윤은 <span class="math">\pi (P,\,P')\,=\,PQ(P,\,P')\,-\,C[Q(P,\,P')]</span></p><p style="text-align:justify">[<span class="math">t_{0} ,\,t_{1}</span>] 기간 동안 기업의 총이윤은 할인율을 고려하지 않는다면 <span class="math">\int_{t_{0}}^{t_{1}} {\pi (P,\,P')dt}</span>, 이는 목적식에 t가 포함 안 된 경우이다. 할인율 r을 고려한다면 <span class="math">\int_{t_{0}}^{t_{1}} {e^{-rt} \pi (P,\,P ' )dt}</span>, 이는 목적식에 t가 포함된 경우이다.</p><h4 id="오일러방정식의-도출" style="text-align:justify">오일러방정식의 도출</h4><p style="text-align:justify">y(t)는 [<span class="math">t_{0} ,\,t_{1}</span>]에서 연속이고 미분가능한 함수라 하자.</p><p style="text-align:justify">위 문제에 대한 최적경로를 <span class="math">y*(t)</span>라 하고 제약조건을 만족하는 또 다른 경로를 <span class="math">\hat{y} (t)</span>라 하면, 최적경로 <span class="math">y*(t)</span>와 다른 경로 <span class="math">\hat{y} (t)</span>의 차이 <span class="math">h(t)</span>는 다음과 같이 정의된다.</p><p style="text-align:justify"><span class="math">h(t)= \hat{y} (t)-y*(t)</span></p><p style="text-align:justify"><span class="math">y*(t)</span>, <span class="math">\hat{y} (t)</span>는 경계조건을 만족하므로</p><p style="text-align:justify"><span class="math">h(t_{0} )=h(t_{1} )=0</span></p><p style="text-align:justify">따라서 h(t)는 경계조건을 만족</p><p style="text-align:justify"><span class="math">y*(t)</span>, <span class="math">\hat{y} (t)</span> 는 구간연속인 미분가능한 함수이므로 h(t)도 구간연속인 미분가능한 함수. </p><p style="text-align:justify">다른 경로 <span class="math">z (t)</span>를 다음과 같이 정의하면 </p><p style="text-align:justify"><span class="math">z (t)=y*(t)+ \epsilon h(t)</span></p><p style="text-align:justify"><span class="math">z ' (t)=y ' *(t)+ \epsilon h ' (t)</span></p><p style="text-align:justify"><span class="math">\lim\limits_{\epsilon \to 0} {z (t)} =y*(t)</span></p><p style="text-align:justify">따라서 <span class="math">z (t)</span>는 경계조건과 연속성 조건을 만족</p><p style="text-align:justify">그러면 다른 경로 <span class="math">z (t)</span>로 구성된 범함수는</p><p style="text-align:justify"><span class="math">J( \epsilon )= \int_{t_{0}}^{t_{1}} {f(z,\,z ' ,\,t)dt}</span> <span class="math">= \int_{t_{0}}^{t_{1}} {f(y*+ \epsilon h,\,y ' *+ \epsilon h ' ,\,t)dt}</span></p><p style="text-align:justify">⇒ <span class="math">J(0)= \int_{t_{0}}^{t_{1}} {f(y*,\,y ' * ' ,\,t)dt\,}</span> </p><p style="text-align:justify">이는 <span class="math">y*(t)</span>의 최대값이므로 <span class="math">J( \epsilon )</span>는 ε=0에서 최대값을 갖는다.</p><p style="text-align:justify"> ∴ <span class="math">\frac{dJ( \epsilon )}{d \epsilon } \bigg| _{\epsilon =0} =0</span></p><p style="text-align:justify"><span class="math">\frac{dJ( \epsilon )}{d \epsilon } = \frac{d}{d \epsilon } \int_{t_{0}}^{t_{1}} {f(y+ \epsilon h,\,y ' + \epsilon h ' ,\,t)dt}</span></p><p style="text-align:justify"><span class="math">=f(y(t_{1} )+ \epsilon h(t_{1} )) \frac{dt_{1}}{d \epsilon } -f(y(t_{0} )+ \epsilon h(t_{0} )) \frac{dt_{0}}{d \epsilon } + \int_{t_{0}}^{t_{1}} {\frac{df}{d \epsilon } dt}</span>.............<sup><a href="#fn113" id="fnref113">[113]</a></sup></p><p style="text-align:justify"><span class="math">= \int_{t_{0}}^{t_{1}} {\frac{df}{d \epsilon } dt}</span>,  (∵<span class="math">\frac{dt_{1}}{d \epsilon } = \frac{dt_{0}}{d \epsilon } =0</span>)</p><p style="text-align:justify"><span class="math">= \int_{t_{0}}^{t_{1}} {( \frac{\partial f}{\partial y} h+ \frac{\partial f}{\partial y ' } h ' + \frac{\partial f}{\partial t} \frac{dt}{d \epsilon } )dt}</span> .....................<sup><a href="#fn114" id="fnref114">[114]</a></sup></p><p style="text-align:justify"><span class="math">= \int_{t_{0}}^{t_{1}} {( \frac{\partial f}{\partial y} h+ \frac{\partial f}{\partial y ' } h ' )dt}</span>,  (∵<span class="math">\frac{dt}{d \epsilon } =0</span>)</p><p style="text-align:justify"><span class="math">= \int_{t_{0}}^{t_{1}} {\frac{\partial f}{\partial y} hdt+ \left[ \frac{\partial f}{\partial y ' } h\, \right] _{t_{0}}^{t_{1}} - \int_{t_{0}}^{t_{1}} \frac{d}{dt} ( \frac{\partial f}{\partial y ' } )hdt}</span> .................<sup><a href="#fn115" id="fnref115">[115]</a></sup></p><p style="text-align:justify"><span class="math">= \int_{t_{0}}^{t_{1}} {( \frac{\partial f}{\partial y} h- {\frac{d}{dt} ( \frac{\partial f}{\partial y ' } )h)dt}}</span> ,   (∵<span class="math">h(t_{0} )=h(t_{1} )=0</span>)</p><p style="text-align:justify"> <span class="math">= \int_{t_{0}}^{t_{1}} {( \frac{\partial f}{\partial y} - \frac{d}{dt} ( \frac{\partial f}{\partial y ' } ))hdt\,} =0</span> ................①</p><table aria-label="오일러방정식의 도출 관련 표 1" style="border-collapse:collapse;table-layout:fixed;height:106.547px;width:419.800px"><colgroup><col style="width:419.8px"/></colgroup><tbody><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:justify">(정리)</p>
+<p style="text-align:justify">f(x)가 [<span class="math">x_{0} ,\,x_{1}</span>]에서 연속이고, h(x)가 [<span class="math">x_{0} ,\,x_{1}</span>]에서 미분가능하다면</p>
+<div aria-hidden="true" class="hml-empty"></div>
+<p style="text-align:justify"><span class="math">\int_{x_{0}}^{x_{1}} {f(x)h(x)dx\,=\,0}</span> 이면 <span class="math">h(x)\,=\,0</span></p>
+</td></tr></tbody></table><p style="text-align:justify">따라서 ①이 h(t)에 상관없이 항상 0 이면 </p><p style="text-align:justify"><span class="math">\frac{\partial f}{\partial y} - \frac{d}{dt} ( \frac{\partial f}{\partial y ' } )\,=\,0</span></p><p style="text-align:justify">이를 오일러 방정식(Euler Equations)이라 한다.<sup><a href="#fn116" id="fnref116">[116]</a></sup></p><p style="text-align:justify">만약 목적식이 <span class="math">{f(y,\,y ' ,\,t)}</span>, t 포함 3 개의 변수의 함수라 한다면(일반적인 형태임) </p><p style="text-align:justify"><span class="math">\frac{d}{dt} ( \frac{\partial f}{\partial y ' } )\,=\, \frac{\partial }{\partial y} ( \frac{\partial f}{\partial y ' } ) \frac{dy}{dt} + \frac{\partial }{\partial y ' } ( \frac{\partial f}{\partial y ' } ) \frac{dy ' }{dt} + \frac{\partial }{\partial t} ( \frac{\partial f}{\partial y ' } ) \frac{dt}{dt}</span></p><p style="text-align:justify"><span class="math">\,=\, \frac{\partial^{2} f}{\partial y \partial y ' } \frac{dy}{dt} + \frac{\partial^{2} f}{\partial y^{'2}} \frac{d^{2} y}{dt^{2}} + \frac{\partial^{2} f}{\partial t \partial y ' }</span></p><p style="text-align:justify">따라서 오일러 방정식은 다음과 같이 쓸 수 있다.</p><p style="text-align:justify"><span class="math">\frac{\partial f}{\partial y} = \frac{\partial^{2} f}{\partial y \partial y ' } \frac{dy}{dt} + \frac{\partial^{2} f}{\partial y^{'2}} \frac{d^{2} y}{dt^{2}} + \frac{\partial^{2} f}{\partial t \partial y ' }</span></p><p style="text-align:justify">⇒ <span class="math">f_{y} =f_{yy ' } y ' +f_{y ' y ' } y '' +f_{ty ' }</span></p><p style="text-align:justify">목적식이 <span class="math">f(y,\,y ' )</span>의 형태라면 오일러 방정식은</p><p style="text-align:justify"><span class="math">f_{y} =f_{yy ' } y ' +f_{y ' y ' } y ''</span></p><p style="text-align:justify"><span class="math">f_{y'y'}</span>은 비선형 함수이고 <span class="math">y''</span> 이 있으므로 이는 비선형 2계 미분방정식이다. </p><p style="text-align:justify">경계조건을 만족하고 오일러방정식을 만족하는 해를 극값(extremal)이라 한다. </p><p style="text-align:justify">경계조건을 만족하고 오일러방정식을 만족하는 값은 극값을 갖기 위한 필요조건이다.</p><h4 id="상태변수가-2개인-경우" style="text-align:justify">상태변수가 2개인 경우</h4><p style="text-align:justify">상태변수가 x, y 2개인 경우 문제는 다음과 같다.</p><p style="text-align:justify">max <span class="math">\int_{t_{0}}^{t_{1}} {f(x,\,x',\,y,\,y ' ,\,t)dt}</span>, where <span class="math">x ' \,=\, \frac{dx}{dt}</span>, <span class="math">y ' \,=\, \frac{dy}{dt}</span></p><p style="text-align:justify">s.t   <span class="math">x(t_{0} )=x_{0}</span> , <span class="math">x(t_{1} )=x_{1}</span>, <span class="math">y(t_{0} )=y_{0}</span> , <span class="math">y(t_{1} )=y_{1}</span></p><p style="text-align:justify">이 때의 오일러 방정식은 2개이다.</p><p style="text-align:justify"><span class="math">f_{x} - \frac{d}{dt} f_{x'} \,=\,0</span>, <span class="math">f_{y} - \frac{d}{dt} f_{y ' } \,=\,0</span></p><p style="text-align:justify">독립변수가 n개라면 오일러방정식 상태변수의 개수만큼 n개가 된다.</p><h4 id="목적식이-n계-도함수로-표현된-경우" style="text-align:justify">목적식이 n계 도함수로 표현된 경우</h4><p style="text-align:justify">max <span class="math">\int_{t_{0}}^{t_{1}} {f(\,y,\,y ' ,\,...,\,y^{(n)} ,\,t)dt}</span>, where <span class="math">y ' \,=\, \frac{dy}{dt}</span>, ..., <span class="math">y^{(n)} \,=\, \frac{d^{n} y}{dt^{n}}</span></p><p style="text-align:justify">s.t   <span class="math">y(t_{0} )=y_{0}</span> , <span class="math">y(t_{1} )=y_{1}</span>, <span class="math">y'(t_{0} )=y_{2}</span>, <span class="math">y'(t_{1} )=y_{3}</span></p><p style="text-align:justify">오일러 방정식은</p><p style="text-align:justify"><span class="math">f_{y} - \frac{d}{dt} f_{y ' } + \frac{d^{2}}{dt^{2}} f_{y''} - \cdots +(-1) ^{n} \frac{d^{n}}{dt^{n}} f_{y^{(n)}} \,=\,0</span></p><h2>각주</h2><ol class="footnotes"><li id="fn112"><p style="text-align:justify"> 수학기초 ‘범함수’ 참조</p>
+<a href="#fnref112">↩</a></li><li id="fn113"><p style="text-align:justify"> 라이프니쯔 법칙(Leibnitz’s rule) 적용. 수학기초 ‘적분의 미분’ 참조.</p>
+<a href="#fnref113">↩</a></li><li id="fn114"><p style="text-align:justify"> 수학기초 ‘내생변수가 상호 함수관계일 때 미분’ 참조. </p>
+<a href="#fnref114">↩</a></li><li id="fn115"><p style="text-align:justify"> 부분적분법 적용. <span class="math">\int_{t_{0}}^{t_{1}} {\frac{\partial f}{\partial y'} h'dt\,= \left[ \frac{\partial f}{\partial y ' } h\, \right] _{t_{0}}^{t_{1}} - \int_{t_{0}}^{t_{1}} \frac{d}{dt} ( \frac{\partial f}{\partial y ' } )hdt}</span></p>
+<a href="#fnref115">↩</a></li><li id="fn116"><p style="text-align:justify"> 또는 오일러-라그랑지 방정식(Euler-Lagrange equation), 라그랑지 방정식(Lagrange equation)이라함. 이산형, 또는 연속형 효용극대화 문제에서 오일러 방정식은 이 공식을 적용해도 도출된다.</p>
+<a href="#fnref116">↩</a></li></ol><p class="section-nav">← 처음 · <a href="calculus-of-variations.html">절별 목차</a> · <a href="calculus-of-variations-conditions.html">Beltrami 항등식과 Legendre 조건</a> →</p></body></html>

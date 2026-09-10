@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>신고전학파 동적 성장모형</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>이산형 동적최적화의 경제학 응용</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>신고전학파 동적 성장모형</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-optimization-applications-discrete.html">이산형 동적최적화의 경제학 응용</a></p><p style="text-align:justify">신고전학파 경제성장모형(neoclassical economic growth model)<sup><a href="#fn97" id="fnref97">[97]</a></sup></p><p style="text-align:justify">Solow 모형에서 저축은 주어진 것으로 일정한 것으로 가정했다. Ramsey 모형은 저축이 가계의 효용 극대화 원칙에 따라 결정되는 것으로 본다. </p><h4 id="가정" style="text-align:justify">가정</h4><p style="text-align:justify">- 효용은 소비의 함수이다.</p><p style="text-align:justify"><span class="math">u_{t} \,=\,u(C_{t} )</span></p><p style="text-align:justify"><span class="math">C_{t}</span> : t기의 소비</p><p style="text-align:justify">효용함수는 오목함수이고, 이나다 조건을 만족한다.</p><p style="text-align:justify"><span class="math">u ' (c)\,&gt;0,\;u '' (c)&lt;0</span></p><p style="text-align:justify"><span class="math">\lim\limits_{c \to 0} {u'(c)\,=\, \infty }</span>, <span class="math">\lim\limits_{c \to \infty } {u'(c)\,=\,0}</span></p><p style="text-align:justify">인구는 매년 일정 비율로 증가한다. 인구는 완전고용된다.</p><p style="text-align:justify"><span class="math">L_{t+1} \,=\,(1+ \mu )L_{t}</span>, <span class="math">\mu</span>는 인구증가율(상수), <span class="math">L_{t}</span> : t기의 인구</p><p style="text-align:justify">⇒ <span class="math">L_{t} \,=\,(1+ \mu ) ^{t} L_{0}</span></p><p style="text-align:justify">- 효용함수는 기간간 가법적(time additive)이다. 어느 두 기간의 소비대체율은 다른 기간의 소비에 영향을 받지 않는다. </p><p style="text-align:justify">- 미래는 <span class="math">\beta</span>의 주관적 시간선호율만큼 할인된다. <span class="math">\beta \,=\, \frac{1}{1+ \theta }</span> : <span class="math">\theta</span>는 시간에 대한 주관적 이자율을 의미하는 것으로 따라서 <span class="math">\beta</span>는 개인의 소비에 대한 조급성(impatience)를 의미.</p><p style="text-align:justify">한 세대는 t기 동안 자신의 효용과 다음 자식 세대의 효용을 극대화하기를 원한다.</p><p style="text-align:justify"><span class="math">U_{t} \,=\,u(c_{t} )+ \beta (1+ \mu )U_{t+1}</span></p><p style="text-align:justify">⇒ <span class="math">U_{t} \,=\,u(c_{t} )+ \beta (1+ \mu )u_{t+1} (c_{t+1} )\,+\, \beta^{2} (1+ \mu ) ^{2} u_{t+2} (c_{t+2} )+ \cdots</span></p><p style="text-align:justify">1국의 총효용은</p><p style="text-align:justify"><span class="math">u(C_{1} ,\,C_{2} ,\,...,\,C_{n} )\,=\, \sum\limits_{t=0}^{\infty } \beta^{t} L_{t} u(C_{t} )\,=\,L_{0} \sum\limits_{t=0}^{\infty } \beta^{t} (1+ \mu ) ^{t} u(c_{t} )</span>, <span class="math">0&lt; \beta (1+ \mu )&lt;1</span></p><p style="text-align:justify">생산함수 가정은 Solow 모형과 동일(1차동차 생산함수, 이나다 조건)</p><p style="text-align:justify">케인즈 국민소득모형을 가정</p><p style="text-align:justify"><span class="math">F(K_{t} ,\,L_{t} )\,=\,Y_{t} \,=\,C_{t} \,+\,S_{t}</span>, <span class="math">K_{t}</span> ; t 기의 자본, <span class="math">F(L_{t} ,\,K_{t} )</span> ; t 기의 총생산</p><p style="text-align:justify">저축은 전액 투자로 소비</p><p style="text-align:justify"><span class="math">I_{t} \,=\,S_{t}</span>, <span class="math">I_{t}</span> ; t 기의 투자, <span class="math">S_{t}</span> ; t 기의 저축</p><p style="text-align:justify">자본은 투자에 의해 증가하고 일정비율 감가상각된다.</p><p style="text-align:justify"><span class="math">K_{t+1} \,=\,I_{t} \,+\,(1- \delta )K_{t}</span>, <span class="math">0\,&lt;\, \delta \,&lt;\,1</span>, where <span class="math">\delta</span>는 감가상각률</p><h4 id="모형-3" style="text-align:justify">모형</h4><p style="text-align:justify"><span class="math">F(K_{t} ,\,L_{t} )\,=\,Y_{t} \,=\,C_{t} \,+\,S_{t}</span></p><p style="text-align:justify">⇒ <span class="math">F(K_{t} ,\,L_{t} )\,=\,C_{t} \,+\,I_{t}</span></p><p style="text-align:justify">⇒ <span class="math">F(K_{t} ,\,L_{t} )\,=\,C_{t} \,+\,K_{t+1} \,-\,(1- \delta )K_{t}</span></p><p style="text-align:justify">⇒ <span class="math">L_{t} f(k_{t} )\,=\,C_{t} \,+\,K_{t+1} \,-\,(1- \delta )K_{t}</span></p><p style="text-align:justify">⇒ <span class="math">f(k_{t} )\,=\, \frac{C_{t}}{L_{t}} \,+\,(1+ \mu ) \frac{K_{t+1}}{L_{t+1}} \,-\,(1- \delta ) \frac{K_{t}}{L_{t}}</span></p><p style="text-align:justify">⇒ <span class="math">f(k_{t} )\,=\,c_{t} \,+\,(1+ \mu )k_{t+1} \,-\,(1- \delta )k_{t}</span>, 소문자는 두당 생산물, 두당 자본, 두당 소비를 의미</p><p style="text-align:justify">⇒ <span class="math">k_{t+1} \,=\, \frac{f(k_{t} )+(1- \delta )k_{t}}{1+ \mu } \,- \frac{c_{t}}{1+ \mu } \,</span></p><p style="text-align:justify">이는 t기에 일국의 자원제약을 의미한다. </p><p style="text-align:justify"><span class="math">\mu =0</span>, <span class="math">\delta =1</span> 이라 하면 </p><p style="text-align:justify"><span class="math">k_{t+1} \,+c_{t} =\,f(k_{t} )</span></p><p style="text-align:justify">따라서 t기의 두당 소비와 두당 저축의 합은 t기의 두당 생산물과 같다.<sup><a href="#fn98" id="fnref98">[98]</a></sup></p><p style="text-align:justify">정책입안자의 목적은 자원 제약하에 전체 소비자의 효용을 극대화하는 것. </p><p style="text-align:justify">max <span class="math">L_{0} \sum\limits_{t=0}^{\infty } \beta^{t} (1+ \mu ) ^{t} u(c_{t} )</span></p><p style="text-align:justify">s.t  <span class="math">k_{t+1} \,=\, \frac{f(k_{t} )+(1- \delta )k_{t}}{1+ \mu } \,- \frac{c_{t}}{1+ \mu } \,</span>, for <span class="math">t=0,\,1,\,2,\,...</span></p><p style="text-align:justify">라그란지안 함수를 만들면</p><p style="text-align:justify">L<span class="math">\,=\, \sum\limits_{t=0}^{\infty } \beta^{t} \left[ L_{0} (1+ \mu ) ^{t} u(c_{t} )\,+\, \lambda_{t} \left( \, \frac{f(k_{t} )+(1- \delta )k_{t}}{1+ \mu } \,- \frac{c_{t}}{1+ \mu } \,-k_{t+1} \right) \right]</span>........<sup><a href="#fn99" id="fnref99">[99]</a></sup></p><p style="text-align:justify">필요조건:</p><p style="text-align:justify"><span class="math">\frac{\partial }{\partial c_{t}}</span>L<span class="math">\,=L_{0} (1+ \mu ) ^{t} u ' (c_{t} )\,-\, \frac{\lambda_{t}}{1+ \mu } \,=\,0\,</span> .............. ①</p><p style="text-align:justify"><span class="math">\frac{\partial }{\partial k_{t+1}}</span>L<span class="math">\,=\, \beta^{t+1} \lambda_{t+1} \left( \frac{f ' (k_{t+1} )+1- \delta }{1+ \mu } \right) \,-\, \beta^{t} \lambda_{t} \,=\,0</span> ............. ②<sup><a href="#fn100" id="fnref100">[100]</a></sup></p><p style="text-align:justify"><span class="math">\frac{\partial }{\partial \lambda_{t}}</span>L<span class="math">\,=\, \frac{f(k_{t} )+(1- \delta )k_{t}}{1+ \mu } \,- \frac{c_{t}}{1+ \mu } \,-k_{t+1} \,=\,0</span> </p><p style="text-align:justify">⇒ <span class="math">\,(1+ \mu )k_{t+1} \,+\,c_{t} =\, {f(k_{t} )+(1- \delta )k_{t}}</span> ..............③</p><p style="text-align:justify">①에서</p><p style="text-align:justify"><span class="math">\lambda_{t} \,=L_{0} (1+ \mu ) ^{t+1} u ' (c_{t} )\,</span></p><p style="text-align:justify">⇒ <span class="math">\lambda_{t+1} \,=L_{0} (1+ \mu ) ^{t+2} u ' (c_{t+1} )\,</span></p><p style="text-align:justify">이를 ②에 대입하면</p><p style="text-align:justify"><span class="math">\,L_{0} (1+ \mu ) ^{t+2} \beta u ' (c_{t+1} )\, \left( \frac{f ' (k_{t+1} )+1- \delta }{1+ \mu } \right) \,=\,L_{0} (1+ \mu ) ^{t+1} u ' (c_{t} )\,</span></p><p style="text-align:justify">⇒ <span class="math">\,u ' (c_{t} )\,=\, \beta u ' (c_{t+1} )\, \left( {f ' (k_{t+1} )+1- \delta } \right) \,</span>...........④</p><p style="text-align:justify">이는 오일러 방정식, 또는 케인즈-램지 규칙(Keynes-Ramsey rule)이라 한다.</p><p style="text-align:justify">직관은 다음과 같다. 소비경로가 최적이라면</p><p style="text-align:justify">초기의 계획자는 다음 두 대안 사이에서 무차별해야 한다.</p><p style="text-align:justify">1. 오늘 산출물 한 단위를 소비하여 <span class="math">\,u ' (c_{t} )\,</span>의 효용 증가를 얻는다.</p><p style="text-align:justify">2. 그 산출물을 자본에 투자하고 수익을 다음 기간에 소비한다. 이때 수익은 <span class="math">f ' (k_{t+1} )+1- \delta</span>이고, t시점에서 평가한 두 번째 대안의 한계편익은 <span class="math">\, \beta u ' (c_{t+1} )\, \left( f ' (k_{t+1} )+1- \delta \right) \,</span>이다.</p><p style="text-align:justify">③과 ④는 비선형 연립 차분방정식이다. 해를 고정시키기 위해서는 두 개의 조건이 필요하다. 하나는 초기조건으로 <span class="math">k_{0} = {\overline{k}}</span>, 또 하나는 추가적으로 TVC가 필요하다. </p><p style="text-align:justify">앞에서 할인율이 <span class="math">\beta</span>일 때 TVC의 공식은</p><p style="text-align:justify"><span class="math">\lim\limits_{t \to \infty } {\left( - \frac{\partial f(y_{t} ,\,u_{t} )/ \partial u_{t}}{\partial y_{t+1} / \partial u_{t}} \right)} y_{t+1} \, \beta^{t} \,=\,0</span> ...................<sup><a href="#fn101" id="fnref101">[101]</a></sup></p><p style="text-align:justify">이를 이 문제의 유형에 맞게 대입하면 </p><p style="text-align:justify"><span class="math">{ \frac{\partial f(y_{t} ,\,u_{t} )}{ \partial u_{t}} }</span> ⇒ <span class="math">\frac{\partial u(c_{t} )}{\partial c_{t}} \,=\,u'(c_{t} )</span>, <span class="math">\frac{\partial y_{t+1}}{\partial u_{t}}</span> ⇒ <span class="math">\frac{\partial k_{t+1}}{\partial c_{t}} \,=\,-1</span>, <span class="math">\beta^{t} \, \rightarrow \, \beta^{t} (1+ \mu ) ^{t}</span></p><p style="text-align:justify">따라서 TVC는 <span class="math">\, \lim\limits_{t \to \infty } {\beta^{t} (1+ \mu ) ^{t} u ' (c_{t} )k_{t+1} \,=\,0}</span></p><h4 id="정상상태-steady-state" style="text-align:justify">정상상태(steady state)</h4><p style="text-align:justify">정상상태에서 <span class="math">c_{t} \,=\,c_{t+1} \,=\,c*</span>, <span class="math">k_{t} \,=\,k_{t+1} \,=\,k*</span> 이므로 ③, ④에서</p><p style="text-align:justify"><span class="math">\,(1+ \mu )k*\,+\,c*=\,f(k*)+(1- \delta )k*</span></p><p style="text-align:justify">⇒ <span class="math">\,c*=\,f(k*)-( \delta + \mu )k*</span>..............⑤</p><p style="text-align:justify"><span class="math">\,u ' (c*)\,=\, \beta u ' (c*)\,[f ' (k*)+1- \delta ]\,</span></p><p style="text-align:justify">⇒ <span class="math">\,1\,=\, \beta \,[f ' (k*)+1- \delta ]\,</span>...............⑥</p><p style="text-align:justify">⇒ <span class="math">f'(k*)\,=\, \theta \,+ \delta</span>, where <span class="math">\beta = \frac{1}{1+ \theta }</span>, 즉 <span class="math">\theta</span>는 주관적 이자율을 의미</p><p style="text-align:justify">⑥은 <span class="math">c*</span>와 무관하므로 <span class="math">k*</span>가 바로 도출될 수 있다. <span class="math">k*</span>가 도출되면 ⑤로부터 <span class="math">c*</span>가 도출된다.</p><p style="text-align:justify">예) 효용함수가 <span class="math">\ln c_{t}</span>, 생산함수가 <span class="math">Ak_{t}^{\alpha }</span>, <span class="math">\mu =0</span>, <span class="math">\delta =1</span>인 경우<sup><a href="#fn102" id="fnref102">[102]</a></sup></p><p style="text-align:justify">max <span class="math">\sum\limits_{t=0}^{\infty } \beta^{t} \,\ln (c_{t} )</span></p><p style="text-align:justify">s.t   <span class="math">k_{t+1} \,=\, {Ak_{t}^{\alpha }} \,- {c_{t}}</span>, <span class="math">k_{t} \geq 0\,,\,t=0,\,1,\,...,\, \infty</span>, where <span class="math">0&lt; \alpha &lt;1</span></p><p style="text-align:justify"> <span class="math">k_{0} = {\overline{k}}</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">오일러 방정식은</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,=\, \beta u ' (c_{t+1} )\, \left( {f ' (k_{t+1} )+1- \delta } \right) \,</span></p><p style="text-align:justify">⇒ <span class="math">\frac{1}{c_{t}} \,=\, \frac{\beta f'(k_{t+1} )}{c_{t+1}}</span></p><p style="text-align:justify">⇒ <span class="math">{c_{t+1}} \,=\, {\beta f ' (k_{t+1} )c_{t}}</span></p><p style="text-align:justify"><span class="math">c*,\,k*</span>를 정상상태라 하자. </p><p style="text-align:justify">정상상태를 구하기 위해 오일러 방정식에 대입하면</p><p style="text-align:justify"><span class="math">\,1\,=\, \beta \,f ' (k*)</span></p><p style="text-align:justify">⇒ <span class="math">\,1\,=\, \beta \,A \alpha (k*) ^{\alpha -1} \,</span></p><p style="text-align:justify">⇒ <span class="math">k*\,=\, \left( \frac{1}{A \alpha \beta } \right) ^{\frac{1}{\alpha -1}} \,=\,(A \alpha \beta ) ^{\frac{1}{1- \alpha }}</span></p><p style="text-align:justify">제약식에서</p><p style="text-align:justify"><span class="math">\,c*=\,f(k*)-( \delta + \mu )k*</span></p><p style="text-align:justify">⇒ <span class="math">\,c*=\,A(k*) ^{\alpha } -k*</span></p><p style="text-align:justify"><span class="math">\,=\,A \left( A \alpha \beta \right) ^{\frac{\alpha }{1- \alpha }} - \left( {A \alpha \beta } \right) ^{\frac{1}{1- \alpha }}</span></p><p style="text-align:justify">이 문제의 Bellman 방정식은</p><p style="text-align:justify"><span class="math">V(k_{t} )=\max_{c_{t}} [\,\ln\,c_{t} + \beta V(k_{t+1} )]</span></p><p style="text-align:justify">가치함수는 <span class="math">V(k_{t} )=\,B\,+D\,\ln k_{t}</span> 의 형태를 띨 것으로 추정.</p><p style="text-align:justify">이를 Bellman 방정식에 대입하면</p><p style="text-align:justify"><span class="math">V(k_{t} )=\,\max_{c_{t}} \, \left\{ \ln c_{t} + \beta V(k_{t+1} ) \right\}</span></p><p style="text-align:justify">⇒ <span class="math">\,B\,+D\,\ln k_{t} =\,\max_{c_{t}} \, \left\{ \ln c_{t} + \beta \left[ B\,+D\,\ln k_{t+1} \right] \right\}</span></p><p style="text-align:justify">⇒ <span class="math">\,B\,+D\,\ln k_{t} =\,\max_{c_{t}} \, \left\{ \ln c_{t} + \beta \left[ B\,+D\,\ln \left( {Ak_{t}^{\alpha }} \,- {c_{t}} \, \right) \right] \right\}</span></p><p style="text-align:justify">중괄호안을 <span class="math">c_{t}</span>에 대하여 미분하여 최대화 문제를 풀면</p><p style="text-align:justify"><span class="math">\, \frac{1}{c_{t}} \,=\, \frac{\beta D}{{Ak_{t}^{\alpha }} \,- {c_{t}}\,} \,</span></p><p style="text-align:justify">∴ <span class="math">c_{t} \,=\, \frac{Ak_{t}^{\alpha } \,}{1+ \beta D}</span></p><p style="text-align:justify">이는 최대화시키는 값이므로 이를 Bellman 방정식에 대입하면</p><p style="text-align:justify"><span class="math">\,B\,+D\,\ln k_{t} =\,\ln \left( \frac{Ak_{t}^{\alpha } \,}{1+ \beta D} \right) + \beta \left[ B\,+D\,\ln \left( {Ak_{t}^{\alpha }} \,-\, \frac{Ak_{t}^{\alpha } \,}{1+ \beta D} \right) \right]</span></p><p style="text-align:justify"><span class="math">\,=\,\ln \left( \frac{Ak_{t}^{\alpha } \,}{1+ \beta D} \right) + \beta \left[ B\,+D\,\ln \left( \, \frac{\beta DAk_{t}^{\alpha } \,}{1+ \beta D} \right) \right]</span></p><p style="text-align:justify"><span class="math">\,= \alpha (1+ \beta D)\,\ln k_{t} \,+\,P</span>, P는 나머지 </p><p style="text-align:justify">항상 성립해야 하므로 좌변과 우변을 비교하면</p><p style="text-align:justify"><span class="math">D\,=\, \alpha (1+ \beta D)</span> ⇒ <span class="math">D\,=\, \frac{\alpha }{1- \alpha \beta }</span></p><p style="text-align:justify">우리의 목적은 정책함수를 구하는 것이고 정책함수에는 D만 포함되므로 D만 구해도 된다.</p><p style="text-align:justify">따라서 정책함수는</p><p style="text-align:justify"><span class="math">c_{t} \,=\, \frac{Ak_{t}^{\alpha } \,}{1+ \frac{\alpha \beta }{1- \alpha \beta }} \,=\, {(1- \alpha \beta )Ak_{t}^{\alpha } \,}</span></p><p style="text-align:justify"><span class="math">k_{0} = {\overline{k}}</span> 이므로 <span class="math">c_{0} \,=\,(1- \alpha \beta )A {\overline{k}}^{\alpha } \,</span></p><p style="text-align:justify"><span class="math">k_{1} \,=\,Ak_{0}^{\alpha } \,-c_{0}</span><span class="math">\,=\,A {\overline{k}}^{\alpha } -(1- \alpha \beta )A {\overline{k}}^{\alpha } \,</span><span class="math">\,=\, \alpha \beta A {\overline{k}}^{\alpha } \,</span></p><p style="text-align:justify"><span class="math">c_{1} \,=\,(1- \alpha \beta )Ak_{1}^{\alpha } \,</span><span class="math">=\,(1- \alpha \beta )A( \alpha \beta A {\overline{k}}_{}^{\alpha } ) ^{\alpha } \,</span><span class="math">=\,(1- \alpha \beta )( \alpha \beta ) ^{\alpha } A^{\alpha +1} {\overline{k}}_{}^{\alpha^{2}} \,</span></p><p style="text-align:justify">이런 식으로 {<span class="math">c_{t}</span>}, {<span class="math">k_{t}</span>}를 구해 나간다.</p><p style="text-align:justify">정책함수를 오일러 방정식에 대입하면</p><p style="text-align:justify"><span class="math">{c_{t+1}} \,=\, {\beta f ' (k_{t+1} )c_{t}}</span></p><p style="text-align:justify">⇒<span class="math">\,(1- \alpha \beta )Ak_{t+1}^{\alpha } \,</span><span class="math">\,=\, \alpha \beta Ak_{t+1}^{\alpha -1} \,(1- \alpha \beta )Ak_{t}^{\alpha } \,</span></p><p style="text-align:justify">⇒ <span class="math">k_{t+1} \,</span><span class="math">\,=\, \alpha \beta \,Ak_{t}^{\alpha } \,</span></p><p style="text-align:justify">⇒ <span class="math">Ak_{t}^{\alpha } \,-\,c_{t}</span><span class="math">\,=\,Ak_{t}^{\alpha } \,-\,(1- \alpha \beta )\,Ak_{t}^{\alpha } \,</span><span class="math">\,=\, \alpha \beta \,Ak_{t}^{\alpha } \,</span></p><p style="text-align:justify">따라서 오일러 방정식을 만족한다.</p><p style="text-align:right">(풀이끝)</p><h2>각주</h2><ol class="footnotes"><li id="fn97"><p style="text-align:justify"> 최초 발제자의 이름을 따 Ramsey 모형, 또는 Ramsey-Cass-Koopmans 모형이라고도 한다.</p>
+<a href="#fnref97">↩</a></li><li id="fn98"><p style="text-align:justify"> <span class="math">(1+ \mu )k_{t+1} =k_{t} (1- \delta )+i_{t} \,,(\,i_{t} = \frac{I_{t}}{L_{t}} )</span> 에서 <span class="math">\delta =1</span> 이라하면 <span class="math">k_{t+1} =i_{t} \,</span>, 균형에서 <span class="math">i_{t} =s_{t}</span>이므로 <span class="math">k_{t+1} =s_{t} \,</span></p>
+<a href="#fnref98">↩</a></li><li id="fn99"><p style="text-align:justify"> 제약식에 할인율을 곱해서 현재가치로 표현. 이를 current value Lagrangian이라 한다. 이에 반해 present value Lagrangian은 L<span class="math">{}_{p}</span><span class="math">\,=\, \sum\limits_{t=0}^{\infty } \left[ \beta^{t} L_{0} (1+ \mu ) ^{t} u(c_{t} )\,+\, \lambda_{t} \left( \, \frac{f(k_{t} )+(1- \delta )k_{t}}{1+ \mu } \,- \frac{c_{t}}{1+ \mu } \,-k_{t+1} \right) \right]</span>. 어느 것이나 결과는 같다. 단지 라그랑지승수의 해석이 약간 달라진다.</p>
+<a href="#fnref99">↩</a></li><li id="fn100"><p style="text-align:justify"> <span class="math">\sum\limits_{t=0}^{\infty } \beta^{t} \lambda_{t} \left( \, \frac{f(k_{t} )+(1- \delta )k_{t}}{1+ \mu } \,- \frac{c_{t}}{1+ \mu } \,-k_{t+1} \right) \,</span><span class="math">=\, \lambda_{0} \left( \, \frac{f(k_{0} )+(1- \delta )k_{0}}{1+ \mu } \,- \frac{c_{0}}{1+ \mu } \,-k_{0} \right) \,+\, \cdots \,</span></p>
+<p style="text-align:justify"> <span class="math">+\, \beta^{t} \lambda_{t} \left( \, \frac{f(k_{t} )+(1- \delta )k_{t}}{1+ \mu } \,- \frac{c_{t}}{1+ \mu } \,-k_{t+1} \right) \,+\, \beta^{t+1} \lambda_{t+1} \left( \, \frac{f(k_{t+1} )+(1- \delta )k_{t+1}}{1+ \mu } \,- \frac{c_{t+1}}{1+ \mu } \,-k_{t+2} \right) \,+\, \cdots</span></p>
+<a href="#fnref100">↩</a></li><li id="fn101"><p style="text-align:justify"> 동적계획법 TVC 참조</p>
+<a href="#fnref101">↩</a></li><li id="fn102"><p style="text-align:justify"> <span class="math">\delta != 1</span>인 경우 <span class="math">k_{t+1} \,=\, {Ak_{t}^{\alpha } +(1- \delta )k_{t}} \,- {c_{t}}</span>, 이 경우는 대수적인 방법으로는 동적계획법으로 풀 수가 없다. 정책함수가 정형화된 틀로 도출되지 않는다. 따라서 수치해석 기법을 이용해야 한다.</p>
+<a href="#fnref102">↩</a></li></ol><p class="section-nav">← <a href="dynamic-optimization-applications-discrete-capm.html">소비 CAPM</a> · <a href="dynamic-optimization-applications-discrete.html">절별 목차</a> · <a href="dynamic-optimization-applications-discrete-growth-dynamics.html">성장모형의 위상도·선형화·해</a> →</p></body></html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>가치함수의 추정</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>동적계획법 (Dynamic Programming)</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>가치함수의 추정</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-programming.html">동적계획법 (Dynamic Programming)</a></p><h4 id="가치함수의-추정" style="text-align:justify">가치함수의 추정</h4><p style="text-align:justify">기간이 T인 경우는 Bellman 방정식을 구하기 위해 가치함수를 유추하는 것이 필요하다. 위 예 (b)의 일반적인 경우를 생각하자.</p><p style="text-align:justify">예)<sup><a href="#fn38" id="fnref38">[38]</a></sup> </p><p style="text-align:justify">min <span class="math">V= \sum\limits_{t=0}^{\top} u_{t}^{2}</span></p><p style="text-align:justify">s.t  <span class="math">\sum\limits_{t=0}^{\top} u_{t} \,=\,\mathbf{A}</span></p><p style="text-align:justify"> <span class="math">\,u_{t} \geq 0,\;t=0,\,1,\,2,...,\,T</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">앞의 예와 같은 문제이지만 기간이 T로 되어 있다.</p><p style="text-align:justify">동적계획법으로 문제를 풀기 위해서는 제약식을 차분방정식 형태로 바꾼다.</p><p style="text-align:justify"><span class="math">y_{t+1} \,=\,y_{t} -u_{t}</span> , t = 0, 1,..., T</p><p style="text-align:justify"><span class="math">y_{\scriptscriptstyle {T+1}} \,=\,0\,</span>, <span class="math">y_{0} \,=\,A\,</span></p><p style="text-align:justify">따라서 동적계획법 문제는 다음과 같다.</p><p style="text-align:justify">min <span class="math">\sum\limits_{t=0}^{\top} u_{t}^{2}</span></p><p style="text-align:justify">s.t  <span class="math">y_{t+1} \,=\,y_{t} -u_{t}</span>, for t = 0,1,..., T</p><p style="text-align:justify"> <span class="math">u_{t} \geq 0</span>, for t = 0,1,..., T</p><p style="text-align:justify"> <span class="math">y_{\scriptscriptstyle {T+1}} \,=\,0\,</span>, <span class="math">y_{0} \,=\,A\,</span></p><p style="text-align:justify">이 문제의 Bellman 방정식은</p><p style="text-align:justify"><span class="math">V_{t} (y_{t} )\,=\min_{u_{t}} [\,u_{t}^{2} +V_{t+1} (y_{t+1} )]</span>, t = 0,1,..., T</p><p style="text-align:justify">T기 이후는 존재하지 않으므로 (T+1)기 의 가치함수는 <span class="math">V_{\scriptscriptstyle {T+1}} (y_{\scriptscriptstyle {T+1}} )=0</span></p><p style="text-align:justify">기간 T에서 최적값 :</p><p style="text-align:justify"><span class="math">V_{\scriptscriptstyle {T}} (y_{\scriptscriptstyle {T}} )\,=\,\min_{u_{\scriptscriptstyle {T}}} \,(u_{\scriptscriptstyle {T}}^{2} )=\,y_{\scriptscriptstyle {T}}^{2}</span> , (∵<span class="math">V_{\scriptscriptstyle {T+1}} (y_{\scriptscriptstyle {T+1}} )=0</span>, <span class="math">u_{\scriptscriptstyle {T}} \,=\,y_{\scriptscriptstyle {T}}</span> .....<sup><a href="#fn39" id="fnref39">[39]</a></sup>)</p><p style="text-align:justify">기간 (T-1)에서 최적값 : </p><p style="text-align:justify"><span class="math">V_{\scriptscriptstyle {T-1}} (y_{\scriptscriptstyle {T-1}} )=\,\min_{u_{\scriptscriptstyle {T-1}}} [u_{\scriptscriptstyle {T-1}}^{2} +V_{\scriptscriptstyle {T}} (y_{\scriptscriptstyle {T}} )]=\,\min_{u_{\scriptscriptstyle {T-1}}} [u_{\scriptscriptstyle {T-1}}^{2} +(y_{\scriptscriptstyle {T-1}} -u_{\scriptscriptstyle {T-1}} ) ^{2} ]</span></p><p style="text-align:justify">∴ <span class="math">u_{\scriptscriptstyle {T-1}} = \frac{1}{2} y_{\scriptscriptstyle {T-1}}</span>................<sup><a href="#fn40" id="fnref40">[40]</a></sup>, <span class="math">V_{\scriptscriptstyle {T-1}} (y_{\scriptscriptstyle {T-1}} )=\, \frac{1}{2} y_{\scriptscriptstyle {T-1}}^{2}</span></p><p style="text-align:justify">기간 (T-2)에서 최적값 : </p><p style="text-align:justify"><span class="math">V_{\scriptscriptstyle {T-2}} (y_{\scriptscriptstyle {T-2}} )=\,\min_{u_{\scriptscriptstyle {T-2}}} [u_{\scriptscriptstyle {T-2}}^{2} +V_{\scriptscriptstyle {T-1}} (y_{\scriptscriptstyle {T-1}} )]=\min_{u_{\scriptscriptstyle {T-2}}} [u_{\scriptscriptstyle {T-2}}^{2} + \frac{1}{2} (y_{\scriptscriptstyle {T-2}} -u_{\scriptscriptstyle {T-2}} ) ^{2} ]</span></p><p style="text-align:justify">∴ <span class="math">u_{\scriptscriptstyle {T-2}} = \frac{1}{3} y_{\scriptscriptstyle {T-2}}</span>................<sup><a href="#fn41" id="fnref41">[41]</a></sup>, <span class="math">V_{\scriptscriptstyle {T-2}} (y_{\scriptscriptstyle {T-2}} )=\, \frac{1}{3} y_{\scriptscriptstyle {T-2}}^{2}</span></p><p style="text-align:justify">       ⦙</p><p style="text-align:justify">기간 (T-t)에서 최적값 : </p><p style="text-align:justify">위로부터 <span class="math">V_{\scriptscriptstyle {T-t}} (y_{\scriptscriptstyle {T-t}} )=\, \frac{1}{t+1} y_{\scriptscriptstyle {T-t+1}}^{2}</span>로 추정한다. </p><p style="text-align:justify">이것이 맞는지를 알기 위해 Bellman 방정식에 대입하면</p><p style="text-align:justify"><span class="math">V_{\scriptscriptstyle {T-t}} (c_{\scriptscriptstyle {T-t}} )=\,\min_{u_{\scriptscriptstyle {T-t}}} [u_{\scriptscriptstyle {T-t}}^{2} +V_{\scriptscriptstyle {T-t+1}} (y_{\scriptscriptstyle {T-t+1}} )]=\min_{u_{\scriptscriptstyle {T-t}}} [u_{\scriptscriptstyle {T-t}}^{2} + \frac{1}{t} (y_{\scriptscriptstyle {T-t}} -u_{\scriptscriptstyle {T-t}} ) ^{2} ]</span></p><p style="text-align:justify">∴ <span class="math">u_{\scriptscriptstyle {T-t}} = \frac{1}{t+1} y_{\scriptscriptstyle {T-t}}</span>................<sup><a href="#fn42" id="fnref42">[42]</a></sup>, <span class="math">V_{\scriptscriptstyle {T-t}} (y_{\scriptscriptstyle {T-t}} )=\, \frac{1}{t+1} y_{\scriptscriptstyle {T-t+1}}^{2}</span></p><p style="text-align:justify">따라서 가치함수가 <span class="math">V_{\scriptscriptstyle {T-t}} (y_{\scriptscriptstyle {T-t}} )=\, \frac{1}{t+1} y_{\scriptscriptstyle {T-t+1}}^{2}</span>임을 알 수 있다.<sup><a href="#fn43" id="fnref43">[43]</a></sup></p><p style="text-align:justify">       ⦙</p><p style="text-align:justify">기간 0 에서 최적값 : </p><p style="text-align:justify"><span class="math">V_{0} (y_{0} )=\min_{u_{0}} [u_{0}^{2} +V_{1} (y_{1} )]=\,\min_{u_{0}} [u_{0}^{2} + \frac{1}{T} (A-u_{0} ) ^{2} ]</span></p><p style="text-align:justify">∴ <span class="math">u_{0} = \frac{A}{T+1}</span>, <span class="math">V_{0} (y_{0} )=\, \frac{A^{2}}{T+1}</span></p><p style="text-align:justify"><span class="math">y_{1} \,=\,A\,-\,u_{0} \,=\, \frac{AT}{T+1}</span>, <span class="math">u_{1} = \frac{1}{T} y_{1} =\, \frac{A}{T+1}</span></p><p style="text-align:justify"><span class="math">y_{2} \,=\,y_{1} \,-\,u_{1} \,=\, \frac{A(T-1)}{T+1}</span>, <span class="math">u_{2} = \frac{1}{T-1} y_{2} =\, \frac{A}{T+1}</span></p><p style="text-align:justify"> <span class="math">\vdots</span></p><p style="text-align:justify">∴ <span class="math">u_{0} =u_{1} =...\,=u_{n} = \frac{A}{T+1}</span></p><p style="text-align:justify">즉 전체기간에 걸쳐 균등 배분하는 것이 제곱합을 최소화하는 것이다.</p><p style="text-align:right">(풀이끝)</p><h2>각주</h2><ol class="footnotes"><li id="fn38"><p style="text-align:justify"> 목적식이 최대화일 경우 이런 형태의 문제를 케이크 먹기(cake-eating) 문제라 한다. 크기 A인 케이크를 (T+1) 기간에 걸쳐 나눠 먹는데 매기 먹는 양은 <span class="math">u_{t}</span>, 효용은 <span class="math">u_{t}^{2}</span>인 문제이다.</p>
+<a href="#fnref38">↩</a></li><li id="fn39"><p style="text-align:justify"> <span class="math">y_{\scriptscriptstyle {T+1}} \,=\,0\,</span>이므로 <span class="math">u_{\scriptscriptstyle {T}} \,=\,y_{\scriptscriptstyle {T}}</span></p>
+<a href="#fnref39">↩</a></li><li id="fn40"><p style="text-align:justify"> <span class="math">\,f_{\scriptscriptstyle {T-1}} =\,u_{\scriptscriptstyle {T-1}}^{2} +(y_{\scriptscriptstyle {T-1}} -u_{\scriptscriptstyle {T-1}} ) ^{2}</span> 에서 <span class="math">\frac{df_{\scriptscriptstyle {T-1}}}{du_{\scriptscriptstyle {T-1}}} =\,2u_{\scriptscriptstyle {T-1}} -2(y_{\scriptscriptstyle {T-1}} -u_{\scriptscriptstyle {T-1}} )=0</span> ⇒ <span class="math">u_{\scriptscriptstyle {T-1}} = \frac{1}{2} y_{\scriptscriptstyle {T-1}}</span> </p>
+<a href="#fnref40">↩</a></li><li id="fn41"><p style="text-align:justify"> <span class="math">\,f_{\scriptscriptstyle {T-2}} =\,u_{\scriptscriptstyle {T-2}}^{2} + \frac{1}{2} (y_{\scriptscriptstyle {T-2}} -u_{\scriptscriptstyle {T-2}} ) ^{2}</span> 에서 <span class="math">\frac{df_{\scriptscriptstyle {T-2}}}{du_{\scriptscriptstyle {T-2}}} =\,2u_{\scriptscriptstyle {T-2}} -(y_{\scriptscriptstyle {T-2}} -u_{\scriptscriptstyle {T-2}} )=0</span> ⇒ <span class="math">u_{\scriptscriptstyle {T-2}} = \frac{1}{3} y_{\scriptscriptstyle {T-2}}</span> </p>
+<a href="#fnref41">↩</a></li><li id="fn42"><p style="text-align:justify"> <span class="math">\,f_{\scriptscriptstyle {T-2}} =\,u_{\scriptscriptstyle {T-2}}^{2} + \frac{1}{t} (y_{\scriptscriptstyle {T-2}} -u_{\scriptscriptstyle {T-2}} ) ^{2}</span> 에서 <span class="math">\frac{df_{\scriptscriptstyle {T-2}}}{du_{\scriptscriptstyle {T-2}}} =\,2u_{\scriptscriptstyle {T-2}} - \frac{2}{t} (y_{\scriptscriptstyle {T-2}} -u_{\scriptscriptstyle {T-2}} )=0</span> ⇒ <span class="math">u_{\scriptscriptstyle {T-2}} = \frac{1}{1+t} y_{\scriptscriptstyle {T-2}}</span> </p>
+<a href="#fnref42">↩</a></li><li id="fn43"><p style="text-align:justify"> 추측법은 가치함수가 Bellman 방정식을 만족할 때까지 계속 추측된 가치함수를 바꿔가면서 대입해보는 방법이다.</p>
+<a href="#fnref43">↩</a></li></ol><p class="section-nav">← <a href="dynamic-programming-finite-basic.html">이산시간 동적계획과 유한기간</a> · <a href="dynamic-programming.html">절별 목차</a> · <a href="dynamic-programming-discounted-finite.html">시간할인이 있는 유한기간 문제</a> →</p></body></html>

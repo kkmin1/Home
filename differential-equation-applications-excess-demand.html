@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>초과수요와 가격동학</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<style id="blog-readability-patch">
+body{max-width:980px;margin:0 auto;padding:1.5rem 1rem 3rem;line-height:1.72;overflow-wrap:break-word}
+h1{line-height:1.3} h2{margin-top:2.2rem;border-bottom:1px solid #bbb;padding-bottom:.25rem}
+h3{margin-top:1.6rem} h4{margin-top:1.3rem}
+.chapter-nav{position:sticky;top:0;z-index:20;padding:.8rem;border:1px solid #ccc;background:#fafafa;overflow-x:auto;white-space:nowrap;border-radius:6px}
+table{display:block;width:100%;max-width:100%;overflow-x:auto;border-collapse:collapse}
+th,td{padding:.45rem .6rem;vertical-align:top}
+img,svg{max-width:100%!important;height:auto!important;display:block;margin:1rem auto}
+.katex-display,.math-display,div.math,p.math{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.footnotes{margin-top:3rem;padding-top:1rem;border-top:1px solid #bbb;font-size:.92em}
+@media(max-width:640px){body{padding:.8rem .65rem 2rem;font-size:16px}h1{font-size:1.65rem}h2{font-size:1.35rem}h3{font-size:1.18rem}.chapter-nav{font-size:.9rem}}
+</style>
+<title>미분방정식의 경제·사회과학 응용</title>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav">
+<a href="system-of-differential equation.html">미분방정식 목차</a> ·
+<a href="differential-equation-basics.html">기초·1계</a> ·
+<a href="differential-equation-second-order.html">2계·고계</a> ·
+<a href="differential-equation-systems.html">연립계·안정성</a> ·
+<a href="phase diagram.html">위상도</a> ·
+<a href="differential-equation-applications.html">응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>초과수요와 가격동학</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="system-of-differential equation.html">미분방정식</a> · <a href="differential-equation-applications.html">미분방정식의 경제·사회과학 응용</a></p><h4 style="text-align:justify">초과수요모형(단일 상품)</h4><p style="text-align:justify">(가정)</p><p style="text-align:justify">수요, 공급이 일치하는 과정은 어느 정도 시간이 걸린다.</p><p style="text-align:justify">시간 t에서 상품가격은 수요-공급 차이(초과수요)의 일정비율(조정계수)을 반영한 형태로 조정된다. 단, 상품가격은 초과수요와 정비례 관계(α &gt; 0)</p><p style="text-align:justify">(모형)</p><p style="text-align:justify">한 상품의 수요, 공급 곡선은 다음의 형태를 하고 있다.</p><p style="text-align:justify"><span class="math">D(t)\,=\,a-bP(t)</span></p><p style="text-align:justify"><span class="math">S(t)\,=\,c+dP(t)</span> , (a &gt; 0, b &gt; 0, c &gt; 0, d &gt; 0)</p><p style="text-align:justify"><span class="math">\frac{\mathbf{d}\mathbf{P}}{\mathbf{d}\mathbf{t}} = \alpha (\mathbf{D}-\mathbf{S})</span> , α ; 조정계수(α &gt; 0), 조정의 속도를 결정한다.</p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">본 모형에서 가격의 변화율은 수요, 공급에 대입하면 다음과 같이 표시될 수 있다.</p><p style="text-align:justify"><span class="math">\frac{dP}{dt} = \alpha (a-bP-c-dP)</span></p><p style="text-align:justify"><span class="math">\frac{dP}{dt} + \alpha (b+d)P= \alpha (a-c)</span>............①</p><p style="text-align:justify">이는 계수가 상수인 1차 선형 비동차 미분방정식이다.  </p><p style="text-align:justify">확장된 중첩의 원리에 따라 일반해는 특수해(<span class="math">P_{p}</span>)와 여함수(<span class="math">P_{c}</span>)의 합으로 구성된다. </p><p style="text-align:justify">계수가 상수이므로 한 특수해는 상수가 가능.</p><p style="text-align:justify">①에 P=k(상수)를 대입하면 </p><p style="text-align:justify"><span class="math">\alpha (b+d)k= \alpha (a-c)</span></p><p style="text-align:justify">∴ <span class="math">P_{p} \,=\,k\,= \frac{a-c}{b+d}</span></p><p style="text-align:justify">여함수는 동차 미분방정식의 해이므로</p><p style="text-align:justify"><span class="math">\frac{dP}{dt} + \alpha (b+d)P=0</span></p><p style="text-align:justify">⇒ <span class="math">\frac{1}{P} \frac{dP}{dt} \,=\,- \alpha (b+d)</span></p><p style="text-align:justify">양변 적분하면</p><p style="text-align:justify"><span class="math">\ln P\,=\,- \alpha (b+d)t\,+\,A_{1}</span> , <span class="math">A_{1}</span>는 상수</p><p style="text-align:justify"><span class="math">P_{c} \,=\,A_{2} e^{- \alpha (b+d)t}</span> , where <span class="math">A_{2} \,=\,e^{A_{1}}</span></p><p style="text-align:justify">따라서 일반해는 <span class="math">P_{g} \,=\,P_{p} +P_{c}</span></p><p style="text-align:justify"><span class="math">P(t)=A_{2} e^{- \alpha (b+d)t} \,+ \frac{a-c}{b+d} \,</span></p><p style="text-align:justify">b, d, α&gt;0 이므로</p><p style="text-align:justify"><span class="math">\lim\limits_{t \to \infty } {P(t)= \frac{a-c}{b+d}} \,= \hat{P}</span></p><p style="text-align:justify">따라서 가격은 장기적으로 <span class="math">\frac{a-c}{b+d}}</span> 로 수렴한다. <span class="math">\hat{P}</span>를 장기균형가격이라 한다.</p><p style="text-align:justify">한편 수요와 공급이 같아지는 점에서 每期 시장청산(market clearing)이 이루어진다면</p><p style="text-align:justify"><span class="math">\,a-bP</span><span class="math">\,=\,c+dP</span></p><p style="text-align:justify">⇒ <span class="math">P\,=\, \frac{a-c}{b} - \frac{d}{b} P</span></p><p style="text-align:justify">⇒ <span class="math">P*\,=\, \frac{a-c}{b+d}</span></p><p style="text-align:justify"><span class="math">P*</span>는 매기 시장청산이 일어날 때의 가격이므로 단기균형가격(short-run equilibrium price)이라 한다. </p><p style="text-align:justify"><span class="math">\hat{P} \,=\, \frac{a-c}{b+d} \,=P*</span> </p><p style="text-align:justify">따라서 장기균형가격(long-run equilibrium price)은 점차 단기균형가격에 수렴함을 알 수 있다.<sup><a href="#fn77" id="fnref77">[77]</a></sup></p><h4 style="text-align:justify">장기적 안정조건</h4><p style="text-align:justify"><span class="math">P(t)=Ae^{- \alpha (b+d)t} \,+ \frac{a-c}{b+d} \,</span> 에서</p><p style="text-align:justify"><span class="math">\alpha &gt;0,\;b&gt;0,\;d&gt;0</span> 이므로 가격은 장기적으로 안정적이고 <span class="math">P*\,=\, \frac{a-c}{b+d} \,</span>로 수렴한다.</p><p style="text-align:justify">만약 <span class="math">b&lt;0</span> (또는 <span class="math">d&lt;0</span>) 라면, 즉 수요곡선이 우상향하는 형태라면(또는 공급곡선이 우하항하는 형태라면) </p><p style="text-align:justify">(i) <span class="math">b+d&gt;0</span> ⇒ <span class="math">b&gt;-d</span> </p><p style="text-align:justify"><span class="math">\lim\limits_{t \to \infty } {P(t)= \frac{a-c}{b+d}} =P*</span> </p><p style="text-align:justify">해는 안정적임을 알 수 있다.</p><p style="text-align:justify">(ii) <span class="math">b+d&lt;0</span> ⇒ <span class="math">b&lt;-d</span></p><p style="text-align:justify"> <span class="math">\lim\limits_{t \to \infty } {P(t)=} \infty</span></p><p style="text-align:justify">즉 수요곡선과 공급곡선의 기울기의 부호가 같더라도 기울기의 절대값을 비교했을 때 안정적이 될 수도 있음을 의미. <sup><a href="#fn78" id="fnref78">[78]</a></sup></p><h4 style="text-align:justify">단일시장 모형의 시사점</h4><p style="text-align:justify">이상에서 본 바와 같이 해가 항상 안정적이라는 보장이 없다. 기울기에 따라 해가 불안정해질 수도 있다는 점은 경제학적으로 시사하는 바가 크다. 경제원론에서 배운바 수요와 공급의 법칙에 따라 자동적으로 균형가격에 접근한다는 이론은 수요곡선과 공급곡선의 기울기에 따라 균형가격에 수렴하지 않고 발산할 수도 있다는 점을 시사한다.</p><h4 style="text-align:justify">초과수요모형(가격기대치를 고려)</h4><p style="text-align:justify">시장의 수요, 공급은 상품가격은 물론 가격추세(price trend)에 영향을 받는다.</p><p style="text-align:justify">국제곡물시장의 곡물가격은 현재가격은 물론 흉작이냐 풍작이냐에 따른 가격전망, 가격추세 등을 고려하여 결정</p><p style="text-align:justify">(모형)</p><p style="text-align:justify"><span class="math">D \,=\,Q_{d}(P(t),\,P ' (t),\,P '' (t))</span></p><p style="text-align:justify"><span class="math">S\,=\,Q_{s} (P(t),\,P ' (t),\,P '' (t))</span></p><p style="text-align:justify"><span class="math">D(t)\,=\,a-b_{1} P(t)+b_{2} P ' (t)+b_{3} P '' (t)</span></p><p style="text-align:justify"><span class="math">S(t)\,=\,c+d_{1} P(t)+d_{2} P'(t)+d_{3} P''(t)</span></p><p style="text-align:justify">(가정)</p><p style="text-align:justify">곡물가격의 수요, 공급은 가격, 가격변화율, 가격변화율의 움직임을 고려하여 결정</p><p style="text-align:justify">매기 수요, 공급이 일치하는 시장청산이 일어남</p><p style="text-align:justify">(풀이)</p><p style="text-align:justify"><span class="math">D(t)=S(t)</span> 에서</p><p style="text-align:justify"><span class="math">\,a-b_{1} P(t)+b_{2} P ' (t)+b_{3} P '' (t)=\,c+d_{1} P(t)+d_{2} P ' (t)+d_{3} P '' (t)</span></p><p style="text-align:justify">이를 정리하면</p><p style="text-align:justify"><span class="math">\,a-b_{1} P(t)+b_{2} P ' (t)+b_{3} P '' (t)=\,c+d_{1} P(t)+d_{2} P ' (t)+d_{3} P '' (t)</span></p><p style="text-align:justify"><span class="math">\,a-c-(b_{1} +d_{1} )P(t)+(b_{2} -d_{2} )P ' (t)+(b_{3} -d_{3} )P '' (t)=\,0</span></p><p style="text-align:justify"><span class="math">\, \frac{b_{1} +d_{1}}{b_{3} -d_{3}} P(t)+ \frac{b_{2} -d_{2}}{b_{3} -d_{3}} P ' (t)+P '' (t)=\,c-a</span></p><p style="text-align:justify">장기균형이기 위해 시간에 따른 변화가 없어야 하므로(<span class="math">P ' =P '' =0</span>)</p><p style="text-align:justify"><span class="math">\, \frac{b_{1} +d_{1}}{b_{3} -d_{3}} P*=\,c-a</span></p><p style="text-align:justify"><span class="math">P*\,=\, \frac{(c-a)(b_{3} +d_{3} )}{b_{1} +d_{1}}</span></p><p style="text-align:justify">P* 값이 상수이므로 stationary 균형값을 갖는다.</p><p style="text-align:justify">특성방정식은</p><p style="text-align:justify"><span class="math">\, \frac{b_{1} +d_{1}}{b_{3} -d_{3}} + \frac{b_{2} -d_{2}}{b_{3} -d_{3}} r+r^{2} =\,0</span></p><p style="text-align:justify"><span class="math">r_{1} ,\,r_{2}</span> 가 실근이고 0보다 작다면 단조 수렴</p><p style="text-align:justify"><span class="math">r_{1} ,\,r_{2}</span> 가 실근이고 0보다 크면 단조 발산</p><p style="text-align:justify"><span class="math">P(t)\,=\,A_{1} e^{r_{1} t} +A_{2} e^{r_{2} t} +\frac{(c-a)(b_{3} +d_{3} )}{b_{1} +d_{1}}</span></p><p style="text-align:justify"><span class="math">r_{1} ,\,r_{2}</span> 가 허근이고 실수부분이 0보다 작다면 곡물가격은 사인파형으로 움직이면서 균형가격에  수렴해 간다.</p><p style="text-align:justify"><span class="math">r_{1} ,\,r_{2}</span> 가 허근이고 실수부분이 0보다 크면 곡물가격은 사인파형으로 움직이면서 균형가격에서 멀어져 간다.</p><p style="text-align:justify"><span class="math">P(t)=\, \frac{(c-a)(b_{3} +d_{3} )}{b_{1} +d_{1}}+e^{ct} (C_{1} \cos (dt)+C_{2} \sin (dt))</span></p><h4 style="text-align:justify">초과수요모형(2 개 시장) </h4><p style="text-align:justify">(모형)</p><p style="text-align:justify">x, y 는 총보완재(gross complement)</p><p style="text-align:justify"><span class="math">D_{\scriptscriptstyle {X}} (t)\,=\,a_{\scriptscriptstyle {X}} -b_{\scriptscriptstyle {X}} P_{\scriptscriptstyle {X}} (t)-k_{\scriptscriptstyle {X}} P_{\scriptscriptstyle {Y}} (t)</span></p><p style="text-align:justify"><span class="math">S_{\scriptscriptstyle {X}} (t)\,=\,c_{\scriptscriptstyle {X}} +d_{\scriptscriptstyle {X}} P_{\scriptscriptstyle {X}} (t)</span> </p><p style="text-align:justify"><span class="math">\frac{\mathbf{d}\mathbf{P}_{\scriptscriptstyle {\mathbf{X}}}}{\mathbf{d}\mathbf{t}} =\mathbf{E}_{\scriptscriptstyle {\mathbf{X}}} (\mathbf{P})\,=\mathbf{D}_{\scriptscriptstyle {\mathbf{X}}} -\mathbf{S}_{\scriptscriptstyle {\mathbf{X}}}</span> </p><p style="text-align:justify"><span class="math">D_{\scriptscriptstyle {Y}} (t)\,=\,a_{\scriptscriptstyle {Y}} -b_{\scriptscriptstyle {Y}} P_{\scriptscriptstyle {Y}} (t)-k_{\scriptscriptstyle {Y}} P_{\scriptscriptstyle {X}} (t)</span></p><p style="text-align:justify"><span class="math">S_{\scriptscriptstyle {Y}} (t)\,=\,c_{\scriptscriptstyle {Y}} +d_{\scriptscriptstyle {Y}} P_{\scriptscriptstyle {Y}} (t)</span> </p><p style="text-align:justify"><span class="math">\frac{\mathbf{d}\mathbf{P}_{\scriptscriptstyle {\mathbf{Y}}}}{\mathbf{d}\mathbf{t}} =\mathbf{E}_{\scriptscriptstyle {\mathbf{Y}}} (\mathbf{P})\,=\mathbf{D}_{\scriptscriptstyle {\mathbf{Y}}} -\mathbf{S}_{\scriptscriptstyle {\mathbf{Y}}}</span></p><p style="text-align:justify">where <span class="math">a_{\scriptscriptstyle {X}} \,,\,b_{\scriptscriptstyle {X}} \,,\,c_{\scriptscriptstyle {X}} \,,\,d_{\scriptscriptstyle {X}} \,,\,a_{\scriptscriptstyle {Y}} \,,\,b_{\scriptscriptstyle {Y}} \,,\,c_{\scriptscriptstyle {Y}} \,,\,d_{\scriptscriptstyle {Y}} \,,\,k_{\scriptscriptstyle {X}} \,,\,k_{\scriptscriptstyle {Y}} \,&gt;0</span></p><p style="text-align:justify">위 식을 정리하면 다음의 연립미분방정식을 얻는다.</p><p style="text-align:justify"><span class="math">\frac{dP_{\scriptscriptstyle {X}}}{dt} =\,a_{\scriptscriptstyle {X}} -\,c_{\scriptscriptstyle {X}} -(b_{\scriptscriptstyle {X}} +d_{\scriptscriptstyle {X}} )P_{\scriptscriptstyle {X}} -k_{\scriptscriptstyle {X}} P_{\scriptscriptstyle {Y}}</span></p><p style="text-align:justify"><span class="math">\frac{dP_{\scriptscriptstyle {Y}}}{dt} =\,a_{\scriptscriptstyle {Y}} -\,c_{\scriptscriptstyle {Y}} -(b_{\scriptscriptstyle {Y}} +d_{\scriptscriptstyle {Y}} )P_{\scriptscriptstyle {Y}} -k_{\scriptscriptstyle {Y}} P_{\scriptscriptstyle {X}}</span></p><p style="text-align:justify">균형점에서 <span class="math">\frac{dP_{\scriptscriptstyle {X}}}{dt} = \frac{dP_{\scriptscriptstyle {Y}}}{dt} =\,0</span></p><p style="text-align:justify"><span class="math">E_{\scriptscriptstyle {X}} (P)=\,a_{\scriptscriptstyle {X}} -\,c_{\scriptscriptstyle {X}} -(b_{\scriptscriptstyle {X}} +d_{\scriptscriptstyle {X}} )P_{\scriptscriptstyle {X}} -k_{\scriptscriptstyle {X}} P_{\scriptscriptstyle {Y}} \,=\,0</span></p><p style="text-align:justify"><span class="math">E_{\scriptscriptstyle {Y}} (P)=\,a_{\scriptscriptstyle {Y}} -\,c_{\scriptscriptstyle {Y}} -(b_{\scriptscriptstyle {Y}} +d_{\scriptscriptstyle {Y}} )P_{\scriptscriptstyle {Y}} -k_{\scriptscriptstyle {Y}} P_{\scriptscriptstyle {X}} \,=\,0</span></p><p style="text-align:justify"><span class="math">\,b_{\scriptscriptstyle {X}} \,,\;d_{\scriptscriptstyle {X}} \,,\;b_{\scriptscriptstyle {Y}} \,,\;d_{\scriptscriptstyle {Y}} \,,\,k_{\scriptscriptstyle {X}} \,,\,k_{\scriptscriptstyle {Y}} \,</span>에 따라 위상도는 두 가지 경우로 나눠진다.<sup><a href="#fn79" id="fnref79">[79]</a></sup></p><p style="text-align:justify"><img alt="초과수요모형(2 개 시장) 관련 도해 16" src="media/미분방정식과_응용_024.png" style="max-width:100%;"/>
+<img alt="초과수요모형(2 개 시장) 관련 도해 17" src="media/미분방정식과_응용_025.png" style="max-width:100%;"/>
+</p><p style="text-align:justify">(i) 안정적인 경우</p><p style="text-align:justify">(그림 a)에서 파란선(<span class="math">E_{\scriptscriptstyle {X}} \,=\,0</span>)은 제품 x의 초과수요가 0인 점들의 집합이다.  제품 x 는 제품 y의 총보완재이므로 <span class="math">E_{\scriptscriptstyle {X}} \,=\,0</span> 곡선은 우하향한다.</p><p style="text-align:justify">점들이 파란선 좌하에 있을 때 초과수요의 부등호는 다음과 같다. 초과수요가 陽(+)인 경우</p><p style="text-align:justify"><span class="math">E_{\scriptscriptstyle {X}} (P)=\,a_{\scriptscriptstyle {X}} -\,c_{\scriptscriptstyle {X}} -(b_{\scriptscriptstyle {X}} +d_{\scriptscriptstyle {X}} )P_{\scriptscriptstyle {X}} -k_{\scriptscriptstyle {X}} P_{\scriptscriptstyle {Y}} \,&gt;\,0</span></p><p style="text-align:justify">⇒ <span class="math">\,a_{\scriptscriptstyle {X}} -\,c_{\scriptscriptstyle {X}} &gt;(b_{\scriptscriptstyle {X}} +d_{\scriptscriptstyle {X}} )P_{\scriptscriptstyle {X}} +k_{\scriptscriptstyle {X}} P_{\scriptscriptstyle {Y}} \,</span></p><p style="text-align:justify">따라서 초과수요가 0 이상인 점들은 파란선 좌하에 있는 점들이다.</p><p style="text-align:justify"><span class="math">E_{\scriptscriptstyle {X}} (P_{\scriptscriptstyle {X}} )&gt;0\; \rightarrow \;D_{\scriptscriptstyle {X}} (P_{\scriptscriptstyle {X}} ) \geq S_{\scriptscriptstyle {X}} (P_{\scriptscriptstyle {X}} )\; \rightarrow \; \frac{dP_{\scriptscriptstyle {X}}}{dt} \, \geq 0</span></p><p style="text-align:justify">따라서 상태가 파란선 좌하에 있는 경우 시간이 지남에 따라 가격은 오른다.</p><p style="text-align:justify">파란선 우상에 있는 점들은 초과수요가 0 이하인 점들이고 시간이 지남에 따라 가격은 내린다. 제품 y의 빨간선(<span class="math">E_{\scriptscriptstyle {Y}} \,=\,0</span>)도 마찬가지로 해석된다. </p><p style="text-align:justify">이들을 종합하면 (그림 a), (그림 b)와 같은 방향벡터가 그려진다.</p><p style="text-align:justify">(그림 a)는 안정적임을, (그림 b)는 불안정함(안장경로)을 보여준다. 그림으로부터 초과수요함수의 상대적인 기울기가 해의 안정성 여부를 판단하는 기준이 됨을 알 수 있다. 이는 단일상품 시장의 경우 수요와 공급의 절대적인 기울기에 따라 수렴과 발산이 판정되는 경우와 유사하다. 이는 물론 수요, 공급 곡선이 선형함수임에 기인한다.</p><h4 style="text-align:justify">초과 수요모형의 의미</h4><p style="text-align:justify">이상에서 본 바와 같이 해가 항상 안정적이라는 보장이 없다. 기울기에 따라 해가 불안정해질 수도 있다는 점은 경제학적으로 시사하는 바가 크다. 경제원론에서 배운바와 같이 수요와 공급의 법칙에 따라 자동적으로 균형가격에 접근한다는 이론은 수요곡선과 공급곡선의 기울기, 관련된 다른 상품과의 상호작용에 따라 균형가격에 수렴하지 않고 발산할 수도 있다는 점을 시사한다. 균형가격이 안정적이지 않고 불안정적인 경우 그 원인으로 외부효과(수요곡선 우상향), 규모의 경제(공급곡선 우하향), 소득효과 등에 기인한다.</p><p style="text-align:justify">예) </p><p style="text-align:justify">(a)</p><p style="text-align:justify"><span class="math">E_{\scriptscriptstyle {X}} \,=\,10-P_{\scriptscriptstyle {X}} \,-\,P_{\scriptscriptstyle {Y}}</span></p><p style="text-align:justify"><span class="math">E_{\scriptscriptstyle {Y}} \,=\,16-P_{\scriptscriptstyle {X}} \,-\,2P_{\scriptscriptstyle {Y}}</span></p><p style="text-align:justify">(b)</p><p style="text-align:justify"><span class="math">E_{\scriptscriptstyle {X}} \,=\,16-P_{\scriptscriptstyle {X}} \,-\,2P_{\scriptscriptstyle {Y}}</span></p><p style="text-align:justify"><span class="math">E_{\scriptscriptstyle {Y}} \,=\,10-P_{\scriptscriptstyle {X}} \,-\,P_{\scriptscriptstyle {Y}}</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">(a)</p><p style="text-align:justify"><span class="math">E_{\scriptscriptstyle {X}} \,=\,E_{\scriptscriptstyle {Y}}</span> 인 (4, 6)이 균형점이다.</p><p style="text-align:justify">고유치와 고유벡터를 구하면 다음과 같다.</p><p style="text-align:justify">A = <span class="math">{\begin{pmatrix}\,-1 &amp; \,-1 \\ -1 &amp; \,-2\end{pmatrix}}</span></p><p style="text-align:justify">고유치는</p><p style="text-align:justify"><span class="math">\phi ( \lambda )= \lambda^{2} +3 \lambda +1\,=\,0</span></p><p style="text-align:justify"><span class="math">\lambda \,=\, \frac{-3\pm 2 \sqrt {2}}{2} \,&lt;0</span></p><p style="text-align:justify">두 근이 실근이고 모두 0보다 작으므로 해는 안정적이다.</p><p style="text-align:justify">고유벡터는</p><p style="text-align:justify"><span class="math">\lambda_{1} \,=\, \frac{-3+2 \sqrt {2}}{2}</span> 일 때 <span class="math">{\begin{pmatrix}1 \\ -0.91\end{pmatrix}}</span></p><p style="text-align:justify"><span class="math">\lambda_{2} \,=\, \frac{-3-2 \sqrt {2}}{2}</span> 일 때 <span class="math">{\begin{pmatrix}1 \\ 1.91\end{pmatrix}}</span></p><p style="text-align:justify">상변화도는 아래 그림과 같다.</p><p style="text-align:justify"><img alt="초과 수요모형의 의미 관련 도해 18" src="media/미분방정식과_응용_026.png" style="max-width:100%;"/>
+</p><p style="text-align:justify">(b)</p><p style="text-align:justify"><span class="math">E_{\scriptscriptstyle {X}} \,=\,E_{\scriptscriptstyle {Y}}</span> 인 (4, 6)이 균형점이다.</p><p style="text-align:justify">고유치와 고유벡터를 구하면 다음과 같다.</p><p style="text-align:justify">A = <span class="math">{\begin{pmatrix}\,-1 &amp; \,-2 \\ -1 &amp; \,-1\end{pmatrix}}</span></p><p style="text-align:justify">고유치는</p><p style="text-align:justify"><span class="math">\phi ( \lambda )= \lambda^{2} +2 \lambda -1\,=\,0</span></p><p style="text-align:justify"><span class="math">\lambda_{1} \,=\,-1+ \sqrt {2} \,&gt;0</span> , <span class="math">\lambda_{2} \,=\,-1- \sqrt {2} \,&lt;0</span></p><p style="text-align:justify">한 근이 0보다 작으므로 해는 불안정적이다. 두근의 부호가 다르므로 균형점은 안장경로이다.</p><p style="text-align:justify">고유벡터는</p><p style="text-align:justify"><span class="math">\lambda_{1} \,=\,-1+ \sqrt {2} \,</span> 일 때 <span class="math">{\begin{pmatrix}1 \\ -0.707\end{pmatrix}}</span></p><p style="text-align:justify"><span class="math">\lambda_{2} \,=\,-1- \sqrt {2} \,</span> 일 때 <span class="math">{\begin{pmatrix}1 \\ 0.707\end{pmatrix}}</span></p><p style="text-align:justify">상변화도는 아래 그림과 같다.</p><p style="text-align:justify"><img alt="초과 수요모형의 의미 관련 도해 19" src="media/미분방정식과_응용_027.png" style="max-width:100%;"/>
+</p><p style="text-align:right">(풀이끝)</p><h2>각주</h2><ol class="footnotes"><li id="fn77"><p style="text-align:justify"> 단기균형가격과 장기균형가격이 항상 일치하는 것이 아님. 이 모형의 경우에만 해당됨. </p>
+<a href="#fnref77">↩</a></li><li id="fn78"><p style="text-align:justify"> 앞의 위상도 그림에서 (a), (b)의 경우가 해당된다. 그림에서 위상선은 비선형형태의 일반적인 형태를 띄고 있지만 교차점에서의 기울기로 수렴, 발산을 판정할 수 있다?</p>
+<a href="#fnref78">↩</a></li><li id="fn79"><p style="text-align:justify"> 위상도의 자세한 설명은 ‘미분방정식 위상도’ 참조</p>
+<a href="#fnref79">↩</a></li></ol><p class="section-nav">← <a href="differential-equation-applications-predator.html">Predator–Prey와 Goodwin 모형</a> · <a href="differential-equation-applications.html">절별 목차</a> · <a href="differential-equation-applications-harrod-domar.html">Domar·Harrod–Domar 성장모형</a> →</p></body></html>

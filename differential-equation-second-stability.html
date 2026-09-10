@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>근의 안정성과 고계방정식</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<style id="blog-readability-patch">
+body{max-width:980px;margin:0 auto;padding:1.5rem 1rem 3rem;line-height:1.72;overflow-wrap:break-word}
+h1{line-height:1.3} h2{margin-top:2.2rem;border-bottom:1px solid #bbb;padding-bottom:.25rem}
+h3{margin-top:1.6rem} h4{margin-top:1.3rem}
+.chapter-nav{position:sticky;top:0;z-index:20;padding:.8rem;border:1px solid #ccc;background:#fafafa;overflow-x:auto;white-space:nowrap;border-radius:6px}
+table{display:block;width:100%;max-width:100%;overflow-x:auto;border-collapse:collapse}
+th,td{padding:.45rem .6rem;vertical-align:top}
+img,svg{max-width:100%!important;height:auto!important;display:block;margin:1rem auto}
+.katex-display,.math-display,div.math,p.math{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.footnotes{margin-top:3rem;padding-top:1rem;border-top:1px solid #bbb;font-size:.92em}
+@media(max-width:640px){body{padding:.8rem .65rem 2rem;font-size:16px}h1{font-size:1.65rem}h2{font-size:1.35rem}h3{font-size:1.18rem}.chapter-nav{font-size:.9rem}}
+</style>
+<title>2계·고계 미분방정식</title>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav">
+<a href="system-of-differential equation.html">미분방정식 목차</a> ·
+<a href="differential-equation-basics.html">기초·1계</a> ·
+<a href="differential-equation-second-order.html">2계·고계</a> ·
+<a href="differential-equation-systems.html">연립계·안정성</a> ·
+<a href="phase diagram.html">위상도</a> ·
+<a href="differential-equation-applications.html">응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>근의 안정성과 고계방정식</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="system-of-differential equation.html">미분방정식</a> · <a href="differential-equation-second-order.html">2계·고계 미분방정식</a></p><h4 style="text-align:justify">근의 안정성(stability of solution)</h4><p style="text-align:justify"><span class="math">y '' (t)+ay ' (t)+by(t)=c</span> , (a, b, c는 상수) 인 경우를 고려</p><p style="text-align:justify"><span class="math">r_{1} ,\,r_{2}</span>를 근이라 하자.</p><p style="text-align:justify">i) 두 근이 실근인 경우(<span class="math">a_{1}^{2} -4a_{2} &gt;0</span>)</p><p style="text-align:justify">앞에서 일반해는 <span class="math">y(t)= \frac{c}{b} +c_{1} e^{r_{1} t} +c_{2} e^{r_{2} t}</span> 이었므로</p><p style="text-align:justify">if <span class="math">r_{1} &lt;0\;and\;r_{2} &lt;0</span>  ⇒  <span class="math">\lim\limits_{t \to \infty } {y(t)=}</span><span class="math">\lim\limits_{t \to \infty } ( \frac{c}{b} +c_{1} e^{r_{1} t} +c_{2} e^{r_{2} t} )\,=\, \frac{c}{b}</span></p><p style="text-align:justify">따라서 특성방정식의 두 근이 0보다 작으면 미분방정식의 해는 수렴한다.(안정적) </p><p style="text-align:justify">이때 <span class="math">\frac{c}{b}</span>는 시간의 변동에 따라 불변이므로 이를 균형(equlibrium), 또는 정상상태(steady state)라 한다.</p><p style="text-align:justify"><span class="math">r_{1} &lt;0\,,\;r_{2} &lt;0</span> 이면 2차 방정식의 근과 계수와의 관계에 의해 </p><p style="text-align:justify"><span class="math">r_{1} +r_{2} =\,-a_{1} \,&lt;0\,,\;r_{1} r_{2} =a_{2} \,&gt;0</span></p><p style="text-align:justify">즉 <span class="math">a_{1} \,&gt;0\,,\;a_{2} \,&gt;0</span> 이면 미분방정식의 해는 수렴한다.</p><p style="text-align:justify">if <span class="math">r_{1} &gt;0\;and\;r_{2} &gt;0</span>  ⇒  <span class="math">\lim\limits_{t \to \infty } {y(t)=}</span><span class="math">\lim\limits_{t \to \infty } ( \frac{c}{b} +c_{1} e^{r_{1} t} +c_{2} e^{r_{2} t} )\,=\, \infty</span></p><p style="text-align:justify">따라서 두 근이 모두 양수이면 미분방정식의 해는 발산한다.</p><p style="text-align:justify">if <span class="math">r_{1} &gt;0\;and\;r_{2} &lt;0</span>  ⇒  <span class="math">\lim\limits_{t \to \infty } {y(t)=}</span><span class="math">\lim\limits_{t \to \infty } ( \frac{c}{b} +c_{1} e^{r_{1} t} +c_{2} e^{r_{2} t} )\,=\, \infty</span></p><p style="text-align:justify">따라서 미분방정식의 해는 발산한다. 단 처음에 <span class="math">c_{2}</span>가 <span class="math">c_{1}</span>보다 큰 경우 해가 수렴하다가 발산한다. 따라서 이런 해를 안장경로(saddle path)라 한다. 특성방정식의 한 근이 양수이고 다른 한 근이 음수라서 미분방정식의 해가 안장경로를 갖는 경우는 경제적 모형에서 자주 발생한다.</p><p style="text-align:justify">ⅱ) 두 근이 중근인 경우(<span class="math">a_{1}^{2} -4a_{2} =0</span>)</p><p style="text-align:justify">if <span class="math">r&lt;0\;</span>  ⇒  <span class="math">\lim\limits_{t \to \infty } {y(t)=}</span><span class="math">\lim\limits_{t \to \infty } ( \frac{c}{b} +c_{1} e^{rt} +c_{2} te^{rt} )\,=\, \frac{c}{b}</span>.............<sup><a href="#fn16" id="fnref16">[16]</a></sup></p><p style="text-align:justify">따라서 중근이 음수일 경우 미분방정식의 해는 수렴한다.</p><p style="text-align:justify">if <span class="math">r&gt;0\;</span>  ⇒  <span class="math">\lim\limits_{t \to \infty } {y(t)=}</span><span class="math">\lim\limits_{t \to \infty } ( \frac{c}{b} +c_{1} e^{rt} +c_{2} te^{rt} )\,=\, \infty</span></p><p style="text-align:justify">따라서 중근이 양수일 경우 미분방정식의 해는 발산한다.</p><p style="text-align:justify">ⅲ) 두 근이 허근인 경우(<span class="math">a_{1}^{2} -4a_{2} &lt;0</span>)</p><p style="text-align:justify">동차부분의 해는 다음과 같았다.<sup><a href="#fn17" id="fnref17">[17]</a></sup></p><p style="text-align:justify"><span class="math">y_{c} (t)=c_{1} e^{\alpha t} \,\cos \beta t+c_{2} e^{\alpha t} \,\sin \beta t</span>, where <span class="math">\alpha \,=\,- \frac{a_{1}}{2} \,,\; \beta \,=\, \frac{\, \sqrt {4a_{2} -a_{1}^{2}}}{2}</span></p><p style="text-align:justify">특수해는 <span class="math">y_{p} \,=\, \frac{c}{b}</span>이므로</p><p style="text-align:justify">일반해는 <span class="math">y(t)= \frac{c}{b} \,+\,c_{1} e^{\alpha t} \,\cos \beta t+c_{2} e^{\alpha t} \,\sin \beta t</span></p><p style="text-align:justify">if <span class="math">\alpha &lt;0</span>  ⇔  <span class="math">\lim\limits_{t \to \infty } {y(t)=}</span> <span class="math">\lim\limits_{t \to \infty } ( \frac{c}{b} \,+\,c_{1} e^{\alpha t} \,\cos \beta t+c_{2} e^{\alpha t} \,\sin \beta t)\,=\, \frac{c}{b}</span></p><p style="text-align:justify">즉 복소수의 실수부분이 0보다 작으면 미분방정식의 해는 발산한다.</p><p style="text-align:justify"><span class="math">\alpha =\,- \frac{a_{1}}{2} &lt;0</span> ⇒ <span class="math">a_{1} &gt;0</span> </p><p style="text-align:justify">따라서 <span class="math">a_{1} &gt;0</span>이면 해는 수렴. </p><p style="text-align:justify">즉, 허근일 경우 2차 미분방정식에서 1차 도함수의 계수가 0보다 크면 안정적이다.</p><p style="text-align:justify">예) <span class="math">y '' (t)+3y ' (t)+2y(t)=4</span>, <span class="math">y(0)=0,\;y'(0)=1</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">y를 상수로 보면 균형값은</p><p style="text-align:justify"><span class="math">2y*=4</span> ⇒ <span class="math">\,y*=2</span></p><p style="text-align:justify">특성방정식은</p><p style="text-align:justify"><span class="math">r^{2} +3r+2=0</span></p><p style="text-align:justify"><span class="math">(r+1)(r+2)=0</span></p><p style="text-align:justify">∴ r= -1 or  –2 &lt; 0</p><p style="text-align:justify">실수이면서 두 근 모두 0보다 작으므로 해는 수렴하고 안정적</p><p style="text-align:justify">일반해는</p><p style="text-align:justify"><span class="math">y(t)=2+\,A_{1} e^{-t} +A_{2} e^{-2t}</span></p><p style="text-align:justify">초기조건 <span class="math">y(0)=0,\;y'(0)=1</span> 를 대입하면</p><p style="text-align:justify"><span class="math">{\begin{pmatrix}1 &amp; 1 \\ -1 &amp; \;-2\end{pmatrix}} {\begin{pmatrix}A_{1} \\ A_{2}\end{pmatrix}} = {\begin{pmatrix}-2 \\ 1\end{pmatrix}}</span></p><p style="text-align:justify">∴ <span class="math">A_{1} \,=\,-3,\;A_{2} \,=\,1</span></p><p style="text-align:justify">따라서 <span class="math">y(t)=2-3e^{-t} +e^{-2t}</span></p><p style="text-align:right">(풀이끝)</p><h4 style="text-align:justify">고계선형미분방정식</h4><h4 style="text-align:justify">상수 계수를 갖는 고차 HLDE</h4><p style="text-align:justify"><span class="math">a_{n} y^{(n)} (t)+a_{n-1} y^{(n-1)} (t)+...+a_{1} y ' (t)+a_{0} y(t)=0</span> ..............①</p><p style="text-align:justify">①에 <span class="math">y(t)\,=\,e^{\lambda t}</span> 를 대입하면</p><p style="text-align:justify"><span class="math">(a_{n} \lambda^{n} +a_{n-1} \lambda^{n-1} +...+a_{1} \lambda +a_{0} )e^{\lambda n} =0</span></p><p style="text-align:justify">위식이 항상 성립하기 위해서는 <span class="math">a_{n} \lambda^{n} +a_{n-1} \lambda^{n-1} +...+a_{1} \lambda +a_{0} =0</span> 인 <span class="math">\lambda</span>를 구함</p><p style="text-align:justify">미분방정식의 해는 </p><p style="text-align:justify"><span class="math">y(t)\,=\, \sum\limits_{i=0}^{n} c_{i} e^{\lambda_{i} t}</span></p><p style="text-align:justify">모든 <span class="math">\lambda_{i}</span>가 0보다 작으면 시간이 지남에 따라 해는 수렴. 그 중 하나라도 0보다 크면 해는 무한대로 발산</p><p style="text-align:justify">연립미분방정식(systems of differential equations)</p><p style="text-align:justify">(일반형) <span class="math">y_{i} (x),\;u_{ij} (x)\,,\,v_{i} (x)</span>는 x의 함수 , i=1,...,n</p><p style="text-align:justify"><span class="math">y' _{1} \,+u_{11} y_{1} +u_{12} y_{2} +...+u_{1n} y_{n} \,=v_{1} \,</span></p><p style="text-align:justify"><span class="math">y ' _{2} \,+u_{21} y_{1} +u_{22} y_{2} +...+u_{1n} y_{n} \,=v_{2} \,</span></p><p style="text-align:justify"> <span class="math">\vdots</span></p><p style="text-align:justify"><span class="math">y ' _{1} \,+u_{n1} y_{1} +u_{n2} y_{2} +...+u_{nn} y_{n} \,=v_{n} \,</span></p><div class="footnotes"><h2>각주</h2><li id="fn7"><p style="text-align:justify"> 함수 f가 f(a+b) = f(a) + f(b)라는 성질을 갖으면 함수 f는 선형함수라 한다.</p>
+<a href="#fnref7">↩</a></li>
+<li id="fn8"><p style="text-align:justify"> a, b는 임의의 값에 대해 성립, a, b 둘 중 하나가 0이면 당연히 성립, a, b가 복소수이어도 성립</p>
+<a href="#fnref8">↩</a></li>
+<li id="fn9"><p style="text-align:justify"> 수학기초 ‘함수의 선형 독립’ 참조</p>
+<a href="#fnref9">↩</a></li>
+<li id="fn10"><p style="text-align:justify"> 오일러 공식 <span class="math">e^{\theta i} \,=\,\cos \theta \,+\,i\,\sin \theta</span>, <span class="math">e^{- \theta i} \,=\,\cos \theta -\,i\,\sin \theta</span> 적용</p>
+<a href="#fnref10">↩</a></li>
+<li id="fn11"><p style="text-align:justify"> <span class="math">t^{2} y '' (t)+a_{1} ty ' (t)+a_{2} y(t)=0\; \rightarrow \;y '' (t)+ \frac{a_{1}}{t} y ' (t)+ \frac{a_{2}}{t^{2}} y(t)=0\,</span> </p>
+<a href="#fnref11">↩</a></li>
+<li id="fn12"><p style="text-align:justify"> ∵ <span class="math">u_{2} (c_{1} y_{g} '' +c_{2} y_{p} '' )+u_{1} (c_{1} y_{g} ' +c_{2} y_{p} ' )+u_{0} (c_{1} y_{g} +c_{2} y_{p} )</span></p>
+<p style="text-align:justify"> <span class="math">=c_{1} (u_{2} y_{g} '' +u_{1} y_{g} ' +u_{0} y_{g} )+c_{2} (u_{2} y_{p} '' +u_{1} y_{p} ' +u_{0} y_{p} )=c_{1} v+c_{2} v != v</span></p>
+<a href="#fnref12">↩</a></li>
+<li id="fn13"><p style="text-align:justify"> 중첩의 원리는 정리에서 보았듯이 1차 비동차 미분방정식에도 적용되는 원리임. 즉 1차 비동차 미분방정식의 일반해도 특수해와 보완해의 합으로 구성할 수 있음 </p>
+<a href="#fnref13">↩</a></li>
+<li id="fn14"><p style="text-align:justify"> ∵<span class="math">y_{1} \,,\,y_{2}</span>는 ①의 해이므로 <span class="math">(g_{1} y '' _{1} +g_{2} y '' _{2} )+u_{1} (g_{1} y ' _{1} +g_{2} y ' _{2} )+u_{0} (g_{1} y_{1} +g_{2} y_{2} )=0</span></p>
+<a href="#fnref14">↩</a></li>
+<li id="fn15"><p style="text-align:justify"> <span class="math">y_{p} (t)\,=\, \alpha e^{-t}</span>은 동차해와 독립이 아니다.</p>
+<a href="#fnref15">↩</a></li>
+<li id="fn16"><p style="text-align:justify"> r이 음수이므로 로피탈의 정리를 적용하면 <span class="math">\lim\limits_{t \to \infty } te^{rt} \,=\, \lim\limits_{t \to \infty } {\frac{t}{e^{-rt}}} \,=\, \lim\limits_{t \to \infty } {\frac{1}{-re^{-rt}}} \,=0\,</span></p>
+<a href="#fnref16">↩</a></li>
+<li id="fn17"><p style="text-align:justify"> 동차미분방정식 허근의 경우 참조</p>
+<a href="#fnref17">↩</a></li></div><section class="related-documents" id="related-documents"><h2>관련 문서</h2><ul><li><a href="differential-equation-basics.html">미분방정식의 기초와 1계 방정식</a></li><li><a href="differential-equation-systems.html">연립미분방정식과 안정성</a></li></ul></section><hr/><p><a href="system-of-differential equation.html">← 미분방정식과 응용 목차</a></p><h2>각주</h2><ol class="footnotes"><li id="fn16"><p style="text-align:justify"> r이 음수이므로 로피탈의 정리를 적용하면 <span class="math">\lim\limits_{t \to \infty } te^{rt} \,=\, \lim\limits_{t \to \infty } {\frac{t}{e^{-rt}}} \,=\, \lim\limits_{t \to \infty } {\frac{1}{-re^{-rt}}} \,=0\,</span></p>
+<a href="#fnref16">↩</a></li><li id="fn17"><p style="text-align:justify"> 동차미분방정식 허근의 경우 참조</p>
+<a href="#fnref17">↩</a></li></ol><p class="section-nav">← <a href="differential-equation-second-nonhomogeneous.html">비동차 2계방정식의 특수해</a> · <a href="differential-equation-second-order.html">절별 목차</a> · 끝 →</p></body></html>

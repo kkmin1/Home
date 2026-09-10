@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>동적 Lagrangian: 무한기간</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>이산형 동적최적화</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>동적 Lagrangian: 무한기간</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-optimization-discrete.html">이산형 동적최적화</a></p><h4 id="기간이-무한인-경우" style="text-align:justify">기간이 무한인 경우</h4><p style="text-align:justify">어떤 최적화 문제에서 유일한 해가 존재하려면 목적함수가 무한대로 발산하지 않도록 위쪽으로 유계(bounded above)여야 한다.<sup><a href="#fn19" id="fnref19">[19]</a></sup></p><p style="text-align:justify">max <span class="math">\sum\limits_{t=0}^{\infty } f(u_{t} ,\,y_{t} ,\,t)</span></p><p style="text-align:justify">s.t <span class="math">y_{t+1} \,=\,y_{t} \,+\,g(u_{t} ,\,y_{t} ,\,t)</span>, for <span class="math">t\,=\,0,\,1,\,...</span></p><p style="text-align:justify"><span class="math">y_{0} \,=\, {\overline{y}}</span></p><p style="text-align:justify">이 문제의 라그랑지 함수를 만들면</p><p style="text-align:justify"><span class="math">L\,=\, \sum\limits_{t=0}^{\infty } [f(u_{t} ,\,y_{t} ,\,t)\,+\, \lambda_{t} [g(u_{t} ,\,y_{t} ,\,t)\,+\,y_{t} \,-\,y_{t+1} ]]\,+\, \mu ( {\overline{y}} \,-\,y_{0} )</span></p><p style="text-align:justify"><span class="math">\lambda_{t}</span>,(<span class="math">t=0,\,...,\,T</span>), <span class="math">\mu</span>는 라그랑지 승수</p><p style="text-align:justify">이 문제의 KKT 조건은 transversality 조건만 제외하고 기간이 유한인 경우와 같다.<sup><a href="#fn20" id="fnref20">[20]</a></sup></p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial u_{t}} \,=\, \frac{\partial f}{\partial u_{t}} (u_{t} ,\,y_{t} ,\,t)\,+\, \lambda_{t} \frac{\partial g}{\partial u_{t}} (u_{t} ,\,y_{t} ,\,t)\,=\,0</span>, for <span class="math">t\,=\,0,\,1,\,...,\, \infty</span> ............①</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial y_{t+1}} \,=\, \frac{\partial f}{\partial y_{t+1}} (u_{t+1} ,\,y_{t+1} ,\,t+1)\,+\, \lambda_{t+1} [ \frac{\partial g}{\partial y_{t+1}} (u_{t+1} ,\,y_{t+1} ,\,t+1)\,+\,1]\,-\, \lambda_{t} \,=\,0</span>,  </p><p style="text-align:justify">for <span class="math">t\,=\,0,\,1,\,...,\, \infty</span> ..............②</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \lambda_{t}} \,=\,g(u_{t} ,\,y_{t} ,\,t)\,+\,y_{t} \,-\,y_{t+1} \,=\,0</span> .............③</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \mu } \,=\, {\overline{y}} \,-\,y_{0} \,=\,0</span> ..............④</p><p style="text-align:justify"><span class="math">\lim\limits_{t \to \infty } {\lambda_{t}} y_{t+1} \,=\,0</span>............⑤</p><p style="text-align:justify">이상이 최대화의 필요조건이다. KKT조건은 목적함수가 오목함수이면 최대화의 필요충분조건이 된다.</p><p style="text-align:justify">⑤는 transversality 조건으로 complementary slackness 조건의 동태적 버전이다.<sup><a href="#fn21" id="fnref21">[21]</a></sup></p><p style="text-align:justify">①에서 </p><p style="text-align:justify"><span class="math">\lambda_{t} \,=\,- \frac{\partial f}{\partial u_{t}} \, \bigg / \frac{\partial g}{\partial u_{t}}</span></p><p style="text-align:justify">따라서 transversality 조건은</p><p style="text-align:justify"><span class="math">\lim\limits_{t \to \infty } {\left(- \frac{\partial f}{\partial u_{t}} \, \bigg / } \frac{\partial g}{\partial u_{t}} \right) y_{t+1} \,=\,0</span></p><p style="text-align:justify">예) 다음의 재산 제약하의 효용극대화 문제를 고려하자. 생존기간은 무한대이다.<sup><a href="#fn22" id="fnref22">[22]</a></sup></p><p style="text-align:justify">maximize <span class="math">\sum\limits_{t=0}^{\infty } \beta^{t} \ln c_{t}</span></p><p style="text-align:justify">s.t  <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span>, <span class="math">t=0,\,1,...,\, \infty</span></p><p style="text-align:justify"> <span class="math">a_{0} \,=\,A</span></p><p style="text-align:justify">재산과 소비의 최적 경로를 구하라</p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">이 문제의 라그랑지 함수를 만들면</p><p style="text-align:justify"><span class="math">L\,=\, \sum\limits_{t=0}^{\infty } \beta^{t} [u(c_{t} )\,+\, \lambda_{t} [(1+r)a_{t} \,-\,c_{t} \,-\,a_{t+1} ]]\,+\, \mu (A\,-\,a_{0} )</span></p><p style="text-align:justify"><span class="math">\lambda_{t}</span>,(<span class="math">t=0,\,...,\,T</span>), <span class="math">\mu</span>는 라그랑지 승수</p><p style="text-align:justify">KKT 조건은 </p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial c_{t}} \,=\,u(c_{t} )'\,-\, \lambda_{t} \,=\,0</span>, for <span class="math">t\,=\,0,\,1,\,...,\, \infty</span> ............①</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial a_{t+1}} \,=\,- \beta^{t} \lambda_{t} \,+\, \beta^{t+1} \lambda_{t+1} (1+r)\,=\,0</span>, for <span class="math">t\,=\,0,\,1,\,...,\, \infty</span> ..............②</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \lambda_{t}} \,=(1+r)a_{t} \,-\,c_{t} \,-\,a_{t+1} \,=\,0</span> .............③</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \mu } \,=A\,-\,a_{0} \,=\,0</span> ..............④</p><p style="text-align:justify"><span class="math">\lim\limits_{t \to \infty } {\beta^{t} \lambda_{t}} a_{t+1} \,=\,0</span>............⑤</p><p style="text-align:justify">⑤는 transversality 조건(TVC)이다. ①을 대입하여 다시 쓰면</p><p style="text-align:justify"><span class="math">\lim\limits_{t \to \infty } {\beta^{t} u'(c_{t} )} a_{t+1} \,=\,0</span></p><p style="text-align:justify">이 의미는 현재가치로 할인된 한계효용 × 남은 재산은 시간이 흐를수록 0에 가까워져야 한다는 의미. 남은 재산이 0이 안되면 (-)의 재산이 가능할 것이고 이는 효용을 극대화하기 위해 빚을 지는 한이 있더라도 소비를 무한정 늘린다는 의미이다.<sup><a href="#fn23" id="fnref23">[23]</a></sup> 반면 남은 재산이 (+)라면 다 소비하지 않은 경우이므로 최대 효용을 이루지 못한다.</p><p style="text-align:justify"><span class="math">\beta \,&lt;\,1</span> 이므로 <span class="math">\lim\limits_{t \to \infty } {\beta^{t}} \,=\,0</span>, 따라서 {<span class="math">a_{t}</span>}가 일정하거나 감소수열이면 TVC를 만족한다. 또 TVC는 {<span class="math">a_{t}</span>}가 <span class="math">\beta^{t}</span>의 할인을 상쇄할 만큼 지나치게 빨리 증가하지만 않으면 만족한다. 이 경우 때때로 적당한 차입을 통한 소비활동이 전생애의 효용극대화를 위한 최적 행동일수도 있다.<sup><a href="#fn24" id="fnref24">[24]</a></sup></p><p style="text-align:justify">①, ②에서</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,=\,(1+r) \beta u ' (c_{t+1} )</span></p><p style="text-align:justify">이는 오일러등식이다.</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,=\, \frac{1}{c_{t}}</span> 이므로 오일러등식은 <span class="math">\,c_{t+1} \,=\,(1+r) \beta c_{t}</span></p><p style="text-align:justify">이 차분방정식의 해는 <span class="math">\,c_{t} \,=\,(1+r) ^{t} \beta^{t} c_{0}</span></p><p style="text-align:justify">기간이 T일 때</p><p style="text-align:justify"><span class="math">a_{0} \,=\, \sum\limits_{t=0}^{\top} \frac{c_{t}}{(1+r) ^{t+1}} \,+\, \frac{a_{\scriptscriptstyle {T+1}}}{(1+r) ^{T+1}}</span></p><p style="text-align:justify"><span class="math">T\, \to \, \infty</span> 일 때</p><p style="text-align:justify"><span class="math">a_{0} \,=\, \lim\limits_{\scriptscriptstyle {T \to \infty}} {\left[ \sum\limits_{t=0}^{\top} \frac{c_{t}}{(1+r) ^{t+1}} \,+\, \frac{a_{\scriptscriptstyle {T+1}}}{(1+r) ^{T+1}} \right]}</span></p><p style="text-align:justify"><span class="math">=\, \sum\limits_{t=0}^{\infty } \frac{c_{t}}{(1+r) ^{t+1}} \,</span>, (∵ transversality 조건에 의해 <span class="math">\lim\limits_{\scriptscriptstyle {T \to \infty}} \, \frac{a_{\scriptscriptstyle {T+1}}}{(1+r) ^{T+1}} \,=\,0</span>..........<sup><a href="#fn25" id="fnref25">[25]</a></sup>)</p><p style="text-align:justify">⇒ <span class="math">A\,=\, \sum\limits_{t=0}^{\infty } \frac{c_{t}}{(1+r) ^{t+1}} \,=\, \sum\limits_{t=0}^{\infty } \frac{(1+r) ^{t} \beta^{t} c_{0}}{(1+r) ^{t+1}}</span> <span class="math">=c_{0} \, \sum\limits_{t=0}^{\infty } \frac{\beta^{t}}{1+r} \,=\, \frac{c_{0}}{(1+r)(1- \beta )}</span></p><p style="text-align:justify">∴ <span class="math">c_{0} \,=\,(1+r)(1- \beta )A</span></p><p style="text-align:justify">따라서 소비의 경로는</p><p style="text-align:justify"><span class="math">\,c_{t} \,=\,[(1+r) \beta ] ^{t} (1+r)(1- \beta )A</span></p><p style="text-align:justify"><span class="math">\,(1+r) \beta</span> ≶ 1 에 따른 소비패턴은 기간이 유한인 경우와 같다. 단 소비는 무한한 기간 동안 이루어지는 것이 최적이다. 특정 유한한 기간 동안에 모든 소비를 끝내고 남은 기간 소비를 안 하는 것은 최적이 아니다.</p><p style="text-align:justify">재산의 경로는</p><p style="text-align:justify"><span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,(1+r) ^{t+1} \beta^{t} (1- \beta )A</span></p><p style="text-align:right">(풀이끝)</p><h4 id="no-ponzi-game-조건" style="text-align:justify">no Ponzi game 조건</h4><p style="text-align:justify">재산 {<span class="math">a_{t}</span>}의 비음조건이 없다면 오일러등식과 제약식을 만족하면서도 무제한의 차입을 통해 소비를 최대화할 수 있다. 이를 방지하기 위해 재산 {<span class="math">a_{t}</span>}의 비음조건 대신 더 폭 넓은 조건인 다음의 조건을 추가할 수 있다. </p><p style="text-align:justify"><span class="math">\lim\limits_{t \to \infty } {\frac{a_{t+1}}{(1+r) ^{t+1}}} \, \geq \,0</span> </p><p style="text-align:justify">이는 먼 미래에 재산의 현재가치가 0 보다 크면 된다는 조건이므로 중간에 어느 정도의 부채를 인정한다. 이 조건을 no Ponzi game 조건이라 한다.<sup><a href="#fn26" id="fnref26">[26]</a></sup></p><p style="text-align:justify">no Ponzi game(nPg) 조건은 최적해에서 등식으로 만족해야 한다. 최적해에서 재산이 남는 것은 추가적으로 소비할 재산이 있다는 의미이므로 더 효용을 증가시킬 수 있으므로 최적해의 가정에 위배된다. 따라서 최적해에서 <span class="math">\lim\limits_{t \to \infty } {\frac{a_{t+1}}{(1+r) ^{t+1}}} \,=\,0</span>.<sup><a href="#fn27" id="fnref27">[27]</a></sup> 이는 앞에서 보았듯이 TVC를 의미한다. 따라서 최적해에서 nPg조건은 TVC과 같기 때문에 경제모형에서 단순히 재산의 비음조건을 추가하기보다 더 완화된 조건인 nPg 조건을 추가함으로써 비음조건과 TVC를 만족하는 것으로 가정한다. </p><p style="text-align:justify">예) 다음 문제의 오일러 방정식을 구하라</p><p style="text-align:justify">max <span class="math">\sum\limits_{t=0}^{\infty } \beta^{t} u(c_{t} )</span></p><p style="text-align:justify">s.t  <span class="math">k_{t+1} \,=\,f(k_{t} )\,-\,c_{t}</span>, <span class="math">t=0,\,1,...,\, \infty</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">이 문제의 라그랑지 함수를 만들면</p><p style="text-align:justify"><span class="math">L\,=\, \sum\limits_{t=0}^{\infty } \beta^{t} [u(c_{t} )\,+\, \lambda_{t} [f(k_{t} )\,-\,c_{t} \,-k_{t+1} ]]\,</span></p><p style="text-align:justify"><span class="math">\lambda_{t}</span>,(<span class="math">t=0,\,...,\,T</span>)는 라그랑지 승수</p><p style="text-align:justify">KKT 조건은 </p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial c_{t}} \,=\,u'(c_{t} )\,-\, \lambda_{t} \,=\,0</span>, for <span class="math">t\,=\,0,\,1,\,...,\, \infty</span> ............①</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial k_{t+1}} \,=\,- \beta^{t} \lambda_{t} \,+\, \beta^{t+1} \lambda_{t+1} f'(k_{t+1} )\,=\,0</span>, for <span class="math">t\,=\,0,\,1,\,...,\, \infty</span> ..............②</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \lambda_{t}} \,=f(k_{t} )\,-\,c_{t} \,-\,k_{t+1} \,=\,0</span> .............③</p><p style="text-align:justify"><span class="math">\lim\limits_{t \to \infty } {\beta^{t} \lambda_{t}} k_{t+1} \,=\,0</span>............④</p><p style="text-align:justify">①, ②에서</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,=\,f'(k_{t+1} ) \beta u ' (c_{t+1} )</span></p><p style="text-align:justify">이는 오일러등식이다.</p><p style="text-align:right">(풀이끝)</p><h2>각주</h2><ol class="footnotes"><li id="fn19"><p style="text-align:justify">목적함수가 발산하지 않도록 유계성을 확보하는 한 가지 방법은 할인인자 <span class="math">\beta_{t}</span>를 도입하는 것이다. 여기서 <span class="math">0\,&lt;\, \beta_{t} \,&lt;\,1</span>이다.</p>
+<a href="#fnref19">↩</a></li><li id="fn20"><p style="text-align:justify"> 자세한 설명은 이 책의 범위를 넘어서므로 생략</p>
+<a href="#fnref20">↩</a></li><li id="fn21"><p style="text-align:justify"> transversality 조건은 일종의 말기조건으로 초기조건과 함께 최적해를 고정시키는데 필요한 것으로 알려져 있다. 그러나 목적식이 특정한 경우, transversality 조건이 최적해의 고정에 반드시 필요하지는 않다는 주장도 존재.</p>
+<a href="#fnref21">↩</a></li><li id="fn22"><p style="text-align:justify"> 개인의 생존기간이 무한대라는 가정은 비현실적이나 자손의 효용도 고려하는 이타적인 사람을 가정. 이 경우 <span class="math">\beta</span>는 자손의 만족이 본인의 효용에 부여하는 가중치를 의미한다. <span class="math">\beta \,&lt;\,1</span>은 자손보다 자신의 만족에 더 비중을 둔다는 의미이다.</p>
+<a href="#fnref22">↩</a></li><li id="fn23"><p style="text-align:justify"> 물론 빚을 지는 것도 제약식을 만족한다.</p>
+<a href="#fnref23">↩</a></li><li id="fn24"><p style="text-align:justify">더구나 이 제약은 영구적인 부채 자체를 금지하는 것이 아니다. 장기적으로 부채가 현재의 이자율보다 더 높은 비율로 증가하는 경우를 배제하는 것이다.</p>
+<a href="#fnref24">↩</a></li><li id="fn25"><p style="text-align:justify"> ②에서 <span class="math">\lambda_{t} \,=\, \frac{1}{\beta^{t} (1+r) ^{t}} \lambda_{0}</span>, ①에서 <span class="math">\lambda_{0} \,=\,u'(c_{0} )</span>, 양자를 결합하면 <span class="math">\lambda_{t} \,=\, \frac{1}{\beta^{t} (1+r) ^{t}} u ' (c_{0} )</span>. 이를 TVC조건 ⑤에 대입하면 <span class="math">\lim\limits_{t \to \infty } {\frac{1}{(1+r) ^{t}} u ' (c_{0} )} a_{t+1} \,=\,0</span> ⇒ <span class="math">\lim\limits_{t \to \infty } {\frac{a_{t+1}}{(1+r) ^{t+1}}} \,=\,0</span>, (∵ <span class="math">u'(c_{0} )</span>는 상수, <span class="math">\frac{1}{1+r} \lim\limits_{t \to \infty } {\frac{a_{t+1}}{(1+r) ^{t}}} \,=\,0</span>)</p>
+<a href="#fnref25">↩</a></li><li id="fn26"><p style="text-align:justify"> Ponzi 게임이란 미국의 사기꾼 Ponzi가 개발한 사업으로 다단계같이 또 다른 회원을 가입시켜 그 투자금으로 기존의 돈을 투자한 회원의 이자를 지급하는 사업을 말한다. 이와 같이 무한정한 차입은 결국 파산을 불러오기 때문에 no Ponzi game 조건이란 무제한의 차입을 제한하는 것을 의미한다. </p>
+<a href="#fnref26">↩</a></li><li id="fn27"><p style="text-align:justify"> 이런 이유로 부등식이 아닌 등식을 nPg 조건으로 보기도 한다.</p>
+<a href="#fnref27">↩</a></li></ol><p class="section-nav">← <a href="dynamic-optimization-discrete-lagrangian-finite.html">동적 Lagrangian: 유한기간</a> · <a href="dynamic-optimization-discrete.html">절별 목차</a> · <a href="dynamic-optimization-discrete-maximum-principle.html">Maximum Principle</a> →</p></body></html>

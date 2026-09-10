@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Maximum Principle</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>이산형 동적최적화</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>Maximum Principle</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-optimization-discrete.html">이산형 동적최적화</a></p><h4 id="최적화-원리-maximum-principle" style="text-align:justify">최적화 원리(Maximum principle)</h4><p style="text-align:justify">최적제어이론의 이산형이라 할 수 있다. 다음의 문제를 고려하자.</p><p style="text-align:justify">max <span class="math">\sum\limits_{t=0}^{T-1} f(u_{t} ,\,y_{t} )</span></p><p style="text-align:justify">s.t <span class="math">y_{t+1} \,=\,y_{t} \,+\,g(u_{t} ,\,y_{t} )</span>, for <span class="math">t\,=\,0,\,1,\,...,\,T-1</span></p><p style="text-align:justify"> <span class="math">y_{0} \,=\,A</span>, A는 상수</p><p style="text-align:justify">이 문제의 라그란지안 함수는</p><p style="text-align:justify"><span class="math">L\,= \sum\limits_{t=0}^{T-1} [f\,(u_{t} ,\,y_{t} )\,+\, \lambda_{t+1} [g(u_{t} ,\,y_{t} )+\,y_{t} -y_{t+1} ]\,+\, \lambda_{0} (A-y_{0} )</span></p><p style="text-align:justify">다음의 함수를 정의하자. </p><p style="text-align:justify"><span class="math">H_{t} (u_{t} ,\,y_{t} ,\, \lambda_{t+1} )\,=f\,(u_{t} ,\,y_{t} )\,+\, \lambda_{t+1} g(u_{t} ,\,y_{t} )</span></p><p style="text-align:justify">이 함수를 Hamiltonian이라 부른다.</p><p style="text-align:justify">Hamiltonian을 라그란지안에 대입하면</p><p style="text-align:justify"><span class="math">\,L\,=\, \sum\limits_{t=1}^{\top} [\mathbf{H}_{t} \,- \lambda_{t+1} (y_{t+1} -y_{t} )]+\, \lambda_{0} (\mathbf{A}\,-\,y_{0} )</span> </p><p style="text-align:justify">필요조건은</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial u_{t}} \,=\, \frac{\partial H_{t}}{\partial u_{t}} \,=\,0</span> ...........①</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial y_{t}} \,=\, \frac{\partial H_{t}}{\partial y_{t}} \,+ \lambda_{t+1} -\, \lambda_{t} =\,0</span> </p><p style="text-align:justify">⇒ <span class="math">\lambda_{t+1} -\, \lambda_{t} =\,-\, \frac{\partial H_{t}}{\partial y_{t}}</span>.............②</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \lambda_{t}} \,=\,g(u_{t} ,\,y_{t} )\,+\,y_{t} -\,y_{t+1} \,=\,0</span> ...............③</p><p style="text-align:justify"><span class="math">\frac{\partial L}{\partial \lambda_{0}} \,=\,A\,-\,y_{0} \,=\,0</span> ...................④</p><p style="text-align:justify">즉 해밀토니안을 극대화하는 것이 라그랑지 함수의 극대화와 조건이 같다. 이 조건들을 최대화원리라 한다.<sup><a href="#fn28" id="fnref28">[28]</a></sup></p><p style="text-align:justify">상태변수에 말기조건의 여부에 따라 이상의 조건에 TVC를 추가해야 한다. 말기값의 제약조건에 따라 TVC는 다음과 같이 구분된다.</p><table aria-label="최적화 원리(Maximum principle) 관련 표 1" style="border-collapse:collapse;table-layout:fixed;height:91.067px;width:366.973px"><colgroup><col style="width:136.32px"/><col style="width:230.653px"/></colgroup><tbody><tr style="height:20.867px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">말기조건</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">Transversality 조건</p>
+</td></tr><tr style="height:23.400px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">y_{\scriptscriptstyle {T}} \,=\,B</span>, B는 상수</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center">최대화 문제일 경우 <span class="math">\lambda_{\scriptscriptstyle {T}} \, \geq \,0</span></p>
+</td></tr><tr style="height:23.400px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">y_{\scriptscriptstyle {T}} \,</span> 조건 없음</p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">\lambda_{\scriptscriptstyle {T}} \,=\,0</span></p>
+</td></tr><tr style="height:23.400px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">y_{\scriptscriptstyle {T}} \, \geq \,B</span></p>
+</td><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.12mm solid #000;border-right:0.12mm solid #000;border-top:0.12mm solid #000;border-bottom:0.12mm solid #000"><p style="text-align:center"><span class="math">\lambda_{\scriptscriptstyle {T}} \, \geq \,0</span>, <span class="math">y_{\scriptscriptstyle {T}} \, \geq \,B</span>, <span class="math">\lambda_{\scriptscriptstyle {T}} (y_{t} \,-\,B)\,=\,0</span></p>
+</td></tr></tbody></table><p style="text-align:justify">여기서 <span class="math">\lambda_{\scriptscriptstyle {T}} \,</span>는 말기 상태변수의 해당 제약식에 대응하는 라그랑지 승수이다.</p><p style="text-align:justify"><span class="math">y_{\scriptscriptstyle {T}} \,=\,B</span> 일 경우 최대화 문제일 때 <span class="math">\lambda_{\scriptscriptstyle {T}} \, \geq \,0</span>는 정태적 최적화 라그랑지 방법에서 고찰한 결과이다.<sup><a href="#fn29" id="fnref29">[29]</a></sup></p><p style="text-align:justify"><span class="math">y_{\scriptscriptstyle {T}} \,</span>의 조건이 없으면 말기에서 <span class="math">y_{\scriptscriptstyle {T}} \,</span>에 관한 제약식의 변화가 목적식에 어떠한 영향도 미치지 못한다. 따라서 기회비용을 나타내는 말기의 라그랑지 승수 <span class="math">\lambda_{\scriptscriptstyle {T}} \,=\,0</span></p><p style="text-align:justify"><span class="math">y_{\scriptscriptstyle {T}} \, \geq \,B</span> 이면 complementery slackness 조건에 의해 <span class="math">\lambda_{\scriptscriptstyle {T}} \, \geq \,0</span>, <span class="math">y_{\scriptscriptstyle {T}} \, \geq \,B</span>, <span class="math">\lambda_{\scriptscriptstyle {T}} (y_{t} \,-\,B)\,=\,0</span></p><h4 id="최대화의-필요충분조건" style="text-align:justify">최대화의 필요충분조건</h4><p style="text-align:justify">f, g가 오목함수이면 라그란지안 함수 L도 오목함수이다. 이 때 최대화원리는 최대화의 필요충분조건이 된다.</p><p style="text-align:justify">최대원리(Maximum Principle)에 따르면 최적경로에서는 각 기간의 총편익을 최대화하도록 <span class="math">u_{t}</span>를 선택해야 한다. 최대원리는 동적최적화 문제를 일련의 정적 최적화 문제로 바꾸며, 이들은 전환방정식과 그림자가격 <span class="math">\lambda_{t}</span>의 변화를 결정하는 방정식으로 연결된다.</p><p style="text-align:justify">통제변수 <span class="math">u_{t}</span>에 제약이 있는 경우 최대화원리는 다음과 같이 일반화된다. </p><p style="text-align:justify">예를 들어 <span class="math">u_{t} \, \leq \,U</span> 라면 최대화원리는</p><table aria-label="최대화의 필요충분조건 관련 표 2" style="border-collapse:collapse;table-layout:fixed;height:113.173px;width:234.907px"><colgroup><col style="width:234.907px"/></colgroup><tbody><tr style="height:3.760px"><td style="padding:1.88px 6.8px 1.88px 6.8px;vertical-align:middle;border-left:0.4mm solid #000;border-right:0.4mm solid #000;border-top:0.4mm solid #000;border-bottom:0.4mm solid #000"><p style="text-align:justify">max<span class="math">{}_{u_{t}}</span> <span class="math">H_{t} (u_{t} ,\,y_{t} ,\, \lambda_{t+1} )</span> s.t <span class="math">u_{t} \, \leq \,U</span></p>
+<p style="text-align:justify"><span class="math">\lambda_{t+1} -\, \lambda_{t} =\,-\, \frac{\partial H_{t}}{\partial y_{t}}</span></p>
+<p style="text-align:justify"><span class="math">y_{t+1} \,=\,y_{t} \,+\,g(u_{t} ,\,y_{t} )</span></p>
+<p style="text-align:justify"><span class="math">y_{0} \,=\, {\overline{y}}</span></p>
+</td></tr></tbody></table><p style="text-align:justify">예) 다음의 최소화문제를 풀어라.</p><p style="text-align:justify">minimize <span class="math">\sum\limits_{t=0}^{2} \frac{1}{2} (y_{t}^{2} \,+\,u_{t}^{2} )</span></p><p style="text-align:justify">s.t  <span class="math">y_{t+1} \,=\,y_{t} \,+\,u_{t}</span>, <span class="math">t=0,\,1,\,2</span></p><p style="text-align:justify"> <span class="math">y_{0} \,=\,5\,</span> </p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">minimize <span class="math">\sum\limits_{t=0}^{2} \frac{1}{2} (y_{t}^{2} \,+\,u_{t}^{2} )</span> ⇒ maximize <span class="math">\sum\limits_{t=0}^{2} - \frac{1}{2} (y_{t}^{2} \,+\,u_{t}^{2} )</span></p><p style="text-align:justify">이 문제의 해밀토니안은</p><p style="text-align:justify"><span class="math">H_{t} \,=\,- \frac{1}{2} (y_{t}^{2} \,+\,u_{t}^{2} )\,+\, \lambda_{t+1} u_{t} \,</span></p><p style="text-align:justify">i) 1차조건 :</p><p style="text-align:justify"><span class="math">\frac{\partial H}{\partial u_{t}} \,=\,-u_{t} \,+\, \lambda_{t+1} =\,0</span>, for t = 0, 1, 2 ...........①</p><p style="text-align:justify"><span class="math">\lambda_{t+1} -\, \lambda_{t} =\,-\, \frac{\partial H_{t}}{\partial y_{t}} \,=\,y_{t} \,</span>, for t = 0, 1, 2 ...........②</p><p style="text-align:justify"><span class="math">y_{t+1} \,=\,y_{t} \,+\,u_{t}</span>, for <span class="math">t=0,\,1,\,2</span> .............③</p><p style="text-align:justify"><span class="math">y_{0} \,=\,5\,</span>.............④</p><p style="text-align:justify"><span class="math">\lambda_{3} \,=\,0</span> ..................⑤</p><p style="text-align:justify">①, ②는 해밀토니안 최대화조건, ③, ④는 제약식, ⑤는 TVC</p><p style="text-align:justify">이상의 조건을 이용해 상태변수{<span class="math">y_{t}</span>}와 통제변수{<span class="math">u_{t}</span>}의 최적값을 구한다.</p><p style="text-align:justify">①, ③에서</p><p style="text-align:justify"><span class="math">y_{t+1} \,=\,y_{t} \,+\, \lambda_{t+1}</span>, for <span class="math">t=0,\,1,\,2</span></p><p style="text-align:justify">이 식에 <span class="math">t=0,\,1,\,2</span> 를 차례로 대입하면</p><p style="text-align:justify"><span class="math">y_{1} \,=\,y_{0} \,+\, \lambda_{1} \,</span> ⇒ <span class="math">y_{1} \,=\,5\,+\, \lambda_{1} \,</span> ..........㉠</p><p style="text-align:justify"><span class="math">y_{2} \,=\,y_{1} \,+\, \lambda_{2} \,</span> .............㉡</p><p style="text-align:justify"><span class="math">y_{3} \,=\,y_{2} \,+\, \lambda_{3}</span> ⇒ <span class="math">y_{3} \,=\,y_{2} \,</span>, (∵ ⑤에서 <span class="math">\lambda_{3} \,=\,0</span>) ............㉢</p><p style="text-align:justify">②에 <span class="math">t=0,\,1,\,2</span> 를 차례로 대입하면</p><p style="text-align:justify"><span class="math">\lambda_{1} -\, \lambda_{0} =\,y_{0} \,</span> ⇒ <span class="math">\lambda_{1} -\, \lambda_{0} =\,5\,</span> .............㉣</p><p style="text-align:justify"><span class="math">\lambda_{2} -\, \lambda_{1} =\,y_{1} \,</span> ................㉤</p><p style="text-align:justify"><span class="math">\lambda_{3} -\, \lambda_{2} =\,y_{2} \,</span> ⇒ <span class="math">-\, \lambda_{2} =\,y_{2} \,</span> ...............㉥</p><p style="text-align:justify">㉡, ㉥에서 <span class="math">y_{2} \,=\, \frac{1}{2} y_{1} \,</span></p><p style="text-align:justify">㉥에서 <span class="math">-\, \lambda_{2} =\,y_{2} \,</span> ⇒ <span class="math">\lambda_{2} \,=\,- \frac{1}{2} y_{1} \,</span> ................㉦</p><p style="text-align:justify">㉤에서 <span class="math">\lambda_{2} -\, \lambda_{1} =\,y_{1} \,</span> ⇒ <span class="math">\lambda_{1} \,=\,- \frac{3}{2} y_{1} \,</span></p><p style="text-align:justify">㉠에서 <span class="math">y_{1} \,=\,5\,+\, \lambda_{1} \,</span> ⇒ <span class="math">y_{1} \,=\,5\,- \frac{3}{2} y_{1} \,</span> ⇒ <span class="math">y_{1} \,=\,2</span></p><p style="text-align:justify">㉦에서 <span class="math">\lambda_{2} \,=\,-1\,</span>, ㉥에서 <span class="math">-\, \lambda_{2} =\,y_{2} \,=\,1</span>, ㉢에서 <span class="math">\,y_{3} \,=\,1</span></p><p style="text-align:justify">상태변수의 최적값은 </p><p style="text-align:justify">∴ <span class="math">y_{1} \,=\,2</span>, <span class="math">\,y_{2} \,=\,1</span>, <span class="math">\,y_{3} \,=\,1</span></p><p style="text-align:justify">②에 <span class="math">t=0,\,1,\,2</span> 를 차례로 대입하면 통제변수의 최적값은 </p><p style="text-align:justify"><span class="math">y_{1} \,=\,5\,+\,u_{0}</span> ⇒ <span class="math">u_{0} \,=\,-3</span></p><p style="text-align:justify"><span class="math">y_{2} \,=\,y_{1} \,+\,u_{1}</span> ⇒ <span class="math">u_{1} \,=\,-1</span></p><p style="text-align:justify"><span class="math">y_{3} \,=\,y_{2} \,+\,u_{2}</span> ⇒ <span class="math">u_{2} \,=\,0</span></p><p style="text-align:justify">따라서 최소값은 </p><p style="text-align:justify"><span class="math">\sum\limits_{t=0}^{2} \frac{1}{2} (y_{t}^{2} \,+\,u_{t}^{2} )\,=\, \frac{1}{2} [(5^{2} +(-3) ^{2} )+(2^{2} +(-1) ^{2} )+(1^{2} +0^{2} )]\,=\,20</span></p><p style="text-align:justify">앞의 동적 KKT방법의 예에서 구한 것과 같은 결과이다.</p><p style="text-align:justify">ii) 2차조건 :</p><p style="text-align:justify">목적식이 볼록함수이고 제약식이 오목함수이므로 2차 조건 만족. 따라서 구한 값이 최소값이다.</p><p style="text-align:right">(풀이끝)</p><h4 id="다기간-효용극대화문제" style="text-align:justify">다기간 효용극대화문제</h4><p style="text-align:justify">앞에서 고찰한 예산제약하의 다기간 효용극대화 문제를 고려하자. 변수의 설명과 가정은 앞의 경우와 같다.</p><p style="text-align:justify">maximize <span class="math">\sum\limits_{t=0}^{\top} \beta^{t} u(c_{t} )</span></p><p style="text-align:justify">s.t  <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span>, <span class="math">t=0,\,...,\,T</span></p><p style="text-align:justify"> <span class="math">a_{0} \,=\,A\,</span> </p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">현재가치 해밀토니안은</p><p style="text-align:justify"><span class="math">H_{t} = \beta^{t} u(c_{t} )\,+\, \lambda_{t+1} (ra_{t} \,-\,c_{t} \,)</span></p><p style="text-align:justify">최적화원리는</p><p style="text-align:justify"><span class="math">\frac{\partial H_{t}}{\partial c_{t}} \,=\, \beta^{t} u ' (c_{t} )\,-\, \lambda_{t+1} \,=\,0</span> .............①</p><p style="text-align:justify"><span class="math">- \frac{\partial H_{t}}{\partial a_{t}} \,=\;-r \lambda_{t+1} \,=\; \lambda_{t+1} \,-\, \lambda_{t}</span> </p><p style="text-align:justify">⇒ <span class="math">(1+r) \lambda_{t+1} \,=\, \lambda_{t} \,</span> ..............②</p><p style="text-align:justify"><span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span>, <span class="math">t=0,\,...,\,T</span> .............③</p><p style="text-align:justify"><span class="math">a_{0} \,=\,A\,</span> ...............④</p><p style="text-align:justify">②에 ①을 대입하면 </p><p style="text-align:justify"><span class="math">\, \beta^{t} (1+r)u ' (c_{t} )\,=\, \beta^{t-1} u ' (c_{t-1} )\,</span></p><p style="text-align:justify">⇒ <span class="math">\,u ' (c_{t} )\,=\,(1+r) \beta u ' (c_{t+1} )</span></p><p style="text-align:justify">이는 오일러등식이다. 동적 KKT 방법과 같은 결과이다. </p><p style="text-align:justify">역시 오일러등식과 제약식을 이용해 차분방정식을 풀 수 있다.</p><p style="text-align:justify">“처음 상태와 처음 결정이 어떤 것이건 그 결정의 결과로 도출된 상태로부터 시작하는 결정들은 이후의 상태에 대하여 최적 정책을 구성해야 한다. 이것을 최적의 정책(optimality principle)이라 한다.”</p><hr/><p><a href="dynamic optimization.html">← 동적최적화이론과 응용 목차</a></p><div class="footnotes"><section class="related-documents" id="related-documents"><h2>관련 문서</h2><ul><li><a href="dynamic-programming.html">동적계획법</a></li><li><a href="difference-equation.html">차분방정식과 응용</a></li></ul></section><hr/><h2 id="각주">각주</h2><li id="fn1"><p style="text-align:justify"> 최종 상태 후 음이 되지 말아야 한다는 의미로 경제학 모형에서 흔히 채택되는 조건</p>
+<a href="#fnref1">↩</a></li><li id="fn2"><p style="text-align:justify"> 이 용어의 기원은 역학에서 운동상태를 묘사하는데서 기인, 이를 또는 전환방정식(transition equation)이라 부름.</p>
+<a href="#fnref2">↩</a></li><li id="fn3"><p style="text-align:justify"> 지금은 통제변수, 상태변수의 의미가 불분명하다 할지라도 이들 변수들의 보다 명확한 의미는 이하의 여러 예를 통해서 구체적으로 이해될 수 있다.</p>
+<a href="#fnref3">↩</a></li><li id="fn4"><p style="text-align:justify"> 등식일 경우 라그란지안 함수 최대화조건, 부등식일 경우 complementary slackness 조건으로 표현한다. 극대화 문제 ‘KKT 조건’ 참조.</p>
+<a href="#fnref4">↩</a></li><li id="fn5"><p style="text-align:justify"> <span class="math">\, \sum\limits_{t=0}^{\top} \lambda_{t} [g(u_{t} ,\,y_{t} )\,+\,y_{t} \,-\,y_{t+1} ]\,=\, \lambda_{0} [g(u_{0} ,\,y_{0} )\,+\,y_{0} \,-\,y_{1} ]+\, \cdots + \lambda_{t-1} [g(u_{t-1} ,\,y_{t-1} )\,+\,y_{t-1} \,-\,y_{t} ]</span></p>
+<p style="text-align:justify"> <span class="math">\,+\, \lambda_{t} [g(u_{t} ,\,y_{t} )\,+\,y_{t} \,-\,y_{t+1} ]+ \lambda_{t+1} [g(u_{t+1} ,\,y_{t+1} )\,+\,y_{t+1} \,-\,y_{t+2} ]+ \cdots +\, \lambda_{\scriptscriptstyle {T}} [g(u_{\scriptscriptstyle {T}} ,\,y_{\scriptscriptstyle {T}} )\,+\,y_{\scriptscriptstyle {T}} \,-\,y_{\scriptscriptstyle {T+1}} ]</span></p>
+<a href="#fnref5">↩</a></li><li id="fn6"><p style="text-align:justify"> 등식의 제약식에 비음제약식이 있는 문제이므로 비음조건에만 complementary slackness조건이 붙는다.</p>
+<a href="#fnref6">↩</a></li><li id="fn7"><p style="text-align:justify"> 2 기간모형과 이의 다기간 확장은 미시경제 응용 ‘피셔 다기간모형’ 참조</p>
+<a href="#fnref7">↩</a></li><li id="fn8"><p style="text-align:justify"> 최종 상태 후 음이 되지 말아야 한다는 의미. 이 조건이 없다면 소비자는 효용극대화를 위해 말기에 <span class="math">a_{\scriptscriptstyle {T+1}} \,=\,- \infty</span>, 즉 대규모의 부채를 남겨두고 죽을 것이다. </p>
+<a href="#fnref8">↩</a></li><li id="fn9"><p style="text-align:justify"> 전체기간의 총효용은 매기 효용의 합과 같다는 의미. 즉 <span class="math">u(c_{0} ,\,c_{1} ,\,...,\,c_{\scriptscriptstyle {T}} )\,=\,u(c_{0} )\,+\,u(c_{1} )\,+\, \cdots ..\,+\,u(c_{\scriptscriptstyle {T}} )</span></p>
+<a href="#fnref9">↩</a></li><li id="fn10"><p style="text-align:justify"> <span class="math">u(c_{t} ) ' \,&gt;\,0,\;u(c_{t} ) '' &lt;0</span> for <span class="math">t=0,\,...,\,T</span></p>
+<a href="#fnref10">↩</a></li><li id="fn11"><p style="text-align:justify"> <span class="math">\, \lim\limits_{c_{t} \to 0} {\,u(c_{t} ) ' \,=\, \infty ,\; \lim\limits_{c_{t} \to \infty } {\,u(c_{t} ) ' \,=\,0}}</span>, 소비가 0에 근접할 때 한계효용이 무한대이므로 조금이라도 소비하는게 최적이다. 따라서 소비의 비음조건이 있을 경우 최적해는 항상 내부에서 결정된다. </p>
+<a href="#fnref11">↩</a></li><li id="fn12"><p style="text-align:justify"> 개인의 주관적 이자율(수익률)이 <span class="math">\rho</span>라면 <span class="math">\beta \,=\, \frac{1}{1+ \rho }</span></p>
+<a href="#fnref12">↩</a></li><li id="fn13"><p style="text-align:justify"> 제약식에 할인율을 곱해서 현재가치로 표현. 이를 당기가치 라그란지안(current value Lagrangian)이라 한다. 이에 반해 현재가치 라그란지안(present value Lagrangian)은</p>
+<p style="text-align:justify"> <span class="math">L\,=\, \sum\limits_{t=0}^{\top} [ \beta^{t} u(c_{t} )\,+\, \lambda_{t} \left( \,(1+r)a_{t} \,-\,c_{t} \,-a_{t+1} \right) ]+ \eta a_{\scriptscriptstyle {T+1}}</span> </p>
+<p style="text-align:justify">   어느 것이나 결과는 같다. 단지 라그랑지승수의 해석이 약간 달라진다.</p>
+<a href="#fnref13">↩</a></li><li id="fn14"><p style="text-align:justify"> <span class="math">\sum\limits_{t=0}^{\infty } \beta^{t} \lambda_{t} \left( \,(1+r)a_{t} \,-c_{t} \,-a_{t+1} \right) \,</span><span class="math">=\, \lambda_{0} \left( \,(1+r)a_{0} \,-c_{0} \,-a_{1} \right) \,+\, \cdots \,</span></p>
+<p style="text-align:justify"> <span class="math">+\, \beta^{t} \lambda_{t} \left( \,(1+r)a_{t} \,-c_{t} \,-a_{t+1} \right) \,+\, \beta^{t+1} \lambda_{t+1} \left( (1+r)a_{t+1} \,-c_{t+1} \,-a_{t+2} \right) \,+\, \cdots \,+ \beta^{\top} \lambda_{\scriptscriptstyle {T}} \left( (1+r)a_{\scriptscriptstyle {T}} \,-c_{\scriptscriptstyle {T}} \,-a_{\scriptscriptstyle {T+1}} \right)</span></p>
+<a href="#fnref14">↩</a></li><li id="fn15"><p style="text-align:justify"> 각주 6) 참조.</p>
+<a href="#fnref15">↩</a></li><li id="fn16"><p style="text-align:justify"> ‘KKT 정리’ 참조</p>
+<a href="#fnref16">↩</a></li><li id="fn17"><p style="text-align:justify"> 차분방정식 ‘전방대입법’에서 <span class="math">y_{t} \,=\, \phi y_{t-1} +a+bx_{t-1}</span>의 해는 <span class="math">y_{t} \,=\, \phi^{-N} y_{\scriptscriptstyle {t+N}} \,- \frac{a}{\phi } \left( \frac{1- \phi^{-N}}{1- \phi^{-1}} \right) \,-\, \frac{b}{\phi } \sum\limits_{i=0}^{N-1} \phi^{-i} x_{t+i} \,</span>이다. <span class="math">y_{t} \,=\,a_{t}</span>, <span class="math">x_{t} \,=\,c_{t}</span>라 놓고 a=0, b=-1, <span class="math">\phi \,=\,1\,+\,r</span>을 대입하면 <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span>의 해는 </p>
+<p style="text-align:justify"><span class="math">a_{t} \,=\, \frac{a_{\scriptscriptstyle {t+N}}}{(1+r) ^{N}} \,+\, \frac{1}{1+r} \sum\limits_{i=0}^{N-1} \frac{c_{t+i} \,}{(1+r) ^{i}}</span>. 따라서 <span class="math">a_{0} \,=\, \frac{a_{\scriptscriptstyle {N}}}{(1+r) ^{N}} \,+\, \frac{1}{1+r} \sum\limits_{i=0}^{N-1} \frac{c_{i} \,}{(1+r) ^{i}}</span> 이다. </p>
+<p style="text-align:justify">N=T+1이라 하면 <span class="math">a_{0} \,=\, \frac{a_{\scriptscriptstyle {T+1}}}{(1+r) ^{T+1}} \,+\, \frac{1}{1+r} \sum\limits_{i=0}^{\top} \frac{c_{i} \,}{(1+r) ^{i}}</span><span class="math">\,=\, \frac{1}{1+r} \sum\limits_{i=0}^{\top} \frac{c_{i} \,}{(1+r) ^{i}}</span>, (∵ <span class="math">a_{\scriptscriptstyle {T+1}} \,=\,0</span>)</p>
+<a href="#fnref17">↩</a></li><li id="fn18"><p style="text-align:justify"> 차분방정식 ‘비동차부분이 외생변수인 경우’ 참조</p>
+<a href="#fnref18">↩</a></li><li id="fn19"><p style="text-align:justify">목적함수가 발산하지 않도록 유계성을 확보하는 한 가지 방법은 할인인자 <span class="math">\beta_{t}</span>를 도입하는 것이다. 여기서 <span class="math">0\,&lt;\, \beta_{t} \,&lt;\,1</span>이다.</p>
+<a href="#fnref19">↩</a></li><li id="fn20"><p style="text-align:justify"> 자세한 설명은 이 책의 범위를 넘어서므로 생략</p>
+<a href="#fnref20">↩</a></li><li id="fn21"><p style="text-align:justify"> transversality 조건은 일종의 말기조건으로 초기조건과 함께 최적해를 고정시키는데 필요한 것으로 알려져 있다. 그러나 목적식이 특정한 경우, transversality 조건이 최적해의 고정에 반드시 필요하지는 않다는 주장도 존재.</p>
+<a href="#fnref21">↩</a></li><li id="fn22"><p style="text-align:justify"> 개인의 생존기간이 무한대라는 가정은 비현실적이나 자손의 효용도 고려하는 이타적인 사람을 가정. 이 경우 <span class="math">\beta</span>는 자손의 만족이 본인의 효용에 부여하는 가중치를 의미한다. <span class="math">\beta \,&lt;\,1</span>은 자손보다 자신의 만족에 더 비중을 둔다는 의미이다.</p>
+<a href="#fnref22">↩</a></li><li id="fn23"><p style="text-align:justify"> 물론 빚을 지는 것도 제약식을 만족한다.</p>
+<a href="#fnref23">↩</a></li><li id="fn24"><p style="text-align:justify">더구나 이 제약은 영구적인 부채 자체를 금지하는 것이 아니다. 장기적으로 부채가 현재의 이자율보다 더 높은 비율로 증가하는 경우를 배제하는 것이다.</p>
+<a href="#fnref24">↩</a></li><li id="fn25"><p style="text-align:justify"> ②에서 <span class="math">\lambda_{t} \,=\, \frac{1}{\beta^{t} (1+r) ^{t}} \lambda_{0}</span>, ①에서 <span class="math">\lambda_{0} \,=\,u'(c_{0} )</span>, 양자를 결합하면 <span class="math">\lambda_{t} \,=\, \frac{1}{\beta^{t} (1+r) ^{t}} u ' (c_{0} )</span>. 이를 TVC조건 ⑤에 대입하면 <span class="math">\lim\limits_{t \to \infty } {\frac{1}{(1+r) ^{t}} u ' (c_{0} )} a_{t+1} \,=\,0</span> ⇒ <span class="math">\lim\limits_{t \to \infty } {\frac{a_{t+1}}{(1+r) ^{t+1}}} \,=\,0</span>, (∵ <span class="math">u'(c_{0} )</span>는 상수, <span class="math">\frac{1}{1+r} \lim\limits_{t \to \infty } {\frac{a_{t+1}}{(1+r) ^{t}}} \,=\,0</span>)</p>
+<a href="#fnref25">↩</a></li><li id="fn26"><p style="text-align:justify"> Ponzi 게임이란 미국의 사기꾼 Ponzi가 개발한 사업으로 다단계같이 또 다른 회원을 가입시켜 그 투자금으로 기존의 돈을 투자한 회원의 이자를 지급하는 사업을 말한다. 이와 같이 무한정한 차입은 결국 파산을 불러오기 때문에 no Ponzi game 조건이란 무제한의 차입을 제한하는 것을 의미한다. </p>
+<a href="#fnref26">↩</a></li><li id="fn27"><p style="text-align:justify"> 이런 이유로 부등식이 아닌 등식을 nPg 조건으로 보기도 한다.</p>
+<a href="#fnref27">↩</a></li><li id="fn28"><p style="text-align:justify"> 혹자에 따라서는 제약식을 <span class="math">y_{t+1} \,=\,y_{t} \,+\,g(u_{t} ,\,y_{t} )\,=\,h(u_{t} ,\,y_{t} )</span>로 보고 해밀토니안을 </p>
+<p style="text-align:justify"> <span class="math">H_{t} (u_{t} ,\,y_{t} ,\, \lambda_{t+1} )\,=f\,(u_{t} ,\,y_{t} )\,+\, \lambda_{t+1} h(u_{t} ,\,y_{t} )</span>로 정의하기도 한다. 이 경우 해밀토니안의 상태변수 미분 공식은 <span class="math">\, \lambda_{t} =\, \frac{\partial H_{t}}{\partial y_{t}}</span>로 변경된다. 결과는 같다.</p>
+<a href="#fnref28">↩</a></li><li id="fn29"><p style="text-align:justify"> 정태적 최적화 ‘라그랑지방법’ 참조</p>
+<a href="#fnref29">↩</a></li></div><h2>각주</h2><ol class="footnotes"><li id="fn28"><p style="text-align:justify"> 혹자에 따라서는 제약식을 <span class="math">y_{t+1} \,=\,y_{t} \,+\,g(u_{t} ,\,y_{t} )\,=\,h(u_{t} ,\,y_{t} )</span>로 보고 해밀토니안을 </p>
+<p style="text-align:justify"> <span class="math">H_{t} (u_{t} ,\,y_{t} ,\, \lambda_{t+1} )\,=f\,(u_{t} ,\,y_{t} )\,+\, \lambda_{t+1} h(u_{t} ,\,y_{t} )</span>로 정의하기도 한다. 이 경우 해밀토니안의 상태변수 미분 공식은 <span class="math">\, \lambda_{t} =\, \frac{\partial H_{t}}{\partial y_{t}}</span>로 변경된다. 결과는 같다.</p>
+<a href="#fnref28">↩</a></li><li id="fn29"><p style="text-align:justify"> 정태적 최적화 ‘라그랑지방법’ 참조</p>
+<a href="#fnref29">↩</a></li></ol><p class="section-nav">← <a href="dynamic-optimization-discrete-lagrangian-infinite.html">동적 Lagrangian: 무한기간</a> · <a href="dynamic-optimization-discrete.html">절별 목차</a> · 끝 →</p></body></html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>무한기간·TVC·정책함수</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>동적계획법 (Dynamic Programming)</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>무한기간·TVC·정책함수</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-programming.html">동적계획법 (Dynamic Programming)</a></p><h4 id="기간이-무한대인-경우" style="text-align:justify">기간이 무한대인 경우</h4><p style="text-align:justify">다음의 문제를 고려하자.</p><p style="text-align:justify">max <span class="math">\, \sum\limits_{t=0}^{\infty } \beta^{t} f(y_{t} ,\,u_{t} )</span>, <span class="math">0&lt; \beta &lt;1</span></p><p style="text-align:justify">s.t   <span class="math">\,y_{t+1} =g_{t} (y_{t} ,\,u_{t} )\,,\,t=\,0,\,1,\,...,\, \infty</span></p><p style="text-align:justify"> <span class="math">y_{0} \,=\,A</span></p><p style="text-align:justify">기간이 무한대일 경우 유일한 해가 존재하기 위해서 <span class="math">f(y_{t} ,\,u_{t} )</span>는 유계함수(bounded function)라고 가정한다.<sup><a href="#fn58" id="fnref58">[58]</a></sup></p><p style="text-align:justify">기간이 무한대이므로 역추론법에 의해 풀기가 어렵다.</p><p style="text-align:justify">이 문제의 Bellman 방정식은</p><p style="text-align:justify"><span class="math">V_{t} (y_{t} )=\,\max_{u_{t}} \, \left\{ f_{t} (y_{t} ,\,u_{t} )+ \beta V_{t+1} (y_{t+1} ) \right\}</span><span class="math">=\,\max_{u_{t}} \, \left\{ f_{t} (y_{t} ,\,u_{t} )+ \beta V_{t+1} [g_{t} (y_{t} ,\,u_{t} )] \right\}</span></p><p style="text-align:justify">일정한 조건을 만족할 때 <span class="math">T \to \infty</span>에 따라 정책함수와 가치함수는 시간에 불변하고<sup><a href="#fn59" id="fnref59">[59]</a></sup> 단일의 일정 함수에 수렴하게 된다.<sup><a href="#fn60" id="fnref60">[60]</a></sup> </p><p style="text-align:justify">즉 Bellman 방정식은</p><p style="text-align:justify"><span class="math">V(y_{t} )=\,\max_{u_{t}} \, \left\{ f(y_{t} ,\,u_{t} )+ \beta V(y_{t+1} ) \right\}</span><span class="math">=\,\max_{u_{t}} \, \left\{ f(y_{t} ,\,u_{t} )+ \beta V[g(y_{t} ,\,u_{t} )] \right\}</span></p><p style="text-align:justify">Bellman 방정식에서 극대화의 1차조건은</p><p style="text-align:justify"><span class="math">\frac{\partial f(y_{t} ,\,u_{t} )}{\partial u_{t}} + \beta \frac{\partial V(y_{t+1} )}{\partial y_{t+1}} \frac{\partial y_{t+1}}{\partial u_{t}} =0</span> .................①</p><p style="text-align:justify">⇒ <span class="math">\frac{\partial f(y_{t+1} ,\,u_{t+1} )}{\partial u_{t+1}} \,=\,- \beta \frac{\partial V(y_{t+2} )}{\partial y_{t+2}} \frac{\partial y_{t+2}}{\partial u_{t+1}}</span> ....................②</p><p style="text-align:justify">①로부터 정책함수 <span class="math">u_{t} =h(y_{t} )</span> 도출. 따라서 가치함수는</p><p style="text-align:justify"><span class="math">V(y_{t} )=\,\max\, \left\{ f(y_{t} ,\,h(y_{t} ))+ \beta V[(g(y_{t} ,\,h(y_{t} ))] \right\}</span></p><p style="text-align:justify">가치함수를 미분하면 포락선 정리에 따라 다음과 같이 된다.</p><p style="text-align:justify"><span class="math">\frac{\partial V(y_{t} )}{\partial y_{t}} \,=\, \frac{\partial f(y_{t} ,\,h(y_{t} ))}{\partial y_{t}} + \frac{\partial f(y_{t} ,\,h(y_{t} ))}{\partial u_{t}} \frac{\partial h}{\partial y_{t}} + \beta \frac{\partial V(y_{t+1} )}{\partial y_{t+1}} \left[ \frac{\partial g}{\partial y_{t}} + \frac{\partial g}{\partial u_{t}} \frac{\partial h}{\partial y_{t}} \right]</span></p><p style="text-align:justify"><span class="math">=\, \frac{\partial f(y_{t} ,\,h(y_{t} ))}{\partial y_{t}} + \beta \frac{\partial V(y_{t+1} )}{\partial y_{t+1}} \frac{\partial g}{\partial y_{t}}</span><span class="math">+ \left[ \frac{\partial f(y_{t} ,\,h(y_{t} ))}{\partial u_{t}} + \beta \frac{\partial V(y_{t+1} )}{\partial y_{t+1}} \frac{\partial g}{\partial u_{t}} \right] \frac{\partial h}{\partial y_{t}}</span></p><p style="text-align:justify"><span class="math">=\, \frac{\partial f(y_{t} ,\,h(y_{t} ))}{\partial y_{t}} + \beta \frac{\partial V(y_{t+1} )}{\partial y_{t+1}} \frac{\partial g}{\partial y_{t}}</span>, (∵ 1차 조건) ..............③</p><p style="text-align:justify">이를 Benveniste and Scheinkman 조건이라 한다.<sup><a href="#fn61" id="fnref61">[61]</a></sup> </p><p style="text-align:justify">⇒ <span class="math">\frac{\partial V(y_{t+1} )}{\partial y_{t+1}} \,=\, \frac{\partial f(y_{t+1} ,\,u_{t+1} )}{\partial y_{t+1}} + \beta \frac{\partial V(y_{t+2} )}{\partial y_{t+2}} \frac{\partial y_{t+2}}{\partial y_{t+1}}</span>..................④</p><p style="text-align:justify">④에 ②를 대입하면</p><p style="text-align:justify"><span class="math">\frac{\partial V(y_{t+1} )}{\partial y_{t+1}} \,=\, \frac{\partial f(y_{t+1} ,\,u_{t+1} )}{\partial y_{t+1}} - \frac{\partial f(y_{t+1} ,\,u_{t+1} )}{\partial u_{t+1}}</span> ..............⑤</p><p style="text-align:justify">⑤를 ①에 대입하면</p><p style="text-align:justify"><span class="math">\frac{\partial f(y_{t} ,\,u_{t} )}{\partial u_{t}} + \beta \left[\frac{\partial f(y_{t+1} ,\,u_{t+1} )}{\partial y_{t+1}} - \frac{\partial f(y_{t+1} ,\,u_{t+1} )}{\partial u_{t+1}} \right] \frac{\partial y_{t+1}}{\partial u_{t}} =0</span></p><p style="text-align:justify">따라서 오일러 방정식이 유도된다.</p><p style="text-align:justify">오일러방정식과 제약조건을 이용하면 이론적으로는 해를 구할 수 있다.</p><h4 id="동적계획법에서의-transversality-조건-62" style="text-align:justify">동적계획법에서의 Transversality 조건<sup><a href="#fn62" id="fnref62">[62]</a></sup></h4><p style="text-align:justify">기간이 무한대일 경우 Bellman 방정식이 성립하기 위해서는 다음의 TVC가 성립해야 한다.<sup><a href="#fn63" id="fnref63">[63]</a></sup></p><p style="text-align:justify">즉, <span class="math">\lim\limits_{\scriptscriptstyle {T \to \infty}} \beta^{\top} V(y_{\scriptscriptstyle {T}} )\,=\,0</span></p><p style="text-align:justify">이것과 라그란지안법에서 도출한 TVC와의 관계는 다음과 같다.</p><p style="text-align:justify">Bellman방정식의 1차조건에서</p><p style="text-align:justify"><span class="math">- \frac{\partial f(y_{t} ,\,u_{t} )}{\partial u_{t}} \,=\, \beta \frac{\partial V(y_{t+1} )}{\partial y_{t+1}} \frac{\partial y_{t+1}}{\partial u_{t}}</span></p><p style="text-align:justify">⇒ <span class="math">- \frac{\partial f(y_{t} ,\,u_{t} )/ \partial u_{t}}{\partial y_{t+1} /\partial u_{t}} \,=\, \beta \frac{\partial V(y_{t+1} )}{\partial y_{t+1}}</span></p><p style="text-align:justify">⇒ <span class="math">- \frac{\partial f(y_{t} ,\,u_{t} )/ \partial u_{t}}{\partial y_{t+1} / \partial u_{t}} y_{t+1} \,=\, \beta \frac{\partial V(y_{t+1} )}{\partial y_{t+1}} y_{t+1}</span><span class="math">&lt;\, \beta V(y_{t+1} )</span>, (∵ V(.)는 오목함수<sup><a href="#fn64" id="fnref64">[64]</a></sup>)</p><p style="text-align:justify">⇒ <span class="math">0\,&lt;\,- \frac{\partial f(y_{t} ,\,u_{t} )/ \partial u_{t}}{\partial y_{t+1} / \partial u_{t}} \,y_{t+1} \beta^{t-1}</span><span class="math">&lt;\, \beta^{t} V(y_{t+1} )</span> </p><p style="text-align:justify">(∵ f는 강증가함수, <span class="math">\frac{\partial y_{t+1}}{\partial u_{t}} \,=\, \frac{\partial g_{t+1}}{\partial u_{t}} \,&lt;\,0\,</span>..........<sup><a href="#fn65" id="fnref65">[65]</a></sup>)</p><p style="text-align:justify"><span class="math">\lim\limits_{t \to \infty } \beta^{t} V(y_{t} )\,=\,0</span> ⇒ <span class="math">\lim\limits_{t \to \infty } \beta^{t} V(y_{t+1} )\,=\,0</span></p><p style="text-align:justify">⇒ <span class="math">\lim\limits_{t \to \infty } {\left( - \frac{\partial f(y_{t} ,\,u_{t} )/ \partial u_{t}}{\partial y_{t+1} / \partial u_{t}} \right)} y_{t+1} \, \beta^{t-1} \,=\,0</span></p><p style="text-align:justify">⇒ <span class="math">\lim\limits_{t \to \infty } {\left( - \frac{\partial f(y_{t} ,\,u_{t} )/ \partial u_{t}}{\partial y_{t+1} / \partial u_{t}} \right)} y_{t+1} \, \beta^{t} \,=\,0</span></p><p style="text-align:justify">이는 라그란지안 법에서 구한 TVC와 같다.</p><p style="text-align:justify">예)<sup><a href="#fn66" id="fnref66">[66]</a></sup></p><p style="text-align:justify">max <span class="math">\sum\limits_{t=0}^{\infty } \beta^{t} u(c_{t} )</span></p><p style="text-align:justify">s.t </p><p style="text-align:justify"><span class="math">c_{t+1} \,+s_{t+1} =y_{t+1} +(1+r)s_{t}</span>, <span class="math">t=\,0,\,1,\,...,\, \infty</span></p><p style="text-align:justify"><span class="math">s_{0} \,=\,0</span></p><p style="text-align:justify">c<sub>t</sub> : t 기의 소비, s<sub>t</sub> : t 기의 저축, y<sub>t</sub> : t 기의 소득, r : 이자율(고정)</p><p style="text-align:justify"><span class="math">y_{t+1} =(1+r)y_{t}</span>, <span class="math">c_{t+1} =(1+r)c_{t}</span> 이므로</p><p style="text-align:justify">제약식은 다음과 같이 변형된다.</p><p style="text-align:justify"><span class="math">s_{t+1} =(1+r)(s_{t} \,+\,y_{t} -c_{t} )</span>, <span class="math">t=\,0,\,1,\,...,\, \infty</span></p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">Bellman 방정식은</p><p style="text-align:justify"><span class="math">V(s_{t} )=\,\max_{c_{t}} \, \left\{ u(c_{t} )+ \beta V(s_{t+1} ) \right\}</span></p><p style="text-align:justify">최대화의 1차 조건은 중괄호안을 미분하여</p><p style="text-align:justify">⇒ <span class="math">\,u ' (c_{t} )\,= \beta (1+r) \frac{\partial V_{t+1}}{\partial s_{t+1}}</span> ...........①</p><p style="text-align:justify">⇒ <span class="math">\,u ' (c_{t+1} )\,= \beta (1+r) \frac{\partial V_{t+2}}{\partial s_{t+2}}</span> .............②</p><p style="text-align:justify">가치함수를 다시 쓰면<sup><a href="#fn67" id="fnref67">[67]</a></sup></p><p style="text-align:justify"><span class="math">V_{t} (s_{t} )</span><span class="math">=\,\max_{c_{t}} \, \left\{ \,u(c_{t} )+ \beta V_{t+1} [(1+r)(s_{t} +y_{t} -c_{t} )] \right\}</span></p><p style="text-align:justify">가치함수를 <span class="math">s_{t}</span>에 대해 미분하면</p><p style="text-align:justify"><span class="math">\frac{\partial V_{t}}{\partial s_{t}} =\, \beta \frac{\partial V_{t+1}}{\partial s_{t+1}} (1+r)\,</span></p><p style="text-align:justify">⇒ <span class="math">\frac{\partial V_{t+1}}{\partial s_{t+1}} =\, \beta \frac{\partial V_{t+2}}{\partial s_{t+2}} (1+r)\,</span>.............④</p><p style="text-align:justify">④에 ②를 대입하면</p><p style="text-align:justify"> <span class="math">\frac{\partial V_{t+1}}{\partial s_{t+1}} =\,u ' (c_{t+1} )\,</span>.........⑤</p><p style="text-align:justify">⑤를 ①에 대입하면</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,= \beta (1+r)u'(c_{t+1} )</span></p><p style="text-align:justify">이는 오일러 방정식이다. </p><p style="text-align:justify">TVC 조건은 <span class="math">\lim\limits_{t \to \infty } {\frac{u ' (c_{t} )}{1+r}} s_{t+1} \, \beta^{t} \,=\,0</span></p><p style="text-align:justify">오일러방정식과 제약식을 이용하면 <span class="math">\left\{ a_{t} \right\}</span>, <span class="math">\left\{ c_{t} \right\}</span>를 구할 수 있음은 앞에서 설명했다.</p><p style="text-align:justify"><span class="math">s_{t} \,=\, \frac{s_{\scriptscriptstyle {t+T}}}{(1+r) ^{\top}} \,-\, \sum\limits_{i=0}^{T-1} \frac{y_{t+i} -c_{t+i} \,}{(1+r) ^{i}}</span> ................<sup><a href="#fn68" id="fnref68">[68]</a></sup></p><p style="text-align:justify"><span class="math">T \to \infty</span> 하면</p><p style="text-align:justify"><span class="math">s_{t} \,=\; \sum\limits_{i=0}^{\infty } \frac{c_{t+i} -y_{t+i} \,}{(1+r) ^{i}}</span>, (∵ TVC에 의해 <span class="math">\, \lim\limits_{\scriptscriptstyle {T \to \infty}} \frac{s_{\scriptscriptstyle {t+T}}}{(1+r) ^{\top}} \,=0</span>..........<sup><a href="#fn69" id="fnref69">[69]</a></sup>)</p><p style="text-align:justify"><span class="math">s_{t} \,+\, \sum\limits_{i=0}^{\infty } \frac{y_{t+i} \,}{(1+r) ^{i}} \,=\; \sum\limits_{i=0}^{\infty } \frac{c_{t+i} \,}{(1+r) ^{i}}</span> ..............⑥</p><p style="text-align:justify"><span class="math">u(c_{t} )=\ln c_{t}</span> 라 하면 오일러 방정식에서</p><p style="text-align:justify"><span class="math">\,c_{t+1} \,= \beta (1+r)c_{t}</span></p><p style="text-align:justify">⇒ <span class="math">\,c_{t+i} \,= \beta^{i} (1+r) ^{i} c_{t}</span></p><p style="text-align:justify">따라서 ⑥은 </p><p style="text-align:justify"><span class="math">s_{t} \,+\, \sum\limits_{i=0}^{\infty } \frac{y_{t+i} \,}{(1+r) ^{i}} \,=\; \sum\limits_{i=0}^{\infty } \beta^{i} c_{t} \,=\, \frac{c_{t}}{1- \beta } \,</span>, (∵ <span class="math">\beta &lt;1</span>)</p><p style="text-align:justify">∴ <span class="math">c_{t} \,=\,(1- \beta ) \left[ \,s_{t} \,+\, \sum\limits_{i=0}^{\infty } \frac{y_{t+i} \,}{(1+r) ^{i}} \right]</span></p><p style="text-align:justify">매기의 최적 소비정책은 부의 일정비율(<span class="math">1- \beta</span>)만 소비하는 것이다. 여기서 부는 당기 저축+미래소득의 현재가치로 구성된다. 경제학에서 저축을 재산으로 표현하기도 한다. 이 경우 부는 당기 재산+미래소득의 현재가치로 구성된다. 소비는 미래소득의 현재가치에 비례하므로 항상소득가설을 의미한다.</p><p style="text-align:right">(풀이끝)</p><p style="text-align:justify">Bellman 방정식이 시간에 불변이 아니더라도 같은 방법으로 푼다.</p><p style="text-align:justify">예) </p><p style="text-align:justify">max <span class="math">\, \sum\limits_{t=0}^{\infty } \beta^{t} u(c_{t} )</span></p><p style="text-align:justify">s.t   <span class="math">\,k_{t+1} =A_{t} f_{t} (k_{t} )-c_{t} \,,\,t=\,0,\,1,\,...,\,T-1</span></p><p style="text-align:justify"> <span class="math">0\, \leq \,k_{t} \, \leq f(k_{t} )</span></p><p style="text-align:justify"><span class="math">A_{t}</span>는 생산성 지표로 상수</p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">Bellman 방정식은</p><p style="text-align:justify"><span class="math">V_{t} (k_{t} )=\,\max_{c_{t}} \, \left\{ u(c_{t} )+ \beta V_{t+1} (k_{t+1} ) \right\}</span></p><p style="text-align:justify">1차조건을 구하기 위해 중괄호안을 미분하면</p><p style="text-align:justify"><span class="math">u'(c_{t} )\,=\, \beta \frac{\partial V_{t+1} (k_{t+1} )}{\partial k_{t+1}}</span> ................①</p><p style="text-align:justify">⇒ <span class="math">u ' (c_{t+1} )\,=\, \beta \frac{\partial V_{t+2} (k_{t+2} )}{\partial k_{t+2}}</span> ............②</p><p style="text-align:justify">(방법1)</p><p style="text-align:justify">Bellman 방정식을 다시 쓰면</p><p style="text-align:justify"><span class="math">V_{t} (k_{t} )=\,\max_{c_{t}} \, \left\{ u[A_{t} f(k_{t} )-k_{t+1} ]+ \beta V_{t+1} (k_{t+1} ) \right\}</span></p><p style="text-align:justify">가치함수를 미분하면 </p><p style="text-align:justify"><span class="math">\frac{\partial V(k_{t} )}{\partial k_{t}} \;</span><span class="math">=\,u'(c_{t} )A_{t} f ' (k_{t} )</span> </p><p style="text-align:justify">⇒ <span class="math">\frac{\partial V(k_{t+1} )}{\partial k_{t+1}} \;</span><span class="math">=\,u ' (c_{t+1} )A_{t+1} f ' (k_{t+1} )</span>..............③</p><p style="text-align:justify">③을 ①에 대입하면</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,= \beta A_{t+1} f ' (k_{t+1} )u ' (c_{t+1} )</span></p><p style="text-align:justify">이는 오일러 방정식이다.</p><p style="text-align:justify">(방법2)</p><p style="text-align:justify">Bellman 방정식을 다시 쓰면</p><p style="text-align:justify"><span class="math">V_{t} (k_{t} )=\,\max_{c_{t}} \, \left\{ u(c_{t} )+ \beta V_{t+1} [A_{t} f(k_{t} )-c_{t} ] \right\}</span></p><p style="text-align:justify">가치함수를 미분하면 </p><p style="text-align:justify"><span class="math">\frac{\partial V(k_{t} )}{\partial k_{t}} \;</span><span class="math">=\, \beta \frac{\partial V(k_{t+1} )}{\partial k_{t+1}} A_{t} f ' (k_{t} )</span></p><p style="text-align:justify">⇒ <span class="math">\frac{\partial V_{t+1}}{\partial k_{t+1}} =\, \beta \frac{\partial V_{t+2}}{\partial k_{t+2}} A_{t+1} f ' (k_{t+1} )\,</span>.............④</p><p style="text-align:justify">④에 ②를 대입하면</p><p style="text-align:justify"> <span class="math">\frac{\partial V_{t+1}}{\partial k_{t+1}} =\,u ' (c_{t+1} )A_{t+1} f ' (k_{t+1} )\,</span>...........⑤</p><p style="text-align:justify">⑤를 ①에 대입하면</p><p style="text-align:justify"><span class="math">\,u ' (c_{t} )\,= \beta A_{t+1} f ' (k_{t+1} )u ' (c_{t+1} )</span></p><p style="text-align:justify">이는 오일러 방정식이다.</p><p style="text-align:right">(풀이끝)</p><h4 id="정책함수의-도출" style="text-align:justify">정책함수의 도출</h4><p style="text-align:justify">실질적으로 Bellman 방정식을 푸는 방법은 대략 다음 세 가지이다.</p><h4 id="1-순차계산법-iteration-mathod" style="text-align:justify">1) 순차계산법(iteration mathod)</h4><p style="text-align:justify">유한기간 문제처럼 T기부터 시작해서 T-1, T-2, ... 풀어 정책함수의 일반적인 형태를 구한 후, T<span class="math">\to \infty</span> 함으로써 수렴하는 해를 발견하는 것.</p><h4 id="2-미정계수법-undetermined-cofficient-method-70" style="text-align:justify">2) 미정계수법(undetermined cofficient method)<sup><a href="#fn70" id="fnref70">[70]</a></sup></h4><p style="text-align:justify">가치함수의 형태를 추정하고 Bellman 방정식에 대입하여 미정계수를 맞추는 것.</p><p style="text-align:justify">i) 예를 들어 가치함수가 <span class="math">V(y)\,=\,A+B\,g(y)+C\,h(y)</span>의 형태라고 추정한다면 이를 Bellman 방정식의 양쪽에 대입한다.</p><p style="text-align:justify"><span class="math">V(y_{t} )=\,\max_{u_{t}} \, \left\{ f(y_{t} ,\,u_{t} )+ \beta V(y_{t+1} ) \right\}</span><span class="math">=\,\max_{u_{t}} \, \left\{ f(y_{t} ,\,u_{t} )+ \beta V(g(y_{t} ,\,u_{t} )) \right\}</span></p><p style="text-align:justify">ii) 최대화 문제를 품으로써 <span class="math">u_{t}</span> 정책함수를 구한다. </p><p style="text-align:justify">iii) 정책함수를 Bellman 방정식에 대입하여 양변이 항등식이 되는 조건에서 계수를 구한다.</p><p style="text-align:justify">이 방법은 가치함수의 형태를 정확히 예측하는 것이 중요하다. 그러나 대부분의 문제에서 정형화된 형태의 해가 존재하지 않는 경우가 많으므로 이 방법은 사용이 극히 제한적이다. 그래서 현실적으로는 아래 세 번째 방법이 많이 사용된다.</p><h4 id="3-시행착오법-71" style="text-align:justify">3) 시행착오법<sup><a href="#fn71" id="fnref71">[71]</a></sup></h4><p style="text-align:justify">단순한 형태의 가치함수를 추정하고 이를 Bellman 방정식에 대입하여 성립하지 않는다면 새로운 가치함수를 다시 Bellman 방정식에 대입하여 Bellman 방정식이 성립할 때까지 해를 향상시켜간다.</p><p style="text-align:justify"><span class="math">V^{j} (y)</span>를 j 번째로 추측된 가치함수라 하자. </p><p style="text-align:justify">i) <span class="math">V^{0} (y)</span>로 시작한다. 이를 Bellman 방정식에 대입하면 </p><p style="text-align:justify"><span class="math">V^{1} (y_{t} )=\,\max_{u_{t}} \, \left\{ f(y_{t} ,\,u_{t} )+ \beta V^{0} (y_{t+1} ) \right\}</span><span class="math">=\,\max_{u_{t}} \, \left\{ f(y_{t} ,\,u_{t} )+ \beta V^{0} (g(y_{t} ,\,u_{t} )) \right\}</span></p><p style="text-align:justify">ii) 최대화 문제를 풀므로써 <span class="math">u_{t}</span> 정책함수를 구한다. </p><p style="text-align:justify">iii) 이를 위 식에 대입했을 때 <span class="math">V^{1} (y)=\,V^{0} (y)</span>이면 해를 구한 것.</p><p style="text-align:justify">v) <span class="math">V^{1} (y) != \,V^{0} (y)</span> 이면,  <span class="math">V^{1} (y)</span>을 Bellman 방정식에 대입하고 해가 구해질 때까지 위의 절차를 반복한다.</p><p style="text-align:justify"><span class="math">V^{2} (y_{t} )</span><span class="math">=\,\max_{u_{t}} \, \left\{ f(y_{t} ,\,u_{t} )+ \beta V^{1} (g(y_{t} ,\,u_{t} )) \right\}</span></p><p style="text-align:justify">예) 다음 동적계획법 문제를 다음의 방법을 이용해서 풀어라.</p><p style="text-align:justify">   max <span class="math">\sum\limits_{t=0}^{\infty } \beta^{t} \ln c_{t}</span></p><p style="text-align:justify">   s.t  <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span>, <span class="math">t=0,\,1,\,...,\, \infty</span></p><p style="text-align:justify"> <span class="math">a_{0} \,=\,A\,</span> </p><p style="text-align:justify">a) 오일러공식</p><p style="text-align:justify">b) 미정계수법</p><p style="text-align:justify">c) 시행착오법</p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">a)</p><p style="text-align:justify">오일러공식은</p><p style="text-align:justify"><span class="math">\frac{1}{c_{t}} \,=\, \beta \frac{1}{c_{t+1}} (1+r)</span></p><p style="text-align:justify">⇒ <span class="math">c_{t+1} \,=\, \beta (1+r) c_{t}</span></p><p style="text-align:justify">제약식을 전방대입법으로 전개하면 다음과 같다.<sup><a href="#fn72" id="fnref72">[72]</a></sup></p><p style="text-align:justify"><span class="math">a_{t} \,=\, \frac{a_{\scriptscriptstyle {t+T}}}{(1+r) ^{\top}} \,+\, \frac{1}{1+r} \sum\limits_{i=0}^{T-1} \frac{c_{t+i} \,}{(1+r) ^{i}}</span></p><p style="text-align:justify">이제 기간이 무한이라고 가정하자.</p><p style="text-align:justify"><span class="math">T \to \infty</span> 이면 transversality 조건에 의해 <span class="math">\lim\limits_{\scriptscriptstyle {T \to \infty}} \, \frac{a_{\scriptscriptstyle {t+T}}}{(1+r) ^{\top}} \,=\,0</span>..........<sup><a href="#fn73" id="fnref73">[73]</a></sup></p><p style="text-align:justify">∴ <span class="math">a_{t} \,=\, \frac{1}{1+r} \sum\limits_{i=0}^{\infty } \frac{c_{t+i} \,}{(1+r) ^{i}}</span></p><p style="text-align:justify"><span class="math">\,=\, \frac{1}{1+r} \sum\limits_{i=0}^{\infty } \frac{\beta^{i} (1+r) ^{i} c_{t} \,}{(1+r) ^{i}}</span>, (∵ 오일러공식에 의해 <span class="math">c_{t+i} \,=\, \beta^{i} (1+r) ^{i} c_{t}</span>)</p><p style="text-align:justify"><span class="math">\,=\, \frac{1}{1+r} \sum\limits_{i=0}^{\infty } \beta^{i} c_{t} \,</span></p><p style="text-align:justify"><span class="math">\,=\, \frac{1}{1+r} \frac{1}{1- \beta } c_{t} \,</span></p><p style="text-align:justify">∴ <span class="math">\,c_{t} =\,(1+r)(1- \beta )a_{t} \,</span></p><p style="text-align:justify">따라서 정책함수를 구했다. 매기의 소비는 매기 재산 증가량<span class="math">\,(1+r)a_{t} \,</span>의 일정비율<span class="math">(1- \beta )\,</span>만큼만 소비하는 것이 최적이다.</p><p style="text-align:justify">정책함수를 제약식에 대입하면</p><p style="text-align:justify"><span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,c_{t}</span></p><p style="text-align:justify">⇒ <span class="math">a_{t+1} \,=\,(1+r)a_{t} \,-\,(1+r)(1- \beta )a_{t} \,=\;(1+r) \beta a_{t} \,</span></p><p style="text-align:justify">b) 미정계수법</p><p style="text-align:justify">앞에서 유한기간일 경우 이 문제의 가치함수는 <span class="math">V_{\scriptscriptstyle {T-t}} (a_{\scriptscriptstyle {T-t}} )=\,B_{t} +D_{t} \,\ln a_{\scriptscriptstyle {T-t}}</span> 의 형태를 취했다. 따라서 무한기간일 경우 가치함수는 <span class="math">V(a_{t} )=\,B\,+D\,\ln a_{t}</span> 의 형태를 띨 것으로 추정.<sup><a href="#fn74" id="fnref74">[74]</a></sup></p><p style="text-align:justify">이를 Bellman 방정식에 대입하면</p><p style="text-align:justify"><span class="math">V(a_{t} )=\,\max_{c_{t}} \, \left\{ \ln c_{t} + \beta V(a_{t+1} ) \right\}</span></p><p style="text-align:justify">⇒ <span class="math">\,B\,+D\,\ln a_{t} =\,\max_{c_{t}} \, \left\{ \ln (c_{t} )+ \beta \left[ B\,+D\,\ln \left( (1+r)a_{t} \,-\,c_{t} \right) \right] \right\}</span></p><p style="text-align:justify">중괄호안을 <span class="math">c_{t}</span>에 대하여 미분하여 최대화 문제를 풀면</p><p style="text-align:justify"><span class="math">\, \frac{1}{c_{t}} \,=\, \frac{\beta D}{(1+r)a_{t} -c_{t}} \,</span></p><p style="text-align:justify">∴ <span class="math">c_{t} \,=\, \frac{1+r}{1+ \beta D} a_{t}</span></p><p style="text-align:justify">이는 최대화시키는 값이므로 이를 Bellman 방정식에 대입하면</p><p style="text-align:justify"><span class="math">B\,+D\,\ln a_{t} =\,\ln \left( \frac{1+r}{1+ \beta D} a_{t} \right) + \beta \left[ B\,+D\,\ln \left( (1+r)a_{t} \,-\, \frac{1+r}{1+ \beta D} a_{t} \right) \right]</span></p><p style="text-align:justify"><span class="math">\left. =\,\ln \left( \frac{1+r}{1+ \beta D} \right) + \beta B\,+ \beta D\,\ln \left((1+r)\,- \frac{1+r}{1+ \beta D} \right)</span><span class="math">\,+(1+ \beta D)\,\ln \left( a_{t} \,) \right.</span></p><p style="text-align:justify">항상 성립해야 하므로 좌변과 우변을 비교하면</p><p style="text-align:justify"><span class="math">D\,=\,1+ \beta D</span> ⇒ <span class="math">D\,=\, \frac{1}{1- \beta }</span></p><p style="text-align:justify"><span class="math">\left. B=\,\ln \left( \frac{1+r}{1+ \beta D} \right) + \beta B\,+ \beta D\,\ln \left( (1+r)\,- \frac{1+r}{1+ \beta D} \right) \right.</span></p><p style="text-align:justify">⇒ <span class="math">\left. B=\, \frac{1}{1- \beta } \, \left[ \ln \left( \frac{1+r}{1+ \beta D} \right) + \beta D\,\ln \left( \frac{(1+r) \beta D}{1+ \beta D} \right) \right] \right.</span></p><p style="text-align:justify">⇒ <span class="math">B=\, \frac{1}{1- \beta } \, \left[ \ln \left( {(1+r)(1- \beta )}\right) + \frac{\beta }{1- \beta } \,\ln \left( {(1+r) \beta } \right) \right]</span></p><p style="text-align:justify">따라서 정책함수는 <span class="math">c_{t} \,=\, \frac{1+r}{1+ \beta D} a_{t}</span><span class="math">=\, {(1+r)(1- \beta )}a_{t}</span>, </p><p style="text-align:justify">가치함수는 <span class="math">V(a_{t} )=\,B\,+D\,\ln a_{t}</span></p><p style="text-align:justify">where <span class="math">D\,=\, \frac{1}{1- \beta }</span>, <span class="math">B=\, \frac{1}{1- \beta } \, \left[ \ln \left( {(1+r)(1- \beta )}\right) + \frac{\beta }{1- \beta } \,\ln \left( {(1+r) \beta } \right) \right]</span></p><p style="text-align:justify">c) 시행착오법</p><p style="text-align:justify">처음의 가치함수를 <span class="math">V^{0} (a_{t} )\,=\,\ln a_{t}</span>로 시작한다. 이를 Bellman방정식에 대입하면</p><p style="text-align:justify"><span class="math">V^{1} (a_{t} )=\,\max_{c_{t}} \, \left\{ \ln c_{t} + \beta V^{0} (a_{t+1} ) \right\}</span><span class="math">=\,\max_{c_{t}} \, \left\{ \ln c_{t} + \beta \ln ((1+r)a_{t} -c_{t} ) \right\}</span></p><p style="text-align:justify">최대화의 1차 조건은 중괄호안을 미분하면</p><p style="text-align:justify"><span class="math">\frac{1}{c_{t}} \,=\, \frac{\beta }{(1+r)a_{t} -c_{t}}</span></p><p style="text-align:justify">⇒ <span class="math">c_{t} \,=\, \frac{ 1+r}{1+ \beta }a_{t}</span></p><p style="text-align:justify">이를 가치함수에 대입하면</p><p style="text-align:justify"><span class="math">V^{1} (a_{t} )\,=\,\ln \left( \frac{1+r}{1+ \beta } a_{t} \right) + \beta \ln \left((1+r)a_{t} - \frac{1+r}{1+ \beta } a_{t} \right)</span></p><p style="text-align:justify"><span class="math">=\,\ln \left( \frac{1+r}{1+ \beta } \right) + \beta \ln \left( \frac{(1+r) \beta }{1+ \beta } \right)</span><span class="math">\,+(1+ \beta )\ln (a_{t} )</span></p><p style="text-align:justify"><span class="math">=\,B_{1}</span><span class="math">\,+(1+ \beta )\ln (a_{t} )</span>, where <span class="math">B_{1} =\,\ln \left( \frac{1+r}{1+ \beta } \right) + \beta \ln \left( \frac{(1+r) \beta }{1+ \beta } \right)</span></p><p style="text-align:justify">이를 새로운 가치함수라 보면</p><p style="text-align:justify"><span class="math">V^{2} (a_{t} )=\,\max_{c_{t}} \, \left\{ \ln c_{t} + \beta V^{1} (a_{t+1} ) \right\}</span><span class="math">=\,\max_{c_{t}} \, \left\{ \ln c_{t} + \beta [B_{1} +(1+ \beta )\ln ((1+r)a_{t} -c_{t} )] \right\}</span></p><p style="text-align:justify">중괄호안을 미분하면</p><p style="text-align:justify"><span class="math">\frac{1}{c_{t}} \,=\, \frac{\beta (1+ \beta )}{(1+r)a_{t} -c_{t}}</span></p><p style="text-align:justify">⇒ <span class="math">c_{t} \,=\, \frac{1+r}{1+ \beta + \beta^{2}} a_{t}</span></p><p style="text-align:justify">이를 가치함수에 대입하면</p><p style="text-align:justify"><span class="math">V^{2} (a_{t} )=\,\ln \left( \frac{1+r}{1+ \beta + \beta^{2}} a_{t} \right) + \beta B_{1} + \beta (1+ \beta )\ln \left((1+r)a_{t} - \frac{1+r}{1+ \beta + \beta^{2}} a_{t} \right)</span></p><p style="text-align:justify"><span class="math">=\,\ln \left( \frac{1+r}{1+ \beta + \beta^{2}} a_{t} \right) + \beta B_{1} + \beta (1+ \beta )\ln \left( \frac{( \beta + \beta^{2} )(1+r)}{1+ \beta + \beta^{2}} a_{t} \right)</span></p><p style="text-align:justify"><span class="math">=\,\ln \left( \frac{1+r}{1+ \beta + \beta^{2}} \right) + \beta B_{1} + \beta (1+ \beta )\ln \left( \frac{( \beta + \beta^{2} )(1+r)}{1+ \beta + \beta^{2}} \right)</span><span class="math">+(1+ \beta + \beta^{2} )\ln \left( a_{t} \right)</span></p><p style="text-align:justify"><span class="math">=\,B_{2}</span><span class="math">\,+(1+ \beta )\ln (a_{t} )</span>, where <span class="math">B_{2} =\,\ln \left( \frac{1+r}{1+ \beta + \beta^{2}} \right) + \beta B_{1} + \beta (1+ \beta )\ln \left( \frac{( \beta + \beta^{2} )(1+r)}{1+ \beta + \beta^{2}} \right)</span></p><p style="text-align:justify">이 과정을 k 번 계속하면</p><p style="text-align:justify"><span class="math">c_{t} \,=\, \frac{1+r}{\sum\limits_{i=0}^{k} \beta^{i}} a_{t}</span>, <span class="math">V^{k} (a_{t} )\,=\,B_{k} \,+\, \sum\limits_{i=0}^{k} \beta^{i} \,\ln (a_{t} )</span></p><p style="text-align:justify"><span class="math">k \to \infty</span>이면 <span class="math">c_{t} \,=\,(1+r)(1- \beta )a_{t}</span> </p><p style="text-align:right">(풀이끝)</p><h2>각주</h2><ol class="footnotes"><li id="fn58"><p style="text-align:justify"> 더 일반적으로 목적식에 상한이 존재하면 됨</p>
+<a href="#fnref58">↩</a></li><li id="fn59"><p style="text-align:justify"> 시간에 불변인 경우를 定常(stationary)상태라고 한다. </p>
+<a href="#fnref59">↩</a></li><li id="fn60"><p style="text-align:justify"> Bellman방정식의 우변을 범함수 T(V)라 했을 때 Bellman방정식은 V=T(V). 즉 함수 V가 일종의 고정점이 된다는 것이다. 이를 축소 사상정리(contraction mapping theorem) 또는 바나크 고정점 정리(Banach fixed-point theorem)라 한다. 이것이 성립하기 위해서는 i) 기간 목적함수가 유계, 연속, 강증가, 강오목함수, ii) 제약함수가 볼록집합. iii) 상태변수의 집합이 compact집합. </p>
+<a href="#fnref60">↩</a></li><li id="fn61"><p style="text-align:justify"> 포락선 정리를 적용하려면 가치함수가 미분가능해야 한다. 목적함수가 미분가능하다면 어떤 조건하에 가치함수도 미분가능하다는 것이 Benveniste and Scheinkman에 의해 증명되었다. 따라서 이를 Benveniste and Scheinkman 조건라고 부른다.</p>
+<a href="#fnref61">↩</a></li><li id="fn62"><p style="text-align:justify"> 기간이 유한일 경우 Bellman방정식은 마지막기에서부터 시작하므로 자연적으로 TVC조건을 충족하는 것으로부터 시작한다.</p>
+<a href="#fnref62">↩</a></li><li id="fn63"><p style="text-align:justify"> Bellman 방정식을 무한대로 돌리면 </p>
+<p style="text-align:justify"><span class="math">V(y_{t} )=\,\max_{u_{t}} \, \left\{ f(y_{t} ,\,u_{t} )+ \beta V(y_{t+1} ) \right\}</span><span class="math">=\,\max_{u_{t}} \, \left\{ f(y_{t} ,\,u_{t} )+ \beta [\max[f(y_{t+1} ,\,u_{t+1} )+ \beta V(y_{t+2} )]] \right\}</span></p>
+<p style="text-align:justify"><span class="math">=\,\max_{u_{t}} \, \left\{ f(y_{t} ,\,u_{t} )+\max \beta f(y_{t+1} ,\,u_{t+1} )+ \beta^{2} V(y_{t+2} )] \right\}</span> = <span class="math">\cdots</span> = </p>
+<p style="text-align:justify"><span class="math">=\,\max_{u_{t}} \, \left\{ f(y_{t} ,\,u_{t} )+\max \beta f(y_{t+1} ,\,u_{t+1} )+\max \beta^{2} f(y_{t+2} ,\,u_{t+2} )+ \cdots + \lim\limits_{\scriptscriptstyle {T \to \infty}} \beta^{\top} V(y_{\scriptscriptstyle {t+T}} )] \right\}</span></p>
+<p style="text-align:justify">따라서 <span class="math">V(y_{t} )</span>가 수렴하기 위해서는 <span class="math">\lim\limits_{\scriptscriptstyle {T \to \infty}} \beta^{\top} V(y_{\scriptscriptstyle {t+T}} )]\,=\,0</span>. 이를 TVC라 한다.</p>
+<a href="#fnref63">↩</a></li><li id="fn64"><p style="text-align:justify"> 축소사상정리가 성립하면 V는 오목함수임. 오목함수일 경우 한계값 &lt; 평균값. 극대화 문제 ‘볼록함수 따름정리’ 참조.</p>
+<a href="#fnref64">↩</a></li><li id="fn65"><p style="text-align:justify"> <span class="math">\frac{\partial y_{t+1}}{\partial u_{t}} \,=\, \frac{\partial g_{t+1}}{\partial u_{t}} \,&gt;\,0\,</span> 이면 상태변수의 집합이 무한대로 증가한다. 이는 축소사상정리에서 상태변수의 집합이 유계집합이라는 조건에 위배.</p>
+<a href="#fnref65">↩</a></li><li id="fn66"><p style="text-align:justify"> 다기간 피셔 소비모형을 무한대로 확장한 것임. ‘미시경제학 응용, 피셔의 다기간 소비모형’ 참조</p>
+<a href="#fnref66">↩</a></li><li id="fn67"><p style="text-align:justify"> 여기서는 (방법2)를 사용한다. 앞의 유한 기간 참조.</p>
+<a href="#fnref67">↩</a></li><li id="fn68"><p style="text-align:justify"> 차분방정식 ‘전방대입법’에서 <span class="math">y_{t} \,=\, \phi y_{t-1} +a+bx_{t-1}</span>의 해는 <span class="math">y_{t} \,=\, \phi^{-T} y_{\scriptscriptstyle {t+T}} \,- \frac{a}{\phi } \left( \frac{1- \phi^{-T}}{1- \phi^{-1}} \right) \,-\, \frac{b}{\phi } \sum\limits_{i=0}^{T-1} \phi^{-i} x_{t+i} \,</span>이다. <span class="math">y_{t} \, == \,s_{t}</span>, <span class="math">x_{t-1} \, == \,y_{t-1} -c_{t-1}</span>라 놓고 a=0, b=1, <span class="math">\phi \,=\,1\,+\,r</span>을 대입하면 <span class="math">s_{t} \,=\,(1+r)s_{t-1} \,+y_{t} -\,c_{t}</span></p>
+<p style="text-align:justify"> <span class="math">=\,(1+r)s_{t-1} \,+(1+r)(y_{t-1} -\,c_{t-1} )</span>의 해는 </p>
+<p style="text-align:justify"><span class="math">s_{t} \,=\, \frac{s_{\scriptscriptstyle {t+T}}}{(1+r) ^{\top}} \,-\, \sum\limits_{i=0}^{T-1} \frac{y_{t+i} -c_{t+i} \,}{(1+r) ^{i}}</span> , 자세한 설명은 차분방정식 ‘전방대입법’ 참조. </p>
+<a href="#fnref68">↩</a></li><li id="fn69"><p style="text-align:justify"> 오일러 방정식에서 <span class="math">u ' (c_{t} )\,=\, \frac{u'(c_{0} )}{\beta^{t} (1+r) ^{t}}</span>. 이를 TVC 조건에 대입하면 <span class="math">\lim\limits_{t \to \infty } {\frac{u ' (c_{0} )s_{t+1}}{(1+r) ^{t+1}}} \,=\,0</span> ⇒  </p>
+<p style="text-align:justify"> <span class="math">\lim\limits_{t \to \infty } {\frac{s_{t+1}}{(1+r) ^{t+1}}} \,=\,0</span>, (∵ <span class="math">u'(c_{0} )</span>는 상수) ⇒ <span class="math">\lim\limits_{\tau \to \infty } {\frac{s_{\tau +1}}{(1+r) ^{\tau +1}}} \,=\,0</span> ⇒ <span class="math">\lim\limits_{t \to \infty } {\frac{s_{\scriptscriptstyle {t+N}}}{(1+r) ^{t+N}}} \,=\,0</span>, (∵ <span class="math">\tau +1\,=\,t+N</span>, N은 일정 상수이므로 <span class="math">\tau \to \infty</span> 이면 <span class="math">t \to \infty</span>) ⇒ <span class="math">\frac{1}{(1+r) ^{N}} \lim\limits_{t \to \infty } {\frac{s_{\scriptscriptstyle {t+N}}}{(1+r) ^{t}}} \,=\,0</span> ⇒ <span class="math">\lim\limits_{t \to \infty } {\frac{s_{\scriptscriptstyle {t+N}}}{(1+r) ^{t}}} \,=\,0</span></p>
+<a href="#fnref69">↩</a></li><li id="fn70"><p style="text-align:justify"> 추측법이라고도 한다.</p>
+<a href="#fnref70">↩</a></li><li id="fn71"><p style="text-align:justify"> 가치함수 향상법(value iteration method)이라고도 한다.</p>
+<a href="#fnref71">↩</a></li><li id="fn72"><p style="text-align:justify"> 차분방정식 ‘전방대입법’ 참조</p>
+<a href="#fnref72">↩</a></li><li id="fn73"><p style="text-align:justify"> 해가 존재하기 위해서는 TVC이 필요. TVC이 위 식과 같은 이유는 동적 KKT 방법에서 예) 참조.</p>
+<a href="#fnref73">↩</a></li><li id="fn74"><p style="text-align:justify"> 시기별 효용함수가 CRRA, CARA, 2차 함수의 형태를 취하면 가치함수도 같은 형태를 취한다.</p>
+<a href="#fnref74">↩</a></li></ol><p class="section-nav">← <a href="dynamic-programming-discounted-finite.html">시간할인이 있는 유한기간 문제</a> · <a href="dynamic-programming.html">절별 목차</a> · <a href="dynamic-programming-stochastic.html">확률 동적계획</a> →</p></body></html>

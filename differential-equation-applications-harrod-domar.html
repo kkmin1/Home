@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Domar·Harrod–Domar 성장모형</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<style id="blog-readability-patch">
+body{max-width:980px;margin:0 auto;padding:1.5rem 1rem 3rem;line-height:1.72;overflow-wrap:break-word}
+h1{line-height:1.3} h2{margin-top:2.2rem;border-bottom:1px solid #bbb;padding-bottom:.25rem}
+h3{margin-top:1.6rem} h4{margin-top:1.3rem}
+.chapter-nav{position:sticky;top:0;z-index:20;padding:.8rem;border:1px solid #ccc;background:#fafafa;overflow-x:auto;white-space:nowrap;border-radius:6px}
+table{display:block;width:100%;max-width:100%;overflow-x:auto;border-collapse:collapse}
+th,td{padding:.45rem .6rem;vertical-align:top}
+img,svg{max-width:100%!important;height:auto!important;display:block;margin:1rem auto}
+.katex-display,.math-display,div.math,p.math{max-width:100%;overflow-x:auto;overflow-y:hidden}
+.footnotes{margin-top:3rem;padding-top:1rem;border-top:1px solid #bbb;font-size:.92em}
+@media(max-width:640px){body{padding:.8rem .65rem 2rem;font-size:16px}h1{font-size:1.65rem}h2{font-size:1.35rem}h3{font-size:1.18rem}.chapter-nav{font-size:.9rem}}
+</style>
+<title>미분방정식의 경제·사회과학 응용</title>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav">
+<a href="system-of-differential equation.html">미분방정식 목차</a> ·
+<a href="differential-equation-basics.html">기초·1계</a> ·
+<a href="differential-equation-second-order.html">2계·고계</a> ·
+<a href="differential-equation-systems.html">연립계·안정성</a> ·
+<a href="phase diagram.html">위상도</a> ·
+<a href="differential-equation-applications.html">응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>Domar·Harrod–Domar 성장모형</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="system-of-differential equation.html">미분방정식</a> · <a href="differential-equation-applications.html">미분방정식의 경제·사회과학 응용</a></p><h4 style="text-align:justify">Domar의 성장모형<sup><a href="#fn80" id="fnref80">[80]</a></sup></h4><p style="text-align:justify">케인즈 총수요 모형을 가정. 케인즈가 단기모형에 집중했다면 즉, Y = C(Y) + I + G</p><p style="text-align:justify">Domar는 여기에 시간변수를 도입하여 장기적 관점에서 케인즈모형을 연구</p><p style="text-align:justify">(가정)</p><p style="text-align:justify">i) 기간당 투자의 변화는 총수요에 영향을 미친다.<sup><a href="#fn81" id="fnref81">[81]</a></sup></p><p style="text-align:justify">균형이 되기 위해서는 총수요는 총생산량과 일치해야 한다.</p><p style="text-align:justify">총수요에서 정부와 해외부문은 고려하지 않는다.</p><p style="text-align:justify"><span class="math">Y^{p} (t)=C(Y(t))+I(t)</span></p><p style="text-align:justify"><span class="math">Y^{d} (t)\,:\,</span>t기의 총수요</p><p style="text-align:justify"><span class="math">Y^{P} (t)\,:\,</span>t기의 총생산</p><p style="text-align:justify"><span class="math">Y^{d} (t)\,=\,</span><span class="math">Y^{P} (t)\,</span></p><p style="text-align:justify">따라서</p><p style="text-align:justify"><span class="math">Y^{p} (t)=C(Y(t))+I(t)</span></p><p style="text-align:justify">ii) The marginal product of capital is constant.<sup><a href="#fn82" id="fnref82">[82]</a></sup><sup><a href="#fn83" id="fnref83">[83]</a></sup> </p><p style="text-align:justify"><span class="math">Y^{p} (t)\,= \rho K(t)</span> ; <span class="math">\rho</span>는 자본계수(산출량/자본비율)로 일정<sup><a href="#fn84" id="fnref84">[84]</a></sup></p><p style="text-align:justify"><span class="math">\frac{dY^{p}}{dt} \,=\, \rho \frac{dK}{dt} \,=\, \rho I(t)</span>..............⓪</p><p style="text-align:justify">iii) 소득의 일정 부분은 저축하고 이는 모두 투자된다.<sup><a href="#fn85" id="fnref85">[85]</a></sup></p><p style="text-align:justify"><span class="math">sY=S=I</span> </p><p style="text-align:justify">S ; 저축</p><p style="text-align:justify">s ; 한계저축성향 </p><p style="text-align:justify">I ; 투자</p><p style="text-align:justify"><span class="math">Y=\, \frac{1}{s} I</span> ...............②</p><p style="text-align:justify">②을 t로 미분하면</p><p style="text-align:justify"><span class="math">\frac{dY}{dt} = \frac{1}{s} \frac{dI}{dt}</span>..............③</p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">완전한 시장청산을 가정했을 때 매년의 생산능력은 완전히 사용되어야 한다.</p><p style="text-align:justify">즉 총수요와 잠재적 생산량이 일치해야 한다.</p><p style="text-align:justify"><span class="math">Y^{d} (t)=Y^{p} (t)</span></p><p style="text-align:justify"><span class="math">\frac{dY^{d} (t)}{dt} = \frac{dY^{p} (t)}{dt}</span>................④</p><p style="text-align:justify">④에 ⓪과 ③을 대입하면</p><p style="text-align:justify"><span class="math">\frac{1}{s} \frac{dI}{dt}</span><span class="math">\,=\, \rho I(t)</span> </p><p style="text-align:justify">이는 다시</p><p style="text-align:justify"><span class="math">\frac{1}{I(t)} \frac{dI(t)}{dt} \,=\,s \rho</span></p><p style="text-align:justify">이를 적분하면</p><p style="text-align:justify"><span class="math">\ln I(t)= \rho st+A</span></p><p style="text-align:justify"><span class="math">I(t)=e^{\rho st} \times e^{A}</span></p><p style="text-align:justify"><span class="math">I(0)=e^{A}</span> ⇒ <span class="math">A\,=\ln I(0)</span></p><p style="text-align:justify">∴ <span class="math">I(t)=I(0)e^{\rho st}</span></p><p style="text-align:left">경제의 총수요와 생산능력이 일치하기 위해서는(즉 자본의 완전이용이 이루어지기 위해서는) 투자가<span class="math">\rho s</span>의 성장률로 증가하여야만 하는데 이를 필요성장률(required rate of growth) 이라고 한다.</p><p style="text-align:left">한편 ③에서 <span class="math">Y(t)= \frac{1}{s} I(t)</span></p><p style="text-align:left"><span class="math">Y(t)= \frac{1}{s}I(0)e^{\rho st}</span></p><p style="text-align:left">따라서 총수요와 생산능력이 일치하기 위해서는 총소득 또한 <span class="math">\rho s</span>의 성장률로 증가하여야만 한다.</p><h4 style="text-align:left">면도날균형(Razor’s edge steady-state)</h4><p style="text-align:left">실제성장률을 r이라 할 때 t기의 투자는 </p><p style="text-align:left"><span class="math">I(t)=I(0)e^{rt}</span></p><p style="text-align:left"><span class="math">\frac{dI}{dt} =rI(0)e^{rt}</span></p><p style="text-align:left">이때 총수요 변화율과 총생산 변화율은</p><p style="text-align:left"><span class="math">\frac{dY}{dt} = \frac{1}{s} \frac{dI}{dt} = \frac{r}{s} I(0)e^{rt}</span></p><p style="text-align:left"><span class="math">\frac{dY^{p}}{dt} \,=\, \rho \frac{dK}{dt} \,=\, \rho I(t)= \rho I(0)e^{rt}</span></p><p style="text-align:justify">따라서</p><p style="text-align:justify"><span class="math">\frac{\frac{dY(t)}{dt}}{\frac{dY^{p} (t)}{dt}} = \frac{r}{\rho s}</span></p><p style="text-align:justify">i) <span class="math">r&gt; \rho s</span>  ⇒  <span class="math">\frac{dY(t)}{dt} &gt; \frac{dY^{p} (t)}{dt}</span></p><p style="text-align:justify">투자가 필요성장률보다 빠르게 증가하는데 총수요가 생산량보다 많으므로 공급부족 발생 ⇒ 더욱 투자 ⇒ 공급부족 심화 ⇒ 더욱 투자 ⇒ 공급부족 심화 ⇒ ....</p><p style="text-align:justify">ii) <span class="math">r&lt; \rho s</span>  ⇒  <span class="math">\frac{dY(t)}{dt} &lt; \frac{dY^{p} (t)}{dt}</span></p><p style="text-align:justify">투자가 필요성장률보다 느리게 증가하는데 총수요보다 생산량이 많으므로 과잉공급 발생 ⇒ 투자 줄임 ⇒ 과잉공급 심화 ⇒ 투자 줄임 ⇒ 과잉공급 심화 ⇒....</p><p style="text-align:justify">한번 균형에서 벗어나면 경제의 내생적 힘에 의하여 원래의 균형상태로 돌아갈 수 있는 방법이 없다. 이때 <span class="math">r= \rho s</span>를 면도날 균형이라 부른다.<sup><a href="#fn86" id="fnref86">[86]</a></sup> </p><h4 style="text-align:justify">Harrod-Domar 모형의 적용과 한계<sup><a href="#fn87" id="fnref87">[87]</a></sup></h4><p style="text-align:justify">요약하면 저축률에 자본의 한계생산을 곱한 값에서 감가상각률을 뺀 것이 산출 증가율이 된다. 따라서 저축률이나 자본의 한계생산을 높이거나 감가상각률을 낮추면 Harrod–Domar 모형에서 산출 성장률이 높아진다.</p><p style="text-align:justify">이 모형은 성장이 노동과 자본의 양에 달려 있으며, 투자가 늘면 자본축적을 통해 경제성장이 촉진된다고 본다. 개발도상국에서는 노동은 상대적으로 풍부하지만 물적 자본이 부족하여 성장이 제약될 수 있고, 낮은 평균소득 때문에 저축과 투자도 충분히 이루어지기 어렵다고 설명한다.</p><p style="text-align:justify">따라서 경제성장을 위해 저축을 늘려 투자를 확대하고, 기술진보를 통해 투자의 효율성을 높이는 정책이 중요하다는 함의를 갖는다.</p><p style="text-align:justify">또한 경제가 자연스럽게 완전고용과 안정적 성장률에 도달하지 않는다고 본다는 점에서 케인스주의적 관점과 유사하다.</p><h4 style="text-align:justify">모형의 의미와 시사점</h4><p style="text-align:justify">주요 비판은 가정이 지나치게 강하다는 점이다. 특히 노동과 자본의 상대가격과 투입비율이 고정되어 있다는 가정 때문에 완전고용을 유지할 만큼의 성장이 자동으로 보장되지 않는다. 투자자가 산출 변화에만 반응한다는 가속도원리 역시 현실성이 부족하다는 비판을 받는다.</p><p style="text-align:justify">개발경제학 관점에서는 경제성장과 경제발전을 사실상 동일시한다는 비판도 있다. 또한 빈곤국이 자본투자를 위해 차입을 확대해야 한다는 함의는 이후 상환부담 문제를 초래할 수 있다.</p><p style="text-align:justify">저축의 내생성도 중요한 문제다. Harrod–Domar 모형에서 핵심 변수인 저축률을 정책이 쉽게 조절할 수 있는 외생적 매개변수로 볼 수 있는지는 의문이다. 실제 저축률은 1인당 소득수준과 소득분배 등 여러 요인의 영향을 받을 수 있다.</p><p style="text-align:justify">예) http://www.neas-seminars.com/Discussions/Topic11438.aspx , </p><p style="text-align:justify">    http://www.neas-seminars.com/Discussions/Attachment3831.aspx </p><h2>각주</h2><ol class="footnotes"><li id="fn80"><p style="text-align:justify"> Harrod 성장모형도 Domar 모형과 비슷하므로 이를 합하여 Harrod-Domar 성장모형이라고도 함.</p>
+<a href="#fnref80">↩</a></li><li id="fn81"><p style="text-align:justify"> 케인즈모형의 장기화 </p>
+<a href="#fnref81">↩</a></li><li id="fn82"><p style="text-align:justify"> the production function exhibits constant returns to scale. This implies capital's marginal and average products are equal. 총산출량은 자본에만 의존하고 노동에는 의존하지 않는다. 자본은 완전히 사용된다. 즉, 생산함수는 자본의 함수로 <span class="math">Y_{t} \,=\, \rho \,\min[K_{t} \,,\,L_{t} ]</span> </p>
+<a href="#fnref82">↩</a></li><li id="fn83"><p style="text-align:justify"> 이는 가속도효과(accelerator effect)를 설명한다. 즉 소득의 증가는 소비의 증가를 야기시키고 이는 더 많은 생산설비를 필요로 하기 때문에(자본계수로 설명되는 부분) 투자의 증가를 유발하고 투자의 증가는 소득의 증가를 유발(투자승수로 설명되는 부분). 즉 자본은 투자승수와 자본계수를 통해 더 빨리 변동.</p>
+<a href="#fnref83">↩</a></li><li id="fn84"><p style="text-align:justify"> 혹은 <span class="math">K= \delta Y^{p} (t)</span> ; δ 는 자본/산출량비율. <span class="math">Y^{p} (t)</span>를 생산하기위해 필요한 자본량 K</p>
+<a href="#fnref84">↩</a></li><li id="fn85"><p style="text-align:justify"> 케인즈모형의 총수요 = 총공급을 가정하고 있음. </p>
+<p style="text-align:justify"><span class="math">Y^{p} =C+I</span> , <span class="math">C=cY^{p}</span></p>
+<p style="text-align:justify"><span class="math">(1-c)Y^{p} =I</span> ; c 한계소비성향</p>
+<p style="text-align:justify"><span class="math">Y^{P} \,=\, \frac{1}{s} I\,,\,s=1-c</span> ; 한계저축성향</p>
+<p style="text-align:justify"><span class="math">sY^{p} =S=I</span></p>
+<a href="#fnref85">↩</a></li><li id="fn86"><p style="text-align:justify"> 양쪽면이 (깍아지른 면도날 같이) 날카로운 낭떨어지 위에 서 있는 사람이 한번 실족하면 영원히 협곡 아래로 떨어져버리고 돌이킬 수 없는 것처럼 현재의 균형이 위험한 상태에 놓여있다는 것을 의미. 이러한 현상을 간략한 숫자를 대입하여 예시한 것은 http://www.sjsu.edu/faculty/watkins/growthmodels.htm 참조.</p>
+<a href="#fnref86">↩</a></li><li id="fn87"><p style="text-align:justify"> http://en.wikipedia.org/wiki/Harrod%E2%80%93Domar_model </p>
+<a href="#fnref87">↩</a></li></ol><p class="section-nav">← <a href="differential-equation-applications-excess-demand.html">초과수요와 가격동학</a> · <a href="differential-equation-applications.html">절별 목차</a> · <a href="differential-equation-applications-solow.html">Solow 성장모형과 균제성장</a> →</p></body></html>

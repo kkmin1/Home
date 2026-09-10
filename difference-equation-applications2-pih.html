@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="blog.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: {inlineMath: [['\\(','\\)'], ['$', '$']], displayMath: [['\\[','\\]'], ['$$','$$']]},
+  svg: {fontCache: 'global'}
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+.chapter-shell{max-width:980px;margin:0 auto;padding:28px 24px 56px;line-height:1.78}
+.chapter-shell table{border-collapse:collapse;max-width:100%;margin:1.2rem auto}
+.chapter-shell td,.chapter-shell th{border:1px solid #bbb;padding:.45rem .65rem;vertical-align:top}
+.chapter-shell h1{margin-bottom:1.2rem}
+.chapter-shell h2{margin-top:2.2rem}
+.chapter-shell h4{margin-top:1.55rem;font-size:1.12rem}
+.chapter-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:38px 0 8px;padding-top:18px;border-top:1px solid #ddd}
+.source-figure{display:block;max-width:100%;height:auto;margin:1.25rem auto}
+.source-graph{margin:1.4rem auto;text-align:center;overflow-x:auto}
+.math{overflow-x:auto}
+</style>
+<style id="econ-math-cleanup-patch">
+html{scroll-behavior:smooth}
+body{max-width:980px;margin:0 auto;padding:1.5rem 1rem 3rem;line-height:1.72;overflow-wrap:break-word}
+table{display:block;width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-collapse:collapse}
+img,svg{max-width:100%!important;height:auto!important}
+.katex-display,.math-display,div.math,p.math{max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+pre,code{max-width:100%;overflow-x:auto}
+.footnotes{margin-top:3rem;padding-top:1rem;border-top:1px solid #bbb;font-size:.92em;line-height:1.6}
+@media(max-width:640px){body{padding:.8rem .65rem 2rem;font-size:16px}h1{font-size:1.65rem}h2{font-size:1.35rem}h3{font-size:1.18rem}h4{font-size:1.05rem}}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><h1>항상소득가설</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="difference-equation.html">차분방정식</a> · <a href="difference-equation-applications2.html">6장. 경제학 응용 II</a></p><h4 style="text-align:justify">항상소득가설(permanent income hypothesis)</h4><p style="text-align:justify">실질소득을 정기수입인 항상소득과 임시수입인 변동소득으로 나누고 소비도 항상소비와 변동소비로 나눌 경우 실질소득 가운데 항상소득의 비율이 클수록 소비성향이 높고 변동소득의 비율이 클수록 저축성향이 높아진다는 이론으로 프리드먼(M．Friedman)이 제창한 가설이다.<sup><a href="#fn64" id="fnref64">[64]</a></sup></p><p style="text-align:justify">항상소득가설은 임시소득이 발생해도 생애전체적 관점에서 보면 소비에 영향을 미칠만한 금액이 아니라는 것을 이론적 배경으로 하고 있다.<sup><a href="#fn65" id="fnref65">[65]</a></sup></p><p style="text-align:justify">항상소득가설(permanent income hypothesis, PIH)은 미국 경제학자 밀턴 프리드먼이 제시한 소비이론이다. 가장 단순한 형태에서는 소비자의 소비패턴이 일시소득의 변화보다 항상소득의 변화에 주로 좌우된다고 본다. 따라서 일시적·잠정적인 소득 변화는 소비지출에 미치는 영향이 작지만, 지속적인 소득 변화는 소비지출에 큰 영향을 줄 수 있다는 것이 핵심 결론이다.<sup><a href="#fn66" id="fnref66">[66]</a></sup></p><h4 style="text-align:justify">모형</h4><p style="text-align:justify">i) <span class="math">\(Y_{t} \,=\,Y_{t}^{p} \,+\,Y_{t}^{\top}\)</span>, </p><p style="text-align:justify"><span class="math">\(Y_{t} \,\)</span> : t기의 소득, <span class="math">\(Y_{t}^{p}\)</span> : t기의 항상소득, <span class="math">\(Y_{t}^{\top}\)</span> : t기의 임시소득</p><p style="text-align:justify">t기의 소득은 항상소득과 임시소득으로 구성</p><p style="text-align:justify">ii) <span class="math">\(C_{t} =bY_{t+1}^{e}\)</span>, <span class="math">\(\,0\,&lt;\,b\,&lt;\,1\)</span> ....................① </p><p style="text-align:justify"><span class="math">\(C_{t}\)</span> : t기의 항상소비</p><p style="text-align:justify">t기의 소비는 t+1기 항상소득의 예측치에 비례적이다.(소비의 항상소득가설)</p><p style="text-align:justify">iii) <span class="math">\(Y_{t+1}^{e} -Y_{t}^{e} = \alpha (Y_{t} -Y_{t}^{e} )\)</span>, <span class="math">\(0\,&lt;\, \alpha \,&lt;\,1\)</span></p><p style="text-align:justify">⇒ <span class="math">\(Y_{t+1}^{e} = \alpha Y_{t} +(1- \alpha )Y_{t}^{e}\)</span> ...............②</p><p style="text-align:justify">(t+1)기에 대한 항상소득 예측치는 t기의 소득과 t기의 예측소득과의 가중평균으로 결정. (적응적기대가설(adaptive expectation theory))</p><p style="text-align:justify">(풀이)</p><p style="text-align:justify">②는 t기에 대해서도 성립하므로</p><p style="text-align:justify"><span class="math">\(Y_{t}^{e} = \alpha Y_{t-1} +(1- \alpha )Y_{t-1}^{e}\)</span></p><p style="text-align:justify">이를 ②에 다시 대입하면</p><p style="text-align:justify"><span class="math">\(Y_{t+1}^{e} = \alpha Y_{t} +(1- \alpha )( \alpha Y_{t-1} +(1- \alpha )Y_{t-1}^{e} )\)</span></p><p style="text-align:justify"><span class="math">\(= \alpha Y_{t} + \alpha (1- \alpha )Y_{t-1} +(1- \alpha ) ^{2} Y_{t-1}^{e}\)</span></p><p style="text-align:justify"><span class="math">\(= \alpha Y_{t} + \alpha (1- \alpha )Y_{t-1} +(1- \alpha ) ^{2} ( \alpha Y_{t-2} +(1- \alpha )Y_{t-2}^{e} )\)</span></p><p style="text-align:justify"><span class="math">\(= \alpha Y_{t} + \alpha (1- \alpha )Y_{t-1} + \alpha (1- \alpha ) ^{2} Y_{t-2} +(1- \alpha ) ^{3} Y_{t-2}^{e}\)</span></p><p style="text-align:justify">이런 식으로 계속 전개하면</p><p style="text-align:justify"><span class="math">\(Y_{t+1}^{e} \,= \alpha \, \sum\limits_{i=0}^{t-1} (1- \alpha ) ^{i} Y_{t-i} +(1- \alpha ) ^{t} Y_{0}\)</span></p><p style="text-align:justify">이를 ①에 대입하면</p><p style="text-align:justify"><span class="math">\(C_{t} =b \left[ \alpha \, \sum\limits_{i=0}^{t-1} (1- \alpha ) ^{i} Y_{t-i} +(1- \alpha ) ^{t} Y_{0} \right]\)</span>..........③</p><p style="text-align:justify">③은 (t-1)기에도 성립하므로</p><p style="text-align:justify"><span class="math">\(C_{t-1} =b \left[ \alpha \, \sum\limits_{i=1}^{t-1} (1- \alpha ) ^{i-1} Y_{t-i} +(1- \alpha ) ^{t-1} Y_{0} \right]\)</span></p><p style="text-align:justify">양변에 <span class="math">\((1- \alpha )\)</span>를 곱하면</p><p style="text-align:justify"><span class="math">\((1- \alpha )C_{t-1} =b \left[ \alpha \, \sum\limits_{i=1}^{t-1} (1- \alpha ) ^{i} Y_{t-i} +(1- \alpha ) ^{t} Y_{0} \right]\)</span>..............④</p><p style="text-align:justify">③에서 ④를 빼면</p><p style="text-align:justify"><span class="math">\(C_{t} -(1- \alpha )C_{t-1} \,=\,b \alpha Y_{t}\)</span></p><p style="text-align:justify">⇒ <span class="math">\(C_{t} =(1- \alpha )C_{t-1} \,+b \alpha Y_{t}\)</span></p><p style="text-align:justify">t 기의 소비는 전기의 소비를 반영한다.</p><p style="text-align:justify">이는 비동차항이 함수식인 선형 비동차 미분방정식이므로 공식을 적용하면</p><p style="text-align:justify"><span class="math">\(C_{t} =(1- \alpha ) ^{t} C_{0} \,+b \alpha \sum\limits_{i=0}^{t-1} (1- \alpha ) ^{i} Y_{t-i}\)</span></p><p style="text-align:justify"><span class="math">\(\sum\limits_{i=0}^{t-1} (1- \alpha ) ^{i} Y_{t-i}\)</span> 는 과거 실제소득의 가중평균을 의미한다. 따라서 t기의 항상소비는 과거 항상소득의 가중평균으로 구성된다.<sup><a href="#fn67" id="fnref67">[67]</a></sup></p><p style="text-align:justify">현재로부터 기간이 멀어질수록 반영되는 가중치가 작아진다. 즉 현재소비는 현재소득은 물론 과거소득의 가중평균으로 이루어진다.</p><p style="text-align:justify">케인즈의 승수이론에 따르면 한계소비성향은 <span class="math">\(b\)</span>이고 이에 따른 정부지출 승수효과는 <span class="math">\(\frac{1}{1-b}\)</span>이다. 그러나 적응적 기대모형에서 현재소득에 대한 한계소비성향은 <span class="math">\(b \alpha\)</span>로 더 작은 효과를 가진다.<sup><a href="#fn68" id="fnref68">[68]</a></sup> 따라서 확장 재정정책에 의해 현재의 국민소득을 증가시킨다 해도 정부지출 승수효과는 <span class="math">\(\frac{1}{1-b \alpha }\)</span>로 더 작은 효과를 갖는다.</p><p style="text-align:justify">만약 <span class="math">\(\alpha \,=\,0\)</span>라면, 즉 다음 기의 항상소득 예측치가 전기의 항상소득 예측치에만 의존한다면 승수효과는 1로 재정정책은 국민소득에 아무런 영향을 미치지 못한다.</p><h4 style="text-align:justify">시사점</h4><p style="text-align:justify">일시적인 소득의 증가는 상당한 소비의 증가로 이어지지 않으며, 지속적으로 기대되는 항상소득이 소비에 영향을 미친다. 조세감면과 같은 일시적인 소득증가를 일으키는 정부정책은 각 개인의 항상소득에는 영향을 미치지 못해 소비증대로 이어지지 못함. 따라서 항상소득가설에 따르면 정부 지출증대로 총수요를 증가시켜 경기부양을 한다는 케인즈식 총수요관리 정책은 효과가 미미할 것이다.</p><h2>각주</h2><ol class="footnotes"><li id="fn64"><p style="text-align:justify"> http://terms.naver.com/entry.nhn?docId=50261 </p>
+<a href="#fnref64">↩</a></li><li id="fn65"><p style="text-align:justify"> &lt;클릭 경제교육. &lt;KDI&gt; http://click.kdi.re.kr/customer/search_list.jsp?Top_keyword=%C7%D7%BB%F3%BC%D2%B5%E6%B0%A1%BC%B3&amp;x=0&amp;y=0 </p>
+<a href="#fnref65">↩</a></li><li id="fn66"><p style="text-align:justify"> http://en.wikipedia.org/wiki/Permanent_income_hypothesis </p>
+<a href="#fnref66">↩</a></li><li id="fn67"><p style="text-align:justify"> 그러나 실증적 연구결과는 이를 뒷받침하고 있지 않다.</p>
+<a href="#fnref67">↩</a></li><li id="fn68"><p style="text-align:justify"> <span class="math">\(0\,&lt;\, \alpha \,&lt;\,1\)</span> 이므로</p>
+<a href="#fnref68">↩</a></li></ol><p class="section-nav">← <a href="difference-equation-applications2-cobweb.html">거미집모형과 비선형 공급</a> · <a href="difference-equation-applications2.html">절별 목차</a> · <a href="difference-equation-applications2-solow.html">이산형 Solow 성장모형</a> →</p></body></html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>정태문제와 다기간 이산시간 문제</title>
+<!-- KaTeX 수식 렌더링 -->
+<link href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" rel="stylesheet"/>
+<script>
+(function() {
+  function renderAllMath() {
+    document.querySelectorAll('span.math').forEach(function(el) {
+      katex.render(el.textContent, el, {throwOnError: false, displayMode: false});
+    });
+  }
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+  script.onload = renderAllMath;
+  document.head.appendChild(script);
+})();
+</script>
+<style>
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em;
+    line-height: 1.5;
+    color: #222;
+    background: #fff;
+  }
+  h1 { font-size: 1.8em; border-bottom: 2px solid #333; padding-bottom: .3em; margin-top: 1.5em; }
+  h2 { font-size: 1.5em; border-bottom: 1px solid #999; padding-bottom: .2em; margin-top: 1.3em; }
+  h3 { font-size: 1.2em; margin-top: 1.1em; color: #444; }
+  h4, h5, h6 { font-size: 1.05em; margin-top: 1em; color: #555; }
+  p  { margin: 0.38em 0; }
+  .hml-empty { height: 0.35em; line-height: 0.35em; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2em auto;
+    font-size: 10pt;
+  }
+  td, th {
+    border: 1px solid #aaa;
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  table p {
+    margin: 0;
+  }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .hml-figure {
+    display: block;
+    margin: 0.15em auto;
+    text-align: center;
+    overflow-x: auto;
+  }
+  .hml-figure svg { margin: 0 auto !important; }
+  .img-placeholder {
+    background: #f0f0f0;
+    border: 1px dashed #aaa;
+    padding: 1em;
+    text-align: center;
+    color: #888;
+    margin: 1em 0;
+  }
+  .footnotes {
+    font-size: 0.85em;
+    color: #555;
+  }
+  .footnotes li { margin-bottom: .4em; }
+  sup a { color: #0066cc; text-decoration: none; }
+  sup a:hover { text-decoration: underline; }
+  .katex-display { overflow-x: auto; overflow-y: hidden; }
+</style>
+<title>이산형 동적최적화</title>
+<style id="blog-readability-patch">
+html { scroll-behavior: smooth; }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  line-height: 1.72;
+  overflow-wrap: break-word;
+}
+h1 { margin-top: 0.5rem; line-height: 1.3; }
+h2 { margin-top: 2.2rem; padding-bottom: .25rem; border-bottom: 1px solid #bbb; line-height: 1.35; }
+h3 { margin-top: 1.6rem; line-height: 1.4; }
+h4 { margin-top: 1.25rem; line-height: 1.45; }
+
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 6px;
+}
+.chapter-nav a { display: inline-block; margin-right: .25rem; }
+
+table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  -webkit-overflow-scrolling: touch;
+}
+th, td {
+  padding: .45rem .6rem;
+  vertical-align: top;
+}
+
+img, svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+svg {
+  display: block;
+  margin: 1rem auto;
+}
+img {
+  display: block;
+  margin: 1rem auto;
+}
+
+.katex-display,
+.math-display,
+div.math,
+p.math {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .2rem;
+}
+
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #bbb;
+  font-size: .92em;
+  line-height: 1.6;
+}
+.footnotes li { margin-bottom: .55rem; }
+
+@media (max-width: 640px) {
+  body { padding: .8rem .65rem 2rem; font-size: 16px; }
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.18rem; }
+  h4 { font-size: 1.05rem; }
+  .chapter-nav { font-size: .9rem; padding: .7rem !important; }
+  th, td { min-width: 7rem; }
+}
+</style>
+<style id="editorial-cleanup-patch">
+.related-documents{margin-top:2.8rem;padding:1rem 1.1rem;border:1px solid #ccc;background:#fafafa;border-radius:6px}
+.related-documents h2{margin-top:0}
+.related-documents ul{margin-bottom:.2rem}
+table[aria-label]{scroll-margin-top:4rem}
+img[alt]{scroll-margin-top:4rem}
+</style>
+</head><body><nav class="chapter-nav" style="padding:1em;border:1px solid #ccc;background:#fafafa;margin-bottom:1.5em">
+<a href="dynamic optimization.html">동적최적화 목차</a> ·
+<a href="dynamic-optimization-discrete.html">이산형 최적화</a> ·
+<a href="dynamic-programming.html">동적계획법</a> ·
+<a href="calculus-of-variations.html">변분학</a> ·
+<a href="optimal-control.html">최적제어</a> ·
+<a href="dynamic-optimization-applications-discrete.html">이산형 응용</a> ·
+<a href="dynamic-optimization-applications-continuous.html">연속형 응용</a> ·
+<a href="eco-math2.html">경제수학 II</a>
+</nav><h1>정태문제와 다기간 이산시간 문제</h1><p class="section-breadcrumbs"><a href="eco-math2.html">경제수학 II</a> · <a href="dynamic optimization.html">동적최적화</a> · <a href="dynamic-optimization-discrete.html">이산형 동적최적화</a></p><h2 id="개요" style="text-align:justify">개요</h2><p style="text-align:justify">미사일의 최적 시간경로를 구한다든지, 한 점에서 다른 점까지 가장 빠른 시간에 도달하는 경로를 구한다든지, 전체기간의 기업의 이윤을 극대화하는 산출량을 구한다든지..., 각 시기별 최적의 시간경로를 구하는 문제는 다양한 분야에서 발생한다.</p><p style="text-align:justify">시간을 0과 자연수로 구분하여 각 기간 최적경로를 파악하는 문제를 이산형 모형이라 한다. 반대로 시간을 실수의 연속 집합으로 보아 최적 경로를 파악하는 문제를 연속형 모형이라 한다.</p><h4 id="정태적-최대화-문제" style="text-align:justify">정태적 최대화 문제</h4><p style="text-align:justify"><span class="math">f(x_{1} ,x_{2} ,...,x_{n} )</span>를 n 개의 상품(<span class="math">x_{i} \,,\,i=1,...,n</span>)을 생산하는 기업의 이윤함수라 하면 이 기업의 이윤극대화 문제는 다음과 같다.</p><p style="text-align:justify"><span class="math">\max\;f(x_{1} ,x_{2} ,...,x_{n} ) \\ \\ s.t\;x_{i} \geq 0\,,\;i=1,...,n</span></p><h4 id="다기간-multiperiod-이산시간-discrete-time-문제" style="text-align:justify">다기간(multiperiod) 이산시간(discrete time) 문제</h4><p style="text-align:justify">이윤함수를 극대화하도록 t기에 생산되는 하나의 상품 <span class="math">x_{t}</span> , t=1,...,T 를 선택</p><p style="text-align:justify"><span class="math">\max\, \sum\limits_{t=1}^{\top} f(x_{t} )</span></p><p style="text-align:justify"><span class="math">s.t\;x_{t} \geq 0\,,\;t=1,...,T</span></p><p style="text-align:justify">t기에 생산되는 제품량이 그 기간의 이윤함수에만 영향을 미친다고 가정하면 이 문제는 단지 정태적 문제를 T번 연속해서 푸는 것과 같다. 각각 단일변수로 구성된 T개의 1차 조건을 각각 만족시키는 해를 구하면 됨.</p><p style="text-align:justify">t기에 생산되는 제품량이 t기는 물론 다음 기간의 이윤함수에도 영향을 미친다고 가정하면 문제는 복잡해 진다.</p><p style="text-align:justify"><span class="math">\max\, \sum\limits_{i=1}^{\top} f(x_{t} ,\,x_{t-1} ,\,t)</span></p><p style="text-align:justify"><span class="math">s.t\;x_{i} \geq 0\,for\;i=1,...,T\;and\,x_{i} =x_{0} \,for\,i=0</span></p><p style="text-align:justify">이 경우 T개의 1차 조건은 독립적으로 풀 수 없고 순차적으로 풀어야 한다.</p><p style="text-align:justify">■ 다기간(multiperiod) 연속시간(continuous time) 문제</p><p style="text-align:justify">현재의 이윤은 현재의 제품생산량 뿐만 아니라 생산량 변화율에 따라 영향을 받는다면 문제는 다음과 같이 설정된다.</p><p style="text-align:justify"><span class="math">\max\; \int_{0}^{\top} {f(x(t),\,x ' (t)} ,\,t)dx</span></p><p style="text-align:justify"><span class="math">s.t\;x(t) \geq 0,\;x(0)=x_{0}</span>, for <span class="math">0\, \leq \,t\, \leq \,T</span></p><p style="text-align:justify">시간t를 무한히 잘게 쪼게 연속변수로 보고 시간 변화에 따른 최적값을 구하는 것이다. 이 경우 해의 도출은 미분방정식으로 표현된다.</p><h2 id="이산형-모형-discrete-time-model" style="text-align:justify">이산형 모형(discrete time model)</h2><p style="text-align:justify">이산형의 동적 최적화 문제를 푸는 데는 세 가지 방법이 있다. 하나는 KKT 조건을 다기간 모형에 확장하여 적용하는 방법이다. 또 하나는 최적제어이론(optimal control theory)이다. 다른 하나는 동적계획법(dynamic programming)이다.</p><p class="section-nav">← 처음 · <a href="dynamic-optimization-discrete.html">절별 목차</a> · <a href="dynamic-optimization-discrete-lagrangian-finite.html">동적 Lagrangian: 유한기간</a> →</p></body></html>

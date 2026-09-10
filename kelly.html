@@ -1,10 +1,8 @@
 <html lang="ko">
 <head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>켈리기준(Kelly Criterion)</title>
-
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>켈리기준(Kelly Criterion)</title>
 <style>
     h1{ color: blue; text-align: center;}
     h2{ color: red; }
@@ -12,8 +10,7 @@
     ul{list-style:none; }
     .inline{ display: inline; }
      </style>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
 MathJax.Hub.Config({
 extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
 jax: ["input/TeX", "output/HTML-CSS"],
@@ -24,8 +21,6 @@ displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
 });
 
 </script>
-
- 
 <style id="deployment-responsive-patch">
 * { box-sizing: border-box; }
 body {
@@ -60,223 +55,149 @@ pre, code {
   h3 { font-size: 1.15rem; line-height: 1.4; }
 }
 </style>
-
 </head>
-
 <body>
-    
-
 <h1> 켈리기준(Kelly Criterion) </h1>
-<br>
+<br/>
 <h2>  개요 </h2>
 켈리공식은 여러번 반복되는 베팅에서 매번 최적 베팅액수를 결정하는 공식이다. 켈리공식은 승률과 배당이 안정적이고 반복 베팅이 가능하다는 등의 가정 아래 장기적인 로그 부(log wealth)의 평균 성장률을 최대화하는 베팅비율을 제시한다. 이는 모든 투자기간에서 기대재산을 최대화한다거나 위험을 고려한 모든 투자자에게 항상 우월하다는 뜻은 아니다. 이름은 공식을 개발한 벨 연구소 연구원이었던 J. L. Kelly에서 명명되었다. 
-<br>
-	
+<br/>
 <h2>  도박(갬블)에서 기대수익 </h2>
-
 <p> 갬블에서 최고의 기대수익을 얻기 위해 매번 얼마를 베팅해야 하는가?</p>
-
 <p>$w_0 $ : 초기 재산</p>
-
 <p>$w_k $ : k 번 베팅 후 재산</p>
 <p> $p$ : 베팅시 이길 확률(일정) </p>
 <p> $q$ : 실패확률 ($= 1 - p$) </p>
 <p> $ y_k $ : k 번째 베팅시 베팅액(random variable) </p>
- <br>
+<br/>
 <p>이 절에서는 먼저 n번 베팅 후 <strong>기대재산</strong> $E[w_n]$을 최대화하려 하면 어떤 문제가 생기는지 살펴본다.</p>
 <p>  투자자의 n 번 베팅 후 재산의 기대값은 다음과 같이 구할 수 있다.</p>
- 	
 <p> let </p>
 <p>
 
 $t_k = \left \{ 
 \begin{array}{ll}
-1 & \textrm{$ if \quad win $}\\
--1 & \textrm{$ if \quad loss $}\\
+1 &amp; \textrm{$ if \quad win $}\\
+-1 &amp; \textrm{$ if \quad loss $}\\
 \end{array} 
 \right.$
 
 </p>
-
-    <p> $ w_k = w_{k-1} + t_k y_k, \qquad k = 1, 2, 3, ... $ </p>
- 
-    <p> $ w_n = w_0 + \sum\limits_{k=1}^n {(t_k y_k)} $ </p> 
-    <!-- \limits 는 \sum 밑으로 subscript가 가도록 하는 역할, 이 것이 없이 그냥 \sum 만 쓰면 subscript가 옆으로 간다. $ 대신 \[, \] 를 쓰면 subscript가 \sum 밑으로 가지만 중앙정렬이 된다.-->
- 
-    <p> $ E[w_n] = w_0 + \sum\limits_{k=1}^{n} {E[t_k y_k]} $ </p>
-    <p> $  =  w_0 + \sum\limits_{k=1}^{n} {(p-q)E[y_k]}$ </p>
-
- <p>  $ \because $ 확률변수 $ t_k, y_k $ 는 서로 독립이므로  $ E[t_k] = 1 \times p + (-1) \times q  = p - q $  </p>
-
-<p> (단 $ p - q > 0 $ 이라 가정, 즉 $ 2p - 1 > 0 \Rightarrow p > \dfrac{1}{2} $ )</p>
+<p> $ w_k = w_{k-1} + t_k y_k, \qquad k = 1, 2, 3, ... $ </p>
+<p> $ w_n = w_0 + \sum\limits_{k=1}^n {(t_k y_k)} $ </p>
+<!-- \limits 는 \sum 밑으로 subscript가 가도록 하는 역할, 이 것이 없이 그냥 \sum 만 쓰면 subscript가 옆으로 간다. $ 대신 \[, \] 를 쓰면 subscript가 \sum 밑으로 가지만 중앙정렬이 된다.-->
+<p> $ E[w_n] = w_0 + \sum\limits_{k=1}^{n} {E[t_k y_k]} $ </p>
+<p> $  =  w_0 + \sum\limits_{k=1}^{n} {(p-q)E[y_k]}$ </p>
+<p>  $ \because $ 확률변수 $ t_k, y_k $ 는 서로 독립이므로  $ E[t_k] = 1 \times p + (-1) \times q  = p - q $  </p>
+<p> (단 $ p - q &gt; 0 $ 이라 가정, 즉 $ 2p - 1 &gt; 0 \Rightarrow p &gt; \dfrac{1}{2} $ )</p>
 <!-- \frac 대신 \dfrac를 쓰는 것은 분수의 폰트 크기가 비분수의 폰트와 같아지는 역할, 이 것이 없이 그냥 \frac를 쓰면 분수의 폰트 크기가 비분수의 폰트보다 작아진다.-->
-
-<br>
-
-<h2>  기대값 이론의 함정 </h2>  
-<p> one-shot 게임임을 망각 </p> 
-<p> Let’s play a game. Imagine you have $100 and you’d like to maximize your money. You flip a weighted coin that comes up heads 60% of the time, and tails 40% of the time x∼Bernoulli(p=0.6). </p> 
-
-<p> You can play as many times as you would like. How much would you bet?</p> 
-
-<p> The most intuitive answer may not be the optimal one. 
-Well let’s look at the two extremes. 
-If you choose to bet \$0, i.e. not play the game at all, you will leave with \$100 with probability 1. 
-If you bet the entire \$100, you have a 60% of doubling up, and 40% of leaving with nothing. That gives you an expected value (EV) of 0.6(200) + 0.4(0) = 120. Since $120/$100 = 1.2, in the long run you would expect to make 1.2x your bet. </p> 
-<p> So you might naturally think that the optimal strategy is to always bet all your money. But what if it lands on tails the first time? Then you can no longer continue to play the game since you will have no more money. In poker language, you won’t be able to realize your equity because even though in the limit of infinite wealth, you will make money, you can’t withstand the variance of any individual flip. 
-In fact, in the limit of infinite games, you will go broke with probability 1. So it seems like the optimal betting strategy is somewhere in between the two, and should probably vary according to the size of your budget.</p> 
-<br>
-	
+<br/>
+<h2>  기대값 이론의 함정 </h2>
+<p> one-shot 게임임을 망각 </p>
+<p>게임을 하나 생각해 보자. 100달러의 자금을 가지고 있고 이를 최대화하려 한다. 앞면이 60%, 뒷면이 40%의 확률로 나오는 편향된 동전을 던진다. 즉 <em>x∼Bernoulli(p=0.6)</em>이다.</p>
+<p>이 게임은 원하는 만큼 반복할 수 있다. 그렇다면 매번 얼마를 베팅해야 할까?</p>
+<p>가장 직관적인 답이 최적의 답은 아닐 수 있다. 두 극단을 보자. 0달러를 베팅하면, 즉 게임에 전혀 참여하지 않으면 확률 1로 100달러를 그대로 보유한다. 반대로 매번 100달러 전부를 베팅하면 60% 확률로 자금이 두 배가 되고 40% 확률로 전부 잃는다. 이때 기대값(EV)은 0.6×200 + 0.4×0 = 120달러이다. 따라서 단순 기대값만 보면 장기적으로 원금의 1.2배를 기대할 수 있다.</p>
+<p>그래서 언제나 전 재산을 거는 전략이 최적이라고 생각하기 쉽다. 그러나 첫 번째 던지기에서 뒷면이 나오면 자금이 0이 되어 더 이상 게임을 계속할 수 없다. 무한히 큰 자금을 가정하면 평균적으로 이익을 얻더라도, 실제로는 개별 시행의 변동성을 견디지 못할 수 있다. 실제로 게임을 무한히 반복하면서 매번 전 재산을 건다면 파산 확률은 1로 수렴한다. 따라서 최적 베팅 비율은 0%와 100% 사이 어딘가에 있으며, 보유자금의 규모에 따라 달라져야 한다.</p>
+<br/>
 <h2>  최종 재산의 최대화 </h2>
 <p>$\max {E[w_n]}$ : 최종재산 </p>
 <p>$\max {E[w_n]} \Longrightarrow \max {E[w_k]}$ 이므로 </p>
-
 <p>기대수익을 최대화하기 위해서는 매기 전액을 베팅 </p>
-
 <p>$y_0 = w_0$, 이긴다면 $y_1 = 2w_0$, 등 등 </p>
-
 <p>그러나 n번 베팅시 모두 이길 확률은 $ p^n $ </p>
-
 <p>따라서 한번이라도 실패 확률은 $ 1 - p^n $ </p>
 <p> $ \lim\limits_{n \to \infty}(1 - p^n) = 1 $ </p>
-
 <p>즉 따라서 매번 전액을 베팅하는 투자전략은 
 게임을 계속할 수록 100% 파산으로 귀결된다. 
 매번 전 재산을 거는 전략에서는 한 번의 패배가 곧 파산이고, 무한히 반복하면 결국 한 번 이상 패할 확률이 1로 수렴한다. 이는 넓은 의미에서 도박자 파산(gambler's ruin) 문제와 연결되지만, 고전적인 gambler's ruin은 보통 유한한 자본을 가진 도박자가 상·하한 흡수경계 사이에서 반복 베팅하는 더 일반적인 모형을 가리킨다. </p>
-
-<br>
-
-<h2> 평균 부의 증가율(평균투자수익률) 최대화(Kelly 기준) </h2> 
-
+<br/>
+<h2> 평균 부의 증가율(평균투자수익률) 최대화(Kelly 기준) </h2>
 <h3> (가정) </h3>
 <p> i) 돈은 무한정 작게 쪼갤 수 있다.</p>
 <p> ii) 매번 베팅시 확률, 보수는 불변</p>
-<br>
-
+<br/>
 <p>$ y_i = b x w_{i-1}, \qquad 0 \leq x \leq 1 $ </p>
-
 <p>$ y_i $ : 이길 때 받는 금액 </p>
-
 <p>$ x $ : 매번 일정 비율로 베팅 </p>
 <p>$b$ : 배당률, 이길 때는 판돈의 b배를 받는다.</p>
-
-<br>
-	
+<br/>
 <h3> (풀이) </h3>
 <p>n번 시행 중 k 번 성공, n-k 번 실패한다면 </p>
-
 <p> 투자의 결과 총재산은</p>
-
 <p> $ w_n = w_0(1 + b x)^k (1 - x)^{n-k} $ </p>
-
 <p>켈리기준의 목적은 최종재산의 산술적 기대값이 아니라 반복 시행에서의 <strong>장기 복리성장률</strong>을 최대화하는 것이다. 이를 위해 기간당 로그 성장률을 사용한다.<sup><a href="#fn1" id="ref1">1</a></sup> </p>
-
 <p>n 개의 양의 수가 있을 때 이들 수의 곱의 n 제곱근의 값. </p>
-
 <p> $ \mu_G $ 를 기하평균이라 하면 </p>
 <p> $ \mu_G = \sqrt[n]{w_0w_1w_2 \cdots w_n} = \prod_{i=1}^{n}y_i^{\dfrac{1}{n}} $ </p>
 <!-- <p>와 수식 사이에 한 칸을 뛰어야 폰트크기가 조정-->
-<br>
-
+<br/>
 <p>양변 log를 취하면 </p>
-
 <p> $ \log \mu_G = \dfrac{1}{n} \sum_{i=1}^{n} \log{w_i} $ </p>
-
 <p> 즉 기하평균의 log는 log의 산술평균이다. 기하평균은 증가율의 평균을 계산하는데 적합하다. </p>
-
 <p> 로그함수는 단조증가함수이므로 평균 부의 증가율은 로그를 취해도 최적값은 같다.</p>
- 
 <p> $ \ln (\dfrac{w_n}{w_0})^{\dfrac {1}{n}} $</p>
 <p> $ = \dfrac {k}{n} \ln(1 + b x) + \dfrac{n-k}{n} \ln(1 - x) $</p>
-
 <p>$ n \to \infty $ 이면 대수의 법칙에 따라 $ \dfrac {k}{n} \to p $ </p>
-
 <p>$ f(x) = p \ln(1+b x) + q \ln(1 - x) $ 라 하면</p>
-
 <p>$ f(x) $를 극대화 하는 1차 조건은</p>
-
 <p> $ f'(x) = b \dfrac{p}{1 + b x} - \dfrac {q}{1- x} = 0 $ </p>
-
 <p> 따라서, $ x^* = p - \dfrac {q}{b} $ <sup><a href="#fn2" id="ref2">2</a></sup></p>
-
 <p>이차조건은</p>
-
-<p>$ f''(x) = - \dfrac {b^2p}{(1+b x)^2} - \dfrac {q}{(1 - x)^2} < 0 $ </p></0>
-
+<p>$ f''(x) = - \dfrac {b^2p}{(1+b x)^2} - \dfrac {q}{(1 - x)^2} &lt; 0 $ </p><!--0-->
 <p>따라서 최대화의 2차조건 만족</p>
-
-<br>
-
+<br/>
 <h2> 켈리기준의 의미 </h2>
-
 <p>예를 들어, 승리 확률이 60%인 도박에서($ p=0.6, q=0.4 $), 도박사가 승리시 베팅 금액 만큼의 보상을 받는 경우($ b=1 $), </p>
 <p> $ x^* = 0.6 - \dfrac {0.4}{1} = 0.2 $ </p>
 <p> 즉, 보유자금의 장기 성장률을 극대화하기 위해, 각 베팅 기회에서 도박사는 총 보유자금의 20%씩을 걸어야 한다.</p>
-
 <p>도박사가 우위를 갖지 못한다면, </p>
-
 <p> $ y_i = 0 $ 이라면, $ b = \dfrac {q}{p} $ </p>
-
 <p>즉 켈리공식은 한 푼도 걸지 말 것을 추천한다.
 
-<p>$ y_i < 0 $ 이라면, $ b < \dfrac {q}{p} $</p>
-
+<p>$ y_i &lt; 0 $ 이라면, $ b &lt; \dfrac {q}{p} $</p>
 <p>이는 도박사가 반대편에 베팅해야 한다는 것을 의미한다.</p>
-
 <p>1 원을 걸 경우 나올 수 있는 두 가지 결과가 $p$의 확률로 $b$원을 획득하거나 베팅한 1 원을 날리는 것이므로, 첫 공식의 분자는 1원을 걸 때 기대 순수익을 의미한다. </p>
-
 <p>따라서</p>
-
-<table style = " font-size:2.5em; ">
-              <tbody>
-                <tr>
-                  <td rowspan="2"> $ x^*= $ </td>
-                  <td align="center" style="font-size:1.2em; border-bottom:solid">기대 순수익</td>              
-                </tr>
-                <tr>            
-                  <td style = "font-size:1.0em; ">승리시 순수익</td>
-               </tr>
-              </tbody>
-</table>	
-<br>
+<table style=" font-size:2.5em; ">
+<tbody>
+<tr>
+<td rowspan="2"> $ x^*= $ </td>
+<td align="center" style="font-size:1.2em; border-bottom:solid">기대 순수익</td>
+</tr>
+<tr>
+<td style="font-size:1.0em; ">승리시 순수익</td>
+</tr>
+</tbody>
+</table>
+<br/>
 <p>이길 확률 $p$는 정보량에 의존하므로 투자에 대한 최선의 베팅금액은 정보량에 비례한다. </p>
 <p>실무적으로는 켈리기준이 투자의 상한선으로 많이 쓰인다.</p>
 <p>① 켈리 기준은 중심극한정리를 이용하므로 투자 횟수 $n$이 충분히 커야 함을 전제로 한다.(적어도 100회 이상을 시행하는 것을 권고)</p>
 <p>② 켈리 기준은 위험(risk), 즉 분산(variance)을 고려하지 않는다.</p>
 <p> ①, ②를 감안해서 현실에서는 켈리 기준보다 적게 투자하는 것이 일반적이다.<sup><a href="#fn3" id="ref3">3</a></sup></p> </p>
-<br>
-
+<br/>
 <h2> 성공시 $b$ 배를 얻고 실패시 $a$ 배를 잃는 경우(차입 투자) </h2>
-
 <p> 실패시 $a$ 배를 잃는다는 의미는 원금의 $a$ 배를 차입해서 투자를 한 경우를 생각할 수 있다. </p>
 <p> 이때, 켈리공식은 다음과 같다. </p>
-
 <p> $ x^{*} = \dfrac{p}{a} - \dfrac{q}{b} $ </p>
-
-
-<p> 최소한 매우 작은 금액이라도 투자하는 것이 유리하기 위해서 $ pb > qa $ </p>
-
+<p> 최소한 매우 작은 금액이라도 투자하는 것이 유리하기 위해서 $ pb &gt; qa $ </p>
 <p>이는 단순히, 투자가 합리적이기 위해서는 기대이익이 기대손실을 초과해야 한다는 사실에 지나지 않는다.</p>
-
 <p>이러한 일반적 결과는, 차입투자(leveraging; 투자를 위한 차입조달)를 할 경우, 
 
- $ a > 1 $이 되어 최적 투자금액 비율을 감소시킨다. </p>
-
+ $ a &gt; 1 $이 되어 최적 투자금액 비율을 감소시킨다. </p>
 <p> 성공확률 $ p $가 아무리 크더라도, $ a $가 충분히 크면 최적 투자금액 비율은 $0$이다. 
 
 따라서 지나친 신용거래는 투자 전략상 좋지 않다.</p>
-
-<hr>
-<span style = " font-size:0.7em;  color: green; line-height: 1.5em;">
+<hr/>
+<span style=" font-size:0.7em;  color: green; line-height: 1.5em;">
 <sup id="fn1"> 
 1. 기하평균은 양수인 경우에만 적용된다. 따라서 인구증가율이나 투자수익률의 평균 측정에 주로 사용된다.
 </sup>
-<br>
+<br/>
 <sup id="fn2"> 
 2. $ \frac{bp}{1+b x} = \frac{q}{1-x} \Longrightarrow (bp+qb) x = bp - q \Longrightarrow x = \frac{bp - q}{bp+qb} = \frac{bp - q}{b} = p - \frac{q}{b} $
     </sup>
-  
-    <br>
+<br/>
 <sup id="fn3"> 
 3. 켈리 자신은 켈리공식에서 계산된 최적 투자금액의 반을 투자할 것을 제안
     </sup>
