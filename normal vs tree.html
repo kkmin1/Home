@@ -30,18 +30,7 @@
         fill:black;
         font-size:30px;
         font-family:Times; }
-     </style>  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
-MathJax.Hub.Config({
-extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
-jax: ["input/TeX", "output/HTML-CSS"],
-tex2jax: 
-{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
-"HTML-CSS": { availableFonts: ["TeX"] }
-});
-</script>
- 
+     </style>
 <style id="deployment-responsive-patch">
 * { box-sizing: border-box; }
 body {
@@ -67,6 +56,16 @@ pre, code { max-width:100%; overflow-x:auto; }
 </style>
 
   <link rel="stylesheet" type="text/css" href="game-theory.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head> 
 <body> 
 	
@@ -80,12 +79,12 @@ pre, code { max-width:100%; overflow-x:auto; }
  <h2>2. 표형(table), 트리형(tree)</h2>
 <p> 게임을 표시하는 방법에는 표형(전략형:normal form), 트리형(전개형:extensive form)의 두 가지가 있다. </p>
 <p> 양자는 서로 호환이 가능하며 그때 그때 분석의 편의를 위해 선택할 수 있다. </p>
-<p> 아래 <표 1>은 표형으로 묘사된 죄인들의 딜렘마 게임이다. </p>
+<p> 아래 &lt;표 1&gt;은 표형으로 묘사된 죄인들의 딜렘마 게임이다. </p>
 <p> 붉은 색 원으로 칠해진 부분이 내쉬균형이다. </p>
 
 <img src="images/game-theory/normal-tree-01.svg" alt="normal-tree diagram 1" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
-<p> 이를 트리형으로 고치면 <그림1>과 같다. </p>
+<p> 이를 트리형으로 고치면 &lt;그림 1&gt;과 같다. </p>
 <p> 갑이 C, D를 선택하고 을이 C, D를 선택하는데 을은 갑의 선택을 모른다. </p>
 <p> 이를 표시하기 위해 을의 양쪽 노드를 점선으로 연결한다. </p>
 <p> 점선으로 연결한 부분은 을은 갑이 왼쪽을 선택했는지, 오른쪽을 선택했는지를 모른다는 의미이다. </p>
@@ -117,11 +116,11 @@ pre, code { max-width:100%; overflow-x:auto; }
 <p> ii) 갑이 a를 선택하면 을은 c를 선택한다. 갑이 b를 선택하면 을은 d를 선택한다. </p>
 <p> iii) 갑이 a를 선택하면 을은 d를 선택한다. 갑이 b를 선택하면 을은 c를 선택한다. </p>
 <p> iv) 갑이 a를 선택하면 을은 d를 선택한다. 갑이 b를 선택하면 을은 d를 선택한다. </p>
-<p> 이로부터 게임표를 만들면 <표 2>와 같다. </p>
+<p> 이로부터 게임표를 만들면 &lt;표 2&gt;와 같다. </p>
 
 <img src="images/game-theory/normal-tree-04.svg" alt="normal-tree diagram 4" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
-<p> <표 2>에서 내쉬균형은 붉은 원으로 칠해진 부분 세 개이다. </p>
+<p> &lt;표 2&gt;에서 내쉬균형은 붉은 원으로 칠해진 부분 세 개이다. </p>
 <p> (갑 : b, 을 : a$\rightarrow$c,  b$\rightarrow$d), (갑 : a, 을 : a $ \rightarrow $ d,  b $ \rightarrow $ c), (갑 : a, 을 : a $ \rightarrow $ d,  b $ \rightarrow $ d) </p>
 <p> 각각의 균형에서 보수(효용)은 (4, 5), (6, 4), (6, 4)이다. </p>
 <br>
