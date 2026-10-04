@@ -14,6 +14,10 @@ body{
   line-height:1.9 !important;
   overflow-wrap:break-word;
 }
+div{
+  font-size:inherit;
+  text-indent:0;
+}
 p{
   font-size:1rem !important;
   line-height:1.9 !important;
@@ -56,6 +60,10 @@ table{
   max-width:100%;
   margin:1rem auto;
   border-collapse:collapse;
+  font-size:.95rem !important;
+}
+th,td{
+  line-height:1.5;
 }
 th,td{
   overflow-wrap:anywhere;
