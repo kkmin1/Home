@@ -68,19 +68,6 @@
             margin: 20px 0;
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js" type="text/javascript">
-        MathJax.Hub.Config({
-            extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-            tex2jax:
-            {
-                inlineMath: [['$', '$'], ["\\(", "\\)"]],
-                displayMath: [['$$', '$$'], ["\\[", "\\]"]],
-            },
-            "HTML-CSS": { availableFonts: ["TeX"] }
-        });
-    </script>
-
 <style id="deployment-responsive-patch">
 * { box-sizing: border-box; }
 body {
@@ -106,6 +93,16 @@ pre, code { max-width:100%; overflow-x:auto; }
 </style>
 
   <link rel="stylesheet" type="text/css" href="game-theory.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body class="sub-page-body">
