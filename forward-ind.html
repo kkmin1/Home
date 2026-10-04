@@ -21,19 +21,7 @@
         fill:black;
         font-size:30px;
         font-family:Times; }
-     </style>  
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
-MathJax.Hub.Config({
-extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
-jax: ["input/TeX", "output/HTML-CSS"],
-tex2jax: 
-{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
-"HTML-CSS": { availableFonts: ["TeX"] }
-});
-</script>
- 
+     </style>
 <style id="deployment-responsive-patch">
 * { box-sizing: border-box; }
 body {
@@ -59,6 +47,16 @@ pre, code { max-width:100%; overflow-x:auto; }
 </style>
 
   <link rel="stylesheet" type="text/css" href="game-theory.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head> 
 <body> 
 	
@@ -78,7 +76,7 @@ pre, code { max-width:100%; overflow-x:auto; }
 
 <h2>2. 부부갈등 게임</h2>
 <p>다음은 부부갈등 게임(battle of sex)이라 하는 유명한 게임이다. 휴일을 맞이하여 남편과 아내는 외출하여 야구장 또는 뮤지컬을 관람하려 한다. 그런데 남편은 야구장을 좀 더 선호하고 아내는 뮤지컬을 좀 더 선호한다.</p> 
-<p>게임의 효용은 <표 1>과 같다.</p>
+<p>게임의 효용은 &lt;표 1&gt;과 같다.</p>
 
 <img src="images/game-theory/forward-ind-battle-of-sexes.svg" alt="부부갈등 게임" style="display:block;width:100%;height:auto;margin:0 auto;">
 
