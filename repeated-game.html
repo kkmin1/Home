@@ -68,8 +68,8 @@ window.MathJax = {
                 <li><strong>할인 인자(Discount Factor, $\delta$):</strong> 미래의 보수를 현재 가치로 환산하는 비율이다 ($0 \le \delta < 1$).
                         이는 미래에 대한 인내심을 나타냅니다. 불확실한 반복게임에서는 계속 만날 확률까지 결합한 유효 할인인자로 해석하기도 한다.</li>
                 <li><strong>전체 보수(Total Payoff):</strong> 시점 $t=0$부터 무한히 반복될 때의 총 보수 $V_i$는 다음과 같이 정의된다.
-                    <p>$$ V_i = \sum_{t=0}^{\infty} \delta^t \pi_i(t) = \pi_i(0) + \delta \pi_i(1) + \delta^2 \pi_i(2) +
-                        \cdots $$</p>
+                    <p>\[V_i = \sum_{t=0}^{\infty} \delta^t \pi_i(t) = \pi_i(0) + \delta \pi_i(1) + \delta^2 \pi_i(2) +
+                        \cdots\]</p>
                 </li>
             </ul>
         </div>
@@ -111,7 +111,7 @@ window.MathJax = {
                 <li><strong>배신 시 ($V_{defect}$):</strong> 첫 라운드에 배신해서 5를 얻지만, 그 후 영원히 배신당해 1씩 받으므로, $5 + 1\delta +
                     1\delta^2 + \cdots = 5 + \frac{\delta}{1-\delta}$</li>
             </ul>
-            <p>따라서 조건은: $$ \frac{3}{1-\delta} \ge 5 + \frac{\delta}{1-\delta} $$</p>
+            <p>따라서 조건은 다음과 같다.</p><p>\[\frac{3}{1-\delta} \ge 5 + \frac{\delta}{1-\delta}\]</p>
             <p>이 부등식을 풀면 <strong>$\delta \ge \frac{1}{2}$</strong> 일 때 협력이 가능함을 알 수 있다.</p>
         </div>
 
@@ -155,14 +155,14 @@ window.MathJax = {
         </div>
 
         <p>1기에 약속을 지키면 한 경기자의 총보수는</p>
-        <p>$$4+3\delta$$</p>
+        <p>\[4+3\delta\]</p>
         <p>이고, 1기에 상대가 A를 선택할 때 자신만 C로 이탈하면 1기에는 5를 얻지만
         다음 기에 (B,B)로 전환되므로</p>
-        <p>$$5+\delta$$</p>
+        <p>\[5+\delta\]</p>
         <p>를 얻는다. 따라서 약속을 지키는 것이 유리하려면</p>
-        <p>$$4+3\delta \ge 5+\delta$$</p>
+        <p>\[4+3\delta \ge 5+\delta\]</p>
         <p>즉</p>
-        <p>$$\delta \ge \frac{1}{2}$$</p>
+        <p>\[\delta \ge \frac{1}{2}\]</p>
         <p>이면 된다.</p>
 
         <p>여기서 중요한 점은 처벌로 사용되는 (B,B)가 그 자체로 단계게임의 내쉬균형이라는 것이다.
