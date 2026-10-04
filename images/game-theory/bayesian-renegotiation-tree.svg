@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
+  <style>
+    text { fill:#111; font-family:Arial, sans-serif; }
+    .title { font-size:26px; font-weight:700; }
+    .label { font-size:24px; fill:#b00020; }
+    .cell { font-size:22px; text-anchor:middle; dominant-baseline:middle; }
+    .hdr { font-size:20px; font-weight:700; text-anchor:middle; dominant-baseline:middle; }
+    .grid { stroke:#111; stroke-width:2; fill:none; }
+    .branch { stroke:#111; stroke-width:3; }
+  </style>
+
+  <circle cx="500" cy="70" r="28" stroke="#111" stroke-width="2" fill="#ffd54a"/>
+  <text x="500" y="78" class="title" text-anchor="middle">N</text>
+
+  <line x1="480" y1="92" x2="300" y2="245" class="branch"/>
+  <line x1="520" y1="92" x2="700" y2="245" class="branch"/>
+  <text x="360" y="155" class="label">H: 2/3</text>
+  <text x="595" y="155" class="label">D: 1/3</text>
+
+  <!-- Hawk payoff table -->
+  <text x="260" y="272" class="hdr">Hawk type</text>
+  <rect x="90" y="290" width="340" height="210" class="grid"/>
+  <line x1="200" y1="290" x2="200" y2="500" class="grid"/>
+  <line x1="315" y1="290" x2="315" y2="500" class="grid"/>
+  <line x1="90" y1="360" x2="430" y2="360" class="grid"/>
+  <line x1="90" y1="430" x2="430" y2="430" class="grid"/>
+  <text x="145" y="325" class="hdr">P1 / P2</text>
+  <text x="258" y="325" class="hdr">A</text>
+  <text x="373" y="325" class="hdr">B</text>
+  <text x="145" y="395" class="hdr">A</text>
+  <text x="145" y="465" class="hdr">B</text>
+  <text x="258" y="395" class="cell">1, 2</text>
+  <text x="373" y="395" class="cell">-1, -1</text>
+  <text x="258" y="465" class="cell">-1, -1</text>
+  <text x="373" y="465" class="cell">2, -2</text>
+
+  <!-- Dove payoff table -->
+  <text x="740" y="272" class="hdr">Dove type</text>
+  <rect x="570" y="290" width="340" height="210" class="grid"/>
+  <line x1="680" y1="290" x2="680" y2="500" class="grid"/>
+  <line x1="795" y1="290" x2="795" y2="500" class="grid"/>
+  <line x1="570" y1="360" x2="910" y2="360" class="grid"/>
+  <line x1="570" y1="430" x2="910" y2="430" class="grid"/>
+  <text x="625" y="325" class="hdr">P1 / P2</text>
+  <text x="738" y="325" class="hdr">A</text>
+  <text x="853" y="325" class="hdr">B</text>
+  <text x="625" y="395" class="hdr">A</text>
+  <text x="625" y="465" class="hdr">B</text>
+  <text x="738" y="395" class="cell">-2, 2</text>
+  <text x="853" y="395" class="cell">-1, -1</text>
+  <text x="738" y="465" class="cell">-1, -1</text>
+  <text x="853" y="465" class="cell">2, 1</text>
+</svg>
