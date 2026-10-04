@@ -88,12 +88,12 @@ window.MathJax = {
     <h3>1-1. 간단한 정식화</h3>
     <p>플레이어가 \(N\)명이고, 각자는 \(a_i \in \{0,1\}\)로 ‘간다(1)/안 간다(0)’를 고른다고 하겠습니다. 총 방문자 수를 \(A= \displaystyle \sum_{i=1}^N a_i\)로 두고, 혼잡 임계치(편안한 수용인원)를 \(T\)라고 하겠습니다. 개인 \(i\)의 보수를 아주 단순하게 다음처럼 둘 수 있다.</p>
 
-    $$u_i(a_i, A) =
+    \[u_i(a_i, A) =
       \begin{cases}
         0, & a_i=0\\
         1, & a_i=1 \text{ 이고 } A \le T\\
         -1, & a_i=1 \text{ 이고 } A > T
-      \end{cases}$$
+      \end{cases}\]
 
     <p>이 경우 핵심은 “내가 가면 임계치를 넘을 것인가”인데, 문제는 다른 사람들도 똑같이 그걸 보고 판단한다는 점이다. 대칭적인 혼합전략을 가정하면, 각 사람이 가는 확률을 \(p\)라고 두고, 그때 ‘내가 갈 때’ 임계치 이하일 확률을 계산해 무차별 조건을 세우는 식으로 균형을 찾습니다. 계산은 이항분포가 들어가서 길어질 수 있지만, 구조 자체는 앞에서 말한 무차별 조건과 같습니다.</p>
 
@@ -111,26 +111,24 @@ window.MathJax = {
 
       <p>쿠르노에서는 두 기업이 동시에 수량을 정한다. 시장가격은 총공급량 \(Q=q_1+q_2\)의 함수로 내려가고, 기업 \(i\)는 이윤 \(\pi_i\)를 최대화한다. 가장 표준적인 설정은 선형수요 \(P(Q)=a-bQ\)와 상수한계비용 \(c\)이다.</p>
 <p>
-      $$
-      \pi_i(q_i, q_j) = (P(Q)-c)\,q_i = (a-b(q_i+q_j)-c)\,q_i
-      $$
+      \[\pi_i(q_i, q_j) = (P(Q)-c)\,q_i = (a-b(q_i+q_j)-c)\,q_i\]
 </p>
       <p>기업 1의 최적반응은 \(q_1\)에 대해 미분해서 구한다.</p>
 <p>
-      $$\frac{\partial \pi_1}{\partial q_1} = a-c -2bq_1 - bq_2 = 0$$
+      \[\frac{\partial \pi_1}{\partial q_1} = a-c -2bq_1 - bq_2 = 0\]
 </p>
 
       <p>따라서 기업 1의 최적반응함수는 다음처럼 된다.</p>
 <p>
-      $$BR_1(q_2) = \frac{a-c-bq_2}{2b}.$$
+      \[BR_1(q_2) = \frac{a-c-bq_2}{2b}.\]
 </p>
       <p>대칭적으로</p>
 <p>
-      $$BR_2(q_1) = \frac{a-c-bq_1}{2b}.$$
+      \[BR_2(q_1) = \frac{a-c-bq_1}{2b}.\]
 </p>
       <p>내쉬균형은 두 식을 동시에 만족하는 \((q_1^*, q_2^*)\)이므로, 대칭해를 기대하면 \(q_1^*=q_2^*=q^*\)로 두고 풀면 된다.</p>
 <p>
-      $$q^* = \frac{a-c-bq^*}{2b}\;\Rightarrow\; 3bq^* = a-c \;\Rightarrow\; q^*=\frac{a-c}{3b}.$$
+      \[q^* = \frac{a-c-bq^*}{2b}\;\Rightarrow\; 3bq^* = a-c \;\Rightarrow\; q^*=\frac{a-c}{3b}.\]
 </p>
       <p>그러면 총공급은 </p><p>\(Q^*=2(a-c)/(3b)\),</p><p> 가격은 </p><p>\(P^*=a-bQ^*=a-\frac{2}{3}(a-c)=\frac{a+2c}{3}\)
         </p><p>가 된다.</p>
@@ -161,9 +159,7 @@ Hotelling의 선형 도시 모형에서 두 기업이 서로를 의식해 점점
 사회적으로 총 이동비용을 최소화하는 배치는 결국 다음을 최소화하는 위치 (\(x_1\), \(x_2\))를 찾는 문제이다.
         </p>
         <p>
-         $$
-\int_0^1 t \min{|x-x_1|, |x-x_2|} dx
-$$ 
+         \[\int_0^1 t \min{|x-x_1|, |x-x_2|} dx\] 
         </p>
         <p>
           핵심 직관은 이렇다. 소비자 전체를 두 기업이 “균등하게” 담당하도록 나누고, 각 기업이 자기 담당 구간의 한가운데에 위치하는 것이 평균 거리를 최소화한다. 이는 1차원 공간에서 평균 절대편차를 최소화하는 점이 구간의 중앙값(여기서는 중앙)이라는 사실과 같다.
@@ -176,9 +172,7 @@ $$
 <p>
  즉,
 
-$$
-x_1 = \frac{1}{4}, \quad x_2 = \frac{3}{4}
-$$
+\[x_1 = \frac{1}{4}, \quad x_2 = \frac{3}{4}\]
 
 이다.
 </p>
@@ -186,9 +180,7 @@ $$
  최소화 문제로 깔끔하게 유도해 보자. 
  두 기업 위치를 \(x_1\le x_2\)라 두고, 소비자는 \(0,1\)에 균등분포, 한 소비자의 이동비용은 \(t\cdot\text{거리}\)라고 하자. 사회적 총 이동비용은</p>
 <p>
-$$
-C(x_1,x_2)=t\int_0^1 \min{|x-x_1|,\ |x-x_2|},dx
-$$
+\[C(x_1,x_2)=t\int_0^1 \min{|x-x_1|,\ |x-x_2|},dx\]
 </p><p>
 이다.
 </p>
@@ -196,110 +188,78 @@ $$
 여기서 어느 소비자가 어느 기업을 선택하는지는 “가까운 쪽”이므로 경계점 \(m\)은 두 점의 중점 \( m=\frac{x_1+x_2}{2} \)
 가 된다. 그래서 적분이 둘로 갈라진다.</p>
 <p>
-$$
-C(x_1,x_2)=t\left(\int_0^{m} |x-x_1|,dx+\int_{m}^{1} |x-x_2|,dx\right)
-$$
+\[C(x_1,x_2)=t\left(\int_0^{m} |x-x_1|,dx+\int_{m}^{1} |x-x_2|,dx\right)\]
 </p><p>
 이제 각 적분을 직접 계산하자. (\(0\le x_1\le m\))이므로 첫 번째 적분은 \(x_1\)을 기준으로 쪼개면
 </p><p>
-$$
-\int_0^{m} |x-x_1|,dx
+\[\int_0^{m} |x-x_1|,dx
 =\int_0^{x_1}(x_1-x),dx+\int_{x_1}^{m}(x-x_1),dx
-=\frac{x_1^2}{2}+\frac{(m-x_1)^2}{2}
-$$
+=\frac{x_1^2}{2}+\frac{(m-x_1)^2}{2}\]
 </p><p>
 두 번째도 (\(m\le x_2\le 1\))이므로 (\(x_2\))에서 쪼개면
 </p><p>
-$$
-\int_m^{1} |x-x_2|,dx
+\[\int_m^{1} |x-x_2|,dx
 =\int_m^{x_2}(x_2-x),dx+\int_{x_2}^{1}(x-x_2),dx
-=\frac{(x_2-m)^2}{2}+\frac{(1-x_2)^2}{2}
-$$
+=\frac{(x_2-m)^2}{2}+\frac{(1-x_2)^2}{2}\]
 </p><p>
 따라서
 </p><p>
-$$
-C(x_1,x_2)
-=\frac{t}{2}\leftx_1^2+(m-x_1)^2+(x_2-m)^2+(1-x_2)^2\right
-$$
+\[C(x_1,x_2)
+=\frac{t}{2}\leftx_1^2+(m-x_1)^2+(x_2-m)^2+(1-x_2)^2\right\]
 </p><p>
 인데, \(m=\frac{x_1+x_2}{2}\)를 대입하면
 </p><p>
-$$
-m-x_1=\frac{x_2-x_1}{2},\qquad x_2-m=\frac{x_2-x_1}{2}
-$$
+\[m-x_1=\frac{x_2-x_1}{2},\qquad x_2-m=\frac{x_2-x_1}{2}\]
 </p><p>
 이므로 가운데 두 항은 같아져서
 </p><p>
-$$
-C(x_1,x_2)
-=\frac{t}{2} x_1^2+\frac{(x_2-x_1)^2}{2}+(1-x_2)^2
-$$
+\[C(x_1,x_2)
+=\frac{t}{2} x_1^2+\frac{(x_2-x_1)^2}{2}+(1-x_2)^2\]
 </p><p>
 이제 (\(d=x_2-x_1\ge 0\))로 두면 (\(x_2=x_1+d\)), 제약은 (\(0\le x_1\)), (\(x_1+d\le 1\))이고 비용은
 </p><p>
-$$
-C(x_1,d)=\frac{t}{2}x_1^2+\frac{d^2}{2}+(1-x_1-d)^2
-$$
+\[C(x_1,d)=\frac{t}{2}x_1^2+\frac{d^2}{2}+(1-x_1-d)^2\]
 </p><p>
 이다. 내부해(경계에 붙지 않는 해)에서 1차 조건을 풀면 된다.
 먼저 \(x_1\)에 대해 미분하면</p>
 <p>
-$$
-\frac{\partial C}{\partial x_1}
+\[\frac{\partial C}{\partial x_1}
 =\frac{t}{2}\left(2x_1-2(1-x_1-d)\right)
-=t\left(2x_1+d-1\right)
-$$
+=t\left(2x_1+d-1\right)\]
 </p><p>
 따라서
 </p><p>
-$$
-2x_1+d-1=0 \quad\Longleftrightarrow\quad 2x_1+d=1
-$$
+\[2x_1+d-1=0 \quad\Longleftrightarrow\quad 2x_1+d=1\]
 </p><p>
 다음으로 \(d\)에 대해 미분하면
 </p><p>
-$$
-\frac{\partial C}{\partial d}
+\[\frac{\partial C}{\partial d}
 =\frac{t}{2}\left(d-2(1-x_1-d)\right)
-=\frac{t}{2}\left(3d+2x_1-2\right)
-$$
+=\frac{t}{2}\left(3d+2x_1-2\right)\]
 </p><p>
 따라서
 </p><p>
-$$
-3d+2x_1-2=0 \quad\Longleftrightarrow\quad 3d+2x_1=2
-$$
+\[3d+2x_1-2=0 \quad\Longleftrightarrow\quad 3d+2x_1=2\]
 </p><p>
 이 두 식을 연립하면,
 </p><p>
-$$
-(3d+2x_1)-(d+2x_1)=2-1 \quad\Longrightarrow\quad 2d=1 \quad\Longrightarrow\quad d=\frac12
-$$
+\[(3d+2x_1)-(d+2x_1)=2-1 \quad\Longrightarrow\quad 2d=1 \quad\Longrightarrow\quad d=\frac12\]
 </p><p>
-$$
-2x_1+\frac12=1 \quad\Longrightarrow\quad 2x_1=\frac12 \quad\Longrightarrow\quad x_1=\frac14
-$$
+\[2x_1+\frac12=1 \quad\Longrightarrow\quad 2x_1=\frac12 \quad\Longrightarrow\quad x_1=\frac14\]
 </p><p>
 따라서
 </p><p>
-$$
-x_2=x_1+d=\frac14+\frac12=\frac34
-$$
+\[x_2=x_1+d=\frac14+\frac12=\frac34\]
 </p><p>
 이 해가 진짜 최소인지도 확인해 두면, \(C(x_1,d)\)는 \(x_1\)와 \(d\)에 대한 2차식이고, 헤시안이 양의 정부호이다. 실제로
 </p><p>
-$$
-\frac{\partial^2 C}{\partial x_1^2}=2t,\qquad
+\[\frac{\partial^2 C}{\partial x_1^2}=2t,\qquad
 \frac{\partial^2 C}{\partial d^2}=\frac{3t}{2},\qquad
-\frac{\partial^2 C}{\partial x_1\partial d}=t
-$$
+\frac{\partial^2 C}{\partial x_1\partial d}=t\]
 </p><p>
 이고 행렬식이
 </p><p>
-$$
-(2t)\left(\frac{3t}{2}\right)-t^2=3t^2-t^2=2t^2>0
-$$
+\[(2t)\left(\frac{3t}{2}\right)-t^2=3t^2-t^2=2t^2>0\]
 </p><p>
 이므로 내부 임계점은 전역 최소이다.
 (제약 \(0\le x_1,\ x_1+d\le 1 \quad\) 도  \(x_1=\frac14,\ x_2=\frac34\)에서 만족합니다).
@@ -317,9 +277,7 @@ $$
 </p><p>
 앞에서 계산한 것처럼,
 </p><p>
-$$
-\int_0^{1/2} \left|x-\frac14\right| dx = \frac{1}{16}
-$$
+\[\int_0^{1/2} \left|x-\frac14\right| dx = \frac{1}{16}\]
 </p><p>
 이므로
 </p><p>
@@ -340,15 +298,11 @@ $$
 </p><p>
 수학적으로 보면, 기업이 0과 1에 있을 때 총 이동비용은
 </p><p>
-$$
-\int_0^{1/2} t x , dx + \int_{1/2}^1 t (1-x) , dx
-$$
+\[\int_0^{1/2} t x , dx + \int_{1/2}^1 t (1-x) , dx\]
 </p><p>
 형태가 되며, 이는 중앙 집중 배치보다 작다. 반면 두 기업이 모두 \(\frac{1}{2}\)에 위치하면 총 이동비용은
 </p><p>
-$$
-\int_0^1 t \left| x - \frac{1}{2} \right| dx
-$$
+\[\int_0^1 t \left| x - \frac{1}{2} \right| dx\]
 </p><p>
 로 계산되며 더 커진다.
 </p><p>
@@ -367,7 +321,7 @@ $$
 
       <p>예를 들어 개인 \(i\)의 이득을 \(v(x_i)\), 총채취에 따른 비용(혹은 자원 고갈 손실)을 \(C(X)\)로 두면, 개인은</p>
 
-      $$\max_{x_i \ge 0} \; \bigl(v(x_i) - C(X)\bigr)$$
+      \[\max_{x_i \ge 0} \; \bigl(v(x_i) - C(X)\bigr)\]
 
       <p>같은 형태로 행동할 수 있다. 여기서 개인은 \(C(X)\)의 “내가 늘리면 남들에게도 비용이 커진다”는 외부효과를 전부 내부화하지 않기 때문에, 사회적 최적보다 큰 \(X\)로 가는 경향이 생깁니다. 계산은 쿠르노처럼 최적반응을 구해 교점을 찾는 방식으로 진행된다.</p>
     </section>
