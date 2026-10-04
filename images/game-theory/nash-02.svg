@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" id = "border" width="900" height="400" viewBox="0 -50 900 350">
+<style>#sgv-text{fill:black;font-size:30px;font-family:Times,serif;}#sgv-text2{fill:black;font-size:30px;font-family:Times,serif;}#sgv-text3{fill:black;font-size:20px;font-family:Times,serif;}text{fill:black;}</style>
+    
+  <polyline points="200,20 800,20" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,120 800,120" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,220 800,220" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,320 800,320" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,20 200,320" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="400,20 400,320" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="600,20 600,320" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="800,20 800,320" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,20 400,120" fill="none" stroke="black" 
+    stroke-width="2" />
+
+  <text id = "sgv-text" x="220" y="100" > 갑 </text>
+  <text id = "sgv-text" x="320" y="70" > 을 </text>
+  <text id = "sgv-text" x="445" y="85" > 사슴 </text>
+  <text id = "sgv-text" x="645" y="85" > 토끼 </text>
+  <text id = "sgv-text" x="250" y="190" > 사슴 </text>
+  <text id = "sgv-text" x="250" y="290" > 토끼 </text>
+  <text id = "sgv-text" x="465" y="190" > 3, 3 </text>
+  <text id = "sgv-text" x="665" y="190" > 0, 1 </text>
+  <text id = "sgv-text" x="465" y="290" > 1, 0 </text>
+  <text id = "sgv-text" x="665" y="290" > 1, 1 </text>
+
+  <text id = "sgv-text" x="280" y="0"> <표 2> 사슴사냥 게임 </text>
+
+</svg>
