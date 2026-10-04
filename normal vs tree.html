@@ -82,43 +82,7 @@ pre, code { max-width:100%; overflow-x:auto; }
 <p> 아래 <표 1>은 표형으로 묘사된 죄인들의 딜렘마 게임이다. </p>
 <p> 붉은 색 원으로 칠해진 부분이 내쉬균형이다. </p>
 
-<svg id = "border" width="900" height="400" viewBox="0 -50 900 350">
-    
-    <polyline points="200,20 800,20" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="200,120 800,120" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="200,220 800,220" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="200,320 800,320" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="200,20 200,320" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="400,20 400,320" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="600,20 600,320" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="800,20 800,320" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="200,20 400,120" fill="none" stroke="black" 
-      stroke-width="2" />
-  
-    <text id = "sgv-text" x="220" y="100" > 갑 </text>
-    <text id = "sgv-text" x="320" y="70" > 을 </text>
-    <text id = "sgv-text" x="475" y="85" > C </text>
-    <text id = "sgv-text" x="675" y="85" > D </text>
-    <text id = "sgv-text" x="280" y="190" > C </text>
-    <text id = "sgv-text" x="280" y="290" > D </text>
-    <text id = "sgv-text" x="465" y="190" > -1, -1 </text>
-    <text id = "sgv-text" x="665" y="190" > -9, 0 </text>
-    <text id = "sgv-text" x="465" y="290" > 0, -9 </text>
-    <text id = "sgv-text" x="665" y="290" > -5, -5 </text>
-  
-    <ellipse cx="700" cy="270" rx="80" ry="40"
-style="fill:none;stroke:purple;stroke-width:3"/>
-
-    <text id = "sgv-text" x="300" y="-10"> <표 1> 표형 </text>
-</svg>
+<img src="images/game-theory/normal-tree-01.svg" alt="normal-tree diagram 1" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
 <p> 이를 트리형으로 고치면 <그림1>과 같다. </p>
 <p> 갑이 C, D를 선택하고 을이 C, D를 선택하는데 을은 갑의 선택을 모른다. </p>
@@ -127,44 +91,7 @@ style="fill:none;stroke:purple;stroke-width:3"/>
 <p> 이 점선으로 연결한 부분을 게임이론에서 정보집합(information set)이라 부른다. </p>
 <p> 동시게임에서는 정보집합을 써서 동시성, 또는 모호성을 표현한다. </p>
 	
-<svg id = "border" width="1000" height="800" viewBox="0 100 1000 800">
-    
-    <polyline points="600,240 400,440" fill="none" stroke="black" 
-      stroke-width="2" />
-        <polyline points="400,440 300,600" fill="none" stroke="black" 
-        stroke-width="2" />
-        <polyline points="400,440 500,600" fill="none" stroke="black" 
-        stroke-width="2" />
-    <polyline points="600,240 800,440" fill="none" stroke="black" 
-      stroke-width="2" />
-      <polyline points="800,440 700,600" fill="none" stroke="black" 
-      stroke-width="2" />
-      <polyline points="800,440 900,600" fill="none" stroke="black" 
-      stroke-width="2" />
-
-      <polyline points="400,440 800,440" fill="none" stroke="black" stroke-dasharray="5,5"
-      stroke-width="2" />
-    <circle cx="600" cy="240" r="40" stroke="green" stroke-width="4" fill="yellow" />
-    <circle cx="400" cy="440" r="40" stroke="green" stroke-width="4" fill="yellow" />
-    <circle cx="800" cy="440" r="40" stroke="green" stroke-width="4" fill="yellow" />
-        <!-- 
-         원의 색이 선 위에 덧 칠하기 위해서는 선 다음에 그림
-        -->
-    <text id = "sgv-text" x="575" y="255" > 갑 </text>
-    <text id = "sgv-text2" x="450" y="330" > C </text>
-    <text id = "sgv-text2" x="720" y="330" > D </text>
-    <text id = "sgv-text" x="375" y="455" > 을 </text>
-    <text id = "sgv-text" x="775" y="455" > 을 </text>
-    <text id = "sgv-text2" x="300" y="530" > C </text>
-    <text id = "sgv-text2" x="470" y="530" > D </text>
-    <text id = "sgv-text2" x="710" y="530" > C </text>
-    <text id = "sgv-text2" x="870" y="530" > D </text>
-    <text id = "sgv-text" x="220" y="650" > (-1, -1) </text>
-    <text id = "sgv-text" x="420" y="650" > (-9, 0) </text>
-    <text id = "sgv-text" x="620" y="650" > (0, -9) </text>
-    <text id = "sgv-text" x="820" y="650" > (-5, -5) </text>
-    <text id = "sgv-text" x="350" y="800"> (그림 1) 트리형</text>
-   </svg>
+<img src="images/game-theory/normal-tree-02.svg" alt="normal-tree diagram 2" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
 <h2>3. 순차적게임(sequential game)</h2>
 <p> (그림 2)는 순차적 게임을 묘사한다. </p>
@@ -175,40 +102,7 @@ style="fill:none;stroke:purple;stroke-width:3"/>
 <p> 이는 을이 갑의 결정을 알 수 있음을 의미한다.</p>
 
 	
-<svg id = "border" width="1000" height="800" viewBox="0 100 1000 800">
-    
-    <polyline points="600,240 400,440" fill="none" stroke="black" 
-      stroke-width="2" />
-        <polyline points="400,440 300,600" fill="none" stroke="black" 
-        stroke-width="2" />
-        <polyline points="400,440 500,600" fill="none" stroke="black" 
-        stroke-width="2" />
-    <polyline points="600,240 800,440" fill="none" stroke="black" 
-      stroke-width="2" />
-      <polyline points="800,440 700,600" fill="none" stroke="black" 
-      stroke-width="2" />
-      <polyline points="800,440 900,600" fill="none" stroke="black" 
-      stroke-width="2" />
-
-    <circle cx="600" cy="240" r="40" stroke="green" stroke-width="4" fill="yellow" />
-    <circle cx="400" cy="440" r="40" stroke="green" stroke-width="4" fill="yellow" />
-    <circle cx="800" cy="440" r="40" stroke="green" stroke-width="4" fill="yellow" />
-        
-    <text id = "sgv-text" x="575" y="255" > 갑 </text>
-    <text id = "sgv-text2" x="450" y="330" > a </text>
-    <text id = "sgv-text2" x="720" y="330" > b </text>
-    <text id = "sgv-text" x="375" y="455" > 을 </text>
-    <text id = "sgv-text" x="775" y="455" > 을 </text>
-    <text id = "sgv-text2" x="300" y="530" > c </text>
-    <text id = "sgv-text2" x="470" y="530" > d </text>
-    <text id = "sgv-text2" x="710" y="530" > c </text>
-    <text id = "sgv-text2" x="870" y="530" > d </text>
-    <text id = "sgv-text" x="220" y="650" > (3, 2) </text>
-    <text id = "sgv-text" x="420" y="650" > (6, 4) </text>
-    <text id = "sgv-text" x="620" y="650" > (1, 3) </text>
-    <text id = "sgv-text" x="820" y="650" > (4, 5) </text>
-    <text id = "sgv-text" x="350" y="800"> (그림 2) 트리형</text>
-   </svg>
+<img src="images/game-theory/normal-tree-03.svg" alt="normal-tree diagram 3" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
 <h3> (1) 전략의 개념 </h3>
 <p> 순차적 게임에서는 전략의 설정에 주의해야 한다. </p>
@@ -224,56 +118,7 @@ style="fill:none;stroke:purple;stroke-width:3"/>
 <p> iv) 갑이 a를 선택하면 을은 d를 선택한다. 갑이 b를 선택하면 을은 d를 선택한다. </p>
 <p> 이로부터 게임표를 만들면 <표 2>와 같다. </p>
 
-<svg id = "border" width="1200" height="400" viewBox="0 -50 1200 350">
-    
-    <polyline points="200,20 1200,20" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="200,120 1200,120" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="200,220 1200,220" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="200,320 1200,320" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="200,20 200,320" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="400,20 400,320" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="600,20 600,320" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="800,20 800,320" fill="none" stroke="black" 
-      stroke-width="2" />
-      <polyline points="1000,20 1000,320" fill="none" stroke="black" 
-      stroke-width="2" />
-      <polyline points="1200,20 1200,320" fill="none" stroke="black" 
-      stroke-width="2" />
-    <polyline points="200,20 400,120" fill="none" stroke="black" 
-      stroke-width="2" />
-  
-    <text id = "sgv-text" x="220" y="100" > 갑 </text>
-    <text id = "sgv-text" x="320" y="70" > 을 </text>
-    <text id = "sgv-text" x="445" y="55" > a -> c </text>
-    <text id = "sgv-text" x="445" y="105" > b -> c </text>
-    <text id = "sgv-text" x="645" y="55" > a -> c </text>
-    <text id = "sgv-text" x="645" y="105" > b -> d </text>
-    <text id = "sgv-text" x="845" y="55" > a -> d </text>
-    <text id = "sgv-text" x="845" y="105" > b -> c </text>
-    <text id = "sgv-text" x="1045" y="55" > a -> d </text>
-    <text id = "sgv-text" x="1045" y="105" > b -> d </text>
-    <text id = "sgv-text" x="280" y="190" > a </text>
-    <text id = "sgv-text" x="280" y="290" > b </text>
-    <text id = "sgv-text" x="465" y="190" > 3, 2 </text>
-    <text id = "sgv-text" x="665" y="190" > 3, 2 </text>
-    <text id = "sgv-text" x="865" y="190" > 6, 4 </text>
-    <text id = "sgv-text" x="1065" y="190" > 6, 4 </text>
-    <text id = "sgv-text" x="465" y="290" > 1, 3 </text>
-    <text id = "sgv-text" x="665" y="290" > 4, 5 </text>
-    <text id = "sgv-text" x="865" y="290" > 1, 3 </text>
-    <text id = "sgv-text" x="1065" y="290" > 4, 5 </text>
-    <ellipse cx="700" cy="270" rx="80" ry="40" style="fill:none;stroke:purple;stroke-width:3"/>
-    <ellipse cx="905" cy="170" rx="80" ry="40" style="fill:none;stroke:purple;stroke-width:3"/>
-    <ellipse cx="1105" cy="170" rx="80" ry="40" style="fill:none;stroke:purple;stroke-width:3"/>
-    <text id = "sgv-text" x="300" y="-10"> <표 2> 표형 </text>
-</svg>
+<img src="images/game-theory/normal-tree-04.svg" alt="normal-tree diagram 4" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
 <p> <표 2>에서 내쉬균형은 붉은 원으로 칠해진 부분 세 개이다. </p>
 <p> (갑 : b, 을 : a$\rightarrow$c,  b$\rightarrow$d), (갑 : a, 을 : a $ \rightarrow $ d,  b $ \rightarrow $ c), (갑 : a, 을 : a $ \rightarrow $ d,  b $ \rightarrow $ d) </p>
@@ -282,40 +127,7 @@ style="fill:none;stroke:purple;stroke-width:3"/>
 
 <h3> (2) 균형경로 vs 비균형경로 </h3>
 
-<svg id = "border" width="1000" height="800" viewBox="0 100 1000 800">
-    
-  <polyline points="600,240 400,440" fill="none" stroke="red" 
-    stroke-width="3" />
-      <polyline points="400,440 300,600" fill="none" stroke="red" 
-      stroke-width="3" />
-      <polyline points="400,440 500,600" fill="none" stroke="black" 
-      stroke-width="2" />
-  <polyline points="600,240 800,440" fill="none" stroke="red" 
-    stroke-width="3" />
-    <polyline points="800,440 700,600" fill="none" stroke="black" 
-    stroke-width="2" />
-    <polyline points="800,440 900,600" fill="none" stroke="red" 
-    stroke-width="3" />
-
-  <circle cx="600" cy="240" r="40" stroke="green" stroke-width="4" fill="yellow" />
-  <circle cx="400" cy="440" r="40" stroke="green" stroke-width="4" fill="yellow" />
-  <circle cx="800" cy="440" r="40" stroke="green" stroke-width="4" fill="yellow" />
-      
-  <text id = "sgv-text" x="575" y="255" > 갑 </text>
-  <text id = "sgv-text2" x="450" y="330" > a </text>
-  <text id = "sgv-text2" x="720" y="330" > b </text>
-  <text id = "sgv-text" x="375" y="455" > 을 </text>
-  <text id = "sgv-text" x="775" y="455" > 을 </text>
-  <text id = "sgv-text2" x="300" y="530" > c </text>
-  <text id = "sgv-text2" x="470" y="530" > d </text>
-  <text id = "sgv-text2" x="710" y="530" > c </text>
-  <text id = "sgv-text2" x="870" y="530" > d </text>
-  <text id = "sgv-text" x="220" y="650" > (3, 2) </text>
-  <text id = "sgv-text" x="420" y="650" > (6, 4) </text>
-  <text id = "sgv-text" x="620" y="650" > (1, 3) </text>
-  <text id = "sgv-text" x="820" y="650" > (4, 5) </text>
-  <text id = "sgv-text" x="350" y="800"> (그림 3) 트리형</text>
- </svg>
+<img src="images/game-theory/normal-tree-05.svg" alt="normal-tree diagram 5" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
 <p> 첫 번째 내쉬균형을 보자. </p>
 <p> 갑은 b를 선택하고, 을은 갑이 a를 선택하면 c를 선택하고 갑이 b를 선택하면 d를 선택하는 전략이 내쉬균형이다. </p>
@@ -323,40 +135,7 @@ style="fill:none;stroke:purple;stroke-width:3"/>
 <p> 전략의 정의상 두 개의 경로가 표현됐지만 실제의 선택 경로는 b$\rightarrow$d 임을 알 수 있다. 이를 내쉬균형상의 균형경로(on the equilibrium path)라 한다. </p>
 <p> 반대로  a$\rightarrow$c 같이 내쉬균형 전략의 일부이지만 도달하지 않는 경로를 비균형경로(off the equilibrium path)라 한다. </p>
 
-<svg id = "border" width="1000" height="800" viewBox="0 100 1000 800">
-    
-  <polyline points="600,240 400,440" fill="none" stroke="red" 
-    stroke-width="3" />
-      <polyline points="400,440 300,600" fill="none" stroke="black" 
-      stroke-width="2" />
-      <polyline points="400,440 500,600" fill="none" stroke="red" 
-      stroke-width="3" />
-  <polyline points="600,240 800,440" fill="none" stroke="red" 
-    stroke-width="3" />
-    <polyline points="800,440 700,600" fill="none" stroke="black" 
-    stroke-width="2" />
-    <polyline points="800,440 900,600" fill="none" stroke="red" 
-    stroke-width="3" />
-
-  <circle cx="600" cy="240" r="40" stroke="green" stroke-width="4" fill="yellow" />
-  <circle cx="400" cy="440" r="40" stroke="green" stroke-width="4" fill="yellow" />
-  <circle cx="800" cy="440" r="40" stroke="green" stroke-width="4" fill="yellow" />
-      
-  <text id = "sgv-text" x="575" y="255" > 갑 </text>
-  <text id = "sgv-text2" x="450" y="330" > a </text>
-  <text id = "sgv-text2" x="720" y="330" > b </text>
-  <text id = "sgv-text" x="375" y="455" > 을 </text>
-  <text id = "sgv-text" x="775" y="455" > 을 </text>
-  <text id = "sgv-text2" x="300" y="530" > c </text>
-  <text id = "sgv-text2" x="470" y="530" > d </text>
-  <text id = "sgv-text2" x="710" y="530" > c </text>
-  <text id = "sgv-text2" x="870" y="530" > d </text>
-  <text id = "sgv-text" x="220" y="650" > (3, 2) </text>
-  <text id = "sgv-text" x="420" y="650" > (6, 4) </text>
-  <text id = "sgv-text" x="620" y="650" > (1, 3) </text>
-  <text id = "sgv-text" x="820" y="650" > (4, 5) </text>
-  <text id = "sgv-text" x="350" y="800"> (그림 4) 트리형</text>
- </svg>
+<img src="images/game-theory/normal-tree-06.svg" alt="normal-tree diagram 6" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
 <p> 세번째 내쉬균형을 보자. </p>
 <p> 갑은 a를 선택하고, 을은 갑이 a를 선택하면 d를 선택하고 갑이 b를 선택하면 d를 선택하는 전략이 내쉬균형이다. </p>
@@ -377,46 +156,10 @@ style="fill:none;stroke:purple;stroke-width:3"/>
 <p> (그림 2)의 트리형 게임을 봤을 때 을의 선택이 하나의 작은 게임을 이룸을 알 수 있다.(물론 이 경우의 게임은 을이 혼자하는 게임이라 할 수 있다.) </p>
 
 <div class="digitDiv">
-  <svg id = "border" width="800" height="600" viewBox="0 100 1000 800">
-    
-    <polyline points="600,240 400,440" fill="none" stroke="black" 
-      stroke-width="2" />
-        
-    <polyline points="600,240 800,440" fill="none" stroke="black" 
-      stroke-width="2" />
-        
-    <circle cx="600" cy="240" r="40" stroke="green" stroke-width="4" fill="yellow" />
-            
-    <text id = "sgv-text" x="575" y="255" > 을 </text>
-    <text id = "sgv-text" x="450" y="330" > c </text>
-    <text id = "sgv-text" x="720" y="330" > d </text>
-   
-    <text id = "sgv-text" x="320" y="500" > (3, 2) </text>
-    <text id = "sgv-text" x="770" y="500" > (6, 4) </text>
-    
-    <text id = "sgv-text" x="350" y="700"> (그림 5a) 부분게임1</text>
-   </svg>
+  <img src="images/game-theory/normal-tree-07.svg" alt="normal-tree diagram 7" style="display:block;width:100%;height:auto;margin:1rem auto;">
 </div>
 <div class="digitDiv">
-  <svg id = "border" width="800" height="600" viewBox="0 100 1000 800">
-    
-    <polyline points="600,240 400,440" fill="none" stroke="black" 
-      stroke-width="2" />
-        
-    <polyline points="600,240 800,440" fill="none" stroke="black" 
-      stroke-width="2" />
-        
-    <circle cx="600" cy="240" r="40" stroke="green" stroke-width="4" fill="yellow" />
-            
-    <text id = "sgv-text" x="575" y="255" > 을 </text>
-    <text id = "sgv-text" x="450" y="330" > c </text>
-    <text id = "sgv-text" x="720" y="330" > d </text>
-   
-    <text id = "sgv-text" x="320" y="500" > (1, 3) </text>
-    <text id = "sgv-text" x="770" y="500" > (4, 5) </text>
-    
-    <text id = "sgv-text" x="350" y="700"> (그림 5b) 부분게임2</text>
-   </svg>
+  <img src="images/game-theory/normal-tree-08.svg" alt="normal-tree diagram 8" style="display:block;width:100%;height:auto;margin:1rem auto;">
 </div>
 <p> 이 게임에서는 이와 같이 작은 게임이 두 개가 있다. 이처럼 어떤 단일 의사결정 노드에서 시작하여 그 아래의 모든 후속 노드를 포함하는 게임을 부분게임(subgame)이라 한다. </p>
 <p> (그림 1)의 트리형 게임에서는 전체 게임 자체를 제외하면 적절한 부분게임(proper subgame)이 존재하지 않는다. 을의 노드가 점선, 즉 정보집합으로 연결되어 있으면 그 하위 가지는 부분게임으로 보지 않는다. </p>
