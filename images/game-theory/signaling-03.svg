@@ -1,0 +1,270 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" id = "border" width="1300" height="800" viewBox="0 0 1300 800">
+<style>#sgv-text{fill:black;font-size:50px;font-family:Times,serif;}#sgv-text2{fill:black;font-size:30px;font-family:Times,serif;}text{fill:black;}</style>
+  
+  <polyline points="200,100 1200,100" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,200 1200,200" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="200,300 1200,300" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,400 1200,400" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="200,500 1200,500" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,600 1200,600" fill="none" stroke="black" 
+    stroke-width="2" />
+
+  <polyline points="200,100 200,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="400,100 400,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="600,100 600,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="800,100 800,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1000,100 1000,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1200,100 1200,600" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,100 400,200" fill="none" stroke="black" 
+    stroke-width="2" />
+
+  <text id = "sgv-text" x="250" y="180" > S </text>
+  <text id = "sgv-text" x="330" y="150" > R </text>
+  <foreignObject id = "sgv-text2" x="440" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to u  \\
+      B \to u $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="640" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to d \\
+       B \to d $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="840" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to u \\
+       B \to d $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="1040" y="115" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ A \to d \\
+       B \to u $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="215" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to A \\
+       L \to A $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="315" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to B \\
+         L \to B $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="415" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to A \\
+        L \to B $
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="240" y="515" width="150" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+    $ H \to B \\
+         L \to A $
+    </div>
+  </foreignObject>
+
+
+  <foreignObject id = "sgv-text2" x="400" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 4 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="400" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       4 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="400" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="400" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 4 
+      \end{pmatrix},
+       \begin{pmatrix}
+       4 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       0 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 3 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 3 
+      \end{pmatrix},
+       \begin{pmatrix}
+       0 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="600" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="800" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 4 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="800" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 3 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="800" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 3 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="800" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       3 \\ 4 
+      \end{pmatrix},
+       \begin{pmatrix}
+       1 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+
+  <foreignObject id = "sgv-text2" x="1000" y="185" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       0 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="1000" y="285" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       4 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="1000" y="385" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       2 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       0 \\ 0 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <foreignObject id = "sgv-text2" x="1000" y="485" width="200" height="150">
+    <div xmlns="http://www.w3.org/1999/xhtml" >
+      \begin{align} \begin{pmatrix}
+       5 \\ 2 
+      \end{pmatrix},
+       \begin{pmatrix}
+       4 \\ 1 
+      \end{pmatrix}
+      \end{align}
+    </div>
+  </foreignObject>
+  <text x="400" y="700" style="font-size:40px"> <표 1> 신호게임보수 - 임시표 </text>
+</svg>
