@@ -1,0 +1,81 @@
+/* Shared presentation for standard Game Theory lecture pages */
+html{
+  -webkit-text-size-adjust:100%;
+}
+body{
+  max-width:980px !important;
+  width:auto !important;
+  margin:0 auto !important;
+  padding:1.2rem 1rem 3rem !important;
+  background:#fff;
+  color:#1f2926;
+  font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif !important;
+  font-size:18px !important;
+  line-height:1.9 !important;
+  overflow-wrap:break-word;
+}
+p{
+  font-size:1rem !important;
+  line-height:1.9 !important;
+  margin:0.85em 0 !important;
+}
+h1,h2,h3,h4{
+  font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif !important;
+  line-height:1.35 !important;
+  color:#25322e !important;
+}
+h1{font-size:1.9rem !important;margin:0.8em 0 0.6em !important;}
+h2{font-size:1.45rem !important;margin:1.7em 0 0.7em !important;}
+h3{font-size:1.18rem !important;margin:1.4em 0 0.6em !important;}
+h4{font-size:1.05rem !important;}
+img,svg,canvas{
+  max-width:100% !important;
+  height:auto !important;
+}
+img{
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+figure{
+  width:100% !important;
+  max-width:100% !important;
+  margin:1.25rem auto !important;
+  padding:0 !important;
+}
+figcaption{
+  position:static !important;
+  display:block;
+  margin-top:.45rem !important;
+  text-align:center !important;
+  font-size:.92rem !important;
+  line-height:1.5 !important;
+  color:#56635e !important;
+}
+table{
+  max-width:100%;
+  margin:1rem auto;
+  border-collapse:collapse;
+}
+th,td{
+  overflow-wrap:anywhere;
+}
+pre{
+  margin:0;
+  white-space:pre-wrap;
+}
+.MathJax_Display,.mjx-chtml,.katex-display{
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+}
+@media (max-width:640px){
+  body{
+    padding:.8rem .65rem 2rem !important;
+    font-size:16px !important;
+  }
+  p{font-size:1rem !important;line-height:1.85 !important;}
+  h1{font-size:1.65rem !important;}
+  h2{font-size:1.32rem !important;}
+  h3{font-size:1.12rem !important;}
+}
