@@ -31,6 +31,6 @@
   <text id = "sgv-text" x="465" y="290" > 1, 0 </text>
   <text id = "sgv-text" x="665" y="290" > 1, 1 </text>
 
-  <text id = "sgv-text" x="280" y="0"> <표 2> 사슴사냥 게임 </text>
+  <text id = "sgv-text" x="280" y="0"> &lt;표 2&gt; 사슴사냥 게임 </text>
 
 </svg>
