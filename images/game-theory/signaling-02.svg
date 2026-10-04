@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" id = "border" width="1600" height="1000" viewBox="0 0 1600 1000">
+<style>#sgv-text{fill:black;font-size:50px;font-family:Times,serif;}#sgv-text2{fill:black;font-size:30px;font-family:Times,serif;}text{fill:black;}</style>
+  <circle cx="400" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="800" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="1200" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="400" cy="700" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="800" cy="700" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="1200" cy="700" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  <circle cx="800" cy="450" r="40" stroke="green" stroke-width="4" fill="yellow" />
+
+  <polyline points="200,150 360,200" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,250 360,200" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,650 360,700" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="200,750 360,700" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1240,200 1400,150" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1240,200 1400,250" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1240,700 1400,650" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1240,700 1400,750" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="440,200 760,200" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="840,200 1160,200" fill="none" stroke="black" 
+    stroke-width="2" />   
+  <polyline points="440,700 760,700" fill="none" stroke="black" 
+    stroke-width="2" />  
+  <polyline points="840,700 1160,700" fill="none" stroke="black" 
+    stroke-width="2" /> 
+  <polyline points="800,240 800,410" fill="none" stroke="black" 
+    stroke-width="2" /> 
+  <polyline points="800,490 800,660" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="400,240 400,660" fill="none" stroke="black" 
+    stroke-width="2" stroke-dasharray="4"/>
+  <polyline points="1200,240 1200,660" fill="none" stroke="black" 
+    stroke-width="2" stroke-dasharray="4"/>
+
+  <text id = "sgv-text" x="385" y="215" > R </text>
+  <text id = "sgv-text" x="785" y="215" > S </text>
+  <text id = "sgv-text" x="1185" y="215" > R </text>
+  <text id = "sgv-text" x="385" y="715" > R </text>
+  <text id = "sgv-text" x="785" y="715" > S </text>
+  <text id = "sgv-text" x="1185" y="715" > R </text>
+  <text id = "sgv-text" x="785" y="465" > N </text>
+  <text id = "sgv-text" x="600" y="190" > A </text>
+  <text id = "sgv-text" x="1000" y="190" > B </text>
+  <text id = "sgv-text" x="600" y="690" > A </text>
+  <text id = "sgv-text" x="1000" y="690" > B </text>
+  <text id = "sgv-text" x="810" y="350" > H(p = 0.5)</text>
+  <text id = "sgv-text" x="810" y="600" > L(1-p = 0.5)</text>
+  <text id = "sgv-text" x="80" y="170" > (2,1) </text>
+  <text id = "sgv-text" x="80" y="270" > (2,0) </text>
+  <text id = "sgv-text" x="80" y="660" > (4,0) </text>
+  <text id = "sgv-text" x="80" y="770" > (2,1) </text>
+  <text id = "sgv-text" x="1410" y="170" > (5,4) </text>
+  <text id = "sgv-text" x="1410" y="270" > (3,1) </text>
+  <text id = "sgv-text" x="1410" y="660" > (2,0) </text>
+  <text id = "sgv-text" x="1410" y="770" > (3,1) </text>
+  <text id = "sgv-text" x="250" y="160" > u </text>
+  <text id = "sgv-text" x="250" y="270" > d </text>
+  <text id = "sgv-text" x="250" y="660" > u </text>
+  <text id = "sgv-text" x="250" y="770" > d </text>
+  <text id = "sgv-text" x="1320" y="160" > u </text>
+  <text id = "sgv-text" x="1320" y="270" > d </text>
+  <text id = "sgv-text" x="1320" y="660" > u </text>
+  <text id = "sgv-text" x="1320" y="770" > d </text>
+  <text x="700" y="950" style="font-size:30px"> (그림 2) 신호게임 </text>
+</svg>
