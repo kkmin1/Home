@@ -36,6 +36,68 @@ pre, code { max-width:100%; overflow-x:auto; }
 }
 </style>
 
+
+<style id="bayesian-responsive-fix">
+.bayes-payoff-pair{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(260px,1fr));
+  gap:1.25rem;
+  align-items:start;
+  margin:1rem auto 1.5rem;
+}
+.bayes-payoff-pair > div{min-width:0;}
+.bayes-small{
+  width:100% !important;
+  max-width:360px !important;
+  table-layout:fixed !important;
+  margin:0 auto !important;
+  font-size:18px !important;
+}
+.bayes-small th,.bayes-small td{
+  min-width:0 !important;
+  width:auto !important;
+  padding:.45rem .35rem !important;
+  overflow-wrap:anywhere;
+}
+.bayes-scroll{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  margin:1rem 0 1.5rem;
+}
+.bayes-wide{
+  width:100% !important;
+  min-width:820px !important;
+  max-width:none !important;
+  table-layout:auto !important;
+  margin:0 !important;
+  font-size:18px !important;
+}
+.bayes-wide th,.bayes-wide td{
+  width:auto !important;
+  min-width:135px;
+  height:auto !important;
+  padding:.55rem .45rem !important;
+  white-space:nowrap;
+  vertical-align:middle;
+}
+.bayes-wide th:first-child{min-width:90px;}
+.bayes-diag{
+  background-image:linear-gradient(to top right,white 49%,black 50%,white 51%);
+}
+.bayes-figure-img{
+  display:block;
+  width:100%;
+  height:auto;
+  margin:0 auto;
+}
+@media (max-width:640px){
+  .bayes-payoff-pair{grid-template-columns:1fr;gap:1rem;}
+  .bayes-small{max-width:340px !important;font-size:16px !important;}
+  .bayes-wide{font-size:16px !important;min-width:760px !important;}
+}
+</style>
+
 </head>
 
 <body>
@@ -54,51 +116,23 @@ pre, code { max-width:100%; overflow-x:auto; }
 
 <p>갑국과 을국은 을국의 요구에 따라 무역협정 재협상을 하려고 한다.
 갑과 을은 각각 A안과 B안을 준비하고 있다. A안은 을에게 유리하고 B안은 갑에게 유리하다. 그런데 을의 재협상 요구에는 진짜로 강경파의 요구에 따라 재협상을 요구하는 것인지, 아니면 내부의 정치적 의도에 따라 재협상을 요구하는 것인지 불분명하다. 
-을이 전자일 경우를 H(Hawk:매파) 유형, 을이 후자일 경우를 D(Dove: 비둘기파) 유형이라 하자. 전자일 경우와 후자일 경우의 보수표는 <표 1>, <표 2>와 같다.</p>
+을이 전자일 경우를 H(Hawk:매파) 유형, 을이 후자일 경우를 D(Dove: 비둘기파) 유형이라 하자. 전자일 경우와 후자일 경우의 보수표는 &lt;표 1&gt;, &lt;표 2&gt;와 같다.</p>
 
-<div class="flex-container">
-<div style="width:13%;float:left;">
-
-  <table id="tbl1" border="1">
-    <caption><표 1> 을 매파</caption>
-  <tr >
-    <th id = "diag"> <pre>갑    을</pre> </th>
-    <th > A </th>
-    <th > B </th>
-  </tr>
-  <tr >
-    <th > A </th>
-    <td style="background-color:#ff9999"> 1, 2 </td>
-    <td > -1, -1 </td>
-  </tr>
-  <tr >
-    <th > B </th>
-    <td >  -1, -1 </td>
-    <td > 2, -2 </td>
-  </tr>
-  </table>
-  
-</div>
-
-  <div style="width:85%;float:right;">
-
-    <table id="tbl2" border="1">
-      <caption><표 2> 을 비둘기파</caption>
-  <tr >
-    <th id = "diag"> <pre>갑    을</pre> </th>
-    <th > A </th>
-    <th > B </th>
-  </tr>
-  <tr >
-    <th > A </th>
-    <td > -2, 2 </td>
-    <td > -1, -1 </td>
-  </tr>
-  <tr >
-    <th > B </th>
-    <td >  -1, -1 </td>
-    <td style="background-color:#ff9999"> 2, 1 </td>
-  </tr>
+<div class="bayes-payoff-pair">
+  <div>
+    <table class="bayes-small" border="1">
+      <caption>&lt;표 1&gt; 을 매파</caption>
+      <tr><th class="bayes-diag"><pre>갑    을</pre></th><th>A</th><th>B</th></tr>
+      <tr><th>A</th><td style="background-color:#ff9999">1, 2</td><td>-1, -1</td></tr>
+      <tr><th>B</th><td>-1, -1</td><td>2, -2</td></tr>
+    </table>
+  </div>
+  <div>
+    <table class="bayes-small" border="1">
+      <caption>&lt;표 2&gt; 을 비둘기파</caption>
+      <tr><th class="bayes-diag"><pre>갑    을</pre></th><th>A</th><th>B</th></tr>
+      <tr><th>A</th><td>-2, 2</td><td>-1, -1</td></tr>
+      <tr><th>B</th><td>-1, -1</td><td style="background-color:#ff9999">2, 1</td></tr>
     </table>
   </div>
 </div>
@@ -110,73 +144,8 @@ pre, code { max-width:100%; overflow-x:auto; }
 갑이 을의 유형을 모르므로 첫 노드를 N(Nature:자연)으로 표현한다.</p>
 
 <figure>
-<svg width="1000" height="550"> 
-
-  <foreignObject x="50" y="300" width="1000" height="300">
-    <body >
-          <div class="flex-container2">
-            <div style="width:13%;float:left;">
-                <table id="tbl1", border="1">
-                <tr >
-                <th id = "diag"> 갑 &nbsp;&nbsp;   을 </th>
-                <th > A </th>
-                <th > B </th>
-              </tr>
-              <tr >
-                <th > A </th>
-                <td > 1, 2 </td>
-                <td > -1, -1 </td>
-              </tr>
-              <tr >
-                <th > B </th>
-                <td >  -1, -1 </td>
-                <td > 2, -2 </td>
-              </tr>
-              </table>
-              </div>
-            
-              <div style="width:85%;float:right;">
-                <table id="tbl2", border="1">
-              <tr >
-                <th id = "diag"> 갑 &nbsp;&nbsp;   을 </th>
-                <th > A </th>
-                <th > B </th>
-              </tr>
-              <tr >
-                <th > A </th>
-                <td > -2, 2 </td>
-                <td > -1, -1 </td>
-              </tr>
-              <tr >
-                <th > B </th>
-                <td >  -1, -1 </td>
-                <td > 2, 1 </td>
-              </tr>
-                </table>
-              </div>
-            </div>
-    </body>
-  </foreignObject>
-  
-  <circle cx="410" cy="50" r="20" stroke="black" stroke-width="1" fill="yellow"/> 
-  <text x="395" y="60" fill="red" font-family="Verdana" font-size="35">N</text>
-  <foreignObject x="290" y="150" width="100" height="100">
-    <div style="color: red; font-size:30">
-      H:$\frac{2}{3}$
-    </div>
-  </foreignObject>
-  <foreignObject x="490" y="150" width="100" height="100">
-    <div style="color: red; font-size:30">
-      D:$\frac{1}{3}$
-    </div>
-  </foreignObject>
-  
-  <line x1 = "430" y1 = "70" x2 = "620" y2 = "270" style = "stroke: black; stroke-width:1"/>
-  <line x1 = "390" y1 = "70" x2 = "220" y2 = "270" style = "stroke: black; stroke-width:1"/>
-</svg>
-<figcaption>
-  (그림1) 불확실성하 재협상 게임의 유형 분기
-</figcaption>
+  <img class="bayes-figure-img" src="images/game-theory/bayesian-renegotiation-tree.svg" alt="불확실성하 재협상 게임의 유형 분기">
+  <figcaption>(그림1) 불확실성하 재협상 게임의 유형 분기</figcaption>
 </figure> 
 <br> 
 
@@ -190,12 +159,12 @@ pre, code { max-width:100%; overflow-x:auto; }
 
 <h2> 베이지안 게임에서 보수의 정의</h2>
 
-<p>우선 임시로 유형별 보수표를 구하면 <표 3>과 같다. <표 3>은 베이지안 게임표가 아니라 베이지안 게임표를 계산하기 쉽게 하기 위해 임시로 구한 표이다.</p>
+<p>우선 임시로 유형별 보수표를 구하면 &lt;표 3&gt;과 같다. &lt;표 3&gt;은 베이지안 게임표가 아니라 베이지안 게임표를 계산하기 쉽게 하기 위해 임시로 구한 표이다.</p>
 
-<table id="tbl3" border="1">
-  <caption><표 3> 재협상 게임 - 임시표 </caption>
+<div class="bayes-scroll"><table id="tbl3" class="bayes-wide" border="1">
+  <caption>&lt;표 3&gt; 재협상 게임 - 임시표 </caption>
 <tr >
-  <th id = "diag" style="width:100px"> <pre>갑   을</pre> </th>
+  <th class="bayes-diag" style="width:100px"> <pre>갑   을</pre> </th>
   <th > H→A, D→A </th>
   <th > H→A, D→B </th>
   <th > H→B, D→A </th>
@@ -215,25 +184,25 @@ pre, code { max-width:100%; overflow-x:auto; }
   <td > $\begin{pmatrix} 2 \\ -1 \end{pmatrix}$, $\begin{pmatrix} -2 \\ -1 \end{pmatrix}$ </td>
   <td > $\begin{pmatrix} 2 \\ 2 \end{pmatrix}$, $\begin{pmatrix} -2 \\ 1 \end{pmatrix}$ </td>
 </tr>
-</table>
+</table></div>
 <br>
 
-<p>예로서 갑 A, 을 H→A, D→A 인 경우, 즉 <표 3>의 첫째 셀의 값은 다음과 같이 구한다.</p>
-<p>갑의 보수는 갑 A, 을 H 일때 A 선택이므로 <표 1>의 갑 A, 을 A에서 1, 을 D일 때 A 선택이므로 <표 2>의 갑 A, 을 A에서 -2 이다.
+<p>예로서 갑 A, 을 H→A, D→A 인 경우, 즉 &lt;표 3&gt;의 첫째 셀의 값은 다음과 같이 구한다.</p>
+<p>갑의 보수는 갑 A, 을 H 일때 A 선택이므로 &lt;표 1&gt;의 갑 A, 을 A에서 1, 을 D일 때 A 선택이므로 &lt;표 2&gt;의 갑 A, 을 A에서 -2 이다.
 이를 유형별 보수벡터 $\begin{pmatrix} 1 \\ -2 \end{pmatrix}$ 로 표시한다.</p>
 
-<p>을의 보수는 갑 A, 을 H 일때 A 선택이므로 <표 1>의 갑 A, 을 A에서 2, 을 D일 때 A 선택이므로 <표 2>의 갑 A, 을 A에서 2 이다.
+<p>을의 보수는 갑 A, 을 H 일때 A 선택이므로 &lt;표 1&gt;의 갑 A, 을 A에서 2, 을 D일 때 A 선택이므로 &lt;표 2&gt;의 갑 A, 을 A에서 2 이다.
 이를 유형별 보수벡터 $\begin{pmatrix} 2 \\ 2 \end{pmatrix}$ 로 표시한다.</p>
 
 <p>베이지안 게임에서 게임의 보수는 갑의 경우 을의 유형을 모르므로 기대값을 구하고, 을의 경우는 유형별로 표기한다. 
 즉 유형을 모르는 측에서는 기대값을 구하고 유형을 아는 자신의 입장에서는 유형별로 보수를 벡터로 표시하는 것이 베이지안 게임에서 보수표이다.</p>
 
-<p>이상을 구하면 <표 4>와 같다.</p>
+<p>이상을 구하면 &lt;표 4&gt;와 같다.</p>
 
-<table id="tbl4" border="1">
-  <caption><표 4> 베이지안 게임표 </caption>
+<div class="bayes-scroll"><table id="tbl4" class="bayes-wide" border="1">
+  <caption>&lt;표 4&gt; 베이지안 게임표 </caption>
 <tr >
-  <th id = "diag" style="width:100px"> <pre>갑   을</pre> </th>
+  <th class="bayes-diag" style="width:100px"> <pre>갑   을</pre> </th>
   <th > H→A, D→A </th>
   <th > H→A, D→B </th>
   <th > H→B, D→A </th>
@@ -253,32 +222,32 @@ pre, code { max-width:100%; overflow-x:auto; }
   <td > $1$, $\begin{pmatrix} -2 \\ -1 \end{pmatrix}$ </td>
   <td > $2$, $\begin{pmatrix} -2 \\ 1 \end{pmatrix}$ </td>
 </tr>
-</table>
+</table></div>
 <br>
 
-<p><표 4>의 갑 A, 을 H→A, D→A의 보수는 다음과 같이 구한다.</p>
-<p><표 3> 으로부터 갑의 보수는 을이 H 유형일 확률 $\dfrac{2}{3}$에서 1, D 유형일 확률 $\dfrac{1}{3}$에서 -2이므로 
+<p>&lt;표 4&gt;의 갑 A, 을 H→A, D→A의 보수는 다음과 같이 구한다.</p>
+<p>&lt;표 3&gt; 으로부터 갑의 보수는 을이 H 유형일 확률 $\dfrac{2}{3}$에서 1, D 유형일 확률 $\dfrac{1}{3}$에서 -2이므로 
 갑의 기대 보수는 $ 1 \times \dfrac{2}{3} + (-2) \times \dfrac{1}{3} = 0$, 
-을의 보수는 유형별로 표기한다. <표 3>의 값 $\begin{pmatrix} 2 \\ 2 \end{pmatrix}$을 그대로 쓰면 된다.</p>
+을의 보수는 유형별로 표기한다. &lt;표 3&gt;의 값 $\begin{pmatrix} 2 \\ 2 \end{pmatrix}$을 그대로 쓰면 된다.</p>
 <p>다른 셀도 같은 방법으로 구한다.</p>
 <p>베이지안 내쉬균형은 정의상 모든 유형에 대해 이탈 유인이 없어야 한다. 즉 모든 유형에 대해 보수값이 크거나 같아야 한다. </p>
 <p>  갑의 경우는 기대보수를 비교하면 되고 을의 경우는 열벡터의 모든 원소가 다른 열벡터보다 크거나 같아야 한다.</p>
-<p>이 게임에서 베이지안 내쉬균형은 <표 4>에서 회색으로 칠해진 부분으로 {갑 A, 을 H->A, D->A}이다. 즉 갑은 A 안을 선택하고, 을은 H 유형일 때 A, D 유형일 때도 A안을 선택하는 것이 최선이다.</p>
+<p>이 게임에서 베이지안 내쉬균형은 &lt;표 4&gt;에서 회색으로 칠해진 부분으로 {갑 A, 을 H->A, D->A}이다. 즉 갑은 A 안을 선택하고, 을은 H 유형일 때 A, D 유형일 때도 A안을 선택하는 것이 최선이다.</p>
 <p>갑은 을이 강경파일 가능성이 크다고 간주하고 있으므로 을과의 협상 타결을 위해 A안을 선택하는 것이 최선이다. 을의 전략은 일종의 기만전술이다. 을은 H유형일 경우 내쉬균형인 A안을 선택한다. 
 그런데 D 유형이라면 B가 내쉬균형으로 최선이지만 갑이 을을 강경파로 오판하고 있으므로 을은 D유형일 때도 A안을 제시하는 것이다.</p>
 <br> 
 
 <h2> 확률을 모르는 경우</h2>
 <p>갑이 을의 유형의 확률을 모르는 경우를 고려해보자.</p>
-<p>을이 H 유형일 확률을 $p$, D 유형일 확률을 $1−p$ 라 하자. <표 4>에서 바뀌는 것은 갑의 보수뿐이다. 을의 보수는 확률이 필요하지 않으므로 그대로이다.</p>
+<p>을이 H 유형일 확률을 $p$, D 유형일 확률을 $1−p$ 라 하자. &lt;표 4&gt;에서 바뀌는 것은 갑의 보수뿐이다. 을의 보수는 확률이 필요하지 않으므로 그대로이다.</p>
 
 <p>갑이 A를 선택하는 경우 을은 {A, A}가 최선이다.</p>
-<p>을이 {A, A}일 때 갑의 A선택시 기대보수는 <표3>으로부터 $1×p+−2×(1−p)=3p−2$</p>
-<p>을이 {A, A}일 때 갑의 B선택시 기대보수는 <표3>으로부터 $−1×p+−1×(1−p)=−1$</p>
+<p>을이 {A, A}일 때 갑의 A선택시 기대보수는 &lt;표 3&gt;으로부터 $1×p+−2×(1−p)=3p−2$</p>
+<p>을이 {A, A}일 때 갑의 B선택시 기대보수는 &lt;표 3&gt;으로부터 $−1×p+−1×(1−p)=−1$</p>
 <p>$3p−2>−1 $ 에서  $p>\dfrac{1}{3}$  이면 을이 {A, A}일 때 갑은 A를 선택한다. $p<\dfrac{1}{3}$ 이면 을이 {A, A}일 때 갑은 B를 선택한다. 
   그런데 갑이 B를선택하는 경우 을은 {A, B}가 최선이다.</p>
-<p>을이 {A, B}일 때 갑의 A선택시 기대보수는 <표3>으로부터 $1×p+−1×(1−p)=2p−1$</p>
-<p>을이 {A, B}일 때 갑의 B선택시 기대보수는 <표3>으로부터 $−1×p+2×(1−p)=2−3p$</p>
+<p>을이 {A, B}일 때 갑의 A선택시 기대보수는 &lt;표 3&gt;으로부터 $1×p+−1×(1−p)=2p−1$</p>
+<p>을이 {A, B}일 때 갑의 B선택시 기대보수는 &lt;표 3&gt;으로부터 $−1×p+2×(1−p)=2−3p$</p>
 <p>$2p−1>2−3p$ 에서 $p>\dfrac{3}{5}$이면 을이 {A, B}일 때 갑은 A를 선택한다. $p<\dfrac{3}{5}$이면 을이 {A, B}일 때 갑은 B를 선택한다.</p>
 
 <p>이상으로부터 $p>\dfrac{3}{5}$이면 {갑:A, 을:H->A, D->A}가 베이지안 내쉬균형이다.</p>
