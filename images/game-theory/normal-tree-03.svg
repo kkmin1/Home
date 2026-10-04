@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" id = "border" width="1000" height="800" viewBox="0 100 1000 800">
+<style>#sgv-text{fill:black;font-size:50px;font-family:Times,serif;}#sgv-text2{fill:black;font-size:30px;font-family:Times,serif;}text{fill:black;}</style>
+    
+    <polyline points="600,240 400,440" fill="none" stroke="black" 
+      stroke-width="2" />
+        <polyline points="400,440 300,600" fill="none" stroke="black" 
+        stroke-width="2" />
+        <polyline points="400,440 500,600" fill="none" stroke="black" 
+        stroke-width="2" />
+    <polyline points="600,240 800,440" fill="none" stroke="black" 
+      stroke-width="2" />
+      <polyline points="800,440 700,600" fill="none" stroke="black" 
+      stroke-width="2" />
+      <polyline points="800,440 900,600" fill="none" stroke="black" 
+      stroke-width="2" />
+
+    <circle cx="600" cy="240" r="40" stroke="green" stroke-width="4" fill="yellow" />
+    <circle cx="400" cy="440" r="40" stroke="green" stroke-width="4" fill="yellow" />
+    <circle cx="800" cy="440" r="40" stroke="green" stroke-width="4" fill="yellow" />
+        
+    <text id = "sgv-text" x="575" y="255" > 갑 </text>
+    <text id = "sgv-text2" x="450" y="330" > a </text>
+    <text id = "sgv-text2" x="720" y="330" > b </text>
+    <text id = "sgv-text" x="375" y="455" > 을 </text>
+    <text id = "sgv-text" x="775" y="455" > 을 </text>
+    <text id = "sgv-text2" x="300" y="530" > c </text>
+    <text id = "sgv-text2" x="470" y="530" > d </text>
+    <text id = "sgv-text2" x="710" y="530" > c </text>
+    <text id = "sgv-text2" x="870" y="530" > d </text>
+    <text id = "sgv-text" x="220" y="650" > (3, 2) </text>
+    <text id = "sgv-text" x="420" y="650" > (6, 4) </text>
+    <text id = "sgv-text" x="620" y="650" > (1, 3) </text>
+    <text id = "sgv-text" x="820" y="650" > (4, 5) </text>
+    <text id = "sgv-text" x="350" y="800"> (그림 2) 트리형</text>
+   </svg>
