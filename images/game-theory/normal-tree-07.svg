@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" id = "border" width="800" height="600" viewBox="0 100 1000 800">
+<style>#sgv-text{fill:black;font-size:50px;font-family:Times,serif;}#sgv-text2{fill:black;font-size:30px;font-family:Times,serif;}text{fill:black;}</style>
+    
+    <polyline points="600,240 400,440" fill="none" stroke="black" 
+      stroke-width="2" />
+        
+    <polyline points="600,240 800,440" fill="none" stroke="black" 
+      stroke-width="2" />
+        
+    <circle cx="600" cy="240" r="40" stroke="green" stroke-width="4" fill="yellow" />
+            
+    <text id = "sgv-text" x="575" y="255" > 을 </text>
+    <text id = "sgv-text" x="450" y="330" > c </text>
+    <text id = "sgv-text" x="720" y="330" > d </text>
+   
+    <text id = "sgv-text" x="320" y="500" > (3, 2) </text>
+    <text id = "sgv-text" x="770" y="500" > (6, 4) </text>
+    
+    <text id = "sgv-text" x="350" y="700"> (그림 5a) 부분게임1</text>
+   </svg>
