@@ -88,31 +88,7 @@ window.MathJax = {
 
 <h2> 용의자들의 갈등(prisonner's dilemma)</h2>
 
-<table class="nash-payoff-table" aria-label="표 1 용의자들의 갈등 게임">
-  <caption>&lt;표 1&gt; 용의자들의 갈등 게임</caption>
-  <thead>
-    <tr>
-      <th rowspan="2">갑</th>
-      <th colspan="2">을</th>
-    </tr>
-    <tr>
-      <th>C</th>
-      <th>D</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>C</th>
-      <td>(-1, -1)</td>
-      <td>(-9, 0)</td>
-    </tr>
-    <tr>
-      <th>D</th>
-      <td>(0, -9)</td>
-      <td>(-5, -5)</td>
-    </tr>
-  </tbody>
-</table>
+<img src="images/game-theory/nash-01.svg" alt="nash diagram 1" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
 <p> &lt;표 1&gt;은 용의자들의 갈등라고 하는 유명한 예로 다음과 같은 경우를 상정한 것이다. 갑과 을이 범죄 혐의가 있어서 경찰 또는 검찰의 조사를 받게 됐는데 양자는 죄를 부인하는 선택(C)과 죄를 인정하는 선택(D)을 할 수 있다. 여기서 죄를 부인하는 선택이라는 것은 갑과 을이 암묵적으로 담합(협조)하여 증거를 감추고 죄를 인정하지 않을 경우 증거 불충분으로 각자의 형량이 징역1년이 됨을 의미한다. 만약 갑(을)은 죄를 부인하고 을(갑)은 죄를 인정한다면 을(갑)은 증거 제공의 공을 감안하여 검찰에서 무죄로 방면해 주고 반면에 갑(을)은 죄의 댓가로 징역9년의 형을 삶을 의미한다. 양자 모두 죄를 인정한다면 각자의 형량은 자백을 감안하여 징역5년임을 의미한다. </p>
 
@@ -134,7 +110,31 @@ window.MathJax = {
   
 <h2>사슴사냥 게임(stag-hunt game)</h2>
 
-<img src="images/game-theory/nash-02.svg" alt="nash diagram 2" style="display:block;width:100%;height:auto;margin:1rem auto;">
+<table class="nash-payoff-table" aria-label="표 2 사슴사냥 게임">
+  <caption>&lt;표 2&gt; 사슴사냥 게임</caption>
+  <thead>
+    <tr>
+      <th rowspan="2">갑</th>
+      <th colspan="2">을</th>
+    </tr>
+    <tr>
+      <th>사슴</th>
+      <th>토끼</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>사슴</th>
+      <td>(3, 3)</td>
+      <td>(0, 1)</td>
+    </tr>
+    <tr>
+      <th>토끼</th>
+      <td>(1, 0)</td>
+      <td>(1, 1)</td>
+    </tr>
+  </tbody>
+</table>
 
 
 <p> 이 게임은 장 자크 루소의 사슴사냥 寓話에서 유래된 사슴사냥게임이라고 하는 유명한 예로 게임적 상황은 이렇다. 갑, 을 두 사냥꾼이 산에서 사슴을 사냥하려고 하는데 길목 양쪽에서 포위해 들어가야만 사냥에 성공한다. 한편 근방에는 토끼들도 있어 사냥꾼은 혼자서 이 토끼를 잡을 수 있다. 그러나 길목을 이탈할 경우 사슴이 도망가므로 사슴사냥은 실패할 것이다. 즉 사슴은 반드시 둘이 협업하여야만 사냥할 수 있는 반면, 토끼는 혼자서도 가능하다. 둘이 협업하여 사슴을 사냥할 경우 사슴사냥에 성공하고 사슴의 가치 6을 반분하여 각자 3씩 갖는다. 반면 둘 중 하나라도 토끼를 사냥하려고 한다면 사슴사냥은 실패하고 사슴을 사냥하려고 한 사람은 0의 가치, 토기를 사냥한 사람은 토끼사냥에 성공하여 토끼의 가치 1을 얻는다. 양자 모두 토끼를 사냥한다면 양자 모두 성공하여 각자 1의 가치를 얻는다. </p>
