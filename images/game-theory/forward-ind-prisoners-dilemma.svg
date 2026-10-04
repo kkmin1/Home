@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" id = "border" width="1600" height="900" viewBox="300 150 1050 720" preserveAspectRatio="xMidYMid meet">
+  <style>
+    #sgv-text { fill:black; font-size:50px; font-family:Times, serif; }
+    #sgv-text2 { fill:black; font-size:30px; font-family:Times, serif; }
+    text { fill:black; }
+  </style>
+  <circle cx="600" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  
+  <polyline points="600,240 400,400" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="600,240 800,400" fill="none" stroke="black" 
+    stroke-width="2" />
+  
+  <text id = "sgv-text" x="580" y="220" > 갑 </text>
+  <text id = "sgv-text2" x="420" y="330" > 해외 </text>
+  <text id = "sgv-text2" x="720" y="330" > 자수 </text>
+  
+  <polyline points="700,420 1300,420" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,520 1300,520" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,620 1300,620" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,720 1300,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,420 700,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="900,420 900,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1100,420 1100,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1300,420 1300,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,420 900,520" fill="none" stroke="black" 
+    stroke-width="2" />
+
+  <text id = "sgv-text" x="720" y="500" > 갑 </text>
+  <text id = "sgv-text" x="820" y="470" > 을 </text>
+  <text id = "sgv-text" x="975" y="485" > C </text>
+  <text id = "sgv-text" x="1175" y="485" > D </text>
+  <text id = "sgv-text" x="780" y="590" > C </text>
+  <text id = "sgv-text" x="780" y="690" > D </text>
+  <text id = "sgv-text" x="340" y="450" > (-6, 0) </text>
+  <text id = "sgv-text" x="945" y="590" > -1, -1 </text>
+  <text id = "sgv-text" x="1145" y="590" > -9, 0 </text>
+  <text id = "sgv-text" x="965" y="690" > 0, -9 </text>
+  <text id = "sgv-text" x="1145" y="690" > -5, -5 </text>
+
+  <text x="500" y="850" style="font-size:30px"> (그림 1) 대안이 있는 죄인들의 딜렘마 게임 </text>
+
+</svg>
