@@ -18,16 +18,13 @@
   /* table 서식 스타일문 */
       table{
         border-collapse: collapse;
-        table-layout: fixed;
+        table-layout:auto;
         border : 1px solid black;
-        width : 400px;
+        width:100%; max-width:560px;
         margin:auto; /*테이블 가운데 중앙정렬*/
         font-size:22px
       }
-      tr, td, th{
-        text-align: center;
-        height:50px;
-      }
+      tr, td, th{ text-align:center; height:50px; padding:.45rem .55rem; white-space:nowrap; }
       /* 표에 대각선을 긋는 코드, 여기서는 th 태그의 id = diag 셀에 대각선을 긋는다. */
       table:nth-of-type(1) th#diag { /* 첫번째 표에 대각선을 긋는다. */
         background-image: linear-gradient(
@@ -121,10 +118,11 @@ window.MathJax = {
  <td > 0, 0 </td>
   <td > -1, 1 </td>
 </tr>
-<th > 보 </th>
-  <td > -1, 1 </td>
- <td > 1, -1 </td>
- <td > 0, 0 </td>
+<tr>
+ <th>보</th>
+ <td>-1, 1</td>
+ <td>1, -1</td>
+ <td>0, 0</td>
 </tr>
   </table>
 
