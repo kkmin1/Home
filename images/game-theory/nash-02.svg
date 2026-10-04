@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" id = "border" width="900" height="400" viewBox="0 -50 900 350">
+<svg xmlns="http://www.w3.org/2000/svg" id = "border" width="900" height="400" viewBox="0 -50 900 430">
 <style>#sgv-text{fill:black;font-size:30px;font-family:Times,serif;}#sgv-text2{fill:black;font-size:30px;font-family:Times,serif;}#sgv-text3{fill:black;font-size:20px;font-family:Times,serif;}text{fill:black;}</style>
     
   <polyline points="200,20 800,20" fill="none" stroke="black" 
