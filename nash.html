@@ -46,6 +46,27 @@ window.MathJax = {
 };
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style id="nash-table-fix">
+.nash-payoff-table{
+  width:100% !important;
+  max-width:680px !important;
+  margin:1rem auto !important;
+  border-collapse:collapse;
+  table-layout:auto !important;
+  text-align:center;
+}
+.nash-summary-table{max-width:780px !important;}
+.nash-payoff-table th,.nash-payoff-table td{
+  width:auto !important;
+  min-width:90px;
+  padding:.55rem .65rem;
+  white-space:nowrap;
+}
+@media(max-width:640px){
+  .nash-payoff-table{font-size:15px !important;}
+  .nash-payoff-table th,.nash-payoff-table td{min-width:0;padding:.45rem .35rem;}
+}
+</style>
 </head>
 
 <body>
@@ -112,7 +133,7 @@ window.MathJax = {
 
 <p>연구노트에 제시된 사슴사냥의 다른 보수 예를 보자.</p>
 
-<table style="width:70%; margin:auto; border-collapse:collapse; text-align:center;">
+<table class="nash-payoff-table">
 <tr><th></th><th>을: 사슴</th><th>을: 토끼</th></tr>
 <tr><th>갑: 사슴</th><td>(5, 5)</td><td>(0, 4)</td></tr>
 <tr><th>갑: 토끼</th><td>(4, 0)</td><td>(2, 2)</td></tr>
@@ -156,7 +177,7 @@ window.MathJax = {
 
 <p>죄수의 딜레마에서는 반드시 \(T &gt; R &gt; P &gt; S\)가 성립한다. 예를 들어 \(T=5, R=3, P=1, S=0\)이라고 하면 다음과 같다.</p>
 
-<table style="width:70%; margin:auto; border-collapse:collapse; text-align:center;">
+<table class="nash-payoff-table">
 <tr><th></th><th>상대 협력</th><th>상대 배신</th></tr>
 <tr><th>나 협력</th><td>\(R=3\)</td><td>\(S=0\)</td></tr>
 <tr><th>나 배신</th><td>\(T=5\)</td><td>\(P=1\)</td></tr>
@@ -217,7 +238,7 @@ window.MathJax = {
 
 <p>쿠바 미사일 위기와 같은 상황은 죄수의 딜레마보다 치킨게임으로 설명하는 것이 훨씬 자연스럽다. 따라서 국제정치의 군사적 경쟁은 다음과 같이 구별해서 보는 것이 유용하다.</p>
 
-<table style="width:85%; margin:auto; border-collapse:collapse; text-align:center;">
+<table class="nash-payoff-table nash-summary-table">
 <tr><th>상황</th><th>핵심 문제</th><th>게임</th></tr>
 <tr><td>지속적 군비증강</td><td>상대가 멈춰도 나는 더 갖고 싶음</td><td>Prisoner’s Dilemma</td></tr>
 <tr><td>상호군축</td><td>상대도 지킨다는 보장만 있으면 나도 지키고 싶음</td><td>Stag Hunt</td></tr>
