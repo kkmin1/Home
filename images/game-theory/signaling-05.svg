@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" id = "border" width="1300" height="800" viewBox="0 0 1300 800">
+<svg xmlns="http://www.w3.org/2000/svg" id = "border" width="1300" height="800" viewBox="0 0 1300 800">
 <style>#sgv-text{fill:black;font-size:50px;font-family:Times,serif;}#sgv-text2{fill:black;font-size:30px;font-family:Times,serif;}text{fill:black;}</style>
   
   <polyline points="200,100 1200,100" fill="none" stroke="black" 
@@ -251,6 +251,6 @@
     </div>
   </foreignObject>
   
-  <text x="400" y="700" style="font-size:40px"> <표 3> 확률 p일 때 신호게임보수표 </text>
+  <text x="400" y="700" style="font-size:40px"> &lt;표 3&gt; 확률 p일 때 신호게임보수표 </text>
 
 </svg>
