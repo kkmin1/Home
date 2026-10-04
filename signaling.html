@@ -111,93 +111,61 @@ window.MathJax = {
 <br>
 
 <h2>3. 믿음(확률)의 갱신</h2>
-<p>S의 유형에 대한 R의  확률(믿음) p는 S가 신호를 보냄에 따라 새롭게 갱신되어야 한다. 이때 확률 갱신의 방법은 베이즈원칙에 따른다.<sup><a href="#fn1" id="ref1">1</a></sup></p>
+<p>S의 유형에 대한 R의 확률(믿음) p는 S가 신호를 보냄에 따라 새롭게 갱신되어야 한다. 이때 확률 갱신의 방법은 베이즈 원칙에 따른다.<sup><a href="#fn1" id="ref1">1</a></sup></p>
 
-<p> i) $\alpha$ : S가 A를 보냈을 때 S의 유형이 H라고 R이 믿을 확률<sup><a href="#fn2" id="ref2">2</a></sup>, 
-<p>이는 조건부확률 $P_{r}(H|A)$로 표현된다.<p>
-<p>
-$ \alpha = P_{r}(H|A) = \frac{P_r(H \cup A)}{P_r(A)} = \frac{P_r(H \cup A)}{P_r(H \cup A)+P_r(L \cup A)} = \frac{P_r(A|H)P_r(H)}{P_r(A|H)P_r(H)+P_r(A|L)P_r(L)}\ $ ........①
-</p>
-<p> ii) $\beta$ : S가 B를 보냈을 때 S의 유형이 H라고 R이 믿을 확률<sup><a href="#fn3" id="ref3">3</a></sup>, 이는 조건부확률 $P_{r}(H|B)$로 표현된다.
-<p>
-$ \beta = P_{r}(H|B) = \frac{P_r(H \cup B)}{P_r(B)} = \frac{P_r(H \cup B)}{P_r(H \cup B)+P_r(L \cup B)} = \frac{P_r(B|H)P_r(H)}{P_r(B|H)P_r(H)+P_r(B|L)P_r(L)}\ $........②
+<p>i) \(\alpha\): S가 A를 보냈을 때 S의 유형이 H라고 R이 믿을 확률<sup><a href="#fn2" id="ref2">2</a></sup></p>
+<p>이는 조건부확률 \(P_r(H|A)\)로 표현된다.</p>
+<p>\[
+\alpha=P_r(H|A)
+=\frac{P_r(A|H)P_r(H)}
+{P_r(A|H)P_r(H)+P_r(A|L)P_r(L)}
+\] … ①</p>
 
-</p>
-<p>이제 S의 각 전략별로 R의 확률이 어떻게 갱신되는가를 보면 다음과 같다.</p>
-<p>
-(a)\(\begin{Bmatrix} H \rightarrow A \\ L \rightarrow A \end{Bmatrix}\) 전략</p>
-<p>
-H 유형이든 L 유형이든 A를 선택하므로 $P_r(A|H) = P_r(A|L) = 1$</p>
-<p>이를 ①에 대입하면 </p>
-<p>
-\[
-\alpha = P_{r}(H|A) =  \frac{P_r(H)}{P_r(H)+P_r(L)} =
-\frac{p}{p+1-p} = p
-\]
-</p>
-<p>따라서 사전확률($p$)과 사후확률($\alpha$)이 같다.<br>
-<p>S가 통합전략을 쓸 경우 R은 S의 유형에 관해 더 향상된 정보를 얻지 못한다.
-<p>따라서 R의 보수는 p에 기초하여 기대값을 구한다.
+<p>ii) \(\beta\): S가 B를 보냈을 때 S의 유형이 H라고 R이 믿을 확률<sup><a href="#fn3" id="ref3">3</a></sup></p>
+<p>이는 조건부확률 \(P_r(H|B)\)로 표현된다.</p>
+<p>\[
+\beta=P_r(H|B)
+=\frac{P_r(B|H)P_r(H)}
+{P_r(B|H)P_r(H)+P_r(B|L)P_r(L)}
+\] … ②</p>
 
-(a)전략시 S는 유형별로 보수를, R은 기대값으로 보수를 표현한다.</p>
+<p>이제 S의 각 전략별로 R의 확률이 어떻게 갱신되는가를 보자.</p>
 
-<p>(b)\(\begin{Bmatrix} H \rightarrow B \\ L \rightarrow B \end{Bmatrix}\)전략</p>
+<p>(a) \(\begin{Bmatrix}H\rightarrow A\\L\rightarrow A\end{Bmatrix}\) 전략</p>
+<p>H 유형이든 L 유형이든 A를 선택하므로 \(P_r(A|H)=P_r(A|L)=1\)이다.</p>
+<p>①에 대입하면</p>
+<p>\[
+\alpha=P_r(H|A)=\frac{P_r(H)}{P_r(H)+P_r(L)}
+=\frac{p}{p+(1-p)}=p
+\]</p>
+<p>따라서 사전확률 \(p\)와 사후확률 \(\alpha\)가 같다. S가 통합전략을 쓰면 R은 S의 유형에 관한 추가 정보를 얻지 못하므로, R의 보수는 사전확률 p에 기초하여 기대값으로 표시한다.</p>
 
-<p>H 유형이든 L 유형이든 B를 선택하므로 $ P_r(B|H) = P_r(B|L) = 1 $</p>
-이를 ②에 대입하면 
-<p>
-\[
-\beta = P_{r}(H|B) =  \frac{P_r(H)}{P_r(H)+P_r(L)} =
-\frac{p}{p+1-p} = p
-\]
-</p>
-<p>
-따라서 사전확률(p)과 사후확률($\beta$)이 같다.
-S가 통합전략을 쓸 경우 R은 S의 유형에 관해 더 향상된 정보를 얻지 못한다.
-따라서 R의 보수는  p에 기초하여 기대값을 구한다.
-(b)전략시 S는 유형별로 보수를, R은 기대값으로 보수를 표현한다.<br><br>
+<p>(b) \(\begin{Bmatrix}H\rightarrow B\\L\rightarrow B\end{Bmatrix}\) 전략</p>
+<p>H 유형이든 L 유형이든 B를 선택하므로 \(P_r(B|H)=P_r(B|L)=1\)이다.</p>
+<p>②에 대입하면</p>
+<p>\[
+\beta=P_r(H|B)=\frac{P_r(H)}{P_r(H)+P_r(L)}
+=\frac{p}{p+(1-p)}=p
+\]</p>
+<p>따라서 사전확률 \(p\)와 사후확률 \(\beta\)가 같다. 이 경우도 R은 사전확률에 기초하여 기대보수를 계산한다.</p>
 
-<p>(c) \(\begin{Bmatrix} H \rightarrow A \\ L \rightarrow B \end{Bmatrix}\)전략</p>
+<p>(c) \(\begin{Bmatrix}H\rightarrow A\\L\rightarrow B\end{Bmatrix}\) 전략</p>
+<p>\(P_r(A|H)=P_r(B|L)=1\)이므로</p>
+<p>\[
+\beta=P_r(H|B)=\frac{0\times p}{0\times p+1\times(1-p)}=0,
+\qquad
+\alpha=P_r(H|A)=\frac{1\times p}{1\times p+0\times(1-p)}=1
+\]</p>
+<p>따라서 B를 보면 L 유형, A를 보면 H 유형임을 확실히 알 수 있다. 분리전략에서는 R도 유형별 보수를 그대로 사용할 수 있다.</p>
 
-<p>$P_r(A|H) = P_r(B|L) = 1$이므로 </p>
-<p>
-\[
-\beta = P_{r}(H|B) =  \frac{0 \times p}{0 \times p+1 \times (1-p)} = 0
-\]
-</p>
-
-<p> $\therefore P_r(L|B) = 1 - \beta = 1$</p>
-<p> B를 봤을 때 L일 확률 1. R은 B를 보면 확실히 L로 간주한다.</p>
-<p>
-\[
-\alpha = P_{r}(H|A) =  \frac{1 \times p}{1 \times p+0 \times (1-p)} = 1
-\]
-</p>
-<p> $P_r(H|A) = 1$</p>
-
-<p> A를 봤을 때 H일 확률 1. R은 A를 보면 확실히 H로 간주한다.</p>
-<p> 따라서 S가 (c)의 분리전략을 쓸 경우 R은 S의 유형을 100% 파악하므로 기대값을 구할 필요가 없다.</p>
-그러므로 (c)전략시 R, S 모두 유형별로 보수를 표현한다.</p>
-
-<p>(d) \(\begin{Bmatrix} H \rightarrow B \\ L \rightarrow A \end{Bmatrix}\)전략</p>
-
-<p> $P_r(B|H) = P_r(A|L) = 1$ 이므로 </p>
-<p>
-\[
-\beta = = P_{r}(H|B) = \frac{1 \times p}{1 \times p+0 \times (1-p)} = 1
-\]
-</p>
-
-<p>B를 봤을 때 H일 확률 1.  R은 B를 보면 확실히 H로 간주한다.</p>
- <p>
- \[
-\alpha = P_{r}(H|A) =  \frac{0 \times p}{0 \times p+1 \times (1-p)} = 0
-\]
-</p>
-<p>$\therefore P_r(L|A) = 1 - \alpha = 1$</p>
-<p> A를 봤을 때 L일 확률 1.  R은 A를 보면 확실히 L로 간주한다.
-따라서 S가 (d)의 분리전략을 쓸 경우 R은 S의 유형을 100% 파악하므로 기대값을 구할 필요가 없다.
-그러므로 (d)전략시 R, S 모두 유형별로 보수를 표현한다.</p>
+<p>(d) \(\begin{Bmatrix}H\rightarrow B\\L\rightarrow A\end{Bmatrix}\) 전략</p>
+<p>\(P_r(B|H)=P_r(A|L)=1\)이므로</p>
+<p>\[
+\beta=P_r(H|B)=\frac{1\times p}{1\times p+0\times(1-p)}=1,
+\qquad
+\alpha=P_r(H|A)=\frac{0\times p}{0\times p+1\times(1-p)}=0
+\]</p>
+<p>따라서 B를 보면 H 유형, A를 보면 L 유형임을 확실히 알 수 있다. 이 경우도 분리전략이므로 R과 S 모두 유형별 보수를 사용할 수 있다.</p>
 
 <h2>4. 신호게임 예 </h2>
 <p>
