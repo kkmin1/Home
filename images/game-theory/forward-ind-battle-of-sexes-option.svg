@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" id = "border" width="1600" height="900" viewBox="300 150 1050 720" preserveAspectRatio="xMidYMid meet">
+  <style>
+    #sgv-text { fill:black; font-size:50px; font-family:Times, serif; }
+    #sgv-text2 { fill:black; font-size:30px; font-family:Times, serif; }
+    text { fill:black; }
+  </style>
+  <circle cx="600" cy="200" r="40" stroke="green" stroke-width="4" fill="yellow" />
+  
+  <polyline points="600,240 400,400" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="600,240 800,400" fill="none" stroke="black" 
+    stroke-width="2" />
+  
+  <text id = "sgv-text2" x="570" y="210" > 남편 </text>
+  <text id = "sgv-text2" x="420" y="330" > 방콕 </text>
+  <text id = "sgv-text2" x="720" y="330" > 외출 </text>
+  
+  <polyline points="700,420 1300,420" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,520 1300,520" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,620 1300,620" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,720 1300,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,420 700,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="900,420 900,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1100,420 1100,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="1300,420 1300,720" fill="none" stroke="black" 
+    stroke-width="2" />
+  <polyline points="700,420 900,520" fill="none" stroke="black" 
+    stroke-width="2" />
+
+  <text id = "sgv-text2" x="720" y="500" > 남편 </text>
+  <text id = "sgv-text2" x="820" y="470" > 아내 </text>
+  <text id = "sgv-text2" x="955" y="485" > 야구장 </text>
+  <text id = "sgv-text2" x="1155" y="485" > 뮤지컬 </text>
+  <text id = "sgv-text2" x="760" y="580" > 야구장 </text>
+  <text id = "sgv-text2" x="760" y="680" > 뮤지컬 </text>
+  <text id = "sgv-text" x="340" y="450" > (4, 1) </text>
+  <text id = "sgv-text" x="965" y="590" > 5, 3 </text>
+  <text id = "sgv-text" x="1165" y="590" > 0, 0 </text>
+  <text id = "sgv-text" x="965" y="690" > 0, 0 </text>
+  <text id = "sgv-text" x="1165" y="690" > 3, 5 </text>
+
+  <text x="500" y="850" style="font-size:30px"> (그림 3) 대안이 있는 부부갈등 게임 </text>
+
+</svg>
