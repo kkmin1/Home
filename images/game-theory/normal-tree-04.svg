@@ -47,5 +47,5 @@
     <ellipse cx="700" cy="270" rx="80" ry="40" style="fill:none;stroke:purple;stroke-width:3"/>
     <ellipse cx="905" cy="170" rx="80" ry="40" style="fill:none;stroke:purple;stroke-width:3"/>
     <ellipse cx="1105" cy="170" rx="80" ry="40" style="fill:none;stroke:purple;stroke-width:3"/>
-    <text id = "sgv-text" x="300" y="-10"> <표 2> 표형 </text>
+    <text id = "sgv-text" x="300" y="-10"> &lt;표 2&gt; 표형 </text>
 </svg>
