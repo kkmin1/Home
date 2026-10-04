@@ -26,18 +26,7 @@
         
          </style>
           <link rel="stylesheet" type="text/css" href="game-theory.css">
-</head>   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"type="text/javascript">
-MathJax.Hub.Config({
-extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
-jax: ["input/TeX", "output/HTML-CSS"],
-tex2jax: 
-{inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-displayMath: [ ['$$','$$'], ["\\[","\\]"] ],},
-"HTML-CSS": { availableFonts: ["TeX"] }
-});
-</script>
- 
+</head>
 <style id="deployment-responsive-patch">
 * { box-sizing: border-box; }
 body {
@@ -62,6 +51,16 @@ pre, code { max-width:100%; overflow-x:auto; }
 }
 </style>
 
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head> 
 <body> 
 	
@@ -207,19 +206,19 @@ S가 통합전략을 쓸 경우 R은 S의 유형에 관해 더 향상된 정보�
 <img src="images/game-theory/signaling-02.svg" alt="신호게임 그림 2" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
 <p>
-임시로 보수표를 구하면 <표1 >과 같다. 이 표는 R이 S의 유형을 모두 안다는 가정하에 임시로 구한 표이다.</p>
+임시로 보수표를 구하면 &lt;표 1&gt;과 같다. 이 표는 R이 S의 유형을 모두 안다는 가정하에 임시로 구한 표이다.</p>
 
 <img src="images/game-theory/signaling-03.svg" alt="신호게임 그림 3" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
 <p>
-<표 1>의 열벡터는 유형별 보수를 쓰면 된다. </p>
+&lt;표 1&gt;의 열벡터는 유형별 보수를 쓰면 된다. </p>
 <p> 예를 들어 S의 셋째 전략, R
 의 첫째 전략의 보수값은 갑 H → A, L → B, 을 A → u, B → u 이므로 갑의 보
 수는 H → A → u에서 2, L → B → u에서 2. </p>
 <p> 이를 열벡터로 표현하여  $\begin{pmatrix} 2\\2 \end{pmatrix}$, 을의 보수는 H → A → u 에서 1, L → B → u에서 0. 이를 열벡터로 표현하여 $\begin{pmatrix} 1\\0 \end{pmatrix}$
 이다.</p>
 
-<p><표1 >에 기초하여 신호게임 보수표를 구하면 <표 2>와 같다.</p>
+<p>&lt;표 1&gt;에 기초하여 신호게임 보수표를 구하면 &lt;표 2&gt;와 같다.</p>
 
 <img src="images/game-theory/signaling-04.svg" alt="신호게임 그림 4" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
@@ -227,7 +226,7 @@ S가 통합전략을 쓸 경우 R은 S의 유형에 관해 더 향상된 정보�
 <p>
 S의 보수는 자신의 유형을 앎으로 열벡터를 그대로 표기한다. R의 보수는 전략에 따라 다르다. 통합전략은 S의 유형에 대한 정보가 향상되지 못하므로 사전확률에 기초한 기대값을 표기하고, 분리전략은 S의 유형을 확신하므로 열벡터를 그대로 표기한다.</p>
 <p>
-내쉬균형은 정의상 모든 유형에 대해 이탈 유인이 없어야 한다. 즉 모든 유형에 대해 보수값이 다른 전략보다 크거나 같아야 한다. 내쉬균형을 구하기 위해서는 <표 2>보수표에서 벡터인 경우는 벡터의 모든 원소가 다른 벡터 원소보다 크거나 같아야 한다. 기대값인 경우 다른 기대값보다 크거나 같아야 한다. </p>
+내쉬균형은 정의상 모든 유형에 대해 이탈 유인이 없어야 한다. 즉 모든 유형에 대해 보수값이 다른 전략보다 크거나 같아야 한다. 내쉬균형을 구하기 위해서는 &lt;표 2&gt;보수표에서 벡터인 경우는 벡터의 모든 원소가 다른 벡터 원소보다 크거나 같아야 한다. 기대값인 경우 다른 기대값보다 크거나 같아야 한다. </p>
 <p> 내쉬균형은 두 개로, 보라색 원 부분이다. 완전베이지안균형이 되려면 전략의 최적성뿐 아니라 각 정보집합에서 수신자의 믿음이 순차적 합리성과, 균형경로에서는 가능한 경우 베이즈 규칙과 일치해야 한다. 아래 균형은 이 믿음 조건을 함께 만족하는 경우 완전베이지안균형으로 해석할 수 있다.</p>
 <p>
 통합전략을 쓰는 완전베이지안균형을 통합균형(pooling equilibrium)이라 한다. 두 유형이 같은 신호를 보내므로 수신자는 그 신호만으로 유형을 완전히 구별할 수 없다. 통합 자체가 반드시 기만을 의미하는 것은 아니다. </p>
@@ -254,7 +253,7 @@ R : \begin{pmatrix} A \rightarrow d \\ B \rightarrow u \end{pmatrix}
 H 유형일 확률 $p$,  L 유형일 확률 $(1-p)$라 하면 통합전략일 경우에만 기대값을 구하면 된다.
 통합전략일 경우 사전확률 = 사후확률이므로  $p$를 그대로 사용하면 된다.</p>
 
-<p><표 1>로 부터 기대값을 구하면 <표 3>과 같다.</p>
+<p>&lt;표 1&gt;로 부터 기대값을 구하면 &lt;표 3&gt;과 같다.</p>
 
 <img src="images/game-theory/signaling-05.svg" alt="신호게임 그림 5" style="display:block;width:100%;height:auto;margin:1rem auto;">
 
